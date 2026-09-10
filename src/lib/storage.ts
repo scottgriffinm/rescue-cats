@@ -1,3 +1,4 @@
+import { ONBOARDING_FURNITURE } from "./collection";
 import { SAVE_KEY, STARTING_TICKETS } from "./constants";
 import type { SaveState } from "./types";
 
@@ -10,11 +11,12 @@ export const EMPTY_SAVE: SaveState = {
   hearts: 0,
   stars: 0,
   tickets: STARTING_TICKETS,
-  furniture: [],
+  furniture: [...ONBOARDING_FURNITURE],
   cosmetics: [],
   levelStrikes: {},
   seenCoach: false,
   bubbles: [],
+  unlockFlags: { mangoNamed: false, porchUnlocked: true },
 };
 
 export function loadSave(): SaveState {
@@ -26,16 +28,23 @@ export function loadSave(): SaveState {
     if (parsed?.version !== 2 || !Array.isArray(parsed.completedIds)) {
       return EMPTY_SAVE;
     }
+    const furniture = [
+      ...new Set([...(parsed.furniture ?? []), ...ONBOARDING_FURNITURE]),
+    ];
     return {
       ...EMPTY_SAVE,
       ...parsed,
       version: 2,
       friends: parsed.friends ?? [],
       pendingUnlocks: parsed.pendingUnlocks ?? [],
-      furniture: parsed.furniture ?? [],
+      furniture,
       cosmetics: parsed.cosmetics ?? [],
       levelStrikes: parsed.levelStrikes ?? {},
       bubbles: parsed.bubbles ?? [],
+      unlockFlags: parsed.unlockFlags ?? {
+        mangoNamed: (parsed.friends ?? []).some((friend) => friend.friendId === "friend_001"),
+        porchUnlocked: true,
+      },
     };
   } catch {
     return EMPTY_SAVE;

@@ -7,6 +7,7 @@ import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
 import { Button } from "@/components/ui/Button";
+import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
 import { FURNITURE, STAR_COSMETICS } from "@/lib/collection";
 import { LEVELS, nextLevel } from "@/lib/levels";
@@ -19,6 +20,7 @@ export function YardScreen() {
   const cleared = save.completedIds.length;
   const allDone = cleared >= LEVELS.length;
   const hasBox = save.furniture.includes("furn_box_cardboard");
+  const hasTree = save.furniture.includes("furn_tree_mini");
 
   return (
     <PhoneFrame>
@@ -48,7 +50,7 @@ export function YardScreen() {
 
       <div className="relative flex flex-1 items-center">
         {hydrated ? (
-          <YardScene friends={save.friends} hasBox={hasBox} />
+          <YardScene friends={save.friends} hasBox={hasBox} hasTree={hasTree} />
         ) : (
           <div className="mx-auto h-40 w-40 animate-pulse rounded-full bg-ink/5" />
         )}
@@ -66,6 +68,8 @@ export function YardScreen() {
           {save.bubbles[0]}
         </button>
       ) : null}
+
+      <FriendsMet friends={save.friends} />
 
       <div className="flex justify-center gap-1.5 px-6">
         {LEVELS.map((level) => {

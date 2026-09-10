@@ -1,5 +1,6 @@
 import pack from "../../data/collection_CURRENT.json";
 import { ART_KIT_PATH } from "./constants";
+import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
 
 type RawFriend = (typeof pack.first_20_cats)[number];
@@ -28,6 +29,7 @@ function toFriend(raw: RawFriend): CatalogFriend {
     body: raw.body,
     tail: raw.tail,
     eyes: raw.eyes,
+    eyeAccent: raw.eyes,
     personality: raw.personality,
     artKit: kit,
     boardColor: boardColorFromCoat(raw.color),
@@ -58,6 +60,14 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => ({
 }));
 
 export const STAR_COSMETICS = pack.star_cosmetics;
+
+/** First five rescues — Collection bible v0 tutorial parade (C/B, Regular body). */
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 5);
+
+export const ONBOARDING_FURNITURE = ["furn_tree_mini"] as const;
+
+/** Re-export bible pity stubs so Collection Lead can find them next to cadence. */
+export const COLLECTION_PITY = PITY;
 
 export function friendById(id: string) {
   return CATALOG.find((friend) => friend.friendId === id);
@@ -101,4 +111,18 @@ export function comfortTotal(ownedSkuIds: string[]) {
 
 export function withName(template: string, name: string) {
   return template.replaceAll("{Name}", name);
+}
+
+export function favoriteToyFor(personality: string) {
+  if (personality === "Hungry") return "crinkle mouse";
+  if (personality === "Curious") return "paper bag";
+  if (personality === "Reserved") return "wool cave";
+  return "sun patch";
+}
+
+export function unlockFlagsFor(friends: { friendId: string }[]): import("./types").UnlockFlags {
+  return {
+    mangoNamed: friends.some((friend) => friend.friendId === FIRST_FRIEND_ID),
+    porchUnlocked: true,
+  };
 }

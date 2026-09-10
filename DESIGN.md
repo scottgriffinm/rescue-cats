@@ -17,6 +17,30 @@ Authoritative teach boards: `data/levels/L01-L03.json` (verbatim studio handoff)
 
 Retarget when a later template arrives by swapping JSON + keeping the slide helper.
 
+## Collection bible v0 — implemented (non-blocking opens)
+
+Cited so Collection Lead can swap content without touching puzzle code. Data model in `src/lib/types.ts`:
+
+- `Phenotype` — breed, coat color/pattern, body, tail, eye accent, personality beat
+- `FriendInstance` — name, phenotypeId, rescuedAt, optional `favoriteToy`
+- `FurnitureSKU`, `YardComfort`, `UnlockFlags` (`mangoNamed`, `porchUnlocked`)
+
+First five rescues (`TUTORIAL_RESCUES`) are a curated C/B, Regular-body parade: Mango, Ink, Biscuit, Tux, Ghost. Naming modal reveals the personality line, suggests a name (pools include Mochi / Bean / Pip-adjacent food names), Confirm → yard drop-in + `"{Name} moved in!"` and a first-night !. Session return can show 1–3 ! bubbles.
+
+Onboarding so the porch is not barren: **mini cat tree is placed free** from a fresh save (Comfort 2). Bible also asked for a free first box; CEO freeze moved the cardboard box to the Mango beat at clear 3 so that unlock still gifts furniture (no second gift on that unlock). Yarn swing + later shop rungs 15 / 40 / 90 / 200 sit in CURRENT as stubs.
+
+Cadence (aligned with locked Puzzle pack): a `FriendInstance` every 3 unique clears for the first 20 cats, then every 5. Hearts on every clear (CURRENT bands; bible range 3–8 is covered on early clears). Porch/Lawn only. Comfort on the HUD. Friends / Met tabs list named instances vs the tutorial five.
+
+Pity / rarity: `src/lib/pity.ts` stubs only (`soft_pity_c_streak` 12, `force_a_by_clear` 25, SS weight 0).
+
+### Open Scott decisions — do not block the slice
+
+These were called out in bible v0 as unresolved. Ship without waiting:
+
+- Monetization / Heart packs / IAP (slice is soft Hearts only once CEO locked it)
+- Duplicate naming / auto-merge commons (slice always allows duplicate names)
+- SS cadence seasonal vs milestones (slice is milestone-first; random SS weight is 0)
+
 ## Collection — LOCKED (CURRENT v1.2, CEO freeze)
 
 Load **`data/collection_CURRENT.json` only**. `collection_v1_pack.json` is a deprecated stub (it still says Mango @ clear 1 — **do not implement that**).
@@ -29,7 +53,7 @@ CEO override for the slice:
 - Hearts on **every** unique clear (band table in CURRENT). Soft Hearts only — no IAP.
 - Always allow duplicate names; never auto-merge.
 - SS rarity = milestone-first (weights stubbed; SS = 0 in random table).
-- Furniture gifts: cardboard box (`boxBed.svg`) with Mango @ 3; Sun Cushion @ 9 with Biscuit. No second gift on the Mango unlock.
+- Furniture gifts: cardboard box (`boxBed.svg`) with Mango @ 3; Sun Cushion @ 9 with Biscuit. No second gift on the Mango unlock. Mini tree is the free onboarding gift from bible v0.
 - Data model: `Phenotype`, `FriendInstance`, `FurnitureSKU`, `YardComfort`, `UnlockFlags`.
 
 Open / non-blocking: Heart packs, seasonal SS, L12+ name reshuffles.

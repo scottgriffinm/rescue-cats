@@ -47,6 +47,7 @@ export type Phenotype = {
   body: string;
   tail: string;
   eyes: string;
+  eyeAccent: string;
   personality: string;
   artKit: ArtKit;
   boardColor: BoardColor;
@@ -102,6 +103,7 @@ export type SaveState = {
   levelStrikes: Record<string, number>;
   seenCoach: boolean;
   bubbles: string[];
+  unlockFlags: UnlockFlags;
 };
 
 export type YardComfort = {

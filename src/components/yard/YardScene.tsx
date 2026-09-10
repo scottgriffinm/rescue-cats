@@ -15,24 +15,28 @@ const ROOSTS = [
 export function YardScene({
   friends,
   hasBox,
+  hasTree,
 }: {
   friends: FriendInstance[];
   hasBox: boolean;
+  hasTree: boolean;
 }) {
   return (
     <div className="relative mx-auto h-[340px] w-full max-w-[340px]">
       <div className="absolute inset-x-5 bottom-4 top-14 rounded-[46%] bg-wood/50" />
 
       <FurnitureImg file="fence" className="absolute left-[6%] top-[10%] w-[54%]" />
-      <FurnitureImg file="swing" className="absolute right-[4%] top-[4%] w-[38%]" />
       <FurnitureImg file="postBell" className="absolute right-[18%] top-[18%] w-[14%]" />
+      {hasTree ? (
+        <FurnitureImg file="swing" className="absolute right-[4%] top-[4%] w-[38%]" />
+      ) : null}
       {hasBox ? (
         <FurnitureImg file="boxBed" className="absolute bottom-[16%] left-[8%] w-[42%]" />
       ) : null}
 
       {friends.length === 0 ? (
         <p className="absolute inset-x-10 top-[48%] text-center font-display text-lg text-ink/35">
-          {hasBox ? "A box, waiting." : "The porch is quiet."}
+          {hasTree ? "A tree, waiting for company." : "The porch is quiet."}
         </p>
       ) : null}
 

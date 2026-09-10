@@ -37,7 +37,7 @@
     "confirm_bubble": "{Name} moved in!",
     "first_night_bubble": "{Name}: Still sniffing everything…",
     "suggestion_pools": {
-      "food": ["Mango", "Biscuit", "Mochi", "Toast", "Pumpkin", "Noodle", "Bean", "Pepper"],
+      "food": ["Mango", "Biscuit", "Mochi", "Toast", "Pumpkin", "Noodle", "Bean", "Beans", "Pip", "Pepper"],
       "soft": ["Misty", "Cloud", "Velvet", "Shadow", "Clover"],
       "silly_human": ["Steve", "Donna", "Greg", "Karen", "Nigel"],
       "breed_leaning": ["Stripe", "Tux", "Blue", "Cream"]
@@ -74,8 +74,9 @@
       "sku_id": "furn_tree_mini",
       "name": "Mini Cat Tree",
       "category": "Cat trees",
-      "hearts": 40,
+      "hearts": 0,
       "comfort": 2,
+      "onboarding": true,
       "asset": "/assets/furniture/swing.svg"
     },
     {
@@ -84,6 +85,22 @@
       "category": "Swings",
       "hearts": 40,
       "comfort": 2,
+      "asset": "/assets/furniture/swing.svg"
+    },
+    {
+      "sku_id": "furn_fountain_stone",
+      "name": "Stone Fountain",
+      "category": "Water",
+      "hearts": 90,
+      "comfort": 2,
+      "asset": "/assets/furniture/postBell.svg"
+    },
+    {
+      "sku_id": "furn_perch_high",
+      "name": "High Perch",
+      "category": "Cat trees",
+      "hearts": 200,
+      "comfort": 3,
       "asset": "/assets/furniture/swing.svg"
     }
   ],

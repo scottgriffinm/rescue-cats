@@ -9,10 +9,12 @@ import {
 } from "react";
 import {
   comfortTotal,
+  favoriteToyFor,
   friendById,
   friendForClear,
   furnitureGiftsForClear,
   heartsForClear,
+  unlockFlagsFor,
   withName,
   NAMING,
 } from "@/lib/collection";
@@ -73,7 +75,12 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
   );
 
   useEffect(() => {
-    snap = { save: loadSave(), hydrated: true };
+    const loaded = loadSave();
+    if (loaded.friends.length > 0 && loaded.bubbles.length === 0) {
+      const host = loaded.friends[0];
+      loaded.bubbles = [`${host.name} is already on the porch.`];
+    }
+    snap = { save: loaded, hydrated: true };
     emit();
   }, []);
 
@@ -132,15 +139,18 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
           rescuedAt: Date.now(),
           clearIndex: nextPending.clearIndex,
           roost: current.friends.length,
+          favoriteToy: favoriteToyFor(catalog.phenotype.personality),
           firstNight: true,
         };
+        const friends = [...current.friends, instance];
         const movedIn = withName(NAMING.confirm_bubble, instance.name);
         const sniff = withName(NAMING.first_night_bubble, instance.name);
         setSave({
           ...current,
-          friends: [...current.friends, instance],
+          friends,
           pendingUnlocks: current.pendingUnlocks.slice(1),
           bubbles: [movedIn, sniff, ...current.bubbles].slice(0, 3),
+          unlockFlags: unlockFlagsFor(friends),
         });
         return instance;
       },
