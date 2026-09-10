@@ -2,48 +2,115 @@ export type Dir = "n" | "e" | "s" | "w";
 
 export type Vec = { x: number; y: number };
 
-export type Coat = "calico" | "cream" | "gray" | "tuxedo" | "peach" | "ink";
+export type BoardColor = "orange" | "gray" | "black";
 
-export type CellKind = "path" | "goal";
+export type ArtKit = "ginger" | "cream" | "slate" | "calico";
 
-export type Cell = {
-  kind: CellKind;
-  dir?: Dir;
-  locked?: boolean;
+export type PieceCat = {
+  id: string;
+  x: number;
+  y: number;
+  color?: BoardColor | string;
+};
+
+export type Gate = {
+  id: string;
+  x: number;
+  y: number;
+  color?: BoardColor | string;
 };
 
 export type Level = {
   id: string;
   number: number;
-  title: string;
+  name: string;
   headline: string;
   hint: string;
+  templateId: string;
   width: number;
   height: number;
-  moves: number;
-  start: Vec;
-  cells: Record<string, Cell>;
+  moveBudget: number;
+  nudges: number;
+  colorLocks: boolean;
+  walls: Vec[];
+  blockers: Vec[];
+  cats: PieceCat[];
+  gates: Gate[];
+  teach?: string;
 };
 
-export type SimStatus = "win" | "loop" | "stuck" | "off";
-
-export type SimResult = {
-  status: SimStatus;
-  path: Vec[];
+export type Phenotype = {
+  phenotypeId: string;
+  breed: string;
+  color: string;
+  pattern: string;
+  body: string;
+  tail: string;
+  eyes: string;
+  personality: string;
+  artKit: ArtKit;
+  boardColor: BoardColor;
 };
 
-export type UnlockedCat = {
-  id: string;
+export type CatalogFriend = {
+  friendId: string;
+  defaultName: string;
+  unlockClear: number;
+  displayLine: string;
+  tier: string;
+  phenotype: Phenotype;
+};
+
+export type FriendInstance = {
+  instanceId: string;
+  friendId: string;
+  phenotypeId: string;
   name: string;
-  coat: Coat;
+  rescuedAt: number;
+  clearIndex: number;
   roost: number;
+  favoriteToy?: string;
+  firstNight: boolean;
+};
+
+export type FurnitureSKU = {
+  skuId: string;
+  name: string;
+  category: string;
+  hearts: number;
+  comfort: number;
+  grantOnClear?: number;
+  asset: string;
+};
+
+export type PendingUnlock = {
+  friendId: string;
+  clearIndex: number;
 };
 
 export type SaveState = {
-  version: 1;
+  version: 2;
   completedIds: string[];
-  cats: UnlockedCat[];
-  pendingUnlocks: number;
+  clearCount: number;
+  friends: FriendInstance[];
+  pendingUnlocks: PendingUnlock[];
+  hearts: number;
+  stars: number;
+  tickets: number;
+  furniture: string[];
+  cosmetics: string[];
+  levelStrikes: Record<string, number>;
+  seenCoach: boolean;
+  bubbles: string[];
 };
 
-export type Phase = "editing" | "running" | "won" | "lost";
+export type YardComfort = {
+  total: number;
+};
+
+export type UnlockFlags = {
+  mangoNamed: boolean;
+  porchUnlocked: boolean;
+};
+
+export type Phase = "playing" | "sliding" | "won" | "continue";

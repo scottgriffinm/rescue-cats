@@ -7,28 +7,47 @@ import {
   useMemo,
   useSyncExternalStore,
 } from "react";
-import { nextCoat, nextRoost } from "@/lib/cats";
-import { UNLOCK_EVERY_N_CLEARS } from "@/lib/constants";
+import {
+  comfortTotal,
+  friendById,
+  friendForClear,
+  furnitureGiftsForClear,
+  heartsForClear,
+  withName,
+  NAMING,
+} from "@/lib/collection";
+import { STARTING_LIVES } from "@/lib/constants";
 import { EMPTY_SAVE, loadSave, writeSave } from "@/lib/storage";
-import type { SaveState, UnlockedCat } from "@/lib/types";
+import type { FriendInstance, PendingUnlock, SaveState } from "@/lib/types";
 
-type Snapshot = {
-  save: SaveState;
-  hydrated: boolean;
+type ClearResult = {
+  newlyCleared: boolean;
+  clearIndex: number;
+  unlocked: PendingUnlock | null;
+  hearts: number;
+  stars: number;
 };
 
 type SaveApi = {
   save: SaveState;
   hydrated: boolean;
-  completeLevel: (levelId: string) => { newlyCleared: boolean; unlocked: boolean };
-  namePendingCat: (name: string) => UnlockedCat | null;
+  comfort: number;
+  completeLevel: (levelId: string, starsEarned: number) => ClearResult;
+  namePendingFriend: (name: string) => FriendInstance | null;
+  markCoachSeen: () => void;
+  addStrike: (levelId: string) => number;
+  spendTicket: (levelId?: string) => boolean;
+  watchAdContinue: (levelId?: string) => void;
+  clearStrikes: (levelId: string) => void;
+  dismissBubble: (text: string) => void;
+  buyFurniture: (skuId: string, cost: number) => boolean;
+  buyCosmetic: (id: string, cost: number) => boolean;
   resetProgress: () => void;
 };
 
 const SaveContext = createContext<SaveApi | null>(null);
-const SERVER_SNAP: Snapshot = { save: EMPTY_SAVE, hydrated: false };
-
-let snap: Snapshot = SERVER_SNAP;
+const SERVER_SNAP = { save: EMPTY_SAVE, hydrated: false };
+let snap = SERVER_SNAP;
 const listeners = new Set<() => void>();
 
 function emit() {
@@ -40,69 +59,149 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
-function getSnapshot() {
-  return snap;
-}
-
-function getServerSnapshot() {
-  return SERVER_SNAP;
-}
-
 function setSave(next: SaveState) {
   snap = { save: next, hydrated: true };
   writeSave(next);
   emit();
 }
 
-function hydrateFromStorage() {
-  snap = { save: loadSave(), hydrated: true };
-  emit();
-}
-
 export function SaveProvider({ children }: { children: React.ReactNode }) {
   const { save, hydrated } = useSyncExternalStore(
     subscribe,
-    getSnapshot,
-    getServerSnapshot,
+    () => snap,
+    () => SERVER_SNAP,
   );
 
   useEffect(() => {
-    hydrateFromStorage();
+    snap = { save: loadSave(), hydrated: true };
+    emit();
   }, []);
 
   const api = useMemo<SaveApi>(
     () => ({
       save,
       hydrated,
-      completeLevel: (levelId: string) => {
-        const current = getSnapshot().save;
+      comfort: comfortTotal(save.furniture),
+      completeLevel: (levelId, starsEarned) => {
+        const current = snap.save;
         if (current.completedIds.includes(levelId)) {
-          return { newlyCleared: false, unlocked: false };
+          return {
+            newlyCleared: false,
+            clearIndex: current.clearCount,
+            unlocked: null,
+            hearts: 0,
+            stars: 0,
+          };
         }
         const completedIds = [...current.completedIds, levelId];
-        const unlocked = completedIds.length % UNLOCK_EVERY_N_CLEARS === 0;
+        const clearIndex = completedIds.length;
+        const hearts = heartsForClear(clearIndex);
+        const catalog = friendForClear(clearIndex);
+        const pending = catalog
+          ? [...current.pendingUnlocks, { friendId: catalog.friendId, clearIndex }]
+          : current.pendingUnlocks;
+        const gifts = furnitureGiftsForClear(clearIndex).map((sku) => sku.skuId);
         setSave({
           ...current,
           completedIds,
-          pendingUnlocks: current.pendingUnlocks + (unlocked ? 1 : 0),
+          clearCount: clearIndex,
+          hearts: current.hearts + hearts,
+          stars: current.stars + starsEarned,
+          pendingUnlocks: pending,
+          furniture: [...new Set([...current.furniture, ...gifts])],
         });
-        return { newlyCleared: true, unlocked };
-      },
-      namePendingCat: (name: string) => {
-        const current = getSnapshot().save;
-        if (current.pendingUnlocks <= 0) return null;
-        const cat: UnlockedCat = {
-          id: `cat-${Date.now()}-${current.cats.length}`,
-          name: name.trim() || "Mochi",
-          coat: nextCoat(current.cats),
-          roost: nextRoost(current.cats),
+        return {
+          newlyCleared: true,
+          clearIndex,
+          unlocked: catalog ? { friendId: catalog.friendId, clearIndex } : null,
+          hearts,
+          stars: starsEarned,
         };
+      },
+      namePendingFriend: (name) => {
+        const current = snap.save;
+        const nextPending = current.pendingUnlocks[0];
+        if (!nextPending) return null;
+        const catalog = friendById(nextPending.friendId);
+        if (!catalog) return null;
+        const instance: FriendInstance = {
+          instanceId: `inst-${Date.now()}-${current.friends.length}`,
+          friendId: catalog.friendId,
+          phenotypeId: catalog.phenotype.phenotypeId,
+          name: name.trim() || catalog.defaultName,
+          rescuedAt: Date.now(),
+          clearIndex: nextPending.clearIndex,
+          roost: current.friends.length,
+          firstNight: true,
+        };
+        const movedIn = withName(NAMING.confirm_bubble, instance.name);
+        const sniff = withName(NAMING.first_night_bubble, instance.name);
         setSave({
           ...current,
-          cats: [...current.cats, cat],
-          pendingUnlocks: current.pendingUnlocks - 1,
+          friends: [...current.friends, instance],
+          pendingUnlocks: current.pendingUnlocks.slice(1),
+          bubbles: [movedIn, sniff, ...current.bubbles].slice(0, 3),
         });
-        return cat;
+        return instance;
+      },
+      markCoachSeen: () => setSave({ ...snap.save, seenCoach: true }),
+      addStrike: (levelId) => {
+        const current = snap.save;
+        const next = Math.min(
+          STARTING_LIVES,
+          (current.levelStrikes[levelId] ?? 0) + 1,
+        );
+        setSave({
+          ...current,
+          levelStrikes: { ...current.levelStrikes, [levelId]: next },
+        });
+        return next;
+      },
+      spendTicket: (levelId) => {
+        const current = snap.save;
+        if (current.tickets <= 0) return false;
+        const levelStrikes = { ...current.levelStrikes };
+        if (levelId) levelStrikes[levelId] = 0;
+        setSave({ ...current, tickets: current.tickets - 1, levelStrikes });
+        return true;
+      },
+      watchAdContinue: (levelId) => {
+        const current = snap.save;
+        const levelStrikes = { ...current.levelStrikes };
+        if (levelId) levelStrikes[levelId] = 0;
+        setSave({ ...current, levelStrikes });
+      },
+      clearStrikes: (levelId) => {
+        setSave({
+          ...snap.save,
+          levelStrikes: { ...snap.save.levelStrikes, [levelId]: 0 },
+        });
+      },
+      dismissBubble: (text) => {
+        setSave({
+          ...snap.save,
+          bubbles: snap.save.bubbles.filter((bubble) => bubble !== text),
+        });
+      },
+      buyFurniture: (skuId, cost) => {
+        const current = snap.save;
+        if (current.hearts < cost || current.furniture.includes(skuId)) return false;
+        setSave({
+          ...current,
+          hearts: current.hearts - cost,
+          furniture: [...current.furniture, skuId],
+        });
+        return true;
+      },
+      buyCosmetic: (id, cost) => {
+        const current = snap.save;
+        if (current.stars < cost || current.cosmetics.includes(id)) return false;
+        setSave({
+          ...current,
+          stars: current.stars - cost,
+          cosmetics: [...current.cosmetics, id],
+        });
+        return true;
       },
       resetProgress: () => setSave(EMPTY_SAVE),
     }),

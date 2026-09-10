@@ -1,11 +1,20 @@
-import { SAVE_KEY } from "./constants";
+import { SAVE_KEY, STARTING_TICKETS } from "./constants";
 import type { SaveState } from "./types";
 
 export const EMPTY_SAVE: SaveState = {
-  version: 1,
+  version: 2,
   completedIds: [],
-  cats: [],
-  pendingUnlocks: 0,
+  clearCount: 0,
+  friends: [],
+  pendingUnlocks: [],
+  hearts: 0,
+  stars: 0,
+  tickets: STARTING_TICKETS,
+  furniture: [],
+  cosmetics: [],
+  levelStrikes: {},
+  seenCoach: false,
+  bubbles: [],
 };
 
 export function loadSave(): SaveState {
@@ -14,14 +23,19 @@ export function loadSave(): SaveState {
     const raw = window.localStorage.getItem(SAVE_KEY);
     if (!raw) return EMPTY_SAVE;
     const parsed = JSON.parse(raw) as SaveState;
-    if (parsed?.version !== 1 || !Array.isArray(parsed.completedIds)) {
+    if (parsed?.version !== 2 || !Array.isArray(parsed.completedIds)) {
       return EMPTY_SAVE;
     }
     return {
-      version: 1,
-      completedIds: parsed.completedIds,
-      cats: parsed.cats ?? [],
-      pendingUnlocks: parsed.pendingUnlocks ?? 0,
+      ...EMPTY_SAVE,
+      ...parsed,
+      version: 2,
+      friends: parsed.friends ?? [],
+      pendingUnlocks: parsed.pendingUnlocks ?? [],
+      furniture: parsed.furniture ?? [],
+      cosmetics: parsed.cosmetics ?? [],
+      levelStrikes: parsed.levelStrikes ?? {},
+      bubbles: parsed.bubbles ?? [],
     };
   } catch {
     return EMPTY_SAVE;
@@ -31,9 +45,4 @@ export function loadSave(): SaveState {
 export function writeSave(save: SaveState) {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(SAVE_KEY, JSON.stringify(save));
-}
-
-export function clearSave() {
-  if (typeof window === "undefined") return;
-  window.localStorage.removeItem(SAVE_KEY);
 }

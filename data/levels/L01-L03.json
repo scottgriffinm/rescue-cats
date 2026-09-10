@@ -1,0 +1,53 @@
+{
+  "templateId": "LT01_teach_slide",
+  "gridOrigin": "top-left",
+  "levels": [
+    {
+      "id": "L1",
+      "name": "Straight Shot",
+      "width": 5,
+      "height": 5,
+      "moveBudget": 8,
+      "nudges": 0,
+      "colorLocks": false,
+      "walls": [],
+      "cats": [{ "id": "cat_a", "x": 2, "y": 1 }],
+      "gates": [{ "id": "gate_a", "x": 2, "y": 4 }],
+      "teach": "straight_shot"
+    },
+    {
+      "id": "L2",
+      "name": "Setup Slide",
+      "width": 5,
+      "height": 5,
+      "moveBudget": 7,
+      "nudges": 0,
+      "colorLocks": false,
+      "walls": [
+        { "x": 1, "y": 2 },
+        { "x": 2, "y": 2 }
+      ],
+      "cats": [{ "id": "cat_a", "x": 0, "y": 2 }],
+      "gates": [{ "id": "gate_a", "x": 4, "y": 2 }],
+      "teach": "setup_slide"
+    },
+    {
+      "id": "L3",
+      "name": "Wall as Brake",
+      "width": 5,
+      "height": 5,
+      "moveBudget": 6,
+      "nudges": 0,
+      "colorLocks": false,
+      "walls": [{ "x": 2, "y": 3 }],
+      "cats": [{ "id": "cat_a", "x": 2, "y": 0 }],
+      "gates": [{ "id": "gate_a", "x": 2, "y": 4 }],
+      "teach": "wall_brake"
+    }
+  ],
+  "rules": {
+    "slide": "cardinal until wall|cat|edge|matched_gate_stop",
+    "win": "all cats on gates",
+    "softFail": "budget exhaust → X, free retry; 3 Xs → ticket|optional ad"
+  }
+}

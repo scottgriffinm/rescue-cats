@@ -1,23 +1,16 @@
+import { UiIcon } from "@/components/art/Sprite";
 import { STARTING_LIVES } from "@/lib/constants";
-import { cn } from "@/lib/cn";
 
-export function LivesRow({ lives }: { lives: number }) {
+export function LivesRow({ strikes }: { strikes: number }) {
   return (
-    <div className="flex items-center gap-1.5" aria-label={`${lives} lives left`}>
-      {Array.from({ length: STARTING_LIVES }, (_, i) => {
-        const lost = i < STARTING_LIVES - lives;
-        return (
-          <span
-            key={i}
-            className={cn(
-              "grid h-7 w-7 place-items-center rounded-full border-2 border-ink font-display text-sm",
-              lost ? "bg-terracotta text-paper" : "bg-white text-ink/25",
-            )}
-          >
-            {lost ? "×" : ""}
-          </span>
-        );
-      })}
+    <div className="flex items-center gap-1" aria-label={`${STARTING_LIVES - strikes} lives left`}>
+      {Array.from({ length: STARTING_LIVES }, (_, i) => (
+        <UiIcon
+          key={i}
+          name={i < strikes ? "fail_mark" : "fail_empty"}
+          className="h-7 w-7"
+        />
+      ))}
     </div>
   );
 }

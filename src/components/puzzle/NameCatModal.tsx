@@ -1,53 +1,70 @@
 "use client";
 
-import { useState } from "react";
-import { CatSvg } from "@/components/art/CatSvg";
+import { useMemo, useState } from "react";
+import { FriendSprite, UiIcon } from "@/components/art/Sprite";
 import { Button } from "@/components/ui/Button";
-import { Field } from "@/components/ui/Field";
-import { nextCoat, nextSuggestion } from "@/lib/cats";
-import { MAX_NAME_LENGTH } from "@/lib/constants";
 import { useSave } from "@/components/providers/SaveProvider";
+import { allNameSuggestions, friendById, NAMING } from "@/lib/collection";
+import { MAX_NAME_LENGTH } from "@/lib/constants";
 
 export function NameCatModal({ onNamed }: { onNamed: () => void }) {
-  const { save, namePendingCat } = useSave();
-  const suggestion = nextSuggestion(save.cats);
-  const coat = nextCoat(save.cats);
-  const [name, setName] = useState<string>(suggestion);
+  const { save, namePendingFriend } = useSave();
+  const pending = save.pendingUnlocks[0];
+  const catalog = pending ? friendById(pending.friendId) : undefined;
+  const pool = useMemo(() => allNameSuggestions(), []);
+  const [name, setName] = useState(catalog?.defaultName ?? "Mango");
+
+  if (!catalog) return null;
+
+  function shuffle() {
+    const pick = pool[Math.floor(Math.random() * pool.length)] ?? catalog?.defaultName ?? "Mango";
+    setName(pick);
+  }
 
   return (
-    <div className="absolute inset-0 z-30 flex items-end justify-center bg-[#1C1916]/35 px-4 pb-8 pt-16 backdrop-blur-[2px]">
-      <div className="w-full rounded-[2rem] border-2 border-ink bg-paper p-6 shadow-[0_12px_0_#1A1814]">
-        <p className="text-center font-display text-[11px] tracking-[0.22em] text-tan">
-          INVITE THEM HOME
-        </p>
-        <h2 className="mt-1 text-center font-display text-3xl tracking-wide">
-          A New Friend!
-        </h2>
-        <div className="mx-auto mt-4 grid h-28 w-28 place-items-center">
-          <CatSvg coat={coat} pose="sit" className="h-28 w-28" />
+    <div className="absolute inset-0 z-30 flex items-end justify-center bg-[#1A1918]/35 px-4 pb-8 pt-16">
+      <div className="w-full rounded-[1.5rem] border-2 border-ink bg-paper p-6">
+        <div className="flex justify-center">
+          <UiIcon name="star_marigold" className="h-8 w-8" />
         </div>
-        <p className="mt-1 text-center text-sm text-ink/60">
-          Please give me a name.
-        </p>
+        <h2 className="mt-2 text-center font-display text-3xl tracking-wide">
+          {NAMING.title}
+        </h2>
+        <div className="mx-auto mt-3 grid h-[88px] w-[88px] place-items-center">
+          <FriendSprite kit={catalog.phenotype.artKit} size={72} className="h-[88px] w-[88px]" />
+        </div>
+        <p className="mt-1 text-center text-sm text-ink/65">{catalog.displayLine}</p>
         <form
           className="mt-4 space-y-3"
           onSubmit={(event) => {
             event.preventDefault();
-            namePendingCat(name);
+            namePendingFriend(name);
             onNamed();
           }}
         >
-          <Field
+          <label className="block text-center text-xs tracking-wide text-ink/50">
+            {NAMING.name_label}
+          </label>
+          <input
             value={name}
             maxLength={MAX_NAME_LENGTH}
             autoFocus
-            aria-label="Cat name"
+            placeholder={NAMING.placeholder}
+            aria-label={NAMING.name_label}
             onFocus={(event) => event.currentTarget.select()}
             onChange={(event) => setName(event.target.value)}
+            className="h-11 w-full rounded-lg border-[2.5px] border-ink bg-paper px-4 text-center font-sans text-lg text-ink outline-none"
           />
           <Button type="submit" className="w-full">
-            Welcome home
+            {NAMING.cta_primary}
           </Button>
+          <button
+            type="button"
+            onClick={shuffle}
+            className="w-full text-center text-sm text-ink/50 underline-offset-2 hover:underline"
+          >
+            {NAMING.cta_shuffle}
+          </button>
         </form>
       </div>
     </div>

@@ -1,0 +1,7 @@
+{
+  "version": "collection_v1",
+  "status": "DEPRECATED",
+  "do_not_load": true,
+  "redirect": "collection_CURRENT.json",
+  "note": "Stale unlock_clear:1 for Mango. CEO freeze: load data/collection_CURRENT.json only (v1.2 FROZEN). Mango @ onClear(3)."
+}

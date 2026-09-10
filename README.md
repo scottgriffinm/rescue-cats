@@ -1,70 +1,42 @@
 # Rescue Cats
 
-A mobile-first puzzle slice: rewire arrow paths to rescue a cat, then invite them into a paper yard. Built as a Vercel-ready Next.js prototype — strategic enough to outgrow easy arrow toys, still in service of the collect loop.
+Mobile-first Next.js slice: slide cats into yard gates, then invite them onto a paper porch.
+
+Locked studio beat: **LT01 L1–L3 → name Mango at clear 3 → yard with a cardboard box.**
 
 ## Stack
 
-- Next.js App Router + TypeScript
-- Tailwind CSS
-- Client-side save in `localStorage` (no auth, no backend)
+Next.js App Router, TypeScript, Tailwind CSS. No auth. Progress is `localStorage` (`rescue-cats.save.v2`).
 
-## Screens
-
-| Route | What |
-| --- | --- |
-| `/` | Yard hub — empty furniture, then named cats |
-| `/play` | Jumps to the next unsolved level |
-| `/level/[id]` | Puzzle board, lives, rewire budget |
-
-Clear **two unique levels** to name a cat (configurable in `src/lib/constants.ts`).
-
-## Local
+## Play
 
 ```bash
 npm install
 npm run dev
 ```
 
-Dev server defaults to [http://127.0.0.1:43173](http://127.0.0.1:43173). Primary layout is 390px wide; desktop shows the same card on charcoal.
+Dev server: [http://127.0.0.1:43173](http://127.0.0.1:43173) (390px primary).
 
 ```bash
 npm run build
 npm start
+npm run verify:levels
 ```
 
-`npm start` also binds **43173**.
+## Routes
+
+| Route | What |
+| --- | --- |
+| `/` | Porch / lawn hub |
+| `/play` | Next unsolved level |
+| `/level/L1` … `/level/L5` | Slide-budget boards |
+
+Tap a cat, then swipe or tap a direction pip. They slide until a wall, blocker, another cat, or the edge (gates stop a matching slide).
 
 ## Vercel
 
-This is a standard Next.js app. From a connected Git repo:
+Standard Next.js. Build: `npm run build`. No env vars.
 
-1. Import the project in Vercel (Framework Preset: Next.js).
-2. Build command: `npm run build`
-3. Output: Next.js default
-4. No environment variables required
+## Design locks
 
-Or from the CLI:
-
-```bash
-npx vercel
-```
-
-## Design notes
-
-Puzzle rules and art direction are provisional. See [DESIGN.md](./DESIGN.md) for what design leads can swap without breaking the yard loop.
-
-## Levels
-
-Five hand-authored boards in `src/lib/levels.ts`, tutorial → medium:
-
-1. One Tap
-2. The Loop
-3. Two Turns
-4. Locked Paths
-5. Tight Gate
-
-To check a map still solves inside its turn budget:
-
-```bash
-npx tsx src/lib/verify-levels.ts
-```
+See [DESIGN.md](./DESIGN.md). Collection source of truth: `data/collection_CURRENT.json` (v1.2 FROZEN). Do not load `collection_v1_pack.json`.

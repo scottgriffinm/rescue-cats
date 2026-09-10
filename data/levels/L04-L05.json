@@ -1,0 +1,46 @@
+{
+  "templateId": "LT01_teach_slide",
+  "gridOrigin": "top-left",
+  "levels": [
+    {
+      "id": "L4",
+      "name": "Two Friends",
+      "width": 5,
+      "height": 5,
+      "moveBudget": 10,
+      "nudges": 0,
+      "colorLocks": false,
+      "walls": [],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_a", "x": 1, "y": 1, "color": "orange" },
+        { "id": "cat_b", "x": 3, "y": 1, "color": "gray" }
+      ],
+      "gates": [
+        { "id": "gate_a", "x": 1, "y": 3 },
+        { "id": "gate_b", "x": 3, "y": 3 }
+      ],
+      "teach": "two_cats"
+    },
+    {
+      "id": "L5",
+      "name": "Collision Order",
+      "width": 5,
+      "height": 5,
+      "moveBudget": 9,
+      "nudges": 0,
+      "colorLocks": false,
+      "walls": [],
+      "blockers": [{ "x": 0, "y": 2 }],
+      "cats": [
+        { "id": "cat_a", "x": 0, "y": 0, "color": "orange" },
+        { "id": "cat_b", "x": 4, "y": 0, "color": "black" }
+      ],
+      "gates": [
+        { "id": "gate_a", "x": 0, "y": 4 },
+        { "id": "gate_b", "x": 4, "y": 4 }
+      ],
+      "teach": "collision_order"
+    }
+  ]
+}

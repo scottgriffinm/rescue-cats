@@ -2,46 +2,70 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { UiIcon } from "@/components/art/Sprite";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
 import { Button } from "@/components/ui/Button";
 import { YardScene } from "@/components/yard/YardScene";
+import { FURNITURE, STAR_COSMETICS } from "@/lib/collection";
 import { LEVELS, nextLevel } from "@/lib/levels";
 
 export function YardScreen() {
   const router = useRouter();
-  const { save, hydrated, resetProgress } = useSave();
+  const { save, hydrated, comfort, resetProgress, buyFurniture, buyCosmetic, dismissBubble } =
+    useSave();
   const upcoming = nextLevel(save.completedIds);
   const cleared = save.completedIds.length;
   const allDone = cleared >= LEVELS.length;
-  const empty = save.cats.length === 0;
+  const hasBox = save.furniture.includes("furn_box_cardboard");
 
   return (
     <PhoneFrame>
-      <header className="px-6 pt-8 text-center">
+      <header className="px-6 pt-7 text-center">
         <p className="font-display text-[11px] tracking-[0.28em] text-ink/40">
-          PAPER YARD
+          PORCH / LAWN
         </p>
-        <h1 className="mt-1 font-display text-[2.15rem] leading-none tracking-wide">
-          RESCUE <span className="text-tan">CATS</span>
+        <h1 className="mt-1 font-display text-[2.1rem] leading-none tracking-wide">
+          RESCUE <span className="text-clay">CATS</span>
         </h1>
-        <p className="mt-3 text-sm text-ink/55">
-          {empty
-            ? "Clear two puzzles, then invite a friend home."
+        <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink/55">
+          <span>Comfort {comfort}</span>
+          <span>♥ {save.hearts}</span>
+          <span className="inline-flex items-center gap-0.5">
+            <UiIcon name="star_marigold" className="h-3.5 w-3.5" />
+            {save.stars}
+          </span>
+        </div>
+        <p className="mt-2 text-sm text-ink/55">
+          {save.friends.length === 0
+            ? "Clear three puzzles, then invite Mango home."
             : allDone
               ? "Everyone who needed saving is napping in the sun."
-              : `${save.cats.length} friend${save.cats.length === 1 ? "" : "s"} in the yard.`}
+              : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
         </p>
       </header>
 
-      <div className="flex flex-1 items-center">
+      <div className="relative flex flex-1 items-center">
         {hydrated ? (
-          <YardScene cats={save.cats} />
+          <YardScene friends={save.friends} hasBox={hasBox} />
         ) : (
           <div className="mx-auto h-40 w-40 animate-pulse rounded-full bg-ink/5" />
         )}
       </div>
+
+      {save.bubbles[0] ? (
+        <button
+          type="button"
+          onClick={() => dismissBubble(save.bubbles[0])}
+          className="mx-6 mb-2 rounded-2xl border-2 border-ink bg-paper px-3 py-2 text-left text-sm"
+        >
+          <span className="mr-2 inline-block align-middle">
+            <UiIcon name="bubble_bang" className="inline h-5 w-5" />
+          </span>
+          {save.bubbles[0]}
+        </button>
+      ) : null}
 
       <div className="flex justify-center gap-1.5 px-6">
         {LEVELS.map((level) => {
@@ -52,11 +76,7 @@ export function YardScreen() {
               key={level.id}
               href={`/level/${level.id}`}
               className={`h-2.5 rounded-full border border-ink transition-all ${
-                done
-                  ? "w-6 bg-tan"
-                  : current
-                    ? "w-8 bg-ink"
-                    : "w-2.5 bg-white"
+                done ? "w-6 bg-clay" : current ? "w-8 bg-ink" : "w-2.5 bg-paper"
               }`}
               aria-label={`Level ${level.number}${done ? " cleared" : ""}`}
             />
@@ -64,31 +84,91 @@ export function YardScreen() {
         })}
       </div>
 
-      <footer className="space-y-3 px-5 pb-7 pt-5">
+      <footer className="space-y-3 px-5 pb-6 pt-4">
         <Button
+          variant="ink"
           className="w-full"
-          onClick={() => router.push(allDone ? `/level/${LEVELS[0].id}` : `/level/${upcoming.id}`)}
+          onClick={() =>
+            router.push(allDone ? `/level/${LEVELS[0].id}` : `/level/${upcoming.id}`)
+          }
         >
           {cleared === 0
-            ? "Rescue the first cat"
+            ? "Start the first slide"
             : allDone
               ? "Replay the routes"
-              : `Continue · Level ${upcoming.number}`}
+              : `Continue · ${upcoming.name}`}
         </Button>
+
+        <ShopRow
+          hearts={save.hearts}
+          stars={save.stars}
+          ownedFurniture={save.furniture}
+          ownedCosmetics={save.cosmetics}
+          onBuyFurniture={buyFurniture}
+          onBuyCosmetic={buyCosmetic}
+        />
+
         {cleared > 0 ? (
           <button
             type="button"
             onClick={resetProgress}
-            className="w-full text-center text-xs text-ink/40 underline-offset-2 hover:text-ink/70 hover:underline"
+            className="w-full text-center text-xs text-ink/40 underline-offset-2 hover:underline"
           >
             Reset paper yard
           </button>
         ) : null}
       </footer>
 
-      {save.pendingUnlocks > 0 ? (
-        <NameCatModal key={save.cats.length} onNamed={() => undefined} />
+      {save.pendingUnlocks.length > 0 ? (
+        <NameCatModal key={save.friends.length} onNamed={() => undefined} />
       ) : null}
     </PhoneFrame>
+  );
+}
+
+function ShopRow({
+  hearts,
+  stars,
+  ownedFurniture,
+  ownedCosmetics,
+  onBuyFurniture,
+  onBuyCosmetic,
+}: {
+  hearts: number;
+  stars: number;
+  ownedFurniture: string[];
+  ownedCosmetics: string[];
+  onBuyFurniture: (skuId: string, cost: number) => boolean;
+  onBuyCosmetic: (id: string, cost: number) => boolean;
+}) {
+  const heartItem = FURNITURE.find(
+    (sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId),
+  );
+  const starItem = STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id));
+  if (!heartItem && !starItem) return null;
+
+  return (
+    <div className="flex gap-2 text-xs">
+      {heartItem ? (
+        <button
+          type="button"
+          disabled={hearts < heartItem.hearts}
+          onClick={() => onBuyFurniture(heartItem.skuId, heartItem.hearts)}
+          className="flex-1 rounded-xl border-2 border-ink px-2 py-2 text-ink/70 disabled:opacity-40"
+        >
+          {heartItem.name} · {heartItem.hearts}♥
+        </button>
+      ) : null}
+      {starItem ? (
+        <button
+          type="button"
+          disabled={stars < starItem.stars}
+          onClick={() => onBuyCosmetic(starItem.id, starItem.stars)}
+          className="flex-1 rounded-xl border-2 border-ink px-2 py-2 text-ink/70 disabled:opacity-40"
+        >
+          {starItem.name} · {starItem.stars}★
+        </button>
+      ) : null}
+    </div>
   );
 }

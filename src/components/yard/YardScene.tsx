@@ -1,58 +1,63 @@
 "use client";
 
-import { CardboardBox, CatTree, CheckIn, Swing } from "@/components/art/Furniture";
-import { CatSvg } from "@/components/art/CatSvg";
-import type { UnlockedCat } from "@/lib/types";
+import { FriendSprite, FurnitureImg, UiIcon } from "@/components/art/Sprite";
+import { friendById } from "@/lib/collection";
+import type { FriendInstance } from "@/lib/types";
 
-const ROOSTS: Array<{ left: string; top: string; pose: "sit" | "loaf"; facing?: "e" | "w" }> = [
-  { left: "18%", top: "46%", pose: "loaf" },
-  { left: "58%", top: "38%", pose: "sit" },
-  { left: "40%", top: "58%", pose: "sit", facing: "w" },
-  { left: "70%", top: "62%", pose: "loaf" },
-  { left: "8%", top: "64%", pose: "sit" },
-  { left: "48%", top: "28%", pose: "loaf" },
+const ROOSTS = [
+  { left: "28%", top: "58%" },
+  { left: "58%", top: "48%" },
+  { left: "44%", top: "70%" },
+  { left: "72%", top: "66%" },
+  { left: "16%", top: "72%" },
 ];
 
-export function YardScene({ cats }: { cats: UnlockedCat[] }) {
+export function YardScene({
+  friends,
+  hasBox,
+}: {
+  friends: FriendInstance[];
+  hasBox: boolean;
+}) {
   return (
     <div className="relative mx-auto h-[340px] w-full max-w-[340px]">
-      <div className="absolute inset-x-6 bottom-6 top-16 rounded-[45%] border border-ink/10 bg-[#EFE6D8]/70" />
+      <div className="absolute inset-x-5 bottom-4 top-14 rounded-[46%] bg-wood/50" />
 
-      <div className="absolute left-[8%] top-[6%] w-[46%]">
-        <Swing className="w-full" />
-      </div>
-      <div className="absolute right-[6%] top-[10%] w-[28%]">
-        <CatTree className="w-full" />
-      </div>
-      <div className="absolute bottom-[18%] left-[10%] w-[38%]">
-        <CardboardBox className="w-full" />
-      </div>
+      <FurnitureImg file="fence" className="absolute left-[6%] top-[10%] w-[54%]" />
+      <FurnitureImg file="swing" className="absolute right-[4%] top-[4%] w-[38%]" />
+      <FurnitureImg file="postBell" className="absolute right-[18%] top-[18%] w-[14%]" />
+      {hasBox ? (
+        <FurnitureImg file="boxBed" className="absolute bottom-[16%] left-[8%] w-[42%]" />
+      ) : null}
 
-      {cats.length === 0 ? (
-        <p className="absolute inset-x-8 top-[46%] text-center font-display text-lg text-ink/35">
-          The yard is waiting.
+      {friends.length === 0 ? (
+        <p className="absolute inset-x-10 top-[48%] text-center font-display text-lg text-ink/35">
+          {hasBox ? "A box, waiting." : "The porch is quiet."}
         </p>
       ) : null}
 
-      {cats.map((cat) => {
-        const roost = ROOSTS[cat.roost % ROOSTS.length];
+      {friends.map((friend) => {
+        const roost = ROOSTS[friend.roost % ROOSTS.length];
+        const catalog = friendById(friend.friendId);
         return (
           <div
-            key={cat.id}
+            key={friend.instanceId}
             className="absolute w-[72px] -translate-x-1/2 -translate-y-1/2"
             style={{ left: roost.left, top: roost.top }}
           >
-            <CatSvg
-              coat={cat.coat}
-              pose={roost.pose}
-              facing={roost.facing}
+            <FriendSprite
+              kit={catalog?.phenotype.artKit ?? "ginger"}
+              size={72}
               className="h-[72px] w-[72px]"
             />
-            {cat.roost === 0 ? (
-              <CheckIn className="absolute -right-1 -top-3 h-6 w-6" />
+            {friend.firstNight ? (
+              <UiIcon
+                name="bubble_bang"
+                className="absolute -right-1 -top-3 h-6 w-6"
+              />
             ) : null}
-            <p className="mt-0.5 text-center font-display text-[11px] tracking-wide text-ink/70">
-              {cat.name}
+            <p className="text-center font-display text-[11px] text-ink/70">
+              {friend.name}
             </p>
           </div>
         );

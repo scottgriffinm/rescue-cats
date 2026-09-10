@@ -1,0 +1,6 @@
+{
+  "version": "collection_v1.1",
+  "status": "SUPERSEDED",
+  "redirect": "collection_CURRENT.json",
+  "note": "Identical intent to CURRENT v1.2 freeze. Engine loads collection_CURRENT.json only."
+}

@@ -1,62 +1,63 @@
-# Rescue Cats — provisional design notes
+# Rescue Cats — design locks
 
-Working title for Scott Griffin's cat-collecting puzzle. These rules and art notes are **placeholders for design leads**. Swap freely; the code is data-driven so the loop (clear → unlock → yard) can keep the same shell.
+Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 are **LOCKED**. Later parade name-shuffles (Pebble, etc.) are ignored.
 
-## Why this exists
+## Puzzle — LOCKED (Template 01 / LT01 Teach Slide)
 
-Arrows & Cats keeps people for the cats, not the puzzles. The arrow boards there are too easy. This slice keeps the collect fantasy (name a cat, put them in a yard) and asks the puzzles to carry more planning: limited rewires, loops, locked highways, decoy exits.
+**Verb: slide-budget routing.** Tap a cat, then slide them one cardinal direction until they hit a **wall, blocker, another cat, or the board edge**. Matching yard gates also stop a slide (`matched_gate_stop`).
 
-## Provisional puzzle mechanic
+- **Win:** every cat sits on a yard-gate tile, in ≤ N slides.
+- **Cost:** the move counter decrements once per slide start (illegal / zero-length slides are free).
+- **Soft fail:** budget exhausted with cats still off-gate → 1 X, free retry of the same printed board. Xs persist per level.
+- **3 Xs:** continue sheet — 1 ticket **or** optional rewarded-ad **stub** (UI only). **Never** ads mid-puzzle.
+- **Stars:** leftover slides → 3★ if leftover ≥ ceil(N/2), 2★ if leftover ≥ ceil(N/4), else 1★. Stars unlock **yard cosmetics only**, never cats or campaign gates.
+- **Nudges / color locks:** encoded on the L1–30 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
 
-**Arrow rewiring.** Each level is a grid of directed path segments. The cat follows whatever heading is printed on the tile they stand on. The player taps a tile to cycle its heading clockwise. **Turns are a rewire budget**, not a count of 90° ticks:
+Authoritative teach boards: `data/levels/L01-L03.json` (verbatim studio handoff). L4–L5 extend the same template. Move table: `data/levels/move_budget_L01-L30.json`. Engine: `src/lib/slide.ts`.
 
-- Changing a tile away from its printed heading spends one turn.
-- Further taps on that same tile are free.
-- Cycling it back to the printed heading refunds the turn.
-- Thick, bolted arrows are locked and cannot turn.
+Retarget when a later template arrives by swapping JSON + keeping the slide helper.
 
-Press **Rescue** to walk the route. Reach the house to clear. A loop, dead end, or walk off the paper costs a life (3 strikes, then retry). A faint path preview shows the current plan while editing.
+## Collection — LOCKED (CURRENT v1.2, CEO freeze)
 
-Unlock cadence: `UNLOCK_EVERY_N_CLEARS` in `src/lib/constants.ts` (default **2 unique clears**). Replay does not mint another cat.
+Load **`data/collection_CURRENT.json` only**. `collection_v1_pack.json` is a deprecated stub (it still says Mango @ clear 1 — **do not implement that**).
 
-Levels live in `src/lib/levels.ts` as ASCII maps. Glyphs: `> < ^ v` rotatable, `E W N S` locked, `G` goal, `.` empty paper.
+CEO override for the slice:
 
-### What Puzzle Lead can swap later
+- First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
+- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27, Noodle@30, … Bean@60.
+- After cat 20, unlock every 5 clears (data-ready; not reached in this slice).
+- Hearts on **every** unique clear (band table in CURRENT). Soft Hearts only — no IAP.
+- Always allow duplicate names; never auto-merge.
+- SS rarity = milestone-first (weights stubbed; SS = 0 in random table).
+- Furniture gifts: cardboard box (`boxBed.svg`) with Mango @ 3; Sun Cushion @ 9 with Biscuit. No second gift on the Mango unlock.
+- Data model: `Phenotype`, `FriendInstance`, `FurnitureSKU`, `YardComfort`, `UnlockFlags`.
 
-- Fire-an-arrow / drag-to-shoot instead of rewire-then-go
-- Collision with other moving cats
-- Shared turn pool across a chapter
-- Combo scoring beyond "N-step rescue"
+Open / non-blocking: Heart packs, seasonal SS, L12+ name reshuffles.
 
-Keep the shell: lives row, level index, preview, win/lose toast, unlock every N clears.
+## Art — LOCKED (Art pack v1)
 
-## Provisional art direction
+Palette (CSS variables in `src/app/globals.css`):
 
-Elevate the kawaii hand-drawn / isometric doodle of the competitor refs — cleaner, warmer, more intentional. Never generic cute.
+| Token | Hex |
+| --- | --- |
+| paper | `#F7F0E6` |
+| ink | `#2B2A28` |
+| clay | `#E8A89A` |
+| sage | `#8FAF8A` |
+| marigold | `#F0B429` |
+| path | `#D96B4A` |
+| mist | `#C4BDB4` |
+| wood | `#E2D4C2` |
 
-- Paper off-white `#F7F1E8`, ink `#1A1814`, tan `#C4A574`, terracotta `#C4785A`
-- Thick friendly outlines, rounded mobile cards, 390px primary frame
-- Cats and furniture are SVG shapes in `src/components/art/` so an art pass can replace them without touching rules
-- Selective flat color on coats only; furniture stays paper + ink + kraft
+Kill list: pure-white voids, pure-black outlines, arcade-red fail Xs (use clay `fail_mark`).
 
-### What Art Director can swap later
+Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in place:
 
-- Coat set and roost positions (`src/lib/cats.ts`, `YardScene`)
-- Furniture drawings
-- Title lockup (currently **RESCUE CATS** with tan on CATS)
-- Motion: cat walk cycle, paper grain, check-in bubbles
+- Puzzle cats: `calico_belly_72.svg` only
+- Mango: `ginger_loaf_48/72`
+- Yard: `boxBed`, `fence`, `postBell`, `swing` + loafs
+- UI: `btn_primary` language, `input_name`, `star_marigold`, `hand_cursor`, `fail_*`, `bubble_bang`
 
-## Collection loop
+## Playable beat
 
-1. Yard is the hub (empty furniture → named cats).
-2. Play the next authored level.
-3. Every 2 unique clears, name a cat (default suggestion **Mochi**, then Nori, Dumpling…).
-4. Confirm places them on a roost in the yard.
-
-Progress is `localStorage` key `rescue-cats.save.v1`. No account.
-
-## Open questions for leads
-
-- Is clockwise-cycle the right input, or should a swipe set a heading in one gesture?
-- Should failed runs keep the player's rewires or snap back to the printed map? (Currently snap back, lives persist.)
-- How many roosts / furniture props before the yard needs rooms or pages?
+L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** → yard with boxBed. Hearts accrue on 1 and 2; the friend lands on 3.
