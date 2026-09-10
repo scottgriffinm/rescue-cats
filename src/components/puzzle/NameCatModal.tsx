@@ -59,7 +59,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
             onChange={(event) => setName(event.target.value)}
             className="h-11 w-full rounded-lg border-0 bg-transparent bg-[url('/assets/ui/input_name.svg')] bg-[length:100%_100%] bg-no-repeat px-4 text-center font-sans text-lg text-ink outline-none"
           />
-          <Button type="submit" className="w-full">
+          <Button type="submit" variant="paper" className="w-full" aria-label={NAMING.cta_primary}>
             {NAMING.cta_primary}
           </Button>
           <button

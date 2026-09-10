@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { UiIcon } from "@/components/art/Sprite";
 import { ContinueSheet } from "@/components/puzzle/ContinueSheet";
 import { LivesRow } from "@/components/puzzle/LivesRow";
@@ -113,6 +113,34 @@ export function PuzzleScreen({ level }: { level: Level }) {
     const dirs = legalDirs(level, cats, id);
     if (dirs.length === 0) setToast("This one is boxed in.");
   }
+
+  useEffect(() => {
+    const KEY_DIR: Record<string, Dir> = {
+      ArrowUp: "n",
+      ArrowRight: "e",
+      ArrowDown: "s",
+      ArrowLeft: "w",
+      w: "n",
+      d: "e",
+      s: "s",
+      a: "w",
+      W: "n",
+      D: "e",
+      S: "s",
+      A: "w",
+    };
+    function onKey(event: KeyboardEvent) {
+      if (phase !== "playing" || showName) return;
+      const target = event.target;
+      if (target instanceof HTMLElement && target.closest("input, textarea")) return;
+      const dir = KEY_DIR[event.key];
+      if (!dir) return;
+      event.preventDefault();
+      void slide(dir);
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [phase, showName, selected, remaining, cats, level]);
 
   return (
     <PhoneFrame>

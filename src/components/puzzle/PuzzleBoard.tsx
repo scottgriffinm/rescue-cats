@@ -115,7 +115,7 @@ export function PuzzleBoard({
                   type="button"
                   disabled={disabled}
                   onClick={() => onSlide(dir)}
-                  className="absolute z-20 grid h-8 w-8 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-path font-display text-sm text-paper"
+                  className="absolute z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-path font-display text-base text-paper"
                   style={{
                     left: `${((cat.x + 0.5) * 100) / level.width}%`,
                     top: `${((cat.y + 0.5) * 100) / level.height}%`,
