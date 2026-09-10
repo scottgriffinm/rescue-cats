@@ -1,11 +1,13 @@
-import { CatBelly } from "@/components/art/CatBelly";
-import { CatLoaf } from "@/components/art/CatLoaf";
-import { FURN_ASSETS, UI_ASSETS } from "@/lib/artAssets";
+import { CAT_ASSETS, FURN_ASSETS, UI_ASSETS } from "@/lib/artAssets";
+import { ART_KIT_PATH, PUZZLE_CAT_SRC } from "@/lib/constants";
 import type { ArtKit } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 export function PuzzleCatSprite({ className }: { className?: string }) {
-  return <CatBelly className={className} />;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={PUZZLE_CAT_SRC} alt="" className={cn("pointer-events-none select-none", className)} />
+  );
 }
 
 export function FriendSprite({
@@ -17,7 +19,16 @@ export function FriendSprite({
   size?: 48 | 72 | 160;
   className?: string;
 }) {
-  return <CatLoaf kit={kit} size={size} className={className} />;
+  const src =
+    size === 48
+      ? ART_KIT_PATH[kit].loaf48
+      : size === 160 && kit === "ginger"
+        ? CAT_ASSETS.ginger_loaf_160
+        : ART_KIT_PATH[kit].loaf72;
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src={src} alt="" className={cn("pointer-events-none select-none", className)} />
+  );
 }
 
 export function FurnitureImg({
@@ -38,8 +49,7 @@ export function UiIcon({
   className,
   alt = "",
 }: {
-  name:
-    | keyof typeof UI_ASSETS;
+  name: keyof typeof UI_ASSETS;
   className?: string;
   alt?: string;
 }) {

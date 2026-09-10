@@ -69,8 +69,8 @@ Art pack v1 is the palette lock. **Art Asset List v1** is the file lock. Comps r
 Priority order (shipped):
 
 1. CSS variables for the Art pack palette (`src/app/globals.css`)
-2. `cat.pose.loaf` @48 — cream `#FFF8F0`, ginger `#D38B5D`, slate `#5A5E6B`, calico (cream + clay `#E8A89A` + slate blobs). Kit parts: body, ears, eyes.open, mouth.w, tail.short, legs.stubby, pattern.blob. Procedural: `CatLoaf`. Optional hero: `ginger_loaf_160.svg`.
-3. `cat.pose.belly` @72 calico — puzzle center only (`CatBelly` / `calico_belly_72.svg`)
+2. `cat.pose.loaf` @48 — cream `#FFF8F0`, ginger `#D38B5D`, slate `#5A5E6B`, calico (cream + clay `#E8A89A` + slate blobs). Art Director SVG pack v1 is the file lock (verbatim under `public/assets/`). Mango = `ginger_loaf`. Optional hero: `ginger_loaf_160.svg`.
+3. `cat.pose.belly` @72 calico — puzzle board cats only (`calico_belly_72.svg`)
 4. Furniture woodblock: `boxBed` 96×72, `swing` 96×96, `postBell` 48×96 (bell marigold + mist), `fence` 120×48 tileable
 5. UI: `btn_primary` (h 44, ink stroke, paper fill), `input_name`, `fail_mark` (28 clay fill + ink X — not arcade red), `star_marigold`, `hand_cursor`
 6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24, outer frame `#1A1918`

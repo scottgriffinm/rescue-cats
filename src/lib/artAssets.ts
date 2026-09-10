@@ -1,4 +1,4 @@
-/** Art Asset List v1 — export paths comps can replace in place. */
+/** Art Director SVG pack v1 — files under public/assets/{cats,furniture,ui}. */
 
 export const ART_STROKE = "#2B2A28";
 export const FUR_CREAM = "#FFF8F0";
