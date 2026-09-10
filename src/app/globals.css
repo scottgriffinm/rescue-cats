@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --paper: #f7f1e8;
+  --paper-deep: #efe6d8;
+  --ink: #1a1814;
+  --tan: #c4a574;
+  --terracotta: #c4785a;
+  --moss: #6e8b6e;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-ink: var(--ink);
+  --color-tan: var(--tan);
+  --color-terracotta: var(--terracotta);
+  --color-moss: var(--moss);
+  --font-sans: var(--font-nunito), ui-rounded, "Nunito", sans-serif;
+  --font-display: var(--font-fredoka), ui-rounded, "Fredoka", sans-serif;
+}
+
+html,
+body {
+  background: #1c1916;
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--font-nunito), ui-rounded, sans-serif;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+.font-display {
+  font-family: var(--font-fredoka), ui-rounded, sans-serif;
+}
+
+.paper-dots {
+  background-image: radial-gradient(#d5ccbe 1.05px, transparent 1.05px);
+  background-size: 18px 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
