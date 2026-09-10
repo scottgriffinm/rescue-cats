@@ -29,7 +29,7 @@ export function FurnitureImg({
   file,
   className,
 }: {
-  file: "boxBed" | "fence" | "postBell" | "swing";
+  file: "boxBed" | "fence" | "postBell" | "swing" | "fountain";
   className?: string;
 }) {
   return (

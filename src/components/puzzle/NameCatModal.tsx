@@ -23,7 +23,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
 
   return (
     <div className="absolute inset-0 z-30 flex items-end justify-center bg-[#1A1918]/35 px-4 pb-8 pt-16">
-      <div className="w-full rounded-[1.5rem] border-2 border-ink bg-paper p-6">
+      <div className="paper-card w-full rounded-[1.5rem] p-6">
         <div className="flex justify-center">
           <UiIcon name="star_marigold" className="h-8 w-8" />
         </div>

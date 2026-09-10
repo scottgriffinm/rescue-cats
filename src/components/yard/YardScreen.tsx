@@ -60,7 +60,7 @@ export function YardScreen() {
         <button
           type="button"
           onClick={() => dismissBubble(save.bubbles[0])}
-          className="mx-6 mb-2 rounded-2xl border-2 border-ink bg-paper px-3 py-2 text-left text-sm"
+          className="paper-card mx-6 mb-2 rounded-2xl px-3 py-2 text-left text-sm"
         >
           <span className="mr-2 inline-block align-middle">
             <UiIcon name="bubble_bang" className="inline h-5 w-5" />
@@ -158,7 +158,7 @@ function ShopRow({
           type="button"
           disabled={hearts < heartItem.hearts}
           onClick={() => onBuyFurniture(heartItem.skuId, heartItem.hearts)}
-          className="flex-1 rounded-xl border-2 border-ink px-2 py-2 text-ink/70 disabled:opacity-40"
+          className="paper-card flex-1 rounded-xl px-2 py-2 text-ink/70 disabled:opacity-40"
         >
           {heartItem.name} · {heartItem.hearts}♥
         </button>
@@ -168,7 +168,7 @@ function ShopRow({
           type="button"
           disabled={stars < starItem.stars}
           onClick={() => onBuyCosmetic(starItem.id, starItem.stars)}
-          className="flex-1 rounded-xl border-2 border-ink px-2 py-2 text-ink/70 disabled:opacity-40"
+          className="paper-card flex-1 rounded-xl px-2 py-2 text-ink/70 disabled:opacity-40"
         >
           {starItem.name} · {starItem.stars}★
         </button>

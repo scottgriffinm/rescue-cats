@@ -32,7 +32,7 @@ export function ContinueSheet({
 
   return (
     <div className="absolute inset-0 z-20 flex items-end bg-[#1A1918]/40 px-4 pb-8 pt-16">
-      <div className="w-full rounded-[1.5rem] border-2 border-ink bg-paper p-6">
+      <div className="paper-card w-full rounded-[1.5rem] p-6">
         <h2 className="text-center font-display text-2xl tracking-wide">Out of tries</h2>
         <p className="mt-2 text-center text-sm text-ink/60">
           Three misses on this board. Use a ticket or a short rest — never in the middle of a slide.

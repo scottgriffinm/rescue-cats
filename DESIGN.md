@@ -62,27 +62,54 @@ Still later (not blocking): L12+ parade name reshuffles.
 
 ## Art — LOCKED (Art pack v1)
 
-Palette (CSS variables in `src/app/globals.css`):
+Art pack v1 is the theme lock. Numbered asset list can replace files in place; do not wait on it to theme.
 
-| Token | Hex |
-| --- | --- |
-| paper | `#F7F0E6` |
-| ink | `#2B2A28` |
-| clay | `#E8A89A` |
-| sage | `#8FAF8A` |
-| marigold | `#F0B429` |
-| path | `#D96B4A` |
-| mist | `#C4BDB4` |
-| wood | `#E2D4C2` |
+Palette is wired as CSS variables on `:root` and as Tailwind tokens (`bg-paper`, `text-ink`, `bg-path`, …) in `src/app/globals.css`.
 
-Kill list: pure-white voids, pure-black outlines, arcade-red fail Xs (use clay `fail_mark`).
+| Token | Hex | Use |
+| --- | --- | --- |
+| `--paper` | `#F7F0E6` | Screen / board / modal background. Never a pure-white void. |
+| `--ink` | `#2B2A28` | Text and UI chrome. Never a pure-black outline. |
+| `--clay` | `#E8A89A` | Soft fail marks, clay accents, header accent word. |
+| `--sage` | `#8FAF8A` | Lawn, fountain water, success / coach pips. |
+| `--marigold` | `#F0B429` | Stars, highlights. |
+| `--path` | `#D96B4A` | Puzzle path / gate accents. |
+| `--mist` | `#C4BDB4` | Secondary chrome, muted pills. |
+| `--wood` | `#E2D4C2` | Furniture, walls, porch boards. |
 
-Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in place:
+### Line / fill
 
-- Puzzle cats: `calico_belly_72.svg` only
-- Mango: `ginger_loaf_48/72`
-- Yard: `boxBed`, `fence`, `postBell`, `swing` + loafs
-- UI: `btn_primary` language, `input_name`, `star_marigold`, `hand_cursor`, `fail_*`, `bubble_bang`
+Warm charcoal strokes (`#2B2A28`), rounded caps, slight wobble. Flat fills — no gradients, no neon, no glossy arcade chrome.
+
+### Cats
+
+Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/calico_belly_72.svg` only. Yard friends use loaf SVGs (`ginger_loaf_48/72` for Mango, plus cream / slate / calico).
+
+### Furniture (chunky woodblock)
+
+| Piece | File | Notes |
+| --- | --- | --- |
+| Box | `public/assets/furniture/boxBed.svg` | Gifted with Mango at unique clear 3. |
+| Swing | `public/assets/furniture/swing.svg` | Shop stub; also stands in for the free onboarding tree. |
+| Fountain | `public/assets/furniture/fountain.svg` | Shop stub + lawn fixture on the isometric yard. |
+| Post + bell | `public/assets/furniture/postBell.svg` | Shop stub / yard trim. |
+| Fence | `public/assets/furniture/fence.svg` | Shop stub / yard trim. |
+
+### Screens
+
+- **Puzzle:** cream paper card (`paper-card`) with path-colored inset accents and path gates.
+- **Unlock / name modal:** cream paper card, wood-ink input, paper+ink buttons.
+- **Yard:** cream isometric porch + sage lawn (`yard_iso.svg`), woodblock furniture, loaf cats.
+
+### Kill list (do not ship)
+
+- Pure-white void backgrounds
+- Pure-black outlines
+- Arcade-red fail Xs — use clay `fail_mark.svg` / path-soft treatment instead
+
+Puzzle fail marks sit on cream `fail_empty.svg` slots. Continue sheet never uses a red X. Hand cursor fill is paper, not white.
+
+Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in place.
 
 ## Playable beat
 

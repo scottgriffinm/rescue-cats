@@ -29,7 +29,7 @@ npm run verify:levels
 | --- | --- |
 | `/` | Porch / lawn hub |
 | `/play` | Next unsolved level |
-| `/level/L1` … `/level/L5` | Slide-budget boards |
+| `/level/L1` … `/level/L10` | Slide-budget boards (LT01) |
 
 Tap a cat, then swipe or tap a direction pip. They slide until a wall, blocker, another cat, or the edge (gates stop a matching slide).
 

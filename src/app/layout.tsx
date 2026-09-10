@@ -16,7 +16,7 @@ const fredoka = Fredoka({
 export const metadata: Metadata = {
   title: "Rescue Cats",
   description:
-    "A paper-yard puzzle game: rewire arrow paths, rescue cats, and invite them home.",
+    "A paper-yard puzzle game: slide cats home, name a friend, and keep them on a cream porch.",
   icons: { icon: "/icon.svg" },
 };
 
