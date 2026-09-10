@@ -188,15 +188,18 @@ export function PuzzleScreen({ level }: { level: Level }) {
       <footer className="flex gap-2 px-5 pb-6">
         {phase === "won" && !showName ? (
           <>
-            <Button variant="paper" className="flex-1" onClick={() => router.push("/")}>
+            <Link
+              href="/"
+              className="inline-flex h-11 flex-1 items-center justify-center rounded-[10px] border-[2.5px] border-ink bg-paper bg-[url('/assets/ui/btn_primary.svg')] bg-[length:100%_100%] bg-no-repeat px-5 font-display text-base tracking-wide text-ink shadow-[0_3px_0_#2B2A28]"
+            >
               Yard
-            </Button>
-            <Button
-              className="flex-1"
-              onClick={() => router.push(next ? `/level/${next.id}` : "/")}
+            </Link>
+            <Link
+              href={next ? `/level/${next.id}` : "/"}
+              className="inline-flex h-11 flex-1 items-center justify-center rounded-[10px] border-[2.5px] border-ink bg-paper bg-[url('/assets/ui/btn_primary.svg')] bg-[length:100%_100%] bg-no-repeat px-5 font-display text-base tracking-wide text-ink shadow-[0_3px_0_#2B2A28]"
             >
               {next ? "Next rescue" : "See the yard"}
-            </Button>
+            </Link>
           </>
         ) : (
           <Button

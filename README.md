@@ -21,6 +21,8 @@ Dev server: [http://127.0.0.1:43173](http://127.0.0.1:43173) (390px primary).
 npm run build
 npm start
 npm run verify:levels
+# optional: L1→L3→Mango playthrough (needs Chrome + puppeteer-core)
+# npm install --no-save puppeteer-core && node scripts/play-mango-beat.mjs
 ```
 
 ## Routes

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { UiIcon } from "@/components/art/Sprite";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { useSave } from "@/components/providers/SaveProvider";
@@ -13,7 +12,6 @@ import { FURNITURE, STAR_COSMETICS } from "@/lib/collection";
 import { LEVELS, nextLevel } from "@/lib/levels";
 
 export function YardScreen() {
-  const router = useRouter();
   const { save, hydrated, comfort, resetProgress, buyFurniture, buyCosmetic, dismissBubble } =
     useSave();
   const upcoming = nextLevel(save.completedIds);
@@ -89,19 +87,16 @@ export function YardScreen() {
       </div>
 
       <footer className="space-y-3 px-5 pb-6 pt-4">
-        <Button
-          variant="ink"
-          className="w-full"
-          onClick={() =>
-            router.push(allDone ? `/level/${LEVELS[0].id}` : `/level/${upcoming.id}`)
-          }
+        <Link
+          href={allDone ? `/level/${LEVELS[0].id}` : `/level/${upcoming.id}`}
+          className="inline-flex h-11 w-full items-center justify-center rounded-[10px] bg-ink px-5 font-display text-base tracking-wide text-paper shadow-[0_3px_0_#1A1918]"
         >
           {cleared === 0
             ? "Start the first slide"
             : allDone
               ? "Replay the routes"
               : `Continue · ${upcoming.name}`}
-        </Button>
+        </Link>
 
         <ShopRow
           hearts={save.hearts}
