@@ -13,8 +13,20 @@ const FURNITURE_ASSETS: Record<string, string> = {
   furn_swing_yarn: "/assets/furniture/swing.svg",
 };
 
-const FORCED = pack.cadence_clears_1_30.forced as Record<string, string>;
-const TIER_WEIGHTS = pack.cadence_clears_1_30.tier_weights_random;
+/**
+ * CEO cadence override for the vertical slice.
+ * `collection_v1_pack.json` still says Mango @ unlock_clear 1 and a forced
+ * parade on clears 1,2,3… — that JSON is conflicting. Engine ignores it.
+ */
+export const CEO_CADENCE = {
+  firstCatClear: 3,
+  first20Every: 3,
+  after20Every: 5,
+  furnitureGifts: {
+    furn_box_cardboard: 3,
+    furn_bed_cushion: 9,
+  } as Record<string, number>,
+} as const;
 
 function artKit(raw: string | undefined, color: string, pattern: string): ArtKit {
   if (raw === "ginger" || raw === "cream" || raw === "slate" || raw === "calico") {
@@ -33,7 +45,7 @@ function boardColorFromCoat(color: string): BoardColor {
   return "orange";
 }
 
-function toFriend(raw: RawFriend): CatalogFriend {
+function toFriend(raw: RawFriend, index: number): CatalogFriend {
   const kit = artKit(raw.art_kit, raw.color, raw.pattern);
   const phenotype: Phenotype = {
     phenotypeId: raw.phenotype_id,
@@ -51,33 +63,21 @@ function toFriend(raw: RawFriend): CatalogFriend {
   return {
     friendId: raw.friend_id,
     defaultName: raw.default_name,
-    unlockClear: raw.unlock_clear,
+    // Ignore pack.unlock_clear (Mango is wrongly 1). Cat n unlocks at 3*n.
+    unlockClear: (index + 1) * CEO_CADENCE.first20Every,
     displayLine: raw.display_line,
     tier: raw.tier,
     phenotype,
   };
 }
 
-function seededUnit(n: number) {
-  const x = Math.sin(n * 9973) * 10000;
-  return x - Math.floor(x);
-}
-
-function rollTier(clearIndex: number): string {
-  const roll = seededUnit(clearIndex);
-  let acc = 0;
-  for (const tier of ["C", "B", "A", "S"] as const) {
-    acc += TIER_WEIGHTS[tier];
-    if (roll < acc) return tier;
-  }
-  return "C";
-}
-
 export const NAMING = pack.naming_modal;
 export const FIRST_FRIEND_ID = pack.first_friend.friend_id;
 export const COLLECTION_VERSION = pack.version;
 
-export const CATALOG: CatalogFriend[] = pack.first_20_cats.map(toFriend);
+export const CATALOG: CatalogFriend[] = pack.first_20_cats.map((raw, index) =>
+  toFriend(raw, index),
+);
 
 export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => ({
   skuId: sku.sku_id,
@@ -85,7 +85,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => ({
   category: sku.category,
   hearts: sku.hearts,
   comfort: sku.comfort,
-  grantOnClear: sku.grant_on_clear,
+  grantOnClear: CEO_CADENCE.furnitureGifts[sku.sku_id] ?? sku.grant_on_clear,
   asset: FURNITURE_ASSETS[sku.sku_id] ?? "/assets/furniture/boxBed.svg",
 }));
 
@@ -98,8 +98,8 @@ export const STAR_COSMETICS = [
 /** First five rescues — Collection bible v0 tutorial parade (C/B, Regular body). */
 export const TUTORIAL_RESCUES = CATALOG.slice(0, 5);
 
-/** v1 shop tree is 40 Hearts — not a free onboarding gift. */
-export const ONBOARDING_FURNITURE: string[] = [];
+/** Mini tree stays as a free porch fixture so L1–L2 are not barren. */
+export const ONBOARDING_FURNITURE = ["furn_tree_mini"] as const;
 
 export const COLLECTION_PITY = PITY;
 
@@ -107,22 +107,16 @@ export function friendById(id: string) {
   return CATALOG.find((friend) => friend.friendId === id);
 }
 
-/** Forced parade first; leftover clears roll `tier_weights_random` (SS = 0). */
-export function friendForClear(
-  clearIndex: number,
-  alreadyRescued: string[] = [],
-): CatalogFriend | undefined {
-  const forcedId = FORCED[String(clearIndex)];
-  if (forcedId) return friendById(forcedId);
-
-  const reserved = new Set(Object.values(FORCED));
-  const owned = new Set(alreadyRescued);
-  const pool = CATALOG.filter(
-    (friend) => !reserved.has(friend.friendId) && !owned.has(friend.friendId),
-  );
-  if (pool.length === 0) return undefined;
-  const tier = rollTier(clearIndex);
-  return pool.find((friend) => friend.tier === tier) ?? pool[0];
+/**
+ * CEO lock: no cat on clear 1 or 2. Cats 1–20 at 3,6,9,…,60.
+ * After cat 20, every 5 (no rows in this slice).
+ */
+export function friendForClear(clearIndex: number): CatalogFriend | undefined {
+  if (clearIndex < CEO_CADENCE.firstCatClear) return undefined;
+  if (clearIndex <= 60 && clearIndex % CEO_CADENCE.first20Every === 0) {
+    return CATALOG[clearIndex / CEO_CADENCE.first20Every - 1];
+  }
+  return undefined;
 }
 
 export function furnitureGiftsForClear(clearIndex: number) {

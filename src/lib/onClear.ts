@@ -7,7 +7,7 @@ export type ClearEvent = {
   friendId?: string;
 };
 
-/** Campaign hook — unique clears only. Forced parade from Collection v1, else tier roll. */
+/** Campaign hook — unique clears only. CEO: first friend at clear 3, then every 3. */
 export function onClear(clearIndex: number, levelId: string, stars: number): ClearEvent {
   const friend = friendForClear(clearIndex);
   return {

@@ -105,10 +105,7 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         const completedIds = [...current.completedIds, levelId];
         const clearIndex = completedIds.length;
         const hearts = heartsForClear(clearIndex);
-        const catalog = friendForClear(
-          clearIndex,
-          current.friends.map((friend) => friend.friendId),
-        );
+        const catalog = friendForClear(clearIndex);
         const pending = catalog
           ? [...current.pendingUnlocks, { friendId: catalog.friendId, clearIndex }]
           : current.pendingUnlocks;
