@@ -2,6 +2,7 @@ import teach from "../../data/levels/L01-L03.json";
 import extra from "../../data/levels/L04-L05.json";
 import later from "../../data/levels/L06-L10.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
+import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
 import type { Level } from "./types";
 
@@ -62,8 +63,8 @@ function hydrate(raw: RawLevel, index: number): Level {
     colorLocks: budgetRow?.colorLocks ?? raw.colorLocks ?? false,
     walls: raw.walls ?? [],
     blockers: raw.blockers ?? [],
-    cats: raw.cats,
-    gates: raw.gates,
+    cats: raw.cats.map((cat) => ({ ...cat, color: normalizeBoardColor(cat.color) })),
+    gates: raw.gates.map((gate) => ({ ...gate, color: normalizeBoardColor(gate.color) })),
     teach: raw.teach,
   };
 }

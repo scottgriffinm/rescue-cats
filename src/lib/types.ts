@@ -10,14 +10,14 @@ export type PieceCat = {
   id: string;
   x: number;
   y: number;
-  color?: BoardColor | string;
+  color?: BoardColor;
 };
 
 export type Gate = {
   id: string;
   x: number;
   y: number;
-  color?: BoardColor | string;
+  color?: BoardColor;
 };
 
 export type Level = {

@@ -103,9 +103,18 @@ export function friendById(id: string) {
   return CATALOG.find((friend) => friend.friendId === id);
 }
 
-/** CURRENT / ENG_READ_THIS: cat n at clear 3*n. Never unlock on clear 1 or 2. */
+/** CEO freeze — do not churn if later parade names shuffle. */
+export const SLICE_UNLOCKS: Record<number, string> = {
+  3: "friend_001",
+  6: "friend_002",
+  9: "friend_003",
+};
+
+/** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9; later rows follow CURRENT as-is. */
 export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   if (clearIndex < 3) return undefined;
+  const locked = SLICE_UNLOCKS[clearIndex];
+  if (locked) return friendById(locked);
   return CATALOG.find((friend) => friend.unlockClear === clearIndex);
 }
 

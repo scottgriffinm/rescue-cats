@@ -43,9 +43,13 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 2. **Duplicate names always allowed.** Each rescue is a new `FriendInstance`. Commons are never auto-merged. Renaming to an existing name is fine.
 3. **SS rarity = milestones first.** Not a seasonal calendar. Random SS weight is 0.
 
-## Collection — LOCKED (CURRENT)
+## Collection — CEO FREEZE (CURRENT v1.2)
 
-Load **`data/collection_CURRENT.json` only** (identical to v1.1). `collection_v1_pack.json` is a deprecated stub — **do not load it**. If a stale `unlock_clear: 1` appears, ignore it: Mango is `onClear(3)`. Clears 3, 6, 9, …, 60.
+Load **`data/collection_CURRENT.json` only** (stamped FROZEN / v1.2 canonical). Ignore deprecated v1. If a stale `unlock_clear: 1` appears, ignore it.
+
+Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming. Unlock table in eng (`SLICE_UNLOCKS`) covers clears **3 / 6 / 9** at minimum. Later clears follow CURRENT as-is — do not churn on L12+ parade reshuffles (Pebble / Tux / Shadow).
+
+Board color enums for the slice: `orange | gray | black`. LT08+ gates map to these strings; `color_orange` etc. normalize in `src/lib/colors.ts` + level hydrate.
 
 - First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
 - Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27, Noodle@30, … Bean@60.
