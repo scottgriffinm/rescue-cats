@@ -47,7 +47,7 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 
 Load **`data/collection_CURRENT.json` only** (stamped FROZEN / v1.2 canonical). Ignore deprecated v1. If a stale `unlock_clear: 1` appears, ignore it.
 
-Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming. Unlock table in eng (`SLICE_UNLOCKS`) covers clears **3 / 6 / 9** at minimum. Later clears follow CURRENT as-is — do not churn on L12+ parade reshuffles (Pebble / Tux / Shadow).
+Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming. Unlock table in eng (`SLICE_UNLOCKS`) covers clears **3 / 6 / 9** at minimum. Later clears follow CURRENT as-is. **Do not chase Pebble@12** or other L12+ parade thrash — wait for a clean CURRENT fix before reshuffling later rows.
 
 Board color enums for the slice: `orange | gray | black`. LT08+ gates map to these strings; `color_orange` etc. normalize in `src/lib/colors.ts` + level hydrate.
 
