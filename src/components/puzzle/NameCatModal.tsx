@@ -33,7 +33,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
         <div className="mx-auto mt-3 grid h-[88px] w-[88px] place-items-center">
           <FriendSprite
             kit={catalog.phenotype.artKit}
-            size={catalog.friendId === "friend_001" ? 160 : 72}
+            size={72}
             className="h-[88px] w-[88px]"
           />
         </div>

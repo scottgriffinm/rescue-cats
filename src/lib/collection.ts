@@ -118,8 +118,13 @@ export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   return CATALOG.find((friend) => friend.unlockClear === clearIndex);
 }
 
+/** Mango unlock gifts the box only — no second gift on that clear. */
 export function furnitureGiftsForClear(clearIndex: number) {
-  return FURNITURE.filter((sku) => sku.grantOnClear === clearIndex);
+  const gifts = FURNITURE.filter((sku) => sku.grantOnClear === clearIndex);
+  if (clearIndex === 3) {
+    return gifts.filter((sku) => sku.skuId === "furn_box_cardboard");
+  }
+  return gifts;
 }
 
 export function heartsForClear(clearIndex: number) {

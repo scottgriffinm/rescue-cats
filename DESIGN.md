@@ -101,7 +101,7 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 
 | Piece | File | Notes |
 | --- | --- | --- |
-| Box | `public/assets/furniture/boxBed.svg` | Gifted with Mango at unique clear 3 (CEO). |
+| Box | `public/assets/furniture/boxBed.svg` | **Only** gift with Mango at unique clear 3. |
 | Swing | `public/assets/furniture/swing.svg` | Shop stub; also stands in for the free onboarding tree. |
 | Fountain | `public/assets/furniture/fountain.svg` | Shop stub + lawn fixture on the isometric yard. |
 | Post + bell | `public/assets/furniture/postBell.svg` | Shop stub / yard trim. |
@@ -123,6 +123,13 @@ Puzzle fail marks sit on cream `fail_empty.svg` slots. Continue sheet never uses
 
 Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in place.
 
-## Playable beat
+## Playable beat (studio handoff)
 
-L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** + boxBed. Hearts on 1 and 2; the friend lands on 3. L4–L10 stay on LT01. Biscuit + Sun Cushion wait until unique clear 9.
+L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** → yard with `boxBed`. Grid origin top-left, y down. Authored boards: `data/levels/L01-L03.json`.
+
+Art mapping:
+
+- `friend_001` Mango → `ginger_loaf_72` (hero / yard) + `ginger_loaf_48` (thumb); board color `orange`
+- `furn_box_cardboard` → `boxBed.svg` (only gift on the Mango unlock)
+- Naming chrome: `star_marigold` + `input_name` + `btn_primary`
+- `calico_belly_72` = puzzle board cats only (not the Mango unlock)
