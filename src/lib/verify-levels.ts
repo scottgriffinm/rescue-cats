@@ -25,6 +25,32 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_a", "w"],
     ["cat_a", "s"],
   ],
+  L6: [
+    ["cat_a", "e"],
+    ["cat_b", "w"],
+  ],
+  L7: [
+    ["cat_a", "w"],
+    ["cat_a", "s"],
+    ["cat_a", "e"],
+    ["cat_b", "e"],
+    ["cat_b", "s"],
+    ["cat_b", "w"],
+  ],
+  L8: [
+    ["cat_a", "s"],
+    ["cat_b", "s"],
+  ],
+  L9: [
+    ["cat_a", "e"],
+    ["cat_b", "w"],
+  ],
+  L10: [
+    ["cat_a", "n"],
+    ["cat_a", "e"],
+    ["cat_b", "s"],
+    ["cat_b", "w"],
+  ],
 };
 
 function play(level: Level, script: Array<[string, Dir]>) {

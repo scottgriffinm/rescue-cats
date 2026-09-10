@@ -1,5 +1,6 @@
 import teach from "../../data/levels/L01-L03.json";
 import extra from "../../data/levels/L04-L05.json";
+import later from "../../data/levels/L06-L10.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { TEMPLATE_ID } from "./constants";
 import type { Level } from "./types";
@@ -10,6 +11,11 @@ const HEADLINES: Record<string, string> = {
   L3: "CAN YOU SAVE THIS CAT?",
   L4: "TWO AT ONCE",
   L5: "MIND THE ORDER",
+  L6: "SWAP CORNERS",
+  L7: "BOTH SIDES",
+  L8: "MATCH THE GATE",
+  L9: "WATCH THE POST",
+  L10: "TIGHT PAIR",
 };
 
 const HINTS: Record<string, string> = {
@@ -18,6 +24,11 @@ const HINTS: Record<string, string> = {
   L3: "Use the long way — the wall sits between you and the gate.",
   L4: "Both cats need a gate. Slide each one home.",
   L5: "Move the open-lane cat first. The other needs room to go around.",
+  L6: "Each friend slides to the opposite corner gate.",
+  L7: "Walls sit in the lanes. Walk around, then home.",
+  L8: "Same slide — gates now remember a color (orange / gray).",
+  L9: "A wall and a post split the paper. Opposite corners still work.",
+  L10: "Meet in the middle lanes, then peel off to the matching gates.",
 };
 
 type RawLevel = {
@@ -57,7 +68,7 @@ function hydrate(raw: RawLevel, index: number): Level {
   };
 }
 
-const authored = [...teach.levels, ...extra.levels] as RawLevel[];
+const authored = [...teach.levels, ...extra.levels, ...later.levels] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
 

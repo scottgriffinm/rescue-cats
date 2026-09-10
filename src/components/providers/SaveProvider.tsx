@@ -20,6 +20,7 @@ import {
   NAMING,
 } from "@/lib/collection";
 import { STARTING_LIVES } from "@/lib/constants";
+import { onClear } from "@/lib/onClear";
 import { EMPTY_SAVE, loadSave, writeSave } from "@/lib/storage";
 import type { FriendInstance, PendingUnlock, SaveState } from "@/lib/types";
 
@@ -118,6 +119,7 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
           pendingUnlocks: pending,
           furniture: [...new Set([...current.furniture, ...gifts])],
         });
+        onClear(clearIndex, levelId, starsEarned);
         return {
           newlyCleared: true,
           clearIndex,

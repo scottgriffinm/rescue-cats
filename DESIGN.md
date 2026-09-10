@@ -13,7 +13,9 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 - **Stars:** leftover slides → 3★ if leftover ≥ ceil(N/2), 2★ if leftover ≥ ceil(N/4), else 1★. Stars unlock **yard cosmetics only**, never cats or campaign gates.
 - **Nudges / color locks:** encoded on the L1–30 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
 
-Authoritative teach boards: `data/levels/L01-L03.json` (verbatim studio handoff). L4–L5 extend the same template. Move table: `data/levels/move_budget_L01-L30.json`. Engine: `src/lib/slide.ts`.
+Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L10 continue LT01. Move table: `data/levels/move_budget_L01-L30.json` (L11–30 budgets + nudge/colorLock stubs only). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`.
+
+Acceptance: slide stops on wall / cat / edge; counter decrements once per slide start; win = all cats on gates; budget exhaust → X and board reset (Xs persist per level); no mid-puzzle ads.
 
 Retarget when a later template arrives by swapping JSON + keeping the slide helper.
 
@@ -84,4 +86,4 @@ Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in pla
 
 ## Playable beat
 
-L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** → yard with boxBed. Hearts accrue on 1 and 2; the friend lands on 3.
+L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** → yard with boxBed. Hearts accrue on 1 and 2; the friend lands on 3. L4–L10 stay on LT01 (two-cat, collision, color-lock stubs).
