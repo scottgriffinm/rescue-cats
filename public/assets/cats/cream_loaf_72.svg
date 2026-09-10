@@ -1,9 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 48 48" fill="none">
-  <ellipse cx="24" cy="28" rx="16" ry="12" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
-  <path d="M12 20 C12 14 16 12 18 16" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M36 20 C36 14 32 12 30 16" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  
-  <circle cx="18" cy="26" r="1.6" fill="#2B2A28"/>
-  <circle cx="28" cy="26" r="1.6" fill="#2B2A28"/>
-  <path d="M38 32 C42 30 44 34 40 36" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
+  <ellipse id="body" cx="24" cy="27" rx="16" ry="12" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <path id="ear-l" d="M12 20 C12 14 16 12 18 16" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path id="ear-r" d="M36 20 C36 14 32 12 30 16" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse id="leg-l" cx="16" cy="37" rx="3.2" ry="2.2" fill="#FFF8F0" stroke="#2B2A28" stroke-width="1.6"/>
+  <ellipse id="leg-r" cx="32" cy="37" rx="3.2" ry="2.2" fill="#FFF8F0" stroke="#2B2A28" stroke-width="1.6"/>
+  <circle id="eye-l" cx="18" cy="25" r="1.6" fill="#2B2A28"/>
+  <circle id="eye-r" cx="28" cy="25" r="1.6" fill="#2B2A28"/>
+  <path id="mouth" d="M21 29 Q23 31 25 29" fill="none" stroke="#2B2A28" stroke-width="1.4" stroke-linecap="round"/>
+  <path id="tail" d="M38 31 C42 29 44 33 40 35" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
 </svg>

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 48 48" fill="none">
   <ellipse id="body" cx="24" cy="27" rx="16" ry="12" fill="#D38B5D" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
   <path id="ear-l" d="M12 20 C12 14 16 12 18 16" fill="#B06D4D" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <path id="ear-r" d="M36 20 C36 14 32 12 30 16" fill="#B06D4D" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

@@ -1,0 +1,39 @@
+/** Art Asset List v1 — export paths comps can replace in place. */
+
+export const ART_STROKE = "#2B2A28";
+export const FUR_CREAM = "#FFF8F0";
+export const FUR_GINGER = "#D38B5D";
+export const FUR_SLATE = "#5A5E6B";
+export const FUR_CLAY = "#E8A89A";
+
+export const CAT_ASSETS = {
+  cream_loaf_48: "/assets/cats/cream_loaf_48.svg",
+  cream_loaf_72: "/assets/cats/cream_loaf_72.svg",
+  ginger_loaf_48: "/assets/cats/ginger_loaf_48.svg",
+  ginger_loaf_72: "/assets/cats/ginger_loaf_72.svg",
+  ginger_loaf_160: "/assets/cats/ginger_loaf_160.svg",
+  slate_loaf_48: "/assets/cats/slate_loaf_48.svg",
+  slate_loaf_72: "/assets/cats/slate_loaf_72.svg",
+  calico_loaf_48: "/assets/cats/calico_loaf_48.svg",
+  calico_loaf_72: "/assets/cats/calico_loaf_72.svg",
+  calico_belly_72: "/assets/cats/calico_belly_72.svg",
+} as const;
+
+export const FURN_ASSETS = {
+  boxBed: "/assets/furniture/boxBed.svg",
+  swing: "/assets/furniture/swing.svg",
+  postBell: "/assets/furniture/postBell.svg",
+  fence: "/assets/furniture/fence.svg",
+  fountain: "/assets/furniture/fountain.svg",
+} as const;
+
+export const UI_ASSETS = {
+  btn_primary: "/assets/ui/btn_primary.svg",
+  input_name: "/assets/ui/input_name.svg",
+  fail_mark: "/assets/ui/fail_mark.svg",
+  fail_empty: "/assets/ui/fail_empty.svg",
+  star_marigold: "/assets/ui/star_marigold.svg",
+  hand_cursor: "/assets/ui/hand_cursor.svg",
+  bubble_bang: "/assets/ui/bubble_bang.svg",
+  icon_close: "/assets/ui/icon_close.svg",
+} as const;

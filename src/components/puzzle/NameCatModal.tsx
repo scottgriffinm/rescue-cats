@@ -31,7 +31,11 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
           {NAMING.title}
         </h2>
         <div className="mx-auto mt-3 grid h-[88px] w-[88px] place-items-center">
-          <FriendSprite kit={catalog.phenotype.artKit} size={72} className="h-[88px] w-[88px]" />
+          <FriendSprite
+            kit={catalog.phenotype.artKit}
+            size={catalog.friendId === "friend_001" ? 160 : 72}
+            className="h-[88px] w-[88px]"
+          />
         </div>
         <p className="mt-1 text-center text-sm text-ink/65">{catalog.displayLine}</p>
         <form
@@ -53,7 +57,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
             aria-label={NAMING.name_label}
             onFocus={(event) => event.currentTarget.select()}
             onChange={(event) => setName(event.target.value)}
-            className="h-11 w-full rounded-lg border-[2.5px] border-ink bg-paper px-4 text-center font-sans text-lg text-ink outline-none"
+            className="h-11 w-full rounded-lg border-0 bg-transparent bg-[url('/assets/ui/input_name.svg')] bg-[length:100%_100%] bg-no-repeat px-4 text-center font-sans text-lg text-ink outline-none"
           />
           <Button type="submit" className="w-full">
             {NAMING.cta_primary}

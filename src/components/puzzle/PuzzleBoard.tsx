@@ -49,7 +49,7 @@ export function PuzzleBoard({
 
   return (
     <div
-      className="paper-card paper-card-path relative mx-auto w-full max-w-[320px] rounded-3xl p-2"
+      className="paper-card paper-card-path relative mx-auto w-full max-w-[320px] rounded-[24px] p-2"
       onPointerDown={(event) => {
         start.current = { x: event.clientX, y: event.clientY };
       }}

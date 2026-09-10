@@ -1,12 +1,11 @@
-import { ART_KIT_PATH, PUZZLE_CAT_SRC } from "@/lib/constants";
+import { CatBelly } from "@/components/art/CatBelly";
+import { CatLoaf } from "@/components/art/CatLoaf";
+import { FURN_ASSETS, UI_ASSETS } from "@/lib/artAssets";
 import type { ArtKit } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 export function PuzzleCatSprite({ className }: { className?: string }) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={PUZZLE_CAT_SRC} alt="" className={cn("pointer-events-none select-none", className)} />
-  );
+  return <CatBelly className={className} />;
 }
 
 export function FriendSprite({
@@ -15,26 +14,22 @@ export function FriendSprite({
   className,
 }: {
   kit: ArtKit;
-  size?: 48 | 72;
+  size?: 48 | 72 | 160;
   className?: string;
 }) {
-  const src = size === 48 ? ART_KIT_PATH[kit].loaf48 : ART_KIT_PATH[kit].loaf72;
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt="" className={cn("pointer-events-none select-none", className)} />
-  );
+  return <CatLoaf kit={kit} size={size} className={className} />;
 }
 
 export function FurnitureImg({
   file,
   className,
 }: {
-  file: "boxBed" | "fence" | "postBell" | "swing" | "fountain";
+  file: keyof typeof FURN_ASSETS;
   className?: string;
 }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={`/assets/furniture/${file}.svg`} alt="" className={cn("select-none", className)} />
+    <img src={FURN_ASSETS[file]} alt="" className={cn("select-none", className)} />
   );
 }
 
@@ -44,17 +39,12 @@ export function UiIcon({
   alt = "",
 }: {
   name:
-    | "fail_empty"
-    | "fail_mark"
-    | "star_marigold"
-    | "bubble_bang"
-    | "hand_cursor"
-    | "icon_close";
+    | keyof typeof UI_ASSETS;
   className?: string;
   alt?: string;
 }) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={`/assets/ui/${name}.svg`} alt={alt} className={cn("select-none", className)} />
+    <img src={UI_ASSETS[name]} alt={alt} className={cn("select-none", className)} />
   );
 }

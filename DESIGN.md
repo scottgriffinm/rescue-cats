@@ -59,9 +59,20 @@ Furniture SKUs (5): box (gift clear 1, comfort 1), Sun Cushion (gift clear 3, co
 
 Hearts bands and random tier weights live on `cadence_clears_1_30`. Stars still buy yard cosmetics only.
 
-## Art — LOCKED (Art pack v1)
+## Art — LOCKED (Art pack v1 + Asset List v1)
 
-Art pack v1 is the theme lock. Numbered asset list can replace files in place; do not wait on it to theme.
+Art pack v1 is the palette lock. **Art Asset List v1** is the file lock. Comps replace SVGs in `public/assets/{cats,furniture,ui}/`. Strokes are ink-warm `#2B2A28`. Base width 390 CSS px.
+
+Priority order (shipped):
+
+1. CSS variables for the Art pack palette (`src/app/globals.css`)
+2. `cat.pose.loaf` @48 — cream `#FFF8F0`, ginger `#D38B5D`, slate `#5A5E6B`, calico (cream + clay `#E8A89A` + slate blobs). Kit parts: body, ears, eyes.open, mouth.w, tail.short, legs.stubby, pattern.blob. Procedural: `CatLoaf`. Optional hero: `ginger_loaf_160.svg`.
+3. `cat.pose.belly` @72 calico — puzzle center only (`CatBelly` / `calico_belly_72.svg`)
+4. Furniture woodblock: `boxBed` 96×72, `swing` 96×96, `postBell` 48×96 (bell marigold + mist), `fence` 120×48 tileable
+5. UI: `btn_primary` (h 44, ink stroke, paper fill), `input_name`, `fail_mark` (28 clay fill + ink X — not arcade red), `star_marigold`, `hand_cursor`
+6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24, outer frame `#1A1918`
+
+Export paths: `cats/{breed}_{pose}_{size}.svg`, `furniture/{id}.svg`, `ui/{id}.svg`. Registry: `src/lib/artAssets.ts`.
 
 Palette is wired as CSS variables on `:root` and as Tailwind tokens (`bg-paper`, `text-ink`, `bg-path`, …) in `src/app/globals.css`.
 
