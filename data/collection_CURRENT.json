@@ -8,6 +8,18 @@
     "hearts": "soft Hearts only — no IAP / Heart packs in this slice",
     "naming": "always allow duplicate names; never auto-merge"
   },
+  "locks": {
+    "economy": { "currency": "soft_hearts", "heart_packs": false, "iap": false },
+    "naming": { "allow_duplicate_names": true, "auto_merge_commons": false },
+    "ss_rarity": { "source": "milestones", "seasonal_calendar": false, "random_ss_weight": 0 }
+  },
+  "ss_milestones": [
+    {
+      "id": "ss_chapter_30",
+      "clear": 30,
+      "note": "First SS candidate at chapter end — not awarded in this slice"
+    }
+  ],
   "first_friend": {
     "friend_id": "friend_001",
     "phenotype_id": "pheno_dsh_orange_mackerel_regular_regular",

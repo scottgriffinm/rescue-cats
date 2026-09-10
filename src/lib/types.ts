@@ -115,4 +115,22 @@ export type UnlockFlags = {
   porchUnlocked: boolean;
 };
 
+/** CEO-locked collection policy for the slice. Do not add IAP or merge paths. */
+export type CollectionLocks = {
+  economy: {
+    currency: "soft_hearts";
+    heartPacks: false;
+    iap: false;
+  };
+  naming: {
+    allowDuplicateNames: true;
+    autoMergeCommons: false;
+  };
+  ssRarity: {
+    source: "milestones";
+    seasonalCalendar: false;
+    randomSsWeight: 0;
+  };
+};
+
 export type Phase = "playing" | "sliding" | "won" | "continue";

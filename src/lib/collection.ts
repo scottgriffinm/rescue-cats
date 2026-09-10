@@ -126,3 +126,18 @@ export function unlockFlagsFor(friends: { friendId: string }[]): import("./types
     porchUnlocked: true,
   };
 }
+
+/** CEO lock: soft Hearts only — no packs, no IAP hooks. */
+export const COLLECTION_LOCKS: import("./types").CollectionLocks = {
+  economy: { currency: "soft_hearts", heartPacks: false, iap: false },
+  naming: { allowDuplicateNames: true, autoMergeCommons: false },
+  ssRarity: { source: "milestones", seasonalCalendar: false, randomSsWeight: 0 },
+};
+
+/**
+ * Always append a new FriendInstance. Duplicate display names are allowed;
+ * commons are never merged (CEO naming lock).
+ */
+export function assertDuplicateNamesAllowed() {
+  return COLLECTION_LOCKS.naming.allowDuplicateNames && !COLLECTION_LOCKS.naming.autoMergeCommons;
+}

@@ -9,6 +9,7 @@ import {
 } from "react";
 import {
   comfortTotal,
+  assertDuplicateNamesAllowed,
   favoriteToyFor,
   friendById,
   friendForClear,
@@ -131,6 +132,7 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         if (!nextPending) return null;
         const catalog = friendById(nextPending.friendId);
         if (!catalog) return null;
+        assertDuplicateNamesAllowed();
         const instance: FriendInstance = {
           instanceId: `inst-${Date.now()}-${current.friends.length}`,
           friendId: catalog.friendId,

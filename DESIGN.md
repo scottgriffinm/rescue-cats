@@ -33,13 +33,13 @@ Cadence (aligned with locked Puzzle pack): a `FriendInstance` every 3 unique cle
 
 Pity / rarity: `src/lib/pity.ts` stubs only (`soft_pity_c_streak` 12, `force_a_by_clear` 25, SS weight 0).
 
-### Open Scott decisions — do not block the slice
+### Collection policy — LOCKED by CEO
 
-These were called out in bible v0 as unresolved. Ship without waiting:
+Former bible v0 opens, now frozen. Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS` + `data/collection_CURRENT.json` → `locks`.
 
-- Monetization / Heart packs / IAP (slice is soft Hearts only once CEO locked it)
-- Duplicate naming / auto-merge commons (slice always allows duplicate names)
-- SS cadence seasonal vs milestones (slice is milestone-first; random SS weight is 0)
+1. **Soft Hearts only.** No Heart packs, no IAP, no paid currency in the prototype. Hearts come from unique clears and spend on furniture SKUs.
+2. **Duplicate names always allowed.** Each rescue is a new `FriendInstance`. Commons are never auto-merged.
+3. **SS rarity = milestones first.** Not a seasonal calendar. Random SS weight is 0. Milestone stub: `ss_milestones` (clear 30) — not awarded in this slice.
 
 ## Collection — LOCKED (CURRENT v1.2, CEO freeze)
 
@@ -54,9 +54,9 @@ CEO override for the slice:
 - Always allow duplicate names; never auto-merge.
 - SS rarity = milestone-first (weights stubbed; SS = 0 in random table).
 - Furniture gifts: cardboard box (`boxBed.svg`) with Mango @ 3; Sun Cushion @ 9 with Biscuit. No second gift on the Mango unlock. Mini tree is the free onboarding gift from bible v0.
-- Data model: `Phenotype`, `FriendInstance`, `FurnitureSKU`, `YardComfort`, `UnlockFlags`.
+- Data model: `Phenotype`, `FriendInstance`, `FurnitureSKU`, `YardComfort`, `UnlockFlags`, `CollectionLocks`.
 
-Open / non-blocking: Heart packs, seasonal SS, L12+ name reshuffles.
+Still later (not blocking): L12+ parade name reshuffles.
 
 ## Art — LOCKED (Art pack v1)
 
