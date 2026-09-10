@@ -8,7 +8,7 @@ export function LivesRow({ strikes }: { strikes: number }) {
         <UiIcon
           key={i}
           name={i < strikes ? "fail_mark" : "fail_empty"}
-          className="h-7 w-7"
+          className={i < strikes ? "clay-pop h-7 w-7" : "h-7 w-7"}
         />
       ))}
     </div>

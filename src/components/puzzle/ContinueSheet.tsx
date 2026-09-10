@@ -31,11 +31,11 @@ export function ContinueSheet({
   }
 
   return (
-    <div className="absolute inset-0 z-20 flex items-end bg-[#1A1918]/40 px-4 pb-8 pt-16">
-      <div className="paper-card w-full rounded-[1.5rem] p-6">
-        <h2 className="text-center font-display text-2xl tracking-wide">Out of tries</h2>
+    <div className="absolute inset-0 z-20 flex items-end bg-ink/30 px-4 pb-8 pt-16">
+      <div className="paper-card modal-spring w-full rounded-[1.5rem] p-6">
+        <h2 className="text-center font-display text-2xl tracking-wide">Three soft misses</h2>
         <p className="mt-2 text-center text-sm text-ink/60">
-          Three misses on this board. Use a ticket or a short rest — never in the middle of a slide.
+          Same printed board. A ticket or a short rest — never an ad mid-slide.
         </p>
         <div className="mt-5 space-y-2">
           <Button className="w-full" disabled={save.tickets <= 0} onClick={ticket}>

@@ -5,7 +5,6 @@ import { UiIcon } from "@/components/art/Sprite";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
-import { Button } from "@/components/ui/Button";
 import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
 import { FURNITURE, STAR_COSMETICS } from "@/lib/collection";
@@ -39,10 +38,12 @@ export function YardScreen() {
         </div>
         <p className="mt-2 text-sm text-ink/55">
           {save.friends.length === 0
-            ? "Clear three puzzles, then invite Mango home."
+            ? "Three little slides. Then you get to meet Mango."
             : allDone
               ? "Everyone who needed saving is napping in the sun."
-              : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
+              : save.friends[0]?.friendId === "friend_001"
+                ? `${save.friends[0].name} is on the porch. The box is theirs.`
+                : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
         </p>
       </header>
 
@@ -92,7 +93,7 @@ export function YardScreen() {
           className="inline-flex h-11 w-full items-center justify-center rounded-[10px] bg-ink px-5 font-display text-base tracking-wide text-paper shadow-[0_3px_0_#1A1918]"
         >
           {cleared === 0
-            ? "Start the first slide"
+            ? "Walk Mango home"
             : allDone
               ? "Replay the routes"
               : `Continue · ${upcoming.name}`}

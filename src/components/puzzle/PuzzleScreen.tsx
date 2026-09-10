@@ -7,7 +7,7 @@ import { UiIcon } from "@/components/art/Sprite";
 import { ContinueSheet } from "@/components/puzzle/ContinueSheet";
 import { LivesRow } from "@/components/puzzle/LivesRow";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
-import { PuzzleBoard } from "@/components/puzzle/PuzzleBoard";
+import { PuzzleBoard, type CatMotion } from "@/components/puzzle/PuzzleBoard";
 import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
 import { Button } from "@/components/ui/Button";
@@ -36,6 +36,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
   const [toast, setToast] = useState<string | null>(level.hint);
   const [earnedStars, setEarnedStars] = useState(0);
   const [showName, setShowName] = useState(false);
+  const [motion, setMotion] = useState<CatMotion | null>(null);
   const runId = useRef(0);
 
   const strikes = save.levelStrikes[level.id] ?? 0;
@@ -50,60 +51,73 @@ export function PuzzleScreen({ level }: { level: Level }) {
     setSelected(level.cats[0]?.id ?? null);
     setPhase("playing");
     setToast(level.hint);
+    setMotion(null);
   }
 
   async function slide(dir: Dir) {
     if (phase !== "playing" || !selected) return;
     const preview = slideCat(level, cats, selected, dir);
     if (!preview.moved) {
-      setToast("That way is blocked.");
+      setToast("Thump — that way is a wall.");
       return;
     }
 
     const id = ++runId.current;
     setPhase("sliding");
     if (!save.seenCoach) markCoachSeen();
+    setMotion({
+      id: selected,
+      kind: "slide",
+      axis: dir === "n" || dir === "s" ? "y" : "x",
+    });
 
     const nextRemaining = remaining - 1;
     setRemaining(nextRemaining);
 
-    for (const step of preview.path) {
+    for (const step of preview.path.slice(1)) {
       if (runId.current !== id) return;
       setCats((current) =>
         current.map((cat) =>
           cat.id === selected ? { ...cat, x: step.x, y: step.y } : cat,
         ),
       );
-      await sleep(90);
+      await sleep(110);
     }
     if (runId.current !== id) return;
+
+    setMotion({ id: selected, kind: "settle" });
+    await sleep(160);
 
     const landed = preview.cats;
     if (allCatsOnGates(level, landed)) {
       const stars = starRating(nextRemaining, level.moveBudget);
       setEarnedStars(stars);
       setPhase("won");
-      setToast(`Home! ${stars} star${stars === 1 ? "" : "s"} from leftover slides.`);
+      setMotion({ id: selected, kind: "home" });
+      setToast("Home — they settled on the gate.");
       const result = completeLevel(level.id, stars);
-      if (result.unlocked) setShowName(true);
+      if (result.unlocked) {
+        await sleep(280);
+        setShowName(true);
+      }
       return;
     }
 
     if (nextRemaining <= 0) {
       const nextStrikes = addStrike(level.id);
-      setToast("Out of slides.");
+      setToast("Soft miss. The paper resets — try another route.");
       if (nextStrikes >= STARTING_LIVES) {
         setPhase("continue");
         return;
       }
-      await sleep(360);
+      await sleep(420);
       if (runId.current !== id) return;
       resetBoard();
-      setToast("Try another route.");
       return;
     }
 
     setPhase("playing");
+    setMotion(null);
     setToast(`${nextRemaining} slide${nextRemaining === 1 ? "" : "s"} left`);
   }
 
@@ -178,6 +192,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
           selected={selected}
           showCoach={!save.seenCoach && phase === "playing"}
           disabled={phase !== "playing"}
+          motion={motion}
           onSelect={selectCat}
           onSlide={(dir) => void slide(dir)}
         />

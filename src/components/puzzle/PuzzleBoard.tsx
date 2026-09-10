@@ -14,12 +14,19 @@ const SHIFT: Record<Dir, { x: number; y: number; glyph: string; label: string }>
   w: { x: -30, y: 0, glyph: "←", label: "Slide west" },
 };
 
+export type CatMotion = {
+  id: string;
+  kind: "slide" | "settle" | "home";
+  axis?: "x" | "y";
+};
+
 export function PuzzleBoard({
   level,
   cats,
   selected,
   showCoach,
   disabled,
+  motion,
   onSelect,
   onSlide,
 }: {
@@ -28,6 +35,7 @@ export function PuzzleBoard({
   selected: string | null;
   showCoach: boolean;
   disabled?: boolean;
+  motion?: CatMotion | null;
   onSelect: (id: string) => void;
   onSlide: (dir: Dir) => void;
 }) {
@@ -35,6 +43,11 @@ export function PuzzleBoard({
   const blocked = blockedSet(level);
   const gateKeys = new Set(level.gates.map((gate) => cellKey(gate.x, gate.y)));
   const legal = selected ? legalDirs(level, cats, selected) : [];
+  const homeKeys = new Set(
+    motion?.kind === "home"
+      ? cats.filter((cat) => gateKeys.has(cellKey(cat.x, cat.y))).map((cat) => cellKey(cat.x, cat.y))
+      : [],
+  );
 
   function endSwipe(clientX: number, clientY: number) {
     if (disabled || !selected || !start.current) return;
@@ -73,7 +86,8 @@ export function PuzzleBoard({
                   className={cn(
                     "relative h-full w-full rounded-xl border border-ink/15 bg-paper-deep",
                     isGate && "border-path/70 bg-path/15",
-                    isWall && "border-ink bg-wood",
+                    isWall && "border-ink/70 bg-wood",
+                    homeKeys.has(key) && "gate-home",
                   )}
                 >
                   {isGate ? <GateMark /> : null}
@@ -83,26 +97,37 @@ export function PuzzleBoard({
           }),
         )}
 
-        {cats.map((cat) => (
-          <button
-            key={cat.id}
-            type="button"
-            disabled={disabled}
-            onClick={() => onSelect(cat.id)}
-            className={cn(
-              "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center transition-[left,top] duration-200 ease-out",
-              selected === cat.id && "z-20",
-            )}
-            style={{
-              left: `${((cat.x + 0.5) * 100) / level.width}%`,
-              top: `${((cat.y + 0.5) * 100) / level.height}%`,
-              width: `${100 / level.width}%`,
-            }}
-            aria-label={`Select cat`}
-          >
-            <PuzzleCatSprite className="h-[56px] w-[56px] drop-shadow-sm" />
-          </button>
-        ))}
+        {cats.map((cat) => {
+          const active = motion?.id === cat.id ? motion : null;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              disabled={disabled}
+              onClick={() => onSelect(cat.id)}
+              className={cn(
+                "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center transition-[left,top] duration-[110ms] ease-[cubic-bezier(0.2,0.85,0.2,1)]",
+                selected === cat.id && "z-20",
+              )}
+              style={{
+                left: `${((cat.x + 0.5) * 100) / level.width}%`,
+                top: `${((cat.y + 0.5) * 100) / level.height}%`,
+                width: `${100 / level.width}%`,
+              }}
+              aria-label={`Select cat`}
+            >
+              <PuzzleCatSprite
+                className={cn(
+                  "h-[56px] w-[56px] drop-shadow-sm",
+                  active?.kind === "slide" && active.axis === "y" && "slide-along-y",
+                  active?.kind === "slide" && active.axis === "x" && "slide-along-x",
+                  active?.kind === "settle" && "slide-settle",
+                  active?.kind === "home" && "slide-home",
+                )}
+              />
+            </button>
+          );
+        })}
 
         {selected
           ? legal.map((dir) => {

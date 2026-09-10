@@ -7,9 +7,9 @@ import { TEMPLATE_ID } from "./constants";
 import type { Level } from "./types";
 
 const HEADLINES: Record<string, string> = {
-  L1: "LOVE IT!",
+  L1: "STRAIGHT SHOT",
   L2: "GO AROUND",
-  L3: "CAN YOU SAVE THIS CAT?",
+  L3: "WALL AS BRAKE",
   L4: "TWO AT ONCE",
   L5: "MIND THE ORDER",
   L6: "SWAP CORNERS",
@@ -20,9 +20,9 @@ const HEADLINES: Record<string, string> = {
 };
 
 const HINTS: Record<string, string> = {
-  L1: "Tap the cat, then slide them south into the yard gate.",
-  L2: "The wall blocks a straight shot. Slide around, then home.",
-  L3: "Use the long way — the wall sits between you and the gate.",
+  L1: "One idea: slide south. They stop in the little house.",
+  L2: "One idea: walls block. Slide around, then home.",
+  L3: "One idea: the wall is a brake. Go around so you stop on the gate.",
   L4: "Both cats need a gate. Slide each one home.",
   L5: "Move the open-lane cat first. The other needs room to go around.",
   L6: "Each friend slides to the opposite corner gate.",

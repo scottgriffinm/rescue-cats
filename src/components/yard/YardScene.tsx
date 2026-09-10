@@ -37,12 +37,15 @@ export function YardScene({
         <FurnitureImg file="swing" className="absolute right-[6%] top-[8%] w-[34%]" />
       ) : null}
       {hasBox ? (
-        <FurnitureImg file="boxBed" className="absolute bottom-[18%] left-[14%] w-[36%]" />
+        <FurnitureImg
+          file="boxBed"
+          className="yard-drop-box absolute bottom-[18%] left-[14%] w-[36%]"
+        />
       ) : null}
 
       {friends.length === 0 ? (
-        <p className="absolute inset-x-12 top-[52%] text-center font-display text-lg text-ink/35">
-          {hasTree ? "A tree, waiting for company." : "The porch is quiet."}
+        <p className="absolute inset-x-12 top-[52%] text-center font-display text-lg text-ink/40">
+          {hasTree ? "A tree, waiting for someone to name." : "The porch is quiet."}
         </p>
       ) : null}
 
@@ -52,7 +55,7 @@ export function YardScene({
         return (
           <div
             key={friend.instanceId}
-            className="absolute w-[72px] -translate-x-1/2 -translate-y-1/2"
+            className="yard-drop absolute w-[72px]"
             style={{ left: roost.left, top: roost.top }}
           >
             <FriendSprite

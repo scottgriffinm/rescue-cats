@@ -22,8 +22,8 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
   }
 
   return (
-    <div className="absolute inset-0 z-30 flex items-end justify-center bg-[#1A1918]/35 px-4 pb-8 pt-16">
-      <div className="paper-card w-full rounded-[1.5rem] p-6">
+    <div className="absolute inset-0 z-30 flex items-end justify-center bg-ink/30 px-4 pb-8 pt-16">
+      <div className="paper-card modal-spring w-full rounded-[1.5rem] p-6">
         <div className="flex justify-center">
           <UiIcon name="star_marigold" className="h-8 w-8" />
         </div>
@@ -34,7 +34,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
           <FriendSprite
             kit={catalog.phenotype.artKit}
             size={72}
-            className="h-[88px] w-[88px]"
+            className="hero-squash h-[88px] w-[88px]"
           />
         </div>
         <p className="mt-1 text-center text-sm text-ink/65">{catalog.displayLine}</p>
