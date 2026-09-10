@@ -2,6 +2,6 @@
   "version": "collection_v1",
   "status": "DEPRECATED",
   "do_not_load": true,
-  "redirect": "collection_v1_1_pack.json",
-  "note": "Stale unlock_clear:1 for Mango. Load data/collection_v1_1_pack.json. Mango @ onClear(3)."
+  "redirect": "collection_CURRENT.json",
+  "note": "Stale unlock_clear:1 for Mango. Do not load. Canonical file: data/collection_CURRENT.json. Mango @ onClear(3)."
 }

@@ -43,9 +43,9 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 2. **Duplicate names always allowed.** Each rescue is a new `FriendInstance`. Commons are never auto-merged. Renaming to an existing name is fine.
 3. **SS rarity = milestones first.** Not a seasonal calendar. Random SS weight is 0.
 
-## Collection — LOCKED (v1.1)
+## Collection — LOCKED (CURRENT)
 
-Load **`data/collection_v1_1_pack.json` only**. `collection_v1_pack.json` is a deprecated stub (stale Mango `@ unlock_clear: 1` — **do not load it**). If that `1` ever reappears, ignore it: Mango is `onClear(3)`.
+Load **`data/collection_CURRENT.json` only** (identical to v1.1). `collection_v1_pack.json` is a deprecated stub — **do not load it**. If a stale `unlock_clear: 1` appears, ignore it: Mango is `onClear(3)`. Clears 3, 6, 9, …, 60.
 
 - First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
 - Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27, Noodle@30, … Bean@60.

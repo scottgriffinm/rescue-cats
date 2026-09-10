@@ -1,4 +1,4 @@
-import pack from "../../data/collection_v1_1_pack.json";
+import pack from "../../data/collection_CURRENT.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -103,7 +103,7 @@ export function friendById(id: string) {
   return CATALOG.find((friend) => friend.friendId === id);
 }
 
-/** v1.1: cat n at clear 3*n. Never unlock on clear 1 or 2. */
+/** CURRENT / ENG_READ_THIS: cat n at clear 3*n. Never unlock on clear 1 or 2. */
 export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   if (clearIndex < 3) return undefined;
   return CATALOG.find((friend) => friend.unlockClear === clearIndex);
