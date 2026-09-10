@@ -2,7 +2,7 @@
 
 Mobile-first Next.js slice: slide cats into yard gates, then invite them onto a paper porch.
 
-Locked studio beat: **LT01 L1–L3 → name Mango at clear 3 → yard with a cardboard box.** CEO cadence overrides Collection v1 JSON (`unlock_clear: 1` is ignored).
+Locked studio beat: **LT01 L1–L3 → name Mango at clear 3 → yard with a cardboard box.** Collection: v1.1.
 
 ## Stack
 
@@ -39,4 +39,4 @@ Standard Next.js. Build: `npm run build`. No env vars.
 
 ## Design locks
 
-See [DESIGN.md](./DESIGN.md). Collection content: `data/collection_v1_pack.json`. Cadence: CEO override (Mango @ clear 3; ignore pack `unlock_clear: 1`).
+See [DESIGN.md](./DESIGN.md). Collection source of truth: `data/collection_v1_1_pack.json`. Do not load `collection_v1_pack.json`.

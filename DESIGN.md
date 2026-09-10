@@ -31,7 +31,7 @@ First five rescues (`TUTORIAL_RESCUES`) are a curated C/B, Regular-body parade: 
 
 Onboarding furniture: mini tree is placed free so L1–L2 are not barren. Cardboard box lands with Mango at clear 3; Sun Cushion with Biscuit at clear 9. Yarn swing stays a Hearts shop stub.
 
-Cadence is the **CEO override** below — not the Collection v1 forced parade. Hearts on every unique clear (band table in the pack). Porch/Lawn only. Comfort on the HUD. Friends / Met tabs list named instances vs the tutorial five.
+Cadence is Collection v1.1: cat every 3 unique clears for the first 20, Hearts on every clear. Porch/Lawn only. Comfort on the HUD. Friends / Met tabs list named instances vs the tutorial five.
 
 Pity / rarity: `src/lib/pity.ts` stubs only (`soft_pity_c_streak` 12, `force_a_by_clear` 25, SS weight 0).
 
@@ -43,24 +43,19 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 2. **Duplicate names always allowed.** Each rescue is a new `FriendInstance`. Commons are never auto-merged. Renaming to an existing name is fine.
 3. **SS rarity = milestones first.** Not a seasonal calendar. Random SS weight is 0.
 
-## Collection — CEO cadence override (authoritative for this slice)
+## Collection — LOCKED (v1.1)
 
-`data/collection_v1_pack.json` is still the content pack (names, phenotypes, naming strings, Hearts bands), but its cadence is **conflicting** and must not be implemented as written:
+Load **`data/collection_v1_1_pack.json` only**. `collection_v1_pack.json` is a deprecated stub (stale Mango `@ unlock_clear: 1` — **do not load it**). If that `1` ever reappears, ignore it: Mango is `onClear(3)`.
 
-- Pack says `first_friend.unlock_clear: 1` and `cadence_clears_1_30.forced` unlocks cats on clears 1, 2, 3, 4, 5, 6…
-- Pack gifts the box at clear 1 and Sun Cushion at clear 3
+- First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
+- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27, Noodle@30, … Bean@60.
+- Clear 30 → 10 cats (through Noodle `friend_010`).
+- Non-cat clears: Hearts only. Cats only on the every-3 cadence.
+- Furniture gifts: cardboard box with Mango @ 3; Sun Cushion with Biscuit @ 9.
+- Stars → yard cosmetics only.
+- Soft Hearts; always allow duplicate names; SS milestone-first (random SS weight 0).
 
-**CEO lock (engine: `CEO_CADENCE` in `src/lib/collection.ts`):**
-
-- No rescue at unique clear 1 or 2 — those clears are puzzle-only (Hearts only).
-- First named friend is **Mango (`friend_001`) at `onClear(3)`**, after LT01 L1–L3.
-- Cats 1–20 map by index: cat *n* unlocks at clear `3*n` (Mango@3, Ink@6, Biscuit@9, Tux@12, … Bean@60).
-- After cat 20, switch to every 5 (not reached in this slice).
-- Furniture: box (`furn_box_cardboard` / `boxBed.svg`) with Mango @ 3; Sun Cushion (`furn_bed_cushion`) with Biscuit @ 9. Yard is not empty after clear 3.
-- Hearts still award on every unique clear per the pack bands. Cats only on the every-3 cadence.
-- Naming modal strings stay exact from the pack. Soft Hearts only; duplicate names always allowed.
-
-Do not “fix” the v1 JSON in place this slice — treat `unlock_clear: 1` as stale.
+Display lines stay with the pack (Mango *“A sunny little explorer…”*, Ink *“Quiet paws…”*, Biscuit *“Here for snacks…”*, …).
 
 ## Art — LOCKED (Art pack v1 + Asset List v1)
 
