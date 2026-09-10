@@ -7,7 +7,7 @@ export type ClearEvent = {
   friendId?: string;
 };
 
-/** Campaign hook — unique clears only. Cat unlocks at 3,6,9… then every 5 after 20. */
+/** Campaign hook — unique clears only. Forced parade from Collection v1, else tier roll. */
 export function onClear(clearIndex: number, levelId: string, stars: number): ClearEvent {
   const friend = friendForClear(clearIndex);
   return {

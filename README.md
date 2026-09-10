@@ -2,7 +2,7 @@
 
 Mobile-first Next.js slice: slide cats into yard gates, then invite them onto a paper porch.
 
-Locked studio beat: **LT01 L1–L3 → name Mango at clear 3 → yard with a cardboard box.**
+Locked studio beat: **LT01 L1 → name Mango + cardboard box; L3 → Biscuit + Sun Cushion.** Collection source: `data/collection_v1_pack.json`.
 
 ## Stack
 
@@ -39,4 +39,4 @@ Standard Next.js. Build: `npm run build`. No env vars.
 
 ## Design locks
 
-See [DESIGN.md](./DESIGN.md). Collection source of truth: `data/collection_CURRENT.json` (v1.2 FROZEN). Do not load `collection_v1_pack.json`.
+See [DESIGN.md](./DESIGN.md). Collection source of truth: `data/collection_v1_pack.json`.

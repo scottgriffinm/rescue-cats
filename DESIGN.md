@@ -29,36 +29,35 @@ Cited so Collection Lead can swap content without touching puzzle code. Data mod
 
 First five rescues (`TUTORIAL_RESCUES`) are a curated C/B, Regular-body parade: Mango, Ink, Biscuit, Tux, Ghost. Naming modal reveals the personality line, suggests a name (pools include Mochi / Bean / Pip-adjacent food names), Confirm → yard drop-in + `"{Name} moved in!"` and a first-night !. Session return can show 1–3 ! bubbles.
 
-Onboarding so the porch is not barren: **mini cat tree is placed free** from a fresh save (Comfort 2). Bible also asked for a free first box; CEO freeze moved the cardboard box to the Mango beat at clear 3 so that unlock still gifts furniture (no second gift on that unlock). Yarn swing + later shop rungs 15 / 40 / 90 / 200 sit in CURRENT as stubs.
+Onboarding furniture: Collection v1 sells the mini tree (40 Hearts) and yarn swing (40 Hearts). The cardboard box is the clear-1 gift with Mango, so the porch is not empty after the first unique clear.
 
-Cadence (aligned with locked Puzzle pack): a `FriendInstance` every 3 unique clears for the first 20 cats, then every 5. Hearts on every clear (CURRENT bands; bible range 3–8 is covered on early clears). Porch/Lawn only. Comfort on the HUD. Friends / Met tabs list named instances vs the tutorial five.
+Cadence (Collection v1): `first_20_cats` + `cadence_clears_1_30.forced`. Early game is a forced parade (clears 1, 2, 3, 4, 5, 6, …) — the older “cat every 3 clears” table is superseded. Non-forced clears roll `tier_weights_random` (SS = 0). Hearts on every unique clear (band table in the pack). Porch/Lawn only. Comfort on the HUD. Friends / Met tabs list named instances vs the tutorial five.
 
 Pity / rarity: `src/lib/pity.ts` stubs only (`soft_pity_c_streak` 12, `force_a_by_clear` 25, SS weight 0).
 
-### Collection policy — LOCKED by CEO
+### Collection policy — LOCKED
 
-Former bible v0 opens, now frozen. Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS` + `data/collection_CURRENT.json` → `locks`.
+Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 
 1. **Soft Hearts only.** No Heart packs, no IAP, no paid currency in the prototype. Hearts come from unique clears and spend on furniture SKUs.
-2. **Duplicate names always allowed.** Each rescue is a new `FriendInstance`. Commons are never auto-merged.
-3. **SS rarity = milestones first.** Not a seasonal calendar. Random SS weight is 0. Milestone stub: `ss_milestones` (clear 30) — not awarded in this slice.
+2. **Duplicate names always allowed.** Each rescue is a new `FriendInstance`. Commons are never auto-merged. Renaming to an existing name is fine.
+3. **SS rarity = milestones first.** Not a seasonal calendar. Random SS weight is 0.
 
-## Collection — LOCKED (CURRENT v1.2, CEO freeze)
+## Collection — LOCKED (v1 pack)
 
-Load **`data/collection_CURRENT.json` only**. `collection_v1_pack.json` is a deprecated stub (it still says Mango @ clear 1 — **do not implement that**).
+Load **`data/collection_v1_pack.json`**. Unlocks key off campaign `onClear(clearIndex)` (unique clears, not level id).
 
-CEO override for the slice:
+Critical beats:
 
-- First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
-- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27, Noodle@30, … Bean@60.
-- After cat 20, unlock every 5 clears (data-ready; not reached in this slice).
-- Hearts on **every** unique clear (band table in CURRENT). Soft Hearts only — no IAP.
-- Always allow duplicate names; never auto-merge.
-- SS rarity = milestone-first (weights stubbed; SS = 0 in random table).
-- Furniture gifts: cardboard box (`boxBed.svg`) with Mango @ 3; Sun Cushion @ 9 with Biscuit. No second gift on the Mango unlock. Mini tree is the free onboarding gift from bible v0.
-- Data model: `Phenotype`, `FriendInstance`, `FurnitureSKU`, `YardComfort`, `UnlockFlags`, `CollectionLocks`.
+- **Clear 1** → `friend_001` **Mango** naming tutorial (pre-fill Mango, display line *“A sunny little explorer. Already sniffing your shoes.”*) + gift `furn_box_cardboard`.
+- **Clear 3** → `friend_003` **Biscuit** + gift `furn_bed_cushion` (Sun Cushion).
+- Forced map also lands Ink@2, Tux@4, Ghost@5, Mist@6, Pumpkin@8, Noodle@10, Oak@13, Cloud@16, Bean@20.
 
-Still later (not blocking): L12+ parade name reshuffles.
+Naming modal strings (exact): title `"New friend!"`, label `"Name your cat"`, CTA `"Welcome home"`, shuffle `"Shuffle names"`, bubbles `"{Name} moved in!"` / `"{Name}: Still sniffing everything…"`.
+
+Furniture SKUs (5): box (gift clear 1, comfort 1), Sun Cushion (gift clear 3, comfort 1), scratch post 15♥, mini tree 40♥, yarn swing 40♥.
+
+Hearts bands and random tier weights live on `cadence_clears_1_30`. Stars still buy yard cosmetics only.
 
 ## Art — LOCKED (Art pack v1)
 
@@ -89,7 +88,7 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 
 | Piece | File | Notes |
 | --- | --- | --- |
-| Box | `public/assets/furniture/boxBed.svg` | Gifted with Mango at unique clear 3. |
+| Box | `public/assets/furniture/boxBed.svg` | Gifted with Mango at unique clear 1. |
 | Swing | `public/assets/furniture/swing.svg` | Shop stub; also stands in for the free onboarding tree. |
 | Fountain | `public/assets/furniture/fountain.svg` | Shop stub + lawn fixture on the isometric yard. |
 | Post + bell | `public/assets/furniture/postBell.svg` | Shop stub / yard trim. |
@@ -113,4 +112,4 @@ Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in pla
 
 ## Playable beat
 
-L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** → yard with boxBed. Hearts accrue on 1 and 2; the friend lands on 3. L4–L10 stay on LT01 (two-cat, collision, color-lock stubs).
+L1 Straight Shot → **name Mango** + boxBed → L2 Setup Slide → Ink → L3 Wall as Brake → **Biscuit** + Sun Cushion. L4–L10 stay on LT01 (two-cat, collision, color-lock stubs).

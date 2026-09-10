@@ -6,7 +6,7 @@
  *   - roll `tier_weights_random` (SS = 0)
  *   - after `soft_pity_c_streak` (12) C-only rolls, force B+
  *   - `force_a_by_clear` 25 guarantees an A if none has dropped
- *   - grant SS only from `ss_milestones` in collection_CURRENT.json
+ *   - grant SS only from later milestone stubs (weight 0 in Collection v1)
  */
 
 export const PITY = {

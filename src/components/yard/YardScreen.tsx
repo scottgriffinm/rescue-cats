@@ -41,7 +41,7 @@ export function YardScreen() {
         </div>
         <p className="mt-2 text-sm text-ink/55">
           {save.friends.length === 0
-            ? "Clear three puzzles, then invite Mango home."
+            ? "Clear the first puzzle, then invite Mango home."
             : allDone
               ? "Everyone who needed saving is napping in the sun."
               : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
