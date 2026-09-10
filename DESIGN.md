@@ -47,12 +47,12 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 
 Load **`data/collection_CURRENT.json` only** (stamped FROZEN / v1.2 canonical). Ignore deprecated v1. If a stale `unlock_clear: 1` appears, ignore it.
 
-Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming. Unlock table in eng (`SLICE_UNLOCKS`) covers clears **3 / 6 / 9** at minimum. Later clears follow CURRENT as-is. **Do not chase Pebble@12** or other L12+ parade thrash — wait for a clean CURRENT fix before reshuffling later rows.
+Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming + box gift. Unlock table covers **3 / 6 / 9**. CURRENT is frozen and correct. **NO Pebble.** Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, … Bean@60. Ignore any chat saying Pebble.
 
 Board color enums for the slice: `orange | gray | black`. LT08+ gates map to these strings; `color_orange` etc. normalize in `src/lib/colors.ts` + level hydrate.
 
 - First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
-- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27, Noodle@30, … Bean@60.
+- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, … Bean@60. **NO Pebble.**
 - Clear 30 → 10 cats (through Noodle `friend_010`).
 - Non-cat clears: Hearts only. Cats only on the every-3 cadence.
 - Furniture gifts: cardboard box with Mango @ 3; Sun Cushion with Biscuit @ 9.

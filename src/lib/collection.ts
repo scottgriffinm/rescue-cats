@@ -103,7 +103,7 @@ export function friendById(id: string) {
   return CATALOG.find((friend) => friend.friendId === id);
 }
 
-/** CEO freeze — Mango@3 / Ink@6 / Biscuit@9. Do not chase Pebble@12; wait for a clean CURRENT fix. */
+/** CEO freeze — CURRENT is correct. NO Pebble. Mango@3 / Ink@6 / Biscuit@9. */
 export const SLICE_UNLOCKS: Record<number, string> = {
   3: "friend_001",
   6: "friend_002",
