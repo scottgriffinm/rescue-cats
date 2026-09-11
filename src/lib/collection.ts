@@ -10,9 +10,9 @@ type RawSku = (typeof pack.starter_furniture)[number];
 const FALLBACK_ASSETS: Record<string, string> = {
   furn_box_cardboard: "/assets/furniture/boxBed.svg",
   furn_bed_cushion: "/assets/furniture/boxBed.svg",
-  furn_scratch_post: "/assets/furniture/postBell.svg",
-  furn_tree_mini: "/assets/furniture/swing.svg",
-  furn_swing_yarn: "/assets/furniture/swing.svg",
+  furn_scratch_post: "/assets/furniture/scratcher.svg",
+  furn_tree_mini: "/assets/furniture/miniTree.svg",
+  furn_swing_yarn: "/assets/furniture/yarnSwing.svg",
   furn_fountain_stone: "/assets/furniture/fountain.svg",
   furn_perch_high: "/assets/furniture/swing.svg",
 };

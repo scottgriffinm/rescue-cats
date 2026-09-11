@@ -13,45 +13,30 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   L3: [["cat_a", "s"]],
   L4: [
     ["cat_a", "s"],
-    ["cat_b", "e"],
     ["cat_b", "s"],
   ],
   L5: [
     ["cat_a", "e"],
-    ["cat_b", "s"],
-    ["cat_a", "w"],
     ["cat_a", "s"],
+    ["cat_b", "w"],
+    ["cat_b", "s"],
   ],
   L6: [
     ["cat_a", "s"],
-    ["cat_a", "e"],
-    ["cat_a", "s"],
-    ["cat_a", "w"],
-    ["cat_b", "n"],
-    ["cat_b", "w"],
-    ["cat_b", "n"],
-    ["cat_b", "e"],
+    ["cat_b", "s"],
   ],
   L7: [
     ["cat_a", "s"],
-    ["cat_a", "e"],
-    ["cat_a", "s"],
-    ["cat_a", "w"],
-    ["cat_b", "s"],
-    ["cat_b", "w"],
-    ["cat_b", "s"],
-    ["cat_b", "e"],
+    ["cat_b", "n"],
   ],
   L8: [
-    ["cat_a", "e"],
-    ["cat_b", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
   ],
   L9: [
-    ["cat_b", "w"],
-    ["cat_b", "s"],
-    ["cat_b", "w"],
-    ["cat_a", "e"],
-    ["cat_a", "s"],
+    ["cat_orange", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
   ],
   L10: [
     ["cat_a", "n"],
@@ -148,55 +133,48 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const l4 = LEVELS.find((level) => level.id === "L4");
   if (!l4) throw new Error("missing L4");
-  assertNotHome(l4, [["cat_b", "e"], ["cat_b", "s"], ["cat_a", "s"]], "L4 B-first overshoots A through the gate");
+  if (l4.cats.length !== 2 || l4.gates.length !== 2) throw new Error("L4 must be two-friend teach");
 }
 
 {
   const l5 = LEVELS.find((level) => level.id === "L5");
   if (!l5) throw new Error("missing L5");
-  assertNotHome(l5, [["cat_b", "s"], ["cat_a", "e"], ["cat_a", "w"], ["cat_a", "s"]], "L5 B-first overshoots");
+  // B sits on the shared column; clearing A first is required before B can land west/south.
+  assertNotHome(l5, [["cat_b", "s"]], "L5 B-first cannot clear alone");
 }
 
 {
   const l8 = LEVELS.find((level) => level.id === "L8");
   if (!l8) throw new Error("missing L8");
   if (!l8.colorLocks) throw new Error("L8 must lock colors");
-  const orange = l8.cats.find((cat) => cat.id === "cat_a");
-  const gray = l8.cats.find((cat) => cat.id === "cat_b");
+  const orange = l8.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l8.cats.find((cat) => cat.id === "cat_gray");
   if (!orange || !gray) throw new Error("L8 missing coats");
-  if (!isMismatchSolid(l8, orange, { x: 0, y: 4 })) {
+  const grayGate = l8.gates.find((gate) => gate.id === "gate_gray");
+  const orangeGate = l8.gates.find((gate) => gate.id === "gate_orange");
+  if (!grayGate || !orangeGate) throw new Error("L8 missing gates");
+  if (!isMismatchSolid(l8, orange, grayGate)) {
     throw new Error("L8 gray house must be solid to the orange coat");
   }
-  if (!isMismatchSolid(l8, gray, { x: 4, y: 0 })) {
+  if (!isMismatchSolid(l8, gray, orangeGate)) {
     throw new Error("L8 orange house must be solid to the gray coat");
   }
-  const south = slideCat(l8, l8.cats, "cat_a", "s");
-  const orangeAfter = south.cats.find((cat) => cat.id === "cat_a");
-  if (!orangeAfter || orangeAfter.x !== 0 || orangeAfter.y !== 3) {
-    throw new Error(
-      `L8 orange south must stop before the gray house, landed (${orangeAfter?.x},${orangeAfter?.y})`,
-    );
-  }
-  assertNotHome(l8, [["cat_a", "s"], ["cat_b", "n"]], "L8 near houses are the wrong coat");
 }
 
 {
   const l9 = LEVELS.find((level) => level.id === "L9");
   if (!l9) throw new Error("missing L9");
   if (!l9.colorLocks) throw new Error("L9 must lock colors");
-  const gray = l9.cats.find((cat) => cat.id === "cat_b");
-  if (!gray) throw new Error("L9 missing gray coat");
-  if (!isMismatchSolid(l9, gray, { x: 4, y: 4 })) {
+  const orange = l9.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l9.cats.find((cat) => cat.id === "cat_gray");
+  if (!orange || !gray) throw new Error("L9 missing coats");
+  const orangeGate = l9.gates.find((gate) => gate.id === "gate_orange");
+  if (!orangeGate) throw new Error("L9 missing orange gate");
+  if (!isMismatchSolid(l9, gray, orangeGate)) {
     throw new Error("L9 orange house must be solid to the gray coat");
   }
-  const bSouth = slideCat(l9, l9.cats, "cat_b", "s");
-  const grayAfter = bSouth.cats.find((cat) => cat.id === "cat_b");
-  if (!grayAfter || grayAfter.x !== 4 || grayAfter.y !== 3) {
-    throw new Error(
-      `L9 gray south must stop before the orange house, landed (${grayAfter?.x},${grayAfter?.y})`,
-    );
-  }
-  assertNotHome(l9, [["cat_a", "s"], ["cat_b", "s"]], "L9 south sits on the wrong coat");
+  // Orange straight south lands on gray house — wrong coat.
+  assertNotHome(l9, [["cat_orange", "s"], ["cat_gray", "w"]], "L9 wrong-order soft-lock");
 }
 
 for (const level of LEVELS) {

@@ -1,8 +1,6 @@
 import teach from "../../data/levels/L01-L03.json";
 import l03 from "../../data/levels/L03.json";
-import lt02 from "../../data/levels/LT02-L04-L05.json";
-import l06l07 from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
-import lt08 from "../../data/levels/LT08-L08-L09.json";
+import chapter2 from "../../data/levels/CHAPTER2_PUZZLE_L04_L09.json";
 import l10 from "../../data/levels/L10.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
@@ -13,12 +11,12 @@ const HEADLINES: Record<string, string> = {
   L1: "STRAIGHT SHOT",
   L2: "GO AROUND",
   L3: "WALL AS BRAKE",
-  L4: "CAT AS BRAKE",
-  L5: "PARK THE BRAKE",
-  L6: "THE LONG WAY",
-  L7: "TWIN CORRIDORS",
-  L8: "MATCH THE COAT",
-  L9: "SWAP THE HOUSES",
+  L4: "TWO FRIENDS",
+  L5: "COLLISION ORDER",
+  L6: "BIGGER YARD",
+  L7: "TIGHT ROUTES",
+  L8: "MY GATE ONLY",
+  L9: "WRONG ORDER",
   L10: "TIGHT PAIR",
 };
 
@@ -26,12 +24,12 @@ const HINTS: Record<string, string> = {
   L1: "One idea: slide south. They stop in the little house.",
   L2: "One idea: walls block. Slide around — the edge behind the house is the brake.",
   L3: "The wall south of the house brakes you on the gate. Side routes slide through.",
-  L4: "A friend can be a wall. Slide into them so you stop on the house.",
-  L5: "Park a friend on the brake square first. Then the other can stop on the gate.",
-  L6: "The straight lane is blocked. Walk the long way around.",
-  L7: "Each side has its own corridor. Don’t cross the middle post.",
-  L8: "Orange house for the orange coat. The near house is the wrong color.",
-  L9: "The house under you is the other coat. Peel off, then swap.",
+  L4: "Two friends, two houses. Slide each down.",
+  L5: "Order matters — vacate the column before your friend can land.",
+  L6: "Bigger board. Pillars force a longer route.",
+  L7: "Crossed houses. Tight budget.",
+  L8: "Orange for orange, gray for gray.",
+  L9: "Wrong house first soft-locks. Match coats in order.",
   L10: "Meet in the middle lanes, then peel off to the matching gates.",
 };
 
@@ -45,8 +43,8 @@ type RawLevel = {
   colorLocks?: boolean;
   walls?: { x: number; y: number }[];
   blockers?: { x: number; y: number }[];
-  cats: { id: string; x: number; y: number; color?: string }[];
-  gates: { id: string; x: number; y: number; color?: string }[];
+  cats: { id: string; x: number; y: number; color?: string; colorId?: string }[];
+  gates: { id: string; x: number; y: number; color?: string; colorId?: string }[];
   teach?: string;
   templateId?: string;
 };
@@ -67,8 +65,14 @@ function hydrate(raw: RawLevel, index: number): Level {
     colorLocks: budgetRow?.colorLocks ?? raw.colorLocks ?? false,
     walls: raw.walls ?? [],
     blockers: raw.blockers ?? [],
-    cats: raw.cats.map((cat) => ({ ...cat, color: normalizeBoardColor(cat.color) })),
-    gates: raw.gates.map((gate) => ({ ...gate, color: normalizeBoardColor(gate.color) })),
+    cats: raw.cats.map((cat) => ({
+      ...cat,
+      color: normalizeBoardColor(cat.colorId ?? cat.color),
+    })),
+    gates: raw.gates.map((gate) => ({
+      ...gate,
+      color: normalizeBoardColor(gate.colorId ?? gate.color),
+    })),
     teach: raw.teach,
   };
 }
@@ -76,9 +80,7 @@ function hydrate(raw: RawLevel, index: number): Level {
 const authored = [
   ...teach.levels.filter((level) => level.id !== "L3"),
   l03,
-  ...lt02.levels,
-  ...l06l07.levels,
-  ...lt08.levels,
+  ...chapter2.levels,
   l10,
 ] as RawLevel[];
 
