@@ -104,6 +104,10 @@ export type SaveState = {
   seenCoach: boolean;
   bubbles: string[];
   unlockFlags: UnlockFlags;
+  first_night_done: boolean;
+  return_hook_available_at: number | null;
+  return_hook_claimed: boolean;
+  first_night_hearts_claimed: boolean;
 };
 
 export type YardComfort = {

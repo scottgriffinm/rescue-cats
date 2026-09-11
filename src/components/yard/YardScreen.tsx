@@ -1,23 +1,52 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { UiIcon } from "@/components/art/Sprite";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
 import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
-import { FURNITURE, STAR_COSMETICS } from "@/lib/collection";
+import { FURNITURE, NAMING, STAR_COSMETICS, withName } from "@/lib/collection";
+import { FIRST_NIGHT_BANG_MS } from "@/lib/constants";
 import { LEVELS, nextLevel } from "@/lib/levels";
 
 export function YardScreen() {
-  const { save, hydrated, comfort, resetProgress, buyFurniture, buyCosmetic, dismissBubble } =
-    useSave();
+  const {
+    save,
+    hydrated,
+    comfort,
+    resetProgress,
+    buyFurniture,
+    buyCosmetic,
+    dismissBubble,
+    completeFirstNight,
+  } = useSave();
   const upcoming = nextLevel(save.completedIds);
   const cleared = save.completedIds.length;
   const allDone = cleared >= LEVELS.length;
   const hasBox = save.furniture.includes("furn_box_cardboard");
   const hasTree = save.furniture.includes("furn_tree_mini");
+  const introFriend = !save.first_night_done
+    ? save.friends.find((friend) => friend.firstNight)
+    : undefined;
+  const [bangFriendId, setBangFriendId] = useState<string | null>(null);
+  const tomorrowHook =
+    save.first_night_done && !save.return_hook_claimed && save.friends[0]
+      ? withName(NAMING.tomorrow_hook, save.friends[0].name)
+      : null;
+
+  useEffect(() => {
+    if (!introFriend) {
+      setBangFriendId(null);
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      setBangFriendId(introFriend.instanceId);
+    }, FIRST_NIGHT_BANG_MS);
+    return () => window.clearTimeout(timer);
+  }, [introFriend?.instanceId]);
 
   return (
     <PhoneFrame>
@@ -49,7 +78,16 @@ export function YardScreen() {
 
       <div className="relative flex flex-1 items-center">
         {hydrated ? (
-          <YardScene friends={save.friends} hasBox={hasBox} hasTree={hasTree} />
+          <YardScene
+            friends={save.friends}
+            hasBox={hasBox}
+            hasTree={hasTree}
+            bangFriendId={bangFriendId}
+            onBang={(instanceId) => {
+              completeFirstNight(instanceId);
+              setBangFriendId(null);
+            }}
+          />
         ) : (
           <div className="mx-auto h-40 w-40 animate-pulse rounded-full bg-ink/5" />
         )}
@@ -66,6 +104,10 @@ export function YardScreen() {
           </span>
           {save.bubbles[0]}
         </button>
+      ) : null}
+
+      {tomorrowHook && save.bubbles[0] !== tomorrowHook ? (
+        <p className="mx-6 mb-2 text-center text-sm text-ink/60">{tomorrowHook}</p>
       ) : null}
 
       <FriendsMet friends={save.friends} />

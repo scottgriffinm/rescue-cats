@@ -15,10 +15,14 @@ export function YardScene({
   friends,
   hasBox,
   hasTree,
+  bangFriendId,
+  onBang,
 }: {
   friends: FriendInstance[];
   hasBox: boolean;
   hasTree: boolean;
+  bangFriendId?: string | null;
+  onBang?: (instanceId: string) => void;
 }) {
   const mango = friends.find((friend) => friend.friendId === "friend_001");
   const others = friends.filter((friend) => friend.friendId !== "friend_001");
@@ -32,16 +36,16 @@ export function YardScene({
         className="pointer-events-none absolute inset-0 h-full w-full select-none"
       />
 
-      <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] w-[56%]" />
-      <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] w-[18%]" />
-      <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[22%]" />
+      <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] min-h-[72px] w-[56%] min-w-[72px]" />
+      <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] min-h-[72px] w-[22%] min-w-[72px]" />
+      <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] min-h-[72px] w-[24%] min-w-[72px]" />
       {hasTree ? (
-        <FurnitureImg file="swing" className="absolute right-[4%] top-[6%] w-[38%]" />
+        <FurnitureImg file="swing" className="absolute right-[4%] top-[6%] min-h-[72px] w-[38%] min-w-[72px]" />
       ) : null}
       {hasBox ? (
         <FurnitureImg
           file="boxBed"
-          className="yard-drop-box absolute bottom-[16%] left-[12%] w-[46%]"
+          className="yard-drop-box absolute bottom-[16%] left-[12%] min-h-[72px] w-[46%] min-w-[72px]"
         />
       ) : null}
 
@@ -61,8 +65,15 @@ export function YardScene({
             size={72}
             className="h-[72px] w-[72px]"
           />
-          {mango.firstNight ? (
-            <UiIcon name="bubble_bang" className="absolute -right-1 -top-3 h-6 w-6" />
+          {bangFriendId === mango.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(mango.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${mango.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
         </div>
@@ -82,8 +93,15 @@ export function YardScene({
               size={72}
               className="h-[72px] w-[72px]"
             />
-            {friend.firstNight ? (
-              <UiIcon name="bubble_bang" className="absolute -right-1 -top-3 h-6 w-6" />
+            {bangFriendId === friend.instanceId ? (
+              <button
+                type="button"
+                onClick={() => onBang?.(friend.instanceId)}
+                className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+                aria-label={`${friend.name} has something to say`}
+              >
+                <UiIcon name="bubble_bang" className="h-7 w-7" />
+              </button>
             ) : null}
             <p className="text-center font-display text-[11px] text-ink/70">{friend.name}</p>
           </div>

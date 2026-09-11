@@ -17,6 +17,10 @@ export const EMPTY_SAVE: SaveState = {
   seenCoach: false,
   bubbles: [],
   unlockFlags: { mangoNamed: false, porchUnlocked: true },
+  first_night_done: false,
+  return_hook_available_at: null,
+  return_hook_claimed: false,
+  first_night_hearts_claimed: false,
 };
 
 export function loadSave(): SaveState {
@@ -45,6 +49,10 @@ export function loadSave(): SaveState {
         mangoNamed: (parsed.friends ?? []).some((friend) => friend.friendId === "friend_001"),
         porchUnlocked: true,
       },
+      first_night_done: parsed.first_night_done ?? false,
+      return_hook_available_at: parsed.return_hook_available_at ?? null,
+      return_hook_claimed: parsed.return_hook_claimed ?? false,
+      first_night_hearts_claimed: parsed.first_night_hearts_claimed ?? false,
     };
   } catch {
     return EMPTY_SAVE;

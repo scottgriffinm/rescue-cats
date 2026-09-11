@@ -19,7 +19,12 @@ import {
   withName,
   NAMING,
 } from "@/lib/collection";
-import { STARTING_LIVES } from "@/lib/constants";
+import {
+  FIRST_NIGHT_HEARTS,
+  RETURN_HOOK_DELAY_MS,
+  RETURN_HOOK_HEARTS,
+  STARTING_LIVES,
+} from "@/lib/constants";
 import { onClear } from "@/lib/onClear";
 import { EMPTY_SAVE, loadSave, writeSave } from "@/lib/storage";
 import type { FriendInstance, PendingUnlock, SaveState } from "@/lib/types";
@@ -38,6 +43,7 @@ type SaveApi = {
   comfort: number;
   completeLevel: (levelId: string, starsEarned: number) => ClearResult;
   namePendingFriend: (name: string) => FriendInstance | null;
+  completeFirstNight: (instanceId: string) => void;
   markCoachSeen: () => void;
   addStrike: (levelId: string) => number;
   spendTicket: (levelId?: string) => boolean;
@@ -78,7 +84,20 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const loaded = loadSave();
-    if (loaded.friends.length > 0 && loaded.bubbles.length === 0) {
+    if (
+      loaded.first_night_done &&
+      !loaded.return_hook_claimed &&
+      loaded.return_hook_available_at != null &&
+      Date.now() >= loaded.return_hook_available_at &&
+      loaded.friends.length > 0
+    ) {
+      const host = loaded.friends[0];
+      const line = withName(NAMING.return_bubble, host.name);
+      loaded.hearts += RETURN_HOOK_HEARTS;
+      loaded.return_hook_claimed = true;
+      loaded.bubbles = [line, ...loaded.bubbles.filter((bubble) => bubble !== line)].slice(0, 3);
+      writeSave(loaded);
+    } else if (loaded.friends.length > 0 && loaded.bubbles.length === 0) {
       const host = loaded.friends[0];
       loaded.bubbles = [`${host.name} is already on the porch.`];
     }
@@ -150,16 +169,38 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         };
         const friends = [...current.friends, instance];
         const movedIn = withName(NAMING.confirm_bubble, instance.name);
-        const sniff = withName(NAMING.first_night_bubble, instance.name);
-        const tomorrow = withName(NAMING.tomorrow_hook, instance.name);
         setSave({
           ...current,
           friends,
           pendingUnlocks: current.pendingUnlocks.slice(1),
-          bubbles: [sniff, tomorrow, movedIn, ...current.bubbles].slice(0, 3),
+          bubbles: [movedIn, ...current.bubbles].slice(0, 3),
           unlockFlags: unlockFlagsFor(friends),
         });
         return instance;
+      },
+      completeFirstNight: (instanceId) => {
+        const current = snap.save;
+        const friend = current.friends.find((item) => item.instanceId === instanceId);
+        if (!friend || current.first_night_done) return;
+        const sniff = withName(NAMING.first_night_bubble, friend.name);
+        const tomorrow = withName(NAMING.tomorrow_hook, friend.name);
+        const hearts = current.first_night_hearts_claimed
+          ? current.hearts
+          : current.hearts + FIRST_NIGHT_HEARTS;
+        setSave({
+          ...current,
+          hearts,
+          first_night_done: true,
+          first_night_hearts_claimed: true,
+          return_hook_available_at: Date.now() + RETURN_HOOK_DELAY_MS,
+          bubbles: [sniff, tomorrow, ...current.bubbles.filter((bubble) => bubble !== sniff)].slice(
+            0,
+            3,
+          ),
+          friends: current.friends.map((item) =>
+            item.instanceId === instanceId ? { ...item, firstNight: false } : item,
+          ),
+        });
       },
       markCoachSeen: () => setSave({ ...snap.save, seenCoach: true }),
       addStrike: (levelId) => {
