@@ -15,7 +15,7 @@
   "naming": {
     "prefill": "",
     "require_choice": true,
-    "suggestion_chips": ["Ink", "Ash", "Shadow"],
+    "suggestion_chips": ["Ink", "Slate", "Nimbus"],
     "cta_primary": "Welcome home"
   },
   "bang_copy": {
@@ -23,7 +23,7 @@
     "friend_002": ["{Name}: Quiet gray paws. Already claimed a shadow."]
   },
   "personality_pools": {
-    "Soft": ["Ink", "Ash", "Shadow"],
+    "Soft": ["Ink", "Slate", "Nimbus"],
     "Curious": ["Mango", "Pip", "Bean"],
     "Hungry": ["Biscuit", "Mochi", "Toast"],
     "Formal": ["Nigel", "Donna", "Greg"]

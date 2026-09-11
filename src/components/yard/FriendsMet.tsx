@@ -28,7 +28,7 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
       {tab === "friends" ? (
         <ul className="flex flex-nowrap justify-center gap-0">
           {friends.length === 0 ? (
-            <li className="text-xs text-ink/40">No one named yet.</li>
+            <li className="text-xs text-ink/40">Friends show up after a few clears.</li>
           ) : (
             friends.map((friend) => {
               const catalog = friendById(friend.friendId);

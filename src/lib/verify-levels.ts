@@ -2766,10 +2766,13 @@ for (const level of LEVELS) {
   }
   if (CHAPTER2.naming.prefill !== "") throw new Error("chapter2 naming prefill must stay empty");
   const inkChips = chipsForFriend("friend_002");
-  if (inkChips.join(",") !== "Ink,Ash,Shadow") {
-    throw new Error(`Ink chips must be Ink/Ash/Shadow, got ${inkChips.join("/")}`);
+  if (inkChips.join(",") !== "Ink,Slate,Nimbus") {
+    throw new Error(`Ink chips must be Ink/Slate/Nimbus, got ${inkChips.join("/")}`);
   }
   if (inkChips.includes("Misty")) throw new Error("Ink chips must not include Misty");
+  if (inkChips.includes("Ash") || inkChips.includes("Shadow")) {
+    throw new Error("Ink chips must not leak Ash@36 or Shadow@27 parade names");
+  }
   const inkBang = CHAPTER2.bang_copy.friend_002?.[0];
   if (inkBang !== "{Name}: Quiet gray paws. Already claimed a shadow.") {
     throw new Error(`Ink first-night drifted: ${inkBang}`);
@@ -4292,6 +4295,24 @@ for (const level of LEVELS) {
     throw new Error("Met must not prefer catalog defaultName over the chosen toast name");
   }
   console.log("Met identity lock ok · chosen name wins over defaultName");
+}
+
+
+{
+  // Pink kill: cold open — no ghost waitingTree; Met empty copy invites.
+  if (EMPTY_SAVE.furniture.includes("furn_tree_mini")) {
+    throw new Error("cold open: Mini Cat Tree must not be auto-owned");
+  }
+  const inkChipsLock = chipsForFriend("friend_002");
+  if (inkChipsLock.join(",") !== "Ink,Slate,Nimbus") {
+    throw new Error(`cold open Ink chips must be Ink/Slate/Nimbus, got ${inkChipsLock.join("/")}`);
+  }
+  for (const banned of ["Ash", "Shadow", "Mango", "Tux", "Pumpkin", "Noodle", "Bean"]) {
+    if (inkChipsLock.includes(banned)) {
+      throw new Error(`Ink chips must not include parade name ${banned}`);
+    }
+  }
+  console.log("Cold open + Ink chips lock ok · no ghost tree · Ink/Slate/Nimbus");
 }
 
 console.log("All authored boards ok");
