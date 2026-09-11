@@ -16,8 +16,8 @@ export function PuzzleCatSprite({
       <img src={PUZZLE_CAT_SRC} alt="" className="pointer-events-none h-full w-full select-none" />
       {colorHex ? (
         <span
-          className="pointer-events-none absolute bottom-[8%] h-[12%] max-h-2 min-h-1.5 w-[55%] max-w-6 rounded-full"
-          style={{ background: colorHex, boxShadow: `0 0 0 1.5px #2B2A28` }}
+          className="pointer-events-none absolute bottom-[6%] h-[16%] max-h-2.5 min-h-2 w-[62%] max-w-7 rounded-full"
+          style={{ background: colorHex, boxShadow: `0 0 0 2px #2B2A28` }}
           aria-hidden
         />
       ) : null}

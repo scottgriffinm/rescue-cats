@@ -1,5 +1,15 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
+import chapter2Pack from "../../data/levels/CHAPTER2_PUZZLE_L04_L09.json";
+import l4Pack from "../../data/levels/L4.json";
+import l5Pack from "../../data/levels/L5.json";
+import l6Pack from "../../data/levels/L6.json";
+import l7Pack from "../../data/levels/L7.json";
+import l8Pack from "../../data/levels/L8.json";
+import l9Pack from "../../data/levels/L9.json";
+import lt02Pack from "../../data/levels/LT02-L04-L05.json";
+import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
+import lt08Pack from "../../data/levels/LT08-L08-L09.json";
 import { ART_KIT_PATH } from "./constants";
 import {
   CHAPTER2,
@@ -310,6 +320,57 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     assertLocked(level, LOCKED[id]);
     console.log(`${id} locked topology ok`);
   }
+
+  type PackedBoard = {
+    id: string;
+    width: number;
+    height: number;
+    colorLocks?: boolean;
+    walls?: { x: number; y: number }[];
+    cats: { id: string; x: number; y: number; colorId?: string; color?: string }[];
+    gates: { id: string; x: number; y: number; colorId?: string; color?: string }[];
+  };
+  const locked = Object.fromEntries(
+    chapter2Pack.levels.map((level) => [level.id, level as PackedBoard]),
+  );
+  const standalones: Record<string, PackedBoard[]> = {
+    L4: [l4Pack as PackedBoard, lt02Pack.levels[0] as PackedBoard],
+    L5: [l5Pack as PackedBoard, lt02Pack.levels[1] as PackedBoard],
+    L6: [l6Pack as PackedBoard, l0607Pack.levels[0] as PackedBoard],
+    L7: [l7Pack as PackedBoard, l0607Pack.levels[1] as PackedBoard],
+    L8: [l8Pack as PackedBoard, lt08Pack.levels[0] as PackedBoard],
+    L9: [l9Pack as PackedBoard, lt08Pack.levels[1] as PackedBoard],
+  };
+  const boardKey = (level: PackedBoard) => {
+    const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
+    const cats = [...level.cats]
+      .map((cat) => `${cat.id}@${cat.x},${cat.y}`)
+      .sort()
+      .join(";");
+    const gates = [...level.gates]
+      .map((gate) => `${gate.id}@${gate.x},${gate.y}`)
+      .sort()
+      .join(";");
+    return `${level.width}x${level.height}|locks:${Boolean(level.colorLocks)}|w:${walls}|c:${cats}|g:${gates}`;
+  };
+  for (const [id, copies] of Object.entries(standalones)) {
+    const canon = locked[id];
+    if (!canon) throw new Error(`missing locked ${id}`);
+    const expected = boardKey(canon);
+    for (const copy of copies) {
+      if (boardKey(copy) !== expected) {
+        throw new Error(`${copy.id} standalone drifted from CHAPTER2_PUZZLE`);
+      }
+    }
+    if (id === "L8" || id === "L9") {
+      for (const copy of copies) {
+        for (const piece of [...copy.cats, ...copy.gates]) {
+          if (!piece.colorId) throw new Error(`${copy.id} ${piece.id} must use colorId`);
+        }
+      }
+    }
+  }
+  console.log("Standalone L4–L9 + LT02/L06-07/LT08 match locked coords");
 }
 
 {

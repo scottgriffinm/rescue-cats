@@ -200,12 +200,41 @@ try {
   if (!yard.text.includes("Hearts shop") && !yard.text.includes("Sisal Scratch Post")) {
     throw new Error("Hearts shop starter missing after Ink");
   }
+  if (!yard.text.includes("Buy for 15♥") && !yard.text.includes("Buy for 15")) {
+    throw new Error("Hearts shop CTA missing after Ink");
+  }
   if (
     !yard.save.bubbles.some(
       (line) => line.includes("Hearts shop") || line.includes("Quiet gray paws"),
     )
   ) {
     throw new Error("Ink bang / shop copy variants missing");
+  }
+  const comfortBefore = (yard.text.match(/Comfort[^\d]*(\d+)/) || [])[1];
+  const bought = await page.evaluate(() => {
+    const cta = [...document.querySelectorAll("button")].find((btn) =>
+      (btn.textContent || "").includes("Buy for 15"),
+    );
+    if (!cta || cta.disabled) return false;
+    cta.click();
+    return true;
+  });
+  if (!bought) throw new Error("Hearts shop buy CTA was not usable");
+  await new Promise((r) => setTimeout(r, 400));
+  const afterBuy = await page.evaluate(() => ({
+    text: document.body.innerText,
+    imgs: [...document.querySelectorAll("img")].map((img) => img.getAttribute("src")),
+    save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
+  }));
+  if (!afterBuy.save.furniture.includes("furn_scratch_post")) {
+    throw new Error("scratch post was not purchased");
+  }
+  if (!afterBuy.imgs.includes("/assets/furniture/scratcher.svg")) {
+    throw new Error("yard missing purchased scratcher");
+  }
+  const comfortAfter = (afterBuy.text.match(/Comfort[^\d]*(\d+)/) || [])[1];
+  if (!comfortAfter || Number(comfortAfter) <= Number(comfortBefore || 0)) {
+    throw new Error(`Comfort meter did not rise (${comfortBefore} → ${comfortAfter})`);
   }
   await shot(page, "05_ink_yard");
 
@@ -223,6 +252,12 @@ try {
 
   await page.goto(`${BASE}/level/L8`, { waitUntil: "networkidle0" });
   await page.waitForFunction(() => document.body.innerText.includes("MY GATE ONLY"));
+  const l8art = await page.evaluate(() =>
+    [...document.querySelectorAll("img")].map((img) => img.getAttribute("src")),
+  );
+  if (!l8art.some((src) => src?.includes("gate_orange")) || !l8art.some((src) => src?.includes("gate_gray"))) {
+    throw new Error(`L8 missing tinted gates: ${l8art}`);
+  }
   await play(
     page,
     [

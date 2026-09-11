@@ -15,12 +15,14 @@ export function YardScene({
   friends,
   hasBox,
   hasTree,
+  hasScratch,
   bangFriendId,
   onBang,
 }: {
   friends: FriendInstance[];
   hasBox: boolean;
   hasTree: boolean;
+  hasScratch?: boolean;
   bangFriendId?: string | null;
   onBang?: (instanceId: string) => void;
 }) {
@@ -46,6 +48,12 @@ export function YardScene({
         <FurnitureImg
           file="boxBed"
           className="yard-drop-box absolute bottom-[16%] left-[12%] w-[46%]"
+        />
+      ) : null}
+      {hasScratch ? (
+        <FurnitureImg
+          file="scratcher"
+          className="yard-drop absolute bottom-[20%] right-[14%] w-[18%]"
         />
       ) : null}
 
