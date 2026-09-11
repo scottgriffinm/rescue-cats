@@ -114,11 +114,17 @@ type RawLevel = {
   templateId?: string;
 };
 
+function levelNumberFromId(id: string, fallbackIndex: number) {
+  const match = /^L(\d+)$/i.exec(id);
+  if (!match) return fallbackIndex + 1;
+  return Number(match[1]);
+}
+
 function hydrate(raw: RawLevel, index: number): Level {
   const budgetRow = budgets.levels.find((row) => row.id === raw.id);
   return {
     id: raw.id,
-    number: index + 1,
+    number: levelNumberFromId(raw.id, index),
     name: raw.name,
     headline: HEADLINES[raw.id] ?? raw.name.toUpperCase(),
     hint: HINTS[raw.id] ?? "Slide every cat onto a yard gate.",
@@ -160,10 +166,23 @@ const authored = [
 
 export const LEVELS: Level[] = authored.map(hydrate);
 
+/** Highest campaign L-number (L10 off-path does not shrink this). */
+export const CAMPAIGN_LEVEL_COUNT = LEVELS.reduce(
+  (max, level) => Math.max(max, level.number),
+  0,
+);
+
 export const MOVE_BUDGET_TABLE = budgets.levels;
 
 export function getLevel(id: string) {
   return LEVELS.find((level) => level.id === id);
+}
+
+/** Next board on the campaign path (array order — L9 → L11, never phantom L10). */
+export function nextCampaignLevel(levelId: string) {
+  const index = LEVELS.findIndex((level) => level.id === levelId);
+  if (index < 0) return undefined;
+  return LEVELS[index + 1];
 }
 
 export function nextLevel(completedIds: string[]) {

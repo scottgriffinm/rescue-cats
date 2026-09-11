@@ -13,7 +13,7 @@ import { useSave } from "@/components/providers/SaveProvider";
 import { GameShell } from "@/components/shell/GameShell";
 import { Button } from "@/components/ui/Button";
 import { STARTING_LIVES } from "@/lib/constants";
-import { LEVELS } from "@/lib/levels";
+import { CAMPAIGN_LEVEL_COUNT, LEVELS, nextCampaignLevel } from "@/lib/levels";
 import {
   allCatsOnGates,
   cloneCats,
@@ -53,7 +53,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
   const runId = useRef(0);
 
   const strikes = save.levelStrikes[level.id] ?? 0;
-  const next = LEVELS.find((item) => item.number === level.number + 1);
+  const next = nextCampaignLevel(level.id);
 
   const onGates = useMemo(() => allCatsOnGates(level, cats), [level, cats]);
 
@@ -187,7 +187,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
         </Link>
         <div className="text-center">
           <p className="font-display text-[11px] tracking-[0.2em] text-ink/45">
-            LEVEL {level.number} / {LEVELS.length}
+            LEVEL {level.number} / {CAMPAIGN_LEVEL_COUNT}
           </p>
           <p className="font-display text-sm">{level.name}</p>
         </div>
