@@ -28,6 +28,7 @@ import {
 } from "./collection";
 import { FURN_ASSETS, GATE_ASSETS } from "./artAssets";
 import { LEVELS } from "./levels";
+import { EMPTY_SAVE } from "./storage";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
@@ -582,6 +583,9 @@ for (const level of LEVELS) {
   for (const clear of [1, 2, 3, 4, 5, 6]) {
     const hearts = heartsForClear(clear);
     if (hearts < 5 || hearts > 7) throw new Error(`clear ${clear} hearts ${hearts} not in 5–7`);
+  }
+  if (EMPTY_SAVE.furniture.includes("furn_tree_mini")) {
+    throw new Error("Mini Cat Tree must not be auto-owned — it is a Hearts shop card");
   }
   const shop3 = shopItemsForClear(3).map((sku) => `${sku.skuId}:${sku.hearts}`).sort();
   if (shop3.join(",") !== "furn_scratch_post:15,furn_tree_mini:40") {

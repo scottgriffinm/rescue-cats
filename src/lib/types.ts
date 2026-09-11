@@ -91,7 +91,7 @@ export type PendingUnlock = {
 };
 
 export type SaveState = {
-  version: 2;
+  version: 3;
   completedIds: string[];
   clearCount: number;
   friends: FriendInstance[];

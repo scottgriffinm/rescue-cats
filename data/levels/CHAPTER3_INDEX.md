@@ -14,7 +14,7 @@ Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12**. **L10 is not on th
 - Biscuit (`friend_003`) at `onClear(9)` — chips **Biscuit / Mochi / Toast**
 - First-night: `{Name}: Here for snacks. Possibly also for you.`
 - Gift: Sun Cushion · `sunCushion.svg` (box + cushion + two or more loafs on the porch)
-- Hearts shop SKUs unchanged: scratcher / miniTree / yarnSwing
+- Hearts shop SKUs unchanged: scratcher 15♥ + mini tree 40♥ from clear ≥3; yarn swing 40♥ from clear ≥6. Mini Cat Tree is a shop card when not owned (not an auto-grant).
 
 ## Engine
 

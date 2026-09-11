@@ -8,7 +8,7 @@ Pack JSON: `chapter2_ink_shop_bang.json`. Overlay on `collection_CURRENT.json`. 
 | Unlock | `onClear(6)` |
 | Line | Quiet gray paws. Already claimed a shadow. |
 | Naming | empty prefill, chips **Ink / Ash / Shadow**, CTA until a name |
-| Shop @3 | Scratch 15♥ · Mini tree 40♥ |
+| Shop @3 | Scratch 15♥ · Mini tree 40♥ (purchasable when not owned) |
 | Shop @6 | Yarn swing 40♥ |
 | Hearts | Clears 1–6 grant 5–7 |
 | Ink `!` | `{Name}: Quiet gray paws. Already claimed a shadow.` |

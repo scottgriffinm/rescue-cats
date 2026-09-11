@@ -22,7 +22,7 @@ const DIR_LABEL = {
 };
 
 const SEED = {
-  version: 2,
+  version: 3,
   completedIds: ["L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8"],
   clearCount: 8,
   friends: [
@@ -53,7 +53,7 @@ const SEED = {
   hearts: 40,
   stars: 18,
   tickets: 1,
-  furniture: ["furn_tree_mini", "furn_box_cardboard", "furn_scratch_post"],
+  furniture: ["furn_box_cardboard", "furn_scratch_post"],
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
@@ -204,6 +204,15 @@ try {
   }
   if (yard.imgs.includes("/assets/furniture/scratcher.svg") === false) {
     throw new Error("owned scratcher must stay on the porch");
+  }
+  if (!yard.text.includes("Mini Cat Tree")) {
+    throw new Error("Mini Cat Tree shop card missing when not owned");
+  }
+  if (!yard.imgs.includes("/assets/furniture/miniTree.svg")) {
+    throw new Error("Mini Cat Tree shop art must be miniTree.svg");
+  }
+  if (!yard.text.includes("40♥") && !yard.text.includes("Buy for 40")) {
+    throw new Error("Mini Cat Tree 40♥ CTA missing");
   }
   await shot(page, "03_biscuit_yard");
 
