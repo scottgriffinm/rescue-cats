@@ -9,8 +9,9 @@ import type { Dir, Level, PieceCat } from "@/lib/types";
 
 export type CatMotion = {
   id: string;
-  kind: "slide" | "settle" | "home";
+  kind: "snap" | "slide" | "settle" | "home";
   axis?: "x" | "y";
+  durationMs?: number;
 };
 
 export function PuzzleBoard({
@@ -91,6 +92,7 @@ export function PuzzleBoard({
 
         {cats.map((cat) => {
           const active = motion?.id === cat.id ? motion : null;
+          const sliding = active?.kind === "slide";
           return (
             <button
               key={cat.id}
@@ -98,13 +100,16 @@ export function PuzzleBoard({
               disabled={disabled}
               onClick={() => onSelect(cat.id)}
               className={cn(
-                "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center transition-[left,top] duration-[110ms] ease-[cubic-bezier(0.2,0.85,0.2,1)]",
+                "absolute z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center",
                 selected === cat.id && "z-20",
               )}
               style={{
                 left: `${((cat.x + 0.5) * 100) / level.width}%`,
                 top: `${((cat.y + 0.5) * 100) / level.height}%`,
                 width: `${100 / level.width}%`,
+                transitionProperty: sliding ? "left, top" : "none",
+                transitionDuration: sliding ? `${active.durationMs ?? 160}ms` : "0ms",
+                transitionTimingFunction: "cubic-bezier(0.2, 0.85, 0.2, 1)",
               }}
               aria-label={`Select cat`}
             >

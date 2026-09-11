@@ -27,6 +27,18 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function nextPaint() {
+  return new Promise<void>((resolve) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => resolve());
+    });
+  });
+}
+
+function slideDurationMs(steps: number) {
+  return Math.max(140, steps * 90);
+}
+
 export function PuzzleScreen({ level }: { level: Level }) {
   const router = useRouter();
   const { save, completeLevel, addStrike, markCoachSeen } = useSave();
@@ -66,24 +78,25 @@ export function PuzzleScreen({ level }: { level: Level }) {
     const id = ++runId.current;
     setPhase("sliding");
     if (!save.seenCoach) markCoachSeen();
+
+    const nextRemaining = remaining - 1;
+    setRemaining(nextRemaining);
+    const durationMs = slideDurationMs(preview.path.length - 1);
+
+    // Cancel any leftover left/top tween so the next hop starts from the
+    // committed tile, not a mid-lag visual (L2's long setup slides).
+    setMotion({ id: selected, kind: "snap" });
+    await nextPaint();
+    if (runId.current !== id) return;
+
     setMotion({
       id: selected,
       kind: "slide",
       axis: dir === "n" || dir === "s" ? "y" : "x",
+      durationMs,
     });
-
-    const nextRemaining = remaining - 1;
-    setRemaining(nextRemaining);
-
-    for (const step of preview.path.slice(1)) {
-      if (runId.current !== id) return;
-      setCats((current) =>
-        current.map((cat) =>
-          cat.id === selected ? { ...cat, x: step.x, y: step.y } : cat,
-        ),
-      );
-      await sleep(110);
-    }
+    setCats(preview.cats);
+    await sleep(durationMs);
     if (runId.current !== id) return;
 
     setMotion({ id: selected, kind: "settle" });
