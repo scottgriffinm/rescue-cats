@@ -15,7 +15,7 @@ export default function PlayPage() {
   }, [hydrated, router, save.completedIds]);
 
   return (
-    <div className="frame-void grid min-h-dvh place-items-center text-ink">
+    <div className="cream-wash grid min-h-dvh place-items-center text-ink">
       <p className="font-display tracking-wide">Finding the next rescue…</p>
     </div>
   );

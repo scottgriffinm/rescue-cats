@@ -13,10 +13,7 @@
   --fur-cream: #fff8f0;
   --fur-ginger: #d38b5d;
   --fur-slate: #5a5e6b;
-  --page-bg: #e8dfd2;
-  --phone-frame: #d4cbbe;
-  --frame-void: #cabcab;
-  --frame-void-soft: #b5a693;
+  --page-bg: #f7f0e6;
   --ctrl-band-gap: 12px;
   --dpad-visual-scale: 0.85;
 }
@@ -32,16 +29,15 @@
   --color-mist: var(--mist);
   --color-wood: var(--wood);
   --color-page-bg: var(--page-bg);
-  --color-phone-frame: var(--phone-frame);
-  --color-frame-void: var(--frame-void);
   --font-sans: var(--font-nunito), ui-rounded, "Nunito", sans-serif;
   --font-display: var(--font-fredoka), ui-rounded, "Fredoka", sans-serif;
 }
 
 html,
 body {
-  background: var(--page-bg);
+  background: var(--paper);
   color: var(--ink);
+  overflow-x: hidden;
 }
 
 body {
@@ -70,23 +66,6 @@ a {
 
 .paper-card-path {
   box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--path) 30%, transparent);
-}
-
-.page-bg {
-  background: var(--page-bg);
-}
-
-.phone-frame {
-  background: var(--phone-frame);
-}
-
-.frame-void {
-  background:
-    radial-gradient(
-      ellipse 80% 64% at 50% 42%,
-      var(--frame-void) 0%,
-      color-mix(in srgb, var(--frame-void-soft) 42%, var(--frame-void)) 100%
-    );
 }
 
 .cream-wash {

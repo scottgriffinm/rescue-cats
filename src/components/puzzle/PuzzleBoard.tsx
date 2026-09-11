@@ -57,7 +57,7 @@ export function PuzzleBoard({
 
   return (
     <div
-      className="paper-card paper-card-path relative mx-auto w-full max-w-[320px] rounded-[24px] p-2"
+      className="paper-card paper-card-path relative mx-auto w-full max-w-[28rem] rounded-[24px] p-2"
       onPointerDown={(event) => {
         start.current = { x: event.clientX, y: event.clientY };
       }}
@@ -127,6 +127,7 @@ export function PuzzleBoard({
                 left: `${((cat.x + 0.5) * 100) / level.width}%`,
                 top: `${((cat.y + 0.5) * 100) / level.height}%`,
                 width: `${100 / level.width}%`,
+                height: `${100 / level.height}%`,
                 transitionProperty: sliding ? "left, top" : "none",
                 transitionDuration: sliding ? `${active.durationMs ?? 160}ms` : "0ms",
                 transitionTimingFunction: "cubic-bezier(0.2, 0.85, 0.2, 1)",
@@ -136,7 +137,7 @@ export function PuzzleBoard({
               <PuzzleCatSprite
                 colorHex={cat.color ? BOARD_COLOR_HEX[cat.color] : undefined}
                 className={cn(
-                  "h-[56px] w-[56px] drop-shadow-sm",
+                  "h-[80%] w-[80%] max-h-[72px] max-w-[72px] drop-shadow-sm",
                   active?.kind === "slide" && active.axis === "y" && "slide-along-y",
                   active?.kind === "slide" && active.axis === "x" && "slide-along-x",
                   active?.kind === "settle" && "slide-settle",

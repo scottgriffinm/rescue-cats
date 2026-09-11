@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { UiIcon } from "@/components/art/Sprite";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { useSave } from "@/components/providers/SaveProvider";
-import { PhoneFrame } from "@/components/shell/PhoneFrame";
+import { GameShell } from "@/components/shell/GameShell";
 import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
 import {
@@ -55,7 +55,7 @@ export function YardScreen() {
   }, [introFriend?.instanceId]);
 
   return (
-    <PhoneFrame>
+    <GameShell>
       <header className="px-6 pt-7 text-center">
         <p className="font-display text-[11px] tracking-[0.28em] text-ink/40">
           PORCH / LAWN
@@ -120,7 +120,7 @@ export function YardScreen() {
 
       <FriendsMet friends={save.friends} />
 
-      <div className="flex justify-center gap-1.5 px-6">
+      <div className="flex flex-wrap justify-center gap-1.5 px-6">
         {LEVELS.map((level) => {
           const done = save.completedIds.includes(level.id);
           const current = upcoming.id === level.id && !allDone;
@@ -173,7 +173,7 @@ export function YardScreen() {
       {save.pendingUnlocks.length > 0 ? (
         <NameCatModal key={save.friends.length} onNamed={() => undefined} />
       ) : null}
-    </PhoneFrame>
+    </GameShell>
   );
 }
 

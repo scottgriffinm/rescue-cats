@@ -31,8 +31,8 @@ export function ContinueSheet({
   }
 
   return (
-    <div className="absolute inset-0 z-20 flex items-end bg-ink/30 px-4 pb-8 pt-16">
-      <div className="paper-card modal-spring w-full rounded-[1.5rem] p-6">
+    <div className="fixed inset-0 z-20 flex items-end justify-center bg-ink/30 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-16 sm:items-center">
+      <div className="paper-card modal-spring w-full max-w-md rounded-[1.5rem] p-6">
         <h2 className="text-center font-display text-2xl tracking-wide">Three soft misses</h2>
         <p className="mt-2 text-center text-sm text-ink/60">
           Same printed board. A ticket or a short rest — never an ad mid-slide.

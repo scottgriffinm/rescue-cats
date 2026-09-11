@@ -10,7 +10,7 @@ import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { PuzzleBoard, type CatMotion } from "@/components/puzzle/PuzzleBoard";
 import { SlidePad } from "@/components/puzzle/SlidePad";
 import { useSave } from "@/components/providers/SaveProvider";
-import { PhoneFrame } from "@/components/shell/PhoneFrame";
+import { GameShell } from "@/components/shell/GameShell";
 import { Button } from "@/components/ui/Button";
 import { STARTING_LIVES } from "@/lib/constants";
 import { LEVELS } from "@/lib/levels";
@@ -176,7 +176,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
   }, [phase, showName, selected, remaining, cats, level]);
 
   return (
-    <PhoneFrame>
+    <GameShell>
       <header className="flex items-center justify-between px-4 pt-4">
         <Link
           href="/"
@@ -254,7 +254,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
       </footer>
 
       {phase === "won" && earnedStars > 0 ? (
-        <div className="pointer-events-none absolute left-1/2 top-24 z-10 flex -translate-x-1/2 gap-1">
+        <div className="pointer-events-none absolute left-1/2 top-20 z-10 flex -translate-x-1/2 gap-1 sm:top-24">
           {Array.from({ length: earnedStars }, (_, i) => (
             <UiIcon key={i} name="star_marigold" className="h-7 w-7" />
           ))}
@@ -278,6 +278,6 @@ export function PuzzleScreen({ level }: { level: Level }) {
       {onGates && phase === "playing" ? (
         <span className="sr-only">All cats are on gates</span>
       ) : null}
-    </PhoneFrame>
+    </GameShell>
   );
 }

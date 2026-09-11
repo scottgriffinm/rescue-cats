@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { PhoneFrame } from "@/components/shell/PhoneFrame";
+import { GameShell } from "@/components/shell/GameShell";
 
 export default function NotFound() {
   return (
-    <PhoneFrame>
+    <GameShell>
       <div className="flex flex-1 flex-col items-center justify-center px-8 text-center">
         <h1 className="font-display text-3xl tracking-wide">Wrong path</h1>
         <p className="mt-2 text-sm text-ink/55">
@@ -16,6 +16,6 @@ export default function NotFound() {
           Back to the yard
         </Link>
       </div>
-    </PhoneFrame>
+    </GameShell>
   );
 }
