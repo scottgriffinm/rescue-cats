@@ -200,6 +200,15 @@ try {
   if (!yard.text.includes("Hearts shop") && !yard.text.includes("Sisal Scratch Post")) {
     throw new Error("Hearts shop starter missing after Ink");
   }
+  if (!yard.imgs.includes("/assets/furniture/miniTree.svg")) {
+    throw new Error("owned mini tree must use Art miniTree.svg");
+  }
+  if (!yard.imgs.includes("/assets/furniture/scratcher.svg")) {
+    throw new Error("shop scratcher art missing after Ink");
+  }
+  if (!yard.imgs.includes("/assets/furniture/yarnSwing.svg")) {
+    throw new Error("shop yarn swing art missing after Ink");
+  }
   if (!yard.text.includes("Buy for 15♥") && !yard.text.includes("Buy for 15")) {
     throw new Error("Hearts shop CTA missing after Ink");
   }

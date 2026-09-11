@@ -37,6 +37,7 @@ export function YardScreen() {
   const hasBox = save.furniture.includes("furn_box_cardboard");
   const hasTree = save.furniture.includes("furn_tree_mini");
   const hasScratch = save.furniture.includes("furn_scratch_post");
+  const hasYarn = save.furniture.includes("furn_swing_yarn");
   const introFriend = save.friends.find((friend) => friend.firstNight);
   const [bangFriendId, setBangFriendId] = useState<string | null>(null);
   const newestFriend = save.friends[save.friends.length - 1];
@@ -93,6 +94,7 @@ export function YardScreen() {
             hasBox={hasBox}
             hasTree={hasTree}
             hasScratch={hasScratch}
+            hasYarn={hasYarn}
             bangFriendId={bangFriendId}
             onBang={(instanceId) => {
               completeFirstNight(instanceId);
@@ -240,6 +242,12 @@ function ShopRow({
         return (
           <div key={heartItem.skuId} className="paper-card space-y-2 rounded-2xl px-3 py-3">
             <div className="text-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={heartItem.asset}
+                alt=""
+                className="mx-auto h-16 w-16 object-contain"
+              />
               <p className="font-display text-base text-ink">{heartItem.name}</p>
               <p className="text-xs text-ink/60">
                 {heartItem.comfort > 0 ? `+${heartItem.comfort} Comfort · ` : ""}
