@@ -15,4 +15,4 @@ Pack JSON: `chapter3_clover_bang.json`. Overlay on `collection_CURRENT.json`. No
 
 Chips stay off Noodle / Ramen / Twirl, Midnight / Inkspot / Onyx, Mist / Fog / Soft, Ink / Ash / Shadow, Tux Formal, and prior food chips. **Ash** and **Bean** stay later.
 
-Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Pumpkin at 24. Shadow at 27. Noodle at 30. Shop SKUs stay scratcher / miniTree / yarnSwing. Bean@60 stays later — clearing L34–L36 must not open Bean UI. Ash@36 stays unshipped.
+Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Pumpkin at 24. Shadow at 27. Noodle at 30. Shop SKUs stay scratcher / miniTree / yarnSwing. Bean@60 stays later — clearing L34–L36 must not open Bean UI. Ash@36 ships next.
