@@ -1,98 +1,104 @@
 {
   "gridOrigin": "top-left",
-  "note": "L6–L7 route depth. L8–L9 LT08 color locks (color_orange / color_gray). L10 keeps the tight-pair closer. Matching gates never stop slides. LT08 mismatch houses are solids.",
+  "note": "L6–L9 locked topologies (mirrors campaign packs). L10 is NOT loaded on the Chapter 2 path.",
   "levels": [
     {
       "id": "L6",
-      "name": "Long Way Home",
-      "width": 5,
-      "height": 5,
-      "moveBudget": 8,
+      "name": "Bigger Yard",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 9,
       "nudges": 0,
       "colorLocks": false,
       "templateId": "LT02_route_depth",
       "walls": [
-        { "x": 0, "y": 3 },
-        { "x": 4, "y": 2 }
+        { "x": 2, "y": 1 },
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 3 },
+        { "x": 3, "y": 4 }
       ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
-        { "id": "cat_b", "x": 4, "y": 4, "color": "color_gray" }
+        { "id": "cat_a", "x": 0, "y": 0 },
+        { "id": "cat_b", "x": 5, "y": 0 }
       ],
       "gates": [
-        { "id": "gate_a", "x": 0, "y": 4 },
-        { "id": "gate_b", "x": 4, "y": 0 }
+        { "id": "gate_a", "x": 0, "y": 5 },
+        { "id": "gate_b", "x": 5, "y": 5 }
       ],
-      "teach": "route_depth"
+      "teach": "bigger_yard"
     },
     {
       "id": "L7",
-      "name": "Twin Corridors",
-      "width": 5,
-      "height": 5,
+      "name": "Tight Routes",
+      "width": 6,
+      "height": 6,
       "moveBudget": 8,
       "nudges": 0,
       "colorLocks": false,
       "templateId": "LT02_route_depth",
       "walls": [
-        { "x": 1, "y": 0 },
-        { "x": 3, "y": 0 },
+        { "x": 1, "y": 2 },
         { "x": 2, "y": 2 },
-        { "x": 0, "y": 3 },
-        { "x": 4, "y": 3 }
+        { "x": 3, "y": 2 },
+        { "x": 2, "y": 4 },
+        { "x": 4, "y": 1 }
       ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
-        { "id": "cat_b", "x": 4, "y": 0, "color": "color_gray" }
+        { "id": "cat_a", "x": 0, "y": 1 },
+        { "id": "cat_b", "x": 5, "y": 3 }
       ],
       "gates": [
-        { "id": "gate_a", "x": 0, "y": 4 },
-        { "id": "gate_b", "x": 4, "y": 4 }
+        { "id": "gate_a", "x": 5, "y": 0 },
+        { "id": "gate_b", "x": 0, "y": 5 }
       ],
-      "teach": "twin_corridors"
+      "teach": "tight_routes"
     },
     {
       "id": "L8",
-      "name": "Match the Coat",
-      "width": 5,
-      "height": 5,
-      "moveBudget": 10,
-      "nudges": 1,
+      "name": "My Gate Only",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 9,
+      "nudges": 0,
       "colorLocks": true,
       "templateId": "LT08_color_lock",
-      "walls": [{ "x": 2, "y": 2 }],
+      "walls": [
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 3 }
+      ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
-        { "id": "cat_b", "x": 4, "y": 4, "color": "color_gray" }
+        { "id": "cat_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 4, "y": 0, "color": "gray", "colorId": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 4, "y": 0, "color": "color_orange" },
-        { "id": "gate_b", "x": 0, "y": 4, "color": "color_gray" }
+        { "id": "gate_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 5, "color": "gray", "colorId": "color_gray" }
       ],
-      "teach": "color_lock",
-      "note": "South / north land on the wrong coat. East / west match."
+      "teach": "my_gate_only"
     },
     {
       "id": "L9",
-      "name": "Swap the Houses",
-      "width": 5,
-      "height": 5,
-      "moveBudget": 9,
-      "nudges": 1,
+      "name": "Wrong Order Soft-Lock",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 8,
+      "nudges": 0,
       "colorLocks": true,
       "templateId": "LT08_color_lock",
-      "walls": [{ "x": 2, "y": 1 }],
-      "blockers": [{ "x": 2, "y": 3 }],
+      "walls": [
+        { "x": 2, "y": 1 },
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 4 }
+      ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
-        { "id": "cat_b", "x": 4, "y": 0, "color": "color_gray" }
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 4, "y": 4, "color": "color_orange" },
-        { "id": "gate_b", "x": 0, "y": 4, "color": "color_gray" }
+        { "id": "gate_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 5, "color": "gray", "colorId": "color_gray" }
       ],
-      "teach": "color_swap",
-      "note": "The house under you is the other coat. Peel off, then swap."
+      "teach": "wrong_order_soft_lock"
     },
     {
       "id": "L10",
@@ -103,6 +109,7 @@
       "nudges": 1,
       "colorLocks": true,
       "templateId": "LT08_color_lock",
+      "note": "Not on the Chapter 2 campaign path.",
       "walls": [
         { "x": 1, "y": 1 },
         { "x": 3, "y": 3 },

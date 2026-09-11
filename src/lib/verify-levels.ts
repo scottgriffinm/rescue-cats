@@ -1,7 +1,169 @@
-import { CHAPTER2, friendForClear, NAMING } from "./collection";
+import { CHAPTER2, chipsForFriend, friendForClear, NAMING } from "./collection";
 import { LEVELS } from "./levels";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
+
+type LockedSpec = {
+  size: number;
+  N: number;
+  colorLocks: boolean;
+  walls: Array<[number, number]>;
+  cats: Array<[string, number, number]>;
+  gates: Array<[string, number, number]>;
+  colors?: boolean;
+};
+
+const LOCKED: Record<string, LockedSpec> = {
+  L4: {
+    size: 5,
+    N: 10,
+    colorLocks: false,
+    walls: [],
+    cats: [
+      ["cat_a", 1, 0],
+      ["cat_b", 3, 0],
+    ],
+    gates: [
+      ["gate_a", 1, 4],
+      ["gate_b", 3, 4],
+    ],
+  },
+  L5: {
+    size: 5,
+    N: 9,
+    colorLocks: false,
+    walls: [
+      [1, 1],
+      [3, 1],
+      [1, 4],
+      [3, 4],
+    ],
+    cats: [
+      ["cat_a", 2, 0],
+      ["cat_b", 2, 3],
+    ],
+    gates: [
+      ["gate_a", 0, 4],
+      ["gate_b", 4, 4],
+    ],
+  },
+  L6: {
+    size: 6,
+    N: 9,
+    colorLocks: false,
+    walls: [
+      [2, 1],
+      [2, 2],
+      [3, 3],
+      [3, 4],
+    ],
+    cats: [
+      ["cat_a", 0, 0],
+      ["cat_b", 5, 0],
+    ],
+    gates: [
+      ["gate_a", 0, 5],
+      ["gate_b", 5, 5],
+    ],
+  },
+  L7: {
+    size: 6,
+    N: 8,
+    colorLocks: false,
+    walls: [
+      [1, 2],
+      [2, 2],
+      [3, 2],
+      [2, 4],
+      [4, 1],
+    ],
+    cats: [
+      ["cat_a", 0, 1],
+      ["cat_b", 5, 3],
+    ],
+    gates: [
+      ["gate_a", 5, 0],
+      ["gate_b", 0, 5],
+    ],
+  },
+  L8: {
+    size: 6,
+    N: 9,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 2],
+      [3, 3],
+    ],
+    cats: [
+      ["cat_orange", 1, 0],
+      ["cat_gray", 4, 0],
+    ],
+    gates: [
+      ["gate_orange", 1, 5],
+      ["gate_gray", 4, 5],
+    ],
+  },
+  L9: {
+    size: 6,
+    N: 8,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 1],
+      [2, 2],
+      [3, 4],
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_gray", 5, 2],
+    ],
+    gates: [
+      ["gate_orange", 5, 0],
+      ["gate_gray", 0, 5],
+    ],
+  },
+};
+
+function assertLocked(level: Level, spec: LockedSpec) {
+  if (level.width !== spec.size || level.height !== spec.size) {
+    throw new Error(`${level.id}: size ${level.width}×${level.height} ≠ ${spec.size}×${spec.size}`);
+  }
+  if (level.moveBudget !== spec.N) {
+    throw new Error(`${level.id}: N=${level.moveBudget} ≠ ${spec.N}`);
+  }
+  if (level.colorLocks !== spec.colorLocks) {
+    throw new Error(`${level.id}: colorLocks ${String(level.colorLocks)} ≠ ${String(spec.colorLocks)}`);
+  }
+  const wallKeys = new Set(level.walls.map((wall) => `${wall.x},${wall.y}`));
+  if (wallKeys.size !== spec.walls.length) {
+    throw new Error(`${level.id}: walls ${wallKeys.size} ≠ ${spec.walls.length}`);
+  }
+  for (const [x, y] of spec.walls) {
+    if (!wallKeys.has(`${x},${y}`)) throw new Error(`${level.id}: missing wall (${x},${y})`);
+  }
+  if (level.cats.length !== spec.cats.length) {
+    throw new Error(`${level.id}: cats ${level.cats.length} ≠ ${spec.cats.length}`);
+  }
+  for (const [id, x, y] of spec.cats) {
+    const cat = level.cats.find((piece) => piece.id === id);
+    if (!cat || cat.x !== x || cat.y !== y) {
+      throw new Error(`${level.id}: ${id} at (${cat?.x},${cat?.y}) ≠ (${x},${y})`);
+    }
+    if (!spec.colors && cat.color) {
+      throw new Error(`${level.id}: ${id} must not require a colorId`);
+    }
+  }
+  if (level.gates.length !== spec.gates.length) {
+    throw new Error(`${level.id}: gates ${level.gates.length} ≠ ${spec.gates.length}`);
+  }
+  for (const [id, x, y] of spec.gates) {
+    const gate = level.gates.find((piece) => piece.id === id);
+    if (!gate || gate.x !== x || gate.y !== y) {
+      throw new Error(`${level.id}: ${id} at (${gate?.x},${gate?.y}) ≠ (${x},${y})`);
+    }
+  }
+}
 
 const SOLVES: Record<string, Array<[string, Dir]>> = {
   L1: [["cat_a", "s"]],
@@ -37,12 +199,6 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "e"],
     ["cat_gray", "s"],
     ["cat_gray", "w"],
-  ],
-  L10: [
-    ["cat_a", "n"],
-    ["cat_a", "e"],
-    ["cat_b", "s"],
-    ["cat_b", "w"],
   ],
 };
 
@@ -131,6 +287,20 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 }
 
 {
+  const ids = LEVELS.map((level) => level.id);
+  if (ids.includes("L10")) throw new Error("L10 must not load on the Chapter 2 path");
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9") {
+    throw new Error(`campaign ids drifted: ${ids.join(",")}`);
+  }
+  for (const [id, spec] of Object.entries(LOCKED)) {
+    const level = LEVELS.find((row) => row.id === id);
+    if (!level) throw new Error(`missing ${id}`);
+    assertLocked(level, spec);
+    console.log(`${id} locked topology ok`);
+  }
+}
+
+{
   const l4 = LEVELS.find((level) => level.id === "L4");
   if (!l4) throw new Error("missing L4");
   if (l4.cats.length !== 2 || l4.gates.length !== 2) throw new Error("L4 must be two-friend teach");
@@ -201,7 +371,16 @@ for (const level of LEVELS) {
     throw new Error("chapter2 pack must pin Ink at clear 6");
   }
   if (CHAPTER2.naming.prefill !== "") throw new Error("chapter2 naming prefill must stay empty");
-  console.log("Ink @ onClear(6) ok · naming is a choice · shop starter ready");
+  const inkChips = chipsForFriend("friend_002");
+  if (inkChips.join(",") !== "Ink,Ash,Shadow") {
+    throw new Error(`Ink chips must be Ink/Ash/Shadow, got ${inkChips.join("/")}`);
+  }
+  if (inkChips.includes("Misty")) throw new Error("Ink chips must not include Misty");
+  const inkBang = CHAPTER2.bang_copy.friend_002?.[0];
+  if (inkBang !== "{Name}: Quiet gray paws. Already claimed a shadow.") {
+    throw new Error(`Ink first-night drifted: ${inkBang}`);
+  }
+  console.log("Ink @ onClear(6) ok · Ink/Ash/Shadow chips · first-night locked");
 }
 
 console.log("All authored boards ok");

@@ -154,13 +154,30 @@ export const NAMING_CHIPS: string[] =
     ? NAMING.suggestion_chips
     : ["Mango", "Biscuit", "Pepper"];
 
-export function shuffleNameChips(count = 3) {
-  const pool = [...new Set(allNameSuggestions())];
-  for (let i = pool.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [pool[i], pool[j]] = [pool[j], pool[i]];
+/** Ink naming chips — never Misty. */
+export const INK_NAMING_CHIPS = ["Ink", "Ash", "Shadow"] as const;
+
+export function chipsForFriend(friendId: string): string[] {
+  if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
+    return [...INK_NAMING_CHIPS];
   }
-  return pool.slice(0, count);
+  return [...NAMING_CHIPS];
+}
+
+function shufflePool(pool: string[], count: number) {
+  const next = [...pool];
+  for (let i = next.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [next[i], next[j]] = [next[j], next[i]];
+  }
+  return next.slice(0, count);
+}
+
+export function shuffleNameChips(count = 3, friendId?: string) {
+  if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
+    return shufflePool([...INK_NAMING_CHIPS], count);
+  }
+  return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
 export function comfortTotal(ownedSkuIds: string[]) {

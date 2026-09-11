@@ -1,26 +1,29 @@
 {
   "id": "L8",
-  "name": "Match the Coat",
-  "width": 5,
-  "height": 5,
-  "moveBudget": 10,
-  "nudges": 1,
+  "name": "My Gate Only",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 9,
+  "nudges": 0,
   "colorLocks": true,
   "templateId": "LT08_color_lock",
-  "walls": [{ "x": 2, "y": 2 }],
+  "walls": [
+    { "x": 2, "y": 2 },
+    { "x": 3, "y": 3 }
+  ],
   "blockers": [],
   "cats": [
-    { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
-    { "id": "cat_b", "x": 4, "y": 4, "color": "color_gray" }
+    { "id": "cat_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+    { "id": "cat_gray", "x": 4, "y": 0, "color": "gray", "colorId": "color_gray" }
   ],
   "gates": [
-    { "id": "gate_a", "x": 4, "y": 0, "color": "color_orange" },
-    { "id": "gate_b", "x": 0, "y": 4, "color": "color_gray" }
+    { "id": "gate_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+    { "id": "gate_gray", "x": 4, "y": 5, "color": "gray", "colorId": "color_gray" }
   ],
-  "teach": "color_lock",
-  "note": "Near houses are the wrong coat and act as solids. East / west match.",
+  "teach": "my_gate_only",
+  "note": "Locked pack. Orange for orange, gray for gray. Mismatch houses are solids.",
   "solve": [
-    ["cat_a", "e"],
-    ["cat_b", "w"]
+    ["cat_orange", "s"],
+    ["cat_gray", "s"]
   ]
 }

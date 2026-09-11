@@ -60,9 +60,19 @@ async function shot(page, name) {
   console.log(`shot ${path}`);
 }
 
+async function selectCat(page, who) {
+  if (who === 0 || who === 1) {
+    const buttons = await page.$$('button[aria-label="Select cat"]');
+    if (!buttons[who]) throw new Error(`missing uncolored cat ${who}`);
+    await buttons[who].click();
+    return;
+  }
+  await page.click(`[aria-label="Select ${who} cat"]`);
+}
+
 async function play(page, steps, winText) {
-  for (const [color, key] of steps) {
-    await page.click(`[aria-label="Select ${color} cat"]`);
+  for (const [who, key] of steps) {
+    await selectCat(page, who);
     const label = DIR_LABEL[key];
     await page.waitForSelector(`[aria-label="${label}"]:not([disabled])`, { visible: true });
     await page.click(`[aria-label="${label}"]`);
@@ -92,14 +102,13 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
   await page.goto(`${BASE}/level/L4`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("Cat as Brake"));
-  await shot(page, "01_l4_collision");
+  await page.waitForFunction(() => document.body.innerText.includes("TWO FRIENDS"));
+  await shot(page, "01_l4_two_friends");
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
+      [0, "ArrowDown"],
+      [1, "ArrowDown"],
     ],
     "Home",
   );
@@ -109,10 +118,10 @@ try {
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
+      [0, "ArrowRight"],
+      [0, "ArrowDown"],
+      [1, "ArrowLeft"],
+      [1, "ArrowDown"],
     ],
     "Home",
   );
@@ -121,14 +130,8 @@ try {
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
+      [0, "ArrowDown"],
+      [1, "ArrowDown"],
     ],
     "New friend!",
   );
@@ -139,6 +142,9 @@ try {
       line: card.querySelector("p")?.textContent?.trim(),
       input: card.querySelector("input")?.value,
       hero: [...card.querySelectorAll("img")].map((img) => img.getAttribute("src")),
+      chips: [...card.querySelectorAll('[aria-label="Name suggestions"] button')].map((el) =>
+        el.textContent?.trim(),
+      ),
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
@@ -147,8 +153,12 @@ try {
   if (modal.input !== "") throw new Error(`Ink prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
   if (!modal.line?.includes("Quiet paws")) throw new Error("missing Ink display line");
-  if (!modal.hero.includes("/assets/cats/slate_loaf_72.svg")) {
-    throw new Error(`Ink hero missing slate loaf: ${modal.hero}`);
+  if (modal.chips.join(",") !== "Ink,Ash,Shadow") {
+    throw new Error(`Ink chips must be Ink/Ash/Shadow, got ${modal.chips.join("/")}`);
+  }
+  if (modal.chips.includes("Misty")) throw new Error("Misty leaked onto Ink chips");
+  if (!modal.hero.includes("/assets/cats/ink_loaf_72.svg")) {
+    throw new Error(`Ink hero missing ink loaf: ${modal.hero}`);
   }
   await shot(page, "03_ink_naming");
 
@@ -177,8 +187,8 @@ try {
   if (yard.save.friends.find((friend) => friend.friendId === "friend_002")?.name !== "Ink") {
     throw new Error("Ink name was not kept");
   }
-  if (!yard.imgs.includes("/assets/cats/slate_loaf_72.svg")) {
-    throw new Error("yard missing Ink slate loaf");
+  if (!yard.imgs.includes("/assets/cats/ink_loaf_72.svg")) {
+    throw new Error("yard missing Ink loaf");
   }
   if (!yard.imgs.includes("/assets/ui/bubble_bang.svg")) {
     throw new Error("yard missing Ink first-night !");
@@ -188,7 +198,7 @@ try {
   }
   if (
     !yard.save.bubbles.some(
-      (line) => line.includes("Hearts shop") || line.includes("shady corner"),
+      (line) => line.includes("Hearts shop") || line.includes("Quiet gray paws"),
     )
   ) {
     throw new Error("Ink bang / shop copy variants missing");
@@ -199,26 +209,20 @@ try {
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
+      [0, "ArrowDown"],
+      [1, "ArrowUp"],
     ],
     "Home",
   );
   await shot(page, "05_l7_win");
 
   await page.goto(`${BASE}/level/L8`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("Match the Coat"));
+  await page.waitForFunction(() => document.body.innerText.includes("MY GATE ONLY"));
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowDown"],
     ],
     "Home",
   );
@@ -228,11 +232,9 @@ try {
   await play(
     page,
     [
-      ["gray", "ArrowLeft"],
+      ["orange", "ArrowRight"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowLeft"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
     ],
     "Home",
   );

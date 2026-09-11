@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FriendSprite, UiIcon } from "@/components/art/Sprite";
 import { Button } from "@/components/ui/Button";
 import { useSave } from "@/components/providers/SaveProvider";
-import { friendById, NAMING, NAMING_CHIPS, shuffleNameChips } from "@/lib/collection";
+import { chipsForFriend, friendById, NAMING, shuffleNameChips } from "@/lib/collection";
 import { MAX_NAME_LENGTH } from "@/lib/constants";
 
 export function NameCatModal({ onNamed }: { onNamed: () => void }) {
@@ -12,7 +12,9 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
   const pending = save.pendingUnlocks[0];
   const catalog = pending ? friendById(pending.friendId) : undefined;
   const [name, setName] = useState("");
-  const [chips, setChips] = useState<string[]>(NAMING_CHIPS);
+  const [chips, setChips] = useState<string[]>(() =>
+    pending ? chipsForFriend(pending.friendId) : [],
+  );
 
   if (!catalog) return null;
 
@@ -86,7 +88,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
           </Button>
           <button
             type="button"
-            onClick={() => setChips(shuffleNameChips(3))}
+            onClick={() => setChips(shuffleNameChips(3, catalog.friendId))}
             aria-label={NAMING.cta_shuffle}
             className="w-full text-center text-sm text-ink/50 underline-offset-2 hover:underline"
           >

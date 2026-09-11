@@ -1,14 +1,9 @@
 {
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "docs/rescue_cats_LOCKED_specs/Puzzle_Locked_L01-L30.md",
   "chapter": 2,
-  "title": "Chapter 2 boards L4\u2013L9",
-  "rules": {
-    "slide": "cardinal until wall|cat|edge \u2014 gates do NOT stop a slide",
-    "win": "cats rest on gates (LT08: matched colorId); mismatch gate = solid",
-    "colorIds": [
-      "color_orange",
-      "color_gray"
-    ]
-  },
+  "title": "Chapter 2 boards L4–L9",
+  "notes": "Mirror of LT02-L04-L05 + CHAPTER2_PUZZLE_L06_L07 + LT08-L08-L09. Locked topologies only — do not invent. Campaign loads the three split packs.",
   "levels": [
     {
       "id": "L4",
@@ -18,45 +13,19 @@
       "moveBudget": 10,
       "nudges": 0,
       "colorLocks": false,
+      "templateId": "LT02_two_cat_collision",
       "walls": [],
+      "blockers": [],
       "cats": [
-        {
-          "id": "cat_a",
-          "x": 1,
-          "y": 0
-        },
-        {
-          "id": "cat_b",
-          "x": 3,
-          "y": 0
-        }
+        { "id": "cat_a", "x": 1, "y": 0 },
+        { "id": "cat_b", "x": 3, "y": 0 }
       ],
       "gates": [
-        {
-          "id": "gate_a",
-          "x": 1,
-          "y": 4
-        },
-        {
-          "id": "gate_b",
-          "x": 3,
-          "y": 4
-        }
+        { "id": "gate_a", "x": 1, "y": 4 },
+        { "id": "gate_b", "x": 3, "y": 4 }
       ],
       "teach": "two_cats",
-      "ascii": ". A . B .\n. . . . .\n. . . . .\n. . . . .\n. a . b .",
-      "notes": "Independent clears. Slide each down; bottom edge brakes on gates. Low collision stress.",
-      "intendedPar": 2,
-      "templateId": "LT02_two_cat_collision",
-      "rules": {
-        "slide": "cardinal until wall|cat|edge \u2014 gates do NOT stop a slide",
-        "win_lt02": "after slides resolve, every cat rests on a gate tile",
-        "win_lt08": "each cat rests on a gate whose colorId matches the cat",
-        "color_mismatch": "mismatched gate acts as solid wall for that cat",
-        "brake": "wall or edge beyond the gate in the slide direction stops you ON the gate",
-        "softFail": "budget exhaust \u2192 X, free retry; 3 Xs \u2192 ticket|optional ad"
-      },
-      "gridOrigin": "top-left"
+      "ascii": ". A . B .\n. . . . .\n. . . . .\n. . . . .\n. a . b ."
     },
     {
       "id": "L5",
@@ -66,198 +35,76 @@
       "moveBudget": 9,
       "nudges": 0,
       "colorLocks": false,
+      "templateId": "LT02_two_cat_collision",
       "walls": [
-        {
-          "x": 1,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 3,
-          "y": 4
-        }
+        { "x": 1, "y": 1 },
+        { "x": 3, "y": 1 },
+        { "x": 1, "y": 4 },
+        { "x": 3, "y": 4 }
       ],
+      "blockers": [],
       "cats": [
-        {
-          "id": "cat_a",
-          "x": 2,
-          "y": 0
-        },
-        {
-          "id": "cat_b",
-          "x": 2,
-          "y": 3
-        }
+        { "id": "cat_a", "x": 2, "y": 0 },
+        { "id": "cat_b", "x": 2, "y": 3 }
       ],
       "gates": [
-        {
-          "id": "gate_a",
-          "x": 0,
-          "y": 4
-        },
-        {
-          "id": "gate_b",
-          "x": 4,
-          "y": 4
-        }
+        { "id": "gate_a", "x": 0, "y": 4 },
+        { "id": "gate_b", "x": 4, "y": 4 }
       ],
-      "teach": "collision_order",
-      "ascii": ". . A . .\n. # . # .\n. . . . .\n. . B . .\na # . # b",
-      "notes": "CEO/Bench bar: order matters. A sliding down hits B, stops at (2,2). B must vacate first (left/right), then both route to corner gates. Walls beside gates force approach along the bottom row \u2014 edge does not sit behind gate from above (wall cells flank gates); slide onto gate from the side along y=4 toward edge... Actually gate at (0,4): approach from right along bottom \u2014 sliding left from (2,4) stops at edge on (0,4). Good.",
-      "intendedPar": 4,
-      "antiSkirt": "A cannot pass through B. Skipping B-first leaves A stuck mid-column and burns N.",
-      "templateId": "LT02_two_cat_collision",
-      "rules": {
-        "slide": "cardinal until wall|cat|edge \u2014 gates do NOT stop a slide",
-        "win_lt02": "after slides resolve, every cat rests on a gate tile",
-        "win_lt08": "each cat rests on a gate whose colorId matches the cat",
-        "color_mismatch": "mismatched gate acts as solid wall for that cat",
-        "brake": "wall or edge beyond the gate in the slide direction stops you ON the gate",
-        "softFail": "budget exhaust \u2192 X, free retry; 3 Xs \u2192 ticket|optional ad"
-      },
-      "gridOrigin": "top-left"
+      "teach": "collision_order"
     },
     {
       "id": "L6",
       "name": "Bigger Yard",
-      "templateId": "LT02_route_depth",
-      "chapter": 2,
-      "phase": "route",
-      "gridOrigin": "top-left",
       "width": 6,
       "height": 6,
       "moveBudget": 9,
       "nudges": 0,
       "colorLocks": false,
-      "rules": {
-        "slide": "cardinal until wall|cat|edge \u2014 gates do NOT stop a slide",
-        "win": "after slides resolve, every cat rests on a gate tile",
-        "brake": "wall or edge beyond the gate in the slide direction stops you ON the gate",
-        "softFail": "budget exhaust \u2192 X, free retry; 3 Xs \u2192 ticket|optional ad"
-      },
+      "templateId": "LT02_route_depth",
       "walls": [
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 3,
-          "y": 4
-        }
+        { "x": 2, "y": 1 },
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 3 },
+        { "x": 3, "y": 4 }
       ],
+      "blockers": [],
       "cats": [
-        {
-          "id": "cat_a",
-          "x": 0,
-          "y": 0
-        },
-        {
-          "id": "cat_b",
-          "x": 5,
-          "y": 0
-        }
+        { "id": "cat_a", "x": 0, "y": 0 },
+        { "id": "cat_b", "x": 5, "y": 0 }
       ],
       "gates": [
-        {
-          "id": "gate_a",
-          "x": 0,
-          "y": 5
-        },
-        {
-          "id": "gate_b",
-          "x": 5,
-          "y": 5
-        }
+        { "id": "gate_a", "x": 0, "y": 5 },
+        { "id": "gate_b", "x": 5, "y": 5 }
       ],
-      "teach": "route_6x6",
-      "ascii": "A . . . . B\n. . # . . .\n. . # . . .\n. . . # . .\n. . . # . .\na . . . . b",
-      "notes": "6\u00d76 route depth. Staggered wall pillars force a 2\u20133 slide setup per cat before edge-braking onto bottom gates. N=9 \u2248 par+3. No color locks. Cats can block each other if they meet mid-board \u2014 plan lanes.",
-      "intendedPar": 6
+      "teach": "bigger_yard"
     },
     {
       "id": "L7",
       "name": "Tight Routes",
-      "templateId": "LT02_route_depth",
-      "chapter": 2,
-      "phase": "route",
-      "gridOrigin": "top-left",
       "width": 6,
       "height": 6,
       "moveBudget": 8,
       "nudges": 0,
       "colorLocks": false,
-      "rules": {
-        "slide": "cardinal until wall|cat|edge \u2014 gates do NOT stop a slide",
-        "win": "after slides resolve, every cat rests on a gate tile",
-        "brake": "wall or edge beyond the gate in the slide direction stops you ON the gate",
-        "softFail": "budget exhaust \u2192 X, free retry; 3 Xs \u2192 ticket|optional ad"
-      },
+      "templateId": "LT02_route_depth",
       "walls": [
-        {
-          "x": 1,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 2
-        },
-        {
-          "x": 2,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 1
-        }
+        { "x": 1, "y": 2 },
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 2 },
+        { "x": 2, "y": 4 },
+        { "x": 4, "y": 1 }
       ],
+      "blockers": [],
       "cats": [
-        {
-          "id": "cat_a",
-          "x": 0,
-          "y": 1
-        },
-        {
-          "id": "cat_b",
-          "x": 5,
-          "y": 3
-        }
+        { "id": "cat_a", "x": 0, "y": 1 },
+        { "id": "cat_b", "x": 5, "y": 3 }
       ],
       "gates": [
-        {
-          "id": "gate_a",
-          "x": 5,
-          "y": 0
-        },
-        {
-          "id": "gate_b",
-          "x": 0,
-          "y": 5
-        }
+        { "id": "gate_a", "x": 5, "y": 0 },
+        { "id": "gate_b", "x": 0, "y": 5 }
       ],
-      "teach": "route_tight",
-      "ascii": ". . . . . a\nA . . . # .\n. # # # . .\n. . . . . B\n. . # . . .\nb . . . . .",
-      "notes": "Crossed destinations: A (left) wants top-right gate; B (right) wants bottom-left. Wall shelf at y=2 + pillar force shared-space sequencing. N=8 tight. Wrong order parks one cat in the other's brake lane.",
-      "intendedPar": 6,
-      "antiSkirt": "With N=8, a wasted collision almost fails the clear \u2014 route before you slide."
+      "teach": "tight_routes"
     },
     {
       "id": "L8",
@@ -267,58 +114,21 @@
       "moveBudget": 9,
       "nudges": 0,
       "colorLocks": true,
+      "templateId": "LT08_color_lock",
       "walls": [
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 3
-        }
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 3 }
       ],
+      "blockers": [],
       "cats": [
-        {
-          "id": "cat_orange",
-          "x": 1,
-          "y": 0,
-          "colorId": "color_orange"
-        },
-        {
-          "id": "cat_gray",
-          "x": 4,
-          "y": 0,
-          "colorId": "color_gray"
-        }
+        { "id": "cat_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 4, "y": 0, "color": "gray", "colorId": "color_gray" }
       ],
       "gates": [
-        {
-          "id": "gate_orange",
-          "x": 1,
-          "y": 5,
-          "colorId": "color_orange"
-        },
-        {
-          "id": "gate_gray",
-          "x": 4,
-          "y": 5,
-          "colorId": "color_gray"
-        }
+        { "id": "gate_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 5, "color": "gray", "colorId": "color_gray" }
       ],
-      "teach": "color_intro",
-      "ascii": ". O . . G .\n. . . . . .\n. . # . . .\n. . . # . .\n. . . . . .\n. o . . g .",
-      "notes": "Slide each down their column; bottom edge brakes on matched gate. If orange slides onto gray gate column by mistake, gray gate is SOLID to orange (mismatch). N=9, light walls for shape only.",
-      "intendedPar": 2,
-      "templateId": "LT08_color_lock",
-      "rules": {
-        "slide": "cardinal until wall|cat|edge \u2014 gates do NOT stop a slide",
-        "win_lt02": "after slides resolve, every cat rests on a gate tile",
-        "win_lt08": "each cat rests on a gate whose colorId matches the cat",
-        "color_mismatch": "mismatched gate acts as solid wall for that cat",
-        "brake": "wall or edge beyond the gate in the slide direction stops you ON the gate",
-        "softFail": "budget exhaust \u2192 X, free retry; 3 Xs \u2192 ticket|optional ad"
-      },
-      "gridOrigin": "top-left"
+      "teach": "my_gate_only"
     },
     {
       "id": "L9",
@@ -328,63 +138,22 @@
       "moveBudget": 8,
       "nudges": 0,
       "colorLocks": true,
+      "templateId": "LT08_color_lock",
       "walls": [
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
-          "y": 4
-        }
+        { "x": 2, "y": 1 },
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 4 }
       ],
+      "blockers": [],
       "cats": [
-        {
-          "id": "cat_orange",
-          "x": 0,
-          "y": 0,
-          "colorId": "color_orange"
-        },
-        {
-          "id": "cat_gray",
-          "x": 5,
-          "y": 2,
-          "colorId": "color_gray"
-        }
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
       ],
       "gates": [
-        {
-          "id": "gate_orange",
-          "x": 5,
-          "y": 0,
-          "colorId": "color_orange"
-        },
-        {
-          "id": "gate_gray",
-          "x": 0,
-          "y": 5,
-          "colorId": "color_gray"
-        }
+        { "id": "gate_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 5, "color": "gray", "colorId": "color_gray" }
       ],
-      "teach": "color_order",
-      "ascii": "O . # . . o\n. . # . . .\n. . . . . G\n. . . . . .\n. . . # . .\ng . . . . .",
-      "notes": "Orange wants gate at top-right; gray wants bottom-left. Shared corridors + mismatch-as-solid means the obvious first slide soft-blocks the other within N=8. Solve gray's path first (or the documented order), then orange. Edge brakes: orange slides right along y=0 onto o; gray slides down/left onto g.",
-      "intendedPar": 5,
-      "antiSkirt": "Parking orange on gray's only approach turns gray gate approach into a dead end under N=8.",
-      "templateId": "LT08_color_lock",
-      "rules": {
-        "slide": "cardinal until wall|cat|edge \u2014 gates do NOT stop a slide",
-        "win_lt02": "after slides resolve, every cat rests on a gate tile",
-        "win_lt08": "each cat rests on a gate whose colorId matches the cat",
-        "color_mismatch": "mismatched gate acts as solid wall for that cat",
-        "brake": "wall or edge beyond the gate in the slide direction stops you ON the gate",
-        "softFail": "budget exhaust \u2192 X, free retry; 3 Xs \u2192 ticket|optional ad"
-      },
-      "gridOrigin": "top-left"
+      "teach": "wrong_order_soft_lock"
     }
   ]
 }

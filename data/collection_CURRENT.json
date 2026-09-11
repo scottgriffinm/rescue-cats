@@ -87,7 +87,7 @@
       "category": "Scratchers",
       "hearts": 15,
       "comfort": 1,
-      "asset": "/assets/furniture/postBell.svg"
+      "asset": "/assets/furniture/scratcher.svg"
     },
     {
       "sku_id": "furn_tree_mini",
@@ -96,7 +96,7 @@
       "hearts": 0,
       "comfort": 2,
       "onboarding": true,
-      "asset": "/assets/furniture/swing.svg"
+      "asset": "/assets/furniture/miniTree.svg"
     },
     {
       "sku_id": "furn_swing_yarn",
@@ -104,7 +104,7 @@
       "category": "Swings",
       "hearts": 40,
       "comfort": 2,
-      "asset": "/assets/furniture/swing.svg"
+      "asset": "/assets/furniture/yarnSwing.svg"
     },
     {
       "sku_id": "furn_fountain_stone",

@@ -1,7 +1,8 @@
 import teach from "../../data/levels/L01-L03.json";
 import l03 from "../../data/levels/L03.json";
-import chapter2 from "../../data/levels/CHAPTER2_PUZZLE_L04_L09.json";
-import l10 from "../../data/levels/L10.json";
+import lt02 from "../../data/levels/LT02-L04-L05.json";
+import chapter2 from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
+import lt08 from "../../data/levels/LT08-L08-L09.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -16,8 +17,7 @@ const HEADLINES: Record<string, string> = {
   L6: "BIGGER YARD",
   L7: "TIGHT ROUTES",
   L8: "MY GATE ONLY",
-  L9: "WRONG ORDER",
-  L10: "TIGHT PAIR",
+  L9: "WRONG ORDER SOFT-LOCK",
 };
 
 const HINTS: Record<string, string> = {
@@ -30,7 +30,6 @@ const HINTS: Record<string, string> = {
   L7: "Crossed houses. Tight budget.",
   L8: "Orange for orange, gray for gray.",
   L9: "Wrong house first soft-locks. Match coats in order.",
-  L10: "Meet in the middle lanes, then peel off to the matching gates.",
 };
 
 type RawLevel = {
@@ -80,8 +79,9 @@ function hydrate(raw: RawLevel, index: number): Level {
 const authored = [
   ...teach.levels.filter((level) => level.id !== "L3"),
   l03,
+  ...lt02.levels,
   ...chapter2.levels,
-  l10,
+  ...lt08.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
