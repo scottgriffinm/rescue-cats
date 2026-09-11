@@ -11,7 +11,7 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 - **Soft fail:** budget exhausted with cats still off-gate → 1 X, free retry of the same printed board. Xs persist per level.
 - **3 Xs:** continue sheet — 1 ticket **or** optional rewarded-ad **stub** (UI only). **Never** ads mid-puzzle.
 - **Stars:** leftover slides → 3★ if leftover ≥ ceil(N/2), 2★ if leftover ≥ ceil(N/4), else 1★. Stars unlock **yard cosmetics only**, never cats or campaign gates.
-- **Nudges / color locks:** encoded on the L1–30 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
+- **Nudges / color locks:** encoded on the L1–33 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
 
 Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L33 are the Chapter 3 color-brake boards (budgets from `data/levels/move_budget_L01-L30.json`). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`. Parade friends key off the level number so L12 awards Tux, L15 awards Ghost, L18 awards Mist, L21 awards Pepper, L24 awards Pumpkin, L27 awards Shadow, and L30 awards Noodle even though L10 is off the path.
 
