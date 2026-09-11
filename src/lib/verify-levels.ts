@@ -10,6 +10,7 @@ import chapter3fPack from "../../data/levels/CHAPTER3_PUZZLE_L25_L27.json";
 import chapter3gPack from "../../data/levels/CHAPTER3_PUZZLE_L28_L30.json";
 import chapter3hPack from "../../data/levels/CHAPTER3_PUZZLE_L31_L33.json";
 import chapter3iPack from "../../data/levels/CHAPTER3_PUZZLE_L34_L36.json";
+import chapter3jPack from "../../data/levels/CHAPTER3_PUZZLE_L37_L39.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
@@ -42,6 +43,9 @@ import l33Pack from "../../data/levels/L33.json";
 import l34Pack from "../../data/levels/L34.json";
 import l35Pack from "../../data/levels/L35.json";
 import l36Pack from "../../data/levels/L36.json";
+import l37Pack from "../../data/levels/L37.json";
+import l38Pack from "../../data/levels/L38.json";
+import l39Pack from "../../data/levels/L39.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
@@ -58,6 +62,7 @@ import {
   CHAPTER3_SHADOW,
   CHAPTER3_NOODLE,
   CHAPTER3_CLOVER,
+  CHAPTER3_ASH,
   chipsForFriend,
   FURNITURE,
   friendForClear,
@@ -729,6 +734,66 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_gray", 5, 5],
     ],
   },
+  L37: {
+    size: 6,
+    N: 10,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [4, 0],
+      [0, 2],
+      [5, 4],
+      [2, 5],
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_gray", 0, 4],
+    ],
+    gates: [
+      ["gate_orange", 3, 2],
+      ["gate_gray", 5, 5],
+    ],
+  },
+  L38: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [1, 0],
+      [5, 2],
+      [0, 4],
+      [3, 5],
+    ],
+    cats: [
+      ["cat_orange", 5, 0],
+      ["cat_black", 0, 1],
+    ],
+    gates: [
+      ["gate_orange", 2, 3],
+      ["gate_black", 3, 3],
+    ],
+  },
+  L39: {
+    size: 6,
+    N: 10,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [1, 0],
+      [5, 0],
+      [0, 2],
+      [4, 4],
+    ],
+    cats: [
+      ["cat_orange", 0, 1],
+      ["cat_black", 2, 3],
+    ],
+    gates: [
+      ["gate_orange", 3, 3],
+      ["gate_black", 4, 3],
+    ],
+  },
 };
 
 function assertLocked(level: Level, spec: LockedSpec) {
@@ -1072,6 +1137,37 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "e"],
     ["cat_gray", "s"],
   ],
+  L37: [
+    ["cat_orange", "e"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+  ],
+  L38: [
+    ["cat_orange", "s"],
+    ["cat_black", "e"],
+    ["cat_black", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_black", "e"],
+    ["cat_black", "n"],
+    ["cat_black", "w"],
+  ],
+  L39: [
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_black", "n"],
+    ["cat_orange", "e"],
+    ["cat_black", "e"],
+    ["cat_black", "s"],
+  ],
 };
 
 function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
@@ -1161,7 +1257,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
   for (const id of [
@@ -1197,6 +1293,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     "L34",
     "L35",
     "L36",
+    "L37",
+    "L38",
+    "L39",
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -1225,6 +1324,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       ...chapter3gPack.levels,
       ...chapter3hPack.levels,
       ...chapter3iPack.levels,
+      ...chapter3jPack.levels,
     ].map((level) => [
       level.id,
       level as PackedBoard,
@@ -1263,6 +1363,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L34: [l34Pack as PackedBoard],
     L35: [l35Pack as PackedBoard],
     L36: [l36Pack as PackedBoard],
+    L37: [l37Pack as PackedBoard],
+    L38: [l38Pack as PackedBoard],
+    L39: [l39Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -1313,7 +1416,10 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       id === "L33" ||
       id === "L34" ||
       id === "L35" ||
-      id === "L36"
+      id === "L36" ||
+      id === "L37" ||
+      id === "L38" ||
+      id === "L39"
     ) {
       for (const copy of copies) {
         for (const piece of [...copy.cats, ...copy.gates]) {
@@ -1322,7 +1428,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       }
     }
   }
-  console.log("Standalone L4–L9 + L11–L36 + LT02/L06-07/LT08 match locked coords");
+  console.log("Standalone L4–L9 + L11–L39 + LT02/L06-07/LT08 match locked coords");
 }
 
 {
@@ -2497,6 +2603,143 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   );
 }
 
+{
+  const l37 = LEVELS.find((level) => level.id === "L37");
+  if (!l37) throw new Error("missing L37");
+  if (!l37.colorLocks) throw new Error("L37 must lock colors");
+  const orange = l37.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l37.cats.find((cat) => cat.id === "cat_gray");
+  const orangeGate = l37.gates.find((gate) => gate.id === "gate_orange");
+  const grayGate = l37.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L37 missing coats");
+  if (gray.color !== "gray") throw new Error("L37 must keep teaching a gray coat");
+  if (grayGate.color !== "gray") throw new Error("L37 must keep a gray house");
+  if (!isMismatchSolid(l37, gray, orangeGate)) {
+    throw new Error("L37 orange house must be solid to the gray coat");
+  }
+  if (!isMismatchSolid(l37, orange, grayGate)) {
+    throw new Error("L37 gray house must be solid to the orange coat");
+  }
+  assertNotHome(
+    l37,
+    [
+      ["cat_orange", "e"],
+      ["cat_orange", "s"],
+    ],
+    "L37 through the house without the south park overshoots",
+  );
+  assertNotHome(
+    l37,
+    [
+      ["cat_orange", "w"],
+      ["cat_orange", "s"],
+      ["cat_gray", "e"],
+      ["cat_gray", "n"],
+      ["cat_gray", "w"],
+      ["cat_gray", "s"],
+      ["cat_orange", "n"],
+      ["cat_gray", "e"],
+      ["cat_gray", "s"],
+    ],
+    "L37 L36 park-above habit cannot finish",
+  );
+}
+
+{
+  const l38 = LEVELS.find((level) => level.id === "L38");
+  if (!l38) throw new Error("missing L38");
+  if (!l38.colorLocks) throw new Error("L38 must lock colors");
+  const orange = l38.cats.find((cat) => cat.id === "cat_orange");
+  const black = l38.cats.find((cat) => cat.id === "cat_black");
+  const orangeGate = l38.gates.find((gate) => gate.id === "gate_orange");
+  const blackGate = l38.gates.find((gate) => gate.id === "gate_black");
+  if (!orange || !black || !orangeGate || !blackGate) throw new Error("L38 missing coats");
+  if (black.color !== "black") throw new Error("L38 must keep teaching a black coat");
+  if (blackGate.color !== "black") throw new Error("L38 must keep a black house");
+  if (!isMismatchSolid(l38, black, orangeGate)) {
+    throw new Error("L38 orange house must be solid to the black coat");
+  }
+  if (!isMismatchSolid(l38, orange, blackGate)) {
+    throw new Error("L38 black house must be solid to the orange coat");
+  }
+  if (blackGate.x - orangeGate.x !== 1 || blackGate.y !== orangeGate.y) {
+    throw new Error("L38 black house must sit east of the orange house");
+  }
+  assertNotHome(
+    l38,
+    [
+      ["cat_orange", "s"],
+      ["cat_orange", "w"],
+      ["cat_orange", "s"],
+    ],
+    "L38 through the house without the east solid overshoots",
+  );
+  assertNotHome(
+    l38,
+    [
+      ["cat_orange", "e"],
+      ["cat_gray", "e"],
+      ["cat_gray", "s"],
+      ["cat_gray", "w"],
+      ["cat_gray", "n"],
+      ["cat_orange", "s"],
+      ["cat_gray", "s"],
+      ["cat_gray", "e"],
+    ],
+    "L38 L37 park-below habit cannot finish",
+  );
+}
+
+{
+  const l39 = LEVELS.find((level) => level.id === "L39");
+  if (!l39) throw new Error("missing L39");
+  if (!l39.colorLocks) throw new Error("L39 must lock colors");
+  const orange = l39.cats.find((cat) => cat.id === "cat_orange");
+  const black = l39.cats.find((cat) => cat.id === "cat_black");
+  const orangeGate = l39.gates.find((gate) => gate.id === "gate_orange");
+  const blackGate = l39.gates.find((gate) => gate.id === "gate_black");
+  if (!orange || !black || !orangeGate || !blackGate) throw new Error("L39 missing coats");
+  if (black.color !== "black") throw new Error("L39 must keep teaching a black coat");
+  if (blackGate.color !== "black") throw new Error("L39 must keep a black house");
+  if (!isMismatchSolid(l39, black, orangeGate)) {
+    throw new Error("L39 orange house must be solid to the black coat");
+  }
+  if (!isMismatchSolid(l39, orange, blackGate)) {
+    throw new Error("L39 black house must be solid to the orange coat");
+  }
+  if (blackGate.x - orangeGate.x !== 1 || blackGate.y !== orangeGate.y) {
+    throw new Error("L39 black house must sit east of the orange house");
+  }
+  if (black.y !== orangeGate.y || black.x >= orangeGate.x) {
+    throw new Error("L39 black must start west on the house row so they vacate first");
+  }
+  assertNotHome(
+    l39,
+    [
+      ["cat_orange", "e"],
+      ["cat_orange", "s"],
+      ["cat_orange", "w"],
+      ["cat_orange", "e"],
+    ],
+    "L39 through the house without vacating overshoots",
+  );
+  assertNotHome(
+    l39,
+    [
+      ["cat_orange", "s"],
+      ["cat_black", "e"],
+      ["cat_black", "s"],
+      ["cat_orange", "w"],
+      ["cat_orange", "s"],
+      ["cat_orange", "e"],
+      ["cat_black", "e"],
+      ["cat_black", "n"],
+      ["cat_black", "w"],
+    ],
+    "L39 L38 solid-east habit cannot finish",
+  );
+}
+
 for (const level of LEVELS) {
   if (!allCatsOnGates(level, level.cats)) {
     const dirs = legalDirs(level, level.cats, level.cats[0].id);
@@ -3561,7 +3804,9 @@ for (const level of LEVELS) {
   if (shippedFriendForClear(33)?.friendId !== "friend_011") {
     throw new Error("shipped parade must award Clover at 33");
   }
-  if (shippedFriendForClear(36)) throw new Error("Ash@36 must stay unshipped this slice");
+  if (shippedFriendForClear(36)?.friendId !== "friend_012") {
+    throw new Error("shipped parade must award Ash at 36");
+  }
   if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
   if (friendForClear(60)?.friendId !== "friend_020") {
     throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
@@ -3733,13 +3978,15 @@ for (const level of LEVELS) {
   if (shippedFriendForClear(32)) throw new Error("L32 must not award a friend");
   if (shippedFriendForClear(34)) throw new Error("L34 must not award a friend");
   if (shippedFriendForClear(35)) throw new Error("L35 must not award a friend");
-  if (shippedFriendForClear(36)) throw new Error("Ash@36 must stay unshipped this slice");
+  if (shippedFriendForClear(36)?.friendId !== "friend_012") {
+    throw new Error("shipped parade must award Ash at 36");
+  }
   if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
   if (friendForClear(60)?.friendId !== "friend_020") {
     throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
   }
   if (friendForClear(36)?.friendId !== "friend_012") {
-    throw new Error("CURRENT must still list Ash at clear 36 for a later slice");
+    throw new Error("CURRENT must still list Ash at clear 36");
   }
   if (friendForClear(6)?.friendId !== "friend_002") {
     throw new Error("Clover wiring must not move Ink off onClear(6)");
@@ -3784,6 +4031,192 @@ for (const level of LEVELS) {
     throw new Error("Ink must keep slate loafs after Clover");
   }
   console.log("Clover @ onClear(33) ok · soft gray-spotted loafs + L34–L36 wired");
+}
+
+{
+  const ash = friendForClear(36);
+  if (ash?.friendId !== "friend_012") {
+    throw new Error(`onClear(36) must unlock Ash, got ${ash?.friendId ?? "none"}`);
+  }
+  if (CHAPTER3_ASH.unlock_clear !== 36 || CHAPTER3_ASH.friend_id !== "friend_012") {
+    throw new Error("ash pack must pin Ash at clear 36");
+  }
+  if (CHAPTER3_ASH.naming.prefill !== "") throw new Error("ash naming prefill must stay empty");
+  const ashChips = chipsForFriend("friend_012");
+  if (ashChips.join(",") !== "Cinder,Soot,Hearth") {
+    throw new Error(`Ash chips must be Cinder/Soot/Hearth, got ${ashChips.join("/")}`);
+  }
+  for (const banned of [
+    "Ash",
+    "Ink",
+    "Shadow",
+    "Midnight",
+    "Inkspot",
+    "Onyx",
+    "Clover",
+    "Patch",
+    "Fern",
+    "Noodle",
+    "Ramen",
+    "Twirl",
+    "Mist",
+    "Fog",
+    "Soft",
+    "Misty",
+    "Tux",
+    "Domino",
+    "Bowtie",
+    "Nigel",
+    "Donna",
+    "Greg",
+    "Ghost",
+    "Wisp",
+    "Pearl",
+    "Pepper",
+    "Spice",
+    "Pip",
+    "Pumpkin",
+    "Squash",
+    "Ember",
+    "Biscuit",
+    "Mochi",
+    "Toast",
+    "Mango",
+    "Bean",
+    "Beans",
+    "Cream",
+    "Oak",
+  ]) {
+    if (ashChips.includes(banned)) {
+      throw new Error(`Ash chips must stay off prior pools, found ${banned}`);
+    }
+  }
+  if (ash.displayLine !== "Warm like a hearth that just went quiet.") {
+    throw new Error(`Ash display line drifted: ${ash.displayLine}`);
+  }
+  if (ash.phenotype.personality !== "Calm") {
+    throw new Error(`Ash personality must be Calm, got ${ash.phenotype.personality}`);
+  }
+  if (ash.phenotype.artKit !== "ash") {
+    throw new Error("Ash must use ash loafs, not Ink slate, Mist mackerel, Shadow charcoal, or Clover silver");
+  }
+  if (ash.phenotype.boardColor !== "gray") throw new Error("Ash must be color_gray");
+  if (ash.phenotype.pattern !== "Solid") throw new Error("Ash must stay gray solid");
+  if (ash.phenotype.color !== "Gray") throw new Error("Ash must stay Gray");
+  if (furnitureGiftsForClear(36).length !== 0) throw new Error("clear 36 must gift nothing");
+  const bang = CHAPTER3_ASH.bang_copy.friend_012?.[0];
+  if (bang !== "{Name}: Warm like a hearth that just went quiet.") {
+    throw new Error(`Ash first-night drifted: ${bang}`);
+  }
+  if (ART_KIT_PATH.ash.loaf48 !== "/assets/cats/ash_loaf_48.svg") {
+    throw new Error("Ash yard/unlock must map ash 48 → ash_loaf_48");
+  }
+  if (ART_KIT_PATH.ash.loaf72 !== "/assets/cats/ash_loaf_72.svg") {
+    throw new Error("Ash yard/unlock must map ash 72 → ash_loaf_72");
+  }
+  if (ART_KIT_PATH.slate.loaf72 !== "/assets/cats/ink_loaf_72.svg") {
+    throw new Error("Ash wiring must not move Ink slate loafs");
+  }
+  if (ART_KIT_PATH.mist.loaf72 !== "/assets/cats/mist_loaf_72.svg") {
+    throw new Error("Ash wiring must not move Mist gray-mackerel loafs");
+  }
+  if (ART_KIT_PATH.shadow.loaf72 !== "/assets/cats/shadow_loaf_72.svg") {
+    throw new Error("Ash wiring must not move Shadow full-black loafs");
+  }
+  if (ART_KIT_PATH.clover.loaf72 !== "/assets/cats/clover_loaf_72.svg") {
+    throw new Error("Ash wiring must not move Clover spotted loafs");
+  }
+  const shopStill = shopItemsForClear(36).map((sku) => sku.skuId).sort();
+  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+    throw new Error(`shop SKUs drifted after Ash: ${shopStill.join(",")}`);
+  }
+  for (const file of ["public/assets/cats/ash_loaf_48.svg", "public/assets/cats/ash_loaf_72.svg"]) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  const ashArt = readFileSync(resolve("public/assets/cats/ash_loaf_72.svg"), "utf8");
+  const inkArt = readFileSync(resolve("public/assets/cats/ink_loaf_72.svg"), "utf8");
+  const mistArt = readFileSync(resolve("public/assets/cats/mist_loaf_72.svg"), "utf8");
+  const shadowArt = readFileSync(resolve("public/assets/cats/shadow_loaf_72.svg"), "utf8");
+  const cloverArt = readFileSync(resolve("public/assets/cats/clover_loaf_72.svg"), "utf8");
+  if (ashArt === inkArt) throw new Error("Ash loaf must not be an Ink clone");
+  if (ashArt === mistArt) throw new Error("Ash loaf must not be a Mist clone");
+  if (ashArt === shadowArt) throw new Error("Ash loaf must not be a Shadow clone");
+  if (ashArt === cloverArt) throw new Error("Ash loaf must not be a Clover clone");
+  if (!ashArt.includes("#8B7462")) throw new Error("Ash loaf must use warm hearth-ash #8B7462");
+  if (!ashArt.includes("#D2C0AE")) throw new Error("Ash loaf must show a warm pale belly");
+  if (ashArt.includes("#5A5E6B")) throw new Error("Ash loaf must not use Ink slate #5A5E6B");
+  if (ashArt.includes("#B4BCC2")) throw new Error("Ash loaf must not use Clover silver #B4BCC2");
+  if (ashArt.includes("#6F7A82")) throw new Error("Ash loaf must not use Clover spots");
+  if (ashArt.includes("#C4BDB4")) throw new Error("Ash loaf must not use Mist taupe #C4BDB4");
+  if (ashArt.includes("#8F8880")) throw new Error("Ash loaf must not use Mist mackerel stripes");
+  if (ashArt.includes("#36322F")) throw new Error("Ash loaf must not use Shadow charcoal");
+  if (ashArt.includes("#D48A4A")) throw new Error("Ash loaf must not reuse Pepper orange");
+  if (paradeClearForLevel("L36") !== 36) throw new Error("L36 must map to parade clear 36");
+  if (paradeClearForLevel("L37") !== 37) throw new Error("L37 must map to parade clear 37");
+  if (paradeClearForLevel("L39") !== 39) throw new Error("L39 must map to parade clear 39");
+  if (shippedFriendForClear(36)?.friendId !== "friend_012") {
+    throw new Error("shipped parade must award Ash at 36");
+  }
+  if (shippedFriendForClear(35)) throw new Error("L35 must not award a friend");
+  if (shippedFriendForClear(37)) throw new Error("L37 must not award a friend");
+  if (shippedFriendForClear(38)) throw new Error("L38 must not award a friend");
+  if (shippedFriendForClear(39)) throw new Error("Oak@39 must stay unshipped this slice");
+  if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
+  if (friendForClear(60)?.friendId !== "friend_020") {
+    throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
+  }
+  if (friendForClear(39)?.friendId !== "friend_013") {
+    throw new Error("CURRENT must still list Oak at clear 39 for a later slice");
+  }
+  if (friendForClear(6)?.friendId !== "friend_002") {
+    throw new Error("Ash wiring must not move Ink off onClear(6)");
+  }
+  if (friendForClear(9)?.friendId !== "friend_003") {
+    throw new Error("Ash wiring must not move Biscuit off onClear(9)");
+  }
+  if (friendForClear(12)?.friendId !== "friend_004") {
+    throw new Error("Ash wiring must not move Tux off onClear(12)");
+  }
+  if (friendForClear(15)?.friendId !== "friend_005") {
+    throw new Error("Ash wiring must not move Ghost off onClear(15)");
+  }
+  if (friendForClear(18)?.friendId !== "friend_006") {
+    throw new Error("Ash wiring must not move Mist off onClear(18)");
+  }
+  if (friendForClear(21)?.friendId !== "friend_007") {
+    throw new Error("Ash wiring must not move Pepper off onClear(21)");
+  }
+  if (friendForClear(24)?.friendId !== "friend_008") {
+    throw new Error("Ash wiring must not move Pumpkin off onClear(24)");
+  }
+  if (friendForClear(27)?.friendId !== "friend_009") {
+    throw new Error("Ash wiring must not move Shadow off onClear(27)");
+  }
+  if (friendForClear(30)?.friendId !== "friend_010") {
+    throw new Error("Ash wiring must not move Noodle off onClear(30)");
+  }
+  if (friendForClear(33)?.friendId !== "friend_011") {
+    throw new Error("Ash wiring must not move Clover off onClear(33)");
+  }
+  if (friendForClear(3)?.friendId !== "friend_001") {
+    throw new Error("Ash wiring must not move Mango off onClear(3)");
+  }
+  if (friendForClear(33)?.phenotype.artKit !== "clover") {
+    throw new Error("Clover must keep spotted loafs after Ash");
+  }
+  if (friendForClear(30)?.phenotype.artKit !== "noodle") {
+    throw new Error("Noodle must keep long cream-mackerel loafs after Ash");
+  }
+  if (friendForClear(27)?.phenotype.artKit !== "shadow") {
+    throw new Error("Shadow must keep full-black loafs after Ash");
+  }
+  if (friendForClear(18)?.phenotype.artKit !== "mist") {
+    throw new Error("Mist must keep gray-mackerel loafs after Ash");
+  }
+  if (friendForClear(6)?.phenotype.artKit !== "slate") {
+    throw new Error("Ink must keep slate loafs after Ash");
+  }
+  console.log("Ash @ onClear(36) ok · warm hearth-ash loafs + L37–L39 wired");
 }
 
 console.log("All authored boards ok");

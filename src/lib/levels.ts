@@ -10,6 +10,7 @@ import chapter3f from "../../data/levels/CHAPTER3_PUZZLE_L25_L27.json";
 import chapter3g from "../../data/levels/CHAPTER3_PUZZLE_L28_L30.json";
 import chapter3h from "../../data/levels/CHAPTER3_PUZZLE_L31_L33.json";
 import chapter3i from "../../data/levels/CHAPTER3_PUZZLE_L34_L36.json";
+import chapter3j from "../../data/levels/CHAPTER3_PUZZLE_L37_L39.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -51,6 +52,9 @@ const HEADLINES: Record<string, string> = {
   L34: "SOLID WEST",
   L35: "VACATE FIRST",
   L36: "PARK ABOVE",
+  L37: "PARK BELOW",
+  L38: "SOLID EAST",
+  L39: "VACATE EAST",
 };
 
 const HINTS: Record<string, string> = {
@@ -89,6 +93,9 @@ const HINTS: Record<string, string> = {
   L34: "The gray house is the west brake. Park a friend there and gray overshoots.",
   L35: "Leave the house column, then park west. L34's solid-west slide goes through.",
   L36: "Sit past south, then park above. L35's west park misses the stop.",
+  L37: "Sit past north, then park below. L36's park-above misses the stop.",
+  L38: "The black house is the east brake. Park a friend there and black overshoots.",
+  L39: "Leave the house row, then the east solid. L38's solid-east slide goes through.",
 };
 
 type RawLevel = {
@@ -148,6 +155,7 @@ const authored = [
   ...chapter3g.levels,
   ...chapter3h.levels,
   ...chapter3i.levels,
+  ...chapter3j.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
