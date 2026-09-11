@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import chapter2Pack from "../../data/levels/CHAPTER2_PUZZLE_L04_L09.json";
 import l4Pack from "../../data/levels/L4.json";
@@ -14,6 +14,7 @@ import { ART_KIT_PATH } from "./constants";
 import {
   CHAPTER2,
   chipsForFriend,
+  FURNITURE,
   friendForClear,
   furnitureGiftsForClear,
   heartsForClear,
@@ -472,6 +473,49 @@ for (const level of LEVELS) {
   const shop6 = shopItemsForClear(6).map((sku) => `${sku.skuId}:${sku.hearts}`).sort();
   if (shop6.join(",") !== "furn_scratch_post:15,furn_swing_yarn:40,furn_tree_mini:40") {
     throw new Error(`shop @6 drifted: ${shop6.join(",")}`);
+  }
+  const shopArt: Array<[string, string, number, number]> = [
+    ["furn_scratch_post", "/assets/furniture/scratcher.svg", 15, 3],
+    ["furn_tree_mini", "/assets/furniture/miniTree.svg", 40, 3],
+    ["furn_swing_yarn", "/assets/furniture/yarnSwing.svg", 40, 6],
+  ];
+  for (const [skuId, asset, hearts, unlock] of shopArt) {
+    const shop = CHAPTER2.shop.items.find((item) => item.sku_id === skuId);
+    if (!shop || shop.asset !== asset || shop.hearts !== hearts || shop.unlock_clear !== unlock) {
+      throw new Error(`shop ${skuId} art map drifted`);
+    }
+    const sku = FURNITURE.find((row) => row.skuId === skuId);
+    if (!sku || sku.asset !== asset || sku.hearts !== hearts || sku.shopUnlockClear !== unlock) {
+      throw new Error(`furniture ${skuId} art map drifted`);
+    }
+  }
+  const artSvg: Record<string, string> = {
+    "public/assets/furniture/scratcher.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="72" viewBox="0 0 48 72" fill="none">
+  <ellipse cx="24" cy="64" rx="16" ry="5" fill="#D4C6B4" stroke="#2B2A28" stroke-width="2.5"/>
+  <rect x="16" y="14" width="16" height="48" rx="4" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5"/>
+  <path d="M18 22 H30 M18 30 H30 M18 38 H30 M18 46 H30" stroke="#2B2A28" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
+  <ellipse cx="24" cy="14" rx="9" ry="4" fill="#D9CBB8" stroke="#2B2A28" stroke-width="2"/>
+</svg>`,
+    "public/assets/furniture/miniTree.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="72" height="96" viewBox="0 0 72 96" fill="none">
+  <ellipse cx="36" cy="88" rx="22" ry="6" fill="#D4C6B4" stroke="#2B2A28" stroke-width="2.5"/>
+  <rect x="30" y="36" width="12" height="50" rx="3" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="36" cy="58" rx="20" ry="7" fill="#EDE4D8" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="36" cy="34" rx="16" ry="6" fill="#F7F0E6" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="36" cy="30" rx="10" ry="4" fill="#E8A89A" stroke="#2B2A28" stroke-width="2" opacity="0.85"/>
+</svg>`,
+    "public/assets/furniture/yarnSwing.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
+  <path d="M18 80 L44 22 L52 22 L28 80 Z" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M78 80 L52 22 L44 22 L68 80 Z" fill="#D4C6B4" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/>
+  <rect x="40" y="20" width="16" height="6" rx="2" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2"/>
+  <path d="M44 26 L40 58" stroke="#2B2A28" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M52 26 L56 58" stroke="#2B2A28" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="32" y="56" width="32" height="10" rx="3" fill="#EDE4D8" stroke="#2B2A28" stroke-width="2.5"/>
+  <rect x="34" y="58" width="28" height="4" rx="1.5" fill="#F7F0E6" opacity="0.8"/>
+</svg>`,
+  };
+  for (const [file, expected] of Object.entries(artSvg)) {
+    const got = readFileSync(resolve(file), "utf8").trim();
+    if (got !== expected.trim()) throw new Error(`${file} is not the Art lock`);
   }
   if (!CHAPTER2.personality_pools.Soft.includes("Ink")) {
     throw new Error("personality pool Soft must include Ink");
