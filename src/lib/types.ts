@@ -19,7 +19,8 @@ export type ArtKit =
   | "clover"
   | "ash"
   | "oak"
-  | "dumpling";
+  | "dumpling"
+  | "stripe";
 
 export type PieceCat = {
   id: string;

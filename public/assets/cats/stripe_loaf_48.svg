@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="stripe-loaf-48">
+      <ellipse cx="24" cy="29" rx="17.2" ry="11.4"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="29" rx="17.2" ry="11.4" fill="#E09A48" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#stripe-loaf-48)" fill="none" stroke="#B45A22" stroke-width="1.7" stroke-linecap="round">
+    <path d="M10 25 C16 23 32 23 38 25"/>
+    <path d="M11 29 C18 27 30 27 37 29"/>
+    <path d="M12 33 C19 31 29 31 36 33"/>
+  </g>
+  <path d="M11 21 C10.4 14.8 15.2 12.8 17.4 17.2" fill="#C46E30" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37 21 C37.6 14.8 32.8 12.8 30.6 17.2" fill="#C46E30" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="34" rx="7.4" ry="4.8" fill="#F6D2A8"/>
+  <circle cx="18" cy="27.5" r="1.6" fill="#2B2A28"/>
+  <circle cx="28" cy="27.5" r="1.6" fill="#2B2A28"/>
+  <path d="M40.5 33 C43 32 44 35.2 41.6 36.4" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

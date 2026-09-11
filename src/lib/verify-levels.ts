@@ -13,6 +13,7 @@ import chapter3iPack from "../../data/levels/CHAPTER3_PUZZLE_L34_L36.json";
 import chapter3jPack from "../../data/levels/CHAPTER3_PUZZLE_L37_L39.json";
 import chapter3kPack from "../../data/levels/CHAPTER3_PUZZLE_L40_L42.json";
 import chapter3lPack from "../../data/levels/CHAPTER3_PUZZLE_L43_L45.json";
+import chapter3mPack from "../../data/levels/CHAPTER3_PUZZLE_L46_L48.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
@@ -54,6 +55,9 @@ import l42Pack from "../../data/levels/L42.json";
 import l43Pack from "../../data/levels/L43.json";
 import l44Pack from "../../data/levels/L44.json";
 import l45Pack from "../../data/levels/L45.json";
+import l46Pack from "../../data/levels/L46.json";
+import l47Pack from "../../data/levels/L47.json";
+import l48Pack from "../../data/levels/L48.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
@@ -73,6 +77,7 @@ import {
   CHAPTER3_ASH,
   CHAPTER3_OAK,
   CHAPTER3_DUMPLING,
+  CHAPTER3_STRIPE,
   chipsForFriend,
   FURNITURE,
   friendById,
@@ -912,6 +917,63 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_black", 3, 2],
     ],
   },
+  L46: {
+    size: 6,
+    N: 10,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [1, 5],
+      [2, 5],
+      [2, 2],
+    ],
+    cats: [
+      ["cat_orange", 2, 3],
+      ["cat_gray", 3, 0],
+    ],
+    gates: [
+      ["gate_orange", 3, 3],
+      ["gate_gray", 5, 0],
+    ],
+  },
+  L47: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [5, 3],
+      [0, 3],
+      [1, 1],
+    ],
+    cats: [
+      ["cat_orange", 3, 0],
+      ["cat_black", 4, 2],
+    ],
+    gates: [
+      ["gate_orange", 3, 2],
+      ["gate_black", 2, 2],
+    ],
+  },
+  L48: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [5, 1],
+      [0, 1],
+      [2, 0],
+    ],
+    cats: [
+      ["cat_orange", 4, 0],
+      ["cat_black", 5, 2],
+    ],
+    gates: [
+      ["gate_orange", 3, 2],
+      ["gate_black", 2, 2],
+    ],
+  },
 
 };
 
@@ -1341,6 +1403,34 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "e"],
     ["cat_black", "s"],
   ],
+  L46: [
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_gray", "s"],
+    ["cat_orange", "n"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
+  ],
+  L47: [
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_black", "n"],
+    ["cat_orange", "w"],
+    ["cat_black", "w"],
+    ["cat_black", "s"],
+    ["cat_black", "e"],
+  ],
+  L48: [
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_black", "s"],
+    ["cat_black", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_black", "n"],
+    ["cat_black", "e"],
+  ],
 };
 
 function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
@@ -1430,7 +1520,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45,L46,L47,L48") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
   for (const id of [
@@ -1475,6 +1565,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     "L43",
     "L44",
     "L45",
+    "L46",
+    "L47",
+    "L48",
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -1506,6 +1599,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       ...chapter3jPack.levels,
       ...chapter3kPack.levels,
       ...chapter3lPack.levels,
+      ...chapter3mPack.levels,
     ].map((level) => [
       level.id,
       level as PackedBoard,
@@ -1553,6 +1647,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L43: [l43Pack as PackedBoard],
     L44: [l44Pack as PackedBoard],
     L45: [l45Pack as PackedBoard],
+    L46: [l46Pack as PackedBoard],
+    L47: [l47Pack as PackedBoard],
+    L48: [l48Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -1612,7 +1709,10 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       id === "L42" ||
       id === "L43" ||
       id === "L44" ||
-      id === "L45"
+      id === "L45" ||
+      id === "L46" ||
+      id === "L47" ||
+      id === "L48"
     ) {
       for (const copy of copies) {
         for (const piece of [...copy.cats, ...copy.gates]) {
@@ -1621,7 +1721,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       }
     }
   }
-  console.log("Standalone L4–L9 + L11–L45 + LT02/L06-07/LT08 match locked coords");
+  console.log("Standalone L4–L9 + L11–L48 + LT02/L06-07/LT08 match locked coords");
 }
 
 {
@@ -4295,11 +4395,11 @@ for (const level of LEVELS) {
   if (l39.number !== 39) throw new Error(`L39 HUD number must be 39, got ${l39.number}`);
   if (l9.number !== 9) throw new Error(`L9 HUD number must be 9, got ${l9.number}`);
   if (l11.number !== 11) throw new Error(`L11 HUD number must be 11, got ${l11.number}`);
-  if (CAMPAIGN_LEVEL_COUNT !== 45) {
-    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 45 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 48) {
+    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 48 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
   }
-  if (LEVELS.length !== 44) {
-    throw new Error(`campaign board count must stay 44 with L10 off-path, got ${LEVELS.length}`);
+  if (LEVELS.length !== 47) {
+    throw new Error(`campaign board count must stay 47 with L10 off-path, got ${LEVELS.length}`);
   }
   for (const level of LEVELS) {
     const parsed = Number(level.id.replace(/^L/i, ""));
@@ -4320,10 +4420,12 @@ for (const level of LEVELS) {
   const afterL42 = nextCampaignLevel("L42");
   if (afterL42?.id !== "L43") throw new Error(`Next after L42 must be L43, got ${afterL42?.id ?? "none"}`);
   const afterL45 = nextCampaignLevel("L45");
-  if (afterL45) throw new Error("L45 must be the last campaign board");
-  const l45hud = LEVELS.find((level) => level.id === "L45");
-  if (!l45hud || l45hud.number !== 45) throw new Error(`L45 HUD number must be 45, got ${l45hud?.number}`);
-  console.log("Level index HUD locks ok · L20=20/45 · L45=45/45 · L9→L11 · L42→L43");
+  if (afterL45?.id !== "L46") throw new Error(`Next after L45 must be L46, got ${afterL45?.id ?? "none"}`);
+  const afterL48 = nextCampaignLevel("L48");
+  if (afterL48) throw new Error("L48 must be the last campaign board");
+  const l48hud = LEVELS.find((level) => level.id === "L48");
+  if (!l48hud || l48hud.number !== 48) throw new Error(`L48 HUD number must be 48, got ${l48hud?.number}`);
+  console.log("Level index HUD locks ok · L20=20/48 · L48=48/48 · L9→L11 · L45→L46");
 }
 
 {
@@ -4457,9 +4559,9 @@ for (const level of LEVELS) {
   if (friendForClear(42)?.friendId !== "friend_014") {
     throw new Error("CURRENT must still list Dumpling at clear 42");
   }
-  if (shippedFriendForClear(45)) throw new Error("Stripe@45 must stay unshipped this slice");
+  if (shippedFriendForClear(45)?.friendId !== "friend_015") throw new Error("Stripe@45 must ship this slice");
   if (friendForClear(45)?.friendId !== "friend_015") {
-    throw new Error("CURRENT must still list Stripe at clear 45 for a later slice");
+    throw new Error("CURRENT must still list Stripe at clear 45");
   }
   if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
   if (friendForClear(60)?.friendId !== "friend_020") {
@@ -4541,9 +4643,9 @@ for (const level of LEVELS) {
   if (shippedFriendForClear(41)) throw new Error("L41 must not award a friend");
   if (shippedFriendForClear(43)) throw new Error("L43 must not award a friend");
   if (shippedFriendForClear(44)) throw new Error("L44 must not award a friend");
-  if (shippedFriendForClear(45)) throw new Error("L45 / Stripe@45 must stay unshipped this slice");
+  if (shippedFriendForClear(45)?.friendId !== "friend_015") throw new Error("Stripe@45 must ship this slice");
   if (friendForClear(45)?.friendId !== "friend_015") {
-    throw new Error("CURRENT must still list Stripe at clear 45 for a later slice");
+    throw new Error("CURRENT must still list Stripe at clear 45");
   }
   if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
   if (friendForClear(60)?.friendId !== "friend_020") {
@@ -4562,5 +4664,95 @@ for (const level of LEVELS) {
   console.log("Dumpling @ onClear(42) ok · cream fold loafs + L43–L45 wired");
 }
 
+
+
+{
+  const stripe = friendForClear(45);
+  if (stripe?.friendId !== "friend_015") {
+    throw new Error(`onClear(45) must unlock Stripe, got ${stripe?.friendId ?? "none"}`);
+  }
+  if (CHAPTER3_STRIPE.unlock_clear !== 45 || CHAPTER3_STRIPE.friend_id !== "friend_015") {
+    throw new Error("stripe pack must pin Stripe at clear 45");
+  }
+  if (CHAPTER3_STRIPE.naming.prefill !== "") throw new Error("stripe naming prefill must stay empty");
+  const stripeChips = chipsForFriend("friend_015");
+  if (stripeChips.join(",") !== "Stripe,Dash,Lane") {
+    throw new Error(`Stripe chips must be Stripe/Dash/Lane, got ${stripeChips.join("/")}`);
+  }
+  for (const banned of ["Dumpling", "Bao", "Potsticker", "Oak", "Acorn", "Timber", "Noodle", "Ramen", "Twirl", "Pepper", "Spice", "Pip", "Pumpkin", "Squash", "Ember", "Bean", "Cloud", "Mango", "Ash"]) {
+    if (stripeChips.includes(banned)) throw new Error(`Stripe chips must not include ${banned}`);
+  }
+  if (stripe.phenotype.artKit !== "stripe") {
+    throw new Error("Stripe must use stripe road-map loafs, not ginger/pepper/pumpkin/oak/noodle");
+  }
+  if (stripe.phenotype.boardColor !== "orange") throw new Error("Stripe must be color_orange");
+  if (stripe.phenotype.pattern !== "Mackerel") throw new Error("Stripe must stay orange mackerel");
+  if (stripe.phenotype.color !== "Orange") throw new Error("Stripe must stay Orange");
+  if (stripe.phenotype.personality !== "Busy") throw new Error("Stripe personality must be Busy");
+  if (stripe.phenotype.phenotypeId !== "pheno_tabby_orange_mackerel_regular_regular") {
+    throw new Error(`Stripe phenotype drifted: ${stripe.phenotype.phenotypeId}`);
+  }
+  if (furnitureGiftsForClear(45).length !== 0) throw new Error("clear 45 must gift nothing");
+  const bang = CHAPTER3_STRIPE.bang_copy.friend_015?.[0];
+  if (bang !== "{Name}: Wears the road map on their back.") {
+    throw new Error(`Stripe first-night drifted: ${bang}`);
+  }
+  if (ART_KIT_PATH.stripe.loaf48 !== "/assets/cats/stripe_loaf_48.svg") {
+    throw new Error("Stripe yard/unlock must map stripe 48 → stripe_loaf_48");
+  }
+  if (ART_KIT_PATH.stripe.loaf72 !== "/assets/cats/stripe_loaf_72.svg") {
+    throw new Error("Stripe yard/unlock must map stripe 72 → stripe_loaf_72");
+  }
+  for (const file of [
+    "public/assets/cats/stripe_loaf_48.svg",
+    "public/assets/cats/stripe_loaf_72.svg",
+  ]) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  const stripeArt = readFileSync(resolve("public/assets/cats/stripe_loaf_72.svg"), "utf8");
+  const gingerArt = readFileSync(resolve("public/assets/cats/ginger_loaf_72.svg"), "utf8");
+  const pepperArt = readFileSync(resolve("public/assets/cats/pepper_loaf_72.svg"), "utf8");
+  const pumpkinArt = readFileSync(resolve("public/assets/cats/pumpkin_loaf_72.svg"), "utf8");
+  const noodleArt = readFileSync(resolve("public/assets/cats/noodle_loaf_72.svg"), "utf8");
+  if (stripeArt === gingerArt) throw new Error("Stripe loaf must not be a ginger kit clone");
+  if (stripeArt === pepperArt) throw new Error("Stripe loaf must not be a Pepper clone");
+  if (stripeArt === pumpkinArt) throw new Error("Stripe loaf must not be a Pumpkin clone");
+  if (stripeArt === noodleArt) throw new Error("Stripe loaf must not be a Noodle clone");
+  if (!stripeArt.includes("#E09A48")) throw new Error("Stripe loaf must use map-orange #E09A48");
+  if (!stripeArt.includes("#B45A22")) throw new Error("Stripe loaf must show road-map #B45A22");
+  if (stripeArt.includes("#D48A4A")) throw new Error("Stripe loaf must not reuse Pepper orange");
+  if (stripeArt.includes("#E07A32")) throw new Error("Stripe loaf must not reuse Pumpkin orange");
+  if (stripeArt.includes("#B56A38")) throw new Error("Stripe loaf must not reuse Oak bark");
+  if (stripeArt.includes("#B8925A")) throw new Error("Stripe loaf must not reuse Noodle mackerel");
+  if (stripeArt.includes("#D38B5D")) throw new Error("Stripe loaf must not reuse Mango ginger");
+  if (paradeClearForLevel("L45") !== 45) throw new Error("L45 must map to parade clear 45");
+  if (paradeClearForLevel("L46") !== 46) throw new Error("L46 must map to parade clear 46");
+  if (paradeClearForLevel("L48") !== 48) throw new Error("L48 must map to parade clear 48");
+  if (shippedFriendForClear(45)?.friendId !== "friend_015") {
+    throw new Error("shipped parade must award Stripe at 45");
+  }
+  if (shippedFriendForClear(44)) throw new Error("L44 must not award a friend");
+  if (shippedFriendForClear(46)) throw new Error("L46 must not award a friend");
+  if (shippedFriendForClear(47)) throw new Error("L47 must not award a friend");
+  if (shippedFriendForClear(48)) throw new Error("L48 / Cloud@48 must stay unshipped this slice");
+  if (friendForClear(48)?.friendId !== "friend_016") {
+    throw new Error("CURRENT must still list Cloud at clear 48 for a later slice");
+  }
+  if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
+  if (friendForClear(60)?.friendId !== "friend_020") {
+    throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
+  }
+  for (const id of ["L46", "L47", "L48"] as const) {
+    const level = LEVELS.find((row) => row.id === id);
+    if (!level?.colorLocks) throw new Error(`${id} must lock colors`);
+  }
+  const l46 = LEVELS.find((level) => level.id === "L46")!;
+  const l47 = LEVELS.find((level) => level.id === "L47")!;
+  const l48 = LEVELS.find((level) => level.id === "L48")!;
+  if (l46.name !== "Hold East Close") throw new Error("L46 must be Hold East Close");
+  if (l47.name !== "Solid West") throw new Error("L47 must be Solid West");
+  if (l48.name !== "Vacate West") throw new Error("L48 must be Vacate West");
+  console.log("Stripe @ onClear(45) ok · road-map mackerel loafs + L46–L48 wired");
+}
 
 console.log("All authored boards ok");

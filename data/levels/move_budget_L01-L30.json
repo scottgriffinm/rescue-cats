@@ -271,6 +271,24 @@
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true
+    },
+    {
+      "id": "L46",
+      "moveBudget": 10,
+      "nudges": 3,
+      "colorLocks": true
+    },
+    {
+      "id": "L47",
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true
+    },
+    {
+      "id": "L48",
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true
     }
   ]
 }

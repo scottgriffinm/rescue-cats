@@ -13,6 +13,7 @@ import chapter3i from "../../data/levels/CHAPTER3_PUZZLE_L34_L36.json";
 import chapter3j from "../../data/levels/CHAPTER3_PUZZLE_L37_L39.json";
 import chapter3k from "../../data/levels/CHAPTER3_PUZZLE_L40_L42.json";
 import chapter3l from "../../data/levels/CHAPTER3_PUZZLE_L43_L45.json";
+import chapter3m from "../../data/levels/CHAPTER3_PUZZLE_L46_L48.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -63,6 +64,9 @@ const HEADLINES: Record<string, string> = {
   L43: "HOLD SOUTH CLOSE",
   L44: "SOLID NORTH",
   L45: "VACATE NORTH",
+  L46: "HOLD EAST CLOSE",
+  L47: "SOLID WEST",
+  L48: "VACATE WEST",
 };
 
 const HINTS: Record<string, string> = {
@@ -110,6 +114,9 @@ const HINTS: Record<string, string> = {
   L43: "Park close under the house. L42 park-east habits overshoot.",
   L44: "The gray house is the north brake. South-close habits from L43 miss the stop.",
   L45: "Leave the house column, then the north solid. L44 solid-north slide goes through.",
+  L46: "Hold the cell east of the mid house. Vacate-north habits from L45 overshoot.",
+  L47: "The black house is the west brake. Hold-east-close habits from L46 miss the stop.",
+  L48: "Leave the house row, then the west solid. L47's solid-west slide goes through.",
 };
 
 type RawLevel = {
@@ -178,6 +185,7 @@ const authored = [
   ...chapter3j.levels,
   ...chapter3k.levels,
   ...chapter3l.levels,
+  ...chapter3m.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

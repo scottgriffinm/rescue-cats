@@ -20,6 +20,7 @@ import {
   ASH_FRIEND_ID,
   OAK_FRIEND_ID,
   DUMPLING_FRIEND_ID,
+  STRIPE_FRIEND_ID,
   NAMING,
   shuffleNameChips,
 } from "@/lib/collection";
@@ -50,7 +51,8 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
     catalog.friendId === CLOVER_FRIEND_ID ||
     catalog.friendId === ASH_FRIEND_ID ||
     catalog.friendId === OAK_FRIEND_ID ||
-    catalog.friendId === DUMPLING_FRIEND_ID;
+    catalog.friendId === DUMPLING_FRIEND_ID ||
+    catalog.friendId === STRIPE_FRIEND_ID;
 
   return (
     <div className="fixed inset-0 z-30 flex items-end justify-center bg-ink/30 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-16 sm:items-center">

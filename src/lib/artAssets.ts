@@ -71,6 +71,10 @@ export const CAT_ASSETS = {
   dumpling_loaf_72: "/assets/cats/dumpling_loaf_72.svg",
   friend_014_loaf_48: "/assets/cats/dumpling_loaf_48.svg",
   friend_014_loaf_72: "/assets/cats/dumpling_loaf_72.svg",
+  stripe_loaf_48: "/assets/cats/stripe_loaf_48.svg",
+  stripe_loaf_72: "/assets/cats/stripe_loaf_72.svg",
+  friend_015_loaf_48: "/assets/cats/stripe_loaf_48.svg",
+  friend_015_loaf_72: "/assets/cats/stripe_loaf_72.svg",
 } as const;
 
 export const FURN_ASSETS = {
