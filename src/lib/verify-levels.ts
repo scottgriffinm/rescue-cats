@@ -4490,8 +4490,8 @@ for (const level of LEVELS) {
   }
   if (CHAPTER3_DUMPLING.naming.prefill !== "") throw new Error("dumpling naming prefill must stay empty");
   const dumplingChips = chipsForFriend("friend_014");
-  if (dumplingChips.join(",") !== "Dumpling,Bao,Potsticker") {
-    throw new Error(`Dumpling chips must be Dumpling/Bao/Potsticker, got ${dumplingChips.join("/")}`);
+  if (dumplingChips.join(",") !== "Dumpling,Bao,Fold") {
+    throw new Error(`Dumpling chips must be Dumpling/Bao/Fold, got ${dumplingChips.join("/")}`);
   }
   for (const banned of ["Oak", "Acorn", "Timber", "Noodle", "Ramen", "Twirl", "Biscuit", "Mochi", "Toast", "Ghost", "Wisp", "Pearl", "Bean", "Mango", "Ash", "Stripe"]) {
     if (dumplingChips.includes(banned)) throw new Error(`Dumpling chips must not include ${banned}`);

@@ -14,7 +14,7 @@
   "naming": {
     "prefill": "",
     "require_choice": true,
-    "suggestion_chips": ["Dumpling", "Bao", "Potsticker"],
+    "suggestion_chips": ["Dumpling", "Bao", "Fold"],
     "cta_primary": "Welcome home"
   },
   "bang_copy": {
