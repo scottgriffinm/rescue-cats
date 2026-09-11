@@ -1,0 +1,30 @@
+{
+  "version": "chapter3_clover_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_011",
+  "unlock_clear": 33,
+  "personality": "Lucky",
+  "display_line": "Lucky, or just very good at finding boxes.",
+  "art": {
+    "loaf_48": "/assets/cats/clover_loaf_48.svg",
+    "loaf_72": "/assets/cats/clover_loaf_72.svg",
+    "board_color": "gray"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Clover", "Patch", "Fern"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_011": [
+      "{Name}: Lucky, or just very good at finding boxes.",
+      "{Name}: Already claimed the shady box. Leave a four-leaf on the porch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 33,
+    "sku_id": null,
+    "note": "Clear 33 gifts nothing — same cadence as Ink @ 6, Tux @ 12, Ghost @ 15, Mist @ 18, Pepper @ 21, Pumpkin @ 24, Shadow @ 27, and Noodle @ 30."
+  }
+}

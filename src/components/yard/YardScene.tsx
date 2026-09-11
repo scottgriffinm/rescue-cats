@@ -43,6 +43,7 @@ export function YardScene({
   const pumpkin = friends.find((friend) => friend.friendId === "friend_008");
   const shadow = friends.find((friend) => friend.friendId === "friend_009");
   const noodle = friends.find((friend) => friend.friendId === "friend_010");
+  const clover = friends.find((friend) => friend.friendId === "friend_011");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -53,7 +54,8 @@ export function YardScene({
       friend.friendId !== "friend_007" &&
       friend.friendId !== "friend_008" &&
       friend.friendId !== "friend_009" &&
-      friend.friendId !== "friend_010",
+      friend.friendId !== "friend_010" &&
+      friend.friendId !== "friend_011",
   );
 
   return (
@@ -194,6 +196,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{noodle.name}</p>
+        </div>
+      ) : null}
+
+      {clover ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "56%", top: "72%" }}
+        >
+          <FriendSprite
+            kit={friendById(clover.friendId)?.phenotype.artKit ?? "clover"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === clover.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(clover.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${clover.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{clover.name}</p>
         </div>
       ) : null}
 

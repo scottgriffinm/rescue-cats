@@ -9,6 +9,7 @@ import chapter3e from "../../data/levels/CHAPTER3_PUZZLE_L22_L24.json";
 import chapter3f from "../../data/levels/CHAPTER3_PUZZLE_L25_L27.json";
 import chapter3g from "../../data/levels/CHAPTER3_PUZZLE_L28_L30.json";
 import chapter3h from "../../data/levels/CHAPTER3_PUZZLE_L31_L33.json";
+import chapter3i from "../../data/levels/CHAPTER3_PUZZLE_L34_L36.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -47,6 +48,9 @@ const HEADLINES: Record<string, string> = {
   L31: "HOLD EAST",
   L32: "THREAD NORTH",
   L33: "THREAD WEST",
+  L34: "SOLID WEST",
+  L35: "VACATE FIRST",
+  L36: "PARK ABOVE",
 };
 
 const HINTS: Record<string, string> = {
@@ -82,6 +86,9 @@ const HINTS: Record<string, string> = {
   L31: "Park east of the house. L30's south park slides through.",
   L32: "Park above, then thread north. L31's east park slides through.",
   L33: "Sit past the house, then park west. North-first habits miss the stop.",
+  L34: "The gray house is the west brake. Park a friend there and gray overshoots.",
+  L35: "Leave the house column, then park west. L34's solid-west slide goes through.",
+  L36: "Sit past south, then park above. L35's west park misses the stop.",
 };
 
 type RawLevel = {
@@ -140,6 +147,7 @@ const authored = [
   ...chapter3f.levels,
   ...chapter3g.levels,
   ...chapter3h.levels,
+  ...chapter3i.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
