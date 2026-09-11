@@ -1,6 +1,6 @@
 # Chapter 2 puzzle index
 
-Campaign boards **L1–L9 sequential**. Ink unlocks at unique clear 6 (L6 in this sequence). Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On LT08 boards, a **mismatch house is a solid**. **L10 is not on the campaign path.** Chapter 3 continues at **L11–L15** after L9 — see `CHAPTER3_INDEX.md`.
+Campaign boards **L1–L9 sequential**. Ink unlocks at unique clear 6 (L6 in this sequence). Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On LT08 boards, a **mismatch house is a solid**. **L10 is not on the campaign path.** Chapter 3 continues at **L11–L18** after L9 — see `CHAPTER3_INDEX.md`.
 
 | Id | Pack | Teach | Color locks |
 | --- | --- | --- | --- |

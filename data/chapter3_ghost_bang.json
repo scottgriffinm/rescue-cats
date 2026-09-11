@@ -1,0 +1,30 @@
+{
+  "version": "chapter3_ghost_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_005",
+  "unlock_clear": 15,
+  "personality": "Shy",
+  "display_line": "A pale loaf. Appears when the sun hits the porch.",
+  "art": {
+    "loaf_48": "/assets/cats/ghost_loaf_48.svg",
+    "loaf_72": "/assets/cats/ghost_loaf_72.svg",
+    "board_color": "gray"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Ghost", "Wisp", "Pearl"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_005": [
+      "{Name}: A pale loaf. Appears when the sun hits the porch.",
+      "{Name}: Soft as a sunbeam. Already half-hidden."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 15,
+    "sku_id": null,
+    "note": "Clear 15 gifts nothing — same cadence as Ink @ 6 and Tux @ 12."
+  }
+}
