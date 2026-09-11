@@ -13,7 +13,7 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 - **Stars:** leftover slides → 3★ if leftover ≥ ceil(N/2), 2★ if leftover ≥ ceil(N/4), else 1★. Stars unlock **yard cosmetics only**, never cats or campaign gates.
 - **Nudges / color locks:** encoded on the L1–42 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
 
-Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L42 are the Chapter 3 color-brake boards (budgets from `data/levels/move_budget_L01-L30.json`). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`. Parade friends key off the level number so L12 awards Tux, L15 awards Ghost, L18 awards Mist, L21 awards Pepper, L24 awards Pumpkin, L27 awards Shadow, L30 awards Noodle, L33 awards Clover, and L36 awards Ash even though L10 is off the path.
+Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L42 are the Chapter 3 color-brake boards (budgets from `data/levels/move_budget_L01-L30.json`). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`. Parade friends key off the level number so L12 awards Tux, L15 awards Ghost, L18 awards Mist, L21 awards Pepper, L24 awards Pumpkin, L27 awards Shadow, L30 awards Noodle, L33 awards Clover, L36 awards Ash, and L39 awards Oak even though L10 is off the path.
 
 Acceptance: slide stops on wall / cat / edge only; gates never brake; counter decrements once per slide start; win = all cats on gates at rest; budget exhaust → X and board reset (Xs persist per level); no mid-puzzle ads.
 
@@ -46,14 +46,14 @@ Same slide engine. Campaign after L9 is **L11–L42** (skip L10).
 - **L21 Thread Park.** Park to brake the south lane, then thread west onto the house.
 - **L22 Hold West.** Park west of the house. Slide through and you miss the stop.
 - **L23 Hold Corner.** Hold the corner cell above the house — the open south lane overshoots.
-- **L24 Park High.** Climb and park the high cell. North without the brake slides through.
-- **L25 Park Low.** Park the cell under the house. South without the brake slides through.
+- **L24 Color Brake.** Gray house is the west solid. Climb into the color stop — park-high habits miss it.
+- **L25 Vacate Column.** Leave the house column, then the south solid. Park-low alone overshoots.
 - **L26 Thread East.** Park above, then thread the east lane onto the house.
 - **L27 Thread Black.** First black coat + black house. Park east, then thread south.
 - **L28 Park West.** Park west of the house. L27's east park slides through.
-- **L29 Hold North.** Hold the cell above the house. West-first habits miss the stop.
-- **L30 Hold South.** Park under the house. North without the south brake slides through.
-- **L31 Hold East.** Park east of the house. L30's south park slides through.
+- **L29 Color Cross.** Black and orange lock adjacent. Hold-north habits miss the cross.
+- **L30 Thread South.** Thread onto the south black solid. Hold-south alone is not enough.
+- **L31 Vacate West.** Leave before the west black solid works. Hold-east habits miss the vacate.
 - **L32 Thread North.** Park above, then thread the north lane onto the house.
 - **L33 Thread West.** Sit past the house, then park west. North-first habits miss the stop.
 - **L34 Solid West.** The gray house is the west brake. Park a friend there and gray overshoots.
