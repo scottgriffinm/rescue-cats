@@ -4268,7 +4268,7 @@ for (const level of LEVELS) {
   if (!NAMING.suggestion_pools.food.includes("Pepper")) {
     throw new Error("Pepper must stay a food chip so the Met identity regression stays covered");
   }
-  const chosenToastName = "Pepper";
+  let chosenToastName = "Pepper";
   const fakeFriends = [
     {
       instanceId: "inst-test",
@@ -4283,7 +4283,7 @@ for (const level of LEVELS) {
     },
   ];
   // FriendsMet Met tab: prefer instance.name over catalog.defaultName.
-  const metLabel: string =
+  const metLabel =
     fakeFriends.find((friend) => friend.friendId === "friend_001")?.name ?? defaultName;
   if (metLabel !== chosenToastName) {
     throw new Error(`Met must show chosen toast name ${chosenToastName}, got ${metLabel}`);
