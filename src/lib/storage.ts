@@ -22,7 +22,9 @@ export const EMPTY_SAVE: SaveState = {
   first_night_hearts_claimed: false,
 };
 
-function migrateFurniture(parsed: Partial<SaveState> & { version?: number }) {
+type PersistedSave = Omit<SaveState, "version"> & { version?: 2 | 3 };
+
+function migrateFurniture(parsed: PersistedSave) {
   const owned = [...new Set(parsed.furniture ?? [])];
   // v2 auto-granted the Mini Cat Tree so L1–L2 were not barren. That SKU is a
   // Hearts shop card (40♥ @ clear 3) — strip the old grant so the card returns.
@@ -37,7 +39,7 @@ export function loadSave(): SaveState {
   try {
     const raw = window.localStorage.getItem(SAVE_KEY);
     if (!raw) return EMPTY_SAVE;
-    const parsed = JSON.parse(raw) as SaveState;
+    const parsed = JSON.parse(raw) as PersistedSave;
     if ((parsed?.version !== 2 && parsed?.version !== 3) || !Array.isArray(parsed.completedIds)) {
       return EMPTY_SAVE;
     }
