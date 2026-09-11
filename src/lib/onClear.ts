@@ -14,7 +14,7 @@ export function paradeClearForLevel(levelId: string): number | undefined {
   return Number(match[1]);
 }
 
-/** Campaign hook — parade is keyed by level number (L12 → Tux, L15 → Ghost, L18 → Mist). */
+/** Campaign hook — parade is keyed by level number (L12 → Tux, L15 → Ghost, L18 → Mist, L21 → Pepper, L24 → Pumpkin). */
 export function onClear(clearIndex: number, levelId: string, stars: number): ClearEvent {
   const parade = paradeClearForLevel(levelId) ?? clearIndex;
   const friend = shippedFriendForClear(parade);

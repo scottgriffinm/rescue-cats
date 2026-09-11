@@ -1,0 +1,30 @@
+{
+  "version": "chapter3_pumpkin_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_008",
+  "unlock_clear": 24,
+  "personality": "Sunny",
+  "display_line": "Seasonal energy, year-round appetite.",
+  "art": {
+    "loaf_48": "/assets/cats/pumpkin_loaf_48.svg",
+    "loaf_72": "/assets/cats/pumpkin_loaf_72.svg",
+    "board_color": "orange"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Pumpkin", "Squash", "Ember"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_008": [
+      "{Name}: Seasonal energy, year-round appetite.",
+      "{Name}: Already hunting the next snack. Save me a leaf."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 24,
+    "sku_id": null,
+    "note": "Clear 24 gifts nothing — same cadence as Ink @ 6, Tux @ 12, Ghost @ 15, Mist @ 18, and Pepper @ 21."
+  }
+}
