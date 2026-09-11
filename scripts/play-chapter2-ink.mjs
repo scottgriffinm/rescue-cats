@@ -126,13 +126,14 @@ try {
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L8`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("MY GATE ONLY"));
+  await page.goto(`${BASE}/level/L6`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BIGGER YARD"));
+  await shot(page, "03_l6_bigger_yard");
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowDown"],
+      [0, "ArrowDown"],
+      [1, "ArrowDown"],
     ],
     "New friend!",
   );
@@ -163,7 +164,7 @@ try {
   if (!modal.hero.includes("/assets/cats/ink_loaf_72.svg")) {
     throw new Error(`Ink hero missing ink loaf: ${modal.hero}`);
   }
-  await shot(page, "03_ink_naming");
+  await shot(page, "04_ink_naming");
 
   await page.$eval("input", (el) => {
     el.focus();
@@ -206,7 +207,30 @@ try {
   ) {
     throw new Error("Ink bang / shop copy variants missing");
   }
-  await shot(page, "04_ink_yard");
+  await shot(page, "05_ink_yard");
+
+  await page.goto(`${BASE}/level/L7`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("TIGHT ROUTES"));
+  await shot(page, "06_l7_tight_routes");
+  await play(
+    page,
+    [
+      [0, "ArrowDown"],
+      [1, "ArrowUp"],
+    ],
+    "Home",
+  );
+
+  await page.goto(`${BASE}/level/L8`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("MY GATE ONLY"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowDown"],
+    ],
+    "Home",
+  );
 
   await page.goto(`${BASE}/level/L9`, { waitUntil: "networkidle0" });
   await play(
@@ -218,7 +242,7 @@ try {
     ],
     "Home",
   );
-  await shot(page, "07_l9_win");
+  await shot(page, "08_l9_win");
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
   console.log("CHAPTER 2 L4-9 + INK OK");
 } catch (error) {

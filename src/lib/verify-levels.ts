@@ -64,8 +64,10 @@ const LOCKED: Record<string, LockedSpec> = {
     N: 9,
     colorLocks: false,
     walls: [
+      [2, 1],
       [2, 2],
       [3, 3],
+      [3, 4],
     ],
     cats: [
       ["cat_a", 0, 0],
@@ -81,7 +83,10 @@ const LOCKED: Record<string, LockedSpec> = {
     N: 8,
     colorLocks: false,
     walls: [
+      [1, 2],
       [2, 2],
+      [3, 2],
+      [2, 4],
       [4, 1],
     ],
     cats: [
@@ -296,13 +301,10 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the Chapter 2 path");
-  if (ids.includes("L6") || ids.includes("L7")) {
-    throw new Error("L6–L7 are still authoring — do not load invented boards");
-  }
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L8,L9") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
-  for (const id of ["L4", "L5", "L8", "L9"] as const) {
+  for (const id of ["L4", "L5", "L6", "L7", "L8", "L9"] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
     assertLocked(level, LOCKED[id]);

@@ -1,8 +1,8 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "source": "CEO Chapter 2 lock",
+  "source": "docs/rescue_cats_LOCKED_specs/Puzzle_Locked_L01-L30.md",
   "gridOrigin": "top-left",
-  "notes": "L6–L7 6×6 route boards. N=9/8, 2 cats, 2 walls, colorLocks off.",
+  "notes": "L6 Bigger Yard + L7 Tight Routes. Locked topologies — do not invent.",
   "levels": [
     {
       "id": "L6",
@@ -14,8 +14,10 @@
       "colorLocks": false,
       "templateId": "LT02_route_depth",
       "walls": [
+        { "x": 2, "y": 1 },
         { "x": 2, "y": 2 },
-        { "x": 3, "y": 3 }
+        { "x": 3, "y": 3 },
+        { "x": 3, "y": 4 }
       ],
       "blockers": [],
       "cats": [
@@ -26,7 +28,8 @@
         { "id": "gate_a", "x": 0, "y": 5 },
         { "id": "gate_b", "x": 5, "y": 5 }
       ],
-      "teach": "bigger_yard"
+      "teach": "bigger_yard",
+      "ascii": "A . . . . B\n. . # . . .\n. . # . . .\n. . . # . .\n. . . # . .\na . . . . b"
     },
     {
       "id": "L7",
@@ -38,7 +41,10 @@
       "colorLocks": false,
       "templateId": "LT02_route_depth",
       "walls": [
+        { "x": 1, "y": 2 },
         { "x": 2, "y": 2 },
+        { "x": 3, "y": 2 },
+        { "x": 2, "y": 4 },
         { "x": 4, "y": 1 }
       ],
       "blockers": [],
@@ -50,7 +56,8 @@
         { "id": "gate_a", "x": 5, "y": 0 },
         { "id": "gate_b", "x": 0, "y": 5 }
       ],
-      "teach": "tight_routes"
+      "teach": "tight_routes",
+      "ascii": ". . . . . a\nA . . . # .\n. # # # . .\n. . . . . B\n. . # . . .\nb . . . . ."
     }
   ]
 }

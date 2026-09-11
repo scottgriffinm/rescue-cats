@@ -8,7 +8,10 @@
   "colorLocks": false,
   "templateId": "LT02_route_depth",
   "walls": [
+    { "x": 1, "y": 2 },
     { "x": 2, "y": 2 },
+    { "x": 3, "y": 2 },
+    { "x": 2, "y": 4 },
     { "x": 4, "y": 1 }
   ],
   "blockers": [],
@@ -20,10 +23,5 @@
     { "id": "gate_a", "x": 5, "y": 0 },
     { "id": "gate_b", "x": 0, "y": 5 }
   ],
-  "teach": "tight_routes",
-  "note": "Locked pack. Mirrors CHAPTER2_PUZZLE_L06_L07 L7.",
-  "solve": [
-    ["cat_a", "s"],
-    ["cat_b", "n"]
-  ]
+  "teach": "tight_routes"
 }

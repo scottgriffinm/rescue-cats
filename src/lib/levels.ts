@@ -1,6 +1,7 @@
 import teach from "../../data/levels/L01-L03.json";
 import l03 from "../../data/levels/L03.json";
 import lt02 from "../../data/levels/LT02-L04-L05.json";
+import chapter2 from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08 from "../../data/levels/LT08-L08-L09.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
@@ -13,6 +14,8 @@ const HEADLINES: Record<string, string> = {
   L3: "WALL AS BRAKE",
   L4: "TWO FRIENDS",
   L5: "COLLISION ORDER",
+  L6: "BIGGER YARD",
+  L7: "TIGHT ROUTES",
   L8: "MY GATE ONLY",
   L9: "WRONG ORDER SOFT-LOCK",
 };
@@ -23,6 +26,8 @@ const HINTS: Record<string, string> = {
   L3: "The wall south of the house brakes you on the gate. Side routes slide through.",
   L4: "Two friends, two houses. Slide each down.",
   L5: "Order matters — vacate the column before your friend can land.",
+  L6: "Bigger board. Pillars force a longer route.",
+  L7: "Crossed houses. Tight budget.",
   L8: "Orange for orange, gray for gray.",
   L9: "Wrong house first soft-locks. Match coats in order.",
 };
@@ -75,6 +80,7 @@ const authored = [
   ...teach.levels.filter((level) => level.id !== "L3"),
   l03,
   ...lt02.levels,
+  ...chapter2.levels,
   ...lt08.levels,
 ] as RawLevel[];
 
