@@ -44,6 +44,7 @@ export function YardScene({
   const clover = friends.find((friend) => friend.friendId === "friend_011");
   const ash = friends.find((friend) => friend.friendId === "friend_012");
   const oak = friends.find((friend) => friend.friendId === "friend_013");
+  const dumpling = friends.find((friend) => friend.friendId === "friend_014");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -57,7 +58,8 @@ export function YardScene({
       friend.friendId !== "friend_010" &&
       friend.friendId !== "friend_011" &&
       friend.friendId !== "friend_012" &&
-      friend.friendId !== "friend_013",
+      friend.friendId !== "friend_013" &&
+      friend.friendId !== "friend_014",
   );
 
   return (
@@ -270,6 +272,30 @@ export function YardScene({
           <p className="text-center font-display text-[11px] text-ink/70">{oak.name}</p>
         </div>
       ) : null}
+      {dumpling ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "86%", top: "52%" }}
+        >
+          <FriendSprite
+            kit={friendById(dumpling.friendId)?.phenotype.artKit ?? "dumpling"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === dumpling.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(dumpling.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${dumpling.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{dumpling.name}</p>
+        </div>
+      ) : null}
+
 
       {shadow ? (
         <div

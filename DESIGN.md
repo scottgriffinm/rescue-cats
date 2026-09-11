@@ -11,9 +11,9 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 - **Soft fail:** budget exhausted with cats still off-gate → 1 X, free retry of the same printed board. Xs persist per level.
 - **3 Xs:** continue sheet — 1 ticket **or** optional rewarded-ad **stub** (UI only). **Never** ads mid-puzzle.
 - **Stars:** leftover slides → 3★ if leftover ≥ ceil(N/2), 2★ if leftover ≥ ceil(N/4), else 1★. Stars unlock **yard cosmetics only**, never cats or campaign gates.
-- **Nudges / color locks:** encoded on the L1–42 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
+- **Nudges / color locks:** encoded on the L1–45 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
 
-Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L42 are the Chapter 3 color-brake boards (budgets from `data/levels/move_budget_L01-L30.json`). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`. Parade friends key off the level number so L12 awards Tux, L15 awards Ghost, L18 awards Mist, L21 awards Pepper, L24 awards Pumpkin, L27 awards Shadow, L30 awards Noodle, L33 awards Clover, L36 awards Ash, and L39 awards Oak even though L10 is off the path.
+Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L45 are the Chapter 3 color-brake boards (budgets from `data/levels/move_budget_L01-L30.json`). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`. Parade friends key off the level number so L12 awards Tux, L15 awards Ghost, L18 awards Mist, L21 awards Pepper, L24 awards Pumpkin, L27 awards Shadow, L30 awards Noodle, L33 awards Clover, L36 awards Ash, L39 awards Oak, and L42 awards Dumpling even though L10 is off the path.
 
 Acceptance: slide stops on wall / cat / edge only; gates never brake; counter decrements once per slide start; win = all cats on gates at rest; budget exhaust → X and board reset (Xs persist per level); no mid-puzzle ads.
 
@@ -31,7 +31,7 @@ Continuous build past the Mango slice. Same slide engine (stop on wall | cat | e
 
 ## Chapter 3 — OPEN (sister-ready next slice)
 
-Same slide engine. Campaign after L9 is **L11–L42** (skip L10).
+Same slide engine. Campaign after L9 is **L11–L45** (skip L10).
 
 - **L11 Color Brake.** Mid-board matching house. Park a friend past the house — matching coats still slide through.
 - **L12 Park First.** Hold the far cell so the slider stops on their house. Overshoot if you go first.
@@ -65,6 +65,9 @@ Same slide engine. Campaign after L9 is **L11–L42** (skip L10).
 - **L40 Solid South.** The gray house is the south brake. East-row vacate habits from L39 miss the stop.
 - **L41 Vacate South.** Leave the house column first, then the south solid.
 - **L42 Park East.** Hold the cell east of the mid house.
+- **L43 Solid West.** The gray house is the west brake. Park-east habits from L42 miss the stop.
+- **L44 Vacate West.** Leave the house row first, then the west solid.
+- **L45 Park South.** Hold the cell south of the mid house.
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
 - **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`.
 - **onClear(15) → Ghost (`friend_005`) after L15.** Pale gray-cream loaf, chips Ghost / Wisp / Pearl, no furniture gift. Pack: `data/chapter3_ghost_bang.json`.
@@ -75,7 +78,8 @@ Same slide engine. Campaign after L9 is **L11–L42** (skip L10).
 - **onClear(30) → Noodle (`friend_010`) after L30.** Long cream-mackerel loaf, chips Noodle / Ramen / Twirl, no furniture gift. Pack: `data/chapter3_noodle_bang.json`.
 - **onClear(33) → Clover (`friend_011`) after L33.** Soft gray-spotted loaf, chips Clover / Patch / Fern, no furniture gift. Pack: `data/chapter3_clover_bang.json`.
 - **onClear(36) → Ash (`friend_012`) after L36.** Warm hearth-ash loaf, chips Cinder / Soot / Hearth, no furniture gift. Pack: `data/chapter3_ash_bang.json`.
-- **onClear(39) → Oak (`friend_013`) after L39.** Bark-warm classic blotch loaf, chips Oak / Acorn / Timber, no furniture gift. Pack: `data/chapter3_oak_bang.json`. Bean@60 and Dumpling@42 ship later.
+- **onClear(39) → Oak (`friend_013`) after L39.** Bark-warm classic blotch loaf, chips Oak / Acorn / Timber, no furniture gift. Pack: `data/chapter3_oak_bang.json`.
+- **onClear(42) → Dumpling (`friend_014`) after L42.** Plump cream-fold loaf, chips Dumpling / Bao / Potsticker, no furniture gift. Pack: `data/chapter3_dumpling_bang.json`. Stripe@45 and Bean@60 ship later.
 
 Retarget later templates by swapping JSON + keeping the slide helper.
 
@@ -87,7 +91,7 @@ Cited so Collection Lead can swap content without touching puzzle code. Data mod
 - `FriendInstance` — name, phenotypeId, rescuedAt, optional `favoriteToy`
 - `FurnitureSKU`, `YardComfort`, `UnlockFlags` (`mangoNamed`, `porchUnlocked`)
 
-First thirteen rescues (`TUTORIAL_RESCUES`) are a curated C/B, Regular-body parade: Mango, Ink, Biscuit, Tux, Ghost, Mist, Pepper, Pumpkin, Shadow, Noodle, Clover, Ash, Oak. Naming modal reveals the personality line, suggests a name (pools include Mochi / Bean / Pip-adjacent food names), Confirm → yard drop-in + `"{Name} moved in!"` and a first-night !. Session return can show 1–3 ! bubbles.
+First fourteen rescues (`TUTORIAL_RESCUES`) are a curated C/B, Regular-body parade: Mango, Ink, Biscuit, Tux, Ghost, Mist, Pepper, Pumpkin, Shadow, Noodle, Clover, Ash, Oak, Dumpling. Naming modal reveals the personality line, suggests a name (pools include Mochi / Bean / Pip-adjacent food names), Confirm → yard drop-in + `"{Name} moved in!"` and a first-night !. Session return can show 1–3 ! bubbles.
 
 Onboarding furniture: mini tree is placed free so L1–L2 are not barren. Cardboard box lands with Mango at clear 3; Sun Cushion with Biscuit at clear 9. Yarn swing stays a Hearts shop stub.
 
@@ -107,13 +111,13 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 
 Load **`data/collection_CURRENT.json` only** (stamped FROZEN / v1.2 canonical). Ignore deprecated v1. If a stale `unlock_clear: 1` appears, ignore it.
 
-Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming + box gift. Unlock table covers **3 / 6 / 9 / 12 / 15 / 18 / 21 / 24 / 27 / 30 / 33 / 36 / 39**. CURRENT is frozen and correct. **NO Pebble.** Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, … Bean@60. Ignore any chat saying Pebble.
+Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming + box gift. Unlock table covers **3 / 6 / 9 / 12 / 15 / 18 / 21 / 24 / 27 / 30 / 33 / 36 / 39 / 42**. CURRENT is frozen and correct. **NO Pebble.** Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, Dumpling@42, … Bean@60. Ignore any chat saying Pebble.
 
 Board color enums for the slice: `orange | gray | black`. LT08+ gates map to these strings; `color_orange` etc. normalize in `src/lib/colors.ts` + level hydrate.
 
 - First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
-- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, … Bean@60. **NO Pebble.**
-- Clear 39 → 13 cats (through Oak `friend_013`).
+- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, Dumpling@42, … Bean@60. **NO Pebble.**
+- Clear 42 → 14 cats (through Dumpling `friend_014`).
 - Non-cat clears: Hearts only. Cats only on the every-3 cadence.
 - Furniture gifts: cardboard box with Mango @ 3; Sun Cushion with Biscuit @ 9.
 - Stars → yard cosmetics only.
