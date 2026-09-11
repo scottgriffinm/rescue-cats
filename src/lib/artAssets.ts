@@ -36,6 +36,10 @@ export const CAT_ASSETS = {
   mist_loaf_72: "/assets/cats/mist_loaf_72.svg",
   friend_006_loaf_48: "/assets/cats/mist_loaf_48.svg",
   friend_006_loaf_72: "/assets/cats/mist_loaf_72.svg",
+  pepper_loaf_48: "/assets/cats/pepper_loaf_48.svg",
+  pepper_loaf_72: "/assets/cats/pepper_loaf_72.svg",
+  friend_007_loaf_48: "/assets/cats/pepper_loaf_48.svg",
+  friend_007_loaf_72: "/assets/cats/pepper_loaf_72.svg",
 } as const;
 
 export const FURN_ASSETS = {

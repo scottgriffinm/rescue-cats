@@ -28,18 +28,18 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
         </button>
       </div>
       {tab === "friends" ? (
-        <ul className="flex flex-wrap justify-center gap-1.5">
+        <ul className="flex flex-nowrap justify-center gap-1">
           {friends.length === 0 ? (
             <li className="text-xs text-ink/40">No one named yet.</li>
           ) : (
             friends.map((friend) => {
               const catalog = friendById(friend.friendId);
               return (
-                <li key={friend.instanceId} className="w-12 text-center">
+                <li key={friend.instanceId} className="w-10 min-w-0 text-center">
                   <FriendSprite
                     kit={catalog?.phenotype.artKit ?? "ginger"}
                     size={48}
-                    className="mx-auto h-9 w-9"
+                    className="mx-auto h-8 w-8"
                   />
                   <p className="truncate font-display text-[10px]">{friend.name}</p>
                 </li>
@@ -48,13 +48,13 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
           )}
         </ul>
       ) : (
-        <ul className="flex flex-wrap justify-center gap-1.5">
+        <ul className="flex flex-nowrap justify-center gap-1">
           {TUTORIAL_RESCUES.map((entry) => (
             <li
               key={entry.friendId}
-              className={`w-12 text-center ${rescued.has(entry.friendId) ? "" : "opacity-40"}`}
+              className={`w-10 min-w-0 text-center ${rescued.has(entry.friendId) ? "" : "opacity-40"}`}
             >
-              <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-9 w-9" />
+              <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-8 w-8" />
               <p className="truncate font-display text-[10px]">
                 {rescued.has(entry.friendId) ? entry.defaultName : "???"}
               </p>

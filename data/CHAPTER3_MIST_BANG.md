@@ -13,4 +13,4 @@ Pack JSON: `chapter3_mist_bang.json`. Overlay on `collection_CURRENT.json`. No P
 | Art | `mist_loaf_48/72` · kit **mist** (CURRENT `art_kit: slate` is ignored — not Ink, not Ghost) |
 | Board | phenotype `gray`; campaign boards stay orange/gray |
 
-Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Shop SKUs stay scratcher / miniTree / yarnSwing. Pepper@21 and Pumpkin@24 stay later.
+Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Shop SKUs stay scratcher / miniTree / yarnSwing. Pepper@21 ships next. Pumpkin@24 stays later.

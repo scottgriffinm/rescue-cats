@@ -342,7 +342,7 @@ try {
       ["orange", "ArrowLeft"],
       ["gray", "ArrowLeft"],
     ],
-    "Home",
+    "New friend!",
   );
   await shot(page, "06_l21_win");
 
@@ -353,14 +353,11 @@ try {
   if (after.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.friends.some((friend) => friend.friendId === "friend_007")) {
-    throw new Error("Pepper must not unlock this slice");
+  if (!after.pendingUnlocks.some((pending) => pending.friendId === "friend_007")) {
+    throw new Error("L21 clear must queue Pepper naming");
   }
   if (after.friends.some((friend) => friend.friendId === "friend_008")) {
     throw new Error("Pumpkin must not unlock this slice");
-  }
-  if (after.pendingUnlocks.some((pending) => pending.friendId === "friend_007")) {
-    throw new Error("L21 clear must not queue Pepper naming");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
   console.log("CHAPTER 3 L18 + MIST + L19-21 OK");
