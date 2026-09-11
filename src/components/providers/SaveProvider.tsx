@@ -181,8 +181,19 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
       completeFirstNight: (instanceId) => {
         const current = snap.save;
         const friend = current.friends.find((item) => item.instanceId === instanceId);
-        if (!friend || current.first_night_done) return;
+        if (!friend) return;
         const sniff = withName(NAMING.first_night_bubble, friend.name);
+        const friends = current.friends.map((item) =>
+          item.instanceId === instanceId ? { ...item, firstNight: false } : item,
+        );
+        if (current.first_night_done) {
+          setSave({
+            ...current,
+            friends,
+            bubbles: [sniff, ...current.bubbles.filter((bubble) => bubble !== sniff)].slice(0, 3),
+          });
+          return;
+        }
         const tomorrow = withName(NAMING.tomorrow_hook, friend.name);
         const hearts = current.first_night_hearts_claimed
           ? current.hearts
@@ -197,9 +208,7 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
             0,
             3,
           ),
-          friends: current.friends.map((item) =>
-            item.instanceId === instanceId ? { ...item, firstNight: false } : item,
-          ),
+          friends,
         });
       },
       markCoachSeen: () => setSave({ ...snap.save, seenCoach: true }),

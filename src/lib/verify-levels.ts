@@ -18,18 +18,23 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_b", "s"],
     ["cat_a", "e"],
     ["cat_a", "s"],
-    ["cat_a", "w"],
-    ["cat_a", "s"],
-  ],
-  L6: [
-    ["cat_a", "e"],
     ["cat_b", "w"],
   ],
-  L7: [
+  L6: [
+    ["cat_b", "s"],
+    ["cat_a", "e"],
+    ["cat_a", "s"],
     ["cat_a", "w"],
+    ["cat_b", "e"],
+    ["cat_a", "s"],
+    ["cat_a", "w"],
+  ],
+  L7: [
+    ["cat_a", "e"],
     ["cat_a", "s"],
     ["cat_a", "e"],
-    ["cat_b", "e"],
+    ["cat_b", "s"],
+    ["cat_b", "w"],
     ["cat_b", "s"],
     ["cat_b", "w"],
   ],
@@ -39,7 +44,10 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L9: [
     ["cat_a", "e"],
+    ["cat_a", "s"],
+    ["cat_a", "e"],
     ["cat_b", "w"],
+    ["cat_b", "s"],
   ],
   L10: [
     ["cat_a", "n"],
@@ -81,6 +89,25 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   }
 }
 
+function wallKeys(level: Level) {
+  return new Set(level.walls.map((wall) => `${wall.x},${wall.y}`));
+}
+
+function expectSize(level: Level, width: number, height: number, walls: number, budget: number) {
+  if (level.width !== width || level.height !== height) {
+    throw new Error(`${level.id} must be ${width}×${height}`);
+  }
+  if (level.walls.length !== walls) {
+    throw new Error(`${level.id} expected ${walls} walls, got ${level.walls.length}`);
+  }
+  if (level.moveBudget !== budget) {
+    throw new Error(`${level.id} budget ${level.moveBudget} != ${budget}`);
+  }
+  if (level.cats.length !== 2 || level.gates.length !== 2) {
+    throw new Error(`${level.id} needs two cats and two gates`);
+  }
+}
+
 {
   const l3 = LEVELS.find((level) => level.id === "L3");
   if (!l3) throw new Error("missing L3");
@@ -88,9 +115,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   const gate = l3.gates[0];
   if (cat.x !== 2 || cat.y !== 0) throw new Error("L3 cat must be (2,0)");
   if (gate.x !== 2 || gate.y !== 2) throw new Error("L3 gate must be (2,2)");
-  const wallKeys = new Set(l3.walls.map((wall) => `${wall.x},${wall.y}`));
+  const keys = wallKeys(l3);
   for (const key of ["1,2", "3,2", "2,3"]) {
-    if (!wallKeys.has(key)) throw new Error(`L3 missing wall ${key}`);
+    if (!keys.has(key)) throw new Error(`L3 missing wall ${key}`);
   }
 
   const south = play(l3, [["cat_a", "s"]]);
@@ -133,12 +160,68 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   }
 }
 
+{
+  const l4 = LEVELS.find((level) => level.id === "L4");
+  if (!l4) throw new Error("missing L4");
+  expectSize(l4, 5, 5, 0, 10);
+  if (l4.colorLocks) throw new Error("L4 should not color-lock");
+}
+
+{
+  const l5 = LEVELS.find((level) => level.id === "L5");
+  if (!l5) throw new Error("missing L5");
+  expectSize(l5, 5, 5, 1, 9);
+  if (legalDirs(l5, l5.cats, "cat_a").length !== 0) {
+    throw new Error("L5 west cat must start boxed until the neighbor vacates");
+  }
+  if (legalDirs(l5, l5.cats, "cat_b").length === 0) {
+    throw new Error("L5 neighbor must be able to vacate");
+  }
+}
+
+{
+  const l6 = LEVELS.find((level) => level.id === "L6");
+  const l7 = LEVELS.find((level) => level.id === "L7");
+  if (!l6 || !l7) throw new Error("missing L6/L7");
+  expectSize(l6, 6, 6, 2, 9);
+  expectSize(l7, 6, 6, 2, 8);
+  if (l6.colorLocks || l7.colorLocks) throw new Error("L6–7 stay LT02, no color lock");
+}
+
+{
+  const l8 = LEVELS.find((level) => level.id === "L8");
+  const l9 = LEVELS.find((level) => level.id === "L9");
+  if (!l8 || !l9) throw new Error("missing L8/L9");
+  expectSize(l8, 6, 6, 2, 9);
+  expectSize(l9, 6, 6, 2, 8);
+  if (!l8.colorLocks || !l9.colorLocks) throw new Error("L8–9 must color-lock");
+  for (const level of [l8, l9]) {
+    const colors = new Set(level.cats.map((cat) => cat.color));
+    const gateColors = new Set(level.gates.map((gate) => gate.color));
+    if (!colors.has("orange") || !colors.has("gray")) {
+      throw new Error(`${level.id} needs orange + gray cats`);
+    }
+    if (!gateColors.has("orange") || !gateColors.has("gray")) {
+      throw new Error(`${level.id} needs orange + gray gates`);
+    }
+  }
+  const slam = slideCat(l9, l9.cats, "cat_a", "s");
+  if (!slam.moved || slam.cats[0].y !== 4) {
+    throw new Error("L9 orange south should brake before the gray house");
+  }
+  if (allCatsOnGates(l9, slam.cats)) {
+    throw new Error("L9 wrong-color rest must not count as a win");
+  }
+}
+
 for (const level of LEVELS) {
   if (!allCatsOnGates(level, level.cats)) {
     const dirs = legalDirs(level, level.cats, level.cats[0].id);
-    if (dirs.length === 0) {
+    const anyOpen = level.cats.some((cat) => legalDirs(level, level.cats, cat.id).length > 0);
+    if (level.cats.length === 1 && dirs.length === 0) {
       throw new Error(`${level.id} has no opening slide`);
     }
+    if (!anyOpen) throw new Error(`${level.id} has no opening slide`);
   }
   const script = SOLVES[level.id];
   if (!script) throw new Error(`Missing solve for ${level.id}`);

@@ -1,12 +1,24 @@
 import { CAT_ASSETS, FURN_ASSETS, UI_ASSETS } from "@/lib/artAssets";
 import { ART_KIT_PATH, PUZZLE_CAT_SRC } from "@/lib/constants";
 import type { ArtKit } from "@/lib/types";
+import type { CSSProperties } from "react";
 import { cn } from "@/lib/cn";
 
-export function PuzzleCatSprite({ className }: { className?: string }) {
+export function PuzzleCatSprite({
+  className,
+  style,
+}: {
+  className?: string;
+  style?: CSSProperties;
+}) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={PUZZLE_CAT_SRC} alt="" className={cn("pointer-events-none select-none", className)} />
+    <img
+      src={PUZZLE_CAT_SRC}
+      alt=""
+      className={cn("pointer-events-none select-none", className)}
+      style={style}
+    />
   );
 }
 

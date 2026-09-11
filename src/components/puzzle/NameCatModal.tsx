@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FriendSprite, UiIcon } from "@/components/art/Sprite";
 import { Button } from "@/components/ui/Button";
 import { useSave } from "@/components/providers/SaveProvider";
-import { friendById, NAMING, NAMING_CHIPS, shuffleNameChips } from "@/lib/collection";
+import { chipsForFriend, friendById, NAMING, shuffleNameChips } from "@/lib/collection";
 import { MAX_NAME_LENGTH } from "@/lib/constants";
 
 export function NameCatModal({ onNamed }: { onNamed: () => void }) {
@@ -12,7 +12,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
   const pending = save.pendingUnlocks[0];
   const catalog = pending ? friendById(pending.friendId) : undefined;
   const [name, setName] = useState("");
-  const [chips, setChips] = useState<string[]>(NAMING_CHIPS);
+  const [chips, setChips] = useState<string[]>(() => chipsForFriend(pending?.friendId));
 
   if (!catalog) return null;
 

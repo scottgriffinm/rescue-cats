@@ -2,7 +2,7 @@
 
 Mobile-first Next.js slice: slide cats into yard gates, then invite them onto a paper porch.
 
-Locked studio beat: **LT01 L1–L3 → name Mango at clear 3 → yard with a cardboard box.** Collection: `collection_CURRENT.json`.
+Playable beat: **LT01 L1–L3 → name Mango at clear 3 → LT02 L4–L7 → name Ink at clear 6 → LT08 L8–L9 + starter shop.** Collection: `collection_CURRENT.json`.
 
 ## Stack
 
@@ -31,7 +31,7 @@ npm run verify:levels
 | --- | --- |
 | `/` | Porch / lawn hub |
 | `/play` | Next unsolved level |
-| `/level/L1` … `/level/L10` | Slide-budget boards (LT01) |
+| `/level/L1` … `/level/L10` | Slide-budget boards (LT01 teach, LT02 two-cat, LT08 color lock) |
 
 Tap a cat, then swipe or tap the footer D-pad. They slide until a wall, blocker, another cat, or the edge. Gates do not stop a slide — rest on the house to win.
 

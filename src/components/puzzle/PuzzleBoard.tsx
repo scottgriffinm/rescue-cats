@@ -4,8 +4,8 @@ import { useRef } from "react";
 import { PuzzleCatSprite, UiIcon } from "@/components/art/Sprite";
 import { cn } from "@/lib/cn";
 import { cellKey } from "@/lib/directions";
-import { blockedSet } from "@/lib/slide";
-import type { Dir, Level, PieceCat } from "@/lib/types";
+import { blockedSet, mismatchedGateSolid } from "@/lib/slide";
+import type { BoardColor, Dir, Level, PieceCat } from "@/lib/types";
 
 export type CatMotion = {
   id: string;
@@ -35,10 +35,14 @@ export function PuzzleBoard({
 }) {
   const start = useRef<{ x: number; y: number } | null>(null);
   const blocked = blockedSet(level);
-  const gateKeys = new Set(level.gates.map((gate) => cellKey(gate.x, gate.y)));
+  const selectedCat = cats.find((cat) => cat.id === selected);
+  const gatesByCell = new Map(level.gates.map((gate) => [cellKey(gate.x, gate.y), gate]));
+  const catSize = level.width >= 6 ? 46 : 56;
   const homeKeys = new Set(
     motion?.kind === "home"
-      ? cats.filter((cat) => gateKeys.has(cellKey(cat.x, cat.y))).map((cat) => cellKey(cat.x, cat.y))
+      ? cats
+          .filter((cat) => gatesByCell.has(cellKey(cat.x, cat.y)))
+          .map((cat) => cellKey(cat.x, cat.y))
       : [],
   );
 
@@ -72,18 +76,21 @@ export function PuzzleBoard({
           Array.from({ length: level.width }, (_, x) => {
             const key = cellKey(x, y);
             const isWall = blocked.has(key);
-            const isGate = gateKeys.has(key);
+            const gate = gatesByCell.get(key);
+            const solidForSelected =
+              Boolean(gate && selectedCat && mismatchedGateSolid(level, selectedCat, { x, y }));
             return (
               <div key={key} className="aspect-square p-[3px]">
                 <div
                   className={cn(
                     "relative h-full w-full rounded-xl border border-ink/15 bg-paper-deep",
-                    isGate && "border-path/70 bg-path/15",
+                    gate && !solidForSelected && gateCellClass(gate.color),
+                    solidForSelected && "border-ink/70 bg-wood",
                     isWall && "border-ink/70 bg-wood",
                     homeKeys.has(key) && "gate-home",
                   )}
                 >
-                  {isGate ? <GateMark /> : null}
+                  {gate ? <GateMark color={gate.color} solid={solidForSelected} /> : null}
                 </div>
               </div>
             );
@@ -113,14 +120,25 @@ export function PuzzleBoard({
               }}
               aria-label={`Select cat`}
             >
+              <span
+                className={cn(
+                  "absolute bottom-1 left-1/2 z-0 h-2 w-6 -translate-x-1/2 rounded-full",
+                  cat.color === "gray" && "bg-[color:var(--fur-slate)]",
+                  cat.color === "orange" && "bg-[color:var(--fur-ginger)]",
+                  cat.color === "black" && "bg-ink/70",
+                  !cat.color && "bg-path/50",
+                )}
+                aria-hidden
+              />
               <PuzzleCatSprite
                 className={cn(
-                  "h-[56px] w-[56px] drop-shadow-sm",
+                  "relative z-[1] drop-shadow-sm",
                   active?.kind === "slide" && active.axis === "y" && "slide-along-y",
                   active?.kind === "slide" && active.axis === "x" && "slide-along-x",
                   active?.kind === "settle" && "slide-settle",
                   active?.kind === "home" && "slide-home",
                 )}
+                style={{ width: catSize, height: catSize }}
               />
             </button>
           );
@@ -137,17 +155,33 @@ export function PuzzleBoard({
   );
 }
 
-function GateMark() {
+const GATE_FILL: Record<BoardColor, { house: string; door: string; cell: string }> = {
+  orange: { house: "#E8C4A0", door: "#D38B5D", cell: "border-[#D38B5D]/70 bg-[#D38B5D]/20" },
+  gray: { house: "#C8CAD1", door: "#5A5E6B", cell: "border-[#5A5E6B]/70 bg-[#5A5E6B]/18" },
+  black: { house: "#8A8680", door: "#2B2A28", cell: "border-ink/50 bg-ink/10" },
+};
+
+function gateCellClass(color?: BoardColor) {
+  return color ? GATE_FILL[color].cell : "border-path/70 bg-path/15";
+}
+
+function GateMark({ color, solid }: { color?: BoardColor; solid?: boolean }) {
+  const tint = color ? GATE_FILL[color] : { house: "#F7F0E6", door: "#D96B4A" };
   return (
     <svg viewBox="0 0 32 32" className="h-full w-full p-1.5" aria-hidden>
       <path
         d="M6 16 L16 8 L26 16 V26 H6 Z"
-        fill="#F7F0E6"
+        fill={solid ? "#E2D4C2" : tint.house}
         stroke="#2B2A28"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
-      <path d="M13 26 V18 H19 V26" fill="#D96B4A" stroke="#2B2A28" strokeWidth="1.5" />
+      <path
+        d="M13 26 V18 H19 V26"
+        fill={solid ? "#CABCAB" : tint.door}
+        stroke="#2B2A28"
+        strokeWidth="1.5"
+      />
     </svg>
   );
 }

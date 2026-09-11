@@ -11,21 +11,30 @@ const ROOSTS = [
   { left: "28%", top: "68%" },
 ];
 
+const INK_ROOST = { left: "16%", top: "46%" };
+
 export function YardScene({
   friends,
   hasBox,
   hasTree,
+  hasPost,
+  hasSwing,
   bangFriendId,
   onBang,
 }: {
   friends: FriendInstance[];
   hasBox: boolean;
   hasTree: boolean;
+  hasPost?: boolean;
+  hasSwing?: boolean;
   bangFriendId?: string | null;
   onBang?: (instanceId: string) => void;
 }) {
   const mango = friends.find((friend) => friend.friendId === "friend_001");
-  const others = friends.filter((friend) => friend.friendId !== "friend_001");
+  const ink = friends.find((friend) => friend.friendId === "friend_002");
+  const others = friends.filter(
+    (friend) => friend.friendId !== "friend_001" && friend.friendId !== "friend_002",
+  );
 
   return (
     <div className="relative mx-auto h-[340px] w-full max-w-[340px]">
@@ -46,6 +55,18 @@ export function YardScene({
         <FurnitureImg
           file="boxBed"
           className="yard-drop-box absolute bottom-[16%] left-[12%] min-h-[72px] w-[46%] min-w-[72px]"
+        />
+      ) : null}
+      {hasPost ? (
+        <FurnitureImg
+          file="postBell"
+          className="yard-drop-box absolute bottom-[18%] right-[6%] min-h-[72px] w-[22%] min-w-[64px]"
+        />
+      ) : null}
+      {hasSwing ? (
+        <FurnitureImg
+          file="swing"
+          className="yard-drop-box absolute left-[40%] top-[30%] min-h-[72px] w-[28%] min-w-[72px]"
         />
       ) : null}
 
@@ -76,6 +97,27 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
+        </div>
+      ) : null}
+
+      {ink ? (
+        <div className="yard-drop absolute w-[72px]" style={INK_ROOST}>
+          <FriendSprite
+            kit={friendById(ink.friendId)?.phenotype.artKit ?? "slate"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === ink.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(ink.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${ink.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{ink.name}</p>
         </div>
       ) : null}
 

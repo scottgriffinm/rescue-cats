@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { FriendSprite } from "@/components/art/Sprite";
-import { TUTORIAL_RESCUES, friendById } from "@/lib/collection";
+import { PARADE_SLICE, friendById } from "@/lib/collection";
 import type { FriendInstance } from "@/lib/types";
 
 export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
@@ -49,7 +49,7 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
         </ul>
       ) : (
         <ul className="flex flex-wrap justify-center gap-2">
-          {TUTORIAL_RESCUES.map((entry) => (
+          {PARADE_SLICE.map((entry) => (
             <li
               key={entry.friendId}
               className={`w-14 text-center ${rescued.has(entry.friendId) ? "" : "opacity-40"}`}

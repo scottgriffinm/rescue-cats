@@ -8,7 +8,13 @@ import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
 import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
-import { FURNITURE, NAMING, STAR_COSMETICS, withName } from "@/lib/collection";
+import {
+  COMFORT_METER_MAX,
+  NAMING,
+  STAR_COSMETICS,
+  STARTER_SHOP,
+  withName,
+} from "@/lib/collection";
 import { FIRST_NIGHT_BANG_MS } from "@/lib/constants";
 import { LEVELS, nextLevel } from "@/lib/levels";
 
@@ -28,9 +34,10 @@ export function YardScreen() {
   const allDone = cleared >= LEVELS.length;
   const hasBox = save.furniture.includes("furn_box_cardboard");
   const hasTree = save.furniture.includes("furn_tree_mini");
-  const introFriend = !save.first_night_done
-    ? save.friends.find((friend) => friend.firstNight)
-    : undefined;
+  const introFriend = save.friends.find((friend) => friend.firstNight);
+  const hasPost = save.furniture.includes("furn_scratch_post");
+  const hasSwing = save.furniture.includes("furn_swing_yarn");
+  const friendNames = save.friends.map((friend) => friend.name);
   const [bangFriendId, setBangFriendId] = useState<string | null>(null);
   const tomorrowHook =
     save.first_night_done && !save.return_hook_claimed && save.friends[0]
@@ -57,22 +64,39 @@ export function YardScreen() {
         <h1 className="mt-1 font-display text-[2.1rem] leading-none tracking-wide">
           RESCUE <span className="text-clay">CATS</span>
         </h1>
-        <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink/55">
-          <span>Comfort {comfort}</span>
-          <span>♥ {save.hearts}</span>
-          <span className="inline-flex items-center gap-0.5">
-            <UiIcon name="star_marigold" className="h-3.5 w-3.5" />
-            {save.stars}
-          </span>
+        <div className="mt-3 flex flex-col items-center gap-1.5 text-xs text-ink/55">
+          <div className="flex items-center justify-center gap-3">
+            <span>Comfort {comfort}</span>
+            <span>♥ {save.hearts}</span>
+            <span className="inline-flex items-center gap-0.5">
+              <UiIcon name="star_marigold" className="h-3.5 w-3.5" />
+              {save.stars}
+            </span>
+          </div>
+          <div
+            className="h-2 w-40 overflow-hidden rounded-full border border-ink/20 bg-wood"
+            role="meter"
+            aria-label={`Comfort ${comfort} of ${COMFORT_METER_MAX}`}
+            aria-valuemin={0}
+            aria-valuemax={COMFORT_METER_MAX}
+            aria-valuenow={comfort}
+          >
+            <div
+              className="h-full bg-sage transition-all duration-300"
+              style={{ width: `${Math.min(100, (comfort / COMFORT_METER_MAX) * 100)}%` }}
+            />
+          </div>
         </div>
         <p className="mt-2 text-sm text-ink/55">
           {save.friends.length === 0
             ? "Three little slides. Then you get to meet a new friend."
-            : allDone
-              ? "Everyone who needed saving is napping in the sun."
-              : save.unlockFlags.mangoNamed
-                ? `${save.friends[0]?.name ?? "Your friend"} is home. Tomorrow: ${upcoming.name}.`
-                : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
+            : friendNames.length >= 2
+              ? `${friendNames.join(" & ")} share the porch.`
+              : allDone
+                ? "Everyone who needed saving is napping in the sun."
+                : save.unlockFlags.mangoNamed
+                  ? `${save.friends[0]?.name ?? "Your friend"} is home. Tomorrow: ${upcoming.name}.`
+                  : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
         </p>
       </header>
 
@@ -82,6 +106,8 @@ export function YardScreen() {
             friends={save.friends}
             hasBox={hasBox}
             hasTree={hasTree}
+            hasPost={hasPost}
+            hasSwing={hasSwing}
             bangFriendId={bangFriendId}
             onBang={(instanceId) => {
               completeFirstNight(instanceId);
@@ -141,7 +167,7 @@ export function YardScreen() {
               : `Continue · ${upcoming.name}`}
         </Link>
 
-        <ShopRow
+        <StarterShop
           hearts={save.hearts}
           stars={save.stars}
           ownedFurniture={save.furniture}
@@ -168,7 +194,7 @@ export function YardScreen() {
   );
 }
 
-function ShopRow({
+function StarterShop({
   hearts,
   stars,
   ownedFurniture,
@@ -183,30 +209,45 @@ function ShopRow({
   onBuyFurniture: (skuId: string, cost: number) => boolean;
   onBuyCosmetic: (id: string, cost: number) => boolean;
 }) {
-  const heartItem = FURNITURE.find(
-    (sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId),
-  );
   const starItem = STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id));
-  if (!heartItem && !starItem) return null;
 
   return (
-    <div className="flex gap-2 text-xs">
-      {heartItem ? (
-        <button
-          type="button"
-          disabled={hearts < heartItem.hearts}
-          onClick={() => onBuyFurniture(heartItem.skuId, heartItem.hearts)}
-          className="paper-card flex-1 rounded-xl px-2 py-2 text-ink/70 disabled:opacity-40"
-        >
-          {heartItem.name} · {heartItem.hearts}♥
-        </button>
-      ) : null}
+    <div className="space-y-2">
+      <p className="text-center font-display text-[11px] tracking-[0.2em] text-ink/40">
+        STARTER SHOP
+      </p>
+      <div className="grid grid-cols-3 gap-1.5 text-[11px]">
+        {STARTER_SHOP.map((item) => {
+          const owned = ownedFurniture.includes(item.skuId);
+          const unaffordable = !owned && hearts < item.hearts;
+          return (
+            <button
+              key={item.skuId}
+              type="button"
+              disabled={owned || unaffordable}
+              onClick={() => onBuyFurniture(item.skuId, item.hearts)}
+              data-sku={item.skuId}
+              className="paper-card rounded-xl px-1.5 py-2 text-ink/70 disabled:opacity-45"
+              aria-label={
+                owned
+                  ? `${item.name} already on the porch`
+                  : `Buy ${item.name} for ${item.hearts} hearts`
+              }
+            >
+              <span className="block font-display leading-tight">{item.name}</span>
+              <span className="mt-0.5 block text-ink/50">
+                {owned ? "Home" : `${item.hearts}♥`}
+              </span>
+            </button>
+          );
+        })}
+      </div>
       {starItem ? (
         <button
           type="button"
           disabled={stars < starItem.stars}
           onClick={() => onBuyCosmetic(starItem.id, starItem.stars)}
-          className="paper-card flex-1 rounded-xl px-2 py-2 text-ink/70 disabled:opacity-40"
+          className="paper-card w-full rounded-xl px-2 py-2 text-xs text-ink/70 disabled:opacity-40"
         >
           {starItem.name} · {starItem.stars}★
         </button>

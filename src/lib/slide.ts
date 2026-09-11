@@ -13,15 +13,29 @@ export function blockedSet(level: Level) {
   return blocked;
 }
 
+function gateAt(level: Level, pos: Vec): Gate | undefined {
+  return level.gates.find((gate) => gate.x === pos.x && gate.y === pos.y);
+}
+
+/** LT08: a mismatched colored house is solid for that cat. Matched houses never brake. */
+export function mismatchedGateSolid(level: Level, cat: PieceCat, pos: Vec) {
+  if (!level.colorLocks) return false;
+  const gate = gateAt(level, pos);
+  if (!gate) return false;
+  const gateColor = normalizeBoardColor(gate.color);
+  const catColor = normalizeBoardColor(cat.color);
+  if (!gateColor || !catColor) return false;
+  return gateColor !== catColor;
+}
+
 export function matchingGate(level: Level, cat: PieceCat, pos: Vec): Gate | undefined {
-  return level.gates.find((gate) => {
-    if (gate.x !== pos.x || gate.y !== pos.y) return false;
-    if (!level.colorLocks) return true;
-    const gateColor = normalizeBoardColor(gate.color);
-    const catColor = normalizeBoardColor(cat.color);
-    if (!gateColor || !catColor) return true;
-    return gateColor === catColor;
-  });
+  const gate = gateAt(level, pos);
+  if (!gate) return undefined;
+  if (!level.colorLocks) return gate;
+  const gateColor = normalizeBoardColor(gate.color);
+  const catColor = normalizeBoardColor(cat.color);
+  if (!gateColor || !catColor) return gate;
+  return gateColor === catColor ? gate : undefined;
 }
 
 export function slideCat(
@@ -45,6 +59,7 @@ export function slideCat(
     if (!inBounds(level, next)) break;
     if (blocked.has(cellKey(next.x, next.y))) break;
     if (occupied.has(cellKey(next.x, next.y))) break;
+    if (mismatchedGateSolid(level, me, next)) break;
     current = next;
     path.push({ ...current });
     // Gates never brake a slide. Win = occupy a matching gate at rest.

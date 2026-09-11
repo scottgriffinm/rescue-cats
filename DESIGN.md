@@ -134,9 +134,13 @@ Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in pla
 
 L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** → yard with `boxBed`. Grid origin top-left, y down. Authored boards: `data/levels/L01-L03.json`.
 
+Chapter 2 (shipped on that same slide verb): **L4–L5** two-cat collision (5×5) → **L6–L7** LT02 on 6×6 → **Ink (`friend_002`) at unique clear 6** (slate loaf, empty naming + Ink/Misty/Shadow chips) → **L8–L9** LT08 color lock (mismatched house is solid; matched house is a valid rest, not a brake) → starter shop (scratch post 15♥, mini tree 40♥, yarn swing 40♥) with Comfort meter. Parade stops at Ink.
+
 Art mapping:
 
 - `friend_001` Mango → `ginger_loaf_72` (hero / yard) + `ginger_loaf_48` (thumb); board color `orange`
-- `furn_box_cardboard` → `boxBed.svg` (only gift on the Mango unlock)
+- `friend_002` Ink → `slate_loaf_72` / `slate_loaf_48`; board color `gray`; unlock at unique clear 6
+- `furn_box_cardboard` → `boxBed.svg` (only gift with Mango at clear 3)
 - Naming chrome: `star_marigold` + `input_name` + `btn_primary`
-- `calico_belly_72` = puzzle board cats only (not the Mango unlock)
+- `calico_belly_72` = puzzle board cats only (not the Mango / Ink unlock)
+- LT08 houses tint orange `#D38B5D` / gray `#5A5E6B`; wrap stays Art Bench v2 (`#E8DFD2` / `#D4CBBE` / `#CABCAB`)

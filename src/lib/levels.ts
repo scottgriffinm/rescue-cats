@@ -7,16 +7,22 @@ import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
 import type { Level } from "./types";
 
+function templateFor(id: string) {
+  if (id === "L8" || id === "L9" || id === "L10") return "LT08_color_lock";
+  if (id === "L4" || id === "L5" || id === "L6" || id === "L7") return "LT02_two_cat";
+  return TEMPLATE_ID;
+}
+
 const HEADLINES: Record<string, string> = {
   L1: "STRAIGHT SHOT",
   L2: "GO AROUND",
   L3: "WALL AS BRAKE",
   L4: "TWO AT ONCE",
   L5: "MIND THE ORDER",
-  L6: "SWAP CORNERS",
-  L7: "BOTH SIDES",
+  L6: "MAKE ROOM",
+  L7: "BOTH EDGES",
   L8: "MATCH THE GATE",
-  L9: "WATCH THE POST",
+  L9: "CROSS COLORS",
   L10: "TIGHT PAIR",
 };
 
@@ -24,12 +30,12 @@ const HINTS: Record<string, string> = {
   L1: "One idea: slide south. They stop in the little house.",
   L2: "One idea: walls block. Slide around — the edge behind the house is the brake.",
   L3: "The wall south of the house brakes you on the gate. Side routes slide through.",
-  L4: "Both cats need a gate. Slide each one home.",
-  L5: "Move the open-lane cat first. The other needs room to go around.",
-  L6: "Each friend slides to the opposite corner gate.",
-  L7: "Walls sit in the lanes. Walk around, then home.",
-  L8: "Same slide — gates now remember a color (orange / gray).",
-  L9: "A wall and a post split the paper. Opposite corners still work.",
+  L4: "Two friends, two houses. Slide each one south — they do not push.",
+  L5: "The west cat is boxed. Move the neighbor first, then vacate the lane.",
+  L6: "Same vacate, bigger paper. The east-edge wall steals the easy home.",
+  L7: "Opposite edges, two walls, eight slides. Stop on the adjacent tile.",
+  L8: "Orange house, gray house. The other color is solid for that cat.",
+  L9: "Houses swapped sides. A wrong-color slam wastes the budget.",
   L10: "Meet in the middle lanes, then peel off to the matching gates.",
 };
 
@@ -56,7 +62,7 @@ function hydrate(raw: RawLevel, index: number): Level {
     name: raw.name,
     headline: HEADLINES[raw.id] ?? raw.name.toUpperCase(),
     hint: HINTS[raw.id] ?? "Slide every cat onto a yard gate.",
-    templateId: TEMPLATE_ID,
+    templateId: templateFor(raw.id),
     width: raw.width,
     height: raw.height,
     moveBudget: budgetRow?.moveBudget ?? raw.moveBudget,

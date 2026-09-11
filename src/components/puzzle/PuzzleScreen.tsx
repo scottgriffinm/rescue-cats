@@ -44,7 +44,12 @@ export function PuzzleScreen({ level }: { level: Level }) {
   const { save, completeLevel, addStrike, markCoachSeen } = useSave();
   const [cats, setCats] = useState<PieceCat[]>(() => cloneCats(level.cats));
   const [remaining, setRemaining] = useState(level.moveBudget);
-  const [selected, setSelected] = useState<string | null>(level.cats[0]?.id ?? null);
+  const [selected, setSelected] = useState<string | null>(
+    () =>
+      level.cats.find((cat) => legalDirs(level, level.cats, cat.id).length > 0)?.id ??
+      level.cats[0]?.id ??
+      null,
+  );
   const [phase, setPhase] = useState<Phase>("playing");
   const [toast, setToast] = useState<string | null>(level.hint);
   const [earnedStars, setEarnedStars] = useState(0);
@@ -61,7 +66,11 @@ export function PuzzleScreen({ level }: { level: Level }) {
     runId.current += 1;
     setCats(cloneCats(level.cats));
     setRemaining(level.moveBudget);
-    setSelected(level.cats[0]?.id ?? null);
+    setSelected(
+      level.cats.find((cat) => legalDirs(level, level.cats, cat.id).length > 0)?.id ??
+        level.cats[0]?.id ??
+        null,
+    );
     setPhase("playing");
     setToast(level.hint);
     setMotion(null);

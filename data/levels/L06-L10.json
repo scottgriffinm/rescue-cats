@@ -1,88 +1,99 @@
 {
-  "templateId": "LT01_teach_slide",
+  "templateId": "LT02_two_cat",
   "gridOrigin": "top-left",
-  "note": "Authored LT01 follow-ons. L8–L10 flip colorLocks in the budget table; gates stay matching so the verb does not change.",
+  "note": "L6–7 extend LT02 on 6×6. L8–9 are LT08 color lock (mismatched house = solid for that cat). L10 stays a follow-on.",
   "levels": [
     {
       "id": "L6",
       "name": "Corner Swap",
-      "width": 5,
-      "height": 5,
-      "moveBudget": 8,
+      "width": 6,
+      "height": 6,
+      "moveBudget": 9,
       "nudges": 0,
       "colorLocks": false,
-      "walls": [{ "x": 2, "y": 2 }],
+      "walls": [
+        { "x": 0, "y": 1 },
+        { "x": 5, "y": 2 }
+      ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "orange" },
-        { "id": "cat_b", "x": 4, "y": 4, "color": "gray" }
+        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
+        { "id": "cat_b", "x": 1, "y": 0, "color": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 4, "y": 0 },
-        { "id": "gate_b", "x": 0, "y": 4 }
+        { "id": "gate_a", "x": 0, "y": 5 },
+        { "id": "gate_b", "x": 5, "y": 5 }
       ],
-      "teach": "corner_swap"
+      "teach": "lt02_extend",
+      "note": "L5 vacate, stretched to 6×6. Second wall blocks the easy east-edge home."
     },
     {
       "id": "L7",
       "name": "Twin Brakes",
-      "width": 5,
-      "height": 5,
+      "width": 6,
+      "height": 6,
       "moveBudget": 8,
       "nudges": 0,
       "colorLocks": false,
       "walls": [
-        { "x": 1, "y": 2 },
-        { "x": 3, "y": 2 },
-        { "x": 2, "y": 4 }
+        { "x": 0, "y": 2 },
+        { "x": 5, "y": 3 }
       ],
       "cats": [
-        { "id": "cat_a", "x": 1, "y": 0, "color": "orange" },
-        { "id": "cat_b", "x": 3, "y": 0, "color": "gray" }
+        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
+        { "id": "cat_b", "x": 5, "y": 0, "color": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 1, "y": 4 },
-        { "id": "gate_b", "x": 3, "y": 4 }
+        { "id": "gate_a", "x": 0, "y": 5 },
+        { "id": "gate_b", "x": 5, "y": 5 }
       ],
-      "teach": "twin_brakes"
+      "teach": "lt02_tight",
+      "note": "Opposite-edge pair, asymmetric walls, N=8. Collision still stops on the adjacent tile."
     },
     {
       "id": "L8",
       "name": "Color Preview",
-      "width": 5,
-      "height": 5,
-      "moveBudget": 10,
-      "nudges": 1,
+      "width": 6,
+      "height": 6,
+      "moveBudget": 9,
+      "nudges": 0,
       "colorLocks": true,
-      "walls": [{ "x": 2, "y": 2 }],
+      "walls": [
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 2 }
+      ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 1, "color": "orange" },
-        { "id": "cat_b", "x": 4, "y": 1, "color": "gray" }
+        { "id": "cat_a", "x": 1, "y": 0, "color": "color_orange" },
+        { "id": "cat_b", "x": 4, "y": 0, "color": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 0, "y": 4, "color": "orange" },
-        { "id": "gate_b", "x": 4, "y": 4, "color": "gray" }
+        { "id": "gate_a", "x": 1, "y": 5, "color": "color_orange" },
+        { "id": "gate_b", "x": 4, "y": 5, "color": "color_gray" }
       ],
-      "teach": "color_preview"
+      "teach": "lt08_intro",
+      "note": "Each friend has a matching house. Wrong-color gate is solid; matched gate is a valid rest, not a brake."
     },
     {
       "id": "L9",
-      "name": "Post and Wall",
-      "width": 5,
-      "height": 5,
-      "moveBudget": 9,
-      "nudges": 1,
+      "name": "Color Cross",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 8,
+      "nudges": 0,
       "colorLocks": true,
-      "walls": [{ "x": 2, "y": 1 }],
-      "blockers": [{ "x": 2, "y": 3 }],
+      "walls": [
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 3 }
+      ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "orange" },
-        { "id": "cat_b", "x": 4, "y": 4, "color": "black" }
+        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
+        { "id": "cat_b", "x": 5, "y": 0, "color": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 4, "y": 0, "color": "orange" },
-        { "id": "gate_b", "x": 0, "y": 4, "color": "black" }
+        { "id": "gate_a", "x": 5, "y": 5, "color": "color_orange" },
+        { "id": "gate_b", "x": 0, "y": 5, "color": "color_gray" }
       ],
-      "teach": "post_and_wall"
+      "teach": "lt08_softlock",
+      "note": "Crossed colors. A south slams the gray house (solid). Two cats cannot share one gate."
     },
     {
       "id": "L10",
@@ -99,12 +110,12 @@
         { "x": 1, "y": 4 }
       ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 2, "color": "orange" },
-        { "id": "cat_b", "x": 4, "y": 2, "color": "gray" }
+        { "id": "cat_a", "x": 0, "y": 2, "color": "color_orange" },
+        { "id": "cat_b", "x": 4, "y": 2, "color": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 2, "y": 0, "color": "orange" },
-        { "id": "gate_b", "x": 2, "y": 4, "color": "gray" }
+        { "id": "gate_a", "x": 2, "y": 0, "color": "color_orange" },
+        { "id": "gate_b", "x": 2, "y": 4, "color": "color_gray" }
       ],
       "teach": "tight_pair"
     }

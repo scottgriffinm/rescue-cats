@@ -142,13 +142,46 @@ export function artForKit(kit: ArtKit) {
 
 export function allNameSuggestions() {
   const pools = NAMING.suggestion_pools;
-  return [...pools.food, ...pools.soft, ...pools.silly_human, ...pools.breed_leaning];
+  return [...new Set(["Ink", ...pools.food, ...pools.soft, ...pools.silly_human, ...pools.breed_leaning])];
 }
 
 export const NAMING_CHIPS: string[] =
   "suggestion_chips" in NAMING && Array.isArray(NAMING.suggestion_chips)
     ? NAMING.suggestion_chips
     : ["Mango", "Biscuit", "Pepper"];
+
+const INK_CHIPS = ["Ink", "Misty", "Shadow"];
+
+/** Mango keeps the Bench chip set. Ink offers quiet-name chips. */
+export function chipsForFriend(friendId?: string) {
+  if (friendId === "friend_002") return INK_CHIPS;
+  return NAMING_CHIPS;
+}
+
+/** Chapter 2 yard depth — Mango + Ink only. */
+export const PARADE_SLICE = CATALOG.filter(
+  (friend) => friend.friendId === "friend_001" || friend.friendId === "friend_002",
+);
+
+export const STARTER_SHOP_IDS = [
+  "furn_scratch_post",
+  "furn_tree_mini",
+  "furn_swing_yarn",
+] as const;
+
+export const STARTER_SHOP_HEARTS: Record<string, number> = {
+  furn_scratch_post: 15,
+  furn_tree_mini: 40,
+  furn_swing_yarn: 40,
+};
+
+export const STARTER_SHOP = STARTER_SHOP_IDS.map((skuId) => {
+  const sku = FURNITURE.find((item) => item.skuId === skuId);
+  if (!sku) throw new Error(`missing starter shop sku ${skuId}`);
+  return { ...sku, hearts: STARTER_SHOP_HEARTS[skuId] ?? sku.hearts };
+});
+
+export const COMFORT_METER_MAX = 8;
 
 export function shuffleNameChips(count = 3) {
   const pool = [...new Set(allNameSuggestions())];
