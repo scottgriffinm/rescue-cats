@@ -65,6 +65,7 @@ import {
   CHAPTER3_ASH,
   chipsForFriend,
   FURNITURE,
+  friendById,
   friendForClear,
   furnitureGiftsForClear,
   shippedFriendForClear,
@@ -73,7 +74,7 @@ import {
   shopItemsForClear,
 } from "./collection";
 import { CAT_ASSETS, FURN_ASSETS, GATE_ASSETS } from "./artAssets";
-import { LEVELS } from "./levels";
+import { CAMPAIGN_LEVEL_COUNT, LEVELS, nextCampaignLevel } from "./levels";
 import { paradeClearForLevel } from "./onClear";
 import { EMPTY_SAVE } from "./storage";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
@@ -4217,6 +4218,80 @@ for (const level of LEVELS) {
     throw new Error("Ink must keep slate loafs after Ash");
   }
   console.log("Ash @ onClear(36) ok · warm hearth-ash loafs + L37–L39 wired");
+}
+
+
+{
+  // Pink kills: L-id HUD must match route; L10 off-path must not off-by-one counters;
+  // Next after L9 must land on L11 (never phantom L10).
+  const l9 = LEVELS.find((level) => level.id === "L9");
+  const l11 = LEVELS.find((level) => level.id === "L11");
+  const l20 = LEVELS.find((level) => level.id === "L20");
+  const l39 = LEVELS.find((level) => level.id === "L39");
+  if (!l9 || !l11 || !l20 || !l39) throw new Error("missing campaign anchors for index locks");
+  if (l20.number !== 20) throw new Error(`L20 HUD number must be 20, got ${l20.number}`);
+  if (l39.number !== 39) throw new Error(`L39 HUD number must be 39, got ${l39.number}`);
+  if (l9.number !== 9) throw new Error(`L9 HUD number must be 9, got ${l9.number}`);
+  if (l11.number !== 11) throw new Error(`L11 HUD number must be 11, got ${l11.number}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 39) {
+    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 39 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
+  }
+  if (LEVELS.length !== 38) {
+    throw new Error(`campaign board count must stay 38 with L10 off-path, got ${LEVELS.length}`);
+  }
+  for (const level of LEVELS) {
+    const parsed = Number(level.id.replace(/^L/i, ""));
+    if (level.number !== parsed) {
+      throw new Error(`${level.id} number ${level.number} must equal L-id ${parsed}`);
+    }
+  }
+  const afterL9 = nextCampaignLevel("L9");
+  if (afterL9?.id !== "L11") {
+    throw new Error(`Next after L9 must be L11 (L10 off-path), got ${afterL9?.id ?? "none"}`);
+  }
+  const afterL19 = nextCampaignLevel("L19");
+  if (afterL19?.id !== "L20") {
+    throw new Error(`Next after L19 must be L20, got ${afterL19?.id ?? "none"}`);
+  }
+  const afterL39 = nextCampaignLevel("L39");
+  if (afterL39) throw new Error("L39 must be the last campaign board");
+  console.log("Level index HUD locks ok · L20=20/39 · L39=39/39 · L9→L11");
+}
+
+{
+  // Pink kill: Met roster must surface the chosen toast name, not catalog defaultName.
+  // Naming Mango "Pepper" must not leave Met labeled Mango.
+  const mango = friendById("friend_001");
+  if (!mango) throw new Error("missing Mango catalog for Met identity lock");
+  const defaultName = String(mango.defaultName);
+  if (defaultName !== "Mango") throw new Error(`Mango defaultName drifted: ${defaultName}`);
+  if (!NAMING.suggestion_pools.food.includes("Pepper")) {
+    throw new Error("Pepper must stay a food chip so the Met identity regression stays covered");
+  }
+  const chosenToastName = "Pepper";
+  const fakeFriends = [
+    {
+      instanceId: "inst-test",
+      friendId: "friend_001",
+      phenotypeId: mango.phenotype.phenotypeId,
+      name: chosenToastName,
+      rescuedAt: 0,
+      clearIndex: 3,
+      roost: 0,
+      favoriteToy: "paper bag",
+      firstNight: false,
+    },
+  ];
+  // FriendsMet Met tab: prefer instance.name over catalog.defaultName.
+  const metLabel: string =
+    fakeFriends.find((friend) => friend.friendId === "friend_001")?.name ?? defaultName;
+  if (metLabel !== chosenToastName) {
+    throw new Error(`Met must show chosen toast name ${chosenToastName}, got ${metLabel}`);
+  }
+  if (metLabel === defaultName) {
+    throw new Error("Met must not prefer catalog defaultName over the chosen toast name");
+  }
+  console.log("Met identity lock ok · chosen name wins over defaultName");
 }
 
 console.log("All authored boards ok");

@@ -7,8 +7,6 @@ import type { FriendInstance } from "@/lib/types";
 
 export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
   const [tab, setTab] = useState<"friends" | "met">("friends");
-  const rescued = new Set(friends.map((friend) => friend.friendId));
-
   return (
     <div className="px-5 pb-1">
       <div className="mb-2 flex justify-center gap-3 font-display text-xs tracking-wide">
@@ -49,17 +47,20 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
         </ul>
       ) : (
         <ul className="flex flex-nowrap justify-center gap-0">
-          {TUTORIAL_RESCUES.map((entry) => (
-            <li
-              key={entry.friendId}
-              className={`w-7 min-w-0 text-center ${rescued.has(entry.friendId) ? "" : "opacity-40"}`}
-            >
-              <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-7 w-7" />
-              <p className="truncate font-display text-[9px]">
-                {rescued.has(entry.friendId) ? entry.defaultName : "???"}
-              </p>
-            </li>
-          ))}
+          {TUTORIAL_RESCUES.map((entry) => {
+            const named = friends.find((friend) => friend.friendId === entry.friendId);
+            return (
+              <li
+                key={entry.friendId}
+                className={`w-7 min-w-0 text-center ${named ? "" : "opacity-40"}`}
+              >
+                <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-7 w-7" />
+                <p className="truncate font-display text-[9px]">
+                  {named ? named.name : "???"}
+                </p>
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
