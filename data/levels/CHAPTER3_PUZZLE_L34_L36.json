@@ -1,0 +1,91 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Chapter 3 continuation — LT02 collision × LT08 color-lock depth after Clover@33",
+  "chapter": 3,
+  "title": "Chapter 3 boards L34–L36",
+  "notes": "Campaign continues L33 → Clover@33 → L34 → L35 → L36. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. L34–L36 raise color-lock / hold discipline after Noodle without copying L28–L33. Bean@60 and Ash@36 stay later slices.",
+  "levels": [
+    {
+      "id": "L34",
+      "name": "Solid West",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_solid_west_gray",
+      "walls": [
+        { "x": 1, "y": 0 },
+        { "x": 0, "y": 1 },
+        { "x": 5, "y": 1 },
+        { "x": 4, "y": 4 },
+        { "x": 2, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 2, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "solid_west_gray",
+      "ascii": ". # . . . O\n# . . . . #\n. . g o . .\nG . . . . .\n. . . . # .\n. . # . . ."
+    },
+    {
+      "id": "L35",
+      "name": "Vacate First",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 10,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_vacate_first_black",
+      "walls": [
+        { "x": 4, "y": 0 },
+        { "x": 1, "y": 1 },
+        { "x": 5, "y": 3 },
+        { "x": 0, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 2, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "vacate_first_black",
+      "ascii": "O . . . # .\n. # . . . .\n. . B . . .\n. . . . . #\n. . o . . .\n# . . . . b"
+    },
+    {
+      "id": "L36",
+      "name": "Park Above",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_park_above_gray",
+      "walls": [
+        { "x": 1, "y": 0 },
+        { "x": 5, "y": 1 },
+        { "x": 0, "y": 3 },
+        { "x": 4, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 5, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "park_above_gray",
+      "ascii": ". # . . . O\nG . . . . #\n. . . . . .\n# . o . . .\n. . . . . .\n. . . . # g"
+    }
+  ]
+}

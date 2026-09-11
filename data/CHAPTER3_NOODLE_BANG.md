@@ -15,4 +15,4 @@ Pack JSON: `chapter3_noodle_bang.json`. Overlay on `collection_CURRENT.json`. No
 
 Chips stay off Ink / Mist / Tux Formal / Shadow night pools (Midnight / Inkspot / Onyx) and prior food chips. **Bean** stays later.
 
-Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Pumpkin at 24. Shadow at 27. Shop SKUs stay scratcher / miniTree / yarnSwing. Bean@60 stays later — clearing L31–L33 must not open Bean UI.
+Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Pumpkin at 24. Shadow at 27. Shop SKUs stay scratcher / miniTree / yarnSwing. Clover@33 ships next. Bean@60 stays later.
