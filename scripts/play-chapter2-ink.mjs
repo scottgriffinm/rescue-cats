@@ -126,12 +126,13 @@ try {
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L6`, { waitUntil: "networkidle0" });
+  await page.goto(`${BASE}/level/L8`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("MY GATE ONLY"));
   await play(
     page,
     [
-      [0, "ArrowDown"],
-      [1, "ArrowDown"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowDown"],
     ],
     "New friend!",
   );
@@ -206,29 +207,6 @@ try {
     throw new Error("Ink bang / shop copy variants missing");
   }
   await shot(page, "04_ink_yard");
-
-  await page.goto(`${BASE}/level/L7`, { waitUntil: "networkidle0" });
-  await play(
-    page,
-    [
-      [0, "ArrowDown"],
-      [1, "ArrowUp"],
-    ],
-    "Home",
-  );
-  await shot(page, "05_l7_win");
-
-  await page.goto(`${BASE}/level/L8`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("MY GATE ONLY"));
-  await play(
-    page,
-    [
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowDown"],
-    ],
-    "Home",
-  );
-  await shot(page, "06_l8_win");
 
   await page.goto(`${BASE}/level/L9`, { waitUntil: "networkidle0" });
   await play(

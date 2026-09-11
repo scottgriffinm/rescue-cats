@@ -296,13 +296,16 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the Chapter 2 path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9") {
+  if (ids.includes("L6") || ids.includes("L7")) {
+    throw new Error("L6–L7 are still authoring — do not load invented boards");
+  }
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L8,L9") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
-  for (const [id, spec] of Object.entries(LOCKED)) {
+  for (const id of ["L4", "L5", "L8", "L9"] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
-    assertLocked(level, spec);
+    assertLocked(level, LOCKED[id]);
     console.log(`${id} locked topology ok`);
   }
 }
