@@ -1,0 +1,31 @@
+{
+  "version": "chapter3_dumpling_bang",
+  "status": "READY",
+  "friend_id": "friend_014",
+  "unlock_clear": 42,
+  "personality": "Cozy",
+  "display_line": "Perfectly folded. Frequently steaming.",
+  "art": {
+    "loaf_48": "/assets/cats/dumpling_loaf_48.svg",
+    "loaf_72": "/assets/cats/dumpling_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "dumpling"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Dumpling", "Bao", "Potsticker"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_014": [
+      "{Name}: Perfectly folded. Frequently steaming.",
+      "{Name}: Already claimed the warmest fold on the porch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 42,
+    "sku_id": null,
+    "note": "Clear 42 gifts nothing — same cadence as Ink @ 6 through Oak @ 39. Box stays Mango@3. Sun Cushion stays Biscuit@9."
+  }
+}
