@@ -1,0 +1,93 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Chapter 3 continuation — black-coat park-brake toward Noodle@30",
+  "chapter": 3,
+  "title": "Chapter 3 boards L28–L30",
+  "notes": "Campaign continues L27 → Shadow@27 → L28 → L29 → L30. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. L28–L30 deepen the L27 black coat. Noodle@30 stays a later slice.",
+  "levels": [
+    {
+      "id": "L28",
+      "name": "Park West",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 10,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_park_west_black",
+      "walls": [
+        { "x": 2, "y": 0 },
+        { "x": 2, "y": 1 },
+        { "x": 2, "y": 2 },
+        { "x": 3, "y": 4 },
+        { "x": 2, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 5, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "park_west_black",
+      "ascii": "O . # . . .\n. . # . . .\n. . # . . B\n. . . . o .\n. . . # . .\nb . # . . ."
+    },
+    {
+      "id": "L29",
+      "name": "Hold North",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 10,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_hold_north_black",
+      "walls": [
+        { "x": 3, "y": 0 },
+        { "x": 1, "y": 2 },
+        { "x": 1, "y": 3 },
+        { "x": 5, "y": 4 },
+        { "x": 0, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 5, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "hold_north_black",
+      "ascii": "O . . # . .\n. . . . . .\n. # . . . B\n. # . . o .\n. . . . . #\n# . b . . ."
+    },
+    {
+      "id": "L30",
+      "name": "Hold South",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 9,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_hold_south_black",
+      "walls": [
+        { "x": 2, "y": 0 },
+        { "x": 2, "y": 1 },
+        { "x": 4, "y": 3 },
+        { "x": 0, "y": 4 },
+        { "x": 3, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 5, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "hold_south_black",
+      "ascii": "O . # . . .\n. . # . . .\n. . . . . B\n. o . . # .\n# . . . . .\n. . . # . b"
+    }
+  ]
+}

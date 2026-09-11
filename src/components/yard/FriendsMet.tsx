@@ -28,34 +28,34 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
         </button>
       </div>
       {tab === "friends" ? (
-        <ul className="flex flex-nowrap justify-center gap-0.5">
+        <ul className="flex flex-nowrap justify-center gap-0">
           {friends.length === 0 ? (
             <li className="text-xs text-ink/40">No one named yet.</li>
           ) : (
             friends.map((friend) => {
               const catalog = friendById(friend.friendId);
               return (
-                <li key={friend.instanceId} className="w-9 min-w-0 text-center">
+                <li key={friend.instanceId} className="w-8 min-w-0 text-center">
                   <FriendSprite
                     kit={catalog?.phenotype.artKit ?? "ginger"}
                     size={48}
-                    className="mx-auto h-8 w-8"
+                    className="mx-auto h-7 w-7"
                   />
-                  <p className="truncate font-display text-[10px]">{friend.name}</p>
+                  <p className="truncate font-display text-[9px]">{friend.name}</p>
                 </li>
               );
             })
           )}
         </ul>
       ) : (
-        <ul className="flex flex-nowrap justify-center gap-0.5">
+        <ul className="flex flex-nowrap justify-center gap-0">
           {TUTORIAL_RESCUES.map((entry) => (
             <li
               key={entry.friendId}
-              className={`w-9 min-w-0 text-center ${rescued.has(entry.friendId) ? "" : "opacity-40"}`}
+              className={`w-8 min-w-0 text-center ${rescued.has(entry.friendId) ? "" : "opacity-40"}`}
             >
-              <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-8 w-8" />
-              <p className="truncate font-display text-[10px]">
+              <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-7 w-7" />
+              <p className="truncate font-display text-[9px]">
                 {rescued.has(entry.friendId) ? entry.defaultName : "???"}
               </p>
             </li>

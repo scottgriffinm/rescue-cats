@@ -41,6 +41,7 @@ export function YardScene({
   const mist = friends.find((friend) => friend.friendId === "friend_006");
   const pepper = friends.find((friend) => friend.friendId === "friend_007");
   const pumpkin = friends.find((friend) => friend.friendId === "friend_008");
+  const shadow = friends.find((friend) => friend.friendId === "friend_009");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -49,7 +50,8 @@ export function YardScene({
       friend.friendId !== "friend_005" &&
       friend.friendId !== "friend_006" &&
       friend.friendId !== "friend_007" &&
-      friend.friendId !== "friend_008",
+      friend.friendId !== "friend_008" &&
+      friend.friendId !== "friend_009",
   );
 
   return (
@@ -166,6 +168,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{pepper.name}</p>
+        </div>
+      ) : null}
+
+      {shadow ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "6%", top: "34%" }}
+        >
+          <FriendSprite
+            kit={friendById(shadow.friendId)?.phenotype.artKit ?? "shadow"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === shadow.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(shadow.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${shadow.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{shadow.name}</p>
         </div>
       ) : null}
 
