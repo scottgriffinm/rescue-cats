@@ -63,6 +63,10 @@ export const CAT_ASSETS = {
   ash_loaf_72: "/assets/cats/ash_loaf_72.svg",
   friend_012_loaf_48: "/assets/cats/ash_loaf_48.svg",
   friend_012_loaf_72: "/assets/cats/ash_loaf_72.svg",
+  oak_loaf_48: "/assets/cats/oak_loaf_48.svg",
+  oak_loaf_72: "/assets/cats/oak_loaf_72.svg",
+  friend_013_loaf_48: "/assets/cats/oak_loaf_48.svg",
+  friend_013_loaf_72: "/assets/cats/oak_loaf_72.svg",
 } as const;
 
 export const FURN_ASSETS = {
@@ -88,9 +92,11 @@ export const UI_ASSETS = {
   icon_close: "/assets/ui/icon_close.svg",
   gate_orange: "/assets/gates/gate_orange.svg",
   gate_gray: "/assets/gates/gate_gray.svg",
+  gate_black: "/assets/gates/gate_black.svg",
 } as const;
 
-export const GATE_ASSETS: Record<"orange" | "gray", string> = {
+export const GATE_ASSETS: Record<"orange" | "gray" | "black", string> = {
   orange: "/assets/gates/gate_orange.svg",
   gray: "/assets/gates/gate_gray.svg",
+  black: "/assets/gates/gate_black.svg",
 };

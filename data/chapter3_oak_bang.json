@@ -1,0 +1,31 @@
+{
+  "version": "chapter3_oak_bang",
+  "status": "READY",
+  "friend_id": "friend_013",
+  "unlock_clear": 39,
+  "personality": "Steady",
+  "display_line": "Sturdy loaf. Will outlast the furniture.",
+  "art": {
+    "loaf_48": "/assets/cats/oak_loaf_48.svg",
+    "loaf_72": "/assets/cats/oak_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "oak"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Oak", "Acorn", "Timber"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_013": [
+      "{Name}: Sturdy loaf. Will outlast the furniture.",
+      "{Name}: Already chose the heaviest board on the porch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 39,
+    "sku_id": null,
+    "note": "Clear 39 gifts nothing — same cadence as Ink @ 6 through Ash @ 36. Box stays Mango@3. Sun Cushion stays Biscuit@9."
+  }
+}

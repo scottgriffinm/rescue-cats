@@ -10,6 +10,7 @@ import chapter3Shadow from "../../data/chapter3_shadow_bang.json";
 import chapter3Noodle from "../../data/chapter3_noodle_bang.json";
 import chapter3Clover from "../../data/chapter3_clover_bang.json";
 import chapter3Ash from "../../data/chapter3_ash_bang.json";
+import chapter3Oak from "../../data/chapter3_oak_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -49,7 +50,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "shadow" ||
     raw === "noodle" ||
     raw === "clover" ||
-    raw === "ash"
+    raw === "ash" ||
+    raw === "oak"
   ) {
     return raw;
   }
@@ -78,6 +80,7 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
   const isNoodle = raw.friend_id === chapter3Noodle.friend_id;
   const isClover = raw.friend_id === chapter3Clover.friend_id;
   const isAsh = raw.friend_id === chapter3Ash.friend_id;
+  const isOak = raw.friend_id === chapter3Oak.friend_id;
   const kit = artKit(raw.art_kit, raw.color, raw.pattern);
   const phenotype: Phenotype = {
     phenotypeId: raw.phenotype_id,
@@ -110,7 +113,9 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
                         ? chapter3Clover.personality
                         : isAsh
                           ? chapter3Ash.personality
-                          : raw.personality,
+                          : isOak
+                            ? chapter3Oak.personality
+                            : raw.personality,
     // CURRENT lists friend_004 as calico; Tux is the first tuxedo loaf, not calico.
     // CURRENT lists friend_006 as slate; Mist is a gray-mackerel loaf, not Ink.
     // CURRENT lists friend_007 as ginger; Pepper is a spotted orange loaf, not Mango.
@@ -119,6 +124,7 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
     // CURRENT lists friend_010 as cream; Noodle is a long cream-mackerel loaf, not Biscuit or Ghost.
     // CURRENT lists friend_011 as slate; Clover is a soft gray-spotted loaf, not Ink, Mist, or Shadow.
     // CURRENT lists friend_012 as slate; Ash is a warm hearth-ash loaf, not Ink, Mist, Shadow, or Clover.
+    // CURRENT lists friend_013 as ginger; Oak is a bark-warm classic blotch loaf, not Mango, Pepper, or Pumpkin.
     artKit: isInk
       ? "slate"
       : isBiscuit
@@ -141,7 +147,9 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
                         ? "clover"
                         : isAsh
                           ? "ash"
-                          : kit,
+                          : isOak
+                            ? "oak"
+                            : kit,
     boardColor: isInk
       ? "gray"
       : isBiscuit
@@ -164,7 +172,9 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
                         ? "gray"
                         : isAsh
                           ? "gray"
-                          : boardColorFromCoat(raw.color),
+                          : isOak
+                            ? "orange"
+                            : boardColorFromCoat(raw.color),
   };
   return {
     friendId: raw.friend_id,
@@ -192,7 +202,9 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
                         ? chapter3Clover.display_line
                         : isAsh
                           ? chapter3Ash.display_line
-                          : raw.display_line,
+                          : isOak
+                            ? chapter3Oak.display_line
+                            : raw.display_line,
     tier: raw.tier,
     phenotype,
   };
@@ -217,6 +229,7 @@ export const CHAPTER3_SHADOW = chapter3Shadow;
 export const CHAPTER3_NOODLE = chapter3Noodle;
 export const CHAPTER3_CLOVER = chapter3Clover;
 export const CHAPTER3_ASH = chapter3Ash;
+export const CHAPTER3_OAK = chapter3Oak;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -228,6 +241,7 @@ export const SHADOW_FRIEND_ID = chapter3Shadow.friend_id;
 export const NOODLE_FRIEND_ID = chapter3Noodle.friend_id;
 export const CLOVER_FRIEND_ID = chapter3Clover.friend_id;
 export const ASH_FRIEND_ID = chapter3Ash.friend_id;
+export const OAK_FRIEND_ID = chapter3Oak.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -254,7 +268,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 12);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 13);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -266,7 +280,7 @@ export function friendById(id: string) {
   return CATALOG.find((friend) => friend.friendId === id);
 }
 
-/** CEO freeze — CURRENT is correct. NO Pebble. Mango@3 / Ink@6 / Biscuit@9 / Tux@12 / Ghost@15 / Mist@18 / Pepper@21 / Pumpkin@24 / Shadow@27 / Noodle@30 / Clover@33 / Ash@36. */
+/** CEO freeze — CURRENT is correct. NO Pebble. Mango@3 / Ink@6 / Biscuit@9 / Tux@12 / Ghost@15 / Mist@18 / Pepper@21 / Pumpkin@24 / Shadow@27 / Noodle@30 / Clover@33 / Ash@36 / Oak@39. */
 export const SLICE_UNLOCKS: Record<number, string> = {
   3: "friend_001",
   6: "friend_002",
@@ -280,9 +294,10 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   30: "friend_010",
   33: "friend_011",
   36: "friend_012",
+  39: "friend_013",
 };
 
-/** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36; Bean@60 stays later. */
+/** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39; Bean@60 stays later. */
 export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   if (clearIndex < 3) return undefined;
   const locked = SLICE_UNLOCKS[clearIndex];
@@ -296,7 +311,7 @@ export function shippedFriendForClear(clearIndex: number): CatalogFriend | undef
   return locked ? friendById(locked) : undefined;
 }
 
-/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. Clear 9 gifts the Sun Cushion. Clear 12, 15, 18, 21, 24, 27, 30, 33, and 36 gift nothing. */
+/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. Clear 9 gifts the Sun Cushion. Clear 12, 15, 18, 21, 24, 27, 30, 33, 36, and 39 gift nothing. */
 export function furnitureGiftsForClear(clearIndex: number) {
   if (
     clearIndex === 6 ||
@@ -308,7 +323,8 @@ export function furnitureGiftsForClear(clearIndex: number) {
     clearIndex === 27 ||
     clearIndex === 30 ||
     clearIndex === 33 ||
-    clearIndex === 36
+    clearIndex === 36 ||
+    clearIndex === 39
   ) {
     return [];
   }
@@ -379,6 +395,9 @@ export const CLOVER_NAMING_CHIPS: string[] = CHAPTER3_CLOVER.naming.suggestion_c
 /** Ash naming chips — hearth / calm, never Ink/Ash/Shadow (Ink's pool), Clover garden, or prior pools. */
 export const ASH_NAMING_CHIPS: string[] = CHAPTER3_ASH.naming.suggestion_chips;
 
+/** Oak naming chips — sturdy / wood, never Ash hearth or prior pools. */
+export const OAK_NAMING_CHIPS: string[] = CHAPTER3_OAK.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -413,6 +432,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === ASH_FRIEND_ID || friendId === "friend_012") {
     return [...ASH_NAMING_CHIPS];
   }
+  if (friendId === OAK_FRIEND_ID || friendId === "friend_013") {
+    return [...OAK_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -426,6 +448,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Wiggly") return [...NOODLE_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Lucky") return [...CLOVER_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Calm") return [...ASH_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Steady") return [...OAK_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -472,6 +495,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === ASH_FRIEND_ID || friendId === "friend_012") {
     return shufflePool([...ASH_NAMING_CHIPS], count);
   }
+  if (friendId === OAK_FRIEND_ID || friendId === "friend_013") {
+    return shufflePool([...OAK_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -499,6 +525,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER3_NOODLE.bang_copy as Record<string, string[]>),
     ...(CHAPTER3_CLOVER.bang_copy as Record<string, string[]>),
     ...(CHAPTER3_ASH.bang_copy as Record<string, string[]>),
+    ...(CHAPTER3_OAK.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));

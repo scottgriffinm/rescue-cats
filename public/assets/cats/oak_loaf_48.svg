@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="oak-loaf-48">
+      <ellipse cx="24" cy="29" rx="17" ry="12.5"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="29" rx="17" ry="12.5" fill="#B56A38" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#oak-loaf-48)">
+    <ellipse cx="16.5" cy="26" rx="5.2" ry="4.4" fill="#8A4524"/>
+    <ellipse cx="31.5" cy="30.5" rx="5.6" ry="4.2" fill="#8A4524"/>
+    <ellipse cx="24" cy="22.5" rx="3.4" ry="2.4" fill="#8A4524"/>
+  </g>
+  <path d="M11 21 C10.5 14.5 15 12.5 17.2 17" fill="#8F4E2C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37 21 C37.5 14.5 33 12.5 30.8 17" fill="#8F4E2C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="34" rx="7.2" ry="5.2" fill="#E6C09A"/>
+  <circle cx="18" cy="27" r="1.6" fill="#2B2A28"/>
+  <circle cx="28" cy="27" r="1.6" fill="#2B2A28"/>
+  <path d="M40 34 C42.5 33 43.5 36 41 37" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
