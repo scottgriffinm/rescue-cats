@@ -1,19 +1,19 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "source": "Chapter 3 continuation \u2014 LT02 collision \u00d7 LT08 color-lock depth after Stripe@45",
+  "source": "Chapter 3 continuation \u2014 LT02 collision \u00d7 LT08 color-lock depth after Stripe@45 (Hold* mill kill + L48 reshape)",
   "chapter": 3,
   "title": "Chapter 3 boards L46\u2013L48",
-  "notes": "Campaign continues L45 \u2192 Stripe@45 \u2192 L46 \u2192 L47 \u2192 L48. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. L46\u2013L48 break off L45 Vacate North with Hold East Close / Solid West / Vacate West. Cloud@48 and Bean@60 stay later slices. Collection bang for Stripe is owned by Collection Lead.",
+  "notes": "Campaign continues L45 \u2192 Stripe@45 \u2192 L46 \u2192 L47 \u2192 L48. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. L46\u2013L48 break off L45 Vacate North with Park East Close / Solid West / Vacate Row. Hold* mill titles killed on L46. L48 reshaped off L31 Vacate West name/template collision. Cloud@48 and Bean@60 stay later slices. Collection bang for Stripe is owned by Collection Lead.",
   "levels": [
     {
       "id": "L46",
-      "name": "Hold East Close",
+      "name": "Park East Close",
       "width": 6,
       "height": 6,
       "moveBudget": 10,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_hold_east_close_gray",
+      "templateId": "LT02_LT08_park_east_close_gray",
       "walls": [
         {
           "x": 1,
@@ -61,7 +61,7 @@
           "colorId": "color_gray"
         }
       ],
-      "teach": "hold_east_close_gray"
+      "teach": "park_east_close_gray"
     },
     {
       "id": "L47",
@@ -123,40 +123,44 @@
     },
     {
       "id": "L48",
-      "name": "Vacate West",
+      "name": "Vacate Row",
       "width": 6,
       "height": 6,
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_vacate_west_black",
+      "templateId": "LT02_LT08_vacate_row_west_black",
       "walls": [
         {
-          "x": 5,
-          "y": 1
+          "x": 4,
+          "y": 0
         },
         {
           "x": 0,
-          "y": 1
+          "y": 0
         },
         {
-          "x": 2,
-          "y": 0
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 4
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 4,
-          "y": 0,
+          "x": 5,
+          "y": 1,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_black",
-          "x": 5,
-          "y": 2,
+          "x": 3,
+          "y": 3,
           "color": "black",
           "colorId": "color_black"
         }
@@ -164,26 +168,26 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 3,
-          "y": 2,
+          "x": 2,
+          "y": 3,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_black",
-          "x": 2,
-          "y": 2,
+          "x": 1,
+          "y": 3,
           "color": "black",
           "colorId": "color_black"
         }
       ],
-      "teach": "vacate_west_black"
+      "teach": "vacate_row_west_black"
     }
   ],
   "teaches": {
-    "L46": "Hold East Close \u2014 park east of the mid house; L45 vacate-north overshoots",
+    "L46": "Park East Close \u2014 park east of the mid house; L45 vacate-north overshoots",
     "L47": "Solid West \u2014 black house is the west brake",
-    "L48": "Vacate West \u2014 leave the row, then the west solid"
+    "L48": "Vacate Row \u2014 leave the house row, then the west solid (not L31 Vacate West)"
   },
   "solver": {
     "engine": "workspace solve_levels.py (slide stops: wall|cat|edge|mismatch solid; matching gates never brake)",

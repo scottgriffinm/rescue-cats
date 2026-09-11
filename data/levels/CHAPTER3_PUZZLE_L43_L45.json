@@ -8,13 +8,13 @@
   "levels": [
     {
       "id": "L43",
-      "name": "Hold South Close",
+      "name": "Park South Close",
       "width": 6,
       "height": 6,
       "moveBudget": 10,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_hold_south_close_gray",
+      "templateId": "LT02_LT08_park_south_close_gray",
       "walls": [
         {
           "x": 0,
@@ -62,7 +62,7 @@
           "colorId": "color_gray"
         }
       ],
-      "teach": "hold_south_close_gray",
+      "teach": "park_south_close_gray",
       "ascii": "......\n#.....\n#.O#..\n..o..G\n......\n.....g"
     },
     {
@@ -185,7 +185,7 @@
     }
   ],
   "teaches": {
-    "L43": "Hold South Close \u2014 park under the mid house; L42 east-park overshoots",
+    "L43": "Park South Close \u2014 park under the mid house; L42 east-park overshoots",
     "L44": "Solid North \u2014 black house is the north brake",
     "L45": "Vacate North \u2014 leave the column, then the north solid"
   },

@@ -1,12 +1,12 @@
 {
   "id": "L46",
-  "name": "Hold East Close",
+  "name": "Park East Close",
   "width": 6,
   "height": 6,
   "moveBudget": 10,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_hold_east_close_gray",
+  "templateId": "LT02_LT08_park_east_close_gray",
   "walls": [
     {
       "x": 1,
@@ -54,5 +54,5 @@
       "colorId": "color_gray"
     }
   ],
-  "teach": "hold_east_close_gray"
+  "teach": "park_east_close_gray"
 }

@@ -1,12 +1,12 @@
 {
   "id": "L43",
-  "name": "Hold South Close",
+  "name": "Park South Close",
   "width": 6,
   "height": 6,
   "moveBudget": 10,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_hold_south_close_gray",
+  "templateId": "LT02_LT08_park_south_close_gray",
   "walls": [
     {
       "x": 0,
@@ -54,5 +54,5 @@
       "colorId": "color_gray"
     }
   ],
-  "teach": "hold_south_close_gray"
+  "teach": "park_south_close_gray"
 }
