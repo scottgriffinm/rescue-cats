@@ -83,8 +83,10 @@ export function PuzzleScreen({ level }: { level: Level }) {
     setRemaining(nextRemaining);
     const durationMs = slideDurationMs(preview.path.length - 1);
 
-    // Cancel any leftover left/top tween so the next hop starts from the
-    // committed tile, not a mid-lag visual (L2's long setup slides).
+    // 1) Kill any leftover left/top tween at the committed tile.
+    // 2) Arm the new transition while still on that tile.
+    // 3) Then commit the landing tile so CSS interpolates start→end.
+    // Applying transition + destination in one paint skips the tween.
     setMotion({ id: selected, kind: "snap" });
     await nextPaint();
     if (runId.current !== id) return;
@@ -95,6 +97,9 @@ export function PuzzleScreen({ level }: { level: Level }) {
       axis: dir === "n" || dir === "s" ? "y" : "x",
       durationMs,
     });
+    await nextPaint();
+    if (runId.current !== id) return;
+
     setCats(preview.cats);
     await sleep(durationMs);
     if (runId.current !== id) return;
