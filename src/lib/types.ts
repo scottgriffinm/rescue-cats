@@ -13,7 +13,8 @@ export type ArtKit =
   | "ghost"
   | "mist"
   | "pepper"
-  | "pumpkin";
+  | "pumpkin"
+  | "shadow";
 
 export type PieceCat = {
   id: string;

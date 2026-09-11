@@ -13,4 +13,4 @@ Pack JSON: `chapter3_pumpkin_bang.json`. Overlay on `collection_CURRENT.json`. N
 | Art | `pumpkin_loaf_48/72` · kit **pumpkin** (CURRENT `art_kit: ginger` is ignored — not Mango mackerel, not Pepper spots) |
 | Board | phenotype `orange`; campaign boards may use orange / gray / **black** |
 
-Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Shop SKUs stay scratcher / miniTree / yarnSwing. Shadow@27 stays later — clearing L27 must not open Shadow UI.
+Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Shop SKUs stay scratcher / miniTree / yarnSwing. Shadow@27 ships next.

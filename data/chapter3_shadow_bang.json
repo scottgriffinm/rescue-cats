@@ -1,0 +1,30 @@
+{
+  "version": "chapter3_shadow_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_009",
+  "unlock_clear": 27,
+  "personality": "Night",
+  "display_line": "First full-black. The porch just got cooler.",
+  "art": {
+    "loaf_48": "/assets/cats/shadow_loaf_48.svg",
+    "loaf_72": "/assets/cats/shadow_loaf_72.svg",
+    "board_color": "black"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Midnight", "Inkspot", "Onyx"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_009": [
+      "{Name}: First full-black. The porch just got cooler.",
+      "{Name}: Already claimed the shady patch. Save me a moonbeam."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 27,
+    "sku_id": null,
+    "note": "Clear 27 gifts nothing — same cadence as Ink @ 6, Tux @ 12, Ghost @ 15, Mist @ 18, Pepper @ 21, and Pumpkin @ 24."
+  }
+}
