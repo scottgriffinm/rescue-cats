@@ -1,7 +1,15 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { ART_KIT_PATH } from "./constants";
-import { CHAPTER2, chipsForFriend, friendForClear, NAMING } from "./collection";
+import {
+  CHAPTER2,
+  chipsForFriend,
+  friendForClear,
+  furnitureGiftsForClear,
+  heartsForClear,
+  NAMING,
+  shopItemsForClear,
+} from "./collection";
 import { GATE_ASSETS } from "./artAssets";
 import { LEVELS } from "./levels";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
@@ -56,10 +64,8 @@ const LOCKED: Record<string, LockedSpec> = {
     N: 9,
     colorLocks: false,
     walls: [
-      [2, 1],
       [2, 2],
       [3, 3],
-      [3, 4],
     ],
     cats: [
       ["cat_a", 0, 0],
@@ -75,10 +81,7 @@ const LOCKED: Record<string, LockedSpec> = {
     N: 8,
     colorLocks: false,
     walls: [
-      [1, 2],
       [2, 2],
-      [3, 2],
-      [2, 4],
       [4, 1],
     ],
     cats: [
@@ -114,8 +117,8 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
+      [2, 0],
       [2, 1],
-      [2, 2],
       [3, 4],
     ],
     cats: [
@@ -201,8 +204,11 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L9: [
     ["cat_orange", "e"],
-    ["cat_gray", "s"],
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
     ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_gray", "s"],
   ],
 };
 
@@ -386,6 +392,26 @@ for (const level of LEVELS) {
   }
   if (ink.displayLine !== "Quiet gray paws. Already claimed a shadow.") {
     throw new Error(`Ink display line drifted: ${ink.displayLine}`);
+  }
+  if (ink.phenotype.personality !== "Soft") {
+    throw new Error(`Ink personality must be Soft, got ${ink.phenotype.personality}`);
+  }
+  if (ink.phenotype.boardColor !== "gray") throw new Error("Ink must be color_gray");
+  if (furnitureGiftsForClear(6).length !== 0) throw new Error("clear 6 must gift nothing");
+  for (const clear of [1, 2, 3, 4, 5, 6]) {
+    const hearts = heartsForClear(clear);
+    if (hearts < 5 || hearts > 7) throw new Error(`clear ${clear} hearts ${hearts} not in 5–7`);
+  }
+  const shop3 = shopItemsForClear(3).map((sku) => `${sku.skuId}:${sku.hearts}`).sort();
+  if (shop3.join(",") !== "furn_scratch_post:15,furn_tree_mini:40") {
+    throw new Error(`shop @3 drifted: ${shop3.join(",")}`);
+  }
+  const shop6 = shopItemsForClear(6).map((sku) => `${sku.skuId}:${sku.hearts}`).sort();
+  if (shop6.join(",") !== "furn_scratch_post:15,furn_swing_yarn:40,furn_tree_mini:40") {
+    throw new Error(`shop @6 drifted: ${shop6.join(",")}`);
+  }
+  if (!CHAPTER2.personality_pools.Soft.includes("Ink")) {
+    throw new Error("personality pool Soft must include Ink");
   }
   if (ART_KIT_PATH.slate.loaf48 !== "/assets/cats/ink_loaf_48.svg") {
     throw new Error("Ink yard/unlock must map slate 48 → ink_loaf_48");

@@ -3,18 +3,62 @@
   "status": "CHAPTER2",
   "friend_id": "friend_002",
   "unlock_clear": 6,
+  "color": "color_gray",
+  "personality": "Soft",
+  "display_line": "Quiet gray paws. Already claimed a shadow.",
+  "gifts_on_clear": [],
+  "art": {
+    "loaf_48": "/assets/cats/ink_loaf_48.svg",
+    "loaf_72": "/assets/cats/ink_loaf_72.svg",
+    "board_color": "gray"
+  },
   "naming": {
     "prefill": "",
-    "require_choice": true
+    "require_choice": true,
+    "suggestion_chips": ["Ink", "Ash", "Shadow"],
+    "cta_primary": "Welcome home"
   },
   "bang_copy": {
     "friend_001": ["{Name}: Still sniffing everything…"],
-    "friend_002": [
-      "{Name}: Quiet gray paws. Already claimed a shadow."
+    "friend_002": ["{Name}: Quiet gray paws. Already claimed a shadow."]
+  },
+  "personality_pools": {
+    "Soft": ["Ink", "Ash", "Shadow"],
+    "Curious": ["Mango", "Pip", "Bean"],
+    "Hungry": ["Biscuit", "Mochi", "Toast"],
+    "Formal": ["Nigel", "Donna", "Greg"]
+  },
+  "hearts_by_clear_band": {
+    "1-6": [5, 7]
+  },
+  "shop": {
+    "open_clear": 3,
+    "items": [
+      {
+        "sku_id": "furn_scratch_post",
+        "label": "Sisal Scratch Post",
+        "hearts": 15,
+        "unlock_clear": 3,
+        "asset": "/assets/furniture/scratcher.svg"
+      },
+      {
+        "sku_id": "furn_tree_mini",
+        "label": "Mini Cat Tree",
+        "hearts": 40,
+        "unlock_clear": 3,
+        "asset": "/assets/furniture/miniTree.svg"
+      },
+      {
+        "sku_id": "furn_swing_yarn",
+        "label": "Yarn Swing",
+        "hearts": 40,
+        "unlock_clear": 6,
+        "asset": "/assets/furniture/yarnSwing.svg"
+      }
     ]
   },
   "shop_starter": {
-    "unlock_clear": 6,
+    "unlock_clear": 3,
     "sku_id": "furn_scratch_post",
     "hearts": 15,
     "label": "Sisal Scratch Post",

@@ -93,7 +93,7 @@
       "sku_id": "furn_tree_mini",
       "name": "Mini Cat Tree",
       "category": "Cat trees",
-      "hearts": 0,
+      "hearts": 40,
       "comfort": 2,
       "onboarding": true,
       "asset": "/assets/furniture/miniTree.svg"
@@ -151,6 +151,7 @@
       "30": "friend_010"
     },
     "hearts_by_clear_band": {
+      "1-6": [5, 7],
       "1-4": [5, 6],
       "5-12": [5, 8],
       "13-20": [6, 10],
@@ -195,7 +196,7 @@
       "body": "Regular",
       "tail": "Regular",
       "eyes": "Gold",
-      "personality": "Reserved",
+      "personality": "Soft",
       "art_kit": "slate"
     },
     {

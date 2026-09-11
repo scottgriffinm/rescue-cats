@@ -1,8 +1,8 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "source": "docs/rescue_cats_LOCKED_specs/Puzzle_Locked_L01-L30.md",
+  "source": "CEO Chapter 2 lock",
   "gridOrigin": "top-left",
-  "notes": "L6 Bigger Yard + L7 Tight Routes. Locked topologies only — do not invent.",
+  "notes": "L6–L7 6×6 route boards. N=9/8, 2 cats, 2 walls, colorLocks off.",
   "levels": [
     {
       "id": "L6",
@@ -14,10 +14,8 @@
       "colorLocks": false,
       "templateId": "LT02_route_depth",
       "walls": [
-        { "x": 2, "y": 1 },
         { "x": 2, "y": 2 },
-        { "x": 3, "y": 3 },
-        { "x": 3, "y": 4 }
+        { "x": 3, "y": 3 }
       ],
       "blockers": [],
       "cats": [
@@ -40,10 +38,7 @@
       "colorLocks": false,
       "templateId": "LT02_route_depth",
       "walls": [
-        { "x": 1, "y": 2 },
         { "x": 2, "y": 2 },
-        { "x": 3, "y": 2 },
-        { "x": 2, "y": 4 },
         { "x": 4, "y": 1 }
       ],
       "blockers": [],

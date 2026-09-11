@@ -9,10 +9,10 @@ import { GameShell } from "@/components/shell/GameShell";
 import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
 import {
-  FURNITURE,
   NAMING,
   SHOP_STARTER,
   STAR_COSMETICS,
+  shopItemsForClear,
   shopUnlocked,
   withName,
 } from "@/lib/collection";
@@ -195,25 +195,25 @@ function ShopRow({
   onBuyCosmetic: (id: string, cost: number) => boolean;
 }) {
   const heartsOpen = shopUnlocked(cleared);
-  const starter = FURNITURE.find((sku) => sku.skuId === SHOP_STARTER.sku_id);
-  const heartItem = heartsOpen
-    ? FURNITURE.find((sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId))
-    : undefined;
+  const heartItems = heartsOpen
+    ? shopItemsForClear(cleared).filter((sku) => !ownedFurniture.includes(sku.skuId))
+    : [];
   const starItem = heartsOpen
     ? STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id))
     : undefined;
-  if (!heartItem && !starItem) return null;
+  if (heartItems.length === 0 && !starItem) return null;
 
   return (
     <div className="space-y-1.5">
-      {heartsOpen && heartItem && starter && heartItem.skuId === starter.skuId ? (
+      {heartsOpen ? (
         <p className="text-center text-[10px] tracking-[0.18em] text-ink/40">
           {SHOP_STARTER.eyebrow.toUpperCase()}
         </p>
       ) : null}
-      <div className="flex gap-2 text-xs">
-      {heartItem ? (
+      <div className="flex flex-wrap gap-2 text-xs">
+      {heartItems.map((heartItem) => (
         <button
+          key={heartItem.skuId}
           type="button"
           disabled={hearts < heartItem.hearts}
           onClick={() => onBuyFurniture(heartItem.skuId, heartItem.hearts)}
@@ -221,7 +221,7 @@ function ShopRow({
         >
           {heartItem.name} · {heartItem.hearts}♥
         </button>
-      ) : null}
+      ))}
       {starItem ? (
         <button
           type="button"

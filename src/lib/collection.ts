@@ -43,6 +43,7 @@ function boardColorFromCoat(color: string): BoardColor {
 }
 
 function toFriend(raw: RawFriend, index: number): CatalogFriend {
+  const isInk = raw.friend_id === chapter2.friend_id;
   const kit = artKit(raw.art_kit, raw.color, raw.pattern);
   const phenotype: Phenotype = {
     phenotypeId: raw.phenotype_id,
@@ -53,15 +54,15 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
     tail: raw.tail,
     eyes: raw.eyes,
     eyeAccent: raw.eyes,
-    personality: raw.personality,
-    artKit: kit,
-    boardColor: boardColorFromCoat(raw.color),
+    personality: isInk ? chapter2.personality : raw.personality,
+    artKit: isInk ? "slate" : kit,
+    boardColor: isInk ? "gray" : boardColorFromCoat(raw.color),
   };
   return {
     friendId: raw.friend_id,
     defaultName: raw.default_name,
     unlockClear: unlockClearFor(raw, index),
-    displayLine: raw.display_line,
+    displayLine: isInk ? chapter2.display_line : raw.display_line,
     tier: raw.tier,
     phenotype,
   };
@@ -83,15 +84,21 @@ export const CATALOG: CatalogFriend[] = pack.first_20_cats.map((raw, index) =>
   toFriend(raw, index),
 );
 
-export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => ({
-  skuId: sku.sku_id,
-  name: sku.name,
-  category: sku.category,
-  hearts: sku.hearts,
-  comfort: sku.comfort,
-  grantOnClear: "grant_on_clear" in sku ? sku.grant_on_clear : undefined,
-  asset: skuAsset(sku),
-}));
+const SHOP_ITEMS = CHAPTER2.shop.items;
+
+export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
+  const shop = SHOP_ITEMS.find((item) => item.sku_id === sku.sku_id);
+  return {
+    skuId: sku.sku_id,
+    name: sku.name,
+    category: sku.category,
+    hearts: shop?.hearts ?? sku.hearts,
+    comfort: sku.comfort,
+    grantOnClear: "grant_on_clear" in sku ? sku.grant_on_clear : undefined,
+    shopUnlockClear: shop?.unlock_clear,
+    asset: shop?.asset ?? skuAsset(sku),
+  };
+});
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
@@ -122,8 +129,9 @@ export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   return CATALOG.find((friend) => friend.unlockClear === clearIndex);
 }
 
-/** Mango unlock gifts the box only — no second gift on that clear. */
+/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. */
 export function furnitureGiftsForClear(clearIndex: number) {
+  if (clearIndex === 6) return [];
   const gifts = FURNITURE.filter((sku) => sku.grantOnClear === clearIndex);
   if (clearIndex === 3) {
     return gifts.filter((sku) => sku.skuId === "furn_box_cardboard");
@@ -132,9 +140,10 @@ export function furnitureGiftsForClear(clearIndex: number) {
 }
 
 export function heartsForClear(clearIndex: number) {
+  const chapterBand = CHAPTER2.hearts_by_clear_band["1-6"];
+  if (clearIndex >= 1 && clearIndex <= 6) return chapterBand[0];
   const bands = pack.cadence_clears_1_30.hearts_by_clear_band;
   const pick = (range: [number, number]) => range[0];
-  if (clearIndex <= 4) return pick(bands["1-4"] as [number, number]);
   if (clearIndex <= 12) return pick(bands["5-12"] as [number, number]);
   if (clearIndex <= 20) return pick(bands["13-20"] as [number, number]);
   return pick(bands["21-30"] as [number, number]);
@@ -155,12 +164,14 @@ export const NAMING_CHIPS: string[] =
     : ["Mango", "Biscuit", "Pepper"];
 
 /** Ink naming chips — never Misty. */
-export const INK_NAMING_CHIPS = ["Ink", "Ash", "Shadow"] as const;
+export const INK_NAMING_CHIPS: string[] = CHAPTER2.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
   }
+  const soft = CHAPTER2.personality_pools.Soft;
+  if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   return [...NAMING_CHIPS];
 }
 
@@ -198,13 +209,19 @@ export function bangLinesFor(friendId: string, name: string) {
 }
 
 export function shopUnlocked(clearCount: number) {
-  return clearCount >= SHOP_STARTER.unlock_clear;
+  return clearCount >= CHAPTER2.shop.open_clear;
+}
+
+export function shopItemsForClear(clearCount: number) {
+  return FURNITURE.filter(
+    (sku) => sku.shopUnlockClear != null && clearCount >= sku.shopUnlockClear,
+  );
 }
 
 export function favoriteToyFor(personality: string) {
   if (personality === "Hungry") return "crinkle mouse";
   if (personality === "Curious") return "paper bag";
-  if (personality === "Reserved") return "wool cave";
+  if (personality === "Reserved" || personality === "Soft") return "wool cave";
   return "sun patch";
 }
 

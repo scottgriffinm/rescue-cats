@@ -1,16 +1,16 @@
 # Chapter 2 — Ink, Hearts shop, and `!` variants
 
-Pack JSON: `chapter2_ink_shop_bang.json`. Overlay on `collection_CURRENT.json`. No Pebble.
+Pack JSON: `chapter2_ink_shop_bang.json`. Overlay on `collection_CURRENT.json`. No Pebble. **No gifts at clear 6.**
 
 | Beat | Lock |
 | --- | --- |
-| Friend | Ink `friend_002` |
+| Friend | Ink `friend_002` · `color_gray` · Soft |
 | Unlock | `onClear(6)` |
-| Naming | title **New friend!**, label **Name your cat**, CTA **Welcome home**, empty prefill, `require_choice: true` |
-| Shop | Hearts shop unlocks at clear 6. Starter SKU `furn_scratch_post` · Sisal Scratch Post · 15♥ |
-| Shop copy | `{Name} found the Hearts shop.` / `A Hearts shop opened on the porch.` |
-| Naming chips | **Ink / Ash / Shadow** (never Misty) |
+| Line | Quiet gray paws. Already claimed a shadow. |
+| Naming | empty prefill, chips **Ink / Ash / Shadow**, CTA until a name |
+| Shop @3 | Scratch 15♥ · Mini tree 40♥ |
+| Shop @6 | Yarn swing 40♥ |
+| Hearts | Clears 1–6 grant 5–7 |
 | Ink `!` | `{Name}: Quiet gray paws. Already claimed a shadow.` |
-| First-night `!` | Per-friend, not a global one-shot |
 
 Mango still unlocks at clear 3. Biscuit at 9.

@@ -81,6 +81,7 @@ export type FurnitureSKU = {
   hearts: number;
   comfort: number;
   grantOnClear?: number;
+  shopUnlockClear?: number;
   asset: string;
 };
 
