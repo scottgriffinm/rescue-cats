@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F7F0E6",
+  themeColor: "#E8DFD2",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${nunito.variable} ${fredoka.variable} h-full antialiased`}
     >
-      <body className="min-h-full overflow-x-hidden bg-paper font-sans">
+      <body className="min-h-full overflow-x-hidden bg-page-bg font-sans">
         <SaveProvider>{children}</SaveProvider>
       </body>
     </html>

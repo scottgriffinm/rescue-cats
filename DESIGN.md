@@ -84,7 +84,7 @@ Priority order (shipped):
 3. `cat.pose.belly` @72 calico — puzzle board cats only (`calico_belly_72.svg`). Ink yard art is `slate_loaf_48` / `slate_loaf_72`. LT08 houses use `gate_orange.svg` / `gate_gray.svg`.
 4. Furniture woodblock: `boxBed` 96×72, `swing` 96×96, `postBell` 48×96 (bell marigold + mist), `fence` 120×48 tileable
 5. UI: `btn_primary` (h 44, ink stroke, paper fill), `input_name`, `fail_mark` (28 clay fill + ink X — not arcade red), `star_marigold`, `hand_cursor`
-6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Full-viewport cream paper (`.cream-wash`, `#F7F0E6`). **No PhoneFrame / device bezel / phone-in-a-void.** Ink outlines `#2B2A28`. Never mist `#C4BDB4`, pitch `#1A1918`, `#000`, or `#FFF` as stage fills.
+6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Full-bleed page `#E8DFD2` → cream cards `#F7F0E6`. **No PhoneFrame / device bezel / phone-in-a-void.** Ink outlines `#2B2A28`. Never mist `#C4BDB4`, pitch `#1A1918`, `#000`, or `#FFF` as stage fills.
 
 Export paths: `cats/{breed}_{pose}_{size}.svg`, `furniture/{id}.svg`, `ui/{id}.svg`. Registry: `src/lib/artAssets.ts`.
 
@@ -92,8 +92,8 @@ Palette is wired as CSS variables on `:root` and as Tailwind tokens (`bg-paper`,
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `--paper` | `#F7F0E6` | Puzzle / yard cards **and** the full-viewport game surface. Never a pure-white void. |
-| `--page-bg` | `#F7F0E6` | Same as paper — the website is the cream game, not a device sitting in a void. |
+| `--paper` | `#F7F0E6` | Puzzle / yard / naming cards. Never a pure-white void. |
+| `--page-bg` | `#E8DFD2` | Full-bleed game page. Not a device bezel or phone-in-a-void. |
 | `--ink` | `#2B2A28` | Text and UI chrome. Never a pure-black outline. |
 | `--clay` | `#E8A89A` | Soft fail marks, clay accents, header accent word. |
 | `--sage` | `#8FAF8A` | Lawn, fountain water, success / coach pips. |
@@ -122,7 +122,7 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 
 ### Screens
 
-- **Shell:** `GameShell` fills the viewport with cream paper + dots. Centered content, max ~34rem. Not a phone bezel.
+- **Shell:** `GameShell` fills the viewport with page `#E8DFD2` + dots. Centered content, max ~34rem. Cream cards on top. Not a phone bezel.
 - **Puzzle:** cream paper card (`paper-card`) with path-colored inset accents and path gates. Board scales with the column.
 - **Unlock / name modal:** cream paper card, wood-ink input, paper+ink buttons.
 - **Yard:** cream isometric porch + sage lawn (`yard_iso.svg`), woodblock furniture, loaf cats.

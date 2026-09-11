@@ -9,7 +9,7 @@ export function GameShell({
   className?: string;
 }) {
   return (
-    <div className="cream-wash relative min-h-dvh w-full overflow-x-hidden text-ink">
+    <div className="page-bg relative min-h-dvh w-full overflow-x-hidden text-ink">
       <div className="paper-dots pointer-events-none absolute inset-0 opacity-60" />
       <div
         className={cn(
