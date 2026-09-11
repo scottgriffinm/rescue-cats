@@ -4,7 +4,13 @@ import { useState } from "react";
 import { FriendSprite, UiIcon } from "@/components/art/Sprite";
 import { Button } from "@/components/ui/Button";
 import { useSave } from "@/components/providers/SaveProvider";
-import { chipsForFriend, friendById, NAMING, shuffleNameChips } from "@/lib/collection";
+import {
+  chipsForFriend,
+  friendById,
+  INK_FRIEND_ID,
+  NAMING,
+  shuffleNameChips,
+} from "@/lib/collection";
 import { MAX_NAME_LENGTH } from "@/lib/constants";
 
 export function NameCatModal({ onNamed }: { onNamed: () => void }) {
@@ -19,6 +25,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
   if (!catalog) return null;
 
   const canWelcome = name.trim().length >= 1;
+  const isInk = catalog.friendId === INK_FRIEND_ID;
 
   return (
     <div className="fixed inset-0 z-30 flex items-end justify-center bg-ink/30 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-16 sm:items-center">
@@ -86,14 +93,16 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
           >
             {NAMING.cta_primary}
           </Button>
-          <button
-            type="button"
-            onClick={() => setChips(shuffleNameChips(3, catalog.friendId))}
-            aria-label={NAMING.cta_shuffle}
-            className="w-full text-center text-sm text-ink/50 underline-offset-2 hover:underline"
-          >
-            {NAMING.cta_shuffle}
-          </button>
+          {isInk ? null : (
+            <button
+              type="button"
+              onClick={() => setChips(shuffleNameChips(3, catalog.friendId))}
+              aria-label={NAMING.cta_shuffle}
+              className="w-full text-center text-sm text-ink/50 underline-offset-2 hover:underline"
+            >
+              {NAMING.cta_shuffle}
+            </button>
+          )}
         </form>
       </div>
     </div>

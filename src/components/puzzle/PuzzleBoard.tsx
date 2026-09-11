@@ -89,7 +89,11 @@ export function PuzzleBoard({
                   )}
                   style={
                     isGate && gateHex
-                      ? { background: `${gateHex}33`, borderColor: gateHex }
+                      ? {
+                          background: `${gateHex}40`,
+                          borderColor: gateHex,
+                          boxShadow: `inset 0 0 0 2px ${gateHex}`,
+                        }
                       : undefined
                   }
                 >
@@ -98,8 +102,8 @@ export function PuzzleBoard({
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
                         src={GATE_ASSETS[gate.color]}
-                        alt=""
-                        className="h-full w-full p-1.5"
+                        alt={`${gate.color} house`}
+                        className="h-full w-full p-0.5"
                       />
                     ) : (
                       <GateMark colorHex={gateHex} />

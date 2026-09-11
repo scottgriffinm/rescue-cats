@@ -9,6 +9,7 @@ import { GameShell } from "@/components/shell/GameShell";
 import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
 import {
+  FURNITURE,
   NAMING,
   SHOP_STARTER,
   STAR_COSMETICS,
@@ -35,6 +36,7 @@ export function YardScreen() {
   const allDone = cleared >= LEVELS.length;
   const hasBox = save.furniture.includes("furn_box_cardboard");
   const hasTree = save.furniture.includes("furn_tree_mini");
+  const hasScratch = save.furniture.includes("furn_scratch_post");
   const introFriend = save.friends.find((friend) => friend.firstNight);
   const [bangFriendId, setBangFriendId] = useState<string | null>(null);
   const newestFriend = save.friends[save.friends.length - 1];
@@ -64,7 +66,7 @@ export function YardScreen() {
           RESCUE <span className="text-clay">CATS</span>
         </h1>
         <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink/55">
-          <span>Comfort {comfort}</span>
+          <ComfortMeter value={comfort} />
           <span>♥ {save.hearts}</span>
           <span className="inline-flex items-center gap-0.5">
             <UiIcon name="star_marigold" className="h-3.5 w-3.5" />
@@ -90,6 +92,7 @@ export function YardScreen() {
             friends={save.friends}
             hasBox={hasBox}
             hasTree={hasTree}
+            hasScratch={hasScratch}
             bangFriendId={bangFriendId}
             onBang={(instanceId) => {
               completeFirstNight(instanceId);
@@ -177,6 +180,26 @@ export function YardScreen() {
   );
 }
 
+function ComfortMeter({ value }: { value: number }) {
+  const cap = Math.max(6, FURNITURE.reduce((sum, sku) => sum + sku.comfort, 0));
+  const pct = Math.min(100, (value / cap) * 100);
+  return (
+    <div className="flex items-center gap-1.5" aria-label={`Comfort ${value}`}>
+      <span>Comfort</span>
+      <div
+        className="h-2 w-16 overflow-hidden rounded-full border border-ink/25 bg-paper-deep"
+        aria-hidden
+      >
+        <div
+          className="h-full bg-sage transition-[width] duration-300"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <span className="font-display text-ink">{value}</span>
+    </div>
+  );
+}
+
 function ShopRow({
   hearts,
   stars,
@@ -195,44 +218,63 @@ function ShopRow({
   onBuyCosmetic: (id: string, cost: number) => boolean;
 }) {
   const heartsOpen = shopUnlocked(cleared);
-  const heartItems = heartsOpen
-    ? shopItemsForClear(cleared).filter((sku) => !ownedFurniture.includes(sku.skuId))
-    : [];
-  const starItem = heartsOpen
-    ? STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id))
-    : undefined;
+  if (!heartsOpen) return null;
+
+  const heartItems = shopItemsForClear(cleared).filter(
+    (sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId),
+  );
+  const starItem = STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id));
   if (heartItems.length === 0 && !starItem) return null;
 
+  const ownedStarter = ownedFurniture.includes(SHOP_STARTER.sku_id);
+
   return (
-    <div className="space-y-1.5">
-      {heartsOpen ? (
-        <p className="text-center text-[10px] tracking-[0.18em] text-ink/40">
-          {SHOP_STARTER.eyebrow.toUpperCase()}
-        </p>
+    <div className="space-y-2">
+      <p className="text-center text-[10px] tracking-[0.18em] text-ink/45">
+        {SHOP_STARTER.eyebrow.toUpperCase()}
+      </p>
+      {heartItems.map((heartItem) => {
+        const canAfford = hearts >= heartItem.hearts;
+        const need = Math.max(0, heartItem.hearts - hearts);
+        const isStarter = heartItem.skuId === SHOP_STARTER.sku_id;
+        return (
+          <div key={heartItem.skuId} className="paper-card space-y-2 rounded-2xl px-3 py-3">
+            <div className="text-center">
+              <p className="font-display text-base text-ink">{heartItem.name}</p>
+              <p className="text-xs text-ink/60">
+                {heartItem.comfort > 0 ? `+${heartItem.comfort} Comfort · ` : ""}
+                {heartItem.hearts}♥
+              </p>
+            </div>
+            {canAfford ? (
+              <button
+                type="button"
+                onClick={() => onBuyFurniture(heartItem.skuId, heartItem.hearts)}
+                className="inline-flex h-11 w-full items-center justify-center rounded-[10px] bg-ink px-5 font-display text-base tracking-wide text-paper shadow-[0_3px_0_#2B2A28]"
+              >
+                {isStarter ? "Buy for 15♥" : `Buy for ${heartItem.hearts}♥`}
+              </button>
+            ) : (
+              <p className="rounded-[10px] border-2 border-ink/20 bg-paper-deep px-3 py-2 text-center text-sm text-ink/70">
+                Need {need} more ♥ — keep sliding
+              </p>
+            )}
+          </div>
+        );
+      })}
+      {heartItems.length === 0 && ownedStarter ? (
+        <p className="text-center text-xs text-ink/50">Sisal Scratch Post is on the porch.</p>
       ) : null}
-      <div className="flex flex-wrap gap-2 text-xs">
-      {heartItems.map((heartItem) => (
-        <button
-          key={heartItem.skuId}
-          type="button"
-          disabled={hearts < heartItem.hearts}
-          onClick={() => onBuyFurniture(heartItem.skuId, heartItem.hearts)}
-          className="paper-card flex-1 rounded-xl px-2 py-2 text-ink/70 disabled:opacity-40"
-        >
-          {heartItem.name} · {heartItem.hearts}♥
-        </button>
-      ))}
       {starItem ? (
         <button
           type="button"
           disabled={stars < starItem.stars}
           onClick={() => onBuyCosmetic(starItem.id, starItem.stars)}
-          className="paper-card flex-1 rounded-xl px-2 py-2 text-ink/70 disabled:opacity-40"
+          className="w-full text-center text-xs text-ink/45 underline-offset-2 hover:underline disabled:no-underline disabled:opacity-50"
         >
           {starItem.name} · {starItem.stars}★
         </button>
       ) : null}
-      </div>
     </div>
   );
 }
