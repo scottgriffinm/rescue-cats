@@ -5,6 +5,7 @@ import chapter3Tux from "../../data/chapter3_tux_bang.json";
 import chapter3Ghost from "../../data/chapter3_ghost_bang.json";
 import chapter3Mist from "../../data/chapter3_mist_bang.json";
 import chapter3Pepper from "../../data/chapter3_pepper_bang.json";
+import chapter3Pumpkin from "../../data/chapter3_pumpkin_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -39,7 +40,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "tuxedo" ||
     raw === "ghost" ||
     raw === "mist" ||
-    raw === "pepper"
+    raw === "pepper" ||
+    raw === "pumpkin"
   ) {
     return raw;
   }
@@ -63,6 +65,7 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
   const isGhost = raw.friend_id === chapter3Ghost.friend_id;
   const isMist = raw.friend_id === chapter3Mist.friend_id;
   const isPepper = raw.friend_id === chapter3Pepper.friend_id;
+  const isPumpkin = raw.friend_id === chapter3Pumpkin.friend_id;
   const kit = artKit(raw.art_kit, raw.color, raw.pattern);
   const phenotype: Phenotype = {
     phenotypeId: raw.phenotype_id,
@@ -85,10 +88,13 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
               ? chapter3Mist.personality
               : isPepper
                 ? chapter3Pepper.personality
-                : raw.personality,
+                : isPumpkin
+                  ? chapter3Pumpkin.personality
+                  : raw.personality,
     // CURRENT lists friend_004 as calico; Tux is the first tuxedo loaf, not calico.
     // CURRENT lists friend_006 as slate; Mist is a gray-mackerel loaf, not Ink.
     // CURRENT lists friend_007 as ginger; Pepper is a spotted orange loaf, not Mango.
+    // CURRENT lists friend_008 as ginger; Pumpkin is a classic orange loaf, not Mango or Pepper.
     artKit: isInk
       ? "slate"
       : isBiscuit
@@ -101,7 +107,9 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
               ? "mist"
               : isPepper
                 ? "pepper"
-                : kit,
+                : isPumpkin
+                  ? "pumpkin"
+                  : kit,
     boardColor: isInk
       ? "gray"
       : isBiscuit
@@ -114,7 +122,9 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
               ? "gray"
               : isPepper
                 ? "orange"
-                : boardColorFromCoat(raw.color),
+                : isPumpkin
+                  ? "orange"
+                  : boardColorFromCoat(raw.color),
   };
   return {
     friendId: raw.friend_id,
@@ -132,7 +142,9 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
               ? chapter3Mist.display_line
               : isPepper
                 ? chapter3Pepper.display_line
-                : raw.display_line,
+                : isPumpkin
+                  ? chapter3Pumpkin.display_line
+                  : raw.display_line,
     tier: raw.tier,
     phenotype,
   };
@@ -152,12 +164,14 @@ export const CHAPTER3_TUX = chapter3Tux;
 export const CHAPTER3_GHOST = chapter3Ghost;
 export const CHAPTER3_MIST = chapter3Mist;
 export const CHAPTER3_PEPPER = chapter3Pepper;
+export const CHAPTER3_PUMPKIN = chapter3Pumpkin;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
 export const GHOST_FRIEND_ID = chapter3Ghost.friend_id;
 export const MIST_FRIEND_ID = chapter3Mist.friend_id;
 export const PEPPER_FRIEND_ID = chapter3Pepper.friend_id;
+export const PUMPKIN_FRIEND_ID = chapter3Pumpkin.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -184,7 +198,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 7);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 8);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -196,7 +210,7 @@ export function friendById(id: string) {
   return CATALOG.find((friend) => friend.friendId === id);
 }
 
-/** CEO freeze — CURRENT is correct. NO Pebble. Mango@3 / Ink@6 / Biscuit@9 / Tux@12 / Ghost@15 / Mist@18 / Pepper@21. */
+/** CEO freeze — CURRENT is correct. NO Pebble. Mango@3 / Ink@6 / Biscuit@9 / Tux@12 / Ghost@15 / Mist@18 / Pepper@21 / Pumpkin@24. */
 export const SLICE_UNLOCKS: Record<number, string> = {
   3: "friend_001",
   6: "friend_002",
@@ -205,9 +219,10 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   15: "friend_005",
   18: "friend_006",
   21: "friend_007",
+  24: "friend_008",
 };
 
-/** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21; later rows follow CURRENT as-is. */
+/** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24; later rows follow CURRENT as-is. */
 export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   if (clearIndex < 3) return undefined;
   const locked = SLICE_UNLOCKS[clearIndex];
@@ -215,20 +230,21 @@ export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   return CATALOG.find((friend) => friend.unlockClear === clearIndex);
 }
 
-/** Friends the live campaign actually awards. Pumpkin@24 stays in CURRENT for a later slice. */
+/** Friends the live campaign actually awards. Shadow@27 stays in CURRENT for a later slice. */
 export function shippedFriendForClear(clearIndex: number): CatalogFriend | undefined {
   const locked = SLICE_UNLOCKS[clearIndex];
   return locked ? friendById(locked) : undefined;
 }
 
-/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. Clear 9 gifts the Sun Cushion. Clear 12, 15, 18, and 21 gift nothing. */
+/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. Clear 9 gifts the Sun Cushion. Clear 12, 15, 18, 21, and 24 gift nothing. */
 export function furnitureGiftsForClear(clearIndex: number) {
   if (
     clearIndex === 6 ||
     clearIndex === 12 ||
     clearIndex === 15 ||
     clearIndex === 18 ||
-    clearIndex === 21
+    clearIndex === 21 ||
+    clearIndex === 24
   ) {
     return [];
   }
@@ -284,6 +300,9 @@ export const MIST_NAMING_CHIPS: string[] = CHAPTER3_MIST.naming.suggestion_chips
 /** Pepper naming chips — spice / food, never Mist weather or prior pools. */
 export const PEPPER_NAMING_CHIPS: string[] = CHAPTER3_PEPPER.naming.suggestion_chips;
 
+/** Pumpkin naming chips — seasonal / food, never Pepper spice or prior pools. */
+export const PUMPKIN_NAMING_CHIPS: string[] = CHAPTER3_PUMPKIN.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -303,6 +322,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === PEPPER_FRIEND_ID || friendId === "friend_007") {
     return [...PEPPER_NAMING_CHIPS];
   }
+  if (friendId === PUMPKIN_FRIEND_ID || friendId === "friend_008") {
+    return [...PUMPKIN_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -311,6 +333,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Shy") return [...GHOST_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Dreamy") return [...MIST_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Bold") return [...PEPPER_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Sunny") return [...PUMPKIN_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -342,6 +365,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === PEPPER_FRIEND_ID || friendId === "friend_007") {
     return shufflePool([...PEPPER_NAMING_CHIPS], count);
   }
+  if (friendId === PUMPKIN_FRIEND_ID || friendId === "friend_008") {
+    return shufflePool([...PUMPKIN_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -364,6 +390,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER3_GHOST.bang_copy as Record<string, string[]>),
     ...(CHAPTER3_MIST.bang_copy as Record<string, string[]>),
     ...(CHAPTER3_PEPPER.bang_copy as Record<string, string[]>),
+    ...(CHAPTER3_PUMPKIN.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -387,6 +414,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Shy") return "sunbeam";
   if (personality === "Dreamy") return "morning fog";
   if (personality === "Bold") return "bell";
+  if (personality === "Sunny") return "fallen leaf";
   return "sun patch";
 }
 

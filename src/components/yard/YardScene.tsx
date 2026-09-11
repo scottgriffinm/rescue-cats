@@ -40,6 +40,7 @@ export function YardScene({
   const ghost = friends.find((friend) => friend.friendId === "friend_005");
   const mist = friends.find((friend) => friend.friendId === "friend_006");
   const pepper = friends.find((friend) => friend.friendId === "friend_007");
+  const pumpkin = friends.find((friend) => friend.friendId === "friend_008");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -47,7 +48,8 @@ export function YardScene({
       friend.friendId !== "friend_004" &&
       friend.friendId !== "friend_005" &&
       friend.friendId !== "friend_006" &&
-      friend.friendId !== "friend_007",
+      friend.friendId !== "friend_007" &&
+      friend.friendId !== "friend_008",
   );
 
   return (
@@ -164,6 +166,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{pepper.name}</p>
+        </div>
+      ) : null}
+
+      {pumpkin ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "82%", top: "38%" }}
+        >
+          <FriendSprite
+            kit={friendById(pumpkin.friendId)?.phenotype.artKit ?? "pumpkin"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === pumpkin.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(pumpkin.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${pumpkin.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{pumpkin.name}</p>
         </div>
       ) : null}
 
