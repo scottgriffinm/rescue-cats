@@ -5,11 +5,10 @@ import { friendById } from "@/lib/collection";
 import type { FriendInstance } from "@/lib/types";
 
 const ROOSTS = [
-  { left: "36%", top: "56%" },
-  { left: "58%", top: "50%" },
-  { left: "48%", top: "68%" },
-  { left: "70%", top: "64%" },
-  { left: "24%", top: "70%" },
+  { left: "62%", top: "58%" },
+  { left: "48%", top: "70%" },
+  { left: "72%", top: "66%" },
+  { left: "28%", top: "68%" },
 ];
 
 export function YardScene({
@@ -21,6 +20,9 @@ export function YardScene({
   hasBox: boolean;
   hasTree: boolean;
 }) {
+  const mango = friends.find((friend) => friend.friendId === "friend_001");
+  const others = friends.filter((friend) => friend.friendId !== "friend_001");
+
   return (
     <div className="relative mx-auto h-[340px] w-full max-w-[340px]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -30,16 +32,16 @@ export function YardScene({
         className="pointer-events-none absolute inset-0 h-full w-full select-none"
       />
 
-      <FurnitureImg file="fence" className="absolute left-[8%] top-[16%] w-[46%]" />
-      <FurnitureImg file="postBell" className="absolute right-[16%] top-[22%] w-[13%]" />
-      <FurnitureImg file="fountain" className="absolute left-[12%] top-[40%] w-[20%]" />
+      <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] w-[56%]" />
+      <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] w-[18%]" />
+      <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[22%]" />
       {hasTree ? (
-        <FurnitureImg file="swing" className="absolute right-[6%] top-[8%] w-[34%]" />
+        <FurnitureImg file="swing" className="absolute right-[4%] top-[6%] w-[38%]" />
       ) : null}
       {hasBox ? (
         <FurnitureImg
           file="boxBed"
-          className="yard-drop-box absolute bottom-[18%] left-[14%] w-[36%]"
+          className="yard-drop-box absolute bottom-[16%] left-[12%] w-[46%]"
         />
       ) : null}
 
@@ -49,8 +51,25 @@ export function YardScene({
         </p>
       ) : null}
 
-      {friends.map((friend) => {
-        const roost = ROOSTS[friend.roost % ROOSTS.length];
+      {mango && hasBox ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "34%", top: "62%" }}
+        >
+          <FriendSprite
+            kit={friendById(mango.friendId)?.phenotype.artKit ?? "ginger"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {mango.firstNight ? (
+            <UiIcon name="bubble_bang" className="absolute -right-1 -top-3 h-6 w-6" />
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
+        </div>
+      ) : null}
+
+      {(mango && !hasBox ? [mango, ...others] : others).map((friend, index) => {
+        const roost = ROOSTS[friend.roost % ROOSTS.length] ?? ROOSTS[index % ROOSTS.length];
         const catalog = friendById(friend.friendId);
         return (
           <div
@@ -64,14 +83,9 @@ export function YardScene({
               className="h-[72px] w-[72px]"
             />
             {friend.firstNight ? (
-              <UiIcon
-                name="bubble_bang"
-                className="absolute -right-1 -top-3 h-6 w-6"
-              />
+              <UiIcon name="bubble_bang" className="absolute -right-1 -top-3 h-6 w-6" />
             ) : null}
-            <p className="text-center font-display text-[11px] text-ink/70">
-              {friend.name}
-            </p>
+            <p className="text-center font-display text-[11px] text-ink/70">{friend.name}</p>
           </div>
         );
       })}

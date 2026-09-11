@@ -8,6 +8,7 @@ import { ContinueSheet } from "@/components/puzzle/ContinueSheet";
 import { LivesRow } from "@/components/puzzle/LivesRow";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { PuzzleBoard, type CatMotion } from "@/components/puzzle/PuzzleBoard";
+import { SlidePad } from "@/components/puzzle/SlidePad";
 import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
 import { Button } from "@/components/ui/Button";
@@ -194,6 +195,12 @@ export function PuzzleScreen({ level }: { level: Level }) {
           disabled={phase !== "playing"}
           motion={motion}
           onSelect={selectCat}
+          onSlide={(dir) => void slide(dir)}
+        />
+        <SlidePad
+          legal={selected ? legalDirs(level, cats, selected) : []}
+          disabled={phase !== "playing"}
+          dimmed={phase === "sliding" || phase === "won"}
           onSlide={(dir) => void slide(dir)}
         />
       </div>

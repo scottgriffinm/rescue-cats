@@ -4,15 +4,8 @@ import { useRef } from "react";
 import { PuzzleCatSprite, UiIcon } from "@/components/art/Sprite";
 import { cn } from "@/lib/cn";
 import { cellKey } from "@/lib/directions";
-import { blockedSet, legalDirs } from "@/lib/slide";
+import { blockedSet } from "@/lib/slide";
 import type { Dir, Level, PieceCat } from "@/lib/types";
-
-const SHIFT: Record<Dir, { x: number; y: number; glyph: string; label: string }> = {
-  n: { x: 0, y: -30, glyph: "↑", label: "Slide north" },
-  e: { x: 30, y: 0, glyph: "→", label: "Slide east" },
-  s: { x: 0, y: 30, glyph: "↓", label: "Slide south" },
-  w: { x: -30, y: 0, glyph: "←", label: "Slide west" },
-};
 
 export type CatMotion = {
   id: string;
@@ -42,7 +35,6 @@ export function PuzzleBoard({
   const start = useRef<{ x: number; y: number } | null>(null);
   const blocked = blockedSet(level);
   const gateKeys = new Set(level.gates.map((gate) => cellKey(gate.x, gate.y)));
-  const legal = selected ? legalDirs(level, cats, selected) : [];
   const homeKeys = new Set(
     motion?.kind === "home"
       ? cats.filter((cat) => gateKeys.has(cellKey(cat.x, cat.y))).map((cat) => cellKey(cat.x, cat.y))
@@ -128,31 +120,6 @@ export function PuzzleBoard({
             </button>
           );
         })}
-
-        {selected
-          ? legal.map((dir) => {
-              const cat = cats.find((item) => item.id === selected);
-              if (!cat) return null;
-              const shift = SHIFT[dir];
-              return (
-                <button
-                  key={dir}
-                  type="button"
-                  disabled={disabled}
-                  onClick={() => onSlide(dir)}
-                  className="absolute z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-path font-display text-base text-paper"
-                  style={{
-                    left: `${((cat.x + 0.5) * 100) / level.width}%`,
-                    top: `${((cat.y + 0.5) * 100) / level.height}%`,
-                    transform: `translate(-50%, -50%) translate(${shift.x}px, ${shift.y}px)`,
-                  }}
-                  aria-label={shift.label}
-                >
-                  {shift.glyph}
-                </button>
-              );
-            })
-          : null}
 
         {showCoach && selected ? (
           <UiIcon
