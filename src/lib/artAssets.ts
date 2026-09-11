@@ -14,6 +14,8 @@ export const CAT_ASSETS = {
   ginger_loaf_160: "/assets/cats/ginger_loaf_160.svg",
   slate_loaf_48: "/assets/cats/slate_loaf_48.svg",
   slate_loaf_72: "/assets/cats/slate_loaf_72.svg",
+  ink_loaf_48: "/assets/cats/ink_loaf_48.svg",
+  ink_loaf_72: "/assets/cats/ink_loaf_72.svg",
   calico_loaf_48: "/assets/cats/calico_loaf_48.svg",
   calico_loaf_72: "/assets/cats/calico_loaf_72.svg",
   calico_belly_72: "/assets/cats/calico_belly_72.svg",
@@ -22,6 +24,9 @@ export const CAT_ASSETS = {
 export const FURN_ASSETS = {
   boxBed: "/assets/furniture/boxBed.svg",
   swing: "/assets/furniture/swing.svg",
+  scratcher: "/assets/furniture/scratcher.svg",
+  miniTree: "/assets/furniture/miniTree.svg",
+  yarnSwing: "/assets/furniture/yarnSwing.svg",
   postBell: "/assets/furniture/postBell.svg",
   fence: "/assets/furniture/fence.svg",
   fountain: "/assets/furniture/fountain.svg",
@@ -36,4 +41,6 @@ export const UI_ASSETS = {
   hand_cursor: "/assets/ui/hand_cursor.svg",
   bubble_bang: "/assets/ui/bubble_bang.svg",
   icon_close: "/assets/ui/icon_close.svg",
+  gate_orange: "/assets/ui/gate_orange.svg",
+  gate_gray: "/assets/ui/gate_gray.svg",
 } as const;

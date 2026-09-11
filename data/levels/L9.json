@@ -1,0 +1,54 @@
+{
+  "templateId": "LT08_color_lock",
+  "gridOrigin": "top-left",
+  "id": "L9",
+  "name": "Wrong Order Soft-Lock",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 8,
+  "nudges": 0,
+  "colorLocks": true,
+  "walls": [
+    {
+      "x": 2,
+      "y": 1
+    },
+    {
+      "x": 2,
+      "y": 2
+    },
+    {
+      "x": 3,
+      "y": 4
+    }
+  ],
+  "cats": [
+    {
+      "id": "cat_orange",
+      "x": 0,
+      "y": 0,
+      "color": "color_orange"
+    },
+    {
+      "id": "cat_gray",
+      "x": 5,
+      "y": 2,
+      "color": "color_gray"
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate_orange",
+      "x": 5,
+      "y": 0,
+      "color": "color_orange"
+    },
+    {
+      "id": "gate_gray",
+      "x": 0,
+      "y": 5,
+      "color": "color_gray"
+    }
+  ],
+  "teach": "lt08_softlock"
+}

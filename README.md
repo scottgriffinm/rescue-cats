@@ -31,7 +31,7 @@ npm run verify:levels
 | --- | --- |
 | `/` | Porch / lawn hub |
 | `/play` | Next unsolved level |
-| `/level/L1` … `/level/L10` | Slide-budget boards (LT01 teach, LT02 two-cat, LT08 color lock) |
+| `/level/L1` … `/level/L9` | Slide-budget boards (LT01 teach, locked LT02 / LT08 packs) |
 
 Tap a cat, then swipe or tap the footer D-pad. They slide until a wall, blocker, another cat, or the edge. Gates do not stop a slide — rest on the house to win.
 

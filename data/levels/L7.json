@@ -1,0 +1,58 @@
+{
+  "templateId": "LT02_two_cat",
+  "gridOrigin": "top-left",
+  "id": "L7",
+  "name": "Tight Routes",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 8,
+  "nudges": 0,
+  "colorLocks": false,
+  "walls": [
+    {
+      "x": 1,
+      "y": 2
+    },
+    {
+      "x": 2,
+      "y": 2
+    },
+    {
+      "x": 3,
+      "y": 2
+    },
+    {
+      "x": 2,
+      "y": 4
+    },
+    {
+      "x": 4,
+      "y": 1
+    }
+  ],
+  "cats": [
+    {
+      "id": "cat_a",
+      "x": 0,
+      "y": 1
+    },
+    {
+      "id": "cat_b",
+      "x": 5,
+      "y": 3
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate_a",
+      "x": 5,
+      "y": 0
+    },
+    {
+      "id": "gate_b",
+      "x": 0,
+      "y": 5
+    }
+  ],
+  "teach": "lt02_tight"
+}

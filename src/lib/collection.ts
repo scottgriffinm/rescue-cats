@@ -9,9 +9,9 @@ type RawSku = (typeof pack.starter_furniture)[number];
 const FALLBACK_ASSETS: Record<string, string> = {
   furn_box_cardboard: "/assets/furniture/boxBed.svg",
   furn_bed_cushion: "/assets/furniture/boxBed.svg",
-  furn_scratch_post: "/assets/furniture/postBell.svg",
-  furn_tree_mini: "/assets/furniture/swing.svg",
-  furn_swing_yarn: "/assets/furniture/swing.svg",
+  furn_scratch_post: "/assets/furniture/scratcher.svg",
+  furn_tree_mini: "/assets/furniture/miniTree.svg",
+  furn_swing_yarn: "/assets/furniture/yarnSwing.svg",
   furn_fountain_stone: "/assets/furniture/fountain.svg",
   furn_perch_high: "/assets/furniture/swing.svg",
 };
@@ -142,7 +142,7 @@ export function artForKit(kit: ArtKit) {
 
 export function allNameSuggestions() {
   const pools = NAMING.suggestion_pools;
-  return [...new Set(["Ink", ...pools.food, ...pools.soft, ...pools.silly_human, ...pools.breed_leaning])];
+  return [...new Set(["Ink", "Ash", ...pools.food, ...pools.soft, ...pools.silly_human, ...pools.breed_leaning])];
 }
 
 export const NAMING_CHIPS: string[] =
@@ -150,7 +150,13 @@ export const NAMING_CHIPS: string[] =
     ? NAMING.suggestion_chips
     : ["Mango", "Biscuit", "Pepper"];
 
-const INK_CHIPS = ["Ink", "Misty", "Shadow"];
+const INK_CHIPS = ["Ink", "Ash", "Shadow"];
+export const INK_FIRST_NIGHT = "{Name}: Quiet gray paws. Already claimed a shadow.";
+
+export function firstNightLine(friendId: string, name: string) {
+  if (friendId === "friend_002") return withName(INK_FIRST_NIGHT, name);
+  return withName(NAMING.first_night_bubble, name);
+}
 
 /** Mango keeps the Bench chip set. Ink offers quiet-name chips. */
 export function chipsForFriend(friendId?: string) {

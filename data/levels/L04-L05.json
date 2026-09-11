@@ -1,7 +1,7 @@
 {
   "templateId": "LT02_two_cat",
   "gridOrigin": "top-left",
-  "note": "Chapter 2 openers. Slide still stops on wall|cat|edge only; gates never brake.",
+  "note": "Locked LT02 pack. Do not invent coordinates.",
   "levels": [
     {
       "id": "L4",
@@ -12,17 +12,38 @@
       "nudges": 0,
       "colorLocks": false,
       "walls": [],
-      "blockers": [],
       "cats": [
-        { "id": "cat_a", "x": 1, "y": 1, "color": "color_orange" },
-        { "id": "cat_b", "x": 3, "y": 1, "color": "color_gray" }
+        {
+          "id": "cat_a",
+          "x": 1,
+          "y": 0
+        },
+        {
+          "id": "cat_b",
+          "x": 3,
+          "y": 0
+        }
       ],
       "gates": [
-        { "id": "gate_a", "x": 1, "y": 4 },
-        { "id": "gate_b", "x": 3, "y": 4 }
+        {
+          "id": "gate_a",
+          "x": 1,
+          "y": 4
+        },
+        {
+          "id": "gate_b",
+          "x": 3,
+          "y": 4
+        }
       ],
       "teach": "two_cats",
-      "note": "Dual clear, low collision. Each friend slides south onto an edge-brake gate."
+      "ascii": [
+        ". A . B .",
+        ". . . . .",
+        ". . . . .",
+        ". . . . .",
+        ". a . b ."
+      ]
     },
     {
       "id": "L5",
@@ -32,18 +53,49 @@
       "moveBudget": 9,
       "nudges": 0,
       "colorLocks": false,
-      "walls": [{ "x": 0, "y": 1 }],
-      "blockers": [],
+      "walls": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        }
+      ],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
-        { "id": "cat_b", "x": 1, "y": 0, "color": "color_gray" }
+        {
+          "id": "cat_a",
+          "x": 2,
+          "y": 0
+        },
+        {
+          "id": "cat_b",
+          "x": 2,
+          "y": 3
+        }
       ],
       "gates": [
-        { "id": "gate_a", "x": 0, "y": 4 },
-        { "id": "gate_b", "x": 4, "y": 4 }
+        {
+          "id": "gate_a",
+          "x": 0,
+          "y": 4
+        },
+        {
+          "id": "gate_b",
+          "x": 4,
+          "y": 4
+        }
       ],
-      "teach": "collision_order",
-      "note": "One wall segment boxes the west cat. The neighbor must vacate; cats never push."
+      "teach": "collision_order"
     }
   ]
 }

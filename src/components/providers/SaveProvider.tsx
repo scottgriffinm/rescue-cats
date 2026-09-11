@@ -13,6 +13,7 @@ import {
   favoriteToyFor,
   friendById,
   friendForClear,
+  firstNightLine,
   furnitureGiftsForClear,
   heartsForClear,
   unlockFlagsFor,
@@ -182,7 +183,7 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         const current = snap.save;
         const friend = current.friends.find((item) => item.instanceId === instanceId);
         if (!friend) return;
-        const sniff = withName(NAMING.first_night_bubble, friend.name);
+        const sniff = firstNightLine(friend.friendId, friend.name);
         const friends = current.friends.map((item) =>
           item.instanceId === instanceId ? { ...item, firstNight: false } : item,
         );

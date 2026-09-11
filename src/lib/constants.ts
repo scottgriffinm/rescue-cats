@@ -18,8 +18,8 @@ export const ART_KIT_PATH: Record<
     loaf72: "/assets/cats/cream_loaf_72.svg",
   },
   slate: {
-    loaf48: "/assets/cats/slate_loaf_48.svg",
-    loaf72: "/assets/cats/slate_loaf_72.svg",
+    loaf48: "/assets/cats/ink_loaf_48.svg",
+    loaf72: "/assets/cats/ink_loaf_72.svg",
   },
   calico: {
     loaf48: "/assets/cats/calico_loaf_48.svg",

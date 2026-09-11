@@ -49,7 +49,7 @@ export function YardScene({
       <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] min-h-[72px] w-[22%] min-w-[72px]" />
       <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] min-h-[72px] w-[24%] min-w-[72px]" />
       {hasTree ? (
-        <FurnitureImg file="swing" className="absolute right-[4%] top-[6%] min-h-[72px] w-[38%] min-w-[72px]" />
+        <FurnitureImg file="miniTree" className="absolute right-[4%] top-[6%] min-h-[72px] w-[28%] min-w-[72px]" />
       ) : null}
       {hasBox ? (
         <FurnitureImg
@@ -59,13 +59,13 @@ export function YardScene({
       ) : null}
       {hasPost ? (
         <FurnitureImg
-          file="postBell"
-          className="yard-drop-box absolute bottom-[18%] right-[6%] min-h-[72px] w-[22%] min-w-[64px]"
+          file="scratcher"
+          className="yard-drop-box absolute bottom-[18%] right-[6%] min-h-[72px] w-[16%] min-w-[48px]"
         />
       ) : null}
       {hasSwing ? (
         <FurnitureImg
-          file="swing"
+          file="yarnSwing"
           className="yard-drop-box absolute left-[40%] top-[30%] min-h-[72px] w-[28%] min-w-[72px]"
         />
       ) : null}

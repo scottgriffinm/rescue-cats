@@ -1,0 +1,50 @@
+{
+  "templateId": "LT08_color_lock",
+  "gridOrigin": "top-left",
+  "id": "L8",
+  "name": "My Gate Only",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 9,
+  "nudges": 0,
+  "colorLocks": true,
+  "walls": [
+    {
+      "x": 2,
+      "y": 2
+    },
+    {
+      "x": 3,
+      "y": 3
+    }
+  ],
+  "cats": [
+    {
+      "id": "cat_orange",
+      "x": 1,
+      "y": 0,
+      "color": "color_orange"
+    },
+    {
+      "id": "cat_gray",
+      "x": 4,
+      "y": 0,
+      "color": "color_gray"
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate_orange",
+      "x": 1,
+      "y": 5,
+      "color": "color_orange"
+    },
+    {
+      "id": "gate_gray",
+      "x": 4,
+      "y": 5,
+      "color": "color_gray"
+    }
+  ],
+  "teach": "lt08_intro"
+}

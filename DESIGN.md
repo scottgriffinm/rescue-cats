@@ -134,12 +134,12 @@ Assets live under `public/assets/{cats,furniture,ui}/` and can be swapped in pla
 
 L1 Straight Shot → L2 Setup Slide → L3 Wall as Brake → **name Mango** → yard with `boxBed`. Grid origin top-left, y down. Authored boards: `data/levels/L01-L03.json`.
 
-Chapter 2 (shipped on that same slide verb): **L4–L5** two-cat collision (5×5) → **L6–L7** LT02 on 6×6 → **Ink (`friend_002`) at unique clear 6** (slate loaf, empty naming + Ink/Misty/Shadow chips) → **L8–L9** LT08 color lock (mismatched house is solid; matched house is a valid rest, not a brake) → starter shop (scratch post 15♥, mini tree 40♥, yarn swing 40♥) with Comfort meter. Parade stops at Ink.
+Chapter 2 (locked packs only): **L4 Two Friends** / **L5 Collision Order** (`LT02-L04-L05.json`) → **L6 Bigger Yard** / **L7 Tight Routes** (`CHAPTER2_PUZZLE_L06_L07.json`) → **Ink (`friend_002`) at unique clear 6** (ink loaf, empty naming + Ink/Ash/Shadow chips) → **L8 My Gate Only** / **L9 Wrong Order Soft-Lock** (`LT08-L08-L09.json`). Mismatched house is solid; matched house is a valid rest, not a brake. Starter shop: scratcher / miniTree / yarnSwing. Parade stops at Ink. Do not invent boards.
 
 Art mapping:
 
 - `friend_001` Mango → `ginger_loaf_72` (hero / yard) + `ginger_loaf_48` (thumb); board color `orange`
-- `friend_002` Ink → `slate_loaf_72` / `slate_loaf_48`; board color `gray`; unlock at unique clear 6
+- `friend_002` Ink → `ink_loaf_72` / `ink_loaf_48` (slate kit aliases the same files); board color `gray`; unlock at unique clear 6
 - `furn_box_cardboard` → `boxBed.svg` (only gift with Mango at clear 3)
 - Naming chrome: `star_marigold` + `input_name` + `btn_primary`
 - `calico_belly_72` = puzzle board cats only (not the Mango / Ink unlock)

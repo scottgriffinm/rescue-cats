@@ -1,6 +1,6 @@
 import { LEVELS } from "./levels";
 import { allCatsOnGates, legalDirs, slideCat } from "./slide";
-import type { Dir, Level, PieceCat } from "./types";
+import type { Dir, Level, PieceCat, Vec } from "./types";
 
 const SOLVES: Record<string, Array<[string, Dir]>> = {
   L1: [["cat_a", "s"]],
@@ -15,46 +15,156 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_b", "s"],
   ],
   L5: [
-    ["cat_b", "s"],
     ["cat_a", "e"],
     ["cat_a", "s"],
     ["cat_b", "w"],
+    ["cat_b", "s"],
   ],
   L6: [
+    ["cat_a", "s"],
     ["cat_b", "s"],
-    ["cat_a", "e"],
-    ["cat_a", "s"],
-    ["cat_a", "w"],
-    ["cat_b", "e"],
-    ["cat_a", "s"],
-    ["cat_a", "w"],
   ],
   L7: [
-    ["cat_a", "e"],
     ["cat_a", "s"],
-    ["cat_a", "e"],
-    ["cat_b", "s"],
-    ["cat_b", "w"],
-    ["cat_b", "s"],
-    ["cat_b", "w"],
+    ["cat_b", "n"],
   ],
   L8: [
-    ["cat_a", "s"],
-    ["cat_b", "s"],
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
   ],
   L9: [
-    ["cat_a", "e"],
-    ["cat_a", "s"],
-    ["cat_a", "e"],
-    ["cat_b", "w"],
-    ["cat_b", "s"],
+    ["cat_orange", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
   ],
-  L10: [
-    ["cat_a", "n"],
-    ["cat_a", "e"],
-    ["cat_b", "s"],
-    ["cat_b", "w"],
-  ],
+};
+
+/** Locked Chapter 2 topologies — fail if any coord drifts. */
+const LOCKED: Record<
+  string,
+  {
+    width: number;
+    height: number;
+    moveBudget: number;
+    colorLocks: boolean;
+    walls: Vec[];
+    cats: Array<{ id: string; x: number; y: number; color?: string }>;
+    gates: Array<{ id: string; x: number; y: number; color?: string }>;
+  }
+> = {
+  L4: {
+    width: 5,
+    height: 5,
+    moveBudget: 10,
+    colorLocks: false,
+    walls: [],
+    cats: [
+      { id: "cat_a", x: 1, y: 0 },
+      { id: "cat_b", x: 3, y: 0 },
+    ],
+    gates: [
+      { id: "gate_a", x: 1, y: 4 },
+      { id: "gate_b", x: 3, y: 4 },
+    ],
+  },
+  L5: {
+    width: 5,
+    height: 5,
+    moveBudget: 9,
+    colorLocks: false,
+    walls: [
+      { x: 1, y: 1 },
+      { x: 3, y: 1 },
+      { x: 1, y: 4 },
+      { x: 3, y: 4 },
+    ],
+    cats: [
+      { id: "cat_a", x: 2, y: 0 },
+      { id: "cat_b", x: 2, y: 3 },
+    ],
+    gates: [
+      { id: "gate_a", x: 0, y: 4 },
+      { id: "gate_b", x: 4, y: 4 },
+    ],
+  },
+  L6: {
+    width: 6,
+    height: 6,
+    moveBudget: 9,
+    colorLocks: false,
+    walls: [
+      { x: 2, y: 1 },
+      { x: 2, y: 2 },
+      { x: 3, y: 3 },
+      { x: 3, y: 4 },
+    ],
+    cats: [
+      { id: "cat_a", x: 0, y: 0 },
+      { id: "cat_b", x: 5, y: 0 },
+    ],
+    gates: [
+      { id: "gate_a", x: 0, y: 5 },
+      { id: "gate_b", x: 5, y: 5 },
+    ],
+  },
+  L7: {
+    width: 6,
+    height: 6,
+    moveBudget: 8,
+    colorLocks: false,
+    walls: [
+      { x: 1, y: 2 },
+      { x: 2, y: 2 },
+      { x: 3, y: 2 },
+      { x: 2, y: 4 },
+      { x: 4, y: 1 },
+    ],
+    cats: [
+      { id: "cat_a", x: 0, y: 1 },
+      { id: "cat_b", x: 5, y: 3 },
+    ],
+    gates: [
+      { id: "gate_a", x: 5, y: 0 },
+      { id: "gate_b", x: 0, y: 5 },
+    ],
+  },
+  L8: {
+    width: 6,
+    height: 6,
+    moveBudget: 9,
+    colorLocks: true,
+    walls: [
+      { x: 2, y: 2 },
+      { x: 3, y: 3 },
+    ],
+    cats: [
+      { id: "cat_orange", x: 1, y: 0, color: "orange" },
+      { id: "cat_gray", x: 4, y: 0, color: "gray" },
+    ],
+    gates: [
+      { id: "gate_orange", x: 1, y: 5, color: "orange" },
+      { id: "gate_gray", x: 4, y: 5, color: "gray" },
+    ],
+  },
+  L9: {
+    width: 6,
+    height: 6,
+    moveBudget: 8,
+    colorLocks: true,
+    walls: [
+      { x: 2, y: 1 },
+      { x: 2, y: 2 },
+      { x: 3, y: 4 },
+    ],
+    cats: [
+      { id: "cat_orange", x: 0, y: 0, color: "orange" },
+      { id: "cat_gray", x: 5, y: 2, color: "gray" },
+    ],
+    gates: [
+      { id: "gate_orange", x: 5, y: 0, color: "orange" },
+      { id: "gate_gray", x: 0, y: 5, color: "gray" },
+    ],
+  },
 };
 
 function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
@@ -93,18 +203,50 @@ function wallKeys(level: Level) {
   return new Set(level.walls.map((wall) => `${wall.x},${wall.y}`));
 }
 
-function expectSize(level: Level, width: number, height: number, walls: number, budget: number) {
-  if (level.width !== width || level.height !== height) {
-    throw new Error(`${level.id} must be ${width}×${height}`);
+function vecKey(pos: Vec) {
+  return `${pos.x},${pos.y}`;
+}
+
+function assertLocked(level: Level) {
+  const locked = LOCKED[level.id];
+  if (!locked) return;
+  if (level.width !== locked.width || level.height !== locked.height) {
+    throw new Error(`${level.id} size ${level.width}×${level.height} != ${locked.width}×${locked.height}`);
   }
-  if (level.walls.length !== walls) {
-    throw new Error(`${level.id} expected ${walls} walls, got ${level.walls.length}`);
+  if (level.moveBudget !== locked.moveBudget) {
+    throw new Error(`${level.id} budget ${level.moveBudget} != ${locked.moveBudget}`);
   }
-  if (level.moveBudget !== budget) {
-    throw new Error(`${level.id} budget ${level.moveBudget} != ${budget}`);
+  if (level.colorLocks !== locked.colorLocks) {
+    throw new Error(`${level.id} colorLocks ${level.colorLocks} != ${locked.colorLocks}`);
   }
-  if (level.cats.length !== 2 || level.gates.length !== 2) {
-    throw new Error(`${level.id} needs two cats and two gates`);
+  const gotWalls = [...wallKeys(level)].sort().join("|");
+  const wantWalls = locked.walls
+    .map(vecKey)
+    .sort()
+    .join("|");
+  if (gotWalls !== wantWalls) {
+    throw new Error(`${level.id} walls ${gotWalls || "(none)"} != ${wantWalls || "(none)"}`);
+  }
+  if (level.cats.length !== locked.cats.length || level.gates.length !== locked.gates.length) {
+    throw new Error(`${level.id} piece count drifted`);
+  }
+  for (const cat of locked.cats) {
+    const got = level.cats.find((item) => item.id === cat.id);
+    if (!got || got.x !== cat.x || got.y !== cat.y) {
+      throw new Error(`${level.id} ${cat.id} at (${got?.x},${got?.y}) != (${cat.x},${cat.y})`);
+    }
+    if (cat.color && got.color !== cat.color) {
+      throw new Error(`${level.id} ${cat.id} color ${got.color} != ${cat.color}`);
+    }
+  }
+  for (const gate of locked.gates) {
+    const got = level.gates.find((item) => item.id === gate.id);
+    if (!got || got.x !== gate.x || got.y !== gate.y) {
+      throw new Error(`${level.id} ${gate.id} at (${got?.x},${got?.y}) != (${gate.x},${gate.y})`);
+    }
+    if (gate.color && got.color !== gate.color) {
+      throw new Error(`${level.id} ${gate.id} color ${got.color} != ${gate.color}`);
+    }
   }
 }
 
@@ -160,57 +302,22 @@ function expectSize(level: Level, width: number, height: number, walls: number, 
   }
 }
 
-{
-  const l4 = LEVELS.find((level) => level.id === "L4");
-  if (!l4) throw new Error("missing L4");
-  expectSize(l4, 5, 5, 0, 10);
-  if (l4.colorLocks) throw new Error("L4 should not color-lock");
+if (LEVELS.some((level) => level.id === "L10")) {
+  throw new Error("L10 must not load on the Chapter 2 path");
+}
+
+for (const id of ["L4", "L5", "L6", "L7", "L8", "L9"]) {
+  const level = LEVELS.find((item) => item.id === id);
+  if (!level) throw new Error(`missing ${id}`);
+  assertLocked(level);
 }
 
 {
-  const l5 = LEVELS.find((level) => level.id === "L5");
-  if (!l5) throw new Error("missing L5");
-  expectSize(l5, 5, 5, 1, 9);
-  if (legalDirs(l5, l5.cats, "cat_a").length !== 0) {
-    throw new Error("L5 west cat must start boxed until the neighbor vacates");
-  }
-  if (legalDirs(l5, l5.cats, "cat_b").length === 0) {
-    throw new Error("L5 neighbor must be able to vacate");
-  }
-}
-
-{
-  const l6 = LEVELS.find((level) => level.id === "L6");
-  const l7 = LEVELS.find((level) => level.id === "L7");
-  if (!l6 || !l7) throw new Error("missing L6/L7");
-  expectSize(l6, 6, 6, 2, 9);
-  expectSize(l7, 6, 6, 2, 8);
-  if (l6.colorLocks || l7.colorLocks) throw new Error("L6–7 stay LT02, no color lock");
-}
-
-{
-  const l8 = LEVELS.find((level) => level.id === "L8");
   const l9 = LEVELS.find((level) => level.id === "L9");
-  if (!l8 || !l9) throw new Error("missing L8/L9");
-  expectSize(l8, 6, 6, 2, 9);
-  expectSize(l9, 6, 6, 2, 8);
-  if (!l8.colorLocks || !l9.colorLocks) throw new Error("L8–9 must color-lock");
-  for (const level of [l8, l9]) {
-    const colors = new Set(level.cats.map((cat) => cat.color));
-    const gateColors = new Set(level.gates.map((gate) => gate.color));
-    if (!colors.has("orange") || !colors.has("gray")) {
-      throw new Error(`${level.id} needs orange + gray cats`);
-    }
-    if (!gateColors.has("orange") || !gateColors.has("gray")) {
-      throw new Error(`${level.id} needs orange + gray gates`);
-    }
-  }
-  const slam = slideCat(l9, l9.cats, "cat_a", "s");
-  if (!slam.moved || slam.cats[0].y !== 4) {
-    throw new Error("L9 orange south should brake before the gray house");
-  }
+  if (!l9) throw new Error("missing L9");
+  const slam = slideCat(l9, l9.cats, "cat_orange", "s");
   if (allCatsOnGates(l9, slam.cats)) {
-    throw new Error("L9 wrong-color rest must not count as a win");
+    throw new Error("L9 south must not be a free dual-home");
   }
 }
 

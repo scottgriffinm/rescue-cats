@@ -155,30 +155,36 @@ export function PuzzleBoard({
   );
 }
 
-const GATE_FILL: Record<BoardColor, { house: string; door: string; cell: string }> = {
-  orange: { house: "#E8C4A0", door: "#D38B5D", cell: "border-[#D38B5D]/70 bg-[#D38B5D]/20" },
-  gray: { house: "#C8CAD1", door: "#5A5E6B", cell: "border-[#5A5E6B]/70 bg-[#5A5E6B]/18" },
-  black: { house: "#8A8680", door: "#2B2A28", cell: "border-ink/50 bg-ink/10" },
-};
-
 function gateCellClass(color?: BoardColor) {
-  return color ? GATE_FILL[color].cell : "border-path/70 bg-path/15";
+  if (color === "orange") return "border-[color:var(--gate-orange)]/70 bg-[color:var(--gate-orange)]/20";
+  if (color === "gray") return "border-[color:var(--gate-gray)]/70 bg-[color:var(--gate-gray)]/18";
+  if (color === "black") return "border-ink/50 bg-ink/10";
+  return "border-path/70 bg-path/15";
 }
 
 function GateMark({ color, solid }: { color?: BoardColor; solid?: boolean }) {
-  const tint = color ? GATE_FILL[color] : { house: "#F7F0E6", door: "#D96B4A" };
+  if (color === "orange" || color === "gray") {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={color === "orange" ? "/assets/ui/gate_orange.svg" : "/assets/ui/gate_gray.svg"}
+        alt=""
+        className={cn("h-full w-full p-1.5", solid && "opacity-55")}
+      />
+    );
+  }
   return (
     <svg viewBox="0 0 32 32" className="h-full w-full p-1.5" aria-hidden>
       <path
         d="M6 16 L16 8 L26 16 V26 H6 Z"
-        fill={solid ? "#E2D4C2" : tint.house}
+        fill={solid ? "#E2D4C2" : "#F7F0E6"}
         stroke="#2B2A28"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
       <path
         d="M13 26 V18 H19 V26"
-        fill={solid ? "#CABCAB" : tint.door}
+        fill={solid ? "#CABCAB" : "#D96B4A"}
         stroke="#2B2A28"
         strokeWidth="1.5"
       />
