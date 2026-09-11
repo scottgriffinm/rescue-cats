@@ -1,4 +1,4 @@
-import { friendForClear } from "./collection";
+import { shippedFriendForClear } from "./collection";
 
 export type ClearEvent = {
   clearIndex: number;
@@ -7,11 +7,19 @@ export type ClearEvent = {
   friendId?: string;
 };
 
-/** Campaign hook — unique clears only. CURRENT: first friend at clear 3, then every 3. */
+/** Campaign parade key — L12 is clear 12 even though L10 is off the path. */
+export function paradeClearForLevel(levelId: string): number | undefined {
+  const match = /^L(\d+)$/.exec(levelId);
+  if (!match) return undefined;
+  return Number(match[1]);
+}
+
+/** Campaign hook — parade is keyed by level number (L12 → Tux). Ghost@15 ships later. */
 export function onClear(clearIndex: number, levelId: string, stars: number): ClearEvent {
-  const friend = friendForClear(clearIndex);
+  const parade = paradeClearForLevel(levelId) ?? clearIndex;
+  const friend = shippedFriendForClear(parade);
   return {
-    clearIndex,
+    clearIndex: parade,
     levelId,
     stars,
     friendId: friend?.friendId,

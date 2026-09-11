@@ -25,6 +25,8 @@ export const CAT_ASSETS = {
   calico_loaf_48: "/assets/cats/calico_loaf_48.svg",
   calico_loaf_72: "/assets/cats/calico_loaf_72.svg",
   calico_belly_72: "/assets/cats/calico_belly_72.svg",
+  tux_loaf_48: "/assets/cats/tux_loaf_48.svg",
+  tux_loaf_72: "/assets/cats/tux_loaf_72.svg",
 } as const;
 
 export const FURN_ASSETS = {

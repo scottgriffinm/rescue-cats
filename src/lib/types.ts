@@ -4,7 +4,7 @@ export type Vec = { x: number; y: number };
 
 export type BoardColor = "orange" | "gray" | "black";
 
-export type ArtKit = "ginger" | "cream" | "slate" | "calico";
+export type ArtKit = "ginger" | "cream" | "slate" | "calico" | "tuxedo";
 
 export type PieceCat = {
   id: string;
