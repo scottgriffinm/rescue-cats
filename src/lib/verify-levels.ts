@@ -857,22 +857,21 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L43: {
     size: 6,
-    N: 11,
+    N: 10,
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 1],
-      [4, 5],
-      [1, 0],
-      [0, 4],
+      [0, 1],
+      [0, 2],
+      [3, 2],
     ],
     cats: [
-      ["cat_orange", 5, 5],
-      ["cat_gray", 4, 0],
+      ["cat_orange", 2, 2],
+      ["cat_gray", 5, 3],
     ],
     gates: [
-      ["gate_orange", 3, 3],
-      ["gate_gray", 2, 3],
+      ["gate_orange", 2, 3],
+      ["gate_gray", 5, 5],
     ],
   },
   L44: {
@@ -881,18 +880,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 0],
-      [4, 5],
-      [1, 1],
-      [0, 4],
+      [2, 5],
+      [2, 0],
+      [4, 1],
     ],
     cats: [
-      ["cat_orange", 5, 5],
-      ["cat_black", 4, 3],
+      ["cat_orange", 5, 3],
+      ["cat_black", 3, 4],
     ],
     gates: [
       ["gate_orange", 3, 3],
-      ["gate_black", 2, 3],
+      ["gate_black", 3, 2],
     ],
   },
   L45: {
@@ -901,18 +899,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 3],
-      [0, 4],
-      [5, 0],
       [4, 5],
+      [4, 0],
+      [5, 2],
     ],
     cats: [
-      ["cat_orange", 4, 3],
-      ["cat_gray", 1, 0],
+      ["cat_orange", 5, 4],
+      ["cat_black", 3, 5],
     ],
     gates: [
-      ["gate_orange", 2, 2],
-      ["gate_gray", 0, 5],
+      ["gate_orange", 3, 3],
+      ["gate_black", 3, 2],
     ],
   },
 
@@ -1317,35 +1314,32 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "s"],
   ],
   L43: [
-    ["cat_gray", "s"],
-    ["cat_gray", "e"],
-    ["cat_gray", "n"],
-    ["cat_orange", "n"],
+    ["cat_orange", "s"],
     ["cat_orange", "w"],
+    ["cat_orange", "n"],
     ["cat_gray", "w"],
+    ["cat_orange", "e"],
     ["cat_gray", "s"],
     ["cat_gray", "e"],
   ],
   L44: [
-    ["cat_black", "s"],
-    ["cat_black", "w"],
-    ["cat_black", "n"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
     ["cat_black", "e"],
     ["cat_orange", "n"],
-    ["cat_orange", "w"],
+    ["cat_black", "n"],
     ["cat_black", "w"],
     ["cat_black", "s"],
-    ["cat_black", "e"],
   ],
   L45: [
-    ["cat_orange", "n"],
     ["cat_orange", "w"],
-    ["cat_gray", "w"],
-    ["cat_gray", "s"],
-    ["cat_gray", "e"],
     ["cat_orange", "s"],
-    ["cat_gray", "s"],
-    ["cat_gray", "w"],
+    ["cat_black", "w"],
+    ["cat_black", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_black", "e"],
+    ["cat_black", "s"],
   ],
 };
 
@@ -4562,9 +4556,9 @@ for (const level of LEVELS) {
   const l43 = LEVELS.find((level) => level.id === "L43")!;
   const l44 = LEVELS.find((level) => level.id === "L44")!;
   const l45 = LEVELS.find((level) => level.id === "L45")!;
-  if (l43.name !== "Solid West") throw new Error("L43 must be Solid West");
-  if (l44.name !== "Vacate West") throw new Error("L44 must be Vacate West");
-  if (l45.name !== "Park South") throw new Error("L45 must be Park South");
+  if (l43.name !== "Hold South Close") throw new Error("L43 must be Hold South Close");
+  if (l44.name !== "Solid North") throw new Error("L44 must be Solid North");
+  if (l45.name !== "Vacate North") throw new Error("L45 must be Vacate North");
   console.log("Dumpling @ onClear(42) ok · cream fold loafs + L43–L45 wired");
 }
 

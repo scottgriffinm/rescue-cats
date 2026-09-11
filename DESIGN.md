@@ -65,9 +65,9 @@ Same slide engine. Campaign after L9 is **L11–L45** (skip L10).
 - **L40 Solid South.** The gray house is the south brake. East-row vacate habits from L39 miss the stop.
 - **L41 Vacate South.** Leave the house column first, then the south solid.
 - **L42 Park East.** Hold the cell east of the mid house.
-- **L43 Solid West.** The gray house is the west brake. Park-east habits from L42 miss the stop.
-- **L44 Vacate West.** Leave the house row first, then the west solid.
-- **L45 Park South.** Hold the cell south of the mid house.
+- **L43 Hold South Close.** The gray house is the west brake. Park-east habits from L42 miss the stop.
+- **L44 Solid North.** Leave the house row first, then the west solid.
+- **L45 Vacate North.** Hold the cell south of the mid house.
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
 - **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`.
 - **onClear(15) → Ghost (`friend_005`) after L15.** Pale gray-cream loaf, chips Ghost / Wisp / Pearl, no furniture gift. Pack: `data/chapter3_ghost_bang.json`.

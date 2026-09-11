@@ -60,9 +60,9 @@ const HEADLINES: Record<string, string> = {
   L40: "SOLID SOUTH",
   L41: "VACATE SOUTH",
   L42: "PARK EAST",
-  L43: "SOLID WEST",
-  L44: "VACATE WEST",
-  L45: "PARK SOUTH",
+  L43: "HOLD SOUTH CLOSE",
+  L44: "SOLID NORTH",
+  L45: "VACATE NORTH",
 };
 
 const HINTS: Record<string, string> = {
@@ -107,9 +107,9 @@ const HINTS: Record<string, string> = {
   L40: "The gray house is the south brake. East-row vacate habits from L39 miss the stop.",
   L41: "Leave the house column, then the south solid. L40's solid-south slide goes through.",
   L42: "Hold the cell east of the mid house. Vacate-south habits from L41 miss the park.",
-  L43: "The gray house is the west brake. Park-east habits from L42 miss the stop.",
-  L44: "Leave the house row, then the west solid. L43's solid-west slide goes through.",
-  L45: "Hold the cell south of the mid house. Vacate-west habits from L44 miss the park.",
+  L43: "Park close under the house. L42 park-east habits overshoot.",
+  L44: "The gray house is the north brake. South-close habits from L43 miss the stop.",
+  L45: "Leave the house column, then the north solid. L44 solid-north slide goes through.",
 };
 
 type RawLevel = {
