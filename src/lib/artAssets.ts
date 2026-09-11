@@ -33,6 +33,7 @@ export const FURN_ASSETS = {
   scratcher: "/assets/furniture/scratcher.svg",
   miniTree: "/assets/furniture/miniTree.svg",
   yarnSwing: "/assets/furniture/yarnSwing.svg",
+  sunCushion: "/assets/furniture/sunCushion.svg",
   postBell: "/assets/furniture/postBell.svg",
   fence: "/assets/furniture/fence.svg",
   fountain: "/assets/furniture/fountain.svg",

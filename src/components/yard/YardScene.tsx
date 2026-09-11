@@ -17,6 +17,8 @@ export function YardScene({
   hasTree,
   hasScratch,
   hasYarn,
+  hasCushion,
+  waitingTree,
   bangFriendId,
   onBang,
 }: {
@@ -25,11 +27,18 @@ export function YardScene({
   hasTree: boolean;
   hasScratch?: boolean;
   hasYarn?: boolean;
+  hasCushion?: boolean;
+  waitingTree?: boolean;
   bangFriendId?: string | null;
   onBang?: (instanceId: string) => void;
 }) {
   const mango = friends.find((friend) => friend.friendId === "friend_001");
-  const others = friends.filter((friend) => friend.friendId !== "friend_001");
+  const biscuit = friends.find((friend) => friend.friendId === "friend_003");
+  const others = friends.filter(
+    (friend) =>
+      friend.friendId !== "friend_001" &&
+      !(hasCushion && friend.friendId === "friend_003"),
+  );
 
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[min(100%,28rem)]">
@@ -43,7 +52,7 @@ export function YardScene({
       <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] w-[56%]" />
       <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] w-[22%]" />
       <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[24%]" />
-      {hasTree ? (
+      {hasTree || waitingTree ? (
         <FurnitureImg file="miniTree" className="absolute right-[10%] top-[18%] w-[20%]" />
       ) : null}
       {hasYarn ? (
@@ -55,6 +64,12 @@ export function YardScene({
           className="yard-drop-box absolute bottom-[16%] left-[12%] w-[46%]"
         />
       ) : null}
+      {hasCushion ? (
+        <FurnitureImg
+          file="sunCushion"
+          className="yard-drop absolute left-[8%] top-[50%] w-[32%]"
+        />
+      ) : null}
       {hasScratch ? (
         <FurnitureImg
           file="scratcher"
@@ -64,7 +79,9 @@ export function YardScene({
 
       {friends.length === 0 ? (
         <p className="absolute inset-x-12 top-[52%] text-center font-display text-lg text-ink/40">
-          {hasTree ? "A tree, waiting for someone to name." : "The porch is quiet."}
+          {hasTree || waitingTree
+            ? "A tree, waiting for someone to name."
+            : "The porch is quiet."}
         </p>
       ) : null}
 
@@ -89,6 +106,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
+        </div>
+      ) : null}
+
+      {biscuit && hasCushion ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "12%", top: "44%" }}
+        >
+          <FriendSprite
+            kit={friendById(biscuit.friendId)?.phenotype.artKit ?? "cream"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === biscuit.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(biscuit.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${biscuit.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{biscuit.name}</p>
         </div>
       ) : null}
 

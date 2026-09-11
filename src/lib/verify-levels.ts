@@ -1,18 +1,23 @@
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import chapter2Pack from "../../data/levels/CHAPTER2_PUZZLE_L04_L09.json";
+import chapter3Pack from "../../data/levels/CHAPTER3_PUZZLE_L11_L12.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
 import l7Pack from "../../data/levels/L7.json";
 import l8Pack from "../../data/levels/L8.json";
 import l9Pack from "../../data/levels/L9.json";
+import l11Pack from "../../data/levels/L11.json";
+import l12Pack from "../../data/levels/L12.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
 import { ART_KIT_PATH } from "./constants";
 import {
+  BISCUIT_GIFT,
   CHAPTER2,
+  CHAPTER3,
   chipsForFriend,
   FURNITURE,
   friendForClear,
@@ -23,6 +28,7 @@ import {
 } from "./collection";
 import { FURN_ASSETS, GATE_ASSETS } from "./artAssets";
 import { LEVELS } from "./levels";
+import { EMPTY_SAVE } from "./storage";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
@@ -146,6 +152,45 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_gray", 0, 5],
     ],
   },
+  L11: {
+    size: 6,
+    N: 10,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 0],
+      [2, 1],
+      [2, 3],
+      [3, 3],
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_gray", 5, 2],
+    ],
+    gates: [
+      ["gate_orange", 0, 4],
+      ["gate_gray", 5, 5],
+    ],
+  },
+  L12: {
+    size: 6,
+    N: 9,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 1],
+      [2, 2],
+      [3, 4],
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_gray", 5, 2],
+    ],
+    gates: [
+      ["gate_orange", 4, 0],
+      ["gate_gray", 0, 5],
+    ],
+  },
 };
 
 function assertLocked(level: Level, spec: LockedSpec) {
@@ -219,6 +264,18 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "s"],
   ],
   L9: [
+    ["cat_orange", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+  ],
+  L11: [
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "e"],
+  ],
+  L12: [
+    ["cat_gray", "n"],
     ["cat_orange", "e"],
     ["cat_gray", "s"],
     ["cat_gray", "w"],
@@ -311,11 +368,11 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 
 {
   const ids = LEVELS.map((level) => level.id);
-  if (ids.includes("L10")) throw new Error("L10 must not load on the Chapter 2 path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9") {
+  if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
-  for (const id of ["L4", "L5", "L6", "L7", "L8", "L9"] as const) {
+  for (const id of ["L4", "L5", "L6", "L7", "L8", "L9", "L11", "L12"] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
     assertLocked(level, LOCKED[id]);
@@ -332,7 +389,10 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     gates: { id: string; x: number; y: number; colorId?: string; color?: string }[];
   };
   const locked = Object.fromEntries(
-    chapter2Pack.levels.map((level) => [level.id, level as PackedBoard]),
+    [...chapter2Pack.levels, ...chapter3Pack.levels].map((level) => [
+      level.id,
+      level as PackedBoard,
+    ]),
   );
   const standalones: Record<string, PackedBoard[]> = {
     L4: [l4Pack as PackedBoard, lt02Pack.levels[0] as PackedBoard],
@@ -341,6 +401,8 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L7: [l7Pack as PackedBoard, l0607Pack.levels[1] as PackedBoard],
     L8: [l8Pack as PackedBoard, lt08Pack.levels[0] as PackedBoard],
     L9: [l9Pack as PackedBoard, lt08Pack.levels[1] as PackedBoard],
+    L11: [l11Pack as PackedBoard],
+    L12: [l12Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -363,7 +425,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
         throw new Error(`${copy.id} standalone drifted from CHAPTER2_PUZZLE`);
       }
     }
-    if (id === "L8" || id === "L9") {
+    if (id === "L8" || id === "L9" || id === "L11" || id === "L12") {
       for (const copy of copies) {
         for (const piece of [...copy.cats, ...copy.gates]) {
           if (!piece.colorId) throw new Error(`${copy.id} ${piece.id} must use colorId`);
@@ -371,7 +433,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       }
     }
   }
-  console.log("Standalone L4–L9 + LT02/L06-07/LT08 match locked coords");
+  console.log("Standalone L4–L9 + L11–L12 + LT02/L06-07/LT08 match locked coords");
 }
 
 {
@@ -421,6 +483,62 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   assertNotHome(l9, [["cat_orange", "s"], ["cat_gray", "w"]], "L9 wrong-order soft-lock");
 }
 
+{
+  const l11 = LEVELS.find((level) => level.id === "L11");
+  if (!l11) throw new Error("missing L11");
+  if (!l11.colorLocks) throw new Error("L11 must lock colors");
+  const orange = l11.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l11.cats.find((cat) => cat.id === "cat_gray");
+  const orangeGate = l11.gates.find((gate) => gate.id === "gate_orange");
+  const grayGate = l11.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L11 missing coats");
+  if (!isMismatchSolid(l11, gray, orangeGate)) {
+    throw new Error("L11 orange house must be solid to the gray coat");
+  }
+  if (!isMismatchSolid(l11, orange, grayGate)) {
+    throw new Error("L11 gray house must be solid to the orange coat");
+  }
+  // Orange south first overshoots through the matching house (no parked brake).
+  assertNotHome(l11, [["cat_orange", "s"]], "L11 orange-first overshoot");
+  assertNotHome(
+    l11,
+    [
+      ["cat_orange", "s"],
+      ["cat_gray", "s"],
+      ["cat_gray", "w"],
+    ],
+    "L11 orange-first cannot finish",
+  );
+}
+
+{
+  const l12 = LEVELS.find((level) => level.id === "L12");
+  if (!l12) throw new Error("missing L12");
+  if (!l12.colorLocks) throw new Error("L12 must lock colors");
+  const orange = l12.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l12.cats.find((cat) => cat.id === "cat_gray");
+  const orangeGate = l12.gates.find((gate) => gate.id === "gate_orange");
+  const grayGate = l12.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L12 missing coats");
+  if (!isMismatchSolid(l12, orange, grayGate)) {
+    throw new Error("L12 gray house must be solid to the orange coat");
+  }
+  if (!isMismatchSolid(l12, gray, orangeGate)) {
+    throw new Error("L12 orange house must be solid to the gray coat");
+  }
+  // Orange east first slides through the matching house to the edge.
+  assertNotHome(l12, [["cat_orange", "e"]], "L12 orange-first overshoot");
+  assertNotHome(
+    l12,
+    [
+      ["cat_orange", "e"],
+      ["cat_gray", "s"],
+      ["cat_gray", "w"],
+    ],
+    "L12 orange-first then gray-home",
+  );
+}
+
 for (const level of LEVELS) {
   if (!allCatsOnGates(level, level.cats)) {
     const dirs = legalDirs(level, level.cats, level.cats[0].id);
@@ -465,6 +583,9 @@ for (const level of LEVELS) {
   for (const clear of [1, 2, 3, 4, 5, 6]) {
     const hearts = heartsForClear(clear);
     if (hearts < 5 || hearts > 7) throw new Error(`clear ${clear} hearts ${hearts} not in 5–7`);
+  }
+  if (EMPTY_SAVE.furniture.includes("furn_tree_mini")) {
+    throw new Error("Mini Cat Tree must not be auto-owned — it is a Hearts shop card");
   }
   const shop3 = shopItemsForClear(3).map((sku) => `${sku.skuId}:${sku.hearts}`).sort();
   if (shop3.join(",") !== "furn_scratch_post:15,furn_tree_mini:40") {
@@ -559,7 +680,81 @@ for (const level of LEVELS) {
   if (FURN_ASSETS.yarnSwing !== "/assets/furniture/yarnSwing.svg") {
     throw new Error("shop yarnSwing path drifted");
   }
+  if (FURN_ASSETS.sunCushion !== "/assets/furniture/sunCushion.svg") {
+    throw new Error("Sun Cushion path drifted");
+  }
   console.log("Ink @ onClear(6) ok · ink loafs + LT08 gates + shop furniture wired");
+}
+
+{
+  const biscuit = friendForClear(9);
+  if (biscuit?.friendId !== "friend_003") {
+    throw new Error(`onClear(9) must unlock Biscuit, got ${biscuit?.friendId ?? "none"}`);
+  }
+  if (CHAPTER3.unlock_clear !== 9 || CHAPTER3.friend_id !== "friend_003") {
+    throw new Error("chapter3 pack must pin Biscuit at clear 9");
+  }
+  if (CHAPTER3.naming.prefill !== "") throw new Error("biscuit naming prefill must stay empty");
+  const biscuitChips = chipsForFriend("friend_003");
+  if (biscuitChips.join(",") !== "Biscuit,Mochi,Toast") {
+    throw new Error(`Biscuit chips must be Biscuit/Mochi/Toast, got ${biscuitChips.join("/")}`);
+  }
+  if (biscuitChips.includes("Misty") || biscuitChips.includes("Ink")) {
+    throw new Error("Biscuit chips must stay on the Hungry food pool");
+  }
+  if (biscuit.displayLine !== "Here for snacks. Possibly also for you.") {
+    throw new Error(`Biscuit display line drifted: ${biscuit.displayLine}`);
+  }
+  if (biscuit.phenotype.personality !== "Hungry") {
+    throw new Error(`Biscuit personality must be Hungry, got ${biscuit.phenotype.personality}`);
+  }
+  if (biscuit.phenotype.artKit !== "cream") throw new Error("Biscuit must use cream loafs");
+  const gifts9 = furnitureGiftsForClear(9);
+  if (gifts9.length !== 1 || gifts9[0]?.skuId !== "furn_bed_cushion") {
+    throw new Error(`clear 9 must gift the Sun Cushion, got ${gifts9.map((sku) => sku.skuId).join(",")}`);
+  }
+  if (gifts9[0]?.asset !== "/assets/furniture/sunCushion.svg") {
+    throw new Error(`Sun Cushion art drifted: ${gifts9[0]?.asset}`);
+  }
+  if (BISCUIT_GIFT.asset !== "/assets/furniture/sunCushion.svg") {
+    throw new Error("chapter3 gift art must be sunCushion.svg");
+  }
+  const bang = CHAPTER3.bang_copy.friend_003?.[0];
+  if (bang !== "{Name}: Here for snacks. Possibly also for you.") {
+    throw new Error(`Biscuit first-night drifted: ${bang}`);
+  }
+  if (ART_KIT_PATH.cream.loaf48 !== "/assets/cats/cream_loaf_48.svg") {
+    throw new Error("Biscuit yard/unlock must map cream 48 → cream_loaf_48");
+  }
+  if (ART_KIT_PATH.cream.loaf72 !== "/assets/cats/cream_loaf_72.svg") {
+    throw new Error("Biscuit yard/unlock must map cream 72 → cream_loaf_72");
+  }
+  const shopStill = shopItemsForClear(9).map((sku) => sku.skuId).sort();
+  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+    throw new Error(`shop SKUs drifted after Biscuit: ${shopStill.join(",")}`);
+  }
+  const cushionSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="56" viewBox="0 0 96 56" fill="none">
+  <ellipse cx="48" cy="36" rx="38" ry="14" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="48" cy="28" rx="36" ry="14" fill="#F0B429" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="48" cy="26" rx="22" ry="7" fill="#F7F0E6" stroke="#2B2A28" stroke-width="2"/>
+  <path d="M32 26 Q48 20 64 26" fill="none" stroke="#2B2A28" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
+</svg>`;
+  const gotCushion = readFileSync(resolve("public/assets/furniture/sunCushion.svg"), "utf8").trim();
+  if (gotCushion !== cushionSvg.trim()) throw new Error("sunCushion.svg is not the Chapter 3 lock");
+  for (const file of [
+    "public/assets/cats/cream_loaf_48.svg",
+    "public/assets/cats/cream_loaf_72.svg",
+    "public/assets/furniture/sunCushion.svg",
+  ]) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  if (friendForClear(6)?.friendId !== "friend_002") {
+    throw new Error("Biscuit wiring must not move Ink off onClear(6)");
+  }
+  if (friendForClear(3)?.friendId !== "friend_001") {
+    throw new Error("Biscuit wiring must not move Mango off onClear(3)");
+  }
+  console.log("Biscuit @ onClear(9) ok · cream loafs + Sun Cushion + L11–L12 wired");
 }
 
 console.log("All authored boards ok");

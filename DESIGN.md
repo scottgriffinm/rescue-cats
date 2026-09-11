@@ -13,7 +13,7 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 - **Stars:** leftover slides → 3★ if leftover ≥ ceil(N/2), 2★ if leftover ≥ ceil(N/4), else 1★. Stars unlock **yard cosmetics only**, never cats or campaign gates.
 - **Nudges / color locks:** encoded on the L1–30 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
 
-Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L10 continue LT01. Move table: `data/levels/move_budget_L01-L30.json` (L11–30 budgets + nudge/colorLock stubs only). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`.
+Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L12 are the Chapter 3 opener (budgets from `data/levels/move_budget_L01-L30.json`; L13–30 remain stubs). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`.
 
 Acceptance: slide stops on wall / cat / edge only; gates never brake; counter decrements once per slide start; win = all cats on gates at rest; budget exhaust → X and board reset (Xs persist per level); no mid-puzzle ads.
 
@@ -26,8 +26,16 @@ Continuous build past the Mango slice. Same slide engine (stop on wall | cat | e
 - **L4–L5 LT02 two-cat collision.** A parked cat is a brake: the slider stops on the adjacent cell. Order matters — move the brake first and the other overshoots through the house.
 - **L6–L7 route depth.** Blocked straight lanes; authored solves are 8-slide corridors.
 - **L8–L9 LT08 color locks.** JSON uses `color_orange` / `color_gray`. Orange coat → orange house. The near house is the wrong coat and acts as a **solid**. Matching houses still do not brake.
-- **L10** stays the tight-pair closer.
+- **L10** stays the tight-pair closer and is **not** on the campaign path.
 - **onClear(6) → Ink (`friend_002`).** Naming is still a choice (empty prefill + chips). Pack: `data/chapter2_ink_shop_bang.json`. Each new friend gets their own yard `!` copy variants. Hearts shop starter (sisal post, 15♥) opens at clear 6.
+
+## Chapter 3 — OPEN (sister-ready next slice)
+
+Same slide engine. Campaign after L9 is **L11–L12** (skip L10).
+
+- **L11 Color Brake.** Mid-board matching house. Park a friend past the house — matching coats still slide through.
+- **L12 Park First.** Hold the far cell so the slider stops on their house. Overshoot if you go first.
+- **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
 
 Retarget later templates by swapping JSON + keeping the slide helper.
 
@@ -115,6 +123,7 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 | Piece | File | Notes |
 | --- | --- | --- |
 | Box | `public/assets/furniture/boxBed.svg` | **Only** gift with Mango at unique clear 3. |
+| Sun Cushion | `public/assets/furniture/sunCushion.svg` | **Only** gift with Biscuit at unique clear 9. |
 | Swing | `public/assets/furniture/swing.svg` | Shop stub; also stands in for the free onboarding tree. |
 | Fountain | `public/assets/furniture/fountain.svg` | Shop stub + lawn fixture on the isometric yard. |
 | Post + bell | `public/assets/furniture/postBell.svg` | Shop stub / yard trim. |

@@ -22,7 +22,7 @@ const DIR_LABEL = {
 };
 
 const SEED = {
-  version: 2,
+  version: 3,
   completedIds: ["L1", "L2", "L3"],
   clearCount: 3,
   friends: [

@@ -38,6 +38,7 @@ export function YardScreen() {
   const hasTree = save.furniture.includes("furn_tree_mini");
   const hasScratch = save.furniture.includes("furn_scratch_post");
   const hasYarn = save.furniture.includes("furn_swing_yarn");
+  const hasCushion = save.furniture.includes("furn_bed_cushion");
   const introFriend = save.friends.find((friend) => friend.firstNight);
   const [bangFriendId, setBangFriendId] = useState<string | null>(null);
   const newestFriend = save.friends[save.friends.length - 1];
@@ -95,6 +96,8 @@ export function YardScreen() {
             hasTree={hasTree}
             hasScratch={hasScratch}
             hasYarn={hasYarn}
+            hasCushion={hasCushion}
+            waitingTree={save.friends.length === 0 && !hasTree}
             bangFriendId={bangFriendId}
             onBang={(instanceId) => {
               completeFirstNight(instanceId);
