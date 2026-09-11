@@ -183,6 +183,16 @@ try {
   if (!yard.imgs.includes("/assets/ui/bubble_bang.svg")) {
     throw new Error("yard missing Ink first-night !");
   }
+  if (!yard.text.includes("Hearts shop") && !yard.text.includes("Sisal Scratch Post")) {
+    throw new Error("Hearts shop starter missing after Ink");
+  }
+  if (
+    !yard.save.bubbles.some(
+      (line) => line.includes("Hearts shop") || line.includes("shady corner"),
+    )
+  ) {
+    throw new Error("Ink bang / shop copy variants missing");
+  }
   await shot(page, "04_ink_yard");
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
   console.log("CHAPTER 2 INK OK");

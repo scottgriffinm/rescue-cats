@@ -1,0 +1,26 @@
+{
+  "version": "chapter2_ink_shop_bang",
+  "status": "CHAPTER2",
+  "friend_id": "friend_002",
+  "unlock_clear": 6,
+  "naming": {
+    "prefill": "",
+    "require_choice": true
+  },
+  "bang_copy": {
+    "friend_001": ["{Name}: Still sniffing everything…"],
+    "friend_002": [
+      "{Name}: The shady corner is taken.",
+      "{Name}: That post looks scratchable."
+    ]
+  },
+  "shop_starter": {
+    "unlock_clear": 6,
+    "sku_id": "furn_scratch_post",
+    "hearts": 15,
+    "label": "Sisal Scratch Post",
+    "eyebrow": "Hearts shop",
+    "intro": "A Hearts shop opened on the porch.",
+    "ink_hook": "{Name} found the Hearts shop."
+  }
+}

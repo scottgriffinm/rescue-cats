@@ -92,7 +92,18 @@ export function PuzzleBoard({
                       : undefined
                   }
                 >
-                  {isGate ? <GateMark colorHex={gateHex} /> : null}
+                  {isGate ? (
+                    gate?.color === "orange" || gate?.color === "gray" ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={`/assets/ui/gate_${gate.color}.svg`}
+                        alt=""
+                        className="h-full w-full p-1.5"
+                      />
+                    ) : (
+                      <GateMark colorHex={gateHex} />
+                    )
+                  ) : null}
                 </div>
               </div>
             );
@@ -148,21 +159,18 @@ export function PuzzleBoard({
 }
 
 function GateMark({ colorHex }: { colorHex?: string }) {
+  const body = colorHex ?? "#F7F0E6";
+  const door = colorHex ? "#FFF8F0" : "#D96B4A";
   return (
     <svg viewBox="0 0 32 32" className="h-full w-full p-1.5" aria-hidden>
       <path
         d="M6 16 L16 8 L26 16 V26 H6 Z"
-        fill={colorHex ?? "#F7F0E6"}
+        fill={body}
         stroke="#2B2A28"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
-      <path
-        d="M13 26 V18 H19 V26"
-        fill={colorHex ?? "#D96B4A"}
-        stroke="#2B2A28"
-        strokeWidth="1.5"
-      />
+      <path d="M13 26 V18 H19 V26" fill={door} stroke="#2B2A28" strokeWidth="1.5" />
     </svg>
   );
 }

@@ -1,4 +1,5 @@
 import pack from "../../data/collection_CURRENT.json";
+import chapter2 from "../../data/chapter2_ink_shop_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -74,6 +75,9 @@ function skuAsset(sku: RawSku) {
 export const NAMING = pack.naming_modal;
 export const FIRST_FRIEND_ID = pack.first_friend.friend_id;
 export const COLLECTION_VERSION = pack.version;
+export const CHAPTER2 = chapter2;
+export const INK_FRIEND_ID = chapter2.friend_id;
+export const SHOP_STARTER = chapter2.shop_starter;
 
 export const CATALOG: CatalogFriend[] = pack.first_20_cats.map((raw, index) =>
   toFriend(raw, index),
@@ -168,6 +172,16 @@ export function comfortTotal(ownedSkuIds: string[]) {
 
 export function withName(template: string, name: string) {
   return template.replaceAll("{Name}", name);
+}
+
+export function bangLinesFor(friendId: string, name: string) {
+  const variants =
+    (CHAPTER2.bang_copy as Record<string, string[]>)[friendId] ?? [NAMING.first_night_bubble];
+  return variants.map((line) => withName(line, name));
+}
+
+export function shopUnlocked(clearCount: number) {
+  return clearCount >= SHOP_STARTER.unlock_clear;
 }
 
 export function favoriteToyFor(personality: string) {

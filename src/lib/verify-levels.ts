@@ -1,4 +1,4 @@
-import { friendForClear, NAMING } from "./collection";
+import { CHAPTER2, friendForClear, NAMING } from "./collection";
 import { LEVELS } from "./levels";
 import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
@@ -190,7 +190,11 @@ for (const level of LEVELS) {
   }
   if (NAMING.prefill !== "") throw new Error("naming prefill must stay empty");
   if (!NAMING.require_choice) throw new Error("naming must require a choice");
-  console.log("Ink @ onClear(6) ok · naming is a choice");
+  if (CHAPTER2.unlock_clear !== 6 || CHAPTER2.friend_id !== "friend_002") {
+    throw new Error("chapter2 pack must pin Ink at clear 6");
+  }
+  if (CHAPTER2.naming.prefill !== "") throw new Error("chapter2 naming prefill must stay empty");
+  console.log("Ink @ onClear(6) ok · naming is a choice · shop starter ready");
 }
 
 console.log("All authored boards ok");

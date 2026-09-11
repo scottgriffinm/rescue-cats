@@ -8,7 +8,14 @@ import { useSave } from "@/components/providers/SaveProvider";
 import { PhoneFrame } from "@/components/shell/PhoneFrame";
 import { FriendsMet } from "@/components/yard/FriendsMet";
 import { YardScene } from "@/components/yard/YardScene";
-import { FURNITURE, NAMING, STAR_COSMETICS, withName } from "@/lib/collection";
+import {
+  FURNITURE,
+  NAMING,
+  SHOP_STARTER,
+  STAR_COSMETICS,
+  shopUnlocked,
+  withName,
+} from "@/lib/collection";
 import { FIRST_NIGHT_BANG_MS } from "@/lib/constants";
 import { LEVELS, nextLevel } from "@/lib/levels";
 
@@ -145,6 +152,7 @@ export function YardScreen() {
         <ShopRow
           hearts={save.hearts}
           stars={save.stars}
+          cleared={cleared}
           ownedFurniture={save.furniture}
           ownedCosmetics={save.cosmetics}
           onBuyFurniture={buyFurniture}
@@ -172,6 +180,7 @@ export function YardScreen() {
 function ShopRow({
   hearts,
   stars,
+  cleared,
   ownedFurniture,
   ownedCosmetics,
   onBuyFurniture,
@@ -179,19 +188,30 @@ function ShopRow({
 }: {
   hearts: number;
   stars: number;
+  cleared: number;
   ownedFurniture: string[];
   ownedCosmetics: string[];
   onBuyFurniture: (skuId: string, cost: number) => boolean;
   onBuyCosmetic: (id: string, cost: number) => boolean;
 }) {
-  const heartItem = FURNITURE.find(
-    (sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId),
-  );
-  const starItem = STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id));
+  const heartsOpen = shopUnlocked(cleared);
+  const starter = FURNITURE.find((sku) => sku.skuId === SHOP_STARTER.sku_id);
+  const heartItem = heartsOpen
+    ? FURNITURE.find((sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId))
+    : undefined;
+  const starItem = heartsOpen
+    ? STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id))
+    : undefined;
   if (!heartItem && !starItem) return null;
 
   return (
-    <div className="flex gap-2 text-xs">
+    <div className="space-y-1.5">
+      {heartsOpen && heartItem && starter && heartItem.skuId === starter.skuId ? (
+        <p className="text-center text-[10px] tracking-[0.18em] text-ink/40">
+          {SHOP_STARTER.eyebrow.toUpperCase()}
+        </p>
+      ) : null}
+      <div className="flex gap-2 text-xs">
       {heartItem ? (
         <button
           type="button"
@@ -212,6 +232,7 @@ function ShopRow({
           {starItem.name} · {starItem.stars}★
         </button>
       ) : null}
+      </div>
     </div>
   );
 }

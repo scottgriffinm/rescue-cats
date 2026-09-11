@@ -18,6 +18,8 @@ import {
   unlockFlagsFor,
   withName,
   NAMING,
+  SHOP_STARTER,
+  bangLinesFor,
 } from "@/lib/collection";
 import {
   FIRST_NIGHT_HEARTS,
@@ -169,11 +171,15 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         };
         const friends = [...current.friends, instance];
         const movedIn = withName(NAMING.confirm_bubble, instance.name);
+        const shopHello =
+          catalog.friendId === "friend_002"
+            ? [withName(SHOP_STARTER.ink_hook, instance.name), SHOP_STARTER.intro]
+            : [];
         setSave({
           ...current,
           friends,
           pendingUnlocks: current.pendingUnlocks.slice(1),
-          bubbles: [movedIn, ...current.bubbles].slice(0, 3),
+          bubbles: [movedIn, ...shopHello, ...current.bubbles].slice(0, 4),
           unlockFlags: unlockFlagsFor(friends),
         });
         return instance;
@@ -182,8 +188,12 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         const current = snap.save;
         const friend = current.friends.find((item) => item.instanceId === instanceId);
         if (!friend || !friend.firstNight) return;
-        const sniff = withName(NAMING.first_night_bubble, friend.name);
+        const bangs = bangLinesFor(friend.friendId, friend.name);
         const tomorrow = withName(NAMING.tomorrow_hook, friend.name);
+        const shopIntro =
+          friend.friendId === "friend_002"
+            ? [withName(SHOP_STARTER.ink_hook, friend.name), SHOP_STARTER.intro]
+            : [];
         const hearts = current.first_night_hearts_claimed
           ? current.hearts
           : current.hearts + FIRST_NIGHT_HEARTS;
@@ -194,10 +204,9 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
           first_night_hearts_claimed: true,
           return_hook_available_at:
             current.return_hook_available_at ?? Date.now() + RETURN_HOOK_DELAY_MS,
-          bubbles: [sniff, tomorrow, ...current.bubbles.filter((bubble) => bubble !== sniff)].slice(
-            0,
-            3,
-          ),
+          bubbles: [...bangs, ...shopIntro, tomorrow, ...current.bubbles]
+            .filter((line, index, all) => all.indexOf(line) === index)
+            .slice(0, 4),
           friends: current.friends.map((item) =>
             item.instanceId === instanceId ? { ...item, firstNight: false } : item,
           ),

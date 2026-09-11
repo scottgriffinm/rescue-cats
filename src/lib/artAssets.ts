@@ -36,4 +36,6 @@ export const UI_ASSETS = {
   hand_cursor: "/assets/ui/hand_cursor.svg",
   bubble_bang: "/assets/ui/bubble_bang.svg",
   icon_close: "/assets/ui/icon_close.svg",
+  gate_orange: "/assets/ui/gate_orange.svg",
+  gate_gray: "/assets/ui/gate_gray.svg",
 } as const;

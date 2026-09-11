@@ -27,7 +27,7 @@ Continuous build past the Mango slice. Same slide engine (stop on wall | cat | e
 - **L6–L7 route depth.** Blocked straight lanes; authored solves are 8-slide corridors.
 - **L8–L9 LT08 color locks.** JSON uses `color_orange` / `color_gray`. Orange coat → orange house. The near house is the wrong coat.
 - **L10** stays the tight-pair closer.
-- **onClear(6) → Ink (`friend_002`).** Naming is still a choice (empty prefill + chips). Each new friend gets their own yard `!` and tomorrow hook.
+- **onClear(6) → Ink (`friend_002`).** Naming is still a choice (empty prefill + chips). Pack: `data/chapter2_ink_shop_bang.json`. Each new friend gets their own yard `!` copy variants. Hearts shop starter (sisal post, 15♥) opens at clear 6.
 
 Retarget later templates by swapping JSON + keeping the slide helper.
 
@@ -81,7 +81,7 @@ Priority order (shipped):
 
 1. CSS variables for the Art pack palette (`src/app/globals.css`)
 2. `cat.pose.loaf` @48 — cream `#FFF8F0`, ginger `#D38B5D`, slate `#5A5E6B`, calico (cream + clay `#E8A89A` + slate blobs). Art Director SVG pack v1 is the file lock (verbatim under `public/assets/`). Mango = `ginger_loaf`. Optional hero: `ginger_loaf_160.svg`.
-3. `cat.pose.belly` @72 calico — puzzle board cats only (`calico_belly_72.svg`)
+3. `cat.pose.belly` @72 calico — puzzle board cats only (`calico_belly_72.svg`). Ink yard art is `slate_loaf_48` / `slate_loaf_72`. LT08 houses use `gate_orange.svg` / `gate_gray.svg`.
 4. Furniture woodblock: `boxBed` 96×72, `swing` 96×96, `postBell` 48×96 (bell marigold + mist), `fence` 120×48 tileable
 5. UI: `btn_primary` (h 44, ink stroke, paper fill), `input_name`, `fail_mark` (28 clay fill + ink X — not arcade red), `star_marigold`, `hand_cursor`
 6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Art Bench void wrap v2: page `#E8DFD2`, bezel `#D4CBBE`, stage `#CABCAB`. Card stays `#F7F0E6`. Ink outlines `#2B2A28`. Never mist `#C4BDB4`, pitch `#1A1918`, `#000`, or `#FFF` as stage fills.
