@@ -132,7 +132,7 @@ export function YardScreen() {
       <footer className="space-y-3 px-5 pb-6 pt-4">
         <Link
           href={allDone ? `/level/${LEVELS[0].id}` : `/level/${upcoming.id}`}
-          className="inline-flex h-11 w-full items-center justify-center rounded-[10px] bg-ink px-5 font-display text-base tracking-wide text-paper shadow-[0_3px_0_#1A1918]"
+          className="inline-flex h-11 w-full items-center justify-center rounded-[10px] bg-ink px-5 font-display text-base tracking-wide text-paper shadow-[0_3px_0_#2B2A28]"
         >
           {cleared === 0
             ? "Walk Mango home"

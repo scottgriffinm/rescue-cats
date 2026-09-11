@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 type Variant = "ink" | "paper" | "tan" | "ghost";
 
 const VARIANTS: Record<Variant, string> = {
-  ink: "bg-ink text-paper shadow-[0_3px_0_#1A1918] active:translate-y-[2px] active:shadow-none",
+  ink: "bg-ink text-paper shadow-[0_3px_0_#2B2A28] active:translate-y-[2px] active:shadow-none",
   paper:
     "h-11 bg-paper text-ink border-[2.5px] border-ink bg-[url('/assets/ui/btn_primary.svg')] bg-[length:100%_100%] bg-no-repeat shadow-[0_3px_0_#2B2A28] active:translate-y-[2px] active:shadow-none",
   tan: "bg-clay text-ink shadow-[0_3px_0_#c48b80] active:translate-y-[2px] active:shadow-none",
