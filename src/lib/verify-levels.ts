@@ -32,7 +32,7 @@ import {
   NAMING,
   shopItemsForClear,
 } from "./collection";
-import { FURN_ASSETS, GATE_ASSETS } from "./artAssets";
+import { CAT_ASSETS, FURN_ASSETS, GATE_ASSETS } from "./artAssets";
 import { LEVELS } from "./levels";
 import { paradeClearForLevel } from "./onClear";
 import { EMPTY_SAVE } from "./storage";
@@ -983,7 +983,10 @@ for (const level of LEVELS) {
   if (tux.phenotype.personality !== "Formal") {
     throw new Error(`Tux personality must be Formal, got ${tux.phenotype.personality}`);
   }
-  if (tux.phenotype.artKit !== "tuxedo") throw new Error("Tux must use tuxedo loafs");
+  if (tux.phenotype.artKit !== "tuxedo") throw new Error("Tux must use tuxedo loafs, not calico");
+  if (ART_KIT_PATH.calico.loaf72 === ART_KIT_PATH.tuxedo.loaf72) {
+    throw new Error("tuxedo kit must not point at calico loafs");
+  }
   if (tux.phenotype.boardColor !== "black") throw new Error("Tux must be color_black");
   if (furnitureGiftsForClear(12).length !== 0) throw new Error("clear 12 must gift nothing");
   const bang = CHAPTER3_TUX.bang_copy.friend_004?.[0];
@@ -1000,8 +1003,32 @@ for (const level of LEVELS) {
   if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Tux: ${shopStill.join(",")}`);
   }
-  for (const file of ["public/assets/cats/tux_loaf_48.svg", "public/assets/cats/tux_loaf_72.svg"]) {
-    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  const tuxSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <ellipse cx="24" cy="28" rx="16" ry="12" fill="#3A3D48" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M12 20 C12 14 16 12 18 16" fill="#2F323C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36 20 C36 14 32 12 30 16" fill="#2F323C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20 24.5 L24 36 L28 24.5 Q24 23 20 24.5 Z" fill="#FFF8F0" stroke="#2B2A28" stroke-width="1.6" stroke-linejoin="round"/>
+  <ellipse cx="15.5" cy="36.5" rx="3.4" ry="2.3" fill="#FFF8F0" stroke="#2B2A28" stroke-width="1.6"/>
+  <ellipse cx="32.5" cy="36.5" rx="3.4" ry="2.3" fill="#FFF8F0" stroke="#2B2A28" stroke-width="1.6"/>
+  <circle cx="18" cy="26" r="1.6" fill="#2B2A28"/>
+  <circle cx="28" cy="26" r="1.6" fill="#2B2A28"/>
+  <path d="M38 32 C42 30 44 34 40 36" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
+</svg>`;
+  const tux72 = tuxSvg.replace('width="48" height="48"', 'width="72" height="72"');
+  for (const [file, expected] of [
+    ["public/assets/cats/tux_loaf_48.svg", tuxSvg],
+    ["public/assets/cats/tux_loaf_72.svg", tux72],
+    ["public/assets/cats/friend_004_loaf_48.svg", tuxSvg],
+    ["public/assets/cats/friend_004_loaf_72.svg", tux72],
+  ] as const) {
+    const got = readFileSync(resolve(file), "utf8").trim();
+    if (got !== expected.trim()) throw new Error(`${file} is not the tuxedo loaf lock`);
+  }
+  if (CAT_ASSETS.tux_loaf_72 !== "/assets/cats/tux_loaf_72.svg") {
+    throw new Error("CAT_ASSETS tux loaf drifted");
+  }
+  if (tuxChips.includes("Misty") || tuxChips.includes("Ash") || tuxChips.includes("Shadow")) {
+    throw new Error("Tux chips must never use the Ink soft pool");
   }
   if (paradeClearForLevel("L12") !== 12) throw new Error("L12 must map to parade clear 12");
   if (paradeClearForLevel("L11") !== 11) throw new Error("L11 must map to parade clear 11");
