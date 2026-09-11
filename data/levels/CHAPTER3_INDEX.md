@@ -36,12 +36,12 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 | L40 | `CHAPTER3_PUZZLE_L40_L42.json` / `L40.json` | Solid South — gray house is the south brake | yes · mismatch solid |
 | L41 | `CHAPTER3_PUZZLE_L40_L42.json` / `L41.json` | Vacate South — leave the house column, then the south solid | yes · mismatch solid |
 | L42 | `CHAPTER3_PUZZLE_L40_L42.json` / `L42.json` | Park East — hold the cell east of the mid house | yes · mismatch solid |
-| L43 | `CHAPTER3_PUZZLE_L43_L45.json` / `L43.json` | Hold South Close — park under the mid house; L42 east-park overshoots | yes · mismatch solid |
+| L43 | `CHAPTER3_PUZZLE_L43_L45.json` / `L43.json` | Park South Close — park under the mid house; L42 east-park overshoots | yes · mismatch solid |
 | L44 | `CHAPTER3_PUZZLE_L43_L45.json` / `L44.json` | Solid North — black house is the north brake | yes · mismatch solid |
 | L45 | `CHAPTER3_PUZZLE_L43_L45.json` / `L45.json` | Vacate North — leave the column, then the north solid | yes · mismatch solid |
-| L46 | `CHAPTER3_PUZZLE_L46_L48.json` / `L46.json` | Hold East Close — park east of the mid house; L45 vacate-north overshoots | yes · mismatch solid |
+| L46 | `CHAPTER3_PUZZLE_L46_L48.json` / `L46.json` | Park East Close — park east of the mid house; L45 vacate-north overshoots | yes · mismatch solid |
 | L47 | `CHAPTER3_PUZZLE_L46_L48.json` / `L47.json` | Solid West — black house is the west brake | yes · mismatch solid |
-| L48 | `CHAPTER3_PUZZLE_L46_L48.json` / `L48.json` | Vacate West — leave the house row, then the west solid | yes · mismatch solid |
+| L48 | `CHAPTER3_PUZZLE_L46_L48.json` / `L48.json` | Vacate Row — leave the house row, then the west solid (≠ L31 Vacate West) | yes · mismatch solid |
 
 `CHAPTER3_PUZZLE_L11_L12.json` is the **campaign import** after the locked L4–L9 pack. `CHAPTER3_PUZZLE_L13_L15.json` continues after L12. `CHAPTER3_PUZZLE_L16_L18.json` continues after L15. `CHAPTER3_PUZZLE_L19_L21.json` continues after L18. `CHAPTER3_PUZZLE_L22_L24.json` continues after L21. `CHAPTER3_PUZZLE_L25_L27.json` continues after L24. `CHAPTER3_PUZZLE_L28_L30.json` continues after L27. `CHAPTER3_PUZZLE_L31_L33.json` continues after L30. `CHAPTER3_PUZZLE_L34_L36.json` continues after L33. `CHAPTER3_PUZZLE_L37_L39.json` continues after L36. `CHAPTER3_PUZZLE_L40_L42.json` continues after L39. `CHAPTER3_PUZZLE_L43_L45.json` continues after L42. `CHAPTER3_PUZZLE_L46_L48.json` continues after L45. Pink plays L11 next after L9.
 

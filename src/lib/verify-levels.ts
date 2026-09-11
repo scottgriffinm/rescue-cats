@@ -961,17 +961,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 1],
-      [0, 1],
-      [2, 0],
+      [4, 0],
+      [0, 0],
+      [5, 2],
+      [1, 4],
     ],
     cats: [
-      ["cat_orange", 4, 0],
-      ["cat_black", 5, 2],
+      ["cat_orange", 5, 1],
+      ["cat_black", 3, 3],
     ],
     gates: [
-      ["gate_orange", 3, 2],
-      ["gate_black", 2, 2],
+      ["gate_orange", 2, 3],
+      ["gate_black", 1, 3],
     ],
   },
 
@@ -1422,14 +1423,14 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "e"],
   ],
   L48: [
+    ["cat_orange", "w"],
     ["cat_orange", "s"],
     ["cat_orange", "e"],
-    ["cat_black", "s"],
-    ["cat_black", "w"],
     ["cat_orange", "n"],
-    ["cat_orange", "w"],
     ["cat_black", "n"],
-    ["cat_black", "e"],
+    ["cat_orange", "w"],
+    ["cat_black", "w"],
+    ["cat_black", "s"],
   ],
 };
 
@@ -4658,10 +4659,11 @@ for (const level of LEVELS) {
   const l43 = LEVELS.find((level) => level.id === "L43")!;
   const l44 = LEVELS.find((level) => level.id === "L44")!;
   const l45 = LEVELS.find((level) => level.id === "L45")!;
-  if (l43.name !== "Hold South Close") throw new Error("L43 must be Hold South Close");
+  if (l43.name !== "Park South Close") throw new Error("L43 must be Park South Close");
+  if (/^Hold\b/i.test(l43.name)) throw new Error("L43 must not use a Hold* mill title");
   if (l44.name !== "Solid North") throw new Error("L44 must be Solid North");
   if (l45.name !== "Vacate North") throw new Error("L45 must be Vacate North");
-  console.log("Dumpling @ onClear(42) ok · cream fold loafs + L43–L45 wired");
+  console.log("Dumpling @ onClear(42) ok · cream fold loafs + L43–L45 wired (L43 Park South Close · no Hold*)");
 }
 
 
@@ -4749,10 +4751,36 @@ for (const level of LEVELS) {
   const l46 = LEVELS.find((level) => level.id === "L46")!;
   const l47 = LEVELS.find((level) => level.id === "L47")!;
   const l48 = LEVELS.find((level) => level.id === "L48")!;
-  if (l46.name !== "Hold East Close") throw new Error("L46 must be Hold East Close");
+  if (l46.name !== "Park East Close") throw new Error("L46 must be Park East Close");
+  if (/^Hold\b/i.test(l46.name)) throw new Error("L46 must not use a Hold* mill title");
   if (l47.name !== "Solid West") throw new Error("L47 must be Solid West");
-  if (l48.name !== "Vacate West") throw new Error("L48 must be Vacate West");
-  console.log("Stripe @ onClear(45) ok · road-map mackerel loafs + L46–L48 wired");
+  if (l48.name !== "Vacate Row") throw new Error("L48 must be Vacate Row");
+  const l31 = LEVELS.find((level) => level.id === "L31")!;
+  if (l31.name !== "Vacate West") throw new Error("L31 must stay Vacate West");
+  if (l48.teach === l31.teach) throw new Error("L48 teach must differ from L31");
+  if (l48.templateId === l31.templateId) throw new Error("L48 templateId must differ from L31");
+  console.log("Stripe @ onClear(45) ok · road-map mackerel loafs + L46–L48 wired (Hold* mill kill · L48 Vacate Row)");
+}
+
+
+{
+  // Pink kill: Hold* mill — L43/L46 must not retread Hold South/East titles; L48 must not collide with L31 Vacate West.
+  const l43 = LEVELS.find((row) => row.id === "L43");
+  const l46 = LEVELS.find((row) => row.id === "L46");
+  const l48 = LEVELS.find((row) => row.id === "L48");
+  const l31 = LEVELS.find((row) => row.id === "L31");
+  if (!l43 || !l46 || !l48 || !l31) throw new Error("missing L31/L43/L46/L48 for Hold* mill kill");
+  if (l43.name !== "Park South Close") throw new Error(`L43 mill kill: expected Park South Close, got ${l43.name}`);
+  if (l46.name !== "Park East Close") throw new Error(`L46 mill kill: expected Park East Close, got ${l46.name}`);
+  if (/^Hold\b/i.test(l43.name) || /^Hold\b/i.test(l46.name)) {
+    throw new Error("L43/L46 must not use Hold* mill titles");
+  }
+  if (String(l43.teach ?? "").startsWith("hold_")) throw new Error("L43 teach must not be hold_*");
+  if (String(l46.teach ?? "").startsWith("hold_")) throw new Error("L46 teach must not be hold_*");
+  if (l48.name !== "Vacate Row") throw new Error(`L48 mill kill: expected Vacate Row, got ${l48.name}`);
+  if (l31.name === l48.name) throw new Error("L48 must not name-collide with L31");
+  if (l48.templateId === l31.templateId) throw new Error("L48 template must not collide with L31");
+  console.log("Hold* mill kill ok · L43 Park South Close · L46 Park East Close · L48 Vacate Row ≠ L31");
 }
 
 console.log("All authored boards ok");

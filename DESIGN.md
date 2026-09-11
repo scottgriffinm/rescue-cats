@@ -65,12 +65,12 @@ Same slide engine. Campaign after L9 is **L11–L48** (skip L10).
 - **L40 Solid South.** The gray house is the south brake. East-row vacate habits from L39 miss the stop.
 - **L41 Vacate South.** Leave the house column first, then the south solid.
 - **L42 Park East.** Hold the cell east of the mid house.
-- **L43 Hold South Close.** Park close under the mid house — L42 park-east overshoots.
+- **L43 Park South Close.** Park close under the mid house — L42 park-east overshoots. (Hold* mill title killed.)
 - **L44 Solid North.** The black house is the north brake.
 - **L45 Vacate North.** Leave the house column first, then the north solid.
-- **L46 Hold East Close.** Park east of the mid house — L45 vacate-north overshoots.
+- **L46 Park East Close.** Park east of the mid house — L45 vacate-north overshoots. (Hold* mill title killed.)
 - **L47 Solid West.** The black house is the west brake.
-- **L48 Vacate West.** Leave the house row first, then the west solid.
+- **L48 Vacate Row.** Leave the house row first, then the west solid (≠ L31 Vacate West).
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
 - **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`.
 - **onClear(15) → Ghost (`friend_005`) after L15.** Pale gray-cream loaf, chips Ghost / Wisp / Pearl, no furniture gift. Pack: `data/chapter3_ghost_bang.json`.
