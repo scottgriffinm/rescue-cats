@@ -74,7 +74,7 @@ Priority order (shipped):
 3. `cat.pose.belly` @72 calico — puzzle board cats only (`calico_belly_72.svg`)
 4. Furniture woodblock: `boxBed` 96×72, `swing` 96×96, `postBell` 48×96 (bell marigold + mist), `fence` 120×48 tileable
 5. UI: `btn_primary` (h 44, ink stroke, paper fill), `input_name`, `fail_mark` (28 clay fill + ink X — not arcade red), `star_marigold`, `hand_cursor`
-6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24, outer wrap `#C4BDB4` (mist). Soft ink `#2B2A28` only for thin frame chrome — never pitch `#1A1918`.
+6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Void wrap v2: page `#E8DFD2`, phone frame `#D4CBBE`, stage `#CABCAB`. Cards stay paper `#F7F0E6`. Never pitch `#1A1918`. Mist `#C4BDB4` is pills only.
 
 Export paths: `cats/{breed}_{pose}_{size}.svg`, `furniture/{id}.svg`, `ui/{id}.svg`. Registry: `src/lib/artAssets.ts`.
 
@@ -82,7 +82,10 @@ Palette is wired as CSS variables on `:root` and as Tailwind tokens (`bg-paper`,
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `--paper` | `#F7F0E6` | Screen / board / modal background. Never a pure-white void. |
+| `--paper` | `#F7F0E6` | Puzzle / yard cards and the cream screen. Never a pure-white void. |
+| `--frame-void` | `#E8DFD2` | Page / outer wrap (void wrap v2). |
+| `--phone-frame` | `#D4CBBE` | Phone bezel. |
+| `--stage` | `#CABCAB` | Stage mat between bezel and paper screen. |
 | `--ink` | `#2B2A28` | Text and UI chrome. Never a pure-black outline. |
 | `--clay` | `#E8A89A` | Soft fail marks, clay accents, header accent word. |
 | `--sage` | `#8FAF8A` | Lawn, fountain water, success / coach pips. |
@@ -118,7 +121,8 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 ### Kill list (do not ship)
 
 - Pure-white void backgrounds
-- Pitch `#1A1918` / pure-black page wrap — use mist `#C4BDB4`
+- Pitch `#1A1918` / pure-black page wrap
+- Mist `#C4BDB4` as the page wrap (pills only; void wrap v2 is `#E8DFD2` / `#D4CBBE` / `#CABCAB`)
 - Pure-black outlines
 - Arcade-red fail Xs — use clay `fail_mark.svg` / path-soft treatment instead
 
