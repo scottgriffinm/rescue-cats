@@ -15,4 +15,4 @@ Pack JSON: `chapter3_shadow_bang.json`. Overlay on `collection_CURRENT.json`. No
 
 Chips stay off Mist / Ink / Tux Formal pools. **Shadow** is Ink's chip (`Ink / Ash / Shadow`), so the unlock chips are Midnight / Inkspot / Onyx.
 
-Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Pumpkin at 24. Shop SKUs stay scratcher / miniTree / yarnSwing. Noodle@30 stays later — clearing L30 must not open Noodle UI.
+Mango still unlocks at clear 3. Ink at 6. Biscuit at 9. Tux at 12. Ghost at 15. Mist at 18. Pepper at 21. Pumpkin at 24. Shop SKUs stay scratcher / miniTree / yarnSwing. Noodle@30 ships next.

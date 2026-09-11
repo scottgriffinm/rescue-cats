@@ -1,6 +1,6 @@
 {
   "templateId": "LT01_teach_slide",
-  "note": "Authoritative move budgets for campaign L1\u2013L30. Color locks and nudges are data stubs until later templates.",
+  "note": "Authoritative move budgets for campaign L1\u2013L33. Color locks and nudges are data stubs until later templates.",
   "levels": [
     {
       "id": "L1",
@@ -179,6 +179,24 @@
     {
       "id": "L30",
       "moveBudget": 9,
+      "nudges": 3,
+      "colorLocks": true
+    },
+    {
+      "id": "L31",
+      "moveBudget": 10,
+      "nudges": 3,
+      "colorLocks": true
+    },
+    {
+      "id": "L32",
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true
+    },
+    {
+      "id": "L33",
+      "moveBudget": 12,
       "nudges": 3,
       "colorLocks": true
     }

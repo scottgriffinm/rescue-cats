@@ -1,0 +1,30 @@
+{
+  "version": "chapter3_noodle_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_010",
+  "unlock_clear": 30,
+  "personality": "Wiggly",
+  "display_line": "Long in spirit. Short in attention span.",
+  "art": {
+    "loaf_48": "/assets/cats/noodle_loaf_48.svg",
+    "loaf_72": "/assets/cats/noodle_loaf_72.svg",
+    "board_color": "orange"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Noodle", "Ramen", "Twirl"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_010": [
+      "{Name}: Long in spirit. Short in attention span.",
+      "{Name}: Already tied in a knot on the sunny board. Save me a loose string."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 30,
+    "sku_id": null,
+    "note": "Clear 30 gifts nothing — same cadence as Ink @ 6, Tux @ 12, Ghost @ 15, Mist @ 18, Pepper @ 21, Pumpkin @ 24, and Shadow @ 27."
+  }
+}
