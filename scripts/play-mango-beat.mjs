@@ -126,7 +126,11 @@ try {
     const cta = document.querySelector("button[type='submit']");
     return Boolean(input?.value.trim()) && !cta?.disabled;
   });
-  await page.click("input", { clickCount: 3 });
+  await page.$eval("input", (el) => {
+    el.focus();
+    el.value = "";
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  });
   await page.type("input", "Mango");
   if (!modal.hero.includes("/assets/cats/ginger_loaf_72.svg")) {
     throw new Error(`Mango hero missing ginger_loaf_72: ${modal.hero.join(",")}`);
@@ -141,7 +145,7 @@ try {
 
   await page.click('button[type="submit"]');
   await page.waitForFunction(
-    () => (document.body.innerText || "").includes("Mango moved in!"),
+    () => (document.body.innerText || "").includes("Mango is home. Tomorrow"),
     { timeout: 8000 },
   );
   const yard = await page.evaluate(() => {
@@ -159,8 +163,8 @@ try {
   if (!yard.imgs.includes("/assets/ui/bubble_bang.svg")) {
     throw new Error("yard missing first-night ! bubble");
   }
-  if (!yard.text.includes("will still be here in the morning")) {
-    throw new Error("yard missing tomorrow hook");
+  if (!yard.text.includes("Mango is home. Tomorrow")) {
+    throw new Error("yard missing tomorrow / next-clear hook");
   }
   if (yard.text.includes("Sun Cushion") && yard.imgs.filter((s) => s === "/assets/furniture/boxBed.svg").length > 1) {
     throw new Error("second gift suspected on Mango unlock");
@@ -170,6 +174,10 @@ try {
   if (save.completedIds.join() !== "L1,L2,L3") throw new Error("clears not L1-L3");
   if (save.friends.length !== 1 || save.friends[0].friendId !== "friend_001") {
     throw new Error("expected named friend_001");
+  }
+  if (save.friends[0].name !== "Mango") throw new Error(`named ${save.friends[0].name}`);
+  if (!save.bubbles.some((line) => line.includes("will still be here in the morning"))) {
+    throw new Error("save missing tomorrow_hook bubble");
   }
   if (!save.furniture.includes("furn_box_cardboard")) throw new Error("box not owned");
   const extras = save.furniture.filter(
