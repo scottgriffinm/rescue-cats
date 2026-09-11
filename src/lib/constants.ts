@@ -18,7 +18,7 @@ export const ART_KIT_PATH: Record<
   | "shadow"
   | "noodle"
   | "clover"
-  | "ash",
+  | "ash"
   | "oak",
   { loaf48: string; loaf72: string }
 > = {
