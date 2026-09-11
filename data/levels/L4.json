@@ -17,11 +17,5 @@
     { "id": "gate_a", "x": 1, "y": 4 },
     { "id": "gate_b", "x": 3, "y": 4 }
   ],
-  "teach": "two_cats",
-  "ascii": ". A . B .\n. . . . .\n. . . . .\n. . . . .\n. a . b .",
-  "note": "Locked pack. No colorIds. Slide each south; bottom edge brakes on the houses.",
-  "solve": [
-    ["cat_a", "s"],
-    ["cat_b", "s"]
-  ]
+  "teach": "two_cats"
 }

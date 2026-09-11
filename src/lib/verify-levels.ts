@@ -117,8 +117,8 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 0],
       [2, 1],
+      [2, 2],
       [3, 4],
     ],
     cats: [
@@ -204,11 +204,8 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L9: [
     ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_orange", "e"],
-    ["cat_gray", "w"],
-    ["cat_orange", "n"],
     ["cat_gray", "s"],
+    ["cat_gray", "w"],
   ],
 };
 
@@ -424,6 +421,8 @@ for (const level of LEVELS) {
     "public/assets/cats/ink_loaf_72.svg",
     "public/assets/cats/color_gray_loaf_48.svg",
     "public/assets/cats/color_gray_loaf_72.svg",
+    "public/assets/cats/gray_loaf_48.svg",
+    "public/assets/cats/gray_loaf_72.svg",
     "public/assets/cats/friend_002_loaf_48.svg",
     "public/assets/cats/friend_002_loaf_72.svg",
     "public/assets/gates/gate_orange.svg",

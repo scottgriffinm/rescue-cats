@@ -8,8 +8,8 @@
   "colorLocks": true,
   "templateId": "LT08_color_lock",
   "walls": [
-    { "x": 2, "y": 0 },
     { "x": 2, "y": 1 },
+    { "x": 2, "y": 2 },
     { "x": 3, "y": 4 }
   ],
   "blockers": [],
@@ -21,14 +21,5 @@
     { "id": "gate_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
     { "id": "gate_gray", "x": 0, "y": 5, "color": "gray", "colorId": "color_gray" }
   ],
-  "teach": "wrong_order_soft_lock",
-  "note": "Locked pack. Wrong house first soft-locks. Match coats in order.",
-  "solve": [
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_orange", "e"],
-    ["cat_gray", "w"],
-    ["cat_orange", "n"],
-    ["cat_gray", "s"]
-  ]
+  "teach": "wrong_order_soft_lock"
 }

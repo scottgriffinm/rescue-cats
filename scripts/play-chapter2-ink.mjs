@@ -235,11 +235,8 @@ try {
     page,
     [
       ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
     ],
     "Home",
   );

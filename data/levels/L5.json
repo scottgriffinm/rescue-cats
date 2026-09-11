@@ -22,12 +22,5 @@
     { "id": "gate_a", "x": 0, "y": 4 },
     { "id": "gate_b", "x": 4, "y": 4 }
   ],
-  "teach": "collision_order",
-  "note": "Locked pack. Vacate the shared column before the second friend can land.",
-  "solve": [
-    ["cat_a", "e"],
-    ["cat_a", "s"],
-    ["cat_b", "w"],
-    ["cat_b", "s"]
-  ]
+  "teach": "collision_order"
 }

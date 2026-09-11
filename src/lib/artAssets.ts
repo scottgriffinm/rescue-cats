@@ -18,6 +18,8 @@ export const CAT_ASSETS = {
   ink_loaf_72: "/assets/cats/ink_loaf_72.svg",
   color_gray_loaf_48: "/assets/cats/color_gray_loaf_48.svg",
   color_gray_loaf_72: "/assets/cats/color_gray_loaf_72.svg",
+  gray_loaf_48: "/assets/cats/gray_loaf_48.svg",
+  gray_loaf_72: "/assets/cats/gray_loaf_72.svg",
   friend_002_loaf_48: "/assets/cats/friend_002_loaf_48.svg",
   friend_002_loaf_72: "/assets/cats/friend_002_loaf_72.svg",
   calico_loaf_48: "/assets/cats/calico_loaf_48.svg",

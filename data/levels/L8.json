@@ -20,10 +20,5 @@
     { "id": "gate_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
     { "id": "gate_gray", "x": 4, "y": 5, "color": "gray", "colorId": "color_gray" }
   ],
-  "teach": "my_gate_only",
-  "note": "Locked pack. Orange for orange, gray for gray. Mismatch houses are solids.",
-  "solve": [
-    ["cat_orange", "s"],
-    ["cat_gray", "s"]
-  ]
+  "teach": "my_gate_only"
 }
