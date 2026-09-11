@@ -9,10 +9,7 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_a", "e"],
     ["cat_a", "n"],
   ],
-  L3: [
-    ["cat_a", "s"],
-    ["cat_a", "e"],
-  ],
+  L3: [["cat_a", "s"]],
   L4: [
     ["cat_a", "s"],
     ["cat_b", "s"],
@@ -52,7 +49,7 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
 };
 
-function play(level: Level, script: Array<[string, Dir]>) {
+function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
   let cats: PieceCat[] = level.cats.map((cat) => ({ ...cat }));
   let used = 0;
   for (const [id, dir] of script) {
@@ -63,24 +60,76 @@ function play(level: Level, script: Array<[string, Dir]>) {
     cats = result.cats;
     used += 1;
   }
-  if (!allCatsOnGates(level, cats)) {
+  if (requireWin && !allCatsOnGates(level, cats)) {
     throw new Error(`${level.id}: script did not land every cat on a gate`);
   }
-  if (used > level.moveBudget) {
+  if (requireWin && used > level.moveBudget) {
     throw new Error(`${level.id}: used ${used} > budget ${level.moveBudget}`);
   }
-  return used;
+  return { used, cats };
+}
+
+function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string) {
+  let cats: PieceCat[] = level.cats.map((cat) => ({ ...cat }));
+  for (const [id, dir] of script) {
+    const result = slideCat(level, cats, id, dir);
+    if (!result.moved) return;
+    cats = result.cats;
+  }
+  if (allCatsOnGates(level, cats)) {
+    throw new Error(`${level.id} false teach: ${label}`);
+  }
 }
 
 {
   const l3 = LEVELS.find((level) => level.id === "L3");
   if (!l3) throw new Error("missing L3");
-  let cats: PieceCat[] = l3.cats.map((cat) => ({ ...cat }));
-  for (const dir of ["e", "s", "w"] as Dir[]) {
-    cats = slideCat(l3, cats, "cat_a", dir).cats;
+  const cat = l3.cats[0];
+  const gate = l3.gates[0];
+  if (cat.x !== 2 || cat.y !== 0) throw new Error("L3 cat must be (2,0)");
+  if (gate.x !== 2 || gate.y !== 2) throw new Error("L3 gate must be (2,2)");
+  const wallKeys = new Set(l3.walls.map((wall) => `${wall.x},${wall.y}`));
+  for (const key of ["1,2", "3,2", "2,3"]) {
+    if (!wallKeys.has(key)) throw new Error(`L3 missing wall ${key}`);
   }
-  if (allCatsOnGates(l3, cats)) {
-    throw new Error("L3 false teach: L2-style skirt still solves");
+
+  const south = play(l3, [["cat_a", "s"]]);
+  if (south.cats[0].x !== 2 || south.cats[0].y !== 2) {
+    throw new Error(
+      `L3 south must brake on the gate, landed (${south.cats[0].x},${south.cats[0].y})`,
+    );
+  }
+
+  assertNotHome(l3, [["cat_a", "e"], ["cat_a", "s"], ["cat_a", "w"]], "L2-style skirt e,s,w");
+  assertNotHome(l3, [["cat_a", "w"], ["cat_a", "s"], ["cat_a", "e"]], "west skirt");
+  assertNotHome(
+    l3,
+    [
+      ["cat_a", "e"],
+      ["cat_a", "s"],
+      ["cat_a", "w"],
+      ["cat_a", "n"],
+    ],
+    "side route overshoots through G",
+  );
+  assertNotHome(
+    l3,
+    [
+      ["cat_a", "w"],
+      ["cat_a", "s"],
+      ["cat_a", "e"],
+      ["cat_a", "n"],
+    ],
+    "other side route overshoots through G",
+  );
+}
+
+{
+  const l2 = LEVELS.find((level) => level.id === "L2");
+  if (!l2) throw new Error("missing L2");
+  const gate = l2.gates[0];
+  if (gate.x !== 4 || gate.y !== 0) {
+    throw new Error("L2 gate must sit on the north-edge cell behind the house");
   }
 }
 
@@ -93,7 +142,7 @@ for (const level of LEVELS) {
   }
   const script = SOLVES[level.id];
   if (!script) throw new Error(`Missing solve for ${level.id}`);
-  const used = play(level, script);
+  const { used } = play(level, script);
   console.log(`#${level.number} ${level.id} ok · ${used}/${level.moveBudget} slides`);
 }
 

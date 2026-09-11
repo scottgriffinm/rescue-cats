@@ -22,8 +22,8 @@ const HEADLINES: Record<string, string> = {
 
 const HINTS: Record<string, string> = {
   L1: "One idea: slide south. They stop in the little house.",
-  L2: "One idea: walls block. Slide around, then home.",
-  L3: "Slide into the wall — it brakes you on the gate’s row. Then home.",
+  L2: "One idea: walls block. Slide around — the edge behind the house is the brake.",
+  L3: "The wall south of the house brakes you on the gate. Side routes slide through.",
   L4: "Both cats need a gate. Slide each one home.",
   L5: "Move the open-lane cat first. The other needs room to go around.",
   L6: "Each friend slides to the opposite corner gate.",

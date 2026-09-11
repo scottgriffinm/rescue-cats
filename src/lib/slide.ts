@@ -47,7 +47,8 @@ export function slideCat(
     if (occupied.has(cellKey(next.x, next.y))) break;
     current = next;
     path.push({ ...current });
-    if (matchingGate(level, me, current)) break;
+    // Gates never brake a slide. Win = occupy a matching gate at rest.
+    // Unmatched / overshoot slides continue through the house.
   }
 
   const moved = path.length > 1;

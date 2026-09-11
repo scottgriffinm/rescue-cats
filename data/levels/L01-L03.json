@@ -28,8 +28,9 @@
         { "x": 2, "y": 2 }
       ],
       "cats": [{ "id": "cat_a", "x": 0, "y": 2 }],
-      "gates": [{ "id": "gate_a", "x": 4, "y": 2 }],
-      "teach": "setup_slide"
+      "gates": [{ "id": "gate_a", "x": 4, "y": 0 }],
+      "teach": "setup_slide",
+      "note": "East lane is walled. Go around; the north-edge cell behind G is the brake."
     },
     {
       "id": "L3",
@@ -39,14 +40,26 @@
       "moveBudget": 3,
       "nudges": 0,
       "colorLocks": false,
-      "walls": [{ "x": 0, "y": 4 }],
-      "cats": [{ "id": "cat_a", "x": 0, "y": 0 }],
-      "gates": [{ "id": "gate_a", "x": 2, "y": 3 }],
-      "teach": "wall_brake"
+      "walls": [
+        { "x": 1, "y": 2 },
+        { "x": 3, "y": 2 },
+        { "x": 2, "y": 3 }
+      ],
+      "cats": [{ "id": "cat_a", "x": 2, "y": 0 }],
+      "gates": [{ "id": "gate_a", "x": 2, "y": 2 }],
+      "teach": "wall_brake",
+      "ascii": [
+        ". . C . .",
+        ". . . . .",
+        ". # G # .",
+        ". . # . .",
+        ". . . . ."
+      ],
+      "note": "Only clear: slide south. Wall south of G brakes you ON the gate. Side routes overshoot through G because gates do not stop slides."
     }
   ],
   "rules": {
-    "slide": "cardinal until wall|cat|edge|matched_gate_stop",
+    "slide": "cardinal until wall|cat|edge",
     "win": "all cats on gates",
     "softFail": "budget exhaust → X, free retry; 3 Xs → ticket|optional ad"
   }

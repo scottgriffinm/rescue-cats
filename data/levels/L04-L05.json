@@ -17,8 +17,8 @@
         { "id": "cat_b", "x": 3, "y": 1, "color": "gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 1, "y": 3 },
-        { "id": "gate_b", "x": 3, "y": 3 }
+        { "id": "gate_a", "x": 1, "y": 4 },
+        { "id": "gate_b", "x": 3, "y": 4 }
       ],
       "teach": "two_cats"
     },

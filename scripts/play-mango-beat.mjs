@@ -80,32 +80,54 @@ try {
     await waitToast(page, winText, 8000);
   };
 
-  await play(["ArrowDown"], "Home!");
+  await play(["ArrowDown"], "Home");
   await shot(page, "03_l1_win");
   await page.click("a[href='/level/L2']");
   await page.waitForFunction(() => document.body.innerText.includes("Setup Slide"));
   await page.waitForSelector('[aria-label="Select cat"]');
 
-  await play(["ArrowDown", "ArrowRight", "ArrowUp"], "Home!");
+  await play(["ArrowDown", "ArrowRight", "ArrowUp"], "Home");
   await shot(page, "04_l2_win");
   await page.click("a[href='/level/L3']");
   await page.waitForFunction(() => document.body.innerText.includes("Wall as Brake"));
   await page.waitForSelector('[aria-label="Select cat"]');
 
-  await play(["ArrowRight", "ArrowDown", "ArrowLeft"], "Home!");
+  await play(["ArrowDown"], "Home");
   await page.waitForSelector("h2");
   const modal = await page.evaluate(() => {
     const card = document.querySelector("h2")?.closest("div.paper-card") ?? document.body;
     const title = card.querySelector("h2")?.textContent?.trim();
     const hero = [...card.querySelectorAll("img")].map((img) => img.getAttribute("src"));
-    const cta = card.querySelector("button[type='submit']")?.textContent?.trim();
+    const cta = card.querySelector("button[type='submit']");
     const input = card.querySelector("input")?.value;
-    return { title, hero, cta, input };
+    return {
+      title,
+      hero,
+      cta: cta?.textContent?.trim(),
+      input,
+      ctaDisabled: Boolean(cta?.disabled),
+    };
   });
   console.log("naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "Mango") throw new Error(`name ${modal.input}`);
+  if (modal.input !== "") throw new Error(`name prefilled ${modal.input}`);
+  if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled until a name is chosen");
   if (modal.cta !== "Welcome home") throw new Error(`cta ${modal.cta}`);
+  const shuffle = await page.evaluate(() => {
+    const btn = [...document.querySelectorAll("button")].find((el) =>
+      (el.textContent || "").includes("Shuffle"),
+    );
+    btn?.click();
+    return btn?.textContent?.trim() ?? null;
+  });
+  if (!shuffle) throw new Error("missing shuffle names control");
+  await page.waitForFunction(() => {
+    const input = document.querySelector("input");
+    const cta = document.querySelector("button[type='submit']");
+    return Boolean(input?.value.trim()) && !cta?.disabled;
+  });
+  await page.click("input", { clickCount: 3 });
+  await page.type("input", "Mango");
   if (!modal.hero.includes("/assets/cats/ginger_loaf_72.svg")) {
     throw new Error(`Mango hero missing ginger_loaf_72: ${modal.hero.join(",")}`);
   }
@@ -133,6 +155,12 @@ try {
   }
   if (!yard.imgs.includes("/assets/furniture/boxBed.svg")) {
     throw new Error("yard missing boxBed");
+  }
+  if (!yard.imgs.includes("/assets/ui/bubble_bang.svg")) {
+    throw new Error("yard missing first-night ! bubble");
+  }
+  if (!yard.text.includes("will still be here in the morning")) {
+    throw new Error("yard missing tomorrow hook");
   }
   if (yard.text.includes("Sun Cushion") && yard.imgs.filter((s) => s === "/assets/furniture/boxBed.svg").length > 1) {
     throw new Error("second gift suspected on Mango unlock");

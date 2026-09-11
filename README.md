@@ -33,7 +33,7 @@ npm run verify:levels
 | `/play` | Next unsolved level |
 | `/level/L1` … `/level/L10` | Slide-budget boards (LT01) |
 
-Tap a cat, then swipe or tap a direction pip. They slide until a wall, blocker, another cat, or the edge (gates stop a matching slide).
+Tap a cat, then swipe or tap the footer D-pad. They slide until a wall, blocker, another cat, or the edge. Gates do not stop a slide — rest on the house to win.
 
 ## Vercel
 

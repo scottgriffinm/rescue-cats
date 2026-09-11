@@ -32,7 +32,8 @@
       "colorLocks": false,
       "walls": [
         { "x": 1, "y": 2 },
-        { "x": 3, "y": 2 }
+        { "x": 3, "y": 2 },
+        { "x": 2, "y": 4 }
       ],
       "cats": [
         { "id": "cat_a", "x": 1, "y": 0, "color": "orange" },
@@ -58,8 +59,8 @@
         { "id": "cat_b", "x": 4, "y": 1, "color": "gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 0, "y": 3, "color": "orange" },
-        { "id": "gate_b", "x": 4, "y": 3, "color": "gray" }
+        { "id": "gate_a", "x": 0, "y": 4, "color": "orange" },
+        { "id": "gate_b", "x": 4, "y": 4, "color": "gray" }
       ],
       "teach": "color_preview"
     },
@@ -93,7 +94,9 @@
       "colorLocks": true,
       "walls": [
         { "x": 1, "y": 1 },
-        { "x": 3, "y": 3 }
+        { "x": 3, "y": 3 },
+        { "x": 3, "y": 0 },
+        { "x": 1, "y": 4 }
       ],
       "cats": [
         { "id": "cat_a", "x": 0, "y": 2, "color": "orange" },

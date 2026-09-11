@@ -4,7 +4,7 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 
 ## Puzzle — LOCKED (Template 01 / LT01 Teach Slide)
 
-**Verb: slide-budget routing.** Tap a cat, then slide them one cardinal direction until they hit a **wall, blocker, another cat, or the board edge**. Matching yard gates also stop a slide (`matched_gate_stop`).
+**Verb: slide-budget routing.** Tap a cat, then slide them one cardinal direction until they hit a **wall, blocker, another cat, or the board edge**. Gates do **not** stop a slide — occupy a matching gate at rest to win. Sliding through an unmatched house or overshooting continues.
 
 - **Win:** every cat sits on a yard-gate tile, in ≤ N slides.
 - **Cost:** the move counter decrements once per slide start (illegal / zero-length slides are free).
@@ -15,7 +15,9 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 
 Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L10 continue LT01. Move table: `data/levels/move_budget_L01-L30.json` (L11–30 budgets + nudge/colorLock stubs only). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`.
 
-Acceptance: slide stops on wall / cat / edge; counter decrements once per slide start; win = all cats on gates; budget exhaust → X and board reset (Xs persist per level); no mid-puzzle ads.
+Acceptance: slide stops on wall / cat / edge only; gates never brake; counter decrements once per slide start; win = all cats on gates at rest; budget exhaust → X and board reset (Xs persist per level); no mid-puzzle ads.
+
+L3 topology (5×5, top-left origin): cat (2,0), gate (2,2), walls (1,2)(3,2)(2,3). Only clear is south — the wall south of G brakes you ON the gate. Side routes overshoot through G. L1/L2 win via an edge cell behind the house.
 
 Retarget when a later template arrives by swapping JSON + keeping the slide helper.
 

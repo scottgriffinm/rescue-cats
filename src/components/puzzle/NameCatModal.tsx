@@ -74,6 +74,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
           <button
             type="button"
             onClick={shuffle}
+            aria-label={NAMING.cta_shuffle}
             className="w-full text-center text-sm text-ink/50 underline-offset-2 hover:underline"
           >
             {NAMING.cta_shuffle}
