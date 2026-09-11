@@ -1,0 +1,30 @@
+{
+  "version": "chapter3_mist_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_006",
+  "unlock_clear": 18,
+  "personality": "Dreamy",
+  "display_line": "Soft as weather. Will fog up your lap.",
+  "art": {
+    "loaf_48": "/assets/cats/mist_loaf_48.svg",
+    "loaf_72": "/assets/cats/mist_loaf_72.svg",
+    "board_color": "gray"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Mist", "Fog", "Soft"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_006": [
+      "{Name}: Soft as weather. Will fog up your lap.",
+      "{Name}: Already half fog. Save me a lap."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 18,
+    "sku_id": null,
+    "note": "Clear 18 gifts nothing — same cadence as Ink @ 6, Tux @ 12, and Ghost @ 15."
+  }
+}

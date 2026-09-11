@@ -10,6 +10,7 @@ const ROOSTS = [
   { left: "72%", top: "66%" },
   { left: "28%", top: "68%" },
   { left: "80%", top: "58%" },
+  { left: "16%", top: "56%" },
 ];
 
 export function YardScene({
@@ -37,12 +38,14 @@ export function YardScene({
   const biscuit = friends.find((friend) => friend.friendId === "friend_003");
   const tux = friends.find((friend) => friend.friendId === "friend_004");
   const ghost = friends.find((friend) => friend.friendId === "friend_005");
+  const mist = friends.find((friend) => friend.friendId === "friend_006");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
       !(hasCushion && friend.friendId === "friend_003") &&
       friend.friendId !== "friend_004" &&
-      friend.friendId !== "friend_005",
+      friend.friendId !== "friend_005" &&
+      friend.friendId !== "friend_006",
   );
 
   return (
@@ -111,6 +114,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
+        </div>
+      ) : null}
+
+      {mist ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "20%", top: "24%" }}
+        >
+          <FriendSprite
+            kit={friendById(mist.friendId)?.phenotype.artKit ?? "mist"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === mist.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(mist.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${mist.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{mist.name}</p>
         </div>
       ) : null}
 
