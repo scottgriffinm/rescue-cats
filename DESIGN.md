@@ -19,7 +19,17 @@ Acceptance: slide stops on wall / cat / edge only; gates never brake; counter de
 
 L3 topology (5×5, top-left origin): cat (2,0), gate (2,2), walls (1,2)(3,2)(2,3). Only clear is south — the wall south of G brakes you ON the gate. Side routes overshoot through G. L1/L2 win via an edge cell behind the house.
 
-Retarget when a later template arrives by swapping JSON + keeping the slide helper.
+## Chapter 2 — OPEN (sister-ready campaign)
+
+Continuous build past the Mango slice. Same slide engine (stop on wall | cat | edge only).
+
+- **L4–L5 LT02 two-cat collision.** A parked cat is a brake: the slider stops on the adjacent cell. Order matters — move the brake first and the other overshoots through the house.
+- **L6–L7 route depth.** Blocked straight lanes; authored solves are 8-slide corridors.
+- **L8–L9 LT08 color locks.** JSON uses `color_orange` / `color_gray`. Orange coat → orange house. The near house is the wrong coat.
+- **L10** stays the tight-pair closer.
+- **onClear(6) → Ink (`friend_002`).** Naming is still a choice (empty prefill + chips). Each new friend gets their own yard `!` and tomorrow hook.
+
+Retarget later templates by swapping JSON + keeping the slide helper.
 
 ## Collection bible v0 — implemented (non-blocking opens)
 

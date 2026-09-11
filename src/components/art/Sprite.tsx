@@ -3,10 +3,25 @@ import { ART_KIT_PATH, PUZZLE_CAT_SRC } from "@/lib/constants";
 import type { ArtKit } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
-export function PuzzleCatSprite({ className }: { className?: string }) {
+export function PuzzleCatSprite({
+  className,
+  colorHex,
+}: {
+  className?: string;
+  colorHex?: string;
+}) {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={PUZZLE_CAT_SRC} alt="" className={cn("pointer-events-none select-none", className)} />
+    <span className="relative inline-flex items-center justify-center">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={PUZZLE_CAT_SRC} alt="" className={cn("pointer-events-none select-none", className)} />
+      {colorHex ? (
+        <span
+          className="pointer-events-none absolute bottom-0.5 h-2 w-6 rounded-full"
+          style={{ background: colorHex, boxShadow: `0 0 0 1.5px #2B2A28` }}
+          aria-hidden
+        />
+      ) : null}
+    </span>
   );
 }
 

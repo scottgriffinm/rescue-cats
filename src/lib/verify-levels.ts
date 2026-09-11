@@ -1,3 +1,4 @@
+import { friendForClear, NAMING } from "./collection";
 import { LEVELS } from "./levels";
 import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
@@ -12,34 +13,44 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   L3: [["cat_a", "s"]],
   L4: [
     ["cat_a", "s"],
+    ["cat_b", "e"],
     ["cat_b", "s"],
   ],
   L5: [
-    ["cat_b", "s"],
     ["cat_a", "e"],
-    ["cat_a", "s"],
+    ["cat_b", "s"],
     ["cat_a", "w"],
     ["cat_a", "s"],
   ],
   L6: [
+    ["cat_a", "s"],
     ["cat_a", "e"],
+    ["cat_a", "s"],
+    ["cat_a", "w"],
+    ["cat_b", "n"],
     ["cat_b", "w"],
+    ["cat_b", "n"],
+    ["cat_b", "e"],
   ],
   L7: [
-    ["cat_a", "w"],
     ["cat_a", "s"],
     ["cat_a", "e"],
-    ["cat_b", "e"],
+    ["cat_a", "s"],
+    ["cat_a", "w"],
     ["cat_b", "s"],
     ["cat_b", "w"],
+    ["cat_b", "s"],
+    ["cat_b", "e"],
   ],
   L8: [
-    ["cat_a", "s"],
-    ["cat_b", "s"],
-  ],
-  L9: [
     ["cat_a", "e"],
     ["cat_b", "w"],
+  ],
+  L9: [
+    ["cat_b", "s"],
+    ["cat_b", "w"],
+    ["cat_a", "e"],
+    ["cat_a", "s"],
   ],
   L10: [
     ["cat_a", "n"],
@@ -133,6 +144,32 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   }
 }
 
+{
+  const l4 = LEVELS.find((level) => level.id === "L4");
+  if (!l4) throw new Error("missing L4");
+  assertNotHome(l4, [["cat_b", "e"], ["cat_b", "s"], ["cat_a", "s"]], "L4 B-first overshoots A through the gate");
+}
+
+{
+  const l5 = LEVELS.find((level) => level.id === "L5");
+  if (!l5) throw new Error("missing L5");
+  assertNotHome(l5, [["cat_b", "s"], ["cat_a", "e"], ["cat_a", "w"], ["cat_a", "s"]], "L5 B-first overshoots");
+}
+
+{
+  const l8 = LEVELS.find((level) => level.id === "L8");
+  if (!l8) throw new Error("missing L8");
+  if (!l8.colorLocks) throw new Error("L8 must lock colors");
+  assertNotHome(l8, [["cat_a", "s"], ["cat_b", "n"]], "L8 near houses are the wrong coat");
+}
+
+{
+  const l9 = LEVELS.find((level) => level.id === "L9");
+  if (!l9) throw new Error("missing L9");
+  if (!l9.colorLocks) throw new Error("L9 must lock colors");
+  assertNotHome(l9, [["cat_a", "s"], ["cat_b", "s"]], "L9 south sits on the wrong coat");
+}
+
 for (const level of LEVELS) {
   if (!allCatsOnGates(level, level.cats)) {
     const dirs = legalDirs(level, level.cats, level.cats[0].id);
@@ -144,6 +181,16 @@ for (const level of LEVELS) {
   if (!script) throw new Error(`Missing solve for ${level.id}`);
   const { used } = play(level, script);
   console.log(`#${level.number} ${level.id} ok · ${used}/${level.moveBudget} slides`);
+}
+
+{
+  const ink = friendForClear(6);
+  if (ink?.friendId !== "friend_002") {
+    throw new Error(`onClear(6) must unlock Ink, got ${ink?.friendId ?? "none"}`);
+  }
+  if (NAMING.prefill !== "") throw new Error("naming prefill must stay empty");
+  if (!NAMING.require_choice) throw new Error("naming must require a choice");
+  console.log("Ink @ onClear(6) ok · naming is a choice");
 }
 
 console.log("All authored boards ok");

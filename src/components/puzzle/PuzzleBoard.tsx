@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { PuzzleCatSprite, UiIcon } from "@/components/art/Sprite";
 import { cn } from "@/lib/cn";
+import { BOARD_COLOR_HEX } from "@/lib/colors";
 import { cellKey } from "@/lib/directions";
 import { blockedSet } from "@/lib/slide";
 import type { Dir, Level, PieceCat } from "@/lib/types";
@@ -35,7 +36,8 @@ export function PuzzleBoard({
 }) {
   const start = useRef<{ x: number; y: number } | null>(null);
   const blocked = blockedSet(level);
-  const gateKeys = new Set(level.gates.map((gate) => cellKey(gate.x, gate.y)));
+  const gateByCell = new Map(level.gates.map((gate) => [cellKey(gate.x, gate.y), gate]));
+  const gateKeys = new Set(gateByCell.keys());
   const homeKeys = new Set(
     motion?.kind === "home"
       ? cats.filter((cat) => gateKeys.has(cellKey(cat.x, cat.y))).map((cat) => cellKey(cat.x, cat.y))
@@ -72,7 +74,9 @@ export function PuzzleBoard({
           Array.from({ length: level.width }, (_, x) => {
             const key = cellKey(x, y);
             const isWall = blocked.has(key);
-            const isGate = gateKeys.has(key);
+            const gate = gateByCell.get(key);
+            const isGate = Boolean(gate);
+            const gateHex = gate?.color ? BOARD_COLOR_HEX[gate.color] : undefined;
             return (
               <div key={key} className="aspect-square p-[3px]">
                 <div
@@ -82,8 +86,13 @@ export function PuzzleBoard({
                     isWall && "border-ink/70 bg-wood",
                     homeKeys.has(key) && "gate-home",
                   )}
+                  style={
+                    isGate && gateHex
+                      ? { background: `${gateHex}33`, borderColor: gateHex }
+                      : undefined
+                  }
                 >
-                  {isGate ? <GateMark /> : null}
+                  {isGate ? <GateMark colorHex={gateHex} /> : null}
                 </div>
               </div>
             );
@@ -111,9 +120,10 @@ export function PuzzleBoard({
                 transitionDuration: sliding ? `${active.durationMs ?? 160}ms` : "0ms",
                 transitionTimingFunction: "cubic-bezier(0.2, 0.85, 0.2, 1)",
               }}
-              aria-label={`Select cat`}
+              aria-label={cat.color ? `Select ${cat.color} cat` : "Select cat"}
             >
               <PuzzleCatSprite
+                colorHex={cat.color ? BOARD_COLOR_HEX[cat.color] : undefined}
                 className={cn(
                   "h-[56px] w-[56px] drop-shadow-sm",
                   active?.kind === "slide" && active.axis === "y" && "slide-along-y",
@@ -137,17 +147,22 @@ export function PuzzleBoard({
   );
 }
 
-function GateMark() {
+function GateMark({ colorHex }: { colorHex?: string }) {
   return (
     <svg viewBox="0 0 32 32" className="h-full w-full p-1.5" aria-hidden>
       <path
         d="M6 16 L16 8 L26 16 V26 H6 Z"
-        fill="#F7F0E6"
+        fill={colorHex ?? "#F7F0E6"}
         stroke="#2B2A28"
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
-      <path d="M13 26 V18 H19 V26" fill="#D96B4A" stroke="#2B2A28" strokeWidth="1.5" />
+      <path
+        d="M13 26 V18 H19 V26"
+        fill={colorHex ?? "#D96B4A"}
+        stroke="#2B2A28"
+        strokeWidth="1.5"
+      />
     </svg>
   );
 }

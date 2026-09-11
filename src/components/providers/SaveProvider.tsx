@@ -181,7 +181,7 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
       completeFirstNight: (instanceId) => {
         const current = snap.save;
         const friend = current.friends.find((item) => item.instanceId === instanceId);
-        if (!friend || current.first_night_done) return;
+        if (!friend || !friend.firstNight) return;
         const sniff = withName(NAMING.first_night_bubble, friend.name);
         const tomorrow = withName(NAMING.tomorrow_hook, friend.name);
         const hearts = current.first_night_hearts_claimed
@@ -192,7 +192,8 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
           hearts,
           first_night_done: true,
           first_night_hearts_claimed: true,
-          return_hook_available_at: Date.now() + RETURN_HOOK_DELAY_MS,
+          return_hook_available_at:
+            current.return_hook_available_at ?? Date.now() + RETURN_HOOK_DELAY_MS,
           bubbles: [sniff, tomorrow, ...current.bubbles.filter((bubble) => bubble !== sniff)].slice(
             0,
             3,

@@ -11,12 +11,12 @@ const HEADLINES: Record<string, string> = {
   L1: "STRAIGHT SHOT",
   L2: "GO AROUND",
   L3: "WALL AS BRAKE",
-  L4: "TWO AT ONCE",
-  L5: "MIND THE ORDER",
-  L6: "SWAP CORNERS",
-  L7: "BOTH SIDES",
-  L8: "MATCH THE GATE",
-  L9: "WATCH THE POST",
+  L4: "CAT AS BRAKE",
+  L5: "PARK THE BRAKE",
+  L6: "THE LONG WAY",
+  L7: "TWIN CORRIDORS",
+  L8: "MATCH THE COAT",
+  L9: "SWAP THE HOUSES",
   L10: "TIGHT PAIR",
 };
 
@@ -24,12 +24,12 @@ const HINTS: Record<string, string> = {
   L1: "One idea: slide south. They stop in the little house.",
   L2: "One idea: walls block. Slide around — the edge behind the house is the brake.",
   L3: "The wall south of the house brakes you on the gate. Side routes slide through.",
-  L4: "Both cats need a gate. Slide each one home.",
-  L5: "Move the open-lane cat first. The other needs room to go around.",
-  L6: "Each friend slides to the opposite corner gate.",
-  L7: "Walls sit in the lanes. Walk around, then home.",
-  L8: "Same slide — gates now remember a color (orange / gray).",
-  L9: "A wall and a post split the paper. Opposite corners still work.",
+  L4: "A friend can be a wall. Slide into them so you stop on the house.",
+  L5: "Park a friend on the brake square first. Then the other can stop on the gate.",
+  L6: "The straight lane is blocked. Walk the long way around.",
+  L7: "Each side has its own corridor. Don’t cross the middle post.",
+  L8: "Orange house for the orange coat. The near house is the wrong color.",
+  L9: "The house under you is the other coat. Peel off, then swap.",
   L10: "Meet in the middle lanes, then peel off to the matching gates.",
 };
 
@@ -46,6 +46,7 @@ type RawLevel = {
   cats: { id: string; x: number; y: number; color?: string }[];
   gates: { id: string; x: number; y: number; color?: string }[];
   teach?: string;
+  templateId?: string;
 };
 
 function hydrate(raw: RawLevel, index: number): Level {
@@ -56,7 +57,7 @@ function hydrate(raw: RawLevel, index: number): Level {
     name: raw.name,
     headline: HEADLINES[raw.id] ?? raw.name.toUpperCase(),
     hint: HINTS[raw.id] ?? "Slide every cat onto a yard gate.",
-    templateId: TEMPLATE_ID,
+    templateId: raw.templateId ?? TEMPLATE_ID,
     width: raw.width,
     height: raw.height,
     moveBudget: budgetRow?.moveBudget ?? raw.moveBudget,

@@ -1,5 +1,11 @@
 import type { BoardColor } from "./types";
 
+export const BOARD_COLOR_HEX: Record<BoardColor, string> = {
+  orange: "#D38B5D",
+  gray: "#5A5E6B",
+  black: "#2B2A28",
+};
+
 const MAP: Record<string, BoardColor> = {
   orange: "orange",
   color_orange: "orange",

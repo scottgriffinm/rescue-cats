@@ -28,13 +28,12 @@ export function YardScreen() {
   const allDone = cleared >= LEVELS.length;
   const hasBox = save.furniture.includes("furn_box_cardboard");
   const hasTree = save.furniture.includes("furn_tree_mini");
-  const introFriend = !save.first_night_done
-    ? save.friends.find((friend) => friend.firstNight)
-    : undefined;
+  const introFriend = save.friends.find((friend) => friend.firstNight);
   const [bangFriendId, setBangFriendId] = useState<string | null>(null);
+  const newestFriend = save.friends[save.friends.length - 1];
   const tomorrowHook =
-    save.first_night_done && !save.return_hook_claimed && save.friends[0]
-      ? withName(NAMING.tomorrow_hook, save.friends[0].name)
+    newestFriend && !introFriend && !save.return_hook_claimed
+      ? withName(NAMING.tomorrow_hook, newestFriend.name)
       : null;
 
   useEffect(() => {
@@ -70,9 +69,11 @@ export function YardScreen() {
             ? "Three little slides. Then you get to meet a new friend."
             : allDone
               ? "Everyone who needed saving is napping in the sun."
-              : save.unlockFlags.mangoNamed
-                ? `${save.friends[0]?.name ?? "Your friend"} is home. Tomorrow: ${upcoming.name}.`
-                : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
+              : save.friends.length >= 2
+                ? `${save.friends.map((friend) => friend.name).join(" & ")} are home. Tomorrow: ${upcoming.name}.`
+                : save.unlockFlags.mangoNamed
+                  ? `${save.friends[0]?.name ?? "Your friend"} is home. Tomorrow: ${upcoming.name}.`
+                  : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
         </p>
       </header>
 

@@ -1,46 +1,51 @@
 {
-  "templateId": "LT01_teach_slide",
+  "templateId": "LT02_two_cat_collision",
   "gridOrigin": "top-left",
+  "note": "Chapter 2 open. Collision = slide stops adjacent to the other cat. Gates do not brake. Order matters: the parked cat is the brake on the gate.",
   "levels": [
     {
       "id": "L4",
-      "name": "Two Friends",
+      "name": "Cat as Brake",
       "width": 5,
       "height": 5,
       "moveBudget": 10,
       "nudges": 0,
       "colorLocks": false,
+      "templateId": "LT02_two_cat_collision",
       "walls": [],
       "blockers": [],
       "cats": [
-        { "id": "cat_a", "x": 1, "y": 1, "color": "orange" },
-        { "id": "cat_b", "x": 3, "y": 1, "color": "gray" }
+        { "id": "cat_a", "x": 1, "y": 0, "color": "color_orange" },
+        { "id": "cat_b", "x": 1, "y": 3, "color": "color_gray" }
       ],
       "gates": [
-        { "id": "gate_a", "x": 1, "y": 4 },
-        { "id": "gate_b", "x": 3, "y": 4 }
+        { "id": "gate_a", "x": 1, "y": 2 },
+        { "id": "gate_b", "x": 4, "y": 4 }
       ],
-      "teach": "two_cats"
+      "teach": "collision_brake",
+      "note": "A south stops adjacent to B and rests on the gate. Move B first and A overshoots through the house."
     },
     {
       "id": "L5",
-      "name": "Collision Order",
+      "name": "Park the Brake",
       "width": 5,
       "height": 5,
       "moveBudget": 9,
       "nudges": 0,
       "colorLocks": false,
+      "templateId": "LT02_two_cat_collision",
       "walls": [],
-      "blockers": [{ "x": 0, "y": 2 }],
+      "blockers": [],
       "cats": [
-        { "id": "cat_a", "x": 0, "y": 0, "color": "orange" },
-        { "id": "cat_b", "x": 4, "y": 0, "color": "black" }
+        { "id": "cat_a", "x": 2, "y": 3, "color": "color_orange" },
+        { "id": "cat_b", "x": 4, "y": 0, "color": "color_gray" }
       ],
       "gates": [
         { "id": "gate_a", "x": 0, "y": 4 },
-        { "id": "gate_b", "x": 4, "y": 4 }
+        { "id": "gate_b", "x": 4, "y": 2 }
       ],
-      "teach": "collision_order"
+      "teach": "collision_order",
+      "note": "Slide A east onto the brake square first. B south then stops on the gate. B first overshoots."
     }
   ]
 }
