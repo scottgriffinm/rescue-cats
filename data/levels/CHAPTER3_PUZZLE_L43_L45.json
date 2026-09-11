@@ -8,13 +8,13 @@
   "levels": [
     {
       "id": "L43",
-      "name": "Hold South Close",
+      "name": "Thread West",
       "width": 6,
       "height": 6,
-      "moveBudget": 10,
+      "moveBudget": 12,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_hold_south_close_gray",
+      "templateId": "LT02_LT08_thread_west_gray",
       "walls": [
         {
           "x": 0,
@@ -22,10 +22,10 @@
         },
         {
           "x": 0,
-          "y": 2
+          "y": 4
         },
         {
-          "x": 3,
+          "x": 2,
           "y": 2
         }
       ],
@@ -33,15 +33,15 @@
       "cats": [
         {
           "id": "cat_orange",
-          "x": 2,
-          "y": 2,
+          "x": 4,
+          "y": 1,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 5,
-          "y": 3,
+          "x": 0,
+          "y": 2,
           "color": "gray",
           "colorId": "color_gray"
         }
@@ -49,7 +49,7 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 2,
+          "x": 3,
           "y": 3,
           "color": "orange",
           "colorId": "color_orange"
@@ -62,8 +62,7 @@
           "colorId": "color_gray"
         }
       ],
-      "teach": "hold_south_close_gray",
-      "ascii": "......\n#.....\n#.O#..\n..o..G\n......\n.....g"
+      "teach": "thread_west_gray"
     },
     {
       "id": "L44",

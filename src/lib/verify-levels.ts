@@ -862,20 +862,20 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L43: {
     size: 6,
-    N: 10,
+    N: 12,
     colorLocks: true,
     colors: true,
     walls: [
       [0, 1],
-      [0, 2],
-      [3, 2],
+      [0, 4],
+      [2, 2],
     ],
     cats: [
-      ["cat_orange", 2, 2],
-      ["cat_gray", 5, 3],
+      ["cat_orange", 4, 1],
+      ["cat_gray", 0, 2],
     ],
     gates: [
-      ["gate_orange", 2, 3],
+      ["gate_orange", 3, 3],
       ["gate_gray", 5, 5],
     ],
   },
@@ -923,17 +923,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 5],
-      [2, 5],
+      [2, 0],
+      [3, 5],
       [2, 2],
     ],
     cats: [
-      ["cat_orange", 2, 3],
-      ["cat_gray", 3, 0],
+      ["cat_orange", 5, 1],
+      ["cat_gray", 3, 4],
     ],
     gates: [
       ["gate_orange", 3, 3],
-      ["gate_gray", 5, 0],
+      ["gate_gray", 2, 3],
     ],
   },
   L47: {
@@ -961,13 +961,13 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 1],
-      [0, 1],
-      [2, 0],
+      [2, 5],
+      [3, 4],
+      [0, 3],
     ],
     cats: [
-      ["cat_orange", 4, 0],
-      ["cat_black", 5, 2],
+      ["cat_orange", 1, 3],
+      ["cat_black", 5, 3],
     ],
     gates: [
       ["gate_orange", 3, 2],
@@ -1376,11 +1376,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "s"],
   ],
   L43: [
-    ["cat_orange", "s"],
     ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "e"],
     ["cat_orange", "n"],
-    ["cat_gray", "w"],
     ["cat_orange", "e"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_orange", "w"],
     ["cat_gray", "s"],
     ["cat_gray", "e"],
   ],
@@ -1404,13 +1408,13 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "s"],
   ],
   L46: [
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
     ["cat_orange", "n"],
-    ["cat_gray", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
     ["cat_gray", "e"],
+    ["cat_gray", "n"],
   ],
   L47: [
     ["cat_orange", "e"],
@@ -1422,13 +1426,13 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "e"],
   ],
   L48: [
-    ["cat_orange", "s"],
-    ["cat_orange", "e"],
-    ["cat_black", "s"],
-    ["cat_black", "w"],
     ["cat_orange", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
     ["cat_orange", "w"],
     ["cat_black", "n"],
+    ["cat_black", "w"],
+    ["cat_black", "s"],
     ["cat_black", "e"],
   ],
 };
@@ -4658,7 +4662,7 @@ for (const level of LEVELS) {
   const l43 = LEVELS.find((level) => level.id === "L43")!;
   const l44 = LEVELS.find((level) => level.id === "L44")!;
   const l45 = LEVELS.find((level) => level.id === "L45")!;
-  if (l43.name !== "Hold South Close") throw new Error("L43 must be Hold South Close");
+  if (l43.name !== "Thread West") throw new Error("L43 must be Thread West");
   if (l44.name !== "Solid North") throw new Error("L44 must be Solid North");
   if (l45.name !== "Vacate North") throw new Error("L45 must be Vacate North");
   console.log("Dumpling @ onClear(42) ok · cream fold loafs + L43–L45 wired");
@@ -4749,10 +4753,30 @@ for (const level of LEVELS) {
   const l46 = LEVELS.find((level) => level.id === "L46")!;
   const l47 = LEVELS.find((level) => level.id === "L47")!;
   const l48 = LEVELS.find((level) => level.id === "L48")!;
-  if (l46.name !== "Hold East Close") throw new Error("L46 must be Hold East Close");
+  if (l46.name !== "Color Gap") throw new Error("L46 must be Color Gap");
   if (l47.name !== "Solid West") throw new Error("L47 must be Solid West");
-  if (l48.name !== "Vacate West") throw new Error("L48 must be Vacate West");
+  if (l48.name !== "Clear Row") throw new Error("L48 must be Clear Row");
   console.log("Stripe @ onClear(45) ok · road-map mackerel loafs + L46–L48 wired");
+}
+
+
+{
+  // Rival Conditional: L43 Hold* killed → Thread West; Stripe scrub L46 Color Gap + L48 Clear Row.
+  const names: Record<string, string> = {
+    L43: "Thread West",
+    L46: "Color Gap",
+    L48: "Clear Row",
+  };
+  for (const [id, name] of Object.entries(names)) {
+    const level = LEVELS.find((row) => row.id === id);
+    if (!level) throw new Error(`missing rival fix ${id}`);
+    if (level.name !== name) throw new Error(`${id} must be ${name}, got ${level.name}`);
+    if (/hold/i.test(level.name)) throw new Error(`${id} must not be a Hold* mill teach`);
+  }
+  if (LEVELS.find((row) => row.id === "L48")?.name === "Vacate West") {
+    throw new Error("L48 must not collide with mill Vacate West naming");
+  }
+  console.log("Rival fix L43/L46/L48 ok · Thread West · Color Gap · Clear Row");
 }
 
 console.log("All authored boards ok");
