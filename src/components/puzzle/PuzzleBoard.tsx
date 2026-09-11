@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { PuzzleCatSprite, UiIcon } from "@/components/art/Sprite";
 import { cn } from "@/lib/cn";
+import { GATE_ASSETS } from "@/lib/artAssets";
 import { BOARD_COLOR_HEX } from "@/lib/colors";
 import { cellKey } from "@/lib/directions";
 import { blockedSet } from "@/lib/slide";
@@ -96,7 +97,7 @@ export function PuzzleBoard({
                     gate?.color === "orange" || gate?.color === "gray" ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img
-                        src={`/assets/ui/gate_${gate.color}.svg`}
+                        src={GATE_ASSETS[gate.color]}
                         alt=""
                         className="h-full w-full p-1.5"
                       />

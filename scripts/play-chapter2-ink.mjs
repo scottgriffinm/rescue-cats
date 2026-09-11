@@ -152,7 +152,9 @@ try {
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
   if (modal.input !== "") throw new Error(`Ink prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (!modal.line?.includes("Quiet paws")) throw new Error("missing Ink display line");
+  if (modal.line !== "Quiet gray paws. Already claimed a shadow.") {
+    throw new Error(`Ink display line drifted: ${modal.line}`);
+  }
   if (modal.chips.join(",") !== "Ink,Ash,Shadow") {
     throw new Error(`Ink chips must be Ink/Ash/Shadow, got ${modal.chips.join("/")}`);
   }

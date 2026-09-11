@@ -1,4 +1,8 @@
+import { existsSync } from "node:fs";
+import { resolve } from "node:path";
+import { ART_KIT_PATH } from "./constants";
 import { CHAPTER2, chipsForFriend, friendForClear, NAMING } from "./collection";
+import { GATE_ASSETS } from "./artAssets";
 import { LEVELS } from "./levels";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
@@ -380,7 +384,35 @@ for (const level of LEVELS) {
   if (inkBang !== "{Name}: Quiet gray paws. Already claimed a shadow.") {
     throw new Error(`Ink first-night drifted: ${inkBang}`);
   }
-  console.log("Ink @ onClear(6) ok · Ink/Ash/Shadow chips · first-night locked");
+  if (ink.displayLine !== "Quiet gray paws. Already claimed a shadow.") {
+    throw new Error(`Ink display line drifted: ${ink.displayLine}`);
+  }
+  if (ART_KIT_PATH.slate.loaf48 !== "/assets/cats/ink_loaf_48.svg") {
+    throw new Error("Ink yard/unlock must map slate 48 → ink_loaf_48");
+  }
+  if (ART_KIT_PATH.slate.loaf72 !== "/assets/cats/ink_loaf_72.svg") {
+    throw new Error("Ink yard/unlock must map slate 72 → ink_loaf_72");
+  }
+  const artFiles = [
+    "public/assets/cats/ink_loaf_48.svg",
+    "public/assets/cats/ink_loaf_72.svg",
+    "public/assets/cats/color_gray_loaf_48.svg",
+    "public/assets/cats/color_gray_loaf_72.svg",
+    "public/assets/cats/friend_002_loaf_48.svg",
+    "public/assets/cats/friend_002_loaf_72.svg",
+    "public/assets/gates/gate_orange.svg",
+    "public/assets/gates/gate_gray.svg",
+  ];
+  for (const file of artFiles) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  if (GATE_ASSETS.orange !== "/assets/gates/gate_orange.svg") {
+    throw new Error("LT08 orange gate path drifted");
+  }
+  if (GATE_ASSETS.gray !== "/assets/gates/gate_gray.svg") {
+    throw new Error("LT08 gray gate path drifted");
+  }
+  console.log("Ink @ onClear(6) ok · ink loafs + LT08 gates wired");
 }
 
 console.log("All authored boards ok");

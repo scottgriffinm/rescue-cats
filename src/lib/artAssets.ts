@@ -16,6 +16,10 @@ export const CAT_ASSETS = {
   slate_loaf_72: "/assets/cats/ink_loaf_72.svg",
   ink_loaf_48: "/assets/cats/ink_loaf_48.svg",
   ink_loaf_72: "/assets/cats/ink_loaf_72.svg",
+  color_gray_loaf_48: "/assets/cats/color_gray_loaf_48.svg",
+  color_gray_loaf_72: "/assets/cats/color_gray_loaf_72.svg",
+  friend_002_loaf_48: "/assets/cats/friend_002_loaf_48.svg",
+  friend_002_loaf_72: "/assets/cats/friend_002_loaf_72.svg",
   calico_loaf_48: "/assets/cats/calico_loaf_48.svg",
   calico_loaf_72: "/assets/cats/calico_loaf_72.svg",
   calico_belly_72: "/assets/cats/calico_belly_72.svg",
@@ -41,6 +45,11 @@ export const UI_ASSETS = {
   hand_cursor: "/assets/ui/hand_cursor.svg",
   bubble_bang: "/assets/ui/bubble_bang.svg",
   icon_close: "/assets/ui/icon_close.svg",
-  gate_orange: "/assets/ui/gate_orange.svg",
-  gate_gray: "/assets/ui/gate_gray.svg",
+  gate_orange: "/assets/gates/gate_orange.svg",
+  gate_gray: "/assets/gates/gate_gray.svg",
 } as const;
+
+export const GATE_ASSETS: Record<"orange" | "gray", string> = {
+  orange: "/assets/gates/gate_orange.svg",
+  gray: "/assets/gates/gate_gray.svg",
+};

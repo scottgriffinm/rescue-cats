@@ -181,7 +181,12 @@
       "friend_id": "friend_002",
       "default_name": "Ink",
       "unlock_clear": 6,
-      "display_line": "Quiet paws. Already claiming the shadiest corner.",
+      "display_line": "Quiet gray paws. Already claimed a shadow.",
+      "art": {
+        "loaf_48": "/assets/cats/ink_loaf_48.svg",
+        "loaf_72": "/assets/cats/ink_loaf_72.svg",
+        "board_color": "gray"
+      },
       "tier": "C",
       "phenotype_id": "pheno_dsh_gray_solid_regular_regular",
       "breed": "Domestic Shorthair",
