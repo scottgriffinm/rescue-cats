@@ -1,4 +1,5 @@
 import teach from "../../data/levels/L01-L03.json";
+import l03 from "../../data/levels/L03.json";
 import extra from "../../data/levels/L04-L05.json";
 import later from "../../data/levels/L06-L10.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
@@ -22,7 +23,7 @@ const HEADLINES: Record<string, string> = {
 const HINTS: Record<string, string> = {
   L1: "One idea: slide south. They stop in the little house.",
   L2: "One idea: walls block. Slide around, then home.",
-  L3: "One idea: the wall is a brake. Go around so you stop on the gate.",
+  L3: "Slide into the wall — it brakes you on the gate’s row. Then home.",
   L4: "Both cats need a gate. Slide each one home.",
   L5: "Move the open-lane cat first. The other needs room to go around.",
   L6: "Each friend slides to the opposite corner gate.",
@@ -69,7 +70,12 @@ function hydrate(raw: RawLevel, index: number): Level {
   };
 }
 
-const authored = [...teach.levels, ...extra.levels, ...later.levels] as RawLevel[];
+const authored = [
+  ...teach.levels.filter((level) => level.id !== "L3"),
+  l03,
+  ...extra.levels,
+  ...later.levels,
+] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
 

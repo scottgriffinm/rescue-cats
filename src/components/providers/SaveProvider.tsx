@@ -135,11 +135,13 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         const catalog = friendById(nextPending.friendId);
         if (!catalog) return null;
         assertDuplicateNamesAllowed();
+        const chosen = name.trim();
+        if (!chosen) return null;
         const instance: FriendInstance = {
           instanceId: `inst-${Date.now()}-${current.friends.length}`,
           friendId: catalog.friendId,
           phenotypeId: catalog.phenotype.phenotypeId,
-          name: name.trim() || catalog.defaultName,
+          name: chosen,
           rescuedAt: Date.now(),
           clearIndex: nextPending.clearIndex,
           roost: current.friends.length,
@@ -149,11 +151,12 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         const friends = [...current.friends, instance];
         const movedIn = withName(NAMING.confirm_bubble, instance.name);
         const sniff = withName(NAMING.first_night_bubble, instance.name);
+        const tomorrow = withName(NAMING.tomorrow_hook, instance.name);
         setSave({
           ...current,
           friends,
           pendingUnlocks: current.pendingUnlocks.slice(1),
-          bubbles: [movedIn, sniff, ...current.bubbles].slice(0, 3),
+          bubbles: [sniff, tomorrow, movedIn, ...current.bubbles].slice(0, 3),
           unlockFlags: unlockFlagsFor(friends),
         });
         return instance;

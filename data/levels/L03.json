@@ -1,0 +1,14 @@
+{
+  "id": "L3",
+  "name": "Wall as Brake",
+  "width": 5,
+  "height": 5,
+  "moveBudget": 3,
+  "nudges": 0,
+  "colorLocks": false,
+  "walls": [{ "x": 0, "y": 4 }],
+  "cats": [{ "id": "cat_a", "x": 0, "y": 0 }],
+  "gates": [{ "id": "gate_a", "x": 2, "y": 3 }],
+  "teach": "wall_brake",
+  "note": "South hits the wall and stops on the gate row. East homes. Skirting the long way is 4+ slides and misses the budget."
+}

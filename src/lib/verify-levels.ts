@@ -10,9 +10,8 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_a", "n"],
   ],
   L3: [
-    ["cat_a", "e"],
     ["cat_a", "s"],
-    ["cat_a", "w"],
+    ["cat_a", "e"],
   ],
   L4: [
     ["cat_a", "s"],
@@ -71,6 +70,18 @@ function play(level: Level, script: Array<[string, Dir]>) {
     throw new Error(`${level.id}: used ${used} > budget ${level.moveBudget}`);
   }
   return used;
+}
+
+{
+  const l3 = LEVELS.find((level) => level.id === "L3");
+  if (!l3) throw new Error("missing L3");
+  let cats: PieceCat[] = l3.cats.map((cat) => ({ ...cat }));
+  for (const dir of ["e", "s", "w"] as Dir[]) {
+    cats = slideCat(l3, cats, "cat_a", dir).cats;
+  }
+  if (allCatsOnGates(l3, cats)) {
+    throw new Error("L3 false teach: L2-style skirt still solves");
+  }
 }
 
 for (const level of LEVELS) {

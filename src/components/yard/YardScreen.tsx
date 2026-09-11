@@ -38,11 +38,11 @@ export function YardScreen() {
         </div>
         <p className="mt-2 text-sm text-ink/55">
           {save.friends.length === 0
-            ? "Three little slides. Then you get to meet Mango."
+            ? "Three little slides. Then you get to meet a new friend."
             : allDone
               ? "Everyone who needed saving is napping in the sun."
-              : save.friends[0]?.friendId === "friend_001"
-                ? `${save.friends[0].name} is on the porch. The box is theirs.`
+              : save.unlockFlags.mangoNamed
+                ? `${save.friends[0]?.name ?? "Your friend"} is home. Tomorrow: ${upcoming.name}.`
                 : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
         </p>
       </header>

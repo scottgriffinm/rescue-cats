@@ -12,14 +12,16 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
   const pending = save.pendingUnlocks[0];
   const catalog = pending ? friendById(pending.friendId) : undefined;
   const pool = useMemo(() => allNameSuggestions(), []);
-  const [name, setName] = useState(catalog?.defaultName ?? "Mango");
+  const [name, setName] = useState("");
 
   if (!catalog) return null;
 
   function shuffle() {
-    const pick = pool[Math.floor(Math.random() * pool.length)] ?? catalog?.defaultName ?? "Mango";
+    const pick = pool[Math.floor(Math.random() * pool.length)] ?? "";
     setName(pick);
   }
+
+  const chosen = name.trim();
 
   return (
     <div className="absolute inset-0 z-30 flex items-end justify-center bg-ink/30 px-4 pb-8 pt-16">
@@ -42,7 +44,8 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
           className="mt-4 space-y-3"
           onSubmit={(event) => {
             event.preventDefault();
-            namePendingFriend(name);
+            if (!chosen) return;
+            namePendingFriend(chosen);
             onNamed();
           }}
         >
@@ -59,7 +62,13 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
             onChange={(event) => setName(event.target.value)}
             className="h-11 w-full rounded-lg border-0 bg-transparent bg-[url('/assets/ui/input_name.svg')] bg-[length:100%_100%] bg-no-repeat px-4 text-center font-sans text-lg text-ink outline-none"
           />
-          <Button type="submit" variant="paper" className="w-full" aria-label={NAMING.cta_primary}>
+          <Button
+            type="submit"
+            variant="paper"
+            className="w-full"
+            disabled={!chosen}
+            aria-label={NAMING.cta_primary}
+          >
             {NAMING.cta_primary}
           </Button>
           <button
