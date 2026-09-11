@@ -45,6 +45,7 @@ export function YardScene({
   const ash = friends.find((friend) => friend.friendId === "friend_012");
   const oak = friends.find((friend) => friend.friendId === "friend_013");
   const dumpling = friends.find((friend) => friend.friendId === "friend_014");
+  const stripe = friends.find((friend) => friend.friendId === "friend_015");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -59,7 +60,8 @@ export function YardScene({
       friend.friendId !== "friend_011" &&
       friend.friendId !== "friend_012" &&
       friend.friendId !== "friend_013" &&
-      friend.friendId !== "friend_014",
+      friend.friendId !== "friend_014" &&
+      friend.friendId !== "friend_015",
   );
 
   return (
@@ -293,6 +295,29 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{dumpling.name}</p>
+        </div>
+      ) : null}
+      {stripe ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "44%", top: "48%" }}
+        >
+          <FriendSprite
+            kit={friendById(stripe.friendId)?.phenotype.artKit ?? "stripe"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === stripe.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(stripe.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${stripe.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{stripe.name}</p>
         </div>
       ) : null}
 

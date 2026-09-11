@@ -1,0 +1,35 @@
+{
+  "version": "chapter3_stripe_bang",
+  "status": "READY",
+  "friend_id": "friend_015",
+  "unlock_clear": 45,
+  "personality": "Busy",
+  "display_line": "Wears the road map on their back.",
+  "art": {
+    "loaf_48": "/assets/cats/stripe_loaf_48.svg",
+    "loaf_72": "/assets/cats/stripe_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "stripe"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Stripe",
+      "Dash",
+      "Lane"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_015": [
+      "{Name}: Wears the road map on their back.",
+      "{Name}: Already claimed the fastest lane on the porch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 45,
+    "sku_id": null,
+    "note": "Clear 45 gifts nothing \u2014 same cadence as Ink @ 6 through Dumpling @ 42. Box stays Mango@3. Sun Cushion stays Biscuit@9. Cloud@48 and Bean@60 stay later."
+  }
+}

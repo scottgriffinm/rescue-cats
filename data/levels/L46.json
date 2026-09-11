@@ -1,0 +1,58 @@
+{
+  "id": "L46",
+  "name": "Hold East Close",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 10,
+  "nudges": 3,
+  "colorLocks": true,
+  "templateId": "LT02_LT08_hold_east_close_gray",
+  "walls": [
+    {
+      "x": 1,
+      "y": 5
+    },
+    {
+      "x": 2,
+      "y": 5
+    },
+    {
+      "x": 2,
+      "y": 2
+    }
+  ],
+  "blockers": [],
+  "cats": [
+    {
+      "id": "cat_orange",
+      "x": 2,
+      "y": 3,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "cat_gray",
+      "x": 3,
+      "y": 0,
+      "color": "gray",
+      "colorId": "color_gray"
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate_orange",
+      "x": 3,
+      "y": 3,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "gate_gray",
+      "x": 5,
+      "y": 0,
+      "color": "gray",
+      "colorId": "color_gray"
+    }
+  ],
+  "teach": "hold_east_close_gray"
+}
