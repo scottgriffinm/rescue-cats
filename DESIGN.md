@@ -4,7 +4,7 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 
 ## Puzzle — LOCKED (Template 01 / LT01 Teach Slide)
 
-**Verb: slide-budget routing.** Tap a cat, then slide them one cardinal direction until they hit a **wall, blocker, another cat, or the board edge**. Gates do **not** stop a slide — occupy a matching gate at rest to win. Sliding through an unmatched house or overshooting continues.
+**Verb: slide-budget routing.** Tap a cat, then slide them one cardinal direction until they hit a **wall, blocker, another cat, or the board edge**. Matching gates do **not** stop a slide — occupy a matching gate at rest to win. Sliding through a matching house or overshooting continues. On LT08 color-lock boards, a **mismatch house is a solid**.
 
 - **Win:** every cat sits on a yard-gate tile, in ≤ N slides.
 - **Cost:** the move counter decrements once per slide start (illegal / zero-length slides are free).
@@ -25,7 +25,7 @@ Continuous build past the Mango slice. Same slide engine (stop on wall | cat | e
 
 - **L4–L5 LT02 two-cat collision.** A parked cat is a brake: the slider stops on the adjacent cell. Order matters — move the brake first and the other overshoots through the house.
 - **L6–L7 route depth.** Blocked straight lanes; authored solves are 8-slide corridors.
-- **L8–L9 LT08 color locks.** JSON uses `color_orange` / `color_gray`. Orange coat → orange house. The near house is the wrong coat.
+- **L8–L9 LT08 color locks.** JSON uses `color_orange` / `color_gray`. Orange coat → orange house. The near house is the wrong coat and acts as a **solid**. Matching houses still do not brake.
 - **L10** stays the tight-pair closer.
 - **onClear(6) → Ink (`friend_002`).** Naming is still a choice (empty prefill + chips). Pack: `data/chapter2_ink_shop_bang.json`. Each new friend gets their own yard `!` copy variants. Hearts shop starter (sisal post, 15♥) opens at clear 6.
 

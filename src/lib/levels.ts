@@ -1,7 +1,9 @@
 import teach from "../../data/levels/L01-L03.json";
 import l03 from "../../data/levels/L03.json";
-import extra from "../../data/levels/L04-L05.json";
-import later from "../../data/levels/L06-L10.json";
+import lt02 from "../../data/levels/LT02-L04-L05.json";
+import l06l07 from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
+import lt08 from "../../data/levels/LT08-L08-L09.json";
+import l10 from "../../data/levels/L10.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -74,8 +76,10 @@ function hydrate(raw: RawLevel, index: number): Level {
 const authored = [
   ...teach.levels.filter((level) => level.id !== "L3"),
   l03,
-  ...extra.levels,
-  ...later.levels,
+  ...lt02.levels,
+  ...l06l07.levels,
+  ...lt08.levels,
+  l10,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

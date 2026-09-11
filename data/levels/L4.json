@@ -1,0 +1,27 @@
+{
+  "id": "L4",
+  "name": "Cat as Brake",
+  "width": 5,
+  "height": 5,
+  "moveBudget": 10,
+  "nudges": 0,
+  "colorLocks": false,
+  "templateId": "LT02_two_cat_collision",
+  "walls": [],
+  "blockers": [],
+  "cats": [
+    { "id": "cat_a", "x": 1, "y": 0, "color": "color_orange" },
+    { "id": "cat_b", "x": 1, "y": 3, "color": "color_gray" }
+  ],
+  "gates": [
+    { "id": "gate_a", "x": 1, "y": 2 },
+    { "id": "gate_b", "x": 4, "y": 4 }
+  ],
+  "teach": "collision_brake",
+  "note": "A south stops adjacent to B and rests on the gate. Move B first and A overshoots through the house.",
+  "solve": [
+    ["cat_a", "s"],
+    ["cat_b", "e"],
+    ["cat_b", "s"]
+  ]
+}

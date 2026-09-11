@@ -1,6 +1,6 @@
 {
   "gridOrigin": "top-left",
-  "note": "L6–L7 route depth. L8–L9 LT08 color locks (color_orange / color_gray). L10 keeps the tight-pair closer. Gates never stop slides.",
+  "note": "L6–L7 route depth. L8–L9 LT08 color locks (color_orange / color_gray). L10 keeps the tight-pair closer. Matching gates never stop slides. LT08 mismatch houses are solids.",
   "levels": [
     {
       "id": "L6",

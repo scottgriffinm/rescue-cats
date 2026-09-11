@@ -24,6 +24,17 @@ export function matchingGate(level: Level, cat: PieceCat, pos: Vec): Gate | unde
   });
 }
 
+/** LT08: a wrong-color house is a solid. Matching houses never brake. */
+export function isMismatchSolid(level: Level, cat: PieceCat, pos: Vec) {
+  if (!level.colorLocks) return false;
+  const gate = level.gates.find((item) => item.x === pos.x && item.y === pos.y);
+  if (!gate) return false;
+  const gateColor = normalizeBoardColor(gate.color);
+  const catColor = normalizeBoardColor(cat.color);
+  if (!gateColor || !catColor) return false;
+  return gateColor !== catColor;
+}
+
 export function slideCat(
   level: Level,
   cats: PieceCat[],
@@ -45,10 +56,10 @@ export function slideCat(
     if (!inBounds(level, next)) break;
     if (blocked.has(cellKey(next.x, next.y))) break;
     if (occupied.has(cellKey(next.x, next.y))) break;
+    if (isMismatchSolid(level, me, next)) break;
     current = next;
     path.push({ ...current });
-    // Gates never brake a slide. Win = occupy a matching gate at rest.
-    // Unmatched / overshoot slides continue through the house.
+    // Matching gates never brake. Win = occupy a matching house at rest.
   }
 
   const moved = path.length > 1;

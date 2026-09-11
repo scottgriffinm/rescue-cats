@@ -1,0 +1,35 @@
+{
+  "id": "L6",
+  "name": "Long Way Home",
+  "width": 5,
+  "height": 5,
+  "moveBudget": 8,
+  "nudges": 0,
+  "colorLocks": false,
+  "templateId": "LT02_route_depth",
+  "walls": [
+    { "x": 0, "y": 3 },
+    { "x": 4, "y": 2 }
+  ],
+  "blockers": [],
+  "cats": [
+    { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
+    { "id": "cat_b", "x": 4, "y": 4, "color": "color_gray" }
+  ],
+  "gates": [
+    { "id": "gate_a", "x": 0, "y": 4 },
+    { "id": "gate_b", "x": 4, "y": 0 }
+  ],
+  "teach": "route_depth",
+  "note": "Straight lanes are walled. Walk the long corridor: 8 slides.",
+  "solve": [
+    ["cat_a", "s"],
+    ["cat_a", "e"],
+    ["cat_a", "s"],
+    ["cat_a", "w"],
+    ["cat_b", "n"],
+    ["cat_b", "w"],
+    ["cat_b", "n"],
+    ["cat_b", "e"]
+  ]
+}

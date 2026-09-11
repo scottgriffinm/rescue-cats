@@ -1,0 +1,58 @@
+{
+  "templateId": "LT02_route_depth",
+  "gridOrigin": "top-left",
+  "note": "Authored route depth. Straight lanes blocked. Slides stop on wall | cat | edge only. Gates never brake.",
+  "levels": [
+    {
+      "id": "L6",
+      "name": "Long Way Home",
+      "width": 5,
+      "height": 5,
+      "moveBudget": 8,
+      "nudges": 0,
+      "colorLocks": false,
+      "templateId": "LT02_route_depth",
+      "walls": [
+        { "x": 0, "y": 3 },
+        { "x": 4, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
+        { "id": "cat_b", "x": 4, "y": 4, "color": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_a", "x": 0, "y": 4 },
+        { "id": "gate_b", "x": 4, "y": 0 }
+      ],
+      "teach": "route_depth"
+    },
+    {
+      "id": "L7",
+      "name": "Twin Corridors",
+      "width": 5,
+      "height": 5,
+      "moveBudget": 8,
+      "nudges": 0,
+      "colorLocks": false,
+      "templateId": "LT02_route_depth",
+      "walls": [
+        { "x": 1, "y": 0 },
+        { "x": 3, "y": 0 },
+        { "x": 2, "y": 2 },
+        { "x": 0, "y": 3 },
+        { "x": 4, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_a", "x": 0, "y": 0, "color": "color_orange" },
+        { "id": "cat_b", "x": 4, "y": 0, "color": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_a", "x": 0, "y": 4 },
+        { "id": "gate_b", "x": 4, "y": 4 }
+      ],
+      "teach": "twin_corridors"
+    }
+  ]
+}

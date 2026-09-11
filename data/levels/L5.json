@@ -1,0 +1,28 @@
+{
+  "id": "L5",
+  "name": "Park the Brake",
+  "width": 5,
+  "height": 5,
+  "moveBudget": 9,
+  "nudges": 0,
+  "colorLocks": false,
+  "templateId": "LT02_two_cat_collision",
+  "walls": [],
+  "blockers": [],
+  "cats": [
+    { "id": "cat_a", "x": 2, "y": 3, "color": "color_orange" },
+    { "id": "cat_b", "x": 4, "y": 0, "color": "color_gray" }
+  ],
+  "gates": [
+    { "id": "gate_a", "x": 0, "y": 4 },
+    { "id": "gate_b", "x": 4, "y": 2 }
+  ],
+  "teach": "collision_order",
+  "note": "Slide A east onto the brake square first. B south then stops on the gate. B first overshoots.",
+  "solve": [
+    ["cat_a", "e"],
+    ["cat_b", "s"],
+    ["cat_a", "w"],
+    ["cat_a", "s"]
+  ]
+}
