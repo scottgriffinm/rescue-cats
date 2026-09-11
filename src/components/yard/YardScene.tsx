@@ -114,7 +114,7 @@ export function YardScene({
       {tux ? (
         <div
           className="yard-drop absolute w-[72px]"
-          style={{ left: "66%", top: "46%" }}
+          style={{ left: "70%", top: "64%" }}
         >
           <FriendSprite
             kit={friendById(tux.friendId)?.phenotype.artKit ?? "tuxedo"}

@@ -65,6 +65,7 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
         : isTux
           ? chapter3Tux.personality
           : raw.personality,
+    // CURRENT lists friend_004 as calico; Tux is the first tuxedo loaf, not calico.
     artKit: isInk ? "slate" : isBiscuit ? "cream" : isTux ? "tuxedo" : kit,
     boardColor: isInk
       ? "gray"

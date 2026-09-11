@@ -4,6 +4,7 @@ export const ART_STROKE = "#2B2A28";
 export const FUR_CREAM = "#FFF8F0";
 export const FUR_GINGER = "#D38B5D";
 export const FUR_SLATE = "#5A5E6B";
+export const FUR_TUX = "#3A3D48";
 export const FUR_CLAY = "#E8A89A";
 
 export const CAT_ASSETS = {
@@ -27,6 +28,8 @@ export const CAT_ASSETS = {
   calico_belly_72: "/assets/cats/calico_belly_72.svg",
   tux_loaf_48: "/assets/cats/tux_loaf_48.svg",
   tux_loaf_72: "/assets/cats/tux_loaf_72.svg",
+  friend_004_loaf_48: "/assets/cats/friend_004_loaf_48.svg",
+  friend_004_loaf_72: "/assets/cats/friend_004_loaf_72.svg",
 } as const;
 
 export const FURN_ASSETS = {
