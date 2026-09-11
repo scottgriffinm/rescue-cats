@@ -1,6 +1,6 @@
 # Chapter 3 puzzle index
 
-Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13–L15 → Ghost @ 15 → L16–L18 → Mist @ 18 → L19–L21**. **L10 is not on the path.** Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On color-lock boards, a **mismatch house is a solid**. A parked friend is the brake onto a mid-board matching house.
+Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13–L15 → Ghost @ 15 → L16–L18 → Mist @ 18 → L19–L21 → Pepper @ 21 → L22–L24**. **L10 is not on the path.** Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On color-lock boards, a **mismatch house is a solid**. A parked friend is the brake onto a mid-board matching house.
 
 | Id | Pack | Teach | Color locks |
 | --- | --- | --- | --- |
@@ -15,8 +15,11 @@ Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13�
 | L19 | `CHAPTER3_PUZZLE_L19_L21.json` / `L19.json` | Hold North — park above the house, then slide on | yes · mismatch solid |
 | L20 | `CHAPTER3_PUZZLE_L19_L21.json` / `L20.json` | Hold East — park east of the house or you overshoot | yes · mismatch solid |
 | L21 | `CHAPTER3_PUZZLE_L19_L21.json` / `L21.json` | Thread Park — park the south lane, then thread west | yes · mismatch solid |
+| L22 | `CHAPTER3_PUZZLE_L22_L24.json` / `L22.json` | Hold West — park west of the house or you overshoot | yes · mismatch solid |
+| L23 | `CHAPTER3_PUZZLE_L22_L24.json` / `L23.json` | Hold Corner — hold the corner cell above the house | yes · mismatch solid |
+| L24 | `CHAPTER3_PUZZLE_L22_L24.json` / `L24.json` | Park High — climb and park the high cell | yes · mismatch solid |
 
-`CHAPTER3_PUZZLE_L11_L12.json` is the **campaign import** after the locked L4–L9 pack. `CHAPTER3_PUZZLE_L13_L15.json` continues after L12. `CHAPTER3_PUZZLE_L16_L18.json` continues after L15. `CHAPTER3_PUZZLE_L19_L21.json` continues after L18. Pink plays L11 next after L9.
+`CHAPTER3_PUZZLE_L11_L12.json` is the **campaign import** after the locked L4–L9 pack. `CHAPTER3_PUZZLE_L13_L15.json` continues after L12. `CHAPTER3_PUZZLE_L16_L18.json` continues after L15. `CHAPTER3_PUZZLE_L19_L21.json` continues after L18. `CHAPTER3_PUZZLE_L22_L24.json` continues after L21. Pink plays L11 next after L9.
 
 ## Collection / art (same beat)
 
@@ -29,10 +32,11 @@ Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13�
 - First-night: `{Name}: A pale loaf. Appears when the sun hits the porch.`
 - Mist (`friend_006`) at `onClear(18)` after **L18** — chips **Mist / Fog / Soft**, gray-mackerel loaf, no furniture gift
 - First-night: `{Name}: Soft as weather. Will fog up your lap.`
-- Porch shows six friends when owned (Mango / Ink / Biscuit / Tux / Ghost / Mist) plus box, cushion, and shop props
-- Pepper @ 21 ships in a later slice — clearing L21 does not open Pepper UI
+- Pepper (`friend_007`) at `onClear(21)` after **L21** — chips **Pepper / Spice / Pip**, orange spotted loaf, no furniture gift
+- First-night: `{Name}: A little spice. Already batting the bell.`
+- Porch shows seven friends when owned (Mango / Ink / Biscuit / Tux / Ghost / Mist / Pepper) plus box, cushion, and shop props
 - Hearts shop SKUs unchanged: scratcher 15♥ + mini tree 40♥ from clear ≥3; yarn swing 40♥ from clear ≥6. Mini Cat Tree is a shop card when not owned (not an auto-grant).
-- Pumpkin @ 24 ships in a later slice
+- Pumpkin @ 24 ships in a later slice — clearing L24 does not open Pumpkin UI
 
 ## Engine
 

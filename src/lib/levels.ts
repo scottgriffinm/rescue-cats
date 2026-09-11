@@ -5,6 +5,7 @@ import chapter3 from "../../data/levels/CHAPTER3_PUZZLE_L11_L12.json";
 import chapter3b from "../../data/levels/CHAPTER3_PUZZLE_L13_L15.json";
 import chapter3c from "../../data/levels/CHAPTER3_PUZZLE_L16_L18.json";
 import chapter3d from "../../data/levels/CHAPTER3_PUZZLE_L19_L21.json";
+import chapter3e from "../../data/levels/CHAPTER3_PUZZLE_L22_L24.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -31,6 +32,9 @@ const HEADLINES: Record<string, string> = {
   L19: "HOLD NORTH",
   L20: "HOLD EAST",
   L21: "THREAD PARK",
+  L22: "HOLD WEST",
+  L23: "HOLD CORNER",
+  L24: "PARK HIGH",
 };
 
 const HINTS: Record<string, string> = {
@@ -54,6 +58,9 @@ const HINTS: Record<string, string> = {
   L19: "Hold the cell above the house. South-first habits overshoot.",
   L20: "Park east of the house. Slide through and you miss the stop.",
   L21: "Park to brake the south lane, then thread west onto the house.",
+  L22: "Park west of the house. Slide through and you miss the stop.",
+  L23: "Hold the corner cell above the house. The open south lane overshoots.",
+  L24: "Climb and park the high cell. North without the brake slides through.",
 };
 
 type RawLevel = {
@@ -108,6 +115,7 @@ const authored = [
   ...chapter3b.levels,
   ...chapter3c.levels,
   ...chapter3d.levels,
+  ...chapter3e.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

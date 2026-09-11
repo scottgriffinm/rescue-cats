@@ -1,5 +1,5 @@
 /**
- * Chapter 3 beat: L15 → Ghost@15 naming + five-cat yard, then L16–L18.
+ * Chapter 3 beat: L21 → Pepper@21 naming + seven-cat yard, then L22–L24.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -9,7 +9,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter3-ghost";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter3-pepper";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -23,8 +23,28 @@ const DIR_LABEL = {
 
 const SEED = {
   version: 3,
-  completedIds: ["L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8", "L9", "L11", "L12", "L13", "L14"],
-  clearCount: 13,
+  completedIds: [
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L7",
+    "L8",
+    "L9",
+    "L11",
+    "L12",
+    "L13",
+    "L14",
+    "L15",
+    "L16",
+    "L17",
+    "L18",
+    "L19",
+    "L20",
+  ],
+  clearCount: 19,
   friends: [
     {
       instanceId: "inst-mango",
@@ -70,16 +90,38 @@ const SEED = {
       favoriteToy: "bowtie",
       firstNight: false,
     },
+    {
+      instanceId: "inst-ghost",
+      friendId: "friend_005",
+      phenotypeId: "pheno_dsh_cream_solid_regular_regular_ghost",
+      name: "Ghost",
+      rescuedAt: Date.now(),
+      clearIndex: 15,
+      roost: 4,
+      favoriteToy: "sunbeam",
+      firstNight: false,
+    },
+    {
+      instanceId: "inst-mist",
+      friendId: "friend_006",
+      phenotypeId: "pheno_dsh_gray_mackerel_regular_regular",
+      name: "Mist",
+      rescuedAt: Date.now(),
+      clearIndex: 18,
+      roost: 5,
+      favoriteToy: "morning fog",
+      firstNight: false,
+    },
   ],
   pendingUnlocks: [],
-  hearts: 56,
-  stars: 30,
+  hearts: 74,
+  stars: 42,
   tickets: 1,
   furniture: ["furn_box_cardboard", "furn_scratch_post", "furn_bed_cushion"],
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Tux dressed for the porch."],
+  bubbles: ["Mist fogged onto the porch."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -134,20 +176,24 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L15`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("THREAD BOTTOM"));
-  await shot(page, "01_l15_before_ghost");
+  await page.goto(`${BASE}/level/L21`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("THREAD PARK"));
+  await shot(page, "01_l21_before_pepper");
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
+      ["gray", "ArrowRight"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowRight"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -165,30 +211,36 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("ghost naming", modal);
+  console.log("pepper naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Ghost prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Pepper prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "A pale loaf. Appears when the sun hits the porch.") {
-    throw new Error(`Ghost display line drifted: ${modal.line}`);
+  if (modal.line !== "A little spice. Already batting the bell.") {
+    throw new Error(`Pepper display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Ghost,Wisp,Pearl") {
-    throw new Error(`Ghost chips must be Ghost/Wisp/Pearl, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Pepper,Spice,Pip") {
+    throw new Error(`Pepper chips must be Pepper/Spice/Pip, got ${modal.chips.join("/")}`);
   }
-  if (!modal.hero.includes("/assets/cats/ghost_loaf_72.svg")) {
-    throw new Error(`Ghost hero missing pale loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/pepper_loaf_72.svg")) {
+    throw new Error(`Pepper hero missing spotted orange loaf: ${modal.hero}`);
   }
-  await shot(page, "02_ghost_naming");
+  if (modal.hero.includes("/assets/cats/ginger_loaf_72.svg")) {
+    throw new Error("Pepper hero must not use the Mango loaf");
+  }
+  if (modal.hero.includes("/assets/cats/mist_loaf_72.svg")) {
+    throw new Error("Pepper hero must not use the Mist loaf");
+  }
+  await shot(page, "02_pepper_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Ghost") &&
+      (document.body.innerText || "").includes("Pepper") &&
       ((document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home") ||
-        (document.body.innerText || "").includes("appeared on the porch")),
+        (document.body.innerText || "").includes("batted the bell")),
     { timeout: 8000 },
   );
 
@@ -196,48 +248,71 @@ try {
     text: document.body.innerText,
     imgs: [...document.querySelectorAll("img")].map((img) => img.getAttribute("src")),
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
+    friendsRow: (() => {
+      const row = document.querySelector("ul.flex");
+      if (!row) return { wrap: true, count: 0 };
+      const style = getComputedStyle(row);
+      return {
+        wrap: style.flexWrap !== "nowrap",
+        count: row.querySelectorAll("li").length,
+      };
+    })(),
   }));
   console.log(
     "yard friends",
     yard.save.friends.map((friend) => friend.friendId),
     "furniture",
     yard.save.furniture,
+    "friends row",
+    yard.friendsRow,
   );
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_005")) {
-    throw new Error("Ghost was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_007")) {
+    throw new Error("Pepper was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_005")?.name !== "Ghost") {
-    throw new Error("Ghost name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_007")?.name !== "Pepper") {
+    throw new Error("Pepper name was not kept");
   }
-  if (yard.save.friends.length < 5) {
-    throw new Error("porch must have five named friends after Ghost");
+  if (yard.save.friends.length < 7) {
+    throw new Error("porch must have seven named friends after Pepper");
+  }
+  if (yard.friendsRow.wrap) {
+    throw new Error("Friends/Met row must stay on one line at phone width");
+  }
+  if (yard.friendsRow.count < 7) {
+    throw new Error("Friends row must show seven cats");
   }
   const giftedNew = yard.save.furniture.filter(
     (sku) => !["furn_box_cardboard", "furn_scratch_post", "furn_bed_cushion"].includes(sku),
   );
   if (giftedNew.length !== 0) {
-    throw new Error(`clear 15 must gift nothing, got ${giftedNew.join(",")}`);
+    throw new Error(`clear 21 must gift nothing, got ${giftedNew.join(",")}`);
+  }
+  if (!yard.imgs.includes("/assets/cats/pepper_loaf_72.svg")) {
+    throw new Error("yard missing Pepper spotted loaf");
+  }
+  if (!yard.imgs.includes("/assets/cats/mist_loaf_72.svg")) {
+    throw new Error("yard missing Mist gray-mackerel loaf after Pepper");
   }
   if (!yard.imgs.includes("/assets/cats/ghost_loaf_72.svg")) {
-    throw new Error("yard missing Ghost pale loaf");
+    throw new Error("yard missing Ghost pale loaf after Pepper");
   }
   if (!yard.imgs.includes("/assets/cats/tux_loaf_72.svg")) {
-    throw new Error("yard missing Tux tuxedo loaf after Ghost");
+    throw new Error("yard missing Tux tuxedo loaf after Pepper");
   }
   if (!yard.imgs.includes("/assets/cats/cream_loaf_72.svg")) {
-    throw new Error("yard missing Biscuit cream loaf after Ghost");
+    throw new Error("yard missing Biscuit cream loaf after Pepper");
   }
   if (!yard.imgs.includes("/assets/cats/ink_loaf_72.svg")) {
-    throw new Error("yard missing Ink loaf after Ghost");
+    throw new Error("yard missing Ink loaf after Pepper");
   }
   if (!yard.imgs.includes("/assets/furniture/boxBed.svg")) {
-    throw new Error("yard missing Mango box after Ghost");
+    throw new Error("yard missing Mango box after Pepper");
   }
   if (!yard.imgs.includes("/assets/furniture/sunCushion.svg")) {
-    throw new Error("yard missing Sun Cushion after Ghost");
+    throw new Error("yard missing Sun Cushion after Pepper");
   }
   if (!yard.imgs.includes("/assets/ui/bubble_bang.svg")) {
-    throw new Error("yard missing Ghost first-night !");
+    throw new Error("yard missing Pepper first-night !");
   }
   if (yard.imgs.includes("/assets/furniture/scratcher.svg") === false) {
     throw new Error("owned scratcher must stay on the porch");
@@ -248,14 +323,14 @@ try {
   if (!yard.imgs.includes("/assets/furniture/miniTree.svg")) {
     throw new Error("Mini Cat Tree shop art must be miniTree.svg");
   }
-  if (!yard.text.includes("Hold Still") && !/Continue · Hold Still/i.test(yard.text)) {
-    throw new Error("L16 Hold Still must be next on the campaign path");
+  if (!yard.text.includes("Hold West") && !/Continue · Hold West/i.test(yard.text)) {
+    throw new Error("L22 Hold West must be next on the campaign path");
   }
-  await shot(page, "03_ghost_yard");
+  await shot(page, "03_pepper_yard");
 
-  await page.goto(`${BASE}/level/L16`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("HOLD STILL"));
-  await shot(page, "04_l16_hold_still");
+  await page.goto(`${BASE}/level/L22`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("HOLD WEST"));
+  await shot(page, "04_l22_hold_west");
   await play(
     page,
     [
@@ -263,66 +338,75 @@ try {
       ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
-    ],
-    "Home",
-  );
-
-  await page.goto(`${BASE}/level/L17`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("HOLD SOUTH"));
-  await play(
-    page,
-    [
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
     ],
     "Home",
   );
-  await shot(page, "05_l17_win");
 
-  await page.goto(`${BASE}/level/L18`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("PARK ACROSS"));
+  await page.goto(`${BASE}/level/L23`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("HOLD CORNER"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+    ],
+    "Home",
+  );
+  await shot(page, "05_l23_win");
+
+  await page.goto(`${BASE}/level/L24`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("PARK HIGH"));
   await play(
     page,
     [
       ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
       ["gray", "ArrowRight"],
       ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "06_l18_win");
+  await shot(page, "06_l24_win");
 
   const after = await page.evaluate(() => JSON.parse(localStorage.getItem("rescue-cats.save.v2")));
-  if (!after.completedIds.includes("L16") || !after.completedIds.includes("L17") || !after.completedIds.includes("L18")) {
-    throw new Error(`L16–L18 not marked complete: ${after.completedIds.join(",")}`);
+  if (!after.completedIds.includes("L22") || !after.completedIds.includes("L23") || !after.completedIds.includes("L24")) {
+    throw new Error(`L22–L24 not marked complete: ${after.completedIds.join(",")}`);
   }
   if (after.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (!after.pendingUnlocks.some((pending) => pending.friendId === "friend_006")) {
-    throw new Error("L18 clear must queue Mist naming");
-  }
   if (after.friends.some((friend) => friend.friendId === "friend_008")) {
     throw new Error("Pumpkin must not unlock this slice");
   }
+  if (after.pendingUnlocks.some((pending) => pending.friendId === "friend_008")) {
+    throw new Error("L24 clear must not queue Pumpkin naming");
+  }
+  if (after.friends.filter((friend) => friend.friendId === "friend_007").length !== 1) {
+    throw new Error("L24 must not unlock a Pepper duplicate");
+  }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 3 L15 + GHOST + L16-18 OK");
+  console.log("CHAPTER 3 L21 + PEPPER + L22-24 OK");
 } catch (error) {
-  console.error("CHAPTER 3 GHOST FAIL", error);
+  console.error("CHAPTER 3 PEPPER FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

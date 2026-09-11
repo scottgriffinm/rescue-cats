@@ -1,0 +1,27 @@
+{
+  "id": "L24",
+  "name": "Park High",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 10,
+  "nudges": 2,
+  "colorLocks": true,
+  "templateId": "LT02_LT08_park_high",
+  "walls": [
+    { "x": 2, "y": 0 },
+    { "x": 2, "y": 1 },
+    { "x": 4, "y": 3 },
+    { "x": 0, "y": 4 },
+    { "x": 5, "y": 5 }
+  ],
+  "blockers": [],
+  "cats": [
+    { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+    { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+  ],
+  "gates": [
+    { "id": "gate_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
+    { "id": "gate_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+  ],
+  "teach": "park_high"
+}

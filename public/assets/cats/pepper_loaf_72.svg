@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="pepper-loaf-72">
+      <ellipse cx="24" cy="28" rx="16" ry="12"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="28" rx="16" ry="12" fill="#D48A4A" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#pepper-loaf-72)">
+    <circle cx="16.5" cy="25" r="2.15" fill="#8F4A28"/>
+    <circle cx="23" cy="22.5" r="2.35" fill="#8F4A28"/>
+    <circle cx="30.5" cy="24.5" r="2.05" fill="#8F4A28"/>
+    <circle cx="19" cy="32" r="1.85" fill="#8F4A28"/>
+    <circle cx="27.5" cy="33.2" r="2.1" fill="#8F4A28"/>
+    <circle cx="33" cy="30.5" r="1.55" fill="#8F4A28"/>
+  </g>
+  <path d="M12 20 C12 14 16 12 18 16" fill="#B05A32" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36 20 C36 14 32 12 30 16" fill="#B05A32" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="32" rx="7" ry="6" fill="#F0C9A0"/>
+  <circle cx="18" cy="26" r="1.6" fill="#2B2A28"/>
+  <circle cx="28" cy="26" r="1.6" fill="#2B2A28"/>
+  <path d="M38 32 C42 30 44 34 40 36" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
+</svg>
