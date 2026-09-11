@@ -11,12 +11,12 @@ export function PuzzleCatSprite({
   colorHex?: string;
 }) {
   return (
-    <span className="relative inline-flex items-center justify-center">
+    <span className={cn("relative inline-flex items-center justify-center", className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={PUZZLE_CAT_SRC} alt="" className={cn("pointer-events-none select-none", className)} />
+      <img src={PUZZLE_CAT_SRC} alt="" className="pointer-events-none h-full w-full select-none" />
       {colorHex ? (
         <span
-          className="pointer-events-none absolute bottom-0.5 h-2 w-6 rounded-full"
+          className="pointer-events-none absolute bottom-[8%] h-[12%] max-h-2 min-h-1.5 w-[55%] max-w-6 rounded-full"
           style={{ background: colorHex, boxShadow: `0 0 0 1.5px #2B2A28` }}
           aria-hidden
         />

@@ -16,9 +16,6 @@
   --gate-orange: #D38B5D;
   --gate-gray: #5A5E6B;
   --page-bg: #e8dfd2;
-  --phone-frame: #d4cbbe;
-  --frame-void: #cabcab;
-  --frame-void-soft: #b5a693;
   --ctrl-band-gap: 12px;
   --dpad-visual-scale: 0.85;
 }
@@ -34,8 +31,6 @@
   --color-mist: var(--mist);
   --color-wood: var(--wood);
   --color-page-bg: var(--page-bg);
-  --color-phone-frame: var(--phone-frame);
-  --color-frame-void: var(--frame-void);
   --font-sans: var(--font-nunito), ui-rounded, "Nunito", sans-serif;
   --font-display: var(--font-fredoka), ui-rounded, "Fredoka", sans-serif;
 }
@@ -44,6 +39,7 @@ html,
 body {
   background: var(--page-bg);
   color: var(--ink);
+  overflow-x: hidden;
 }
 
 body {
@@ -76,19 +72,6 @@ a {
 
 .page-bg {
   background: var(--page-bg);
-}
-
-.phone-frame {
-  background: var(--phone-frame);
-}
-
-.frame-void {
-  background:
-    radial-gradient(
-      ellipse 80% 64% at 50% 42%,
-      var(--frame-void) 0%,
-      color-mix(in srgb, var(--frame-void-soft) 42%, var(--frame-void)) 100%
-    );
 }
 
 .cream-wash {

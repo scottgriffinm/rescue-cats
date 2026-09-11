@@ -75,7 +75,7 @@ Display lines stay with the pack (Mango *“A sunny little explorer…”*, Ink 
 
 ## Art — LOCKED (Art pack v1 + Asset List v1)
 
-Art pack v1 is the palette lock. **Art Asset List v1** is the file lock. Comps replace SVGs in `public/assets/{cats,furniture,ui}/`. Strokes are ink-warm `#2B2A28`. Base width 390 CSS px.
+Art pack v1 is the palette lock. **Art Asset List v1** is the file lock. Comps replace SVGs in `public/assets/{cats,furniture,ui}/`. Strokes are ink-warm `#2B2A28`. Mobile-first and fluid to desktop — the website **is** the game. Do not lock the site to a 390px phone mock.
 
 Priority order (shipped):
 
@@ -84,7 +84,7 @@ Priority order (shipped):
 3. `cat.pose.belly` @72 calico — puzzle board cats only (`calico_belly_72.svg`). Ink yard art is `slate_loaf_48` / `slate_loaf_72`. LT08 houses use `gate_orange.svg` / `gate_gray.svg`.
 4. Furniture woodblock: `boxBed` 96×72, `swing` 96×96, `postBell` 48×96 (bell marigold + mist), `fence` 120×48 tileable
 5. UI: `btn_primary` (h 44, ink stroke, paper fill), `input_name`, `fail_mark` (28 clay fill + ink X — not arcade red), `star_marigold`, `hand_cursor`
-6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Art Bench void wrap v2: page `#E8DFD2`, bezel `#D4CBBE`, stage `#CABCAB`. Card stays `#F7F0E6`. Ink outlines `#2B2A28`. Never mist `#C4BDB4`, pitch `#1A1918`, `#000`, or `#FFF` as stage fills.
+6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Full-bleed page `#E8DFD2` → cream cards `#F7F0E6`. **No PhoneFrame / device bezel / phone-in-a-void.** Ink outlines `#2B2A28`. Never mist `#C4BDB4`, pitch `#1A1918`, `#000`, or `#FFF` as stage fills.
 
 Export paths: `cats/{breed}_{pose}_{size}.svg`, `furniture/{id}.svg`, `ui/{id}.svg`. Registry: `src/lib/artAssets.ts`.
 
@@ -92,10 +92,8 @@ Palette is wired as CSS variables on `:root` and as Tailwind tokens (`bg-paper`,
 
 | Token | Hex | Use |
 | --- | --- | --- |
-| `--paper` | `#F7F0E6` | Puzzle / yard cards and the cream screen. Never a pure-white void. |
-| `--page-bg` | `#E8DFD2` | Browser / page background. |
-| `--phone-frame` | `#D4CBBE` | Device bezel around the cream card. |
-| `--frame-void` | `#CABCAB` | Stage around the cream card. Replaces `#1A1918`. |
+| `--paper` | `#F7F0E6` | Puzzle / yard / naming cards. Never a pure-white void. |
+| `--page-bg` | `#E8DFD2` | Full-bleed game page. Not a device bezel or phone-in-a-void. |
 | `--ink` | `#2B2A28` | Text and UI chrome. Never a pure-black outline. |
 | `--clay` | `#E8A89A` | Soft fail marks, clay accents, header accent word. |
 | `--sage` | `#8FAF8A` | Lawn, fountain water, success / coach pips. |
@@ -124,14 +122,16 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 
 ### Screens
 
-- **Puzzle:** cream paper card (`paper-card`) with path-colored inset accents and path gates.
+- **Shell:** `GameShell` fills the viewport with page `#E8DFD2` + dots. Centered content, max ~34rem. Cream cards on top. Not a phone bezel.
+- **Puzzle:** cream paper card (`paper-card`) with path-colored inset accents and path gates. Board scales with the column.
 - **Unlock / name modal:** cream paper card, wood-ink input, paper+ink buttons.
 - **Yard:** cream isometric porch + sage lawn (`yard_iso.svg`), woodblock furniture, loaf cats.
 
 ### Kill list (do not ship)
 
+- PhoneFrame / device bezel / “phone in a void” presentation
 - Pure-white void backgrounds
-- Pitch `#1A1918` / `#000` / `#FFF` stage fills — Art Bench void v2 (`#E8DFD2` / `#D4CBBE` / `#CABCAB`)
+- Pitch `#1A1918` / `#000` / `#FFF` stage fills
 - Mist `#C4BDB4` as the page / stage wrap
 - Pure-black outlines
 - Arcade-red fail Xs — use clay `fail_mark.svg` / path-soft treatment instead

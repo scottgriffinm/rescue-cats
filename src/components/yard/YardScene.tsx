@@ -28,7 +28,7 @@ export function YardScene({
   const others = friends.filter((friend) => friend.friendId !== "friend_001");
 
   return (
-    <div className="relative mx-auto h-[340px] w-full max-w-[340px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[min(100%,28rem)]">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/assets/ui/yard_iso.svg"
@@ -36,16 +36,16 @@ export function YardScene({
         className="pointer-events-none absolute inset-0 h-full w-full select-none"
       />
 
-      <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] min-h-[72px] w-[56%] min-w-[72px]" />
-      <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] min-h-[72px] w-[22%] min-w-[72px]" />
-      <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] min-h-[72px] w-[24%] min-w-[72px]" />
+      <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] w-[56%]" />
+      <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] w-[22%]" />
+      <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[24%]" />
       {hasTree ? (
-        <FurnitureImg file="swing" className="absolute right-[4%] top-[6%] min-h-[72px] w-[38%] min-w-[72px]" />
+        <FurnitureImg file="swing" className="absolute right-[4%] top-[6%] w-[38%]" />
       ) : null}
       {hasBox ? (
         <FurnitureImg
           file="boxBed"
-          className="yard-drop-box absolute bottom-[16%] left-[12%] min-h-[72px] w-[46%] min-w-[72px]"
+          className="yard-drop-box absolute bottom-[16%] left-[12%] w-[46%]"
         />
       ) : null}
 

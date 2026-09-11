@@ -32,7 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${nunito.variable} ${fredoka.variable} h-full antialiased`}
     >
-      <body className="min-h-full font-sans">
+      <body className="min-h-full overflow-x-hidden bg-page-bg font-sans">
         <SaveProvider>{children}</SaveProvider>
       </body>
     </html>

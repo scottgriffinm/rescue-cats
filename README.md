@@ -1,6 +1,6 @@
 # Rescue Cats
 
-Mobile-first Next.js slice: slide cats into yard gates, then invite them onto a paper porch.
+Full-viewport Next.js game: slide cats into yard gates, then invite them onto a paper porch. The website is the game — no phone-frame mock.
 
 Chapter 2 is open: **L1–L3 → Mango @ 3 → L4–L5 collision → L6–L7 routes → L8–L9 color locks → Ink @ 6.** Packs: `data/levels/CHAPTER2_INDEX.md`. Collection: `collection_CURRENT.json`.
 
@@ -15,7 +15,7 @@ npm install
 npm run dev
 ```
 
-Dev server: [http://127.0.0.1:43173](http://127.0.0.1:43173) (390px primary).
+Dev server: [http://127.0.0.1:43173](http://127.0.0.1:43173) (mobile-first, fluid on desktop).
 
 ```bash
 npm run build
