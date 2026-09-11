@@ -1,5 +1,5 @@
 /**
- * Chapter 2 beat: L4–L6 collision / route → name Ink → yard ! and tomorrow hook.
+ * Chapter 2 beat: L4–L9 + Ink@6 naming + Hearts shop / first-night !.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -194,8 +194,51 @@ try {
     throw new Error("Ink bang / shop copy variants missing");
   }
   await shot(page, "04_ink_yard");
+
+  await page.goto(`${BASE}/level/L7`, { waitUntil: "networkidle0" });
+  await play(
+    page,
+    [
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+    ],
+    "Home",
+  );
+  await shot(page, "05_l7_win");
+
+  await page.goto(`${BASE}/level/L8`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("Match the Coat"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowLeft"],
+    ],
+    "Home",
+  );
+  await shot(page, "06_l8_win");
+
+  await page.goto(`${BASE}/level/L9`, { waitUntil: "networkidle0" });
+  await play(
+    page,
+    [
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+    ],
+    "Home",
+  );
+  await shot(page, "07_l9_win");
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 2 INK OK");
+  console.log("CHAPTER 2 L4-9 + INK OK");
 } catch (error) {
   console.error("CHAPTER 2 FAIL", error);
   try {
