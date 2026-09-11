@@ -13,10 +13,10 @@
   --fur-cream: #fff8f0;
   --fur-ginger: #d38b5d;
   --fur-slate: #5a5e6b;
-  --frame-void: #e8dfd2;
+  --page-bg: #e8dfd2;
   --phone-frame: #d4cbbe;
-  --stage: #cabcab;
-  --frame-void-soft: #d4cbbe;
+  --frame-void: #cabcab;
+  --frame-void-soft: #b5a693;
   --ctrl-band-gap: 12px;
   --dpad-visual-scale: 0.85;
 }
@@ -31,13 +31,16 @@
   --color-path: var(--path);
   --color-mist: var(--mist);
   --color-wood: var(--wood);
+  --color-page-bg: var(--page-bg);
+  --color-phone-frame: var(--phone-frame);
+  --color-frame-void: var(--frame-void);
   --font-sans: var(--font-nunito), ui-rounded, "Nunito", sans-serif;
   --font-display: var(--font-fredoka), ui-rounded, "Fredoka", sans-serif;
 }
 
 html,
 body {
-  background: var(--frame-void);
+  background: var(--page-bg);
   color: var(--ink);
 }
 
@@ -69,16 +72,21 @@ a {
   box-shadow: inset 0 0 0 3px color-mix(in srgb, var(--path) 30%, transparent);
 }
 
-.frame-void {
-  background: var(--frame-void);
+.page-bg {
+  background: var(--page-bg);
 }
 
-.phone-frame-shell {
+.phone-frame {
   background: var(--phone-frame);
 }
 
-.stage-wash {
-  background: var(--stage);
+.frame-void {
+  background:
+    radial-gradient(
+      ellipse 80% 64% at 50% 42%,
+      var(--frame-void) 0%,
+      color-mix(in srgb, var(--frame-void-soft) 42%, var(--frame-void)) 100%
+    );
 }
 
 .cream-wash {

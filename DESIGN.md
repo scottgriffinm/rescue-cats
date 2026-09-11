@@ -74,7 +74,7 @@ Priority order (shipped):
 3. `cat.pose.belly` @72 calico — puzzle board cats only (`calico_belly_72.svg`)
 4. Furniture woodblock: `boxBed` 96×72, `swing` 96×96, `postBell` 48×96 (bell marigold + mist), `fence` 120×48 tileable
 5. UI: `btn_primary` (h 44, ink stroke, paper fill), `input_name`, `fail_mark` (28 clay fill + ink X — not arcade red), `star_marigold`, `hand_cursor`
-6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Void wrap v2: page `#E8DFD2`, phone frame `#D4CBBE`, stage `#CABCAB`. Cards stay paper `#F7F0E6`. Never pitch `#1A1918`. Mist `#C4BDB4` is pills only.
+6. Extra chrome: `fail_empty` (ink stroke only), `bubble_bang` (clay + ink !), header accent word = clay, puzzle card paper-cream radius 24. Art Bench void wrap v2: page `#E8DFD2`, bezel `#D4CBBE`, stage `#CABCAB`. Card stays `#F7F0E6`. Ink outlines `#2B2A28`. Never mist `#C4BDB4`, pitch `#1A1918`, `#000`, or `#FFF` as stage fills.
 
 Export paths: `cats/{breed}_{pose}_{size}.svg`, `furniture/{id}.svg`, `ui/{id}.svg`. Registry: `src/lib/artAssets.ts`.
 
@@ -83,15 +83,15 @@ Palette is wired as CSS variables on `:root` and as Tailwind tokens (`bg-paper`,
 | Token | Hex | Use |
 | --- | --- | --- |
 | `--paper` | `#F7F0E6` | Puzzle / yard cards and the cream screen. Never a pure-white void. |
-| `--frame-void` | `#E8DFD2` | Page / outer wrap (void wrap v2). |
-| `--phone-frame` | `#D4CBBE` | Phone bezel. |
-| `--stage` | `#CABCAB` | Stage mat between bezel and paper screen. |
+| `--page-bg` | `#E8DFD2` | Browser / page background. |
+| `--phone-frame` | `#D4CBBE` | Device bezel around the cream card. |
+| `--frame-void` | `#CABCAB` | Stage around the cream card. Replaces `#1A1918`. |
 | `--ink` | `#2B2A28` | Text and UI chrome. Never a pure-black outline. |
 | `--clay` | `#E8A89A` | Soft fail marks, clay accents, header accent word. |
 | `--sage` | `#8FAF8A` | Lawn, fountain water, success / coach pips. |
 | `--marigold` | `#F0B429` | Stars, highlights. |
 | `--path` | `#D96B4A` | Puzzle path / gate accents. |
-| `--mist` | `#C4BDB4` | Secondary chrome, muted pills. |
+| `--mist` | `#C4BDB4` | Secondary chrome, muted pills. Never the page wrap. |
 | `--wood` | `#E2D4C2` | Furniture, walls, porch boards. |
 
 ### Line / fill
@@ -121,8 +121,8 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 ### Kill list (do not ship)
 
 - Pure-white void backgrounds
-- Pitch `#1A1918` / pure-black page wrap
-- Mist `#C4BDB4` as the page wrap (pills only; void wrap v2 is `#E8DFD2` / `#D4CBBE` / `#CABCAB`)
+- Pitch `#1A1918` / `#000` / `#FFF` stage fills — Art Bench void v2 (`#E8DFD2` / `#D4CBBE` / `#CABCAB`)
+- Mist `#C4BDB4` as the page / stage wrap
 - Pure-black outlines
 - Arcade-red fail Xs — use clay `fail_mark.svg` / path-soft treatment instead
 
