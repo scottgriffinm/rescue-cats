@@ -1,0 +1,211 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Chapter 3 continuation \u2014 LT02 collision \u00d7 LT08 color-lock depth after Oak@39",
+  "chapter": 3,
+  "title": "Chapter 3 boards L40\u2013L42",
+  "notes": "Campaign continues L39 \u2192 Oak@39 \u2192 L40 \u2192 L41 \u2192 L42. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. L40\u2013L42 raise south-axis color-lock / vacate / park-east discipline after Vacate East without copying L37\u2013L39. Bean@60 stays a later slice. Collection bang for Oak is owned by Collection Lead.",
+  "levels": [
+    {
+      "id": "L40",
+      "name": "Solid South",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_solid_south_gray",
+      "walls": [
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 0,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 3,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "solid_south_gray",
+      "ascii": ".#...O\nG....#\n...o..\n...g..\n#.....\n....#."
+    },
+    {
+      "id": "L41",
+      "name": "Vacate South",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_vacate_south_black",
+      "walls": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 3,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 3,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "vacate_south_black",
+      "ascii": "#....O\n...B.#\n...o..\n...b..\n.#....\n....#."
+    },
+    {
+      "id": "L42",
+      "name": "Park East",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_park_east_gray",
+      "walls": [
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 0,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "park_east_gray",
+      "ascii": "#.....\n...O.#\n...#..\n..o...\nG.....\n....#g"
+    }
+  ],
+  "teaches": {
+    "L40": "Solid South \u2014 the gray house is the south brake. East-row vacate habits from L39 miss the stop.",
+    "L41": "Vacate South \u2014 leave the house column first, then the south solid. L40's solid-south slide is blocked while a friend sits the column.",
+    "L42": "Park East \u2014 hold the cell east of the mid house. South-solid / vacate-south habits overshoot without the park."
+  },
+  "solver": {
+    "engine": "workspace solve_levels.py (slide stops: wall|cat|edge|mismatch solid; matching gates never brake)",
+    "min_slides": {
+      "L40": 8,
+      "L41": 9,
+      "L42": 8
+    }
+  }
+}

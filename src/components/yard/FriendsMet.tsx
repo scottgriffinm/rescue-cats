@@ -33,11 +33,11 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
             friends.map((friend) => {
               const catalog = friendById(friend.friendId);
               return (
-                <li key={friend.instanceId} className="w-7 min-w-0 text-center">
+                <li key={friend.instanceId} className="w-6 min-w-0 text-center">
                   <FriendSprite
                     kit={catalog?.phenotype.artKit ?? "ginger"}
                     size={48}
-                    className="mx-auto h-7 w-7"
+                    className="mx-auto h-6 w-6"
                   />
                   <p className="truncate font-display text-[9px]">{friend.name}</p>
                 </li>
@@ -52,9 +52,9 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
             return (
               <li
                 key={entry.friendId}
-                className={`w-7 min-w-0 text-center ${named ? "" : "opacity-40"}`}
+                className={`w-6 min-w-0 text-center ${named ? "" : "opacity-40"}`}
               >
-                <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-7 w-7" />
+                <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-6 w-6" />
                 <p className="truncate font-display text-[9px]">
                   {named ? named.name : "???"}
                 </p>

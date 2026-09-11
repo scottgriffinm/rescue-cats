@@ -11,6 +11,7 @@ import chapter3gPack from "../../data/levels/CHAPTER3_PUZZLE_L28_L30.json";
 import chapter3hPack from "../../data/levels/CHAPTER3_PUZZLE_L31_L33.json";
 import chapter3iPack from "../../data/levels/CHAPTER3_PUZZLE_L34_L36.json";
 import chapter3jPack from "../../data/levels/CHAPTER3_PUZZLE_L37_L39.json";
+import chapter3kPack from "../../data/levels/CHAPTER3_PUZZLE_L40_L42.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
@@ -46,6 +47,9 @@ import l36Pack from "../../data/levels/L36.json";
 import l37Pack from "../../data/levels/L37.json";
 import l38Pack from "../../data/levels/L38.json";
 import l39Pack from "../../data/levels/L39.json";
+import l40Pack from "../../data/levels/L40.json";
+import l41Pack from "../../data/levels/L41.json";
+import l42Pack from "../../data/levels/L42.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
@@ -63,6 +67,7 @@ import {
   CHAPTER3_NOODLE,
   CHAPTER3_CLOVER,
   CHAPTER3_ASH,
+  CHAPTER3_OAK,
   chipsForFriend,
   FURNITURE,
   friendById,
@@ -785,6 +790,67 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_black", 4, 3],
     ],
   },
+  L40: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [1, 0],
+      [5, 1],
+      [0, 4],
+      [4, 5],
+    ],
+    cats: [
+      ["cat_orange", 5, 0],
+      ["cat_gray", 0, 1],
+    ],
+    gates: [
+      ["gate_orange", 3, 2],
+      ["gate_gray", 3, 3],
+    ],
+  },
+  L41: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [0, 0],
+      [5, 1],
+      [1, 4],
+      [4, 5],
+    ],
+    cats: [
+      ["cat_orange", 5, 0],
+      ["cat_black", 3, 1],
+    ],
+    gates: [
+      ["gate_orange", 3, 2],
+      ["gate_black", 3, 3],
+    ],
+  },
+  L42: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [3, 2],
+      [4, 5],
+      [0, 0],
+      [5, 1],
+    ],
+    cats: [
+      ["cat_orange", 3, 1],
+      ["cat_gray", 0, 4],
+    ],
+    gates: [
+      ["gate_orange", 2, 3],
+      ["gate_gray", 5, 5],
+    ],
+  },
+
 };
 
 function assertLocked(level: Level, spec: LockedSpec) {
@@ -1154,6 +1220,37 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "e"],
     ["cat_black", "s"],
   ],
+  L40: [
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
+    ["cat_gray", "w"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
+  ],
+  L41: [
+    ["cat_black", "e"],
+    ["cat_black", "s"],
+    ["cat_black", "w"],
+    ["cat_black", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_black", "s"],
+    ["cat_black", "e"],
+    ["cat_black", "n"],
+  ],
+  L42: [
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
+    ["cat_orange", "e"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+  ],
 };
 
 function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
@@ -1243,7 +1340,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
   for (const id of [
@@ -1282,6 +1379,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     "L37",
     "L38",
     "L39",
+    "L40",
+    "L41",
+    "L42",
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -1311,6 +1411,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       ...chapter3hPack.levels,
       ...chapter3iPack.levels,
       ...chapter3jPack.levels,
+      ...chapter3kPack.levels,
     ].map((level) => [
       level.id,
       level as PackedBoard,
@@ -1352,6 +1453,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L37: [l37Pack as PackedBoard],
     L38: [l38Pack as PackedBoard],
     L39: [l39Pack as PackedBoard],
+    L40: [l40Pack as PackedBoard],
+    L41: [l41Pack as PackedBoard],
+    L42: [l42Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -1405,7 +1509,10 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       id === "L36" ||
       id === "L37" ||
       id === "L38" ||
-      id === "L39"
+      id === "L39" ||
+      id === "L40" ||
+      id === "L41" ||
+      id === "L42"
     ) {
       for (const copy of copies) {
         for (const piece of [...copy.cats, ...copy.gates]) {
@@ -4016,7 +4123,7 @@ for (const level of LEVELS) {
   if (shippedFriendForClear(35)) throw new Error("L35 must not award a friend");
   if (shippedFriendForClear(37)) throw new Error("L37 must not award a friend");
   if (shippedFriendForClear(38)) throw new Error("L38 must not award a friend");
-  if (shippedFriendForClear(39)) throw new Error("Oak@39 must stay unshipped this slice");
+  if (shippedFriendForClear(39)?.friendId !== "friend_013") throw new Error("Oak@39 must ship this slice");
   if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
   if (friendForClear(60)?.friendId !== "friend_020") {
     throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
@@ -4088,11 +4195,11 @@ for (const level of LEVELS) {
   if (l39.number !== 39) throw new Error(`L39 HUD number must be 39, got ${l39.number}`);
   if (l9.number !== 9) throw new Error(`L9 HUD number must be 9, got ${l9.number}`);
   if (l11.number !== 11) throw new Error(`L11 HUD number must be 11, got ${l11.number}`);
-  if (CAMPAIGN_LEVEL_COUNT !== 39) {
-    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 39 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 42) {
+    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 42 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
   }
-  if (LEVELS.length !== 38) {
-    throw new Error(`campaign board count must stay 38 with L10 off-path, got ${LEVELS.length}`);
+  if (LEVELS.length !== 41) {
+    throw new Error(`campaign board count must stay 41 with L10 off-path, got ${LEVELS.length}`);
   }
   for (const level of LEVELS) {
     const parsed = Number(level.id.replace(/^L/i, ""));
@@ -4109,8 +4216,12 @@ for (const level of LEVELS) {
     throw new Error(`Next after L19 must be L20, got ${afterL19?.id ?? "none"}`);
   }
   const afterL39 = nextCampaignLevel("L39");
-  if (afterL39) throw new Error("L39 must be the last campaign board");
-  console.log("Level index HUD locks ok · L20=20/39 · L39=39/39 · L9→L11");
+  if (afterL39?.id !== "L40") throw new Error(`Next after L39 must be L40, got ${afterL39?.id ?? "none"}`);
+  const afterL42 = nextCampaignLevel("L42");
+  if (afterL42) throw new Error("L42 must be the last campaign board");
+  const l42hud = LEVELS.find((level) => level.id === "L42");
+  if (!l42hud || l42hud.number !== 42) throw new Error(`L42 HUD number must be 42, got ${l42hud?.number}`);
+  console.log("Level index HUD locks ok · L20=20/42 · L42=42/42 · L9→L11 · L39→L40");
 }
 
 {
@@ -4184,6 +4295,82 @@ for (const level of LEVELS) {
   if (paradeClearForLevel("L24") !== 24) throw new Error("L24 parade clear must stay 24");
   if (paradeClearForLevel("L30") !== 30) throw new Error("L30 parade clear must stay 30");
   console.log("Mill rewrite L24/L25/L29–L31 ok · same IDs · no parade remap");
+}
+
+{
+  const oak = friendForClear(39);
+  if (oak?.friendId !== "friend_013") {
+    throw new Error(`onClear(39) must unlock Oak, got ${oak?.friendId ?? "none"}`);
+  }
+  if (CHAPTER3_OAK.unlock_clear !== 39 || CHAPTER3_OAK.friend_id !== "friend_013") {
+    throw new Error("oak pack must pin Oak at clear 39");
+  }
+  if (CHAPTER3_OAK.naming.prefill !== "") throw new Error("oak naming prefill must stay empty");
+  const oakChips = chipsForFriend("friend_013");
+  if (oakChips.join(",") !== "Oak,Acorn,Timber") {
+    throw new Error(`Oak chips must be Oak/Acorn/Timber, got ${oakChips.join("/")}`);
+  }
+  for (const banned of ["Ash", "Shadow", "Cinder", "Soot", "Hearth", "Pumpkin", "Pepper", "Bean", "Mango"]) {
+    if (oakChips.includes(banned)) throw new Error(`Oak chips must not include ${banned}`);
+  }
+  if (oak.phenotype.artKit !== "oak") {
+    throw new Error("Oak must use oak blotch loafs, not ginger/pepper/pumpkin");
+  }
+  if (oak.phenotype.boardColor !== "orange") throw new Error("Oak must be color_orange");
+  if (furnitureGiftsForClear(39).length !== 0) throw new Error("clear 39 must gift nothing");
+  const bang = CHAPTER3_OAK.bang_copy.friend_013?.[0];
+  if (bang !== "{Name}: Sturdy loaf. Will outlast the furniture.") {
+    throw new Error(`Oak first-night drifted: ${bang}`);
+  }
+  if (ART_KIT_PATH.oak.loaf48 !== "/assets/cats/oak_loaf_48.svg") {
+    throw new Error("Oak yard/unlock must map oak 48 → oak_loaf_48");
+  }
+  if (ART_KIT_PATH.oak.loaf72 !== "/assets/cats/oak_loaf_72.svg") {
+    throw new Error("Oak yard/unlock must map oak 72 → oak_loaf_72");
+  }
+  for (const file of [
+    "public/assets/cats/oak_loaf_48.svg",
+    "public/assets/cats/oak_loaf_72.svg",
+    "public/assets/gates/gate_black.svg",
+    "public/assets/gate_black.svg",
+  ]) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  const oakArt = readFileSync(resolve("public/assets/cats/oak_loaf_72.svg"), "utf8");
+  if (!oakArt.includes("#B56A38")) throw new Error("Oak loaf must use bark-warm #B56A38");
+  if (!oakArt.includes("#8A4524")) throw new Error("Oak loaf must show blotches #8A4524");
+  if (oakArt.includes("#D48A4A")) throw new Error("Oak loaf must not reuse Pepper orange");
+  if (GATE_ASSETS.black !== "/assets/gates/gate_black.svg") {
+    throw new Error("GATE_ASSETS.black must point at gate_black.svg");
+  }
+  if (paradeClearForLevel("L39") !== 39) throw new Error("L39 must map to parade clear 39");
+  if (paradeClearForLevel("L40") !== 40) throw new Error("L40 must map to parade clear 40");
+  if (paradeClearForLevel("L42") !== 42) throw new Error("L42 must map to parade clear 42");
+  if (shippedFriendForClear(39)?.friendId !== "friend_013") {
+    throw new Error("shipped parade must award Oak at 39");
+  }
+  if (shippedFriendForClear(40)) throw new Error("L40 must not award a friend");
+  if (shippedFriendForClear(41)) throw new Error("L41 must not award a friend");
+  if (shippedFriendForClear(42)) throw new Error("L42 / Dumpling@42 must stay unshipped this slice");
+  if (friendForClear(42)?.friendId !== "friend_014") {
+    throw new Error("CURRENT must still list Dumpling at clear 42 for a later slice");
+  }
+  if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
+  if (friendForClear(60)?.friendId !== "friend_020") {
+    throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
+  }
+  for (const id of ["L40", "L41", "L42"] as const) {
+    const level = LEVELS.find((row) => row.id === id);
+    if (!level?.colorLocks) throw new Error(`${id} must lock colors`);
+  }
+  const l40 = LEVELS.find((level) => level.id === "L40")!;
+  const l41 = LEVELS.find((level) => level.id === "L41")!;
+  const l42 = LEVELS.find((level) => level.id === "L42")!;
+  if (l40.name !== "Solid South") throw new Error("L40 must be Solid South");
+  if (l41.name !== "Vacate South") throw new Error("L41 must be Vacate South");
+  if (l42.name !== "Park East") throw new Error("L42 must be Park East");
+  console.log("Oak @ onClear(39) ok · bark blotch loafs + L40–L42 wired");
+
 }
 
 console.log("All authored boards ok");
