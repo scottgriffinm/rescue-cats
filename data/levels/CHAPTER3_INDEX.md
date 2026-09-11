@@ -17,14 +17,14 @@ Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13�
 | L21 | `CHAPTER3_PUZZLE_L19_L21.json` / `L21.json` | Thread Park — park the south lane, then thread west | yes · mismatch solid |
 | L22 | `CHAPTER3_PUZZLE_L22_L24.json` / `L22.json` | Hold West — park west of the house or you overshoot | yes · mismatch solid |
 | L23 | `CHAPTER3_PUZZLE_L22_L24.json` / `L23.json` | Hold Corner — hold the corner cell above the house | yes · mismatch solid |
-| L24 | `CHAPTER3_PUZZLE_L22_L24.json` / `L24.json` | Park High — climb and park the high cell | yes · mismatch solid |
-| L25 | `CHAPTER3_PUZZLE_L25_L27.json` / `L25.json` | Park Low — park under the house or you overshoot | yes · mismatch solid |
+L24 | `CHAPTER3_PUZZLE_L22_L24.json` / `L24.json` | Color Brake — gray house is the west solid; climb into the color stop | yes · mismatch solid |
+L25 | `CHAPTER3_PUZZLE_L25_L27.json` / `L25.json` | Vacate Column — leave the house column, then the south solid | yes · mismatch solid |
 | L26 | `CHAPTER3_PUZZLE_L25_L27.json` / `L26.json` | Thread East — park above, then thread the east lane | yes · mismatch solid |
 | L27 | `CHAPTER3_PUZZLE_L25_L27.json` / `L27.json` | Thread Black — black coat + house; park east, then thread south | yes · mismatch solid |
 | L28 | `CHAPTER3_PUZZLE_L28_L30.json` / `L28.json` | Park West — park west of the house or you overshoot | yes · mismatch solid |
-| L29 | `CHAPTER3_PUZZLE_L28_L30.json` / `L29.json` | Hold North — hold the cell above the house | yes · mismatch solid |
-| L30 | `CHAPTER3_PUZZLE_L28_L30.json` / `L30.json` | Hold South — park under the house or you overshoot | yes · mismatch solid |
-| L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Hold East — park east of the house or you overshoot | yes · mismatch solid |
+L29 | `CHAPTER3_PUZZLE_L28_L30.json` / `L29.json` | Color Cross — black/orange adjacent lock | yes · mismatch solid |
+L30 | `CHAPTER3_PUZZLE_L28_L30.json` / `L30.json` | Thread South — park/thread onto the south black solid | yes · mismatch solid |
+L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before the west black solid works | yes · mismatch solid |
 | L32 | `CHAPTER3_PUZZLE_L31_L33.json` / `L32.json` | Thread North — park above, then thread the north lane | yes · mismatch solid |
 | L33 | `CHAPTER3_PUZZLE_L31_L33.json` / `L33.json` | Thread West — sit past the house, then park west | yes · mismatch solid |
 | L34 | `CHAPTER3_PUZZLE_L34_L36.json` / `L34.json` | Solid West — the gray house is the west brake | yes · mismatch solid |

@@ -466,44 +466,40 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L24: {
     size: 6,
-    N: 10,
+    N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 0],
-      [2, 1],
-      [4, 3],
-      [0, 4],
-      [5, 5],
+      [0, 1],
+      [5, 1],
+      [0, 0],
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_gray", 5, 2],
+      ["cat_orange", 0, 4],
+      ["cat_gray", 1, 1],
     ],
     gates: [
       ["gate_orange", 3, 2],
-      ["gate_gray", 1, 5],
+      ["gate_gray", 2, 2],
     ],
   },
   L25: {
     size: 6,
-    N: 9,
+    N: 10,
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 0],
-      [1, 1],
-      [3, 3],
-      [0, 4],
-      [1, 5],
+      [5, 0],
+      [2, 1],
+      [4, 2],
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_gray", 5, 2],
+      ["cat_orange", 4, 5],
+      ["cat_gray", 2, 0],
     ],
     gates: [
-      ["gate_orange", 2, 2],
-      ["gate_gray", 5, 5],
+      ["gate_orange", 3, 2],
+      ["gate_gray", 3, 3],
     ],
   },
   L26: {
@@ -572,64 +568,58 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L29: {
     size: 6,
-    N: 10,
+    N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 0],
-      [1, 2],
-      [1, 3],
-      [5, 4],
-      [0, 5],
+      [5, 2],
+      [0, 4],
+      [2, 2],
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_black", 5, 2],
+      ["cat_orange", 5, 4],
+      ["cat_black", 1, 1],
     ],
     gates: [
-      ["gate_orange", 4, 3],
-      ["gate_black", 2, 5],
+      ["gate_orange", 2, 3],
+      ["gate_black", 3, 3],
     ],
   },
   L30: {
     size: 6,
-    N: 9,
+    N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 0],
-      [2, 1],
-      [4, 3],
-      [0, 4],
+      [4, 0],
       [3, 5],
+      [1, 4],
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_black", 5, 2],
+      ["cat_orange", 2, 5],
+      ["cat_black", 2, 0],
     ],
     gates: [
-      ["gate_orange", 1, 3],
-      ["gate_black", 5, 5],
+      ["gate_orange", 2, 2],
+      ["gate_black", 2, 3],
     ],
   },
   L31: {
     size: 6,
-    N: 10,
+    N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 0],
-      [3, 1],
-      [0, 4],
-      [5, 4],
+      [5, 5],
+      [4, 1],
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_black", 5, 2],
+      ["cat_orange", 3, 1],
+      ["cat_black", 4, 3],
     ],
     gates: [
-      ["gate_orange", 2, 3],
-      ["gate_black", 4, 5],
+      ["gate_orange", 3, 2],
+      ["gate_black", 2, 2],
     ],
   },
   L32: {
@@ -996,27 +986,23 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "s"],
   ],
   L24: [
-    ["cat_orange", "s"],
     ["cat_orange", "e"],
-    ["cat_gray", "n"],
-    ["cat_gray", "w"],
-    ["cat_gray", "s"],
     ["cat_orange", "n"],
-    ["cat_gray", "e"],
+    ["cat_orange", "w"],
     ["cat_gray", "s"],
     ["cat_gray", "w"],
-    ["cat_gray", "s"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
   ],
   L25: [
-    ["cat_orange", "s"],
-    ["cat_orange", "e"],
-    ["cat_orange", "n"],
-    ["cat_gray", "s"],
     ["cat_gray", "w"],
-    ["cat_gray", "n"],
-    ["cat_orange", "s"],
     ["cat_gray", "s"],
     ["cat_gray", "e"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "n"],
   ],
   L26: [
     ["cat_orange", "e"],
@@ -1055,33 +1041,32 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L29: [
     ["cat_orange", "s"],
-    ["cat_orange", "e"],
+    ["cat_black", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_black", "e"],
     ["cat_black", "n"],
     ["cat_black", "w"],
-    ["cat_black", "s"],
-    ["cat_orange", "n"],
-    ["cat_black", "w"],
-    ["cat_black", "s"],
   ],
   L30: [
-    ["cat_orange", "e"],
-    ["cat_black", "n"],
-    ["cat_black", "w"],
-    ["cat_black", "s"],
-    ["cat_black", "w"],
-    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
     ["cat_black", "e"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
     ["cat_black", "s"],
+    ["cat_black", "w"],
+    ["cat_black", "n"],
   ],
   L31: [
-    ["cat_orange", "s"],
-    ["cat_black", "s"],
+    ["cat_orange", "w"],
     ["cat_black", "w"],
-    ["cat_orange", "e"],
-    ["cat_black", "e"],
     ["cat_black", "n"],
-    ["cat_black", "w"],
-    ["cat_black", "s"],
+    ["cat_black", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
   ],
   L32: [
     ["cat_orange", "e"],
@@ -2031,56 +2016,18 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   if (!l24) throw new Error("missing L24");
   if (!l24.colorLocks) throw new Error("L24 must lock colors");
   const orange = l24.cats.find((cat) => cat.id === "cat_orange");
-  const gray = l24.cats.find((cat) => cat.id === "cat_gray");
+  const other = l24.cats.find((cat) => cat.id === "cat_gray");
   const orangeGate = l24.gates.find((gate) => gate.id === "gate_orange");
-  const grayGate = l24.gates.find((gate) => gate.id === "gate_gray");
-  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L24 missing coats");
-  if (!isMismatchSolid(l24, gray, orangeGate)) {
+  const otherGate = l24.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !other || !orangeGate || !otherGate) throw new Error("L24 missing coats");
+  if (other.color !== "gray") throw new Error("L24 must teach a gray coat");
+  if (otherGate.color !== "gray") throw new Error("L24 must teach a gray house");
+  if (!isMismatchSolid(l24, other, orangeGate)) {
     throw new Error("L24 orange house must be solid to the gray coat");
   }
-  if (!isMismatchSolid(l24, orange, grayGate)) {
+  if (!isMismatchSolid(l24, orange, otherGate)) {
     throw new Error("L24 gray house must be solid to the orange coat");
   }
-  assertNotHome(
-    l24,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-    ],
-    "L24 high without the parked brake overshoots",
-  );
-  assertNotHome(
-    l24,
-    [
-      ["cat_orange", "e"],
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-      ["cat_orange", "e"],
-      ["cat_gray", "w"],
-      ["cat_gray", "s"],
-      ["cat_orange", "w"],
-      ["cat_gray", "w"],
-      ["cat_gray", "s"],
-      ["cat_gray", "e"],
-    ],
-    "L24 L22 hold-west habit cannot finish",
-  );
-  assertNotHome(
-    l24,
-    [
-      ["cat_orange", "e"],
-      ["cat_orange", "s"],
-      ["cat_gray", "w"],
-      ["cat_orange", "n"],
-      ["cat_gray", "e"],
-      ["cat_gray", "n"],
-      ["cat_gray", "w"],
-      ["cat_gray", "s"],
-    ],
-    "L24 L23 hold-corner habit cannot finish",
-  );
 }
 
 {
@@ -2088,42 +2035,18 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   if (!l25) throw new Error("missing L25");
   if (!l25.colorLocks) throw new Error("L25 must lock colors");
   const orange = l25.cats.find((cat) => cat.id === "cat_orange");
-  const gray = l25.cats.find((cat) => cat.id === "cat_gray");
+  const other = l25.cats.find((cat) => cat.id === "cat_gray");
   const orangeGate = l25.gates.find((gate) => gate.id === "gate_orange");
-  const grayGate = l25.gates.find((gate) => gate.id === "gate_gray");
-  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L25 missing coats");
-  if (!isMismatchSolid(l25, gray, orangeGate)) {
+  const otherGate = l25.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !other || !orangeGate || !otherGate) throw new Error("L25 missing coats");
+  if (other.color !== "gray") throw new Error("L25 must teach a gray coat");
+  if (otherGate.color !== "gray") throw new Error("L25 must teach a gray house");
+  if (!isMismatchSolid(l25, other, orangeGate)) {
     throw new Error("L25 orange house must be solid to the gray coat");
   }
-  if (!isMismatchSolid(l25, orange, grayGate)) {
+  if (!isMismatchSolid(l25, orange, otherGate)) {
     throw new Error("L25 gray house must be solid to the orange coat");
   }
-  assertNotHome(
-    l25,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-      ["cat_orange", "s"],
-    ],
-    "L25 south without the parked brake overshoots",
-  );
-  assertNotHome(
-    l25,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_gray", "n"],
-      ["cat_gray", "w"],
-      ["cat_gray", "s"],
-      ["cat_orange", "n"],
-      ["cat_gray", "e"],
-      ["cat_gray", "s"],
-      ["cat_gray", "w"],
-      ["cat_gray", "s"],
-    ],
-    "L25 L24 park-high habit cannot finish",
-  );
 }
 
 {
@@ -2265,42 +2188,18 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   if (!l29) throw new Error("missing L29");
   if (!l29.colorLocks) throw new Error("L29 must lock colors");
   const orange = l29.cats.find((cat) => cat.id === "cat_orange");
-  const black = l29.cats.find((cat) => cat.id === "cat_black");
+  const other = l29.cats.find((cat) => cat.id === "cat_black");
   const orangeGate = l29.gates.find((gate) => gate.id === "gate_orange");
-  const blackGate = l29.gates.find((gate) => gate.id === "gate_black");
-  if (!orange || !black || !orangeGate || !blackGate) throw new Error("L29 missing coats");
-  if (black.color !== "black") throw new Error("L29 must keep teaching a black coat");
-  if (blackGate.color !== "black") throw new Error("L29 must keep a black house");
-  if (!isMismatchSolid(l29, black, orangeGate)) {
+  const otherGate = l29.gates.find((gate) => gate.id === "gate_black");
+  if (!orange || !other || !orangeGate || !otherGate) throw new Error("L29 missing coats");
+  if (other.color !== "black") throw new Error("L29 must teach a black coat");
+  if (otherGate.color !== "black") throw new Error("L29 must teach a black house");
+  if (!isMismatchSolid(l29, other, orangeGate)) {
     throw new Error("L29 orange house must be solid to the black coat");
   }
-  if (!isMismatchSolid(l29, orange, blackGate)) {
+  if (!isMismatchSolid(l29, orange, otherGate)) {
     throw new Error("L29 black house must be solid to the orange coat");
   }
-  assertNotHome(
-    l29,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-    ],
-    "L29 north without the parked brake overshoots",
-  );
-  assertNotHome(
-    l29,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-      ["cat_orange", "e"],
-      ["cat_black", "w"],
-      ["cat_black", "s"],
-      ["cat_orange", "w"],
-      ["cat_black", "w"],
-      ["cat_black", "s"],
-    ],
-    "L29 L28 park-west habit cannot finish",
-  );
 }
 
 {
@@ -2308,42 +2207,18 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   if (!l30) throw new Error("missing L30");
   if (!l30.colorLocks) throw new Error("L30 must lock colors");
   const orange = l30.cats.find((cat) => cat.id === "cat_orange");
-  const black = l30.cats.find((cat) => cat.id === "cat_black");
+  const other = l30.cats.find((cat) => cat.id === "cat_black");
   const orangeGate = l30.gates.find((gate) => gate.id === "gate_orange");
-  const blackGate = l30.gates.find((gate) => gate.id === "gate_black");
-  if (!orange || !black || !orangeGate || !blackGate) throw new Error("L30 missing coats");
-  if (black.color !== "black") throw new Error("L30 must keep teaching a black coat");
-  if (blackGate.color !== "black") throw new Error("L30 must keep a black house");
-  if (!isMismatchSolid(l30, black, orangeGate)) {
+  const otherGate = l30.gates.find((gate) => gate.id === "gate_black");
+  if (!orange || !other || !orangeGate || !otherGate) throw new Error("L30 missing coats");
+  if (other.color !== "black") throw new Error("L30 must teach a black coat");
+  if (otherGate.color !== "black") throw new Error("L30 must teach a black house");
+  if (!isMismatchSolid(l30, other, orangeGate)) {
     throw new Error("L30 orange house must be solid to the black coat");
   }
-  if (!isMismatchSolid(l30, orange, blackGate)) {
+  if (!isMismatchSolid(l30, orange, otherGate)) {
     throw new Error("L30 black house must be solid to the orange coat");
   }
-  assertNotHome(
-    l30,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-    ],
-    "L30 south without the parked brake overshoots",
-  );
-  assertNotHome(
-    l30,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-      ["cat_orange", "e"],
-      ["cat_black", "w"],
-      ["cat_black", "s"],
-      ["cat_orange", "w"],
-      ["cat_black", "w"],
-      ["cat_black", "s"],
-    ],
-    "L30 L28 park-west habit cannot finish",
-  );
 }
 
 {
@@ -2351,41 +2226,18 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
   if (!l31) throw new Error("missing L31");
   if (!l31.colorLocks) throw new Error("L31 must lock colors");
   const orange = l31.cats.find((cat) => cat.id === "cat_orange");
-  const black = l31.cats.find((cat) => cat.id === "cat_black");
+  const other = l31.cats.find((cat) => cat.id === "cat_black");
   const orangeGate = l31.gates.find((gate) => gate.id === "gate_orange");
-  const blackGate = l31.gates.find((gate) => gate.id === "gate_black");
-  if (!orange || !black || !orangeGate || !blackGate) throw new Error("L31 missing coats");
-  if (black.color !== "black") throw new Error("L31 must keep teaching a black coat");
-  if (blackGate.color !== "black") throw new Error("L31 must keep a black house");
-  if (!isMismatchSolid(l31, black, orangeGate)) {
+  const otherGate = l31.gates.find((gate) => gate.id === "gate_black");
+  if (!orange || !other || !orangeGate || !otherGate) throw new Error("L31 missing coats");
+  if (other.color !== "black") throw new Error("L31 must teach a black coat");
+  if (otherGate.color !== "black") throw new Error("L31 must teach a black house");
+  if (!isMismatchSolid(l31, other, orangeGate)) {
     throw new Error("L31 orange house must be solid to the black coat");
   }
-  if (!isMismatchSolid(l31, orange, blackGate)) {
+  if (!isMismatchSolid(l31, orange, otherGate)) {
     throw new Error("L31 black house must be solid to the orange coat");
   }
-  assertNotHome(
-    l31,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-    ],
-    "L31 through the house without the east park overshoots",
-  );
-  assertNotHome(
-    l31,
-    [
-      ["cat_orange", "e"],
-      ["cat_black", "n"],
-      ["cat_black", "w"],
-      ["cat_black", "s"],
-      ["cat_black", "w"],
-      ["cat_orange", "s"],
-      ["cat_black", "e"],
-      ["cat_black", "s"],
-    ],
-    "L31 L30 hold-south habit cannot finish",
-  );
 }
 
 {
@@ -4313,6 +4165,25 @@ for (const level of LEVELS) {
     }
   }
   console.log("Cold open + Ink chips lock ok · no ghost tree · Ink/Slate/Nimbus");
+}
+
+{
+  // Pink kill: mill rewrite L24/L25/L29–L31 — same IDs, color-brake teaches, no parade remap.
+  const names: Record<string, string> = {
+    L24: "Color Brake",
+    L25: "Vacate Column",
+    L29: "Color Cross",
+    L30: "Thread South",
+    L31: "Vacate West",
+  };
+  for (const [id, name] of Object.entries(names)) {
+    const level = LEVELS.find((row) => row.id === id);
+    if (!level) throw new Error(`missing mill rewrite ${id}`);
+    if (level.name !== name) throw new Error(`${id} must be ${name}, got ${level.name}`);
+  }
+  if (paradeClearForLevel("L24") !== 24) throw new Error("L24 parade clear must stay 24");
+  if (paradeClearForLevel("L30") !== 30) throw new Error("L30 parade clear must stay 30");
+  console.log("Mill rewrite L24/L25/L29–L31 ok · same IDs · no parade remap");
 }
 
 console.log("All authored boards ok");
