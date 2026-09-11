@@ -1,5 +1,6 @@
 import pack from "../../data/collection_CURRENT.json";
 import chapter2 from "../../data/chapter2_ink_shop_bang.json";
+import chapter3 from "../../data/chapter3_biscuit_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -9,7 +10,7 @@ type RawSku = (typeof pack.starter_furniture)[number];
 
 const FALLBACK_ASSETS: Record<string, string> = {
   furn_box_cardboard: "/assets/furniture/boxBed.svg",
-  furn_bed_cushion: "/assets/furniture/boxBed.svg",
+  furn_bed_cushion: "/assets/furniture/sunCushion.svg",
   furn_scratch_post: "/assets/furniture/scratcher.svg",
   furn_tree_mini: "/assets/furniture/miniTree.svg",
   furn_swing_yarn: "/assets/furniture/yarnSwing.svg",
@@ -44,6 +45,7 @@ function boardColorFromCoat(color: string): BoardColor {
 
 function toFriend(raw: RawFriend, index: number): CatalogFriend {
   const isInk = raw.friend_id === chapter2.friend_id;
+  const isBiscuit = raw.friend_id === chapter3.friend_id;
   const kit = artKit(raw.art_kit, raw.color, raw.pattern);
   const phenotype: Phenotype = {
     phenotypeId: raw.phenotype_id,
@@ -54,15 +56,23 @@ function toFriend(raw: RawFriend, index: number): CatalogFriend {
     tail: raw.tail,
     eyes: raw.eyes,
     eyeAccent: raw.eyes,
-    personality: isInk ? chapter2.personality : raw.personality,
-    artKit: isInk ? "slate" : kit,
-    boardColor: isInk ? "gray" : boardColorFromCoat(raw.color),
+    personality: isInk
+      ? chapter2.personality
+      : isBiscuit
+        ? chapter3.personality
+        : raw.personality,
+    artKit: isInk ? "slate" : isBiscuit ? "cream" : kit,
+    boardColor: isInk ? "gray" : isBiscuit ? "orange" : boardColorFromCoat(raw.color),
   };
   return {
     friendId: raw.friend_id,
     defaultName: raw.default_name,
     unlockClear: unlockClearFor(raw, index),
-    displayLine: isInk ? chapter2.display_line : raw.display_line,
+    displayLine: isInk
+      ? chapter2.display_line
+      : isBiscuit
+        ? chapter3.display_line
+        : raw.display_line,
     tier: raw.tier,
     phenotype,
   };
@@ -77,8 +87,11 @@ export const NAMING = pack.naming_modal;
 export const FIRST_FRIEND_ID = pack.first_friend.friend_id;
 export const COLLECTION_VERSION = pack.version;
 export const CHAPTER2 = chapter2;
+export const CHAPTER3 = chapter3;
 export const INK_FRIEND_ID = chapter2.friend_id;
+export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
+export const BISCUIT_GIFT = chapter3.gift;
 
 export const CATALOG: CatalogFriend[] = pack.first_20_cats.map((raw, index) =>
   toFriend(raw, index),
@@ -88,6 +101,7 @@ const SHOP_ITEMS = CHAPTER2.shop.items;
 
 export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
   const shop = SHOP_ITEMS.find((item) => item.sku_id === sku.sku_id);
+  const giftArt = sku.sku_id === chapter3.gift.sku_id ? chapter3.gift.asset : undefined;
   return {
     skuId: sku.sku_id,
     name: sku.name,
@@ -96,7 +110,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
     comfort: sku.comfort,
     grantOnClear: "grant_on_clear" in sku ? sku.grant_on_clear : undefined,
     shopUnlockClear: shop?.unlock_clear,
-    asset: shop?.asset ?? skuAsset(sku),
+    asset: giftArt ?? shop?.asset ?? skuAsset(sku),
   };
 });
 
@@ -129,12 +143,15 @@ export function friendForClear(clearIndex: number): CatalogFriend | undefined {
   return CATALOG.find((friend) => friend.unlockClear === clearIndex);
 }
 
-/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. */
+/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. Clear 9 gifts the Sun Cushion. */
 export function furnitureGiftsForClear(clearIndex: number) {
   if (clearIndex === 6) return [];
   const gifts = FURNITURE.filter((sku) => sku.grantOnClear === clearIndex);
   if (clearIndex === 3) {
     return gifts.filter((sku) => sku.skuId === "furn_box_cardboard");
+  }
+  if (clearIndex === 9) {
+    return gifts.filter((sku) => sku.skuId === "furn_bed_cushion");
   }
   return gifts;
 }
@@ -166,12 +183,20 @@ export const NAMING_CHIPS: string[] =
 /** Ink naming chips — never Misty. */
 export const INK_NAMING_CHIPS: string[] = CHAPTER2.naming.suggestion_chips;
 
+/** Biscuit naming chips — food names, never the Ink/Soft pool. */
+export const BISCUIT_NAMING_CHIPS: string[] = CHAPTER3.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
   }
+  if (friendId === BISCUIT_FRIEND_ID || friendId === "friend_003") {
+    return [...BISCUIT_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
+  const hungry = CHAPTER2.personality_pools.Hungry;
+  if (friendById(friendId)?.phenotype.personality === "Hungry") return [...hungry];
   return [...NAMING_CHIPS];
 }
 
@@ -188,6 +213,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return shufflePool([...INK_NAMING_CHIPS], count);
   }
+  if (friendId === BISCUIT_FRIEND_ID || friendId === "friend_003") {
+    return shufflePool([...BISCUIT_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -203,8 +231,11 @@ export function withName(template: string, name: string) {
 }
 
 export function bangLinesFor(friendId: string, name: string) {
-  const variants =
-    (CHAPTER2.bang_copy as Record<string, string[]>)[friendId] ?? [NAMING.first_night_bubble];
+  const merged = {
+    ...(CHAPTER2.bang_copy as Record<string, string[]>),
+    ...(CHAPTER3.bang_copy as Record<string, string[]>),
+  };
+  const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
 }
 

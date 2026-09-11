@@ -1,0 +1,31 @@
+{
+  "version": "chapter3_biscuit_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_003",
+  "unlock_clear": 9,
+  "personality": "Hungry",
+  "display_line": "Here for snacks. Possibly also for you.",
+  "art": {
+    "loaf_48": "/assets/cats/cream_loaf_48.svg",
+    "loaf_72": "/assets/cats/cream_loaf_72.svg",
+    "board_color": "orange"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Biscuit", "Mochi", "Toast"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_003": [
+      "{Name}: Here for snacks. Possibly also for you.",
+      "{Name}: That sun cushion is already warm."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 9,
+    "sku_id": "furn_bed_cushion",
+    "label": "Sun Cushion",
+    "asset": "/assets/furniture/sunCushion.svg"
+  }
+}

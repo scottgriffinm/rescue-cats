@@ -17,6 +17,7 @@ export function YardScene({
   hasTree,
   hasScratch,
   hasYarn,
+  hasCushion,
   bangFriendId,
   onBang,
 }: {
@@ -25,11 +26,17 @@ export function YardScene({
   hasTree: boolean;
   hasScratch?: boolean;
   hasYarn?: boolean;
+  hasCushion?: boolean;
   bangFriendId?: string | null;
   onBang?: (instanceId: string) => void;
 }) {
   const mango = friends.find((friend) => friend.friendId === "friend_001");
-  const others = friends.filter((friend) => friend.friendId !== "friend_001");
+  const biscuit = friends.find((friend) => friend.friendId === "friend_003");
+  const others = friends.filter(
+    (friend) =>
+      friend.friendId !== "friend_001" &&
+      !(hasCushion && friend.friendId === "friend_003"),
+  );
 
   return (
     <div className="relative mx-auto aspect-square w-full max-w-[min(100%,28rem)]">
@@ -53,6 +60,12 @@ export function YardScene({
         <FurnitureImg
           file="boxBed"
           className="yard-drop-box absolute bottom-[16%] left-[12%] w-[46%]"
+        />
+      ) : null}
+      {hasCushion ? (
+        <FurnitureImg
+          file="sunCushion"
+          className="yard-drop absolute left-[8%] top-[50%] w-[32%]"
         />
       ) : null}
       {hasScratch ? (
@@ -89,6 +102,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
+        </div>
+      ) : null}
+
+      {biscuit && hasCushion ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "12%", top: "44%" }}
+        >
+          <FriendSprite
+            kit={friendById(biscuit.friendId)?.phenotype.artKit ?? "cream"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === biscuit.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(biscuit.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${biscuit.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{biscuit.name}</p>
         </div>
       ) : null}
 

@@ -174,7 +174,9 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
         const shopHello =
           catalog.friendId === "friend_002"
             ? [withName(SHOP_STARTER.ink_hook, instance.name), SHOP_STARTER.intro]
-            : [];
+            : catalog.friendId === "friend_003"
+              ? [`${instance.name} claimed the sun cushion.`]
+              : [];
         setSave({
           ...current,
           friends,

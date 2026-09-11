@@ -79,7 +79,7 @@
       "hearts": 0,
       "comfort": 1,
       "grant_on_clear": 9,
-      "asset": "/assets/furniture/boxBed.svg"
+      "asset": "/assets/furniture/sunCushion.svg"
     },
     {
       "sku_id": "furn_scratch_post",

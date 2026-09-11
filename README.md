@@ -2,7 +2,7 @@
 
 Full-viewport Next.js game: slide cats into yard gates, then invite them onto a paper porch. The website is the game — no phone-frame mock.
 
-Chapter 2 is open: **L1–L3 → Mango @ 3 → L4–L5 collision → L6–L7 routes → L8–L9 color locks → Ink @ 6.** Packs: `data/levels/CHAPTER2_INDEX.md`. Collection: `collection_CURRENT.json`.
+Chapter 3 opener is open: **L1–L3 → Mango @ 3 → L4–L5 collision → L6–L7 routes → Ink @ 6 → L8–L9 color locks → Biscuit @ 9 → L11–L12 color-brake.** L10 stays off the path. Packs: `data/levels/CHAPTER2_INDEX.md`, `data/levels/CHAPTER3_INDEX.md`. Collection: `collection_CURRENT.json`.
 
 ## Stack
 
@@ -25,6 +25,7 @@ npm run verify:levels
 # npm install --no-save puppeteer-core
 # node scripts/play-mango-beat.mjs
 # node scripts/play-chapter2-ink.mjs
+# node scripts/play-chapter3-biscuit.mjs
 ```
 
 ## Routes
@@ -33,7 +34,7 @@ npm run verify:levels
 | --- | --- |
 | `/` | Porch / lawn hub |
 | `/play` | Next unsolved level |
-| `/level/L1` … `/level/L10` | Slide-budget boards (LT01 teach, LT02 collision, LT08 color) |
+| `/level/L1` … `/level/L9`, `/level/L11`, `/level/L12` | Slide-budget boards (LT01 teach, LT02 collision, LT08 color, Ch.3 color-brake). L10 is off-path. |
 
 Tap a cat, then swipe or tap the footer D-pad. They slide until a wall, blocker, another cat, or the edge. Matching gates do not stop a slide — rest on the house to win. On color-lock boards, a wrong-color house is a solid.
 
