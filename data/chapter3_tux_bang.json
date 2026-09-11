@@ -1,0 +1,30 @@
+{
+  "version": "chapter3_tux_bang",
+  "status": "CHAPTER3",
+  "friend_id": "friend_004",
+  "unlock_clear": 12,
+  "personality": "Formal",
+  "display_line": "Dressed for dinner. Will still sit in the box.",
+  "art": {
+    "loaf_48": "/assets/cats/tux_loaf_48.svg",
+    "loaf_72": "/assets/cats/tux_loaf_72.svg",
+    "board_color": "black"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Tux", "Domino", "Bowtie"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_004": [
+      "{Name}: Dressed for dinner. Will still sit in the box.",
+      "{Name}: The porch needed a black tie."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 12,
+    "sku_id": null,
+    "note": "Clear 12 gifts nothing — same cadence as Ink @ 6."
+  }
+}

@@ -9,6 +9,7 @@ import {
   friendById,
   BISCUIT_FRIEND_ID,
   INK_FRIEND_ID,
+  TUX_FRIEND_ID,
   NAMING,
   shuffleNameChips,
 } from "@/lib/collection";
@@ -27,7 +28,9 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
 
   const canWelcome = name.trim().length >= 1;
   const lockChips =
-    catalog.friendId === INK_FRIEND_ID || catalog.friendId === BISCUIT_FRIEND_ID;
+    catalog.friendId === INK_FRIEND_ID ||
+    catalog.friendId === BISCUIT_FRIEND_ID ||
+    catalog.friendId === TUX_FRIEND_ID;
 
   return (
     <div className="fixed inset-0 z-30 flex items-end justify-center bg-ink/30 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-16 sm:items-center">

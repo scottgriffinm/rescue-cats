@@ -12,9 +12,9 @@ import {
   assertDuplicateNamesAllowed,
   favoriteToyFor,
   friendById,
-  friendForClear,
   furnitureGiftsForClear,
   heartsForClear,
+  shippedFriendForClear,
   unlockFlagsFor,
   withName,
   NAMING,
@@ -27,7 +27,7 @@ import {
   RETURN_HOOK_HEARTS,
   STARTING_LIVES,
 } from "@/lib/constants";
-import { onClear } from "@/lib/onClear";
+import { onClear, paradeClearForLevel } from "@/lib/onClear";
 import { EMPTY_SAVE, loadSave, writeSave } from "@/lib/storage";
 import type { FriendInstance, PendingUnlock, SaveState } from "@/lib/types";
 
@@ -124,27 +124,28 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
           };
         }
         const completedIds = [...current.completedIds, levelId];
-        const clearIndex = completedIds.length;
-        const hearts = heartsForClear(clearIndex);
-        const catalog = friendForClear(clearIndex);
+        const uniqueCount = completedIds.length;
+        const paradeClear = paradeClearForLevel(levelId) ?? uniqueCount;
+        const hearts = heartsForClear(uniqueCount);
+        const catalog = shippedFriendForClear(paradeClear);
         const pending = catalog
-          ? [...current.pendingUnlocks, { friendId: catalog.friendId, clearIndex }]
+          ? [...current.pendingUnlocks, { friendId: catalog.friendId, clearIndex: paradeClear }]
           : current.pendingUnlocks;
-        const gifts = furnitureGiftsForClear(clearIndex).map((sku) => sku.skuId);
+        const gifts = furnitureGiftsForClear(paradeClear).map((sku) => sku.skuId);
         setSave({
           ...current,
           completedIds,
-          clearCount: clearIndex,
+          clearCount: uniqueCount,
           hearts: current.hearts + hearts,
           stars: current.stars + starsEarned,
           pendingUnlocks: pending,
           furniture: [...new Set([...current.furniture, ...gifts])],
         });
-        onClear(clearIndex, levelId, starsEarned);
+        onClear(paradeClear, levelId, starsEarned);
         return {
           newlyCleared: true,
-          clearIndex,
-          unlocked: catalog ? { friendId: catalog.friendId, clearIndex } : null,
+          clearIndex: paradeClear,
+          unlocked: catalog ? { friendId: catalog.friendId, clearIndex: paradeClear } : null,
           hearts,
           stars: starsEarned,
         };
@@ -176,7 +177,9 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
             ? [withName(SHOP_STARTER.ink_hook, instance.name), SHOP_STARTER.intro]
             : catalog.friendId === "friend_003"
               ? [`${instance.name} claimed the sun cushion.`]
-              : [];
+              : catalog.friendId === "friend_004"
+                ? [`${instance.name} dressed for the porch.`]
+                : [];
         setSave({
           ...current,
           friends,

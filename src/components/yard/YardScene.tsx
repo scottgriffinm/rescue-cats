@@ -34,10 +34,12 @@ export function YardScene({
 }) {
   const mango = friends.find((friend) => friend.friendId === "friend_001");
   const biscuit = friends.find((friend) => friend.friendId === "friend_003");
+  const tux = friends.find((friend) => friend.friendId === "friend_004");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
-      !(hasCushion && friend.friendId === "friend_003"),
+      !(hasCushion && friend.friendId === "friend_003") &&
+      friend.friendId !== "friend_004",
   );
 
   return (
@@ -106,6 +108,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
+        </div>
+      ) : null}
+
+      {tux ? (
+        <div
+          className="yard-drop absolute w-[72px]"
+          style={{ left: "66%", top: "46%" }}
+        >
+          <FriendSprite
+            kit={friendById(tux.friendId)?.phenotype.artKit ?? "tuxedo"}
+            size={72}
+            className="h-[72px] w-[72px]"
+          />
+          {bangFriendId === tux.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(tux.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${tux.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{tux.name}</p>
         </div>
       ) : null}
 

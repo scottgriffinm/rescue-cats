@@ -6,7 +6,7 @@ export const PRODUCT_NAME = "Rescue Cats";
 export const TEMPLATE_ID = "LT01_teach_slide";
 
 export const ART_KIT_PATH: Record<
-  "ginger" | "cream" | "slate" | "calico",
+  "ginger" | "cream" | "slate" | "calico" | "tuxedo",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -24,6 +24,10 @@ export const ART_KIT_PATH: Record<
   calico: {
     loaf48: "/assets/cats/calico_loaf_48.svg",
     loaf72: "/assets/cats/calico_loaf_72.svg",
+  },
+  tuxedo: {
+    loaf48: "/assets/cats/tux_loaf_48.svg",
+    loaf72: "/assets/cats/tux_loaf_72.svg",
   },
 };
 
