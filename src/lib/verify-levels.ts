@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import chapter2Pack from "../../data/levels/CHAPTER2_PUZZLE_L04_L09.json";
 import chapter3Pack from "../../data/levels/CHAPTER3_PUZZLE_L11_L12.json";
 import chapter3bPack from "../../data/levels/CHAPTER3_PUZZLE_L13_L15.json";
+import chapter3cPack from "../../data/levels/CHAPTER3_PUZZLE_L16_L18.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
@@ -14,6 +15,9 @@ import l12Pack from "../../data/levels/L12.json";
 import l13Pack from "../../data/levels/L13.json";
 import l14Pack from "../../data/levels/L14.json";
 import l15Pack from "../../data/levels/L15.json";
+import l16Pack from "../../data/levels/L16.json";
+import l17Pack from "../../data/levels/L17.json";
+import l18Pack from "../../data/levels/L18.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
@@ -23,6 +27,7 @@ import {
   CHAPTER2,
   CHAPTER3,
   CHAPTER3_TUX,
+  CHAPTER3_GHOST,
   chipsForFriend,
   FURNITURE,
   friendForClear,
@@ -258,6 +263,66 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_gray", 3, 5],
     ],
   },
+  L16: {
+    size: 6,
+    N: 9,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 0],
+      [2, 1],
+      [2, 3],
+      [3, 3],
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_gray", 5, 2],
+    ],
+    gates: [
+      ["gate_orange", 5, 3],
+      ["gate_gray", 1, 5],
+    ],
+  },
+  L17: {
+    size: 6,
+    N: 8,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 1],
+      [2, 2],
+      [3, 4],
+      [5, 0],
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_gray", 5, 2],
+    ],
+    gates: [
+      ["gate_orange", 3, 0],
+      ["gate_gray", 0, 4],
+    ],
+  },
+  L18: {
+    size: 6,
+    N: 10,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 1],
+      [2, 2],
+      [3, 4],
+      [0, 4],
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_gray", 5, 2],
+    ],
+    gates: [
+      ["gate_orange", 1, 3],
+      ["gate_gray", 5, 5],
+    ],
+  },
 };
 
 function assertLocked(level: Level, spec: LockedSpec) {
@@ -373,6 +438,35 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "s"],
     ["cat_gray", "e"],
   ],
+  L16: [
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+  ],
+  L17: [
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+  ],
+  L18: [
+    ["cat_orange", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_orange", "e"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+  ],
 };
 
 function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
@@ -462,10 +556,25 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
-  for (const id of ["L4", "L5", "L6", "L7", "L8", "L9", "L11", "L12", "L13", "L14", "L15"] as const) {
+  for (const id of [
+    "L4",
+    "L5",
+    "L6",
+    "L7",
+    "L8",
+    "L9",
+    "L11",
+    "L12",
+    "L13",
+    "L14",
+    "L15",
+    "L16",
+    "L17",
+    "L18",
+  ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
     assertLocked(level, LOCKED[id]);
@@ -482,7 +591,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     gates: { id: string; x: number; y: number; colorId?: string; color?: string }[];
   };
   const locked = Object.fromEntries(
-    [...chapter2Pack.levels, ...chapter3Pack.levels, ...chapter3bPack.levels].map((level) => [
+    [...chapter2Pack.levels, ...chapter3Pack.levels, ...chapter3bPack.levels, ...chapter3cPack.levels].map((level) => [
       level.id,
       level as PackedBoard,
     ]),
@@ -499,6 +608,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L13: [l13Pack as PackedBoard],
     L14: [l14Pack as PackedBoard],
     L15: [l15Pack as PackedBoard],
+    L16: [l16Pack as PackedBoard],
+    L17: [l17Pack as PackedBoard],
+    L18: [l18Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -521,7 +633,18 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
         throw new Error(`${copy.id} standalone drifted from CHAPTER2_PUZZLE`);
       }
     }
-    if (id === "L8" || id === "L9" || id === "L11" || id === "L12" || id === "L13" || id === "L14" || id === "L15") {
+    if (
+      id === "L8" ||
+      id === "L9" ||
+      id === "L11" ||
+      id === "L12" ||
+      id === "L13" ||
+      id === "L14" ||
+      id === "L15" ||
+      id === "L16" ||
+      id === "L17" ||
+      id === "L18"
+    ) {
       for (const copy of copies) {
         for (const piece of [...copy.cats, ...copy.gates]) {
           if (!piece.colorId) throw new Error(`${copy.id} ${piece.id} must use colorId`);
@@ -529,7 +652,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       }
     }
   }
-  console.log("Standalone L4–L9 + L11–L15 + LT02/L06-07/LT08 match locked coords");
+  console.log("Standalone L4–L9 + L11–L18 + LT02/L06-07/LT08 match locked coords");
 }
 
 {
@@ -740,6 +863,136 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       ["cat_gray", "e"],
     ],
     "L15 L11 habit cannot finish",
+  );
+}
+
+{
+  const l16 = LEVELS.find((level) => level.id === "L16");
+  if (!l16) throw new Error("missing L16");
+  if (!l16.colorLocks) throw new Error("L16 must lock colors");
+  const orange = l16.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l16.cats.find((cat) => cat.id === "cat_gray");
+  const orangeGate = l16.gates.find((gate) => gate.id === "gate_orange");
+  const grayGate = l16.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L16 missing coats");
+  if (!isMismatchSolid(l16, gray, orangeGate)) {
+    throw new Error("L16 orange house must be solid to the gray coat");
+  }
+  if (!isMismatchSolid(l16, orange, grayGate)) {
+    throw new Error("L16 gray house must be solid to the orange coat");
+  }
+  assertNotHome(l16, [["cat_orange", "s"]], "L16 orange-south alone is not home");
+  assertNotHome(
+    l16,
+    [
+      ["cat_gray", "w"],
+      ["cat_orange", "e"],
+      ["cat_orange", "s"],
+      ["cat_orange", "e"],
+      ["cat_orange", "n"],
+    ],
+    "L16 moving the parked brake first overshoots",
+  );
+  assertNotHome(
+    l16,
+    [
+      ["cat_orange", "s"],
+      ["cat_gray", "s"],
+      ["cat_gray", "w"],
+      ["cat_orange", "n"],
+      ["cat_orange", "e"],
+      ["cat_orange", "s"],
+      ["cat_gray", "e"],
+    ],
+    "L16 L13 habit cannot finish",
+  );
+}
+
+{
+  const l17 = LEVELS.find((level) => level.id === "L17");
+  if (!l17) throw new Error("missing L17");
+  if (!l17.colorLocks) throw new Error("L17 must lock colors");
+  const orange = l17.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l17.cats.find((cat) => cat.id === "cat_gray");
+  const orangeGate = l17.gates.find((gate) => gate.id === "gate_orange");
+  const grayGate = l17.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L17 missing coats");
+  if (!isMismatchSolid(l17, gray, orangeGate)) {
+    throw new Error("L17 orange house must be solid to the gray coat");
+  }
+  if (!isMismatchSolid(l17, orange, grayGate)) {
+    throw new Error("L17 gray house must be solid to the orange coat");
+  }
+  assertNotHome(l17, [["cat_orange", "e"]], "L17 orange-east alone overshoots");
+  assertNotHome(
+    l17,
+    [
+      ["cat_gray", "n"],
+      ["cat_orange", "e"],
+      ["cat_gray", "s"],
+      ["cat_gray", "w"],
+    ],
+    "L17 L12 far-edge park overshoots",
+  );
+  assertNotHome(
+    l17,
+    [
+      ["cat_orange", "e"],
+      ["cat_orange", "s"],
+      ["cat_orange", "e"],
+      ["cat_orange", "n"],
+      ["cat_gray", "w"],
+      ["cat_gray", "n"],
+      ["cat_gray", "e"],
+      ["cat_gray", "s"],
+    ],
+    "L17 L16 hold-still habit cannot finish",
+  );
+}
+
+{
+  const l18 = LEVELS.find((level) => level.id === "L18");
+  if (!l18) throw new Error("missing L18");
+  if (!l18.colorLocks) throw new Error("L18 must lock colors");
+  const orange = l18.cats.find((cat) => cat.id === "cat_orange");
+  const gray = l18.cats.find((cat) => cat.id === "cat_gray");
+  const orangeGate = l18.gates.find((gate) => gate.id === "gate_orange");
+  const grayGate = l18.gates.find((gate) => gate.id === "gate_gray");
+  if (!orange || !gray || !orangeGate || !grayGate) throw new Error("L18 missing coats");
+  if (!isMismatchSolid(l18, gray, orangeGate)) {
+    throw new Error("L18 orange house must be solid to the gray coat");
+  }
+  if (!isMismatchSolid(l18, orange, grayGate)) {
+    throw new Error("L18 gray house must be solid to the orange coat");
+  }
+  assertNotHome(l18, [["cat_orange", "s"]], "L18 orange-south alone is not home");
+  assertNotHome(
+    l18,
+    [
+      ["cat_orange", "e"],
+      ["cat_orange", "s"],
+      ["cat_orange", "e"],
+      ["cat_orange", "n"],
+      ["cat_gray", "w"],
+      ["cat_gray", "n"],
+      ["cat_gray", "e"],
+      ["cat_gray", "s"],
+    ],
+    "L18 L16 hold-still habit cannot finish",
+  );
+  assertNotHome(
+    l18,
+    [
+      ["cat_orange", "s"],
+      ["cat_gray", "s"],
+      ["cat_gray", "w"],
+      ["cat_gray", "n"],
+      ["cat_orange", "e"],
+      ["cat_orange", "n"],
+      ["cat_orange", "w"],
+      ["cat_orange", "n"],
+    ],
+    "L18 L17 hold-south habit cannot finish",
   );
 }
 
@@ -1036,7 +1289,9 @@ for (const level of LEVELS) {
     throw new Error("shipped parade must award Tux at 12");
   }
   if (shippedFriendForClear(11)) throw new Error("L11 must not award a friend");
-  if (shippedFriendForClear(15)) throw new Error("Ghost@15 must stay unshipped this slice");
+  if (shippedFriendForClear(15)?.friendId !== "friend_005") {
+    throw new Error("shipped parade must award Ghost at 15");
+  }
   if (friendForClear(6)?.friendId !== "friend_002") {
     throw new Error("Tux wiring must not move Ink off onClear(6)");
   }
@@ -1047,6 +1302,74 @@ for (const level of LEVELS) {
     throw new Error("Tux wiring must not move Mango off onClear(3)");
   }
   console.log("Tux @ onClear(12) ok · tuxedo loafs + L13–L15 wired");
+}
+
+{
+  const ghost = friendForClear(15);
+  if (ghost?.friendId !== "friend_005") {
+    throw new Error(`onClear(15) must unlock Ghost, got ${ghost?.friendId ?? "none"}`);
+  }
+  if (CHAPTER3_GHOST.unlock_clear !== 15 || CHAPTER3_GHOST.friend_id !== "friend_005") {
+    throw new Error("ghost pack must pin Ghost at clear 15");
+  }
+  if (CHAPTER3_GHOST.naming.prefill !== "") throw new Error("ghost naming prefill must stay empty");
+  const ghostChips = chipsForFriend("friend_005");
+  if (ghostChips.join(",") !== "Ghost,Wisp,Pearl") {
+    throw new Error(`Ghost chips must be Ghost/Wisp/Pearl, got ${ghostChips.join("/")}`);
+  }
+  for (const banned of ["Tux", "Domino", "Bowtie", "Ink", "Ash", "Shadow", "Biscuit", "Mochi", "Toast", "Misty"]) {
+    if (ghostChips.includes(banned)) {
+      throw new Error(`Ghost chips must stay off prior pools, found ${banned}`);
+    }
+  }
+  if (ghost.displayLine !== "A pale loaf. Appears when the sun hits the porch.") {
+    throw new Error(`Ghost display line drifted: ${ghost.displayLine}`);
+  }
+  if (ghost.phenotype.personality !== "Shy") {
+    throw new Error(`Ghost personality must be Shy, got ${ghost.phenotype.personality}`);
+  }
+  if (ghost.phenotype.artKit !== "ghost") throw new Error("Ghost must use ghost loafs");
+  if (ghost.phenotype.boardColor !== "gray") throw new Error("Ghost must be color_gray");
+  if (furnitureGiftsForClear(15).length !== 0) throw new Error("clear 15 must gift nothing");
+  const bang = CHAPTER3_GHOST.bang_copy.friend_005?.[0];
+  if (bang !== "{Name}: A pale loaf. Appears when the sun hits the porch.") {
+    throw new Error(`Ghost first-night drifted: ${bang}`);
+  }
+  if (ART_KIT_PATH.ghost.loaf48 !== "/assets/cats/ghost_loaf_48.svg") {
+    throw new Error("Ghost yard/unlock must map ghost 48 → ghost_loaf_48");
+  }
+  if (ART_KIT_PATH.ghost.loaf72 !== "/assets/cats/ghost_loaf_72.svg") {
+    throw new Error("Ghost yard/unlock must map ghost 72 → ghost_loaf_72");
+  }
+  const shopStill = shopItemsForClear(15).map((sku) => sku.skuId).sort();
+  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+    throw new Error(`shop SKUs drifted after Ghost: ${shopStill.join(",")}`);
+  }
+  for (const file of ["public/assets/cats/ghost_loaf_48.svg", "public/assets/cats/ghost_loaf_72.svg"]) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  if (paradeClearForLevel("L15") !== 15) throw new Error("L15 must map to parade clear 15");
+  if (paradeClearForLevel("L16") !== 16) throw new Error("L16 must map to parade clear 16");
+  if (shippedFriendForClear(15)?.friendId !== "friend_005") {
+    throw new Error("shipped parade must award Ghost at 15");
+  }
+  if (shippedFriendForClear(14)) throw new Error("L14 must not award a friend");
+  if (shippedFriendForClear(16)) throw new Error("L16 must not award a friend");
+  if (shippedFriendForClear(18)) throw new Error("Mist@18 must stay unshipped this slice");
+  if (shippedFriendForClear(24)) throw new Error("Pumpkin@24 must stay unshipped this slice");
+  if (friendForClear(6)?.friendId !== "friend_002") {
+    throw new Error("Ghost wiring must not move Ink off onClear(6)");
+  }
+  if (friendForClear(9)?.friendId !== "friend_003") {
+    throw new Error("Ghost wiring must not move Biscuit off onClear(9)");
+  }
+  if (friendForClear(12)?.friendId !== "friend_004") {
+    throw new Error("Ghost wiring must not move Tux off onClear(12)");
+  }
+  if (friendForClear(3)?.friendId !== "friend_001") {
+    throw new Error("Ghost wiring must not move Mango off onClear(3)");
+  }
+  console.log("Ghost @ onClear(15) ok · pale loafs + L16–L18 wired");
 }
 
 console.log("All authored boards ok");

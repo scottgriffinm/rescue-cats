@@ -13,7 +13,7 @@ Studio freeze for the vertical slice. Puzzle + Collection cadence + Art pack v1 
 - **Stars:** leftover slides → 3★ if leftover ≥ ceil(N/2), 2★ if leftover ≥ ceil(N/4), else 1★. Stars unlock **yard cosmetics only**, never cats or campaign gates.
 - **Nudges / color locks:** encoded on the L1–30 budget table; inactive on authored LT01 boards. Board colors normalize to `orange | gray | black`.
 
-Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L15 are the Chapter 3 color-brake boards (budgets from `data/levels/move_budget_L01-L30.json`; L16–30 remain stubs). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`. Parade friends key off the level number so L12 awards Tux even though L10 is off the path.
+Authoritative teach boards: `data/levels/L01-L03.json` (studio handoff). L2 is a two-cell wall run (Template 01 prose said “1 wall”; the JSON is the lock). L4–L9 continue the locked Chapter 2 packs. L11–L18 are the Chapter 3 color-brake boards (budgets from `data/levels/move_budget_L01-L30.json`; L19–30 remain stubs). Engine: `src/lib/slide.ts`. Unique clears emit `onClear(clearIndex)` from `src/lib/onClear.ts`. Parade friends key off the level number so L12 awards Tux and L15 awards Ghost even though L10 is off the path.
 
 Acceptance: slide stops on wall / cat / edge only; gates never brake; counter decrements once per slide start; win = all cats on gates at rest; budget exhaust → X and board reset (Xs persist per level); no mid-puzzle ads.
 
@@ -31,15 +31,19 @@ Continuous build past the Mango slice. Same slide engine (stop on wall | cat | e
 
 ## Chapter 3 — OPEN (sister-ready next slice)
 
-Same slide engine. Campaign after L9 is **L11–L15** (skip L10).
+Same slide engine. Campaign after L9 is **L11–L18** (skip L10).
 
 - **L11 Color Brake.** Mid-board matching house. Park a friend past the house — matching coats still slide through.
 - **L12 Park First.** Hold the far cell so the slider stops on their house. Overshoot if you go first.
 - **L13 Step Off.** Leave the edge house to brake the mid-board matching house.
 - **L14 Park Close.** Hold the adjacent cell — L12's far-edge park overshoots a closer house.
 - **L15 Thread Bottom.** Park the mid house, then thread the bottom wall.
+- **L16 Hold Still.** The friend already sits as the brake. Move them first and the mid house overshoots.
+- **L17 Hold South.** Park under the house — L12's far-edge park overshoots.
+- **L18 Park Across.** Hold the next cell on the same row after the walls force the setup.
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
-- **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`. Ghost@15 ships later.
+- **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`.
+- **onClear(15) → Ghost (`friend_005`) after L15.** Pale gray-cream loaf, chips Ghost / Wisp / Pearl, no furniture gift. Pack: `data/chapter3_ghost_bang.json`. Pumpkin@24 ships later.
 
 Retarget later templates by swapping JSON + keeping the slide helper.
 
@@ -71,7 +75,7 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 
 Load **`data/collection_CURRENT.json` only** (stamped FROZEN / v1.2 canonical). Ignore deprecated v1. If a stale `unlock_clear: 1` appears, ignore it.
 
-Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming + box gift. Unlock table covers **3 / 6 / 9 / 12**. CURRENT is frozen and correct. **NO Pebble.** Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, … Bean@60. Ignore any chat saying Pebble.
+Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming + box gift. Unlock table covers **3 / 6 / 9 / 12 / 15**. CURRENT is frozen and correct. **NO Pebble.** Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, … Bean@60. Ignore any chat saying Pebble.
 
 Board color enums for the slice: `orange | gray | black`. LT08+ gates map to these strings; `color_orange` etc. normalize in `src/lib/colors.ts` + level hydrate.
 
@@ -120,7 +124,7 @@ Warm charcoal strokes (`#2B2A28`), rounded caps, slight wobble. Flat fills — n
 
 ### Cats
 
-Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/calico_belly_72.svg` only. Yard friends use loaf SVGs (`ginger_loaf_48/72` for Mango, cream for Biscuit, ink/slate for Ink, tuxedo black-and-cream for Tux, plus calico).
+Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/calico_belly_72.svg` only. Yard friends use loaf SVGs (`ginger_loaf_48/72` for Mango, cream for Biscuit, ink/slate for Ink, tuxedo black-and-cream for Tux, pale gray-cream for Ghost, plus calico).
 
 ### Furniture (chunky woodblock)
 
