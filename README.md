@@ -1,3 +1,5 @@
+> **🚨 CEO HANDOFF:** read [`CEO_HANDOFF_CHECKPOINT.md`](./CEO_HANDOFF_CHECKPOINT.md) first — pick up from Clover@33 PR #23.
+
 # Rescue Cats
 
 Full-viewport Next.js game: slide cats into yard gates, then invite them onto a paper porch. The website is the game — no phone-frame mock.
