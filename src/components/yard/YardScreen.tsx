@@ -97,7 +97,6 @@ export function YardScreen() {
             hasScratch={hasScratch}
             hasYarn={hasYarn}
             hasCushion={hasCushion}
-            waitingTree={save.friends.length === 0 && !hasTree}
             bangFriendId={bangFriendId}
             onBang={(instanceId) => {
               completeFirstNight(instanceId);
