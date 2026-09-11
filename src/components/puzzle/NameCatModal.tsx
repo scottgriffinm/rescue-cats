@@ -1,27 +1,22 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { FriendSprite, UiIcon } from "@/components/art/Sprite";
 import { Button } from "@/components/ui/Button";
 import { useSave } from "@/components/providers/SaveProvider";
-import { allNameSuggestions, friendById, NAMING } from "@/lib/collection";
+import { friendById, NAMING, NAMING_CHIPS, shuffleNameChips } from "@/lib/collection";
 import { MAX_NAME_LENGTH } from "@/lib/constants";
 
 export function NameCatModal({ onNamed }: { onNamed: () => void }) {
   const { save, namePendingFriend } = useSave();
   const pending = save.pendingUnlocks[0];
   const catalog = pending ? friendById(pending.friendId) : undefined;
-  const pool = useMemo(() => allNameSuggestions(), []);
   const [name, setName] = useState("");
+  const [chips, setChips] = useState<string[]>(NAMING_CHIPS);
 
   if (!catalog) return null;
 
-  function shuffle() {
-    const pick = pool[Math.floor(Math.random() * pool.length)] ?? "";
-    setName(pick);
-  }
-
-  const chosen = name.trim();
+  const canWelcome = name.trim().length >= 1;
 
   return (
     <div className="absolute inset-0 z-30 flex items-end justify-center bg-ink/30 px-4 pb-8 pt-16">
@@ -44,8 +39,8 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
           className="mt-4 space-y-3"
           onSubmit={(event) => {
             event.preventDefault();
-            if (!chosen) return;
-            namePendingFriend(chosen);
+            if (!canWelcome) return;
+            namePendingFriend(name);
             onNamed();
           }}
         >
@@ -58,22 +53,40 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
             autoFocus
             placeholder={NAMING.placeholder}
             aria-label={NAMING.name_label}
-            onFocus={(event) => event.currentTarget.select()}
             onChange={(event) => setName(event.target.value)}
-            className="h-11 w-full rounded-lg border-0 bg-transparent bg-[url('/assets/ui/input_name.svg')] bg-[length:100%_100%] bg-no-repeat px-4 text-center font-sans text-lg text-ink outline-none"
+            className="h-11 w-full rounded-lg border-0 bg-transparent bg-[url('/assets/ui/input_name.svg')] bg-[length:100%_100%] bg-no-repeat px-4 text-center font-sans text-lg text-ink outline-none placeholder:text-ink/35"
           />
+          <div className="flex flex-wrap justify-center gap-2" aria-label="Name suggestions">
+            {chips.map((chip) => {
+              const selected = name === chip;
+              return (
+                <button
+                  key={chip}
+                  type="button"
+                  onClick={() => setName(chip)}
+                  className={`h-9 rounded-full border-2 px-3 font-display text-sm ${
+                    selected
+                      ? "border-ink bg-wood text-ink"
+                      : "border-ink/25 bg-paper text-ink/80"
+                  }`}
+                >
+                  {chip}
+                </button>
+              );
+            })}
+          </div>
           <Button
             type="submit"
             variant="paper"
             className="w-full"
-            disabled={!chosen}
+            disabled={!canWelcome}
             aria-label={NAMING.cta_primary}
           >
             {NAMING.cta_primary}
           </Button>
           <button
             type="button"
-            onClick={shuffle}
+            onClick={() => setChips(shuffleNameChips(3))}
             aria-label={NAMING.cta_shuffle}
             className="w-full text-center text-sm text-ink/50 underline-offset-2 hover:underline"
           >

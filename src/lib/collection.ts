@@ -145,6 +145,20 @@ export function allNameSuggestions() {
   return [...pools.food, ...pools.soft, ...pools.silly_human, ...pools.breed_leaning];
 }
 
+export const NAMING_CHIPS: string[] =
+  "suggestion_chips" in NAMING && Array.isArray(NAMING.suggestion_chips)
+    ? NAMING.suggestion_chips
+    : ["Mango", "Biscuit", "Pepper"];
+
+export function shuffleNameChips(count = 3) {
+  const pool = [...new Set(allNameSuggestions())];
+  for (let i = pool.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  return pool.slice(0, count);
+}
+
 export function comfortTotal(ownedSkuIds: string[]) {
   return FURNITURE.filter((sku) => ownedSkuIds.includes(sku.skuId)).reduce(
     (sum, sku) => sum + sku.comfort,

@@ -116,7 +116,7 @@ a {
 
 .dpad-glyph {
   font-family: var(--font-fredoka), ui-rounded, sans-serif;
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1;
 }
 

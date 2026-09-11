@@ -73,8 +73,8 @@ try {
     await page.click('[aria-label="Select cat"]');
     for (const key of keys) {
       const label = DIR_LABEL[key];
-      await page.waitForSelector(`[aria-label="${label}"]`, { visible: true });
-      await page.click(`[aria-label="${label}"]`);
+      await page.waitForSelector(`[aria-label="${label}"]:not([disabled])`, { visible: true });
+      await page.click(`[aria-label="${label}"]:not([disabled])`);
       await new Promise((r) => setTimeout(r, 900));
     }
     await waitToast(page, winText, 8000);
@@ -100,12 +100,14 @@ try {
     const hero = [...card.querySelectorAll("img")].map((img) => img.getAttribute("src"));
     const cta = card.querySelector("button[type='submit']");
     const input = card.querySelector("input")?.value;
+    const chips = [...card.querySelectorAll("button")].map((btn) => btn.textContent?.trim());
     return {
       title,
       hero,
       cta: cta?.textContent?.trim(),
       input,
       ctaDisabled: Boolean(cta?.disabled),
+      chips,
     };
   });
   console.log("naming", modal);
@@ -113,21 +115,18 @@ try {
   if (modal.input !== "") throw new Error(`name prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled until a name is chosen");
   if (modal.cta !== "Welcome home") throw new Error(`cta ${modal.cta}`);
-  const shuffle = await page.evaluate(() => {
-    const btn = [...document.querySelectorAll("button")].find((el) =>
-      (el.textContent || "").includes("Shuffle"),
-    );
-    btn?.click();
-    return btn?.textContent?.trim() ?? null;
+  if (!modal.chips?.includes("Mango") || !modal.chips?.includes("Biscuit") || !modal.chips?.includes("Pepper")) {
+    throw new Error(`missing suggestion chips: ${modal.chips?.join(",")}`);
+  }
+  await page.evaluate(() => {
+    const chip = [...document.querySelectorAll("button")].find((btn) => btn.textContent?.trim() === "Mango");
+    chip?.click();
   });
-  if (!shuffle) throw new Error("missing shuffle names control");
   await page.waitForFunction(() => {
     const input = document.querySelector("input");
     const cta = document.querySelector("button[type='submit']");
-    return Boolean(input?.value.trim()) && !cta?.disabled;
+    return input?.value === "Mango" && cta && !cta.disabled;
   });
-  await page.click("input", { clickCount: 3 });
-  await page.type("input", "Mango");
   if (!modal.hero.includes("/assets/cats/ginger_loaf_72.svg")) {
     throw new Error(`Mango hero missing ginger_loaf_72: ${modal.hero.join(",")}`);
   }
@@ -156,12 +155,16 @@ try {
   if (!yard.imgs.includes("/assets/furniture/boxBed.svg")) {
     throw new Error("yard missing boxBed");
   }
-  if (!yard.imgs.includes("/assets/ui/bubble_bang.svg")) {
-    throw new Error("yard missing first-night ! bubble");
-  }
-  if (!yard.text.includes("will still be here in the morning")) {
-    throw new Error("yard missing tomorrow hook");
-  }
+  await page.waitForSelector('[aria-label="Mango has something to say"]', { timeout: 4000 });
+  await page.click('[aria-label="Mango has something to say"]');
+  await page.waitForFunction(
+    () => (document.body.innerText || "").includes("Still sniffing everything"),
+    { timeout: 4000 },
+  );
+  await page.waitForFunction(
+    () => (document.body.innerText || "").includes("Come back tomorrow"),
+    { timeout: 4000 },
+  );
   if (yard.text.includes("Sun Cushion") && yard.imgs.filter((s) => s === "/assets/furniture/boxBed.svg").length > 1) {
     throw new Error("second gift suspected on Mango unlock");
   }
@@ -176,6 +179,8 @@ try {
     (id) => id !== "furn_box_cardboard" && id !== "furn_tree_mini",
   );
   if (extras.length) throw new Error(`unexpected furniture gifts: ${extras.join(",")}`);
+  if (!save.first_night_done) throw new Error("first_night_done not persisted");
+  if (!save.return_hook_available_at) throw new Error("return_hook_available_at missing");
   await shot(page, "06_yard_mango_boxbed");
 
   writeFileSync(

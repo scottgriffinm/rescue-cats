@@ -4,7 +4,7 @@
   "levels": [
     { "id": "L1", "moveBudget": 8, "nudges": 0, "colorLocks": false },
     { "id": "L2", "moveBudget": 7, "nudges": 0, "colorLocks": false },
-    { "id": "L3", "moveBudget": 3, "nudges": 0, "colorLocks": false },
+    { "id": "L3", "moveBudget": 6, "nudges": 0, "colorLocks": false },
     { "id": "L4", "moveBudget": 10, "nudges": 0, "colorLocks": false },
     { "id": "L5", "moveBudget": 9, "nudges": 0, "colorLocks": false },
     { "id": "L6", "moveBudget": 8, "nudges": 0, "colorLocks": false },

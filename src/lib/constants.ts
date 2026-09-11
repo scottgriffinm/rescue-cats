@@ -28,3 +28,7 @@ export const ART_KIT_PATH: Record<
 };
 
 export const PUZZLE_CAT_SRC = "/assets/cats/calico_belly_72.svg";
+export const FIRST_NIGHT_HEARTS = 2;
+export const RETURN_HOOK_HEARTS = 3;
+export const RETURN_HOOK_DELAY_MS = 24 * 60 * 60 * 1000;
+export const FIRST_NIGHT_BANG_MS = 600;
