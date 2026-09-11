@@ -142,14 +142,14 @@
     },
     {
       "id": "L24",
-      "moveBudget": 10,
-      "nudges": 2,
+      "moveBudget": 11,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L25",
-      "moveBudget": 9,
-      "nudges": 2,
+      "moveBudget": 10,
+      "nudges": 3,
       "colorLocks": true
     },
     {
@@ -172,19 +172,19 @@
     },
     {
       "id": "L29",
-      "moveBudget": 10,
+      "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L30",
-      "moveBudget": 9,
+      "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L31",
-      "moveBudget": 10,
+      "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true
     },

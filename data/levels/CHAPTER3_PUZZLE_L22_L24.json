@@ -1,9 +1,9 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "source": "Chapter 3 continuation — color-lock park-brake toward Pumpkin@24",
+  "source": "Chapter 3 continuation \u2014 color-lock park-brake toward Pumpkin@24",
   "chapter": 3,
-  "title": "Chapter 3 boards L22–L24",
-  "notes": "Campaign continues L21 → Pepper@21 → L22 → L23 → L24. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. Pumpkin@24 unlocks on L24.",
+  "title": "Chapter 3 boards L22\u2013L24",
+  "notes": "Campaign continues L21 \u2192 Pepper@21 \u2192 L22 \u2192 L23 \u2192 L24. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. Pumpkin@24 unlocks on L24.",
   "levels": [
     {
       "id": "L22",
@@ -15,20 +15,59 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_hold_west",
       "walls": [
-        { "x": 2, "y": 0 },
-        { "x": 2, "y": 1 },
-        { "x": 2, "y": 2 },
-        { "x": 3, "y": 4 },
-        { "x": 2, "y": 5 }
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 4, "y": 3, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "hold_west",
       "ascii": "O . # . . .\n. . # . . .\n. . # . . G\n. . . . o .\n. . . # . .\n. g # . . ."
@@ -43,51 +82,120 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_hold_corner",
       "walls": [
-        { "x": 3, "y": 0 },
-        { "x": 1, "y": 2 },
-        { "x": 1, "y": 3 },
-        { "x": 5, "y": 3 },
-        { "x": 2, "y": 5 }
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 5
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 2, "y": 3, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 4, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "hold_corner",
       "ascii": "O . . # . .\n. . . . . .\n. # o . . G\n. # . . . #\n. . . . . .\n. . # . g ."
     },
     {
       "id": "L24",
-      "name": "Park High",
+      "name": "Color Brake",
       "width": 6,
       "height": 6,
-      "moveBudget": 10,
-      "nudges": 2,
+      "moveBudget": 11,
+      "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_park_high",
+      "templateId": "LT02_LT08_color_brake_climb_gray",
       "walls": [
-        { "x": 2, "y": 0 },
-        { "x": 2, "y": 1 },
-        { "x": 4, "y": 3 },
-        { "x": 0, "y": 4 },
-        { "x": 5, "y": 5 }
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 0
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 2,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
-      "teach": "park_high",
-      "ascii": "O . # . . .\n. . # . . .\n. . . o . G\n. . . . # .\n# . . . . .\n. g . . . #"
+      "teach": "color_brake_climb_gray"
     }
   ]
 }
