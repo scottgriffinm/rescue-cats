@@ -75,7 +75,11 @@ export const ART_KIT_PATH: Record<
   },
 };
 
-export const PUZZLE_CAT_SRC = "/assets/cats/calico_belly_72.svg";
+export const PUZZLE_BELLY_SRC = {
+  orange: "/assets/cats/orange_belly_72.svg",
+  gray: "/assets/cats/gray_belly_72.svg",
+  black: "/assets/cats/black_belly_72.svg",
+} as const;
 export const FIRST_NIGHT_HEARTS = 2;
 export const RETURN_HOOK_HEARTS = 3;
 export const RETURN_HOOK_DELAY_MS = 24 * 60 * 60 * 1000;
