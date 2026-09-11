@@ -11,7 +11,7 @@ Campaign boards **L1–L9 sequential**. Ink unlocks at unique clear 6 (L6 in thi
 | L8 | `LT08-L08-L09.json` / `L8.json` | My Gate Only — orange / gray | yes · mismatch solid |
 | L9 | `LT08-L08-L09.json` / `L9.json` | Wrong Order Soft-Lock | yes · mismatch solid |
 
-`CHAPTER2_PUZZLE_L04_L09.json` mirrors the same topologies but is **not** the campaign import.
+`CHAPTER2_PUZZLE_L04_L09.json` is the **unified campaign import** for L4–L9. Split packs (`LT02-L04-L05.json`, `CHAPTER2_PUZZLE_L06_L07.json`, `LT08-L08-L09.json`) are mirrors.
 
 ## Collection / art (same beat)
 

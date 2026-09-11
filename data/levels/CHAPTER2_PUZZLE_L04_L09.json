@@ -3,7 +3,7 @@
   "source": "docs/rescue_cats_LOCKED_specs/Puzzle_Locked_L01-L30.md",
   "chapter": 2,
   "title": "Chapter 2 boards L4–L9",
-  "notes": "Mirror of LT02-L04-L05 + CHAPTER2_PUZZLE_L06_L07 + LT08-L08-L09. Locked topologies only — do not invent. Campaign loads the three split packs.",
+  "notes": "Unified campaign source for L4–L9 in order. Locked topologies only — do not invent. Split packs LT02 / L06-L07 / LT08 are mirrors.",
   "levels": [
     {
       "id": "L4",

@@ -10,7 +10,7 @@ import {
   NAMING,
   shopItemsForClear,
 } from "./collection";
-import { GATE_ASSETS } from "./artAssets";
+import { FURN_ASSETS, GATE_ASSETS } from "./artAssets";
 import { LEVELS } from "./levels";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
@@ -432,6 +432,9 @@ for (const level of LEVELS) {
     "public/assets/cats/friend_002_loaf_72.svg",
     "public/assets/gates/gate_orange.svg",
     "public/assets/gates/gate_gray.svg",
+    "public/assets/furniture/scratcher.svg",
+    "public/assets/furniture/miniTree.svg",
+    "public/assets/furniture/yarnSwing.svg",
   ];
   for (const file of artFiles) {
     if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
@@ -442,7 +445,16 @@ for (const level of LEVELS) {
   if (GATE_ASSETS.gray !== "/assets/gates/gate_gray.svg") {
     throw new Error("LT08 gray gate path drifted");
   }
-  console.log("Ink @ onClear(6) ok · ink loafs + LT08 gates wired");
+  if (FURN_ASSETS.scratcher !== "/assets/furniture/scratcher.svg") {
+    throw new Error("shop scratcher path drifted");
+  }
+  if (FURN_ASSETS.miniTree !== "/assets/furniture/miniTree.svg") {
+    throw new Error("shop miniTree path drifted");
+  }
+  if (FURN_ASSETS.yarnSwing !== "/assets/furniture/yarnSwing.svg") {
+    throw new Error("shop yarnSwing path drifted");
+  }
+  console.log("Ink @ onClear(6) ok · ink loafs + LT08 gates + shop furniture wired");
 }
 
 console.log("All authored boards ok");
