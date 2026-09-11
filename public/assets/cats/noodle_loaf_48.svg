@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="noodle-loaf-48">
+      <ellipse cx="24" cy="30" rx="20" ry="8.5"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="30" rx="20" ry="8.5" fill="#F3D9A8" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#noodle-loaf-48)">
+    <path d="M10 26 C12 30 12 32 10 36" stroke="#B8925A" stroke-width="2" stroke-linecap="round"/>
+    <path d="M16 25 C18.2 30 18.2 33 16 37" stroke="#B8925A" stroke-width="2" stroke-linecap="round"/>
+    <path d="M22 24.5 C24.2 30 24.2 33.5 22 37.5" stroke="#B8925A" stroke-width="2" stroke-linecap="round"/>
+    <path d="M28 24.5 C30.2 30 30.2 33.5 28 37.5" stroke="#B8925A" stroke-width="2" stroke-linecap="round"/>
+    <path d="M34 25 C36.2 30 36.2 33 34 37" stroke="#B8925A" stroke-width="2" stroke-linecap="round"/>
+    <path d="M38 26 C40 30 40 32 38 36" stroke="#B8925A" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <path d="M11 24 C10 18 14 16 16 20" fill="#E8C888" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M37 24 C38 18 34 16 32 20" fill="#E8C888" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="33" rx="8" ry="4" fill="#FFF1D2"/>
+  <circle cx="17" cy="29" r="1.6" fill="#2B2A28"/>
+  <circle cx="27" cy="29" r="1.6" fill="#2B2A28"/>
+  <path d="M43 31 C47 27 48 36 44 37 C47 39 44 42 40 38" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
+</svg>
