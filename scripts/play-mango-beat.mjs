@@ -57,10 +57,10 @@ try {
   await page.click("a[href='/level/L1']");
   await page.waitForSelector('[aria-label="Select cat"]');
   const puzzleCat = await page.$eval('[aria-label="Select cat"] img', (img) => img.getAttribute("src"));
-  if (puzzleCat !== "/assets/cats/calico_belly_72.svg") {
-    throw new Error(`L1 puzzle cat is ${puzzleCat}, expected calico_belly_72`);
+  if (puzzleCat !== "/assets/cats/orange_belly_72.svg") {
+    throw new Error(`L1 puzzle cat is ${puzzleCat}, expected orange_belly_72`);
   }
-  await shot(page, "02_l1_calico_belly");
+  await shot(page, "02_l1_orange_belly");
 
   const DIR_LABEL = {
     ArrowDown: "Slide south",

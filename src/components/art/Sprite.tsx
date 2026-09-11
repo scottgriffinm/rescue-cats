@@ -1,26 +1,21 @@
 import { CAT_ASSETS, FURN_ASSETS, UI_ASSETS } from "@/lib/artAssets";
-import { ART_KIT_PATH, PUZZLE_CAT_SRC } from "@/lib/constants";
-import type { ArtKit } from "@/lib/types";
+import { ART_KIT_PATH, PUZZLE_BELLY_SRC } from "@/lib/constants";
+import type { ArtKit, BoardColor } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
 export function PuzzleCatSprite({
   className,
-  colorHex,
+  color,
 }: {
   className?: string;
-  colorHex?: string;
+  /** Board coat. Uncolored teach cats (L1–L3) render orange — never cream calico. */
+  color?: BoardColor;
 }) {
+  const src = PUZZLE_BELLY_SRC[color ?? "orange"];
   return (
     <span className={cn("relative inline-flex items-center justify-center", className)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={PUZZLE_CAT_SRC} alt="" className="pointer-events-none h-full w-full select-none" />
-      {colorHex ? (
-        <span
-          className="pointer-events-none absolute bottom-[6%] h-[16%] max-h-2.5 min-h-2 w-[62%] max-w-7 rounded-full"
-          style={{ background: colorHex, boxShadow: `0 0 0 2px #2B2A28` }}
-          aria-hidden
-        />
-      ) : null}
+      <img src={src} alt="" className="pointer-events-none h-full w-full select-none" />
     </span>
   );
 }

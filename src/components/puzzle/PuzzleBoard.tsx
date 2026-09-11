@@ -140,7 +140,7 @@ export function PuzzleBoard({
               aria-label={cat.color ? `Select ${cat.color} cat` : "Select cat"}
             >
               <PuzzleCatSprite
-                colorHex={cat.color ? BOARD_COLOR_HEX[cat.color] : undefined}
+                color={cat.color}
                 className={cn(
                   "h-[80%] w-[80%] max-h-[72px] max-w-[72px] drop-shadow-sm",
                   active?.kind === "slide" && active.axis === "y" && "slide-along-y",
