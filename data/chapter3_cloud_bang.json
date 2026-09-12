@@ -1,0 +1,35 @@
+{
+  "version": "chapter3_cloud_bang",
+  "status": "READY",
+  "friend_id": "friend_016",
+  "unlock_clear": 48,
+  "personality": "Floaty",
+  "display_line": "Floats from cushion to cushion.",
+  "art": {
+    "loaf_48": "/assets/cats/cloud_loaf_48.svg",
+    "loaf_72": "/assets/cats/cloud_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "cloud"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Cloud",
+      "Puff",
+      "Drift"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_016": [
+      "{Name}: Floats from cushion to cushion.",
+      "{Name}: Already picked the softest air above the porch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 48,
+    "sku_id": null,
+    "note": "Clear 48 gifts nothing \u2014 same cadence as Ink @ 6 through Stripe @ 45. Box stays Mango@3. Sun Cushion stays Biscuit@9. Donna@51 and Bean@60 stay later."
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP \u2014 Cloud@48 + L49\u2013L51",
+  "source": "Chapter 3 after Cloud@48",
+  "chapter": 3,
+  "title": "Chapter 3 boards L49\u2013L51 (Cloud@48)",
+  "notes": "After L48 Vacate Row \u2192 Cloud@48 \u2192 L49\u2013L51. L10 off-path. No Hold*/Park*/Close. Habit breaks off vacate-row. Collection owns Cloud bang; Art owns cloud-48 pack. Bean@60 gated.",
+  "levels": [
+    {
+      "id": "L49",
+      "name": "Color Step",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_color_step_gray",
+      "walls": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 3,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "color_step_gray",
+      "ascii": "..#...\nO.....\n...o..\n...g..\n..#...\n.....G"
+    },
+    {
+      "id": "L50",
+      "name": "Thread East",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_thread_east_gray",
+      "walls": [
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 0,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "thread_east_gray",
+      "ascii": "...##.\nG.....\n......\n.#o...\n......\n....Og"
+    },
+    {
+      "id": "L51",
+      "name": "Dual Cross",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_dual_cross_black",
+      "walls": [
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 4,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 3,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "dual_cross_black",
+      "ascii": ".#....\n......\n....#.\n..ob..\n....B.\n..O..#"
+    }
+  ],
+  "teaches": {
+    "L49": "Color Step \u2014 gray mismatch solid is the setup step; vacate-row habits miss",
+    "L50": "Thread East \u2014 east corridor onto the mid house",
+    "L51": "Dual Cross \u2014 orange/black color-cross dual brake"
+  },
+  "solver": {
+    "min_slides": {
+      "L49": 9,
+      "L50": 9,
+      "L51": 9
+    }
+  }
+}

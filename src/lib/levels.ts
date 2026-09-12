@@ -14,6 +14,7 @@ import chapter3j from "../../data/levels/CHAPTER3_PUZZLE_L37_L39.json";
 import chapter3k from "../../data/levels/CHAPTER3_PUZZLE_L40_L42.json";
 import chapter3l from "../../data/levels/CHAPTER3_PUZZLE_L43_L45.json";
 import chapter3m from "../../data/levels/CHAPTER3_PUZZLE_L46_L48.json";
+import chapter3n from "../../data/levels/CHAPTER3_PUZZLE_L49_L51.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -67,6 +68,9 @@ const HEADLINES: Record<string, string> = {
   L46: "DUAL BRAKE",
   L47: "SOLID WEST",
   L48: "VACATE ROW",
+  L49: "COLOR STEP",
+  L50: "THREAD EAST",
+  L51: "DUAL CROSS",
 };
 
 const HINTS: Record<string, string> = {
@@ -117,6 +121,9 @@ const HINTS: Record<string, string> = {
   L46: "Two brakes in sequence — color-cross. Dual habits from one park miss both.",
   L47: "The black house is the west brake. Dual-brake habits from L46 miss the stop.",
   L48: "Leave the house row, then the west solid. L47's solid-west slide goes through — not L31's Vacate West.",
+  L49: "Gray mismatch solid is the setup step. Vacate-row habits from L48 miss.",
+  L50: "Thread east onto the mid house. Color-step habits from L49 miss the corridor.",
+  L51: "Orange/black color-cross dual brake. Thread-east habits from L50 miss both stops.",
 };
 
 type RawLevel = {
@@ -186,6 +193,7 @@ const authored = [
   ...chapter3k.levels,
   ...chapter3l.levels,
   ...chapter3m.levels,
+  ...chapter3n.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
