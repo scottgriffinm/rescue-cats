@@ -1256,21 +1256,21 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L62: {
     size: 6,
-    N: 11,
+    N: 12,
     colorLocks: true,
     colors: true,
     walls: [
-      [0, 2],
+      [2, 5],
       [3, 3],
-      [1, 4],
+      [0, 0],
     ],
     cats: [
-      ["cat_orange", 1, 1],
-      ["cat_gray", 5, 1],
+      ["cat_orange", 2, 2],
+      ["cat_gray", 4, 0],
     ],
     gates: [
-      ["gate_orange", 2, 3],
-      ["gate_gray", 4, 3],
+      ["gate_orange", 1, 1],
+      ["gate_gray", 3, 4],
     ],
   },
   L63: {
@@ -1895,15 +1895,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "w"],
   ],
   L62: [
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_gray", "s"],
-    ["cat_orange", "e"],
-    ["cat_gray", "n"],
+    ["cat_orange", "n"],
     ["cat_orange", "w"],
     ["cat_orange", "s"],
-    ["cat_orange", "e"],
     ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
   ],
   L63: [
     ["cat_orange", "s"],
@@ -5790,20 +5790,36 @@ for (const level of LEVELS) {
   const l62 = LEVELS.find((level) => level.id === "L62")!;
   const l63 = LEVELS.find((level) => level.id === "L63")!;
   if (l61.name !== "Span Cut") throw new Error("L61 must be Span Cut");
-  if (l62.name !== "Mirror Gap") throw new Error("L62 must be Mirror Gap");
+  if (l62.name !== "Knight Cut") throw new Error("L62 must be Knight Cut");
   if (l63.name !== "Far Peg") throw new Error("L63 must be Far Peg");
   if (/\b(hold|park|close|thread)\b/i.test([l61.name, l62.name, l63.name].join(" "))) {
     throw new Error("L61–L63 must not be Hold*/Park*/Close/Thread*");
   }
   const packNames = (chapter3rPack.levels as { id: string; name: string }[]).map((row) => `${row.id}:${row.name}`);
-  if (packNames.join(",") !== "L61:Span Cut,L62:Mirror Gap,L63:Far Peg") {
+  if (packNames.join(",") !== "L61:Span Cut,L62:Knight Cut,L63:Far Peg") {
     throw new Error(`Bean pack names drifted: ${packNames.join(",")}`);
   }
   const yard = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yard.match(/const bean =/g) || []).length !== 1) throw new Error("YardScene must declare bean once");
   if ((yard.match(/\{bean \?/g) || []).length !== 1) throw new Error("YardScene must render bean once");
   if (TUTORIAL_RESCUES.length < 20) throw new Error("TUTORIAL_RESCUES must include through Bean (20)");
-  console.log("Bean @ onClear(60) ok · tiny toasted loafs + L61–L63 wired (Span Cut / Mirror Gap / Far Peg); parade finale");
+  console.log("Bean @ onClear(60) ok · tiny toasted loafs + L61–L63 wired (Span Cut / Knight Cut / Far Peg); parade finale");
+}
+
+
+{
+  const l62r = LEVELS.find((row) => row.id === "L62");
+  const l56r = LEVELS.find((row) => row.id === "L56");
+  if (!l62r || !l56r) throw new Error("missing L56/L62");
+  if (l62r.name !== "Knight Cut") throw new Error(`L62 must be Knight Cut, got ${l62r.name}`);
+  const g62 = [...l62r.gates].map((gate) => `${gate.x},${gate.y}`).sort().join("|");
+  const g56 = [...l56r.gates].map((gate) => `${gate.x},${gate.y}`).sort().join("|");
+  if (g62 === g56) throw new Error("L62 gates must not match L56 Color Fork");
+  if (g62 !== "1,1|3,4") throw new Error(`L62 Knight Cut gates must be (1,1)/(3,4), got ${g62}`);
+  if (/mirror gap|\bhold\b|\bpark\b|\bclose\b|\bthread\b/i.test(l62r.name)) {
+    throw new Error("L62 must not reuse Mirror Gap / Hold*/Park*/Thread*");
+  }
+  console.log("Rival rewrite L62 ok · Knight Cut (1,1)/(3,4)");
 }
 
 console.log("All authored boards ok");
