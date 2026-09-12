@@ -5,12 +5,26 @@ import { friendById } from "@/lib/collection";
 import type { FriendInstance } from "@/lib/types";
 
 const ROOSTS = [
-  { left: "62%", top: "58%" },
-  { left: "48%", top: "70%" },
+  { left: "8%", top: "18%" },
+  { left: "28%", top: "14%" },
+  { left: "48%", top: "16%" },
+  { left: "68%", top: "14%" },
+  { left: "86%", top: "22%" },
+  { left: "4%", top: "34%" },
+  { left: "24%", top: "38%" },
+  { left: "42%", top: "32%" },
+  { left: "60%", top: "30%" },
+  { left: "80%", top: "36%" },
+  { left: "14%", top: "52%" },
+  { left: "36%", top: "48%" },
+  { left: "54%", top: "46%" },
+  { left: "74%", top: "50%" },
+  { left: "88%", top: "54%" },
+  { left: "8%", top: "68%" },
+  { left: "30%", top: "72%" },
+  { left: "52%", top: "70%" },
   { left: "72%", top: "66%" },
-  { left: "28%", top: "68%" },
-  { left: "80%", top: "58%" },
-  { left: "16%", top: "56%" },
+  { left: "44%", top: "80%" },
 ];
 
 
@@ -162,7 +176,7 @@ export function YardScene({
       {mist ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "20%", top: "24%" }}
+          style={{ width: roostW, left: "8%", top: "18%" }}
         >
           <FriendSprite
             kit={friendById(mist.friendId)?.phenotype.artKit ?? "mist"}
@@ -186,7 +200,7 @@ export function YardScene({
       {pepper ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "64%", top: "20%" }}
+          style={{ width: roostW, left: "68%", top: "14%" }}
         >
           <FriendSprite
             kit={friendById(pepper.friendId)?.phenotype.artKit ?? "pepper"}
@@ -210,7 +224,7 @@ export function YardScene({
       {noodle ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "40%", top: "78%" }}
+          style={{ width: roostW, left: "32%", top: "80%" }}
         >
           <FriendSprite
             kit={friendById(noodle.friendId)?.phenotype.artKit ?? "noodle"}
@@ -234,7 +248,7 @@ export function YardScene({
       {clover ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "56%", top: "72%" }}
+          style={{ width: roostW, left: "54%", top: "74%" }}
         >
           <FriendSprite
             kit={friendById(clover.friendId)?.phenotype.artKit ?? "clover"}
@@ -258,7 +272,7 @@ export function YardScene({
       {ash ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "8%", top: "72%" }}
+          style={{ width: roostW, left: "6%", top: "70%" }}
         >
           <FriendSprite
             kit={friendById(ash.friendId)?.phenotype.artKit ?? "ash"}
@@ -282,7 +296,7 @@ export function YardScene({
       {oak ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "74%", top: "48%" }}
+          style={{ width: roostW, left: "64%", top: "40%" }}
         >
           <FriendSprite
             kit={friendById(oak.friendId)?.phenotype.artKit ?? "oak"}
@@ -305,7 +319,7 @@ export function YardScene({
       {dumpling ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "86%", top: "52%" }}
+          style={{ width: roostW, left: "84%", top: "54%" }}
         >
           <FriendSprite
             kit={friendById(dumpling.friendId)?.phenotype.artKit ?? "dumpling"}
@@ -328,7 +342,7 @@ export function YardScene({
       {stripe ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "44%", top: "48%" }}
+          style={{ width: roostW, left: "38%", top: "50%" }}
         >
           <FriendSprite
             kit={friendById(stripe.friendId)?.phenotype.artKit ?? "stripe"}
@@ -351,7 +365,7 @@ export function YardScene({
       {cloud ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "28%", top: "42%" }}
+          style={{ width: roostW, left: "22%", top: "40%" }}
         >
           <FriendSprite
             kit={friendById(cloud.friendId)?.phenotype.artKit ?? "cloud"}
@@ -374,7 +388,7 @@ export function YardScene({
       {donna ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "52%", top: "36%" }}
+          style={{ width: roostW, left: "46%", top: "34%" }}
         >
           <FriendSprite
             kit={friendById(donna.friendId)?.phenotype.artKit ?? "donna"}
@@ -397,7 +411,7 @@ export function YardScene({
       {sunny ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "18%", top: "28%" }}
+          style={{ width: roostW, left: "86%", top: "24%" }}
         >
           <FriendSprite
             kit={friendById(sunny.friendId)?.phenotype.artKit ?? "sunny"}
@@ -420,7 +434,7 @@ export function YardScene({
       {nigel ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "62%", top: "44%" }}
+          style={{ width: roostW, left: "56%", top: "28%" }}
         >
           <FriendSprite
             kit={friendById(nigel.friendId)?.phenotype.artKit ?? "nigel"}
@@ -443,7 +457,7 @@ export function YardScene({
       {bean ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "40%", top: "22%" }}
+          style={{ width: roostW, left: "30%", top: "14%" }}
         >
           <FriendSprite
             kit={friendById(bean.friendId)?.phenotype.artKit ?? "bean"}
@@ -468,7 +482,7 @@ export function YardScene({
       {shadow ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "6%", top: "34%" }}
+          style={{ width: roostW, left: "4%", top: "32%" }}
         >
           <FriendSprite
             kit={friendById(shadow.friendId)?.phenotype.artKit ?? "shadow"}
@@ -492,7 +506,7 @@ export function YardScene({
       {pumpkin ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "82%", top: "38%" }}
+          style={{ width: roostW, left: "78%", top: "34%" }}
         >
           <FriendSprite
             kit={friendById(pumpkin.friendId)?.phenotype.artKit ?? "pumpkin"}
@@ -516,7 +530,7 @@ export function YardScene({
       {ghost ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "50%", top: "30%" }}
+          style={{ width: roostW, left: "48%", top: "18%" }}
         >
           <FriendSprite
             kit={friendById(ghost.friendId)?.phenotype.artKit ?? "ghost"}
@@ -540,7 +554,7 @@ export function YardScene({
       {tux ? (
         <div
           className="yard-drop absolute"
-          style={{ width: roostW, left: "70%", top: "64%" }}
+          style={{ width: roostW, left: "72%", top: "64%" }}
         >
           <FriendSprite
             kit={friendById(tux.friendId)?.phenotype.artKit ?? "tuxedo"}

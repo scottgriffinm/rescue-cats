@@ -7,6 +7,15 @@ import type { FriendInstance } from "@/lib/types";
 
 export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
   const [tab, setTab] = useState<"friends" | "met">("friends");
+  const namedIds = new Set(friends.map((friend) => friend.friendId));
+  const namedInOrder = TUTORIAL_RESCUES.filter((entry) => namedIds.has(entry.friendId));
+  // Met: named friends + at most next 1–2 unmet upcoming (not the full ··· wall).
+  const upcomingUnmet = TUTORIAL_RESCUES.filter((entry) => !namedIds.has(entry.friendId)).slice(
+    0,
+    2,
+  );
+  const metEntries = [...namedInOrder, ...upcomingUnmet];
+
   return (
     <div className="px-5 pb-1">
       <div className="mb-2 flex justify-center gap-3 font-display text-xs tracking-wide">
@@ -47,7 +56,7 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
         </ul>
       ) : (
         <ul className="flex flex-nowrap justify-center gap-0 overflow-x-auto">
-          {TUTORIAL_RESCUES.map((entry) => {
+          {metEntries.map((entry) => {
             const named = friends.find((friend) => friend.friendId === entry.friendId);
             return (
               <li
