@@ -76,15 +76,26 @@ export function YardScreen() {
           </span>
         </div>
         <p className="mt-2 text-sm text-ink/55">
-          {save.friends.length === 0
-            ? "Three little slides. Then you get to meet a new friend."
-            : allDone
-              ? "Everyone who needed saving is napping in the sun."
-              : save.friends.length >= 2
-                ? `${save.friends.map((friend) => friend.name).join(" & ")} are home. Tomorrow: ${upcoming.name}.`
-                : save.unlockFlags.mangoNamed
-                  ? `${save.friends[0]?.name ?? "Your friend"} is home. Tomorrow: ${upcoming.name}.`
-                  : `${save.friends.length} friend${save.friends.length === 1 ? "" : "s"} on the porch.`}
+          {(() => {
+            const beanFriend = save.friends.find((friend) => friend.friendId === "friend_020");
+            const beanNamed = Boolean(beanFriend);
+            if (save.friends.length === 0) {
+              return "Three little slides. Then you get to meet a new friend.";
+            }
+            if (beanNamed && allDone) {
+              return `${beanFriend!.name}'s home. The whole parade is napping in the sun.`;
+            }
+            if (allDone) {
+              return "Everyone who needed saving is napping in the sun.";
+            }
+            if (save.friends.length === 1) {
+              return `${save.friends[0].name} is home. Tomorrow: ${upcoming.name}.`;
+            }
+            if (save.friends.length < 6) {
+              return `${save.friends.map((friend) => friend.name).join(" & ")} are home. Tomorrow: ${upcoming.name}.`;
+            }
+            return `${save.friends.length} friends on the porch. Tomorrow: ${upcoming.name}.`;
+          })()}
         </p>
       </header>
 
@@ -150,9 +161,9 @@ export function YardScreen() {
           className="inline-flex h-11 w-full items-center justify-center rounded-[10px] bg-ink px-5 font-display text-base tracking-wide text-paper shadow-[0_3px_0_#2B2A28]"
         >
           {cleared === 0
-            ? "Walk Mango home"
+            ? "Start the first rescue"
             : allDone
-              ? "Replay the routes"
+              ? "Replay a favorite route"
               : `Continue · ${upcoming.name}`}
         </Link>
 

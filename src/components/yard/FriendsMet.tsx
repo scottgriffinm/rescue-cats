@@ -56,7 +56,7 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
               >
                 <FriendSprite kit={entry.phenotype.artKit} size={48} className="mx-auto h-6 w-6" />
                 <p className="truncate font-display text-[9px]">
-                  {named ? named.name : "???"}
+                  {named ? named.name : "···"}
                 </p>
               </li>
             );

@@ -3511,17 +3511,17 @@ for (const level of LEVELS) {
   }
   const artSvg: Record<string, string> = {
     "public/assets/furniture/scratcher.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="48" height="72" viewBox="0 0 48 72" fill="none">
-  <ellipse cx="24" cy="64" rx="16" ry="5" fill="#D4C6B4" stroke="#2B2A28" stroke-width="2.5"/>
-  <rect x="16" y="14" width="16" height="48" rx="4" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5"/>
-  <path d="M18 22 H30 M18 30 H30 M18 38 H30 M18 46 H30" stroke="#2B2A28" stroke-width="1.5" stroke-linecap="round" opacity="0.45"/>
-  <ellipse cx="24" cy="14" rx="9" ry="4" fill="#D9CBB8" stroke="#2B2A28" stroke-width="2"/>
+  <ellipse cx="24" cy="64" rx="16" ry="5" fill="#B89870" stroke="#2B2A28" stroke-width="2.5"/>
+  <rect x="16" y="14" width="16" height="48" rx="4" fill="#C4A882" stroke="#2B2A28" stroke-width="2.5"/>
+  <path d="M18 22 H30 M18 30 H30 M18 38 H30 M18 46 H30" stroke="#F0B429" stroke-width="1.6" stroke-linecap="round"/>
+  <ellipse cx="24" cy="14" rx="9" ry="4" fill="#B89870" stroke="#2B2A28" stroke-width="2"/>
 </svg>`,
     "public/assets/furniture/miniTree.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="72" height="96" viewBox="0 0 72 96" fill="none">
-  <ellipse cx="36" cy="88" rx="22" ry="6" fill="#D4C6B4" stroke="#2B2A28" stroke-width="2.5"/>
-  <rect x="30" y="36" width="12" height="50" rx="3" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5"/>
-  <ellipse cx="36" cy="58" rx="20" ry="7" fill="#EDE4D8" stroke="#2B2A28" stroke-width="2.5"/>
-  <ellipse cx="36" cy="34" rx="16" ry="6" fill="#F7F0E6" stroke="#2B2A28" stroke-width="2.5"/>
-  <ellipse cx="36" cy="30" rx="10" ry="4" fill="#E8A89A" stroke="#2B2A28" stroke-width="2" opacity="0.85"/>
+  <ellipse cx="36" cy="88" rx="22" ry="6" fill="#B89870" stroke="#2B2A28" stroke-width="2.5"/>
+  <rect x="30" y="36" width="12" height="50" rx="3" fill="#C4A882" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="36" cy="58" rx="20" ry="7" fill="#E8A89A" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="36" cy="34" rx="16" ry="6" fill="#E8C89A" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="36" cy="30" rx="10" ry="4" fill="#D96B4A" stroke="#2B2A28" stroke-width="2"/>
 </svg>`,
     "public/assets/furniture/yarnSwing.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
   <path d="M18 80 L44 22 L52 22 L28 80 Z" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/>
@@ -3633,9 +3633,9 @@ for (const level of LEVELS) {
     throw new Error(`shop SKUs drifted after Biscuit: ${shopStill.join(",")}`);
   }
   const cushionSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="56" viewBox="0 0 96 56" fill="none">
-  <ellipse cx="48" cy="36" rx="38" ry="14" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5"/>
+  <ellipse cx="48" cy="36" rx="38" ry="14" fill="#C4B49A" stroke="#2B2A28" stroke-width="2.5"/>
   <ellipse cx="48" cy="28" rx="36" ry="14" fill="#F0B429" stroke="#2B2A28" stroke-width="2.5"/>
-  <ellipse cx="48" cy="26" rx="22" ry="7" fill="#F7F0E6" stroke="#2B2A28" stroke-width="2"/>
+  <ellipse cx="48" cy="26" rx="22" ry="7" fill="#F8D56A" stroke="#2B2A28" stroke-width="2"/>
   <path d="M32 26 Q48 20 64 26" fill="none" stroke="#2B2A28" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
 </svg>`;
   const gotCushion = readFileSync(resolve("public/assets/furniture/sunCushion.svg"), "utf8").trim();
@@ -5766,8 +5766,8 @@ for (const level of LEVELS) {
   const pepperArt = readFileSync(resolve("public/assets/cats/pepper_loaf_72.svg"), "utf8");
   if (beanArt === gingerArt) throw new Error("Bean loaf must not be a Mango/ginger clone");
   if (beanArt === pepperArt) throw new Error("Bean loaf must not be a Pepper clone");
-  if (!beanArt.includes("#C47A3A")) throw new Error("Bean loaf must use toasted body #C47A3A");
-  if (!beanArt.includes("#7A3F1E")) throw new Error("Bean loaf must show kidney patches #7A3F1E");
+  if (!beanArt.includes("#A85C2C")) throw new Error("Bean loaf must use polished body #A85C2C");
+  if (!beanArt.includes("#4A2412")) throw new Error("Bean loaf must show dark kidneys #4A2412");
   if (paradeClearForLevel("L60") !== 60) throw new Error("L60 must map to parade clear 60");
   if (paradeClearForLevel("L61") !== 61) throw new Error("L61 must map to parade clear 61");
   if (paradeClearForLevel("L63") !== 63) throw new Error("L63 must map to parade clear 63");
@@ -5820,6 +5820,53 @@ for (const level of LEVELS) {
     throw new Error("L62 must not reuse Mirror Gap / Hold*/Park*/Thread*");
   }
   console.log("Rival rewrite L62 ok · Knight Cut (1,1)/(3,4)");
+}
+
+
+{
+  // Sister-ready polish — yard glare + Bean contrast + furniture nests + copy.
+  const yard = readFileSync(resolve("public/assets/ui/yard_iso.svg"), "utf8");
+  if (!yard.includes("#8FAF8A")) throw new Error("yard lawn must be solid sage #8FAF8A");
+  if (yard.includes('opacity="0.34"') || yard.includes("opacity='0.34'")) {
+    throw new Error("yard lawn must not use 34% cream wash");
+  }
+  if (!yard.includes("#EFE4D4")) throw new Error("porch must use paper-deep #EFE4D4");
+  const beanArt = readFileSync(resolve("public/assets/cats/bean_loaf_72.svg"), "utf8");
+  if (!beanArt.includes("#A85C2C") || !beanArt.includes("#4A2412")) {
+    throw new Error("Bean polish must use #A85C2C body + #4A2412 kidneys");
+  }
+  const box = readFileSync(resolve("public/assets/furniture/boxBed.svg"), "utf8");
+  if (box.includes("#F7F0E6")) throw new Error("boxBed must drop paper-white nest #F7F0E6");
+  const continueSheet = readFileSync(resolve("src/components/puzzle/ContinueSheet.tsx"), "utf8");
+  if (/ad stub/i.test(continueSheet)) throw new Error("ContinueSheet must not say ad stub");
+  if (!continueSheet.includes("Soft miss")) throw new Error("ContinueSheet title must be Soft miss");
+  if (!continueSheet.includes("Back to the porch")) throw new Error("ContinueSheet yard CTA must say porch");
+  const yardScreen = readFileSync(resolve("src/components/yard/YardScreen.tsx"), "utf8");
+  if (yardScreen.includes("Walk Mango home")) throw new Error("cold CTA must be Start the first rescue");
+  if (!yardScreen.includes("Start the first rescue")) throw new Error("missing Start the first rescue CTA");
+  if (!yardScreen.includes("Replay a favorite route")) throw new Error("missing Replay a favorite route CTA");
+  if (!yardScreen.includes("whole parade is napping")) throw new Error("missing Bean finale porch line");
+  const friendsMet = readFileSync(resolve("src/components/yard/FriendsMet.tsx"), "utf8");
+  if (friendsMet.includes('"???"')) throw new Error("Met unmet label must be ··· not ???");
+  if (friendsMet.includes('"···"') === false && !friendsMet.includes("···")) {
+    throw new Error("Met unmet label must use ···");
+  }
+  // ban inventing friend_021 (scan gameplay sources only — this file names the ban)
+  const srcHit = [
+    "src/lib/collection.ts",
+    "src/components/yard/YardScreen.tsx",
+    "src/components/yard/YardScene.tsx",
+    "src/lib/levels.ts",
+  ].flatMap((file) => {
+    const text = readFileSync(resolve(file), "utf8");
+    return /friend_021/.test(text) ? [file] : [];
+  });
+  if (srcHit.length) throw new Error(`friend_021 must not appear in ${srcHit.join(",")}`);
+  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[63] || SLICE_UNLOCKS[66]) {
+    throw new Error("no unlocks past Bean@60");
+  }
+  if (TUTORIAL_RESCUES.length !== 20) throw new Error("TUTORIAL_RESCUES must stay at 20 (through Bean)");
+  console.log("Sister polish ok · yard sage · Bean contrast · furniture nests · copy");
 }
 
 console.log("All authored boards ok");
