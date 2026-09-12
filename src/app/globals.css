@@ -284,6 +284,50 @@ a {
   }
 }
 
+
+.comfort-pulse {
+  animation: comfort-pulse 520ms cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+.furn-place-pop {
+  animation: furn-place-pop 560ms cubic-bezier(0.22, 1.2, 0.32, 1) both;
+  transform-origin: center bottom;
+}
+
+.shop-leave {
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  pointer-events: none;
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+
+@keyframes comfort-pulse {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes furn-place-pop {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.84);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.07);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
