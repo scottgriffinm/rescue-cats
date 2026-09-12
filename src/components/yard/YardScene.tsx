@@ -49,7 +49,6 @@ export function YardScene({
   const cloud = friends.find((friend) => friend.friendId === "friend_016");
   const donna = friends.find((friend) => friend.friendId === "friend_017");
   const sunny = friends.find((friend) => friend.friendId === "friend_018");
-  const sunny = friends.find((friend) => friend.friendId === "friend_018");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -397,31 +396,6 @@ export function YardScene({
         </div>
       ) : null}
 
-
-
-      {sunny ? (
-        <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "36%", top: "18%" }}
-        >
-          <FriendSprite
-            kit={friendById(sunny.friendId)?.phenotype.artKit ?? "sunny"}
-            size={72}
-            className="h-[72px] w-[72px]"
-          />
-          {bangFriendId === sunny.instanceId ? (
-            <button
-              type="button"
-              onClick={() => onBang?.(sunny.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
-              aria-label={`${sunny.name} has something to say`}
-            >
-              <UiIcon name="bubble_bang" className="h-7 w-7" />
-            </button>
-          ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{sunny.name}</p>
-        </div>
-      ) : null}
 
       {shadow ? (
         <div
