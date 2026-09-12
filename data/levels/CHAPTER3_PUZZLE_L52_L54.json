@@ -1,0 +1,199 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP \u2014 Donna@51 + L52\u2013L54",
+  "source": "Chapter 3 after Donna@51",
+  "chapter": 3,
+  "title": "Chapter 3 boards L52\u2013L54 (Donna@51)",
+  "notes": "After L51 Offset Brake \u2192 Donna@51 \u2192 L52\u2013L54. L10 off-path. No Hold*/Park*/Close. Habit breaks off Offset Brake. Collection owns Donna bang; Art owns donna-51 pack. Sunny@54, Nigel@57, Bean@60 gated.",
+  "levels": [
+    {
+      "id": "L52",
+      "name": "Thread North",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_thread_north_gray",
+      "walls": [
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 3,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "thread_north_gray",
+      "ascii": "......\n...#..\n...G..\n..o...\n...#..\n.#..Og"
+    },
+    {
+      "id": "L53",
+      "name": "Color Latch",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_color_latch_gray",
+      "walls": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 3
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 4,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 2,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "color_latch_gray",
+      "ascii": ".....#\n......\n..go..\nO...#.\n....G.\n.....#"
+    },
+    {
+      "id": "L54",
+      "name": "Swap Brake",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_swap_brake_black",
+      "walls": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 0,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 3,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "swap_brake_black",
+      "ascii": "......\n.#....\n......\n..ob..\nB..O##\n......"
+    }
+  ],
+  "teaches": {
+    "L52": "Thread North \u2014 north corridor onto the mid house; Offset Brake habits miss",
+    "L53": "Color Latch \u2014 gray mismatch solid latches the stop",
+    "L54": "Swap Brake \u2014 orange/black swap who brakes whom across the cross"
+  },
+  "solver": {
+    "min_slides": {
+      "L52": 9,
+      "L53": 9,
+      "L54": 9
+    }
+  }
+}

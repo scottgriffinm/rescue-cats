@@ -15,6 +15,7 @@ import chapter3k from "../../data/levels/CHAPTER3_PUZZLE_L40_L42.json";
 import chapter3l from "../../data/levels/CHAPTER3_PUZZLE_L43_L45.json";
 import chapter3m from "../../data/levels/CHAPTER3_PUZZLE_L46_L48.json";
 import chapter3n from "../../data/levels/CHAPTER3_PUZZLE_L49_L51.json";
+import chapter3o from "../../data/levels/CHAPTER3_PUZZLE_L52_L54.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -71,6 +72,9 @@ const HEADLINES: Record<string, string> = {
   L49: "COLOR STEP",
   L50: "LATCH THROUGH",
   L51: "OFFSET BRAKE",
+  L52: "THREAD NORTH",
+  L53: "COLOR LATCH",
+  L54: "SWAP BRAKE",
 };
 
 const HINTS: Record<string, string> = {
@@ -124,6 +128,9 @@ const HINTS: Record<string, string> = {
   L49: "Gray mismatch solid is the setup step. Vacate-row habits from L48 miss.",
   L50: "Latch through the gray solid. Thread-east habits miss the corridor.",
   L51: "Offset brakes — houses are not adjacent. Dual-cross habits miss the gap.",
+  L52: "Thread north past the gray solid. Offset-brake habits from L51 miss the corridor.",
+  L53: "Color latch on the gray house. Thread-north habits miss the stop.",
+  L54: "Swap brake — black house after the color latch. Adjacent dual habits miss.",
 };
 
 type RawLevel = {
@@ -194,6 +201,7 @@ const authored = [
   ...chapter3l.levels,
   ...chapter3m.levels,
   ...chapter3n.levels,
+  ...chapter3o.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

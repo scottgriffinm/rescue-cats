@@ -1,0 +1,35 @@
+{
+  "version": "chapter3_donna_bang",
+  "status": "READY",
+  "friend_id": "friend_017",
+  "unlock_clear": 51,
+  "personality": "Manager",
+  "display_line": "Has opinions about the yard layout.",
+  "art": {
+    "loaf_48": "/assets/cats/donna_loaf_48.svg",
+    "loaf_72": "/assets/cats/donna_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "donna"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Donna",
+      "Karen",
+      "Helen"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_017": [
+      "{Name}: Has opinions about the yard layout.",
+      "{Name}: Already rearranged the box. The old way was wrong."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 51,
+    "sku_id": null,
+    "note": "Clear 51 gifts nothing \u2014 same cadence as Ink @ 6 through Cloud @ 48. Box stays Mango@3. Sun Cushion stays Biscuit@9. Sunny@54, Nigel@57, and Bean@60 stay later. Nigel@57 owns the other silly-human tux lane \u2014 do not reuse Nigel/Steve/Greg."
+  }
+}

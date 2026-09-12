@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="donna-loaf-72">
+      <ellipse cx="24" cy="28" rx="16.5" ry="12"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="28" rx="16.5" ry="12" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#donna-loaf-72)">
+    <path d="M24 16 L24 40 L41 40 L41 16 Z" fill="#E8A89A"/>
+    <ellipse cx="15" cy="33" rx="5.2" ry="4.2" fill="#5A5E6B"/>
+    <ellipse cx="32" cy="24" rx="4.4" ry="3.2" fill="#D38B5D"/>
+  </g>
+  <path d="M11.5 20 C11 14 15.2 12 17.4 16.4" fill="#FFF8F0" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36.5 20 C37 14 32.8 12 30.6 16.4" fill="#E8A89A" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="33.5" rx="6.4" ry="4.4" fill="#FFF8F0"/>
+  <circle cx="18" cy="26" r="1.6" fill="#2B2A28"/>
+  <circle cx="28" cy="26" r="1.6" fill="#2B2A28"/>
+  <path d="M39.5 33 C42.5 31.5 44 35 41 36.5" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
+</svg>

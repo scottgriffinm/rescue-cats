@@ -45,6 +45,9 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 | L49 | `CHAPTER3_PUZZLE_L49_L51.json` / `L49.json` | Color Step — gray mismatch solid is the setup step | yes · mismatch solid |
 | L50 | `CHAPTER3_PUZZLE_L49_L51.json` / `L50.json` | Latch Through — not Thread East / not compass flip | yes · mismatch solid |
 | L51 | `CHAPTER3_PUZZLE_L49_L51.json` / `L51.json` | Offset Brake — gates not adjacent; not Dual Cross | yes · mismatch solid |
+| L52 | `CHAPTER3_PUZZLE_L52_L54.json` / `L52.json` | Thread North — gray corridor after Offset Brake | yes · mismatch solid |
+| L53 | `CHAPTER3_PUZZLE_L52_L54.json` / `L53.json` | Color Latch — gray house stop after Thread North | yes · mismatch solid |
+| L54 | `CHAPTER3_PUZZLE_L52_L54.json` / `L54.json` | Swap Brake — black house; not Dual Cross | yes · mismatch solid |
 
 `CHAPTER3_PUZZLE_L11_L12.json` is the **campaign import** after the locked L4–L9 pack. `CHAPTER3_PUZZLE_L13_L15.json` continues after L12. `CHAPTER3_PUZZLE_L16_L18.json` continues after L15. `CHAPTER3_PUZZLE_L19_L21.json` continues after L18. `CHAPTER3_PUZZLE_L22_L24.json` continues after L21. `CHAPTER3_PUZZLE_L25_L27.json` continues after L24. `CHAPTER3_PUZZLE_L28_L30.json` continues after L27. `CHAPTER3_PUZZLE_L31_L33.json` continues after L30. `CHAPTER3_PUZZLE_L34_L36.json` continues after L33. `CHAPTER3_PUZZLE_L37_L39.json` continues after L36. `CHAPTER3_PUZZLE_L40_L42.json` continues after L39. `CHAPTER3_PUZZLE_L43_L45.json` continues after L42. `CHAPTER3_PUZZLE_L46_L48.json` continues after L45. `CHAPTER3_PUZZLE_L49_L51.json` continues after L48. Pink plays L11 next after L9.
 
