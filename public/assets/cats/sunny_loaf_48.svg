@@ -1,5 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="sunny-loaf-48">
+      <ellipse cx="24" cy="28" rx="16" ry="12"/>
+    </clipPath>
+  </defs>
   <ellipse cx="24" cy="28" rx="16" ry="12" fill="#E59A3C" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#sunny-loaf-48)" stroke="#F0B429" stroke-width="1.7" stroke-linecap="round">
+    <path d="M24 18 L24 23"/>
+    <path d="M18.2 20.2 L21.2 23.4"/>
+    <path d="M29.8 20.2 L26.8 23.4"/>
+    <path d="M16.5 25.5 L21 26.2"/>
+    <path d="M31.5 25.5 L27 26.2"/>
+  </g>
   <path d="M12 20 C12 14 16 12 18 16" fill="#C97828" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M36 20 C36 14 32 12 30 16" fill="#C97828" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <ellipse cx="24" cy="32.5" rx="8.2" ry="6" fill="#F0B429"/>

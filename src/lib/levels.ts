@@ -76,9 +76,9 @@ const HEADLINES: Record<string, string> = {
   L52: "GATE WEAVE",
   L53: "COLOR LATCH",
   L54: "SPLIT LATCH",
-  L55: "RIM LATCH",
+  L55: "HOOK ROUTE",
   L56: "COLOR FORK",
-  L57: "ANCHOR BRAKE",
+  L57: "CORNER BRACE",
 };
 
 const HINTS: Record<string, string> = {
@@ -135,9 +135,9 @@ const HINTS: Record<string, string> = {
   L52: "Weave through offset gray gates. Thread-north habits miss the weave.",
   L53: "Color latch on the gray house. Gate-weave habits miss the stop.",
   L54: "Split latch — houses are not adjacent. Swap/Dual habits miss the gap.",
-  L55: "Rim latch on the gray edge. Split-latch habits miss the rim.",
+  L55: "Hook the gray route. Rim-latch / Color-step habits miss the hook.",
   L56: "Color fork — pick the gray branch. Rim-latch habits miss the fork.",
-  L57: "Anchor brake on the black house. Offset gates — Dual habits miss.",
+  L57: "Corner brace on far corners — not Split Latch twin. Dual habits miss.",
 };
 
 type RawLevel = {

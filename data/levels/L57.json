@@ -1,39 +1,39 @@
 {
   "id": "L57",
-  "name": "Anchor Brake",
+  "name": "Corner Brace",
   "width": 6,
   "height": 6,
   "moveBudget": 12,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_anchor_brake_black",
+  "templateId": "LT02_LT08_corner_brace_black",
   "walls": [
     {
       "x": 3,
       "y": 1
     },
     {
-      "x": 4,
-      "y": 5
-    },
-    {
       "x": 0,
       "y": 2
+    },
+    {
+      "x": 5,
+      "y": 1
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 3,
-      "y": 0,
+      "x": 2,
+      "y": 2,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_black",
       "x": 5,
-      "y": 4,
+      "y": 3,
       "color": "black",
       "colorId": "color_black"
     }
@@ -41,18 +41,18 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 1,
-      "y": 2,
+      "x": 0,
+      "y": 1,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_black",
-      "x": 4,
+      "x": 5,
       "y": 4,
       "color": "black",
       "colorId": "color_black"
     }
   ],
-  "teach": "anchor_brake_black"
+  "teach": "corner_brace_black"
 }
