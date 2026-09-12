@@ -26,7 +26,7 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
         </button>
       </div>
       {tab === "friends" ? (
-        <ul className="flex flex-nowrap justify-center gap-0">
+        <ul className="flex flex-nowrap justify-center gap-0 overflow-x-auto">
           {friends.length === 0 ? (
             <li className="text-xs text-ink/40">Friends show up after a few clears.</li>
           ) : (
@@ -46,7 +46,7 @@ export function FriendsMet({ friends }: { friends: FriendInstance[] }) {
           )}
         </ul>
       ) : (
-        <ul className="flex flex-nowrap justify-center gap-0">
+        <ul className="flex flex-nowrap justify-center gap-0 overflow-x-auto">
           {TUTORIAL_RESCUES.map((entry) => {
             const named = friends.find((friend) => friend.friendId === entry.friendId);
             return (

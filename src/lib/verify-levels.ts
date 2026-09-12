@@ -1001,40 +1001,40 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L50: {
     size: 6,
-    N: 12,
-    colorLocks: true,
-    colors: true,
-    walls: [
-      [4, 0],
-      [1, 3],
-      [3, 0],
-    ],
-    cats: [
-      ["cat_orange", 4, 5],
-      ["cat_gray", 0, 1],
-    ],
-    gates: [
-      ["gate_orange", 2, 3],
-      ["gate_gray", 5, 5],
-    ],
-  },
-  L51: {
-    size: 6,
     N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 0],
-      [5, 5],
-      [4, 2],
+      [3, 1],
+      [0, 2],
+      [4, 0],
     ],
     cats: [
-      ["cat_orange", 2, 5],
-      ["cat_black", 4, 4],
+      ["cat_orange", 1, 2],
+      ["cat_gray", 0, 5],
     ],
     gates: [
-      ["gate_orange", 2, 3],
-      ["gate_black", 3, 3],
+      ["gate_orange", 2, 2],
+      ["gate_gray", 2, 3],
+    ],
+  },
+  L51: {
+    size: 6,
+    N: 12,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [4, 4],
+      [2, 2],
+      [3, 0],
+    ],
+    cats: [
+      ["cat_orange", 0, 3],
+      ["cat_black", 0, 0],
+    ],
+    gates: [
+      ["gate_orange", 1, 2],
+      ["gate_black", 4, 3],
     ],
   },
 
@@ -1509,26 +1509,26 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "n"],
   ],
   L50: [
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
-    ["cat_orange", "e"],
-    ["cat_orange", "n"],
-    ["cat_orange", "e"],
     ["cat_gray", "e"],
     ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
-  ],
-  L51: [
-    ["cat_orange", "w"],
+    ["cat_gray", "w"],
     ["cat_orange", "n"],
-    ["cat_black", "w"],
+    ["cat_orange", "w"],
     ["cat_orange", "s"],
     ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_gray", "n"],
+  ],
+  L51: [
+    ["cat_black", "e"],
     ["cat_black", "s"],
+    ["cat_black", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "e"],
     ["cat_black", "e"],
     ["cat_black", "n"],
     ["cat_black", "w"],
+    ["cat_black", "s"],
   ],
 };
 
@@ -4972,11 +4972,15 @@ for (const level of LEVELS) {
   if (cloudArt === creamArt) throw new Error("Cloud loaf must not be a cream kit clone");
   if (cloudArt === ghostArt) throw new Error("Cloud loaf must not be a Ghost clone");
   if (cloudArt === dumplingArt) throw new Error("Cloud loaf must not be a Dumpling clone");
-  if (!cloudArt.includes("#F4EFE6")) throw new Error("Cloud loaf must use puff cream #F4EFE6");
-  if (!cloudArt.includes("#E8E0D4")) throw new Error("Cloud loaf must show soft puff #E8E0D4");
+  if (!cloudArt.includes("#EEE8DE")) throw new Error("Cloud loaf must use highlight #EEE8DE");
+  if (!cloudArt.includes("#D5CFC4")) throw new Error("Cloud loaf must show dove #D5CFC4");
+  if (!cloudArt.includes("#B8B2A8")) throw new Error("Cloud loaf must show rain-shadow #B8B2A8");
+  if (!cloudArt.includes("#9A958C")) throw new Error("Cloud loaf must show deep rain-shadow #9A958C");
+  if (cloudArt.includes("#E8C888")) throw new Error("Cloud loaf must not reuse Dumpling bun #E8C888");
   if (cloudArt.includes("#F2D2A0")) throw new Error("Cloud loaf must not reuse Dumpling warm cream");
   if (cloudArt.includes("#C9955C")) throw new Error("Cloud loaf must not reuse Dumpling fold");
   if (cloudArt.includes("#E6E0D4")) throw new Error("Cloud loaf must not reuse Ghost pale #E6E0D4");
+  if (cloudArt.includes("#FFF8F0")) throw new Error("Cloud loaf must not use Biscuit paper-cream #FFF8F0");
   if (paradeClearForLevel("L48") !== 48) throw new Error("L48 must map to parade clear 48");
   if (paradeClearForLevel("L49") !== 49) throw new Error("L49 must map to parade clear 49");
   if (paradeClearForLevel("L51") !== 51) throw new Error("L51 must map to parade clear 51");
@@ -5003,9 +5007,35 @@ for (const level of LEVELS) {
   const l51 = LEVELS.find((level) => level.id === "L51")!;
   if (l49.name !== "Color Step") throw new Error("L49 must be Color Step");
   if (/\b(hold|park|close)\b/i.test(l49.name)) throw new Error("L49 must not be Hold*/Park*/Close");
-  if (l50.name !== "Thread East") throw new Error("L50 must be Thread East");
-  if (l51.name !== "Dual Cross") throw new Error("L51 must be Dual Cross");
-  console.log("Cloud @ onClear(48) ok · puff-stack cream loafs + L49–L51 wired (Color Step / Thread East / Dual Cross)");
+  if (l50.name !== "Latch Through") throw new Error("L50 must be Latch Through");
+  if (l51.name !== "Offset Brake") throw new Error("L51 must be Offset Brake");
+  console.log("Cloud @ onClear(48) ok · puff-stack cream loafs + L49–L51 wired (Color Step / Latch Through / Offset Brake)");
+}
+
+
+{
+  // Rival Cloud art Fail: puff-stack must show value steps (not cream-on-cream).
+  const cloudArtFix = readFileSync(resolve("public/assets/cats/cloud_loaf_72.svg"), "utf8");
+  for (const hex of ["#EEE8DE", "#D5CFC4", "#B8B2A8", "#9A958C"] as const) {
+    if (!cloudArtFix.includes(hex)) throw new Error(`Cloud loaf missing contrast step ${hex}`);
+  }
+  if (cloudArtFix.includes("#E8C888")) throw new Error("Cloud loaf must not reuse Dumpling bun #E8C888");
+  console.log("Cloud loaf contrast ok · highlight/dove/rain-shadow");
+}
+
+
+{
+  const l50r = LEVELS.find((row) => row.id === "L50");
+  const l51r = LEVELS.find((row) => row.id === "L51");
+  const l26r = LEVELS.find((row) => row.id === "L26");
+  if (!l50r || !l51r || !l26r) throw new Error("missing L26/L50/L51");
+  if (l50r.name !== "Latch Through") throw new Error(`L50 must be Latch Through, got ${l50r.name}`);
+  if (l51r.name !== "Offset Brake") throw new Error(`L51 must be Offset Brake, got ${l51r.name}`);
+  if (l50r.name === l26r.name) throw new Error("L50 must not name-collide with L26 Thread East");
+  if (/thread east|dual cross|\bhold\b|\bpark\b|\bclose\b/i.test(l50r.name + " " + l51r.name)) {
+    throw new Error("L50/L51 must not reuse Thread East / Dual Cross / Hold*/Park*");
+  }
+  console.log("Rival rewrite L50/L51 ok · Latch Through · Offset Brake");
 }
 
 console.log("All authored boards ok");
