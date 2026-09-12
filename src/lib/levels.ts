@@ -69,8 +69,8 @@ const HEADLINES: Record<string, string> = {
   L47: "SOLID WEST",
   L48: "VACATE ROW",
   L49: "COLOR STEP",
-  L50: "THREAD EAST",
-  L51: "DUAL CROSS",
+  L50: "LATCH THROUGH",
+  L51: "OFFSET BRAKE",
 };
 
 const HINTS: Record<string, string> = {
@@ -122,8 +122,8 @@ const HINTS: Record<string, string> = {
   L47: "The black house is the west brake. Dual-brake habits from L46 miss the stop.",
   L48: "Leave the house row, then the west solid. L47's solid-west slide goes through — not L31's Vacate West.",
   L49: "Gray mismatch solid is the setup step. Vacate-row habits from L48 miss.",
-  L50: "Thread east onto the mid house. Color-step habits from L49 miss the corridor.",
-  L51: "Orange/black color-cross dual brake. Thread-east habits from L50 miss both stops.",
+  L50: "Latch through the gray solid. Thread-east habits miss the corridor.",
+  L51: "Offset brakes — houses are not adjacent. Dual-cross habits miss the gap.",
 };
 
 type RawLevel = {

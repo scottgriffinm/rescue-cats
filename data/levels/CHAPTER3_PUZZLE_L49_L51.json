@@ -63,24 +63,24 @@
     },
     {
       "id": "L50",
-      "name": "Thread East",
+      "name": "Latch Through",
       "width": 6,
       "height": 6,
-      "moveBudget": 12,
+      "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_thread_east_gray",
+      "templateId": "LT02_LT08_latch_through_gray",
       "walls": [
         {
-          "x": 4,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 3
-        },
-        {
           "x": 3,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 4,
           "y": 0
         }
       ],
@@ -88,15 +88,15 @@
       "cats": [
         {
           "id": "cat_orange",
-          "x": 4,
-          "y": 5,
+          "x": 1,
+          "y": 2,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
           "x": 0,
-          "y": 1,
+          "y": 5,
           "color": "gray",
           "colorId": "color_gray"
         }
@@ -105,57 +105,56 @@
         {
           "id": "gate_orange",
           "x": 2,
-          "y": 3,
+          "y": 2,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_gray",
-          "x": 5,
-          "y": 5,
+          "x": 2,
+          "y": 3,
           "color": "gray",
           "colorId": "color_gray"
         }
       ],
-      "teach": "thread_east_gray",
-      "ascii": "...##.\nG.....\n......\n.#o...\n......\n....Og"
+      "teach": "latch_through_gray"
     },
     {
       "id": "L51",
-      "name": "Dual Cross",
+      "name": "Offset Brake",
       "width": 6,
       "height": 6,
-      "moveBudget": 11,
+      "moveBudget": 12,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_dual_cross_black",
+      "templateId": "LT02_LT08_offset_brake_black",
       "walls": [
         {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 5
-        },
-        {
           "x": 4,
+          "y": 4
+        },
+        {
+          "x": 2,
           "y": 2
+        },
+        {
+          "x": 3,
+          "y": 0
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 2,
-          "y": 5,
+          "x": 0,
+          "y": 3,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_black",
-          "x": 4,
-          "y": 4,
+          "x": 0,
+          "y": 0,
           "color": "black",
           "colorId": "color_black"
         }
@@ -163,21 +162,20 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 2,
-          "y": 3,
+          "x": 1,
+          "y": 2,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_black",
-          "x": 3,
+          "x": 4,
           "y": 3,
           "color": "black",
           "colorId": "color_black"
         }
       ],
-      "teach": "dual_cross_black",
-      "ascii": ".#....\n......\n....#.\n..ob..\n....B.\n..O..#"
+      "teach": "offset_brake_black"
     }
   ],
   "teaches": {

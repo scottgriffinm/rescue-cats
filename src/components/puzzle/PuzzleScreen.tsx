@@ -49,6 +49,10 @@ export function PuzzleScreen({ level }: { level: Level }) {
   const [toast, setToast] = useState<string | null>(level.hint);
   const [earnedStars, setEarnedStars] = useState(0);
   const [showName, setShowName] = useState(false);
+
+  useEffect(() => {
+    if (save.pendingUnlocks.length > 0) setShowName(true);
+  }, [save.pendingUnlocks.length]);
   const [motion, setMotion] = useState<CatMotion | null>(null);
   const runId = useRef(0);
 
@@ -226,7 +230,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
       <p className="min-h-10 px-5 text-center text-sm text-ink/55">{toast}</p>
 
       <footer className="flex gap-2 px-5 pb-6">
-        {phase === "won" && !showName ? (
+        {phase === "won" && !showName && save.pendingUnlocks.length === 0 ? (
           <>
             <Link
               href="/"
@@ -271,7 +275,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
         />
       ) : null}
 
-      {save.pendingUnlocks.length > 0 && showName ? (
+      {save.pendingUnlocks.length > 0 ? (
         <NameCatModal key={save.friends.length} onNamed={() => router.push("/")} />
       ) : null}
 
