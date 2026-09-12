@@ -1,39 +1,39 @@
 {
   "id": "L60",
-  "name": "Brace Stop",
+  "name": "Post Brace",
   "width": 6,
   "height": 6,
   "moveBudget": 12,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_brace_stop_black",
+  "templateId": "LT02_LT08_post_brace_black",
   "walls": [
     {
-      "x": 5,
-      "y": 4
+      "x": 2,
+      "y": 0
     },
     {
-      "x": 3,
-      "y": 5
+      "x": 1,
+      "y": 3
     },
     {
       "x": 0,
-      "y": 5
+      "y": 4
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 2,
-      "y": 3,
+      "x": 4,
+      "y": 5,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_black",
       "x": 0,
-      "y": 3,
+      "y": 5,
       "color": "black",
       "colorId": "color_black"
     }
@@ -41,18 +41,18 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 1,
-      "y": 1,
+      "x": 0,
+      "y": 0,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_black",
-      "x": 4,
-      "y": 4,
+      "x": 5,
+      "y": 5,
       "color": "black",
       "colorId": "color_black"
     }
   ],
-  "teach": "brace_stop_black"
+  "teach": "post_brace_black"
 }
