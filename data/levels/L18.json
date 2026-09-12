@@ -1,26 +1,59 @@
 {
   "id": "L18",
-  "name": "Park Across",
+  "name": "Row Brake",
   "width": 6,
   "height": 6,
   "moveBudget": 10,
-  "nudges": 2,
+  "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_park_across",
+  "templateId": "LT02_LT08_row_brake_gray",
   "walls": [
-    { "x": 2, "y": 1 },
-    { "x": 2, "y": 2 },
-    { "x": 3, "y": 4 },
-    { "x": 0, "y": 4 }
+    {
+      "x": 1,
+      "y": 0
+    },
+    {
+      "x": 5,
+      "y": 0
+    },
+    {
+      "x": 2,
+      "y": 2
+    }
   ],
   "blockers": [],
   "cats": [
-    { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-    { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+    {
+      "id": "cat_orange",
+      "x": 5,
+      "y": 2,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "cat_gray",
+      "x": 5,
+      "y": 4,
+      "color": "gray",
+      "colorId": "color_gray"
+    }
   ],
   "gates": [
-    { "id": "gate_orange", "x": 1, "y": 3, "color": "orange", "colorId": "color_orange" },
-    { "id": "gate_gray", "x": 5, "y": 5, "color": "gray", "colorId": "color_gray" }
+    {
+      "id": "gate_orange",
+      "x": 4,
+      "y": 0,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "gate_gray",
+      "x": 1,
+      "y": 1,
+      "color": "gray",
+      "colorId": "color_gray"
+    }
   ],
-  "teach": "park_across"
+  "teach": "row_brake_gray",
+  "ascii": ".#..o#\n.g....\n..#..O\n......\n.....G\n......"
 }

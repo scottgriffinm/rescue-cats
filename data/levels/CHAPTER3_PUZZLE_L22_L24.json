@@ -7,47 +7,39 @@
   "levels": [
     {
       "id": "L22",
-      "name": "Hold West",
+      "name": "Left Brake",
       "width": 6,
       "height": 6,
       "moveBudget": 11,
-      "nudges": 2,
+      "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_hold_west",
+      "templateId": "LT02_LT08_left_brake_gray",
       "walls": [
         {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 2
-        },
-        {
-          "x": 3,
+          "x": 5,
           "y": 4
         },
         {
-          "x": 2,
+          "x": 3,
           "y": 5
+        },
+        {
+          "x": 2,
+          "y": 2
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 0,
-          "y": 0,
+          "x": 4,
+          "y": 1,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 5,
+          "x": 4,
           "y": 2,
           "color": "gray",
           "colorId": "color_gray"
@@ -56,66 +48,62 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 4,
+          "x": 2,
           "y": 3,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_gray",
-          "x": 1,
+          "x": 0,
           "y": 5,
           "color": "gray",
           "colorId": "color_gray"
         }
       ],
-      "teach": "hold_west",
-      "ascii": "O . # . . .\n. . # . . .\n. . # . . G\n. . . . o .\n. . . # . .\n. g # . . ."
+      "teach": "left_brake_gray",
+      "ascii": "......\n....O.\n..#.G.\n..o...\n.....#\ng..#.."
     },
     {
       "id": "L23",
-      "name": "Hold Corner",
+      "name": "Corner Brake",
       "width": 6,
       "height": 6,
       "moveBudget": 10,
-      "nudges": 2,
+      "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_hold_corner",
+      "templateId": "LT02_LT08_corner_brake_gray",
       "walls": [
         {
-          "x": 3,
-          "y": 0
+          "x": 0,
+          "y": 3
         },
         {
           "x": 1,
           "y": 2
         },
         {
-          "x": 1,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 3
-        },
-        {
-          "x": 2,
+          "x": 0,
           "y": 5
+        },
+        {
+          "x": 3,
+          "y": 0
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 0,
-          "y": 0,
+          "x": 1,
+          "y": 3,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 5,
-          "y": 2,
+          "x": 4,
+          "y": 3,
           "color": "gray",
           "colorId": "color_gray"
         }
@@ -124,20 +112,20 @@
         {
           "id": "gate_orange",
           "x": 2,
-          "y": 3,
+          "y": 4,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_gray",
-          "x": 4,
+          "x": 5,
           "y": 5,
           "color": "gray",
           "colorId": "color_gray"
         }
       ],
-      "teach": "hold_corner",
-      "ascii": "O . . # . .\n. . . . . .\n. # o . . G\n. # . . . #\n. . . . . .\n. . # . g ."
+      "teach": "corner_brake_gray",
+      "ascii": "...#..\n......\n.#....\n#O..G.\n..o...\n#....g"
     },
     {
       "id": "L24",

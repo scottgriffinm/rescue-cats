@@ -70,8 +70,8 @@
     },
     {
       "id": "L12",
-      "moveBudget": 9,
-      "nudges": 1,
+      "moveBudget": 10,
+      "nudges": 3,
       "colorLocks": true
     },
     {
@@ -82,8 +82,8 @@
     },
     {
       "id": "L14",
-      "moveBudget": 8,
-      "nudges": 1,
+      "moveBudget": 10,
+      "nudges": 3,
       "colorLocks": true
     },
     {
@@ -94,50 +94,50 @@
     },
     {
       "id": "L16",
-      "moveBudget": 9,
-      "nudges": 2,
+      "moveBudget": 10,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L17",
-      "moveBudget": 8,
-      "nudges": 2,
+      "moveBudget": 10,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L18",
       "moveBudget": 10,
-      "nudges": 2,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L19",
-      "moveBudget": 9,
-      "nudges": 2,
+      "moveBudget": 10,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L20",
-      "moveBudget": 8,
-      "nudges": 2,
+      "moveBudget": 10,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L21",
       "moveBudget": 12,
-      "nudges": 2,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L22",
       "moveBudget": 11,
-      "nudges": 2,
+      "nudges": 3,
       "colorLocks": true
     },
     {
       "id": "L23",
       "moveBudget": 10,
-      "nudges": 2,
+      "nudges": 3,
       "colorLocks": true
     },
     {
