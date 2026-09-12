@@ -1110,21 +1110,21 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L55: {
     size: 6,
-    N: 11,
+    N: 12,
     colorLocks: true,
     colors: true,
     walls: [
-      [0, 1],
-      [2, 0],
-      [1, 5],
+      [5, 3],
+      [0, 2],
+      [3, 2],
     ],
     cats: [
-      ["cat_orange", 4, 2],
-      ["cat_gray", 3, 0],
+      ["cat_orange", 2, 4],
+      ["cat_gray", 2, 3],
     ],
     gates: [
-      ["gate_orange", 3, 2],
-      ["gate_gray", 3, 3],
+      ["gate_orange", 2, 1],
+      ["gate_gray", 4, 3],
     ],
   },
   L56: {
@@ -1153,16 +1153,16 @@ const LOCKED: Record<string, LockedSpec> = {
     colors: true,
     walls: [
       [3, 1],
-      [4, 5],
       [0, 2],
+      [5, 1],
     ],
     cats: [
-      ["cat_orange", 3, 0],
-      ["cat_black", 5, 4],
+      ["cat_orange", 2, 2],
+      ["cat_black", 5, 3],
     ],
     gates: [
-      ["gate_orange", 1, 2],
-      ["gate_black", 4, 4],
+      ["gate_orange", 0, 1],
+      ["gate_black", 5, 4],
     ],
   },
 
@@ -1692,15 +1692,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "w"],
   ],
   L55: [
+    ["cat_gray", "n"],
+    ["cat_gray", "w"],
+    ["cat_orange", "n"],
     ["cat_gray", "e"],
+    ["cat_orange", "s"],
     ["cat_gray", "s"],
     ["cat_gray", "w"],
-    ["cat_orange", "s"],
-    ["cat_gray", "e"],
-    ["cat_orange", "n"],
-    ["cat_orange", "w"],
-    ["cat_orange", "s"],
     ["cat_gray", "n"],
+    ["cat_gray", "e"],
   ],
   L56: [
     ["cat_orange", "w"],
@@ -1713,15 +1713,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "n"],
   ],
   L57: [
-    ["cat_orange", "e"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
     ["cat_black", "n"],
     ["cat_black", "w"],
-    ["cat_orange", "s"],
+    ["cat_black", "s"],
     ["cat_black", "e"],
     ["cat_orange", "n"],
     ["cat_orange", "w"],
-    ["cat_black", "w"],
-    ["cat_black", "s"],
+    ["cat_orange", "s"],
   ],
 };
 
@@ -5367,6 +5367,11 @@ for (const level of LEVELS) {
   if (sunnyArt === pepperArt) throw new Error("Sunny loaf must not be a Pepper clone");
   if (!sunnyArt.includes("#E59A3C")) throw new Error("Sunny loaf must use body #E59A3C");
   if (!sunnyArt.includes("#F0B429")) throw new Error("Sunny loaf must show marigold sun-belly #F0B429");
+  if (!sunnyArt.includes("#C97828")) throw new Error("Sunny loaf must show ear/ray warm #C97828");
+  // Rival soft-kill: sunbeam mark — multiple marigold fills (rays / belly), not plain orange blob
+  if (sunnyArt.split("#F0B429").length - 1 < 2) {
+    throw new Error("Sunny loaf must show sunbeam mark (2+ marigold #F0B429 fills)");
+  }
   if (!sunnyArt.includes("#C97828")) throw new Error("Sunny loaf must use ear #C97828");
   if (sunnyArt.includes("#8F4A28")) throw new Error("Sunny loaf must not reuse Pepper spots");
   if (sunnyArt.includes("#B45A22")) throw new Error("Sunny loaf must not reuse Stripe roads");
@@ -5391,20 +5396,37 @@ for (const level of LEVELS) {
   const l55 = LEVELS.find((level) => level.id === "L55")!;
   const l56 = LEVELS.find((level) => level.id === "L56")!;
   const l57 = LEVELS.find((level) => level.id === "L57")!;
-  if (l55.name !== "Rim Latch") throw new Error("L55 must be Rim Latch");
+  if (l55.name !== "Hook Route") throw new Error("L55 must be Hook Route");
   if (l56.name !== "Color Fork") throw new Error("L56 must be Color Fork");
-  if (l57.name !== "Anchor Brake") throw new Error("L57 must be Anchor Brake");
+  if (l57.name !== "Corner Brace") throw new Error("L57 must be Corner Brace");
   if (/\b(hold|park|close|thread)\b/i.test([l55.name, l56.name, l57.name].join(" "))) {
     throw new Error("L55–L57 must not be Hold*/Park*/Close/Thread*");
   }
   const packNames = (chapter3pPack.levels as { id: string; name: string }[]).map((row) => `${row.id}:${row.name}`);
-  if (packNames.join(",") !== "L55:Rim Latch,L56:Color Fork,L57:Anchor Brake") {
+  if (packNames.join(",") !== "L55:Hook Route,L56:Color Fork,L57:Corner Brace") {
     throw new Error(`Sunny pack names drifted: ${packNames.join(",")}`);
   }
   // L53 hint scrub — no Thread-north residue
   const l53 = LEVELS.find((level) => level.id === "L53")!;
   if (/thread.?north/i.test(l53.hint)) throw new Error("L53 hint must not retain Thread-north residue");
-  console.log("Sunny @ onClear(54) ok · marigold sun-belly loafs + L55–L57 wired (Rim Latch / Color Fork / Anchor Brake)");
+  console.log("Sunny @ onClear(54) ok · marigold sun-belly loafs + L55–L57 wired (Hook Route / Color Fork / Corner Brace)");
+}
+
+
+{
+  const l55r = LEVELS.find((row) => row.id === "L55");
+  const l57r = LEVELS.find((row) => row.id === "L57");
+  const l49r = LEVELS.find((row) => row.id === "L49");
+  const l54r = LEVELS.find((row) => row.id === "L54");
+  if (!l55r || !l57r || !l49r || !l54r) throw new Error("missing L49/L54/L55/L57");
+  if (l55r.name !== "Hook Route") throw new Error(`L55 must be Hook Route, got ${l55r.name}`);
+  if (l57r.name !== "Corner Brace") throw new Error(`L57 must be Corner Brace, got ${l57r.name}`);
+  if (l55r.name === l49r.name) throw new Error("L55 must not name-collide with L49 Color Step");
+  if (l57r.name === l54r.name) throw new Error("L57 must not name-collide with L54 Split Latch");
+  if (/rim latch|anchor brake|\bhold\b|\bpark\b|\bclose\b|\bthread\b/i.test(l55r.name + " " + l57r.name)) {
+    throw new Error("L55/L57 must not reuse Rim Latch / Anchor Brake / Hold*/Park*/Thread*");
+  }
+  console.log("Rival rewrite L55/L57 ok · Hook Route · Corner Brace");
 }
 
 console.log("All authored boards ok");
