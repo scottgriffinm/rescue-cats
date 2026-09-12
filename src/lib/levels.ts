@@ -61,10 +61,10 @@ const HEADLINES: Record<string, string> = {
   L40: "SOLID SOUTH",
   L41: "VACATE SOUTH",
   L42: "PARK EAST",
-  L43: "PARK SOUTH CLOSE",
+  L43: "THREAD WEST",
   L44: "SOLID NORTH",
   L45: "VACATE NORTH",
-  L46: "PARK EAST CLOSE",
+  L46: "DUAL BRAKE",
   L47: "SOLID WEST",
   L48: "VACATE ROW",
 };
@@ -111,11 +111,11 @@ const HINTS: Record<string, string> = {
   L40: "The gray house is the south brake. East-row vacate habits from L39 miss the stop.",
   L41: "Leave the house column, then the south solid. L40's solid-south slide goes through.",
   L42: "Hold the cell east of the mid house. Vacate-south habits from L41 miss the park.",
-  L43: "Park close under the mid house. L42 park-east habits overshoot.",
+  L43: "Thread west through the corridor. Park-east habits from L42 miss the gap.",
   L44: "The gray house is the north brake. South-close habits from L43 miss the stop.",
   L45: "Leave the house column, then the north solid. L44 solid-north slide goes through.",
-  L46: "Park the cell east of the mid house. Vacate-north habits from L45 overshoot.",
-  L47: "The black house is the west brake. Hold-east-close habits from L46 miss the stop.",
+  L46: "Two brakes in sequence — color-cross. Park-east-close habits miss both.",
+  L47: "The black house is the west brake. Dual-brake habits from L46 miss the stop.",
   L48: "Leave the house row, then the west solid. L47's solid-west slide goes through — not L31's Vacate West.",
 };
 

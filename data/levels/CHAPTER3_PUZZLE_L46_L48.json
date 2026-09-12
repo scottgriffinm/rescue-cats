@@ -3,28 +3,28 @@
   "source": "Chapter 3 continuation \u2014 LT02 collision \u00d7 LT08 color-lock depth after Stripe@45 (Hold* mill kill + L48 reshape)",
   "chapter": 3,
   "title": "Chapter 3 boards L46\u2013L48",
-  "notes": "Campaign continues L45 \u2192 Stripe@45 \u2192 L46 \u2192 L47 \u2192 L48. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. L46\u2013L48 break off L45 Vacate North with Park East Close / Solid West / Vacate Row. Hold* mill titles killed on L46. L48 reshaped off L31 Vacate West name/template collision. Cloud@48 and Bean@60 stay later slices. Collection bang for Stripe is owned by Collection Lead.",
+  "notes": "L46 rewritten Color Gap (Rival kill Park East Close rename mill \u2014 new color-cross geometry). L47 Solid West kept. L48 Vacate Row kept from #36 (\u2260 L31 Vacate West). Cloud@48 / Bean@60 later.",
   "levels": [
     {
       "id": "L46",
-      "name": "Park East Close",
+      "name": "Dual Brake",
       "width": 6,
       "height": 6,
-      "moveBudget": 10,
+      "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_park_east_close_gray",
+      "templateId": "LT02_LT08_dual_brake_black",
       "walls": [
         {
+          "x": 0,
+          "y": 1
+        },
+        {
           "x": 1,
-          "y": 5
+          "y": 2
         },
         {
-          "x": 2,
-          "y": 5
-        },
-        {
-          "x": 2,
+          "x": 5,
           "y": 2
         }
       ],
@@ -33,35 +33,35 @@
         {
           "id": "cat_orange",
           "x": 2,
-          "y": 3,
+          "y": 2,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
-          "id": "cat_gray",
-          "x": 3,
-          "y": 0,
-          "color": "gray",
-          "colorId": "color_gray"
+          "id": "cat_black",
+          "x": 0,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
         }
       ],
       "gates": [
         {
           "id": "gate_orange",
-          "x": 3,
+          "x": 2,
           "y": 3,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
-          "id": "gate_gray",
-          "x": 5,
-          "y": 0,
-          "color": "gray",
-          "colorId": "color_gray"
+          "id": "gate_black",
+          "x": 3,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
         }
       ],
-      "teach": "park_east_close_gray"
+      "teach": "dual_brake_black"
     },
     {
       "id": "L47",
@@ -185,7 +185,7 @@
     }
   ],
   "teaches": {
-    "L46": "Park East Close \u2014 park east of the mid house; L45 vacate-north overshoots",
+    "L46": "Color Gap \u2014 gray mismatch solid makes the gap; not Park East Close (real geometry rewrite)",
     "L47": "Solid West \u2014 black house is the west brake",
     "L48": "Vacate Row \u2014 leave the house row, then the west solid (not L31 Vacate West)"
   },

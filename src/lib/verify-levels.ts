@@ -862,20 +862,20 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L43: {
     size: 6,
-    N: 10,
+    N: 12,
     colorLocks: true,
     colors: true,
     walls: [
-      [0, 1],
-      [0, 2],
-      [3, 2],
+      [3, 1],
+      [2, 4],
+      [2, 0],
     ],
     cats: [
-      ["cat_orange", 2, 2],
-      ["cat_gray", 5, 3],
+      ["cat_orange", 0, 0],
+      ["cat_gray", 3, 2],
     ],
     gates: [
-      ["gate_orange", 2, 3],
+      ["gate_orange", 3, 3],
       ["gate_gray", 5, 5],
     ],
   },
@@ -919,21 +919,21 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L46: {
     size: 6,
-    N: 10,
+    N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 5],
-      [2, 5],
-      [2, 2],
+      [0, 1],
+      [1, 2],
+      [5, 2],
     ],
     cats: [
-      ["cat_orange", 2, 3],
-      ["cat_gray", 3, 0],
+      ["cat_orange", 2, 2],
+      ["cat_black", 0, 3],
     ],
     gates: [
-      ["gate_orange", 3, 3],
-      ["gate_gray", 5, 0],
+      ["gate_orange", 2, 3],
+      ["gate_black", 3, 3],
     ],
   },
   L47: {
@@ -1378,12 +1378,14 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L43: [
     ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
     ["cat_orange", "w"],
     ["cat_orange", "n"],
-    ["cat_gray", "w"],
-    ["cat_orange", "e"],
-    ["cat_gray", "s"],
     ["cat_gray", "e"],
+    ["cat_gray", "s"],
   ],
   L44: [
     ["cat_orange", "s"],
@@ -1405,13 +1407,14 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "s"],
   ],
   L46: [
-    ["cat_orange", "e"],
     ["cat_orange", "s"],
+    ["cat_black", "s"],
     ["cat_orange", "w"],
-    ["cat_gray", "s"],
     ["cat_orange", "n"],
-    ["cat_gray", "n"],
-    ["cat_gray", "e"],
+    ["cat_orange", "e"],
+    ["cat_black", "e"],
+    ["cat_black", "n"],
+    ["cat_black", "w"],
   ],
   L47: [
     ["cat_orange", "e"],
@@ -4659,11 +4662,11 @@ for (const level of LEVELS) {
   const l43 = LEVELS.find((level) => level.id === "L43")!;
   const l44 = LEVELS.find((level) => level.id === "L44")!;
   const l45 = LEVELS.find((level) => level.id === "L45")!;
-  if (l43.name !== "Park South Close") throw new Error("L43 must be Park South Close");
+  if (l43.name !== "Thread West") throw new Error("L43 must be Thread West");
   if (/^Hold\b/i.test(l43.name)) throw new Error("L43 must not use a Hold* mill title");
   if (l44.name !== "Solid North") throw new Error("L44 must be Solid North");
   if (l45.name !== "Vacate North") throw new Error("L45 must be Vacate North");
-  console.log("Dumpling @ onClear(42) ok · cream fold loafs + L43–L45 wired (L43 Park South Close · no Hold*)");
+  console.log("Dumpling @ onClear(42) ok · cream fold loafs + L43–L45 wired (L43 Thread West · no Hold*)");
 }
 
 
@@ -4751,7 +4754,7 @@ for (const level of LEVELS) {
   const l46 = LEVELS.find((level) => level.id === "L46")!;
   const l47 = LEVELS.find((level) => level.id === "L47")!;
   const l48 = LEVELS.find((level) => level.id === "L48")!;
-  if (l46.name !== "Park East Close") throw new Error("L46 must be Park East Close");
+  if (l46.name !== "Dual Brake") throw new Error("L46 must be Dual Brake");
   if (/^Hold\b/i.test(l46.name)) throw new Error("L46 must not use a Hold* mill title");
   if (l47.name !== "Solid West") throw new Error("L47 must be Solid West");
   if (l48.name !== "Vacate Row") throw new Error("L48 must be Vacate Row");
@@ -4759,7 +4762,7 @@ for (const level of LEVELS) {
   if (l31.name !== "Vacate West") throw new Error("L31 must stay Vacate West");
   if (l48.teach === l31.teach) throw new Error("L48 teach must differ from L31");
   if (l48.templateId === l31.templateId) throw new Error("L48 templateId must differ from L31");
-  console.log("Stripe @ onClear(45) ok · road-map mackerel loafs + L46–L48 wired (Hold* mill kill · L48 Vacate Row)");
+  console.log("Stripe @ onClear(45) ok · road-map mackerel loafs + L46–L48 wired (L46 Dual Brake · L48 Vacate Row)");
 }
 
 
@@ -4770,8 +4773,8 @@ for (const level of LEVELS) {
   const l48 = LEVELS.find((row) => row.id === "L48");
   const l31 = LEVELS.find((row) => row.id === "L31");
   if (!l43 || !l46 || !l48 || !l31) throw new Error("missing L31/L43/L46/L48 for Hold* mill kill");
-  if (l43.name !== "Park South Close") throw new Error(`L43 mill kill: expected Park South Close, got ${l43.name}`);
-  if (l46.name !== "Park East Close") throw new Error(`L46 mill kill: expected Park East Close, got ${l46.name}`);
+  if (l43.name !== "Thread West") throw new Error(`L43 mill kill: expected Thread West, got ${l43.name}`);
+  if (l46.name !== "Dual Brake") throw new Error(`L46 mill kill: expected Dual Brake, got ${l46.name}`);
   if (/^Hold\b/i.test(l43.name) || /^Hold\b/i.test(l46.name)) {
     throw new Error("L43/L46 must not use Hold* mill titles");
   }
@@ -4780,7 +4783,29 @@ for (const level of LEVELS) {
   if (l48.name !== "Vacate Row") throw new Error(`L48 mill kill: expected Vacate Row, got ${l48.name}`);
   if (l31.name === l48.name) throw new Error("L48 must not name-collide with L31");
   if (l48.templateId === l31.templateId) throw new Error("L48 template must not collide with L31");
-  console.log("Hold* mill kill ok · L43 Park South Close · L46 Park East Close · L48 Vacate Row ≠ L31");
+  console.log("Hold* mill kill ok · L43 Thread West · L46 Dual Brake · L48 Vacate Row ≠ L31");
+}
+
+
+{
+  // Rival Fail on Park* Close: real rewrites Thread West + Dual Brake (no Hold*/Park*/Close).
+  const l43 = LEVELS.find((row) => row.id === "L43");
+  const l46 = LEVELS.find((row) => row.id === "L46");
+  if (!l43 || !l46) throw new Error("missing L43/L46 rival rewrite");
+  if (l43.name !== "Thread West") throw new Error(`L43 must be Thread West, got ${l43.name}`);
+  if (l46.name !== "Dual Brake") throw new Error(`L46 must be Dual Brake, got ${l46.name}`);
+  for (const level of [l43, l46]) {
+    if (/\b(hold|park|close)\b/i.test(level.name)) {
+      throw new Error(`${level.id} must not be Hold*/Park*/Close mill teach`);
+    }
+  }
+  if (String(l43.teach ?? "").startsWith("hold_") || String(l43.teach ?? "").includes("park_") && String(l43.teach ?? "").includes("close")) {
+    throw new Error("L43 teach must not be hold_*/park_*_close");
+  }
+  if (String(l46.teach ?? "").startsWith("hold_") || /park_.*close|close_.*park/.test(String(l46.teach ?? ""))) {
+    throw new Error("L46 teach must not be hold_*/park_*_close");
+  }
+  console.log("Rival rewrite L43/L46 ok · Thread West · Dual Brake");
 }
 
 console.log("All authored boards ok");
