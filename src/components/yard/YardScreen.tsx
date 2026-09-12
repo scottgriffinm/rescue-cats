@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { UiIcon } from "@/components/art/Sprite";
 import { NameCatModal } from "@/components/puzzle/NameCatModal";
 import { useSave } from "@/components/providers/SaveProvider";
@@ -27,6 +27,23 @@ const PARADE_MILESTONES = Object.entries(SLICE_UNLOCKS)
   .map(([clear, friendId]) => ({ clear: Number(clear), friendId }))
   .sort((a, b) => a.clear - b.clear);
 
+/** Sister-readable buy/gift lines — warm paper/ink, not cute-generic sparkle. */
+const PLACE_LINES: Record<string, string> = {
+  furn_scratch_post: "Scratch post on the porch. Someone will try it.",
+  furn_tree_mini: "Mini tree landed. Climbing practice.",
+  furn_swing_yarn: "Yarn swing up. Soft batting ahead.",
+  furn_fountain_stone: "Water on the porch. Comfort climbs.",
+  furn_perch_high: "A high seat. Someone will claim it.",
+  furn_box_cardboard: "A cardboard box. Instant nest.",
+  furn_bed_cushion: "Sun cushion down. Warm spot claimed.",
+};
+
+function placeLineFor(skuId: string) {
+  if (PLACE_LINES[skuId]) return PLACE_LINES[skuId];
+  const sku = FURNITURE.find((row) => row.skuId === skuId);
+  return sku ? `${sku.name} on the porch.` : "Something new on the porch.";
+}
+
 export function YardScreen() {
   const {
     save,
@@ -50,6 +67,12 @@ export function YardScreen() {
   const hasPerch = save.furniture.includes("furn_perch_high");
   const introFriend = save.friends.find((friend) => friend.firstNight);
   const [bangFriendId, setBangFriendId] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+  const [comfortPulse, setComfortPulse] = useState(0);
+  const [highlightSku, setHighlightSku] = useState<string | null>(null);
+  const [leavingSkus, setLeavingSkus] = useState<Record<string, boolean>>({});
+  const prevFurnitureRef = useRef<string[] | null>(null);
+  const buyHandledRef = useRef<string | null>(null);
   const newestFriend = save.friends[save.friends.length - 1];
   const tomorrowHook =
     newestFriend && !introFriend && !save.return_hook_claimed
@@ -67,6 +90,53 @@ export function YardScreen() {
     return () => window.clearTimeout(timer);
   }, [introFriend?.instanceId]);
 
+  useEffect(() => {
+    if (!toast && !highlightSku) return;
+    const timer = window.setTimeout(() => {
+      setToast(null);
+      setHighlightSku(null);
+    }, 2200);
+    return () => window.clearTimeout(timer);
+  }, [toast, highlightSku, comfortPulse]);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    const prev = prevFurnitureRef.current;
+    prevFurnitureRef.current = save.furniture;
+    if (!prev) return;
+    const added = save.furniture.filter((skuId) => !prev.includes(skuId));
+    for (const skuId of added) {
+      if (buyHandledRef.current === skuId) {
+        buyHandledRef.current = null;
+        continue;
+      }
+      setToast(placeLineFor(skuId));
+      setComfortPulse((n) => n + 1);
+      setHighlightSku(skuId);
+    }
+  }, [hydrated, save.furniture]);
+
+  function celebrateBuy(skuId: string) {
+    buyHandledRef.current = skuId;
+    setLeavingSkus((prev) => ({ ...prev, [skuId]: true }));
+    setToast(placeLineFor(skuId));
+    setComfortPulse((n) => n + 1);
+    setHighlightSku(skuId);
+    window.setTimeout(() => {
+      setLeavingSkus((prev) => {
+        const next = { ...prev };
+        delete next[skuId];
+        return next;
+      });
+    }, 480);
+  }
+
+  function handleBuyFurniture(skuId: string, cost: number) {
+    const ok = buyFurniture(skuId, cost);
+    if (ok) celebrateBuy(skuId);
+    return ok;
+  }
+
   return (
     <GameShell>
       <header className="px-6 pt-7 text-center">
@@ -77,7 +147,7 @@ export function YardScreen() {
           RESCUE <span className="text-clay">CATS</span>
         </h1>
         <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink/55">
-          <ComfortMeter value={comfort} />
+          <ComfortMeter value={comfort} pulseKey={comfortPulse} />
           <span>♥ {save.hearts}</span>
           <span className="inline-flex items-center gap-0.5">
             <UiIcon name="star_marigold" className="h-3.5 w-3.5" />
@@ -119,6 +189,7 @@ export function YardScreen() {
             hasCushion={hasCushion}
             hasFountain={hasFountain}
             hasPerch={hasPerch}
+            highlightSku={highlightSku}
             bangFriendId={bangFriendId}
             onBang={(instanceId) => {
               completeFirstNight(instanceId);
@@ -210,13 +281,23 @@ export function YardScreen() {
               : `Continue · ${upcoming.name}`}
         </Link>
 
+        {toast ? (
+          <p
+            className="paper-card rounded-2xl px-3 py-2 text-center text-sm text-ink/80"
+            role="status"
+          >
+            {toast}
+          </p>
+        ) : null}
+
         <ShopRow
           hearts={save.hearts}
           stars={save.stars}
           cleared={cleared}
           ownedFurniture={save.furniture}
           ownedCosmetics={save.cosmetics}
-          onBuyFurniture={buyFurniture}
+          leavingSkus={leavingSkus}
+          onBuyFurniture={handleBuyFurniture}
           onBuyCosmetic={buyCosmetic}
         />
 
@@ -238,11 +319,15 @@ export function YardScreen() {
   );
 }
 
-function ComfortMeter({ value }: { value: number }) {
+function ComfortMeter({ value, pulseKey }: { value: number; pulseKey: number }) {
   const cap = Math.max(6, FURNITURE.reduce((sum, sku) => sum + sku.comfort, 0));
   const pct = Math.min(100, (value / cap) * 100);
   return (
-    <div className="flex items-center gap-1.5" aria-label={`Comfort ${value}`}>
+    <div
+      key={pulseKey > 0 ? `comfort-${pulseKey}` : "comfort"}
+      className={`flex items-center gap-1.5 ${pulseKey > 0 ? "comfort-pulse" : ""}`}
+      aria-label={`Comfort ${value}`}
+    >
       <span>Comfort</span>
       <div
         className="h-2 w-16 overflow-hidden rounded-full border border-ink/25 bg-paper-deep"
@@ -264,6 +349,7 @@ function ShopRow({
   cleared,
   ownedFurniture,
   ownedCosmetics,
+  leavingSkus,
   onBuyFurniture,
   onBuyCosmetic,
 }: {
@@ -272,6 +358,7 @@ function ShopRow({
   cleared: number;
   ownedFurniture: string[];
   ownedCosmetics: string[];
+  leavingSkus: Record<string, boolean>;
   onBuyFurniture: (skuId: string, cost: number) => boolean;
   onBuyCosmetic: (id: string, cost: number) => boolean;
 }) {
@@ -279,7 +366,9 @@ function ShopRow({
   if (!heartsOpen) return null;
 
   const heartItems = shopItemsForClear(cleared).filter(
-    (sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId),
+    (sku) =>
+      sku.hearts > 0 &&
+      (!ownedFurniture.includes(sku.skuId) || Boolean(leavingSkus[sku.skuId])),
   );
   const starItem = STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id));
   if (heartItems.length === 0 && !starItem) return null;
@@ -292,11 +381,17 @@ function ShopRow({
         {SHOP_STARTER.eyebrow.toUpperCase()}
       </p>
       {heartItems.map((heartItem) => {
+        const leaving = Boolean(leavingSkus[heartItem.skuId]);
         const canAfford = hearts >= heartItem.hearts;
         const need = Math.max(0, heartItem.hearts - hearts);
         const isStarter = heartItem.skuId === SHOP_STARTER.sku_id;
         return (
-          <div key={heartItem.skuId} className="paper-card space-y-2 rounded-2xl px-3 py-3">
+          <div
+            key={heartItem.skuId}
+            className={`paper-card space-y-2 rounded-2xl px-3 py-3 transition-[opacity,transform] duration-[420ms] ease-out ${
+              leaving ? "shop-leave" : ""
+            }`}
+          >
             <div className="text-center">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -310,7 +405,11 @@ function ShopRow({
                 {heartItem.hearts}♥
               </p>
             </div>
-            {canAfford ? (
+            {leaving ? (
+              <p className="rounded-[10px] border-2 border-ink/15 bg-paper-deep px-3 py-2 text-center text-sm text-ink/60">
+                On the porch
+              </p>
+            ) : canAfford ? (
               <button
                 type="button"
                 onClick={() => onBuyFurniture(heartItem.skuId, heartItem.hearts)}

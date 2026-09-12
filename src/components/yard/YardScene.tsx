@@ -33,6 +33,10 @@ function loafPx(friendCount: number): 48 | 72 {
   return friendCount >= 10 ? 48 : 72;
 }
 
+function furnPop(highlightSku: string | null | undefined, skuId: string) {
+  return highlightSku === skuId ? "furn-place-pop" : "";
+}
+
 export function YardScene({
   friends,
   hasBox,
@@ -42,6 +46,7 @@ export function YardScene({
   hasCushion,
   hasFountain,
   hasPerch,
+  highlightSku,
   bangFriendId,
   onBang,
 }: {
@@ -53,6 +58,7 @@ export function YardScene({
   hasCushion?: boolean;
   hasFountain?: boolean;
   hasPerch?: boolean;
+  highlightSku?: string | null;
   bangFriendId?: string | null;
   onBang?: (instanceId: string) => void;
 }) {
@@ -113,33 +119,45 @@ export function YardScene({
       <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] w-[56%]" />
       <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] w-[22%]" />
       {hasFountain ? (
-        <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[24%]" />
+        <FurnitureImg
+          file="fountain"
+          className={`absolute left-[10%] top-[38%] w-[24%] ${furnPop(highlightSku, "furn_fountain_stone")}`}
+        />
       ) : null}
       {hasPerch ? (
-        <FurnitureImg file="swing" className="absolute right-[28%] top-[12%] w-[18%]" />
+        <FurnitureImg
+          file="swing"
+          className={`absolute right-[28%] top-[12%] w-[18%] ${furnPop(highlightSku, "furn_perch_high")}`}
+        />
       ) : null}
       {hasTree ? (
-        <FurnitureImg file="miniTree" className="absolute right-[10%] top-[18%] w-[20%]" />
+        <FurnitureImg
+          file="miniTree"
+          className={`absolute right-[10%] top-[18%] w-[20%] ${furnPop(highlightSku, "furn_tree_mini")}`}
+        />
       ) : null}
       {hasYarn ? (
-        <FurnitureImg file="yarnSwing" className="absolute left-[36%] top-[6%] w-[30%]" />
+        <FurnitureImg
+          file="yarnSwing"
+          className={`absolute left-[36%] top-[6%] w-[30%] ${furnPop(highlightSku, "furn_swing_yarn")}`}
+        />
       ) : null}
       {hasBox ? (
         <FurnitureImg
           file="boxBed"
-          className="yard-drop-box absolute bottom-[16%] left-[12%] w-[46%]"
+          className={`yard-drop-box absolute bottom-[16%] left-[12%] w-[46%] ${furnPop(highlightSku, "furn_box_cardboard")}`}
         />
       ) : null}
       {hasCushion ? (
         <FurnitureImg
           file="sunCushion"
-          className="yard-drop absolute left-[8%] top-[50%] w-[32%]"
+          className={`yard-drop absolute left-[8%] top-[50%] w-[32%] ${furnPop(highlightSku, "furn_bed_cushion")}`}
         />
       ) : null}
       {hasScratch ? (
         <FurnitureImg
           file="scratcher"
-          className="yard-drop absolute bottom-[20%] right-[14%] w-[18%]"
+          className={`yard-drop absolute bottom-[20%] right-[14%] w-[18%] ${furnPop(highlightSku, "furn_scratch_post")}`}
         />
       ) : null}
 
