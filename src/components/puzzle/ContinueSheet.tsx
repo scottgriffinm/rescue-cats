@@ -33,19 +33,19 @@ export function ContinueSheet({
   return (
     <div className="fixed inset-0 z-20 flex items-end justify-center bg-ink/30 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-16 sm:items-center">
       <div className="paper-card modal-spring w-full max-w-md rounded-[1.5rem] p-6">
-        <h2 className="text-center font-display text-2xl tracking-wide">Three soft misses</h2>
+        <h2 className="text-center font-display text-2xl tracking-wide">Soft miss</h2>
         <p className="mt-2 text-center text-sm text-ink/60">
-          Same printed board. A ticket or a short rest — never an ad mid-slide.
+          Same board. Use a ticket, or take a short rest — then try again.
         </p>
         <div className="mt-5 space-y-2">
           <Button className="w-full" disabled={save.tickets <= 0} onClick={ticket}>
             Use a ticket ({save.tickets})
           </Button>
           <Button variant="paper" className="w-full" disabled={watching} onClick={ad}>
-            {watching ? "Taking a breather…" : "Optional rest (ad stub)"}
+            {watching ? "Resting…" : "Take a short rest"}
           </Button>
           <Button variant="ghost" className="w-full" onClick={onYard}>
-            Back to the yard
+            Back to the porch
           </Button>
         </div>
       </div>

@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="340" height="340" viewBox="0 0 340 340" fill="none">
-  <path d="M32 186 C54 118 108 108 170 112 C238 116 292 128 310 186 C288 252 54 256 32 186 Z" fill="#8FAF8A" fill-opacity="0.34" stroke="#2B2A28" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M72 204 L170 254 L268 204 L268 222 L170 272 L72 222 Z" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M74 202 C118 178 148 158 170 152 C196 160 230 180 266 202 C218 228 170 250 74 202 Z" fill="#F7F0E6" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-  <path d="M104 194 C140 176 160 166 170 164 C186 170 214 186 236 198" stroke="#E2D4C2" stroke-width="3" stroke-linecap="round"/>
-  <path d="M90 210 C130 190 158 176 170 174 C190 182 226 202 250 214" stroke="#E2D4C2" stroke-width="3" stroke-linecap="round"/>
-  <ellipse cx="126" cy="256" rx="15" ry="7" fill="#D96B4A" fill-opacity="0.38" stroke="#2B2A28" stroke-width="1.7" stroke-linecap="round"/>
-  <ellipse cx="158" cy="270" rx="15" ry="7" fill="#D96B4A" fill-opacity="0.34" stroke="#2B2A28" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M32 186 C54 118 108 108 170 112 C238 116 292 128 310 186 C288 252 54 256 32 186 Z" fill="#8FAF8A" stroke="#2B2A28" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M48 176 C90 132 140 124 170 126 C210 128 262 140 292 176 C270 228 68 232 48 176 Z" fill="#7A9876" fill-opacity="0.35" stroke="none"/>
+  <path d="M72 204 L170 254 L268 204 L268 222 L170 272 L72 222 Z" fill="#C4B49A" stroke="#2B2A28" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M74 202 C118 178 148 158 170 152 C196 160 230 180 266 202 C218 228 170 250 74 202 Z" fill="#EFE4D4" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M104 194 C140 176 160 166 170 164 C186 170 214 186 236 198" stroke="#C4B49A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M90 210 C130 190 158 176 170 174 C190 182 226 202 250 214" stroke="#C4B49A" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="126" cy="256" rx="15" ry="7" fill="#D96B4A" fill-opacity="0.55" stroke="#2B2A28" stroke-width="1.7" stroke-linecap="round"/>
+  <ellipse cx="158" cy="270" rx="15" ry="7" fill="#D96B4A" fill-opacity="0.5" stroke="#2B2A28" stroke-width="1.7" stroke-linecap="round"/>
 </svg>
