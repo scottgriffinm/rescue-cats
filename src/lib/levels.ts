@@ -72,9 +72,9 @@ const HEADLINES: Record<string, string> = {
   L49: "COLOR STEP",
   L50: "LATCH THROUGH",
   L51: "OFFSET BRAKE",
-  L52: "THREAD NORTH",
+  L52: "GATE WEAVE",
   L53: "COLOR LATCH",
-  L54: "SWAP BRAKE",
+  L54: "SPLIT LATCH",
 };
 
 const HINTS: Record<string, string> = {
@@ -128,9 +128,9 @@ const HINTS: Record<string, string> = {
   L49: "Gray mismatch solid is the setup step. Vacate-row habits from L48 miss.",
   L50: "Latch through the gray solid. Thread-east habits miss the corridor.",
   L51: "Offset brakes — houses are not adjacent. Dual-cross habits miss the gap.",
-  L52: "Thread north past the gray solid. Offset-brake habits from L51 miss the corridor.",
+  L52: "Weave through offset gray gates. Thread-north habits miss the weave.",
   L53: "Color latch on the gray house. Thread-north habits miss the stop.",
-  L54: "Swap brake — black house after the color latch. Adjacent dual habits miss.",
+  L54: "Split latch — houses are not adjacent. Swap/Dual habits miss the gap.",
 };
 
 type RawLevel = {
