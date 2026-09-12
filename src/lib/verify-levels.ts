@@ -1196,17 +1196,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 3],
-      [4, 0],
-      [0, 4],
+      [3, 1],
+      [5, 3],
+      [1, 4],
     ],
     cats: [
-      ["cat_orange", 3, 1],
-      ["cat_gray", 3, 5],
+      ["cat_orange", 5, 0],
+      ["cat_gray", 1, 0],
     ],
     gates: [
-      ["gate_orange", 3, 3],
-      ["gate_gray", 3, 2],
+      ["gate_orange", 2, 2],
+      ["gate_gray", 4, 3],
     ],
   },
   L60: {
@@ -1798,15 +1798,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "e"],
   ],
   L59: [
-    ["cat_orange", "e"],
-    ["cat_gray", "n"],
-    ["cat_gray", "e"],
-    ["cat_orange", "s"],
     ["cat_orange", "w"],
     ["cat_gray", "w"],
-    ["cat_gray", "n"],
-    ["cat_gray", "e"],
     ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_orange", "s"],
+    ["cat_gray", "e"],
   ],
   L60: [
     ["cat_orange", "w"],
@@ -5590,20 +5590,20 @@ for (const level of LEVELS) {
   const l59 = LEVELS.find((level) => level.id === "L59")!;
   const l60 = LEVELS.find((level) => level.id === "L60")!;
   if (l58.name !== "Pinch Route") throw new Error("L58 must be Pinch Route");
-  if (l59.name !== "Color Shelf") throw new Error("L59 must be Color Shelf");
+  if (l59.name !== "Skew Gate") throw new Error("L59 must be Skew Gate");
   if (l60.name !== "Post Brace") throw new Error("L60 must be Post Brace");
   if (/\b(hold|park|close|thread)\b/i.test([l58.name, l59.name, l60.name].join(" "))) {
     throw new Error("L58–L60 must not be Hold*/Park*/Close/Thread*");
   }
   const packNames = (chapter3qPack.levels as { id: string; name: string }[]).map((row) => `${row.id}:${row.name}`);
-  if (packNames.join(",") !== "L58:Pinch Route,L59:Color Shelf,L60:Post Brace") {
+  if (packNames.join(",") !== "L58:Pinch Route,L59:Skew Gate,L60:Post Brace") {
     throw new Error(`Nigel pack names drifted: ${packNames.join(",")}`);
   }
   // single porch slot — no duplicate nigel const in YardScene
   const yard = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yard.match(/const nigel =/g) || []).length !== 1) throw new Error("YardScene must declare nigel once");
   if ((yard.match(/\{nigel \?/g) || []).length !== 1) throw new Error("YardScene must render nigel once");
-  console.log("Nigel @ onClear(57) ok · blaze shirtfront loafs + L58–L60 wired (Pinch Route / Color Shelf / Post Brace); Bean@60 gated");
+  console.log("Nigel @ onClear(57) ok · blaze shirtfront loafs + L58–L60 wired (Pinch Route / Skew Gate / Post Brace); Bean@60 gated");
 }
 
 
@@ -5618,6 +5618,23 @@ for (const level of LEVELS) {
     throw new Error("L60 must not reuse Brace Stop / Hold*/Park*/Thread*");
   }
   console.log("Rival preempt L60 ok · Post Brace (0,0)/(5,5)");
+}
+
+
+{
+  const l59r = LEVELS.find((row) => row.id === "L59");
+  const l49r = LEVELS.find((row) => row.id === "L49");
+  if (!l59r || !l49r) throw new Error("missing L49/L59");
+  if (l59r.name !== "Skew Gate") throw new Error(`L59 must be Skew Gate, got ${l59r.name}`);
+  const g59 = [...l59r.gates].map((gate) => `${gate.x},${gate.y}`).sort().join("|");
+  const g49 = [...l49r.gates].map((gate) => `${gate.x},${gate.y}`).sort().join("|");
+  if (g59 === "2,3|3,3" || g59 === "3,2|3,3") throw new Error("L59 must not use Color Step vertical twin gates");
+  if (g59 === g49) throw new Error("L59 gates must not match L49 Color Step");
+  if (g59 !== "2,2|3,4" && g59 !== "2,2|4,3") throw new Error(`L59 Skew Gate gates must be (2,2)/(4,3), got ${g59}`);
+  if (/color shelf|\bhold\b|\bpark\b|\bclose\b|\bthread\b/i.test(l59r.name)) {
+    throw new Error("L59 must not reuse Color Shelf / Hold*/Park*/Thread*");
+  }
+  console.log("Rival rewrite L59 ok · Skew Gate (2,2)/(4,3)");
 }
 
 console.log("All authored boards ok");
