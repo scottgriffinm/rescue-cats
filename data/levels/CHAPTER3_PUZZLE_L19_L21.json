@@ -1,9 +1,9 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "source": "Chapter 3 continuation — color-lock park-brake toward Pepper@21 / Pumpkin@24",
+  "source": "Chapter 3 continuation \u2014 color-lock park-brake toward Pepper@21 / Pumpkin@24",
   "chapter": 3,
-  "title": "Chapter 3 boards L19–L21",
-  "notes": "Campaign continues L18 → Mist@18 → L19 → L20 → L21. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. Pepper@21 unlocks on L21.",
+  "title": "Chapter 3 boards L19\u2013L21",
+  "notes": "Campaign continues L18 \u2192 Mist@18 \u2192 L19 \u2192 L20 \u2192 L21. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house. Pepper@21 unlocks on L21.",
   "levels": [
     {
       "id": "L19",
@@ -15,19 +15,55 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_hold_north",
       "walls": [
-        { "x": 5, "y": 0 },
-        { "x": 2, "y": 1 },
-        { "x": 2, "y": 2 },
-        { "x": 2, "y": 5 }
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 5
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 3, "y": 3, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "hold_north",
       "ascii": "O . . . . #\n. . # . . .\n. . # . . G\n. . . o . .\n. . . . . .\n. g # . . ."
@@ -42,20 +78,59 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_hold_east",
       "walls": [
-        { "x": 2, "y": 0 },
-        { "x": 2, "y": 1 },
-        { "x": 2, "y": 2 },
-        { "x": 0, "y": 4 },
-        { "x": 3, "y": 4 }
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 4
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 2, "y": 3, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 5, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "hold_east",
       "ascii": "O . # . . .\n. . # . . .\n. . # . . G\n. . o . . .\n# . . # . .\n. . . . . g"
@@ -70,21 +145,63 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_thread_park",
       "walls": [
-        { "x": 2, "y": 0 },
-        { "x": 2, "y": 1 },
-        { "x": 2, "y": 3 },
-        { "x": 3, "y": 3 },
-        { "x": 4, "y": 5 },
-        { "x": 0, "y": 4 }
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 4
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 4, "y": 3, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 1, "y": 4, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "thread_park",
       "ascii": "O . # . . .\n. . # . . .\n. . . . . G\n. . # # o .\n# g . . . .\n. . . . # ."
