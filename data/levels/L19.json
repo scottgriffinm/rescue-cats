@@ -1,26 +1,67 @@
 {
   "id": "L19",
-  "name": "Hold North",
+  "name": "Over Brake",
   "width": 6,
   "height": 6,
-  "moveBudget": 9,
-  "nudges": 2,
+  "moveBudget": 10,
+  "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_hold_north",
+  "templateId": "LT02_LT08_over_brake_gray",
   "walls": [
-    { "x": 5, "y": 0 },
-    { "x": 2, "y": 1 },
-    { "x": 2, "y": 2 },
-    { "x": 2, "y": 5 }
+    {
+      "x": 0,
+      "y": 4
+    },
+    {
+      "x": 2,
+      "y": 0
+    },
+    {
+      "x": 4,
+      "y": 5
+    },
+    {
+      "x": 0,
+      "y": 5
+    },
+    {
+      "x": 2,
+      "y": 5
+    }
   ],
   "blockers": [],
   "cats": [
-    { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-    { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+    {
+      "id": "cat_orange",
+      "x": 5,
+      "y": 4,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "cat_gray",
+      "x": 1,
+      "y": 2,
+      "color": "gray",
+      "colorId": "color_gray"
+    }
   ],
   "gates": [
-    { "id": "gate_orange", "x": 3, "y": 3, "color": "orange", "colorId": "color_orange" },
-    { "id": "gate_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+    {
+      "id": "gate_orange",
+      "x": 0,
+      "y": 3,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "gate_gray",
+      "x": 4,
+      "y": 3,
+      "color": "gray",
+      "colorId": "color_gray"
+    }
   ],
-  "teach": "hold_north"
+  "teach": "over_brake_gray",
+  "ascii": "..#...\n......\n.G....\no...g.\n#....O\n#.#.#."
 }

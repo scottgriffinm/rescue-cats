@@ -1,23 +1,23 @@
 {
   "id": "L45",
-  "name": "Vacate North",
+  "name": "North Slip",
   "width": 6,
   "height": 6,
   "moveBudget": 11,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_vacate_north_black",
+  "templateId": "LT02_LT08_north_slip_black",
   "walls": [
     {
-      "x": 4,
-      "y": 5
-    },
-    {
-      "x": 4,
-      "y": 0
+      "x": 3,
+      "y": 2
     },
     {
       "x": 5,
+      "y": 1
+    },
+    {
+      "x": 0,
       "y": 2
     }
   ],
@@ -26,14 +26,14 @@
     {
       "id": "cat_orange",
       "x": 5,
-      "y": 4,
+      "y": 0,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_black",
-      "x": 3,
-      "y": 5,
+      "x": 1,
+      "y": 0,
       "color": "black",
       "colorId": "color_black"
     }
@@ -41,18 +41,19 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 3,
+      "x": 5,
       "y": 3,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_black",
-      "x": 3,
-      "y": 2,
+      "x": 0,
+      "y": 4,
       "color": "black",
       "colorId": "color_black"
     }
   ],
-  "teach": "vacate_north_black"
+  "teach": "north_slip_black",
+  "ascii": ".B...O\n.....#\n#..#..\n.....o\nb.....\n......"
 }

@@ -7,24 +7,28 @@
   "levels": [
     {
       "id": "L46",
-      "name": "Dual Brake",
+      "name": "Twin Peg",
       "width": 6,
       "height": 6,
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_dual_brake_black",
+      "templateId": "LT02_LT08_twin_peg_black",
       "walls": [
         {
-          "x": 0,
-          "y": 1
-        },
-        {
-          "x": 1,
-          "y": 2
+          "x": 2,
+          "y": 4
         },
         {
           "x": 5,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 2,
           "y": 2
         }
       ],
@@ -32,14 +36,14 @@
       "cats": [
         {
           "id": "cat_orange",
-          "x": 2,
-          "y": 2,
+          "x": 3,
+          "y": 4,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_black",
-          "x": 0,
+          "x": 5,
           "y": 3,
           "color": "black",
           "colorId": "color_black"
@@ -49,40 +53,37 @@
         {
           "id": "gate_orange",
           "x": 2,
-          "y": 3,
+          "y": 1,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_black",
-          "x": 3,
-          "y": 3,
+          "x": 5,
+          "y": 5,
           "color": "black",
           "colorId": "color_black"
         }
       ],
-      "teach": "dual_brake_black"
+      "teach": "twin_peg_black",
+      "ascii": ".....#\n..o...\n..#.#.\n.....B\n..#O..\n.....b"
     },
     {
       "id": "L47",
-      "name": "Solid West",
+      "name": "Side Seal",
       "width": 6,
       "height": 6,
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_solid_west_black",
+      "templateId": "LT02_LT08_side_seal_black",
       "walls": [
         {
           "x": 5,
-          "y": 3
+          "y": 5
         },
         {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 1,
+          "x": 2,
           "y": 1
         }
       ],
@@ -90,7 +91,7 @@
       "cats": [
         {
           "id": "cat_orange",
-          "x": 3,
+          "x": 1,
           "y": 0,
           "color": "orange",
           "colorId": "color_orange"
@@ -98,7 +99,7 @@
         {
           "id": "cat_black",
           "x": 4,
-          "y": 2,
+          "y": 1,
           "color": "black",
           "colorId": "color_black"
         }
@@ -106,20 +107,21 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 3,
-          "y": 2,
+          "x": 5,
+          "y": 1,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_black",
-          "x": 2,
+          "x": 0,
           "y": 2,
           "color": "black",
           "colorId": "color_black"
         }
       ],
-      "teach": "solid_west_black"
+      "teach": "side_seal_black",
+      "ascii": ".O....\n..#.Bo\nb.....\n......\n......\n.....#"
     },
     {
       "id": "L48",

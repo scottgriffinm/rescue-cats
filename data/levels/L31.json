@@ -1,35 +1,35 @@
 {
   "id": "L31",
-  "name": "Vacate West",
+  "name": "West Slip",
   "width": 6,
   "height": 6,
   "moveBudget": 11,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_vacate_west_black",
+  "templateId": "LT02_LT08_west_slip_black",
   "walls": [
     {
-      "x": 5,
-      "y": 5
+      "x": 1,
+      "y": 1
     },
     {
-      "x": 4,
-      "y": 1
+      "x": 3,
+      "y": 5
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 3,
-      "y": 1,
+      "x": 2,
+      "y": 2,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_black",
-      "x": 4,
-      "y": 3,
+      "x": 0,
+      "y": 4,
       "color": "black",
       "colorId": "color_black"
     }
@@ -37,18 +37,19 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 3,
-      "y": 2,
+      "x": 4,
+      "y": 5,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_black",
-      "x": 2,
+      "x": 4,
       "y": 2,
       "color": "black",
       "colorId": "color_black"
     }
   ],
-  "teach": "vacate_west_black"
+  "teach": "west_slip_black",
+  "ascii": "......\n.#....\n..O.b.\n......\nB.....\n...#o."
 }
