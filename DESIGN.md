@@ -85,7 +85,7 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L60 Post Brace.**
 - **Bean@60** — tiny toasted loaf + 2 kidney patches; chips Bean/Seed/Nib; no gift. Parade finale.
 - **L61 Span Cut.**
-- **L62 Mirror Gap.**
+- **L62 Knight Cut.**
 - **L63 Far Peg.**
 - **Nigel@57** — blaze + full shirtfront; chips Nigel/Clive/Graham; no gift. Bean@60 gated.
 - **Sunny@54** — bright orange solid + marigold sun-belly; chips Sunny/Sol/Beam; no gift.

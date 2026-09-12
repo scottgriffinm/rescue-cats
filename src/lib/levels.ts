@@ -85,7 +85,7 @@ const HEADLINES: Record<string, string> = {
   L59: "SKEW GATE",
   L60: "POST BRACE",
   L61: "SPAN CUT",
-  L62: "MIRROR GAP",
+  L62: "KNIGHT CUT",
   L63: "FAR PEG",
 };
 
@@ -150,7 +150,7 @@ const HINTS: Record<string, string> = {
   L59: "Skew the orange/gray houses — not Color Step’s vertical twin.",
   L60: "Post brace on far corners (0,0)/(5,5) — not the (1,1)/(4,4) twin.",
   L61: "Span cut across the gray gap. Post-brace habits miss the cut.",
-  L62: "Mirror gap — houses face across. Span habits miss the mirror.",
+  L62: "Knight-step the orange/gray houses — not Color Fork’s same-row twin.",
   L63: "Far peg on the black house. Offset — Dual habits miss.",
 };
 
