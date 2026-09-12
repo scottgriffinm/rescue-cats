@@ -414,7 +414,7 @@ export function shippedFriendForClear(clearIndex: number): CatalogFriend | undef
   return locked ? friendById(locked) : undefined;
 }
 
-/** Mango unlock gifts the box only. Clear 6 (Ink) gifts nothing. Clear 9 gifts the Sun Cushion. Clear 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, and 60 gift nothing. */
+/** Mango@3 box · Biscuit@9 cushion · Shadow@27 fountain fallback · Cloud@48 yarn fallback. Soft hearts only. */
 export function furnitureGiftsForClear(clearIndex: number) {
   if (
     clearIndex === 6 ||
@@ -423,14 +423,12 @@ export function furnitureGiftsForClear(clearIndex: number) {
     clearIndex === 18 ||
     clearIndex === 21 ||
     clearIndex === 24 ||
-    clearIndex === 27 ||
     clearIndex === 30 ||
     clearIndex === 33 ||
     clearIndex === 36 ||
     clearIndex === 39 ||
     clearIndex === 42 ||
     clearIndex === 45 ||
-    clearIndex === 48 ||
     clearIndex === 51 ||
     clearIndex === 54 ||
     clearIndex === 57 ||
@@ -444,6 +442,13 @@ export function furnitureGiftsForClear(clearIndex: number) {
   }
   if (clearIndex === 9) {
     return gifts.filter((sku) => sku.skuId === "furn_bed_cushion");
+  }
+  // Comfort escalation — gift if unowned (SaveProvider Set-dedupes when already bought)
+  if (clearIndex === 27) {
+    return FURNITURE.filter((sku) => sku.skuId === "furn_fountain_stone");
+  }
+  if (clearIndex === 48) {
+    return FURNITURE.filter((sku) => sku.skuId === "furn_swing_yarn");
   }
   return gifts;
 }

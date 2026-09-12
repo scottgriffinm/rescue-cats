@@ -86,14 +86,14 @@
         "sku_id": "furn_fountain_stone",
         "label": "Stone Fountain",
         "hearts": 90,
-        "unlock_clear": 15,
+        "unlock_clear": 18,
         "asset": "/assets/furniture/fountain.svg"
       },
       {
         "sku_id": "furn_perch_high",
         "label": "High Perch",
-        "hearts": 200,
-        "unlock_clear": 30,
+        "hearts": 120,
+        "unlock_clear": 36,
         "asset": "/assets/furniture/swing.svg"
       }
     ]

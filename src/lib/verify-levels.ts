@@ -3498,8 +3498,8 @@ for (const level of LEVELS) {
     ["furn_scratch_post", "/assets/furniture/scratcher.svg", 15, 3],
     ["furn_tree_mini", "/assets/furniture/miniTree.svg", 40, 3],
     ["furn_swing_yarn", "/assets/furniture/yarnSwing.svg", 40, 6],
-    ["furn_fountain_stone", "/assets/furniture/fountain.svg", 90, 15],
-    ["furn_perch_high", "/assets/furniture/swing.svg", 200, 30],
+    ["furn_fountain_stone", "/assets/furniture/fountain.svg", 90, 18],
+    ["furn_perch_high", "/assets/furniture/swing.svg", 120, 36],
   ];
   for (const [skuId, asset, hearts, unlock] of shopArt) {
     const shop = CHAPTER2.shop.items.find((item) => item.sku_id === skuId);
@@ -3526,13 +3526,13 @@ for (const level of LEVELS) {
   <ellipse cx="36" cy="30" rx="10" ry="4" fill="#D96B4A" stroke="#2B2A28" stroke-width="2"/>
 </svg>`,
     "public/assets/furniture/yarnSwing.svg": `<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96" fill="none">
-  <path d="M18 80 L44 22 L52 22 L28 80 Z" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/>
-  <path d="M78 80 L52 22 L44 22 L68 80 Z" fill="#D4C6B4" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/>
-  <rect x="40" y="20" width="16" height="6" rx="2" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2"/>
+  <path d="M18 80 L44 22 L52 22 L28 80 Z" fill="#C4A882" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M78 80 L52 22 L44 22 L68 80 Z" fill="#B89870" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/>
+  <rect x="40" y="20" width="16" height="6" rx="2" fill="#C4A882" stroke="#2B2A28" stroke-width="2"/>
   <path d="M44 26 L40 58" stroke="#2B2A28" stroke-width="2.5" stroke-linecap="round"/>
   <path d="M52 26 L56 58" stroke="#2B2A28" stroke-width="2.5" stroke-linecap="round"/>
-  <rect x="32" y="56" width="32" height="10" rx="3" fill="#EDE4D8" stroke="#2B2A28" stroke-width="2.5"/>
-  <rect x="34" y="58" width="28" height="4" rx="1.5" fill="#F7F0E6" opacity="0.8"/>
+  <circle cx="48" cy="62" r="12" fill="#D96B4A" stroke="#2B2A28" stroke-width="2.5"/>
+  <path d="M40 58 C46 56 50 62 56 60 M42 66 C48 64 52 68 56 64" fill="none" stroke="#2B2A28" stroke-width="1.6" stroke-linecap="round"/>
 </svg>`,
   };
   for (const [file, expected] of Object.entries(artSvg)) {
@@ -3786,7 +3786,7 @@ for (const level of LEVELS) {
     throw new Error("Ghost yard/unlock must map ghost 72 → ghost_loaf_72");
   }
   const shopStill = shopItemsForClear(15).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Ghost: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/ghost_loaf_48.svg", "public/assets/cats/ghost_loaf_72.svg"]) {
@@ -4274,7 +4274,7 @@ for (const level of LEVELS) {
   if (shadow.phenotype.boardColor !== "black") throw new Error("Shadow must be color_black");
   if (shadow.phenotype.pattern !== "Solid") throw new Error("Shadow must stay full-black solid");
   if (shadow.phenotype.color !== "Black") throw new Error("Shadow must stay Black");
-  if (furnitureGiftsForClear(27).length !== 0) throw new Error("clear 27 must gift nothing");
+  if (furnitureGiftsForClear(27).map((sku) => sku.skuId).join(",") !== "furn_fountain_stone") throw new Error("clear 27 must gift fountain");
   const bang = CHAPTER3_SHADOW.bang_copy.friend_009?.[0];
   if (bang !== "{Name}: First full-black. The porch just got cooler.") {
     throw new Error(`Shadow first-night drifted: ${bang}`);
@@ -4469,7 +4469,7 @@ for (const level of LEVELS) {
     throw new Error("Noodle wiring must not move Pumpkin classic loafs");
   }
   const shopStill = shopItemsForClear(30).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_fountain_stone,furn_perch_high,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Noodle: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/noodle_loaf_48.svg", "public/assets/cats/noodle_loaf_72.svg"]) {
@@ -4648,7 +4648,7 @@ for (const level of LEVELS) {
     throw new Error("Clover wiring must not move Noodle long loafs");
   }
   const shopStill = shopItemsForClear(33).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_fountain_stone,furn_perch_high,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Clover: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/clover_loaf_48.svg", "public/assets/cats/clover_loaf_72.svg"]) {
@@ -5385,7 +5385,7 @@ for (const level of LEVELS) {
   if (cloud.phenotype.phenotypeId !== "pheno_dsh_cream_solid_regular_regular_cloud") {
     throw new Error(`Cloud phenotype drifted: ${cloud.phenotype.phenotypeId}`);
   }
-  if (furnitureGiftsForClear(48).length !== 0) throw new Error("clear 48 must gift nothing");
+  if (furnitureGiftsForClear(48).map((sku) => sku.skuId).join(",") !== "furn_swing_yarn") throw new Error("clear 48 must gift yarn");
   const bang = CHAPTER3_CLOUD.bang_copy.friend_016?.[0];
   if (bang !== "{Name}: Floats from cushion to cushion.") {
     throw new Error(`Cloud first-night drifted: ${bang}`);
@@ -5873,23 +5873,31 @@ for (const level of LEVELS) {
 
 
 {
-  // Rival Conditional A — Comfort/shop scale with parade
+  // Rival Conditional A — Comfort escalation lock (Collection)
   const shop15 = shopItemsForClear(15).map((sku) => sku.skuId).sort();
-  if (shop15.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
-    throw new Error(`shop @15 must unlock Stone Fountain: ${shop15.join(",")}`);
+  if (shop15.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+    throw new Error(`shop @15 must stay pre-fountain: ${shop15.join(",")}`);
   }
-  const shop30 = shopItemsForClear(30).map((sku) => sku.skuId).sort();
-  if (shop30.join(",") !== "furn_fountain_stone,furn_perch_high,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
-    throw new Error(`shop @30 must unlock High Perch: ${shop30.join(",")}`);
+  const shop18 = shopItemsForClear(18).map((sku) => sku.skuId).sort();
+  if (shop18.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+    throw new Error(`shop @18 must unlock Stone Fountain: ${shop18.join(",")}`);
+  }
+  const shop36 = shopItemsForClear(36).map((sku) => sku.skuId).sort();
+  if (shop36.join(",") !== "furn_fountain_stone,furn_perch_high,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+    throw new Error(`shop @36 must unlock High Perch: ${shop36.join(",")}`);
   }
   const fountain = FURNITURE.find((sku) => sku.skuId === "furn_fountain_stone");
   const perch = FURNITURE.find((sku) => sku.skuId === "furn_perch_high");
-  if (!fountain || fountain.hearts !== 90 || fountain.shopUnlockClear !== 15 || fountain.comfort !== 2) {
-    throw new Error("Stone Fountain must be 90♥ @15 +2 Comfort");
+  if (!fountain || fountain.hearts !== 90 || fountain.shopUnlockClear !== 18 || fountain.comfort !== 2) {
+    throw new Error("Stone Fountain must be 90♥ @18 +2 Comfort");
   }
-  if (!perch || perch.hearts !== 200 || perch.shopUnlockClear !== 30 || perch.comfort !== 3) {
-    throw new Error("High Perch must be 200♥ @30 +3 Comfort");
+  if (!perch || perch.hearts !== 120 || perch.shopUnlockClear !== 36 || perch.comfort !== 3) {
+    throw new Error("High Perch must be 120♥ @36 +3 Comfort");
   }
+  const gifts27 = furnitureGiftsForClear(27).map((sku) => sku.skuId);
+  if (gifts27.join(",") !== "furn_fountain_stone") throw new Error("clear 27 must gift fountain fallback");
+  const gifts48 = furnitureGiftsForClear(48).map((sku) => sku.skuId);
+  if (gifts48.join(",") !== "furn_swing_yarn") throw new Error("clear 48 must gift yarn fallback");
   const yardScene = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if (!yardScene.includes("hasFountain") || !yardScene.includes("hasPerch")) {
     throw new Error("YardScene must gate fountain + perch on ownership");
@@ -5897,7 +5905,7 @@ for (const level of LEVELS) {
   if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[63] || SLICE_UNLOCKS[66]) {
     throw new Error("no unlocks past Bean@60");
   }
-  console.log("Rival Conditional A ok · shop fountain@15 perch@30 · yard gates");
+  console.log("Rival Conditional A ok · fountain@18/90 · perch@36/120 · gifts 27/48 · yard gates");
 }
 
 console.log("All authored boards ok");
