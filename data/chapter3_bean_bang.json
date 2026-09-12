@@ -1,0 +1,35 @@
+{
+  "version": "chapter3_bean_bang",
+  "status": "READY",
+  "friend_id": "friend_020",
+  "unlock_clear": 60,
+  "personality": "Tiny",
+  "display_line": "Small, complete, and slightly smug about it.",
+  "art": {
+    "loaf_48": "/assets/cats/bean_loaf_48.svg",
+    "loaf_72": "/assets/cats/bean_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "bean"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Bean",
+      "Seed",
+      "Nib"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_020": [
+      "{Name}: Small, complete, and slightly smug about it.",
+      "{Name}: Already claimed the smallest warm spot. It is enough."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 60,
+    "sku_id": null,
+    "note": "Parade finale. Clear 60 gifts nothing unless Collection adds one. Box stays Mango@3. Sun Cushion stays Biscuit@9. CURRENT art_kit ginger is ignored. No Pebble."
+  }
+}
