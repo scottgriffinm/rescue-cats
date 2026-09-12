@@ -1,0 +1,35 @@
+{
+  "version": "chapter3_nigel_bang",
+  "status": "READY",
+  "friend_id": "friend_019",
+  "unlock_clear": 57,
+  "personality": "Proper",
+  "display_line": "Introduces himself like a neighbor with a clipboard.",
+  "art": {
+    "loaf_48": "/assets/cats/nigel_loaf_48.svg",
+    "loaf_72": "/assets/cats/nigel_loaf_72.svg",
+    "board_color": "black",
+    "art_kit": "nigel"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Nigel",
+      "Clive",
+      "Graham"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_019": [
+      "{Name}: Introduces himself like a neighbor with a clipboard.",
+      "{Name}: Already inspecting the fence posts. They are acceptable."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 57,
+    "sku_id": null,
+    "note": "PREP ONLY until Rival Sunny Pass. No gift. Bean@60 stays gated. Do not reuse Donna/Karen/Helen or Tux/Domino/Bowtie."
+  }
+}

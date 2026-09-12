@@ -17,6 +17,7 @@ import chapter3mPack from "../../data/levels/CHAPTER3_PUZZLE_L46_L48.json";
 import chapter3nPack from "../../data/levels/CHAPTER3_PUZZLE_L49_L51.json";
 import chapter3oPack from "../../data/levels/CHAPTER3_PUZZLE_L52_L54.json";
 import chapter3pPack from "../../data/levels/CHAPTER3_PUZZLE_L55_L57.json";
+import chapter3qPack from "../../data/levels/CHAPTER3_PUZZLE_L58_L60.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
@@ -70,6 +71,9 @@ import l54Pack from "../../data/levels/L54.json";
 import l55Pack from "../../data/levels/L55.json";
 import l56Pack from "../../data/levels/L56.json";
 import l57Pack from "../../data/levels/L57.json";
+import l58Pack from "../../data/levels/L58.json";
+import l59Pack from "../../data/levels/L59.json";
+import l60Pack from "../../data/levels/L60.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
@@ -93,8 +97,10 @@ import {
   CHAPTER3_CLOUD,
   CHAPTER3_DONNA,
   CHAPTER3_SUNNY,
+  CHAPTER3_NIGEL,
   DONNA_FRIEND_ID,
   SUNNY_FRIEND_ID,
+  NIGEL_FRIEND_ID,
   SLICE_UNLOCKS,
   artForKit,
   chipsForFriend,
@@ -1165,6 +1171,63 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_black", 5, 4],
     ],
   },
+  L58: {
+    size: 6,
+    N: 12,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [4, 4],
+      [0, 2],
+      [0, 1],
+    ],
+    cats: [
+      ["cat_orange", 5, 0],
+      ["cat_gray", 5, 3],
+    ],
+    gates: [
+      ["gate_orange", 2, 3],
+      ["gate_gray", 5, 5],
+    ],
+  },
+  L59: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 3],
+      [4, 0],
+      [0, 4],
+    ],
+    cats: [
+      ["cat_orange", 3, 1],
+      ["cat_gray", 3, 5],
+    ],
+    gates: [
+      ["gate_orange", 3, 3],
+      ["gate_gray", 3, 2],
+    ],
+  },
+  L60: {
+    size: 6,
+    N: 12,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [5, 4],
+      [3, 5],
+      [0, 5],
+    ],
+    cats: [
+      ["cat_orange", 2, 3],
+      ["cat_black", 0, 3],
+    ],
+    gates: [
+      ["gate_orange", 1, 1],
+      ["gate_black", 4, 4],
+    ],
+  },
 
 };
 
@@ -1723,6 +1786,39 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "w"],
     ["cat_orange", "s"],
   ],
+  L58: [
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_gray", "w"],
+    ["cat_orange", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+  ],
+  L59: [
+    ["cat_orange", "e"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+  ],
+  L60: [
+    ["cat_orange", "n"],
+    ["cat_black", "n"],
+    ["cat_black", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_black", "w"],
+    ["cat_black", "s"],
+    ["cat_black", "e"],
+  ],
 };
 
 function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
@@ -1812,7 +1908,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45,L46,L47,L48,L49,L50,L51,L52,L53,L54,L55,L56,L57") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45,L46,L47,L48,L49,L50,L51,L52,L53,L54,L55,L56,L57,L58,L59,L60") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
   for (const id of [
@@ -1869,6 +1965,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     "L55",
     "L56",
     "L57",
+    "L58",
+    "L59",
+    "L60",
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -1904,6 +2003,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       ...chapter3nPack.levels,
       ...chapter3oPack.levels,
       ...chapter3pPack.levels,
+      ...chapter3qPack.levels,
     ].map((level) => [
       level.id,
       level as PackedBoard,
@@ -1963,6 +2063,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L55: [l55Pack as PackedBoard],
     L56: [l56Pack as PackedBoard],
     L57: [l57Pack as PackedBoard],
+    L58: [l58Pack as PackedBoard],
+    L59: [l59Pack as PackedBoard],
+    L60: [l60Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -2034,7 +2137,10 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       id === "L54" ||
       id === "L55" ||
       id === "L56" ||
-      id === "L57"
+      id === "L57" ||
+      id === "L58" ||
+      id === "L59" ||
+      id === "L60"
     ) {
       for (const copy of copies) {
         for (const piece of [...copy.cats, ...copy.gates]) {
@@ -2043,7 +2149,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       }
     }
   }
-  console.log("Standalone L4–L9 + L11–L57 + LT02/L06-07/LT08 match locked coords");
+  console.log("Standalone L4–L9 + L11–L60 + LT02/L06-07/LT08 match locked coords");
 }
 
 {
@@ -4717,11 +4823,11 @@ for (const level of LEVELS) {
   if (l39.number !== 39) throw new Error(`L39 HUD number must be 39, got ${l39.number}`);
   if (l9.number !== 9) throw new Error(`L9 HUD number must be 9, got ${l9.number}`);
   if (l11.number !== 11) throw new Error(`L11 HUD number must be 11, got ${l11.number}`);
-  if (CAMPAIGN_LEVEL_COUNT !== 57) {
-    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 57 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 60) {
+    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 60 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
   }
-  if (LEVELS.length !== 56) {
-    throw new Error(`campaign board count must stay 56 with L10 off-path, got ${LEVELS.length}`);
+  if (LEVELS.length !== 59) {
+    throw new Error(`campaign board count must stay 59 with L10 off-path, got ${LEVELS.length}`);
   }
   for (const level of LEVELS) {
     const parsed = Number(level.id.replace(/^L/i, ""));
@@ -4750,7 +4856,9 @@ for (const level of LEVELS) {
   const afterL54 = nextCampaignLevel("L54");
   if (afterL54?.id !== "L55") throw new Error("L54 must route to L55");
   const afterL57 = nextCampaignLevel("L57");
-  if (afterL57) throw new Error("L57 must be the last campaign board");
+  if (afterL57?.id !== "L58") throw new Error("L57 must route to L58");
+  const afterL60 = nextCampaignLevel("L60");
+  if (afterL60) throw new Error("L60 must be the last campaign board");
   const l48hud = LEVELS.find((level) => level.id === "L48");
   if (!l48hud || l48hud.number !== 48) throw new Error(`L48 HUD number must be 48, got ${l48hud?.number}`);
   const l51hud = LEVELS.find((level) => level.id === "L51");
@@ -4759,7 +4867,9 @@ for (const level of LEVELS) {
   if (!l54hud || l54hud.number !== 54) throw new Error(`L54 HUD number must be 54, got ${l54hud?.number}`);
   const l57hud = LEVELS.find((level) => level.id === "L57");
   if (!l57hud || l57hud.number !== 57) throw new Error(`L57 HUD number must be 57, got ${l57hud?.number}`);
-  console.log("Level index HUD locks ok · L20=20/57 · L57=57/57 · L9→L11 · L48→L49 · L51→L52 · L54→L55");
+  const l60hud = LEVELS.find((level) => level.id === "L60");
+  if (!l60hud || l60hud.number !== 60) throw new Error(`L60 HUD number must be 60, got ${l60hud?.number}`);
+  console.log("Level index HUD locks ok · L20=20/60 · L60=60/60 · L9→L11 · L48→L49 · L51→L52 · L54→L55 · L57→L58");
 }
 
 {
@@ -5384,7 +5494,9 @@ for (const level of LEVELS) {
   }
   if (shippedFriendForClear(55)) throw new Error("L55 must not award a friend");
   if (shippedFriendForClear(56)) throw new Error("L56 must not award a friend");
-  if (shippedFriendForClear(57)) throw new Error("L57 must not award a friend");
+  if (shippedFriendForClear(57)?.friendId !== "friend_019") {
+    throw new Error("shipped parade must award Nigel at 57");
+  }
   if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
   if (friendForClear(60)?.friendId !== "friend_020") {
     throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
@@ -5427,6 +5539,71 @@ for (const level of LEVELS) {
     throw new Error("L55/L57 must not reuse Rim Latch / Anchor Brake / Hold*/Park*/Thread*");
   }
   console.log("Rival rewrite L55/L57 ok · Hook Route · Corner Brace");
+}
+
+
+{
+  const nigel = friendById(NIGEL_FRIEND_ID);
+  if (!nigel || nigel.friendId !== "friend_019") throw new Error("Nigel friend_019 missing");
+  if (nigel.unlockClear !== 57) throw new Error("Nigel must unlock at 57");
+  if (nigel.phenotype.artKit !== "nigel") throw new Error("Nigel kit must be nigel (not tuxedo/calico)");
+  if (nigel.phenotype.personality !== "Proper") throw new Error("Nigel personality must be Proper");
+  const chips = chipsForFriend(NIGEL_FRIEND_ID);
+  if (chips.join("/") !== "Nigel/Clive/Graham") throw new Error(`Nigel chips must be Nigel/Clive/Graham, got ${chips.join("/")}`);
+  for (const ban of ["Donna", "Karen", "Helen", "Tux", "Domino", "Bowtie", "Steve", "Greg", "Sunny", "Beam", "Glow"]) {
+    if (chips.includes(ban)) throw new Error(`Nigel chips must not include ${ban}`);
+  }
+  if (furnitureGiftsForClear(57).length !== 0) throw new Error("Nigel@57 must gift nothing");
+  if (SLICE_UNLOCKS[57] !== "friend_019") throw new Error("SLICE_UNLOCKS[57] must be friend_019");
+  if (SLICE_UNLOCKS[60]) throw new Error("Bean@60 must stay out of SLICE_UNLOCKS this slice");
+  if (artForKit("nigel").loaf72 !== "/assets/cats/nigel_loaf_72.svg") {
+    throw new Error("Nigel yard/unlock must map nigel 72 → nigel_loaf_72");
+  }
+  for (const file of [
+    "public/assets/cats/nigel_loaf_48.svg",
+    "public/assets/cats/nigel_loaf_72.svg",
+  ]) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  const nigelArt = readFileSync(resolve("public/assets/cats/nigel_loaf_72.svg"), "utf8");
+  const tuxArt = readFileSync(resolve("public/assets/cats/tux_loaf_72.svg"), "utf8");
+  const donnaArt = readFileSync(resolve("public/assets/cats/donna_loaf_72.svg"), "utf8");
+  if (nigelArt === tuxArt) throw new Error("Nigel loaf must not be a Tux clone");
+  if (nigelArt === donnaArt) throw new Error("Nigel loaf must not be a Donna clone");
+  if (paradeClearForLevel("L57") !== 57) throw new Error("L57 must map to parade clear 57");
+  if (paradeClearForLevel("L58") !== 58) throw new Error("L58 must map to parade clear 58");
+  if (paradeClearForLevel("L60") !== 60) throw new Error("L60 must map to parade clear 60");
+  if (shippedFriendForClear(57)?.friendId !== "friend_019") {
+    throw new Error("shipped parade must award Nigel at 57");
+  }
+  if (shippedFriendForClear(58)) throw new Error("L58 must not award a friend");
+  if (shippedFriendForClear(59)) throw new Error("L59 must not award a friend");
+  if (shippedFriendForClear(60)) throw new Error("Bean@60 must stay unshipped this slice");
+  if (friendForClear(60)?.friendId !== "friend_020") {
+    throw new Error("CURRENT must still list Bean at clear 60 for a later slice");
+  }
+  for (const id of ["L58", "L59", "L60"] as const) {
+    const level = LEVELS.find((row) => row.id === id);
+    if (!level?.colorLocks) throw new Error(`${id} must lock colors`);
+  }
+  const l58 = LEVELS.find((level) => level.id === "L58")!;
+  const l59 = LEVELS.find((level) => level.id === "L59")!;
+  const l60 = LEVELS.find((level) => level.id === "L60")!;
+  if (l58.name !== "Pinch Route") throw new Error("L58 must be Pinch Route");
+  if (l59.name !== "Color Shelf") throw new Error("L59 must be Color Shelf");
+  if (l60.name !== "Brace Stop") throw new Error("L60 must be Brace Stop");
+  if (/\b(hold|park|close|thread)\b/i.test([l58.name, l59.name, l60.name].join(" "))) {
+    throw new Error("L58–L60 must not be Hold*/Park*/Close/Thread*");
+  }
+  const packNames = (chapter3qPack.levels as { id: string; name: string }[]).map((row) => `${row.id}:${row.name}`);
+  if (packNames.join(",") !== "L58:Pinch Route,L59:Color Shelf,L60:Brace Stop") {
+    throw new Error(`Nigel pack names drifted: ${packNames.join(",")}`);
+  }
+  // single porch slot — no duplicate nigel const in YardScene
+  const yard = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
+  if ((yard.match(/const nigel =/g) || []).length !== 1) throw new Error("YardScene must declare nigel once");
+  if ((yard.match(/\{nigel \?/g) || []).length !== 1) throw new Error("YardScene must render nigel once");
+  console.log("Nigel @ onClear(57) ok · blaze shirtfront loafs + L58–L60 wired (Pinch Route / Color Shelf / Brace Stop); Bean@60 gated");
 }
 
 console.log("All authored boards ok");

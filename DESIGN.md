@@ -80,6 +80,10 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L55 Hook Route.**
 - **L56 Color Fork.**
 - **L57 Corner Brace.**
+- **L58 Pinch Route.**
+- **L59 Color Shelf.**
+- **L60 Brace Stop.**
+- **Nigel@57** — blaze + full shirtfront; chips Nigel/Clive/Graham; no gift. Bean@60 gated.
 - **Sunny@54** — bright orange solid + marigold sun-belly; chips Sunny/Sol/Beam; no gift.
 - **Donna@51** — split-face calico loaf; chips Donna/Karen/Helen; no gift. Orange/black color-cross dual brake.
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
