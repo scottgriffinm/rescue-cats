@@ -20,6 +20,8 @@ export function YardScene({
   hasScratch,
   hasYarn,
   hasCushion,
+  hasFountain,
+  hasPerch,
   bangFriendId,
   onBang,
 }: {
@@ -29,6 +31,8 @@ export function YardScene({
   hasScratch?: boolean;
   hasYarn?: boolean;
   hasCushion?: boolean;
+  hasFountain?: boolean;
+  hasPerch?: boolean;
   bangFriendId?: string | null;
   onBang?: (instanceId: string) => void;
 }) {
@@ -85,7 +89,18 @@ export function YardScene({
 
       <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] w-[56%]" />
       <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] w-[22%]" />
-      <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[24%]" />
+      {hasFountain ? (
+        <FurnitureImg
+          file="fountain"
+          className="yard-drop absolute left-[10%] top-[38%] w-[24%]"
+        />
+      ) : null}
+      {hasPerch ? (
+        <FurnitureImg
+          file="swing"
+          className="yard-drop absolute right-[22%] top-[32%] w-[22%]"
+        />
+      ) : null}
       {hasTree ? (
         <FurnitureImg file="miniTree" className="absolute right-[10%] top-[18%] w-[20%]" />
       ) : null}

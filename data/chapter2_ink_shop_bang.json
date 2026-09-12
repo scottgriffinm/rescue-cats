@@ -15,21 +15,48 @@
   "naming": {
     "prefill": "",
     "require_choice": true,
-    "suggestion_chips": ["Ink", "Slate", "Nimbus"],
+    "suggestion_chips": [
+      "Ink",
+      "Slate",
+      "Nimbus"
+    ],
     "cta_primary": "Welcome home"
   },
   "bang_copy": {
-    "friend_001": ["{Name}: Still sniffing everything…"],
-    "friend_002": ["{Name}: Quiet gray paws. Already claimed a shadow."]
+    "friend_001": [
+      "{Name}: Still sniffing everything\u2026"
+    ],
+    "friend_002": [
+      "{Name}: Quiet gray paws. Already claimed a shadow."
+    ]
   },
   "personality_pools": {
-    "Soft": ["Ink", "Slate", "Nimbus"],
-    "Curious": ["Mango", "Pip", "Bean"],
-    "Hungry": ["Biscuit", "Mochi", "Toast"],
-    "Formal": ["Nigel", "Donna", "Greg"]
+    "Soft": [
+      "Ink",
+      "Slate",
+      "Nimbus"
+    ],
+    "Curious": [
+      "Mango",
+      "Pip",
+      "Bean"
+    ],
+    "Hungry": [
+      "Biscuit",
+      "Mochi",
+      "Toast"
+    ],
+    "Formal": [
+      "Nigel",
+      "Donna",
+      "Greg"
+    ]
   },
   "hearts_by_clear_band": {
-    "1-6": [5, 7]
+    "1-6": [
+      5,
+      7
+    ]
   },
   "shop": {
     "open_clear": 3,
@@ -54,6 +81,20 @@
         "hearts": 40,
         "unlock_clear": 6,
         "asset": "/assets/furniture/yarnSwing.svg"
+      },
+      {
+        "sku_id": "furn_fountain_stone",
+        "label": "Stone Fountain",
+        "hearts": 90,
+        "unlock_clear": 24,
+        "asset": "/assets/furniture/fountain.svg"
+      },
+      {
+        "sku_id": "furn_perch_high",
+        "label": "High Perch",
+        "hearts": 200,
+        "unlock_clear": 36,
+        "asset": "/assets/furniture/swing.svg"
       }
     ]
   },

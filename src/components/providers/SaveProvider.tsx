@@ -20,6 +20,7 @@ import {
   NAMING,
   SHOP_STARTER,
   bangLinesFor,
+  FURNITURE,
 } from "@/lib/collection";
 import {
   FIRST_NIGHT_HEARTS,
@@ -291,10 +292,13 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
       buyFurniture: (skuId, cost) => {
         const current = snap.save;
         if (current.hearts < cost || current.furniture.includes(skuId)) return false;
+        const sku = FURNITURE.find((item) => item.skuId === skuId);
+        const landed = sku ? `${sku.name} landed on the porch.` : "Something new landed on the porch.";
         setSave({
           ...current,
           hearts: current.hearts - cost,
           furniture: [...current.furniture, skuId],
+          bubbles: [landed, ...current.bubbles.filter((bubble) => bubble !== landed)].slice(0, 4),
         });
         return true;
       },

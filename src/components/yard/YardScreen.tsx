@@ -39,6 +39,8 @@ export function YardScreen() {
   const hasScratch = save.furniture.includes("furn_scratch_post");
   const hasYarn = save.furniture.includes("furn_swing_yarn");
   const hasCushion = save.furniture.includes("furn_bed_cushion");
+  const hasFountain = save.furniture.includes("furn_fountain_stone");
+  const hasPerch = save.furniture.includes("furn_perch_high");
   const introFriend = save.friends.find((friend) => friend.firstNight);
   const [bangFriendId, setBangFriendId] = useState<string | null>(null);
   const newestFriend = save.friends[save.friends.length - 1];
@@ -108,6 +110,8 @@ export function YardScreen() {
             hasScratch={hasScratch}
             hasYarn={hasYarn}
             hasCushion={hasCushion}
+            hasFountain={hasFountain}
+            hasPerch={hasPerch}
             bangFriendId={bangFriendId}
             onBang={(instanceId) => {
               completeFirstNight(instanceId);
@@ -235,9 +239,13 @@ function ShopRow({
   const heartsOpen = shopUnlocked(cleared);
   if (!heartsOpen) return null;
 
-  const heartItems = shopItemsForClear(cleared).filter(
-    (sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId),
-  );
+  const heartItems = shopItemsForClear(cleared)
+    .filter((sku) => sku.hearts > 0 && !ownedFurniture.includes(sku.skuId))
+    .sort(
+      (a, b) =>
+        (a.shopUnlockClear ?? 0) - (b.shopUnlockClear ?? 0) || a.hearts - b.hearts,
+    )
+    .slice(0, 1);
   const starItem = STAR_COSMETICS.find((item) => !ownedCosmetics.includes(item.id));
   if (heartItems.length === 0 && !starItem) return null;
 
@@ -284,7 +292,7 @@ function ShopRow({
         );
       })}
       {heartItems.length === 0 && ownedStarter ? (
-        <p className="text-center text-xs text-ink/50">Sisal Scratch Post is on the porch.</p>
+        <p className="text-center text-xs text-ink/50">The porch grew. Keep sliding.</p>
       ) : null}
       {starItem ? (
         <button

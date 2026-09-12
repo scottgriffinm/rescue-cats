@@ -194,8 +194,8 @@ Bean / loaf silhouettes, readable at 48px. Puzzle cats use `public/assets/cats/c
 | --- | --- | --- |
 | Box | `public/assets/furniture/boxBed.svg` | **Only** gift with Mango at unique clear 3. |
 | Sun Cushion | `public/assets/furniture/sunCushion.svg` | **Only** gift with Biscuit at unique clear 9. |
-| Swing | `public/assets/furniture/swing.svg` | Shop stub; also stands in for the free onboarding tree. |
-| Fountain | `public/assets/furniture/fountain.svg` | Shop stub + lawn fixture on the isometric yard. |
+| Swing / High Perch | `public/assets/furniture/swing.svg` | Hearts shop @36 (200♥, +3 Comfort). Drop-in, not a gift. |
+| Fountain | `public/assets/furniture/fountain.svg` | Hearts shop @24 (90♥, +2 Comfort). Drop-in — not always-on trim. |
 | Post + bell | `public/assets/furniture/postBell.svg` | Shop stub / yard trim. |
 | Fence | `public/assets/furniture/fence.svg` | Shop stub / yard trim. |
 

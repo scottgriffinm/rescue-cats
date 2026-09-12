@@ -3498,6 +3498,8 @@ for (const level of LEVELS) {
     ["furn_scratch_post", "/assets/furniture/scratcher.svg", 15, 3],
     ["furn_tree_mini", "/assets/furniture/miniTree.svg", 40, 3],
     ["furn_swing_yarn", "/assets/furniture/yarnSwing.svg", 40, 6],
+    ["furn_fountain_stone", "/assets/furniture/fountain.svg", 90, 24],
+    ["furn_perch_high", "/assets/furniture/swing.svg", 200, 36],
   ];
   for (const [skuId, asset, hearts, unlock] of shopArt) {
     const shop = CHAPTER2.shop.items.find((item) => item.sku_id === skuId);
@@ -4143,7 +4145,7 @@ for (const level of LEVELS) {
     throw new Error("Pumpkin wiring must not move Tux tuxedo loafs");
   }
   const shopStill = shopItemsForClear(24).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Pumpkin: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/pumpkin_loaf_48.svg", "public/assets/cats/pumpkin_loaf_72.svg"]) {
@@ -4299,7 +4301,7 @@ for (const level of LEVELS) {
     throw new Error("Shadow wiring must not move Pumpkin classic loafs");
   }
   const shopStill = shopItemsForClear(27).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Shadow: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/shadow_loaf_48.svg", "public/assets/cats/shadow_loaf_72.svg"]) {
@@ -4467,7 +4469,7 @@ for (const level of LEVELS) {
     throw new Error("Noodle wiring must not move Pumpkin classic loafs");
   }
   const shopStill = shopItemsForClear(30).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Noodle: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/noodle_loaf_48.svg", "public/assets/cats/noodle_loaf_72.svg"]) {
@@ -4646,7 +4648,7 @@ for (const level of LEVELS) {
     throw new Error("Clover wiring must not move Noodle long loafs");
   }
   const shopStill = shopItemsForClear(33).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_fountain_stone,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Clover: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/clover_loaf_48.svg", "public/assets/cats/clover_loaf_72.svg"]) {
@@ -4823,7 +4825,7 @@ for (const level of LEVELS) {
     throw new Error("Ash wiring must not move Clover spotted loafs");
   }
   const shopStill = shopItemsForClear(36).map((sku) => sku.skuId).sort();
-  if (shopStill.join(",") !== "furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
+  if (shopStill.join(",") !== "furn_fountain_stone,furn_perch_high,furn_scratch_post,furn_swing_yarn,furn_tree_mini") {
     throw new Error(`shop SKUs drifted after Ash: ${shopStill.join(",")}`);
   }
   for (const file of ["public/assets/cats/ash_loaf_48.svg", "public/assets/cats/ash_loaf_72.svg"]) {

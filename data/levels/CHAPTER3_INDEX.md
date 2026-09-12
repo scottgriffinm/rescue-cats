@@ -84,7 +84,7 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 - Ash (`friend_012`) at `onClear(36)` after **L36** — chips **Cinder / Soot / Hearth**, warm hearth-ash loaf, no furniture gift
 - First-night: `{Name}: Warm like a hearth that just went quiet.`
 - Porch shows sixteen friends when owned (Mango / Ink / Biscuit / Tux / Ghost / Mist / Pepper / Pumpkin / Shadow / Noodle / Clover / Ash / Oak / Dumpling / Stripe / Cloud) plus box, cushion, and shop props
-- Hearts shop SKUs unchanged: scratcher 15♥ + mini tree 40♥ from clear ≥3; yarn swing 40♥ from clear ≥6. Mini Cat Tree is a shop card when not owned (not an auto-grant).
+- Hearts shop SKUs: scratcher 15♥ + mini tree 40♥ from clear ≥3; yarn swing 40♥ from clear ≥6; stone fountain 90♥ from clear ≥24; high perch 200♥ from clear ≥36. Mini Cat Tree is a shop card when not owned (not an auto-grant). No new gifts — box@3 and cushion@9 only.
 - Oak (`friend_013`) at `onClear(39)` after **L39** — chips **Oak / Acorn / Timber**, bark-warm blotch loaf, no furniture gift
 - First-night: `{Name}: Sturdy loaf. Will outlast the furniture.`
 - Dumpling (`friend_014`) at `onClear(42)` after **L42** — chips **Dumpling / Bao / Potsticker**, plump cream-fold loaf, no furniture gift

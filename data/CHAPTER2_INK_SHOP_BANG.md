@@ -10,6 +10,8 @@ Pack JSON: `chapter2_ink_shop_bang.json`. Overlay on `collection_CURRENT.json`. 
 | Naming | empty prefill, chips **Ink / Ash / Shadow**, CTA until a name |
 | Shop @3 | Scratch 15♥ · Mini tree 40♥ (purchasable when not owned) |
 | Shop @6 | Yarn swing 40♥ |
+| Shop @24 | Stone fountain 90♥ (Pumpkin parade) |
+| Shop @36 | High perch 200♥ (Ash parade) |
 | Hearts | Clears 1–6 grant 5–7 |
 | Ink `!` | `{Name}: Quiet gray paws. Already claimed a shadow.` |
 
