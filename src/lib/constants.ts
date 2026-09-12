@@ -23,7 +23,8 @@ export const ART_KIT_PATH: Record<
   | "dumpling"
   | "stripe"
   | "cloud"
-  | "donna",
+  | "donna"
+  | "sunny",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -97,6 +98,10 @@ export const ART_KIT_PATH: Record<
   donna: {
     loaf48: "/assets/cats/donna_loaf_48.svg",
     loaf72: "/assets/cats/donna_loaf_72.svg",
+  },
+  sunny: {
+    loaf48: "/assets/cats/sunny_loaf_48.svg",
+    loaf72: "/assets/cats/sunny_loaf_72.svg",
   },
 };
 
