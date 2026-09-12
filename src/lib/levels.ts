@@ -82,7 +82,7 @@ const HEADLINES: Record<string, string> = {
   L57: "CORNER BRACE",
   L58: "PINCH ROUTE",
   L59: "COLOR SHELF",
-  L60: "BRACE STOP",
+  L60: "POST BRACE",
 };
 
 const HINTS: Record<string, string> = {
@@ -144,7 +144,7 @@ const HINTS: Record<string, string> = {
   L57: "Corner brace on far corners — not Split Latch twin. Dual habits miss.",
   L58: "Pinch the gray route. Corner-brace habits miss the pinch.",
   L59: "Color shelf — park on the gray ledge. Pinch habits miss the shelf.",
-  L60: "Brace stop on the black house. Offset — Dual habits miss.",
+  L60: "Post brace on far corners (0,0)/(5,5) — not the (1,1)/(4,4) twin.",
 };
 
 type RawLevel = {

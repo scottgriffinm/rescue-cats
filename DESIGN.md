@@ -82,7 +82,7 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L57 Corner Brace.**
 - **L58 Pinch Route.**
 - **L59 Color Shelf.**
-- **L60 Brace Stop.**
+- **L60 Post Brace.**
 - **Nigel@57** — blaze + full shirtfront; chips Nigel/Clive/Graham; no gift. Bean@60 gated.
 - **Sunny@54** — bright orange solid + marigold sun-belly; chips Sunny/Sol/Beam; no gift.
 - **Donna@51** — split-face calico loaf; chips Donna/Karen/Helen; no gift. Orange/black color-cross dual brake.

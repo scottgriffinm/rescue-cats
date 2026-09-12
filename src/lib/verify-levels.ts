@@ -1215,17 +1215,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 4],
-      [3, 5],
-      [0, 5],
+      [2, 0],
+      [1, 3],
+      [0, 4],
     ],
     cats: [
-      ["cat_orange", 2, 3],
-      ["cat_black", 0, 3],
+      ["cat_orange", 4, 5],
+      ["cat_black", 0, 5],
     ],
     gates: [
-      ["gate_orange", 1, 1],
-      ["gate_black", 4, 4],
+      ["gate_orange", 0, 0],
+      ["gate_black", 5, 5],
     ],
   },
 
@@ -1809,15 +1809,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "s"],
   ],
   L60: [
-    ["cat_orange", "n"],
-    ["cat_black", "n"],
-    ["cat_black", "e"],
-    ["cat_orange", "s"],
     ["cat_orange", "w"],
     ["cat_orange", "n"],
-    ["cat_black", "w"],
-    ["cat_black", "s"],
     ["cat_black", "e"],
+    ["cat_black", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_black", "s"],
   ],
 };
 
@@ -5591,19 +5591,33 @@ for (const level of LEVELS) {
   const l60 = LEVELS.find((level) => level.id === "L60")!;
   if (l58.name !== "Pinch Route") throw new Error("L58 must be Pinch Route");
   if (l59.name !== "Color Shelf") throw new Error("L59 must be Color Shelf");
-  if (l60.name !== "Brace Stop") throw new Error("L60 must be Brace Stop");
+  if (l60.name !== "Post Brace") throw new Error("L60 must be Post Brace");
   if (/\b(hold|park|close|thread)\b/i.test([l58.name, l59.name, l60.name].join(" "))) {
     throw new Error("L58–L60 must not be Hold*/Park*/Close/Thread*");
   }
   const packNames = (chapter3qPack.levels as { id: string; name: string }[]).map((row) => `${row.id}:${row.name}`);
-  if (packNames.join(",") !== "L58:Pinch Route,L59:Color Shelf,L60:Brace Stop") {
+  if (packNames.join(",") !== "L58:Pinch Route,L59:Color Shelf,L60:Post Brace") {
     throw new Error(`Nigel pack names drifted: ${packNames.join(",")}`);
   }
   // single porch slot — no duplicate nigel const in YardScene
   const yard = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yard.match(/const nigel =/g) || []).length !== 1) throw new Error("YardScene must declare nigel once");
   if ((yard.match(/\{nigel \?/g) || []).length !== 1) throw new Error("YardScene must render nigel once");
-  console.log("Nigel @ onClear(57) ok · blaze shirtfront loafs + L58–L60 wired (Pinch Route / Color Shelf / Brace Stop); Bean@60 gated");
+  console.log("Nigel @ onClear(57) ok · blaze shirtfront loafs + L58–L60 wired (Pinch Route / Color Shelf / Post Brace); Bean@60 gated");
+}
+
+
+{
+  const l60p = LEVELS.find((row) => row.id === "L60");
+  if (!l60p) throw new Error("missing L60");
+  if (l60p.name !== "Post Brace") throw new Error(`L60 must be Post Brace, got ${l60p.name}`);
+  const g = [...l60p.gates].map((gate) => `${gate.x},${gate.y}`).sort().join("|");
+  if (g === "1,1|4,4") throw new Error("L60 must not use (1,1)/(4,4) Split/Anchor twin");
+  if (g !== "0,0|5,5") throw new Error(`L60 Post Brace gates must be (0,0)/(5,5), got ${g}`);
+  if (/brace stop|\bhold\b|\bpark\b|\bclose\b|\bthread\b/i.test(l60p.name)) {
+    throw new Error("L60 must not reuse Brace Stop / Hold*/Park*/Thread*");
+  }
+  console.log("Rival preempt L60 ok · Post Brace (0,0)/(5,5)");
 }
 
 console.log("All authored boards ok");
