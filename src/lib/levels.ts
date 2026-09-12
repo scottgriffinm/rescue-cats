@@ -18,6 +18,7 @@ import chapter3n from "../../data/levels/CHAPTER3_PUZZLE_L49_L51.json";
 import chapter3o from "../../data/levels/CHAPTER3_PUZZLE_L52_L54.json";
 import chapter3p from "../../data/levels/CHAPTER3_PUZZLE_L55_L57.json";
 import chapter3q from "../../data/levels/CHAPTER3_PUZZLE_L58_L60.json";
+import chapter3r from "../../data/levels/CHAPTER3_PUZZLE_L61_L63.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -83,6 +84,9 @@ const HEADLINES: Record<string, string> = {
   L58: "PINCH ROUTE",
   L59: "SKEW GATE",
   L60: "POST BRACE",
+  L61: "SPAN CUT",
+  L62: "MIRROR GAP",
+  L63: "FAR PEG",
 };
 
 const HINTS: Record<string, string> = {
@@ -145,6 +149,9 @@ const HINTS: Record<string, string> = {
   L58: "Pinch the gray route. Corner-brace habits miss the pinch.",
   L59: "Skew the orange/gray houses — not Color Step’s vertical twin.",
   L60: "Post brace on far corners (0,0)/(5,5) — not the (1,1)/(4,4) twin.",
+  L61: "Span cut across the gray gap. Post-brace habits miss the cut.",
+  L62: "Mirror gap — houses face across. Span habits miss the mirror.",
+  L63: "Far peg on the black house. Offset — Dual habits miss.",
 };
 
 type RawLevel = {
@@ -218,6 +225,7 @@ const authored = [
   ...chapter3o.levels,
   ...chapter3p.levels,
   ...chapter3q.levels,
+  ...chapter3r.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
