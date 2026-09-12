@@ -12,13 +12,20 @@ import {
   FURNITURE,
   NAMING,
   SHOP_STARTER,
+  SLICE_UNLOCKS,
   STAR_COSMETICS,
+  friendById,
   shopItemsForClear,
   shopUnlocked,
   withName,
 } from "@/lib/collection";
 import { FIRST_NIGHT_BANG_MS } from "@/lib/constants";
 import { LEVELS, nextLevel } from "@/lib/levels";
+
+/** Parade cadence chips — clears 3…60 → Mango…Bean (not one dot per board). */
+const PARADE_MILESTONES = Object.entries(SLICE_UNLOCKS)
+  .map(([clear, friendId]) => ({ clear: Number(clear), friendId }))
+  .sort((a, b) => a.clear - b.clear);
 
 export function YardScreen() {
   const {
@@ -142,21 +149,53 @@ export function YardScreen() {
 
       <FriendsMet friends={save.friends} />
 
-      <div className="flex flex-wrap justify-center gap-1.5 px-6">
-        {LEVELS.map((level) => {
-          const done = save.completedIds.includes(level.id);
-          const current = upcoming.id === level.id && !allDone;
-          return (
-            <Link
-              key={level.id}
-              href={`/level/${level.id}`}
-              className={`h-2.5 rounded-full border border-ink transition-all ${
-                done ? "w-6 bg-clay" : current ? "w-8 bg-ink" : "w-2.5 bg-paper"
-              }`}
-              aria-label={`Level ${level.number}${done ? " cleared" : ""}`}
-            />
-          );
-        })}
+      <div
+        className="flex flex-wrap items-end justify-center gap-1.5 px-6"
+        aria-label="Parade progress"
+      >
+        {(() => {
+          const nextClear =
+            PARADE_MILESTONES.find((milestone) => cleared < milestone.clear)?.clear ?? null;
+          return PARADE_MILESTONES.map((milestone) => {
+            const friend = friendById(milestone.friendId);
+            const rescued = save.friends.find((row) => row.friendId === milestone.friendId);
+            const label = rescued?.name ?? friend?.defaultName ?? milestone.friendId;
+            const done = cleared >= milestone.clear;
+            const current = !allDone && nextClear === milestone.clear;
+            const level = LEVELS[milestone.clear - 1] ?? upcoming;
+            return (
+              <Link
+                key={milestone.friendId}
+                href={`/level/${level.id}`}
+                className={`flex flex-col items-center gap-0.5 rounded-md px-0.5 transition-all ${
+                  current ? "opacity-100" : done ? "opacity-90" : "opacity-45"
+                }`}
+                aria-label={`${label} at clear ${milestone.clear}${
+                  done ? " rescued" : current ? " next" : " upcoming"
+                }`}
+                title={`${label} · ${milestone.clear} clears`}
+              >
+                <span
+                  className={`rounded-full border border-ink transition-all ${
+                    done
+                      ? "h-2.5 w-6 bg-clay"
+                      : current
+                        ? "h-2.5 w-8 bg-ink"
+                        : "h-2.5 w-2.5 bg-paper"
+                  }`}
+                  aria-hidden
+                />
+                <span
+                  className={`max-w-[2.6rem] truncate font-display text-[8px] leading-none tracking-wide ${
+                    current ? "text-ink" : done ? "text-clay" : "text-ink/40"
+                  }`}
+                >
+                  {label}
+                </span>
+              </Link>
+            );
+          });
+        })()}
       </div>
 
       <footer className="space-y-3 px-5 pb-6 pt-4">
