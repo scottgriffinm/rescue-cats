@@ -1,0 +1,54 @@
+{
+  "version": "comfort_escalation_v1",
+  "status": "READY",
+  "locks": {
+    "currency": "soft_hearts",
+    "iap": false,
+    "heart_packs": false,
+    "friend_021": false,
+    "pebble": false,
+    "parade": "Mango@3 Tux@12 Pumpkin@24 Shadow@27 Noodle@30 Bean@60"
+  },
+  "problem": "Comfort stuck ~2 with full parade / 120♥ — fountain+perch exist in CURRENT but are absent from CHAPTER2.shop.items (no shopUnlockClear), so shopItemsForClear never offers them. YardScene also paints fountain as free decor.",
+  "shop_additions": [
+    {
+      "sku_id": "furn_fountain_stone",
+      "label": "Stone Fountain",
+      "hearts": 90,
+      "comfort": 2,
+      "unlock_clear": 18,
+      "asset": "/assets/furniture/fountain.svg",
+      "note": "Mist@18 — mid parade water dopamine"
+    },
+    {
+      "sku_id": "furn_perch_high",
+      "label": "High Perch",
+      "hearts": 120,
+      "comfort": 3,
+      "unlock_clear": 36,
+      "asset": "/assets/furniture/swing.svg",
+      "note": "Ash@36 — was 200♥ (unreachable at ~120 bank); 120♥ keeps soft-hearts reachable. CURRENT hearts field may stay 200 for catalog; shop override 120."
+    }
+  ],
+  "gifts": [
+    {
+      "clear": 27,
+      "sku_id": "furn_fountain_stone",
+      "note": "Shadow@27 — gift fountain if not owned (shop still sells earlier at 18). If already owned, gift nothing."
+    },
+    {
+      "clear": 48,
+      "sku_id": "furn_swing_yarn",
+      "note": "Cloud@48 — gift Yarn Swing if not owned (shop unlocks @6). Comfort +2 path for players who skipped buy."
+    }
+  ],
+  "comfort_curve_target": [
+    { "beat": "Mango@3 gift box", "comfort": 1 },
+    { "beat": "+ scratch/tree buys", "comfort": "2–4" },
+    { "beat": "Biscuit@9 cushion", "comfort": "+1" },
+    { "beat": "Mist@18 fountain shop", "comfort": "+2" },
+    { "beat": "Shadow@27 fountain gift fallback", "comfort": "ensure ≥4–6" },
+    { "beat": "Ash@36 perch shop", "comfort": "+3" },
+    { "beat": "full set", "comfort": "≈12 (1+1+1+2+2+2+3)" }
+  ]
+}

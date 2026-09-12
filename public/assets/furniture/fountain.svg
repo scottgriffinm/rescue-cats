@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 72 72" fill="none">
-  <ellipse cx="36" cy="60" rx="22" ry="6" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.4" stroke-linejoin="round"/>
-  <path d="M17 48 C18 40 26 38 36 38 C47 38 54 41 55 48 L51 60 C48 64 24 64 21 60 Z" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="36" cy="60" rx="22" ry="6" fill="#B89870" stroke="#2B2A28" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M17 48 C18 40 26 38 36 38 C47 38 54 41 55 48 L51 60 C48 64 24 64 21 60 Z" fill="#C4A882" stroke="#2B2A28" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M22 48 C26 45 46 45 50 48" fill="none" stroke="#2B2A28" stroke-width="1.6" stroke-linecap="round" opacity="0.45"/>
-  <ellipse cx="36" cy="46" rx="15" ry="5" fill="#8FAF8A" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
-  <path d="M33 24 C32 36 34 42 36 46 C38 42 40 36 39 24" fill="#E2D4C2" stroke="#2B2A28" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="36" cy="46" rx="15" ry="5" fill="#6E926A" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
+  <path d="M33 24 C32 36 34 42 36 46 C38 42 40 36 39 24" fill="#C4A882" stroke="#2B2A28" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
   <circle cx="36" cy="18" r="7" fill="#8FAF8A" stroke="#2B2A28" stroke-width="2.4"/>
   <path d="M36 12 C38 8 44 10 42 16" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
 </svg>
