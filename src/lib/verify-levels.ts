@@ -5258,6 +5258,18 @@ for (const level of LEVELS) {
   if (friendsMet.includes('"···"') === false && !friendsMet.includes("···")) {
     throw new Error("Met unmet label must use ···");
   }
+  // Met shows named + at most next 1–2 unmet — not the full TUTORIAL_RESCUES ··· wall.
+  if (!friendsMet.includes("upcomingUnmet") || !friendsMet.includes(".slice(")) {
+    throw new Error("Met tab must limit unmet upcoming (named + ≤2 ···), not full roster wall");
+  }
+  if (/TUTORIAL_RESCUES\.map\(/.test(friendsMet)) {
+    throw new Error("Met tab must not map full TUTORIAL_RESCUES wall");
+  }
+  const yardSceneRoosts = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
+  const roostsBlock = yardSceneRoosts.match(/const ROOSTS = \[([\s\S]*?)\];/);
+  if (!roostsBlock) throw new Error("YardScene ROOSTS missing");
+  const roostCount = (roostsBlock[1].match(/left:/g) ?? []).length;
+  if (roostCount < 20) throw new Error(`ROOSTS must have ≥20 seats, got ${roostCount}`);
   // ban inventing friend_021 (scan gameplay sources only — this file names the ban)
   const srcHit = [
     "src/lib/collection.ts",
