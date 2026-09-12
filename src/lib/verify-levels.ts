@@ -5345,8 +5345,8 @@ for (const level of LEVELS) {
   if (sunny.phenotype.artKit !== "sunny") throw new Error("Sunny kit must be sunny (not ginger)");
   if (sunny.phenotype.personality !== "Bright") throw new Error("Sunny personality must be Bright");
   const chips = chipsForFriend(SUNNY_FRIEND_ID);
-  if (chips.join("/") !== "Sunny/Sol/Beam") throw new Error(`Sunny chips must be Sunny/Sol/Beam, got ${chips.join("/")}`);
-  for (const ban of ["Mango", "Pepper", "Pumpkin", "Oak", "Stripe", "Donna", "Karen", "Helen", "Dash", "Lane"]) {
+  if (chips.join("/") !== "Sunny/Beam/Glow") throw new Error(`Sunny chips must be Sunny/Beam/Glow, got ${chips.join("/")}`);
+  for (const ban of ["Sol", "Nigel", "Steve", "Greg", "Mango", "Pepper", "Pumpkin", "Oak", "Stripe", "Donna", "Karen", "Helen", "Dash", "Lane"]) {
     if (chips.includes(ban)) throw new Error(`Sunny chips must not include ${ban}`);
   }
   if (furnitureGiftsForClear(54).length !== 0) throw new Error("Sunny@54 must gift nothing");

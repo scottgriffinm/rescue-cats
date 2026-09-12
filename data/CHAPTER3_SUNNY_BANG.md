@@ -7,7 +7,7 @@ Pack JSON: `chapter3_sunny_bang.json`. Overlay on `collection_CURRENT.json`. No 
 | Friend | Sunny `friend_018` · **warm solid sun-patch** loaf · Bright |
 | Unlock | `onClear(54)` after campaign **L54** (L10 stays off the path) |
 | Line | Follows the warm patch around the lawn. |
-| Naming | empty prefill, chips **Sunny / Sol / Beam**, CTA until a name |
+| Naming | empty prefill, chips **Sunny / Beam / Glow**, CTA until a name |
 | Gift | none |
 | Sunny `!` | `{Name}: Follows the warm patch around the lawn.` |
 | Art | `sunny_loaf_48/72` · kit **sunny** (CURRENT `art_kit: ginger` is ignored — not generic ginger_loaf, not Mango mackerel, Pepper spotted, Pumpkin classic, Oak blotch, Stripe roadmap) |
