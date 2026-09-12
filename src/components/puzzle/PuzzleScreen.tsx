@@ -54,6 +54,13 @@ export function PuzzleScreen({ level }: { level: Level }) {
 
   const strikes = save.levelStrikes[level.id] ?? 0;
   const next = nextCampaignLevel(level.id);
+  const hasPendingUnlock = save.pendingUnlocks.length > 0;
+
+  // Rival Cloud Fail: remounting L49 after skipping the 280ms naming gap left
+  // pendingUnlocks stuck with showName=false. Always surface pending on puzzle.
+  useEffect(() => {
+    if (hasPendingUnlock) setShowName(true);
+  }, [hasPendingUnlock]);
 
   const onGates = useMemo(() => allCatsOnGates(level, cats), [level, cats]);
 
@@ -226,7 +233,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
       <p className="min-h-10 px-5 text-center text-sm text-ink/55">{toast}</p>
 
       <footer className="flex gap-2 px-5 pb-6">
-        {phase === "won" && !showName ? (
+        {phase === "won" && !showName && !hasPendingUnlock ? (
           <>
             <Link
               href="/"
@@ -271,7 +278,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
         />
       ) : null}
 
-      {save.pendingUnlocks.length > 0 && showName ? (
+      {hasPendingUnlock ? (
         <NameCatModal key={save.friends.length} onNamed={() => router.push("/")} />
       ) : null}
 

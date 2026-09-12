@@ -72,8 +72,8 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L47 Solid West.** The black house is the west brake.
 - **L48 Vacate Row.** Leave the house row first, then the west solid (≠ L31 Vacate West).
 - **L49 Color Step.** Gray mismatch solid is the setup step — vacate-row habits miss.
-- **L50 Thread East.** East corridor onto the mid house.
-- **L51 Dual Cross.** Orange/black color-cross dual brake.
+- **L50 Latch Through.** Gray mismatch latches, then you commit through (not L26 Thread East).
+- **L51 Offset Brake.** Orange/black houses offset — sequential brakes (not Dual Cross / Dual Brake).
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
 - **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`.
 - **onClear(15) → Ghost (`friend_005`) after L15.** Pale gray-cream loaf, chips Ghost / Wisp / Pearl, no furniture gift. Pack: `data/chapter3_ghost_bang.json`.

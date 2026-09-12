@@ -1001,40 +1001,40 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L50: {
     size: 6,
-    N: 12,
-    colorLocks: true,
-    colors: true,
-    walls: [
-      [4, 0],
-      [1, 3],
-      [3, 0],
-    ],
-    cats: [
-      ["cat_orange", 4, 5],
-      ["cat_gray", 0, 1],
-    ],
-    gates: [
-      ["gate_orange", 2, 3],
-      ["gate_gray", 5, 5],
-    ],
-  },
-  L51: {
-    size: 6,
     N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 0],
-      [5, 5],
-      [4, 2],
+      [3, 1],
+      [0, 2],
+      [4, 0],
     ],
     cats: [
-      ["cat_orange", 2, 5],
-      ["cat_black", 4, 4],
+      ["cat_orange", 1, 2],
+      ["cat_gray", 0, 5],
     ],
     gates: [
-      ["gate_orange", 2, 3],
-      ["gate_black", 3, 3],
+      ["gate_orange", 2, 2],
+      ["gate_gray", 2, 3],
+    ],
+  },
+  L51: {
+    size: 6,
+    N: 12,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [4, 4],
+      [2, 2],
+      [3, 0],
+    ],
+    cats: [
+      ["cat_orange", 0, 3],
+      ["cat_black", 0, 0],
+    ],
+    gates: [
+      ["gate_orange", 1, 2],
+      ["gate_black", 4, 3],
     ],
   },
 
@@ -1509,26 +1509,26 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "n"],
   ],
   L50: [
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
-    ["cat_orange", "e"],
-    ["cat_orange", "n"],
-    ["cat_orange", "e"],
     ["cat_gray", "e"],
     ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
-  ],
-  L51: [
-    ["cat_orange", "w"],
+    ["cat_gray", "w"],
     ["cat_orange", "n"],
-    ["cat_black", "w"],
+    ["cat_orange", "w"],
     ["cat_orange", "s"],
     ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_gray", "n"],
+  ],
+  L51: [
+    ["cat_black", "e"],
     ["cat_black", "s"],
+    ["cat_black", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "e"],
     ["cat_black", "e"],
     ["cat_black", "n"],
     ["cat_black", "w"],
+    ["cat_black", "s"],
   ],
 };
 
@@ -4972,11 +4972,16 @@ for (const level of LEVELS) {
   if (cloudArt === creamArt) throw new Error("Cloud loaf must not be a cream kit clone");
   if (cloudArt === ghostArt) throw new Error("Cloud loaf must not be a Ghost clone");
   if (cloudArt === dumplingArt) throw new Error("Cloud loaf must not be a Dumpling clone");
-  if (!cloudArt.includes("#F4EFE6")) throw new Error("Cloud loaf must use puff cream #F4EFE6");
-  if (!cloudArt.includes("#E8E0D4")) throw new Error("Cloud loaf must show soft puff #E8E0D4");
+  // Higher-contrast puff-stack (readable on cream porch) — not muddy cream-on-cream.
+  if (!cloudArt.includes("#B8B2A8")) throw new Error("Cloud loaf must use contrast base #B8B2A8");
+  if (!cloudArt.includes("#D5CFC4")) throw new Error("Cloud loaf must show mid puff #D5CFC4");
+  if (!cloudArt.includes("#EEE8DE")) throw new Error("Cloud loaf must show top puff #EEE8DE");
+  if (!cloudArt.includes("#9A958C")) throw new Error("Cloud loaf must show dark belly #9A958C for porch read");
+  if (cloudArt.includes("#F4EFE6")) throw new Error("Cloud loaf must not use muddy cream-on-cream #F4EFE6");
   if (cloudArt.includes("#F2D2A0")) throw new Error("Cloud loaf must not reuse Dumpling warm cream");
   if (cloudArt.includes("#C9955C")) throw new Error("Cloud loaf must not reuse Dumpling fold");
   if (cloudArt.includes("#E6E0D4")) throw new Error("Cloud loaf must not reuse Ghost pale #E6E0D4");
+  if (cloudArt.includes("#FFF8F0")) throw new Error("Cloud loaf must not reuse Biscuit flat cream #FFF8F0");
   if (paradeClearForLevel("L48") !== 48) throw new Error("L48 must map to parade clear 48");
   if (paradeClearForLevel("L49") !== 49) throw new Error("L49 must map to parade clear 49");
   if (paradeClearForLevel("L51") !== 51) throw new Error("L51 must map to parade clear 51");
@@ -5003,9 +5008,41 @@ for (const level of LEVELS) {
   const l51 = LEVELS.find((level) => level.id === "L51")!;
   if (l49.name !== "Color Step") throw new Error("L49 must be Color Step");
   if (/\b(hold|park|close)\b/i.test(l49.name)) throw new Error("L49 must not be Hold*/Park*/Close");
-  if (l50.name !== "Thread East") throw new Error("L50 must be Thread East");
-  if (l51.name !== "Dual Cross") throw new Error("L51 must be Dual Cross");
-  console.log("Cloud @ onClear(48) ok · puff-stack cream loafs + L49–L51 wired (Color Step / Thread East / Dual Cross)");
+  if (l50.name !== "Latch Through") throw new Error("L50 must be Latch Through (not Thread East)");
+  if (l51.name !== "Offset Brake") throw new Error("L51 must be Offset Brake (not Dual Cross)");
+  if (/thread\s*east/i.test(l50.name) || l50.teach === "thread_east" || l50.teach === "thread_east_gray") {
+    throw new Error("L50 must not collide with L26 Thread East");
+  }
+  if (/dual\s*(cross|brake)/i.test(l51.name) || String(l51.teach ?? "").includes("dual_")) {
+    throw new Error("L51 must not be Dual Cross / Dual Brake recombination");
+  }
+  const l26 = LEVELS.find((level) => level.id === "L26")!;
+  if (l50.name === l26.name) throw new Error("L50 must not name-collide with L26");
+  if (l50.templateId === l26.templateId) throw new Error("L50 template must not collide with L26");
+  const l46 = LEVELS.find((level) => level.id === "L46")!;
+  if (l51.name === l46.name) throw new Error("L51 must not name-collide with L46 Dual Brake");
+  if (l51.templateId === l46.templateId) throw new Error("L51 template must not collide with L46");
+  console.log("Cloud @ onClear(48) ok · contrast puff-stack + L49 Color Step / L50 Latch Through / L51 Offset Brake");
+}
+
+{
+  // Cloud award stick — Next rescue must not skip Welcome-home during the naming gap.
+  const puzzle = readFileSync(resolve("src/components/puzzle/PuzzleScreen.tsx"), "utf8");
+  if (!puzzle.includes("hasPendingUnlock")) {
+    throw new Error("PuzzleScreen must gate Yard/Next on hasPendingUnlock (Cloud award stick)");
+  }
+  if (puzzle.includes("pendingUnlocks.length > 0 && showName")) {
+    throw new Error("PuzzleScreen must not gate NameCatModal on showName alone");
+  }
+  const naming = readFileSync(resolve("src/components/puzzle/NameCatModal.tsx"), "utf8");
+  if (!naming.includes("CLOUD_FRIEND_ID")) {
+    throw new Error("NameCatModal must lock Cloud chips via CLOUD_FRIEND_ID");
+  }
+  const met = readFileSync(resolve("src/components/yard/FriendsMet.tsx"), "utf8");
+  if (!met.includes("overflow-x-auto")) {
+    throw new Error("FriendsMet must scroll so Cloud@16 is visible on Met");
+  }
+  console.log("Cloud award stick ok · pending blocks Next · modal always surfaces · Met scrolls");
 }
 
 console.log("All authored boards ok");
