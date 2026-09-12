@@ -112,9 +112,9 @@ const HINTS: Record<string, string> = {
   L41: "Leave the house column, then the south solid. L40's solid-south slide goes through.",
   L42: "Hold the cell east of the mid house. Vacate-south habits from L41 miss the park.",
   L43: "Thread west through the corridor. Park-east habits from L42 miss the gap.",
-  L44: "The gray house is the north brake. South-close habits from L43 miss the stop.",
+  L44: "The gray house is the north brake. Thread-west habits from L43 miss the stop.",
   L45: "Leave the house column, then the north solid. L44 solid-north slide goes through.",
-  L46: "Two brakes in sequence — color-cross. Park-east-close habits miss both.",
+  L46: "Two brakes in sequence — color-cross. Dual habits from one park miss both.",
   L47: "The black house is the west brake. Dual-brake habits from L46 miss the stop.",
   L48: "Leave the house row, then the west solid. L47's solid-west slide goes through — not L31's Vacate West.",
 };
