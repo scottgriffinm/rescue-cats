@@ -5367,6 +5367,10 @@ for (const level of LEVELS) {
   if (sunnyArt === pepperArt) throw new Error("Sunny loaf must not be a Pepper clone");
   if (!sunnyArt.includes("#E59A3C")) throw new Error("Sunny loaf must use body #E59A3C");
   if (!sunnyArt.includes("#F0B429")) throw new Error("Sunny loaf must show marigold sun-belly #F0B429");
+  if (!sunnyArt.includes("#C97828")) throw new Error("Sunny loaf must use ear #C97828");
+  if (sunnyArt.includes("#8F4A28")) throw new Error("Sunny loaf must not reuse Pepper spots");
+  if (sunnyArt.includes("#B45A22")) throw new Error("Sunny loaf must not reuse Stripe roads");
+  if (sunnyArt.includes("#8A4524")) throw new Error("Sunny loaf must not reuse Oak blotch");
   if (paradeClearForLevel("L54") !== 54) throw new Error("L54 must map to parade clear 54");
   if (paradeClearForLevel("L55") !== 55) throw new Error("L55 must map to parade clear 55");
   if (paradeClearForLevel("L57") !== 57) throw new Error("L57 must map to parade clear 57");

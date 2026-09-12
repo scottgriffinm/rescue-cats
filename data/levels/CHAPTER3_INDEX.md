@@ -1,6 +1,6 @@
 # Chapter 3 puzzle index
 
-Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13–L15 → Ghost @ 15 → L16–L18 → Mist @ 18 → L19–L21 → Pepper @ 21 → L22–L24 → Pumpkin @ 24 → L25–L27 → Shadow @ 27 → L28–L30 → Noodle @ 30 → L31–L33 → Clover @ 33 → L34–L36 → Ash @ 36 → L37–L39 → Oak @ 39 → L40–L42 → Dumpling @ 42 → L43–L45 → Stripe @ 45 → L46–L48 → Cloud @ 48 → L49–L51**. **L10 is not on the path.** Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On color-lock boards, a **mismatch house is a solid**. A parked friend is the brake onto a mid-board matching house.
+Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13–L15 → Ghost @ 15 → L16–L18 → Mist @ 18 → L19–L21 → Pepper @ 21 → L22–L24 → Pumpkin @ 24 → L25–L27 → Shadow @ 27 → L28–L30 → Noodle @ 30 → L31–L33 → Clover @ 33 → L34–L36 → Ash @ 36 → L37–L39 → Oak @ 39 → L40–L42 → Dumpling @ 42 → L43–L45 → Stripe @ 45 → L46–L48 → Cloud @ 48 → L49–L51 → Donna @ 51 → L52–L54 → Sunny @ 54 → L55–L57**. **L10 is not on the path.** Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On color-lock boards, a **mismatch house is a solid**. A parked friend is the brake onto a mid-board matching house.
 
 | Id | Pack | Teach | Color locks |
 | --- | --- | --- | --- |
@@ -46,7 +46,7 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 | L50 | `CHAPTER3_PUZZLE_L49_L51.json` / `L50.json` | Latch Through — not Thread East / not compass flip | yes · mismatch solid |
 | L51 | `CHAPTER3_PUZZLE_L49_L51.json` / `L51.json` | Offset Brake — gates not adjacent; not Dual Cross | yes · mismatch solid |
 | L52 | `CHAPTER3_PUZZLE_L52_L54.json` / `L52.json` | Gate Weave — not Thread North / not L32 collide | yes · mismatch solid |
-| L53 | `CHAPTER3_PUZZLE_L52_L54.json` / `L53.json` | Color Latch — gray house stop after Thread North | yes · mismatch solid |
+| L53 | `CHAPTER3_PUZZLE_L52_L54.json` / `L53.json` | Color Latch — gray house stop after Gate Weave | yes · mismatch solid |
 | L54 | `CHAPTER3_PUZZLE_L52_L54.json` / `L54.json` | Split Latch — offset gates; not Dual/Swap adjacent | yes · mismatch solid |
 | L55 | `CHAPTER3_PUZZLE_L55_L57.json` / `L55.json` | Rim Latch — gray rim after Split Latch | yes · mismatch solid |
 | L56 | `CHAPTER3_PUZZLE_L55_L57.json` / `L56.json` | Color Fork — gray branch after Rim Latch | yes · mismatch solid |
@@ -87,7 +87,11 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 - First-night: `{Name}: Wears the road map on their back.`
 - Cloud (`friend_016`) at `onClear(48)` after **L48** — chips **Cloud / Puff / Drift**, puff-stack cream loaf, no furniture gift
 - First-night: `{Name}: Floats from cushion to cushion.`
-- Donna @ 51 and Bean @ 60 ship later — clearing L49–L51 must not open Donna or Bean UI
+- Donna (`friend_017`) at `onClear(51)` after **L51** — chips **Donna / Karen / Helen**, split-face calico loaf, no furniture gift
+- First-night: `{Name}: Has opinions about the yard layout.`
+- Sunny (`friend_018`) at `onClear(54)` after **L54** — chips **Sunny / Sol / Beam**, warm solid sun-patch loaf, no furniture gift
+- First-night: `{Name}: Follows the warm patch around the lawn.`
+- Nigel@57 and Bean@60 stay later — clearing L55–L57 must not open Nigel or Bean UI
 
 ## Engine
 
