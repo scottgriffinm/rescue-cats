@@ -1,9 +1,9 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "source": "Chapter 3 continuation — color-lock park-brake toward Ghost@15",
+  "source": "Chapter 3 continuation \u2014 color-lock park-brake toward Ghost@15",
   "chapter": 3,
-  "title": "Chapter 3 boards L13–L15",
-  "notes": "Campaign continues L12 → Tux@12 → L13 → L14 → L15. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house.",
+  "title": "Chapter 3 boards L13\u2013L15",
+  "notes": "Campaign continues L12 \u2192 Tux@12 \u2192 L13 \u2192 L14 \u2192 L15. L10 stays off the path. Matching gates never brake. Mismatch houses are solids. A parked friend is the brake onto a mid-board matching house.",
   "levels": [
     {
       "id": "L13",
@@ -15,19 +15,55 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_step_off",
       "walls": [
-        { "x": 2, "y": 0 },
-        { "x": 2, "y": 1 },
-        { "x": 2, "y": 3 },
-        { "x": 3, "y": 3 }
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 1, "y": 4, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 5, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "step_off",
       "ascii": "O . # . . .\n. . # . . .\n. . . . . G\n. . # # . .\n. o . . . .\n. . . . . g"
@@ -42,18 +78,51 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_park_close",
       "walls": [
-        { "x": 2, "y": 1 },
-        { "x": 2, "y": 2 },
-        { "x": 3, "y": 4 }
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 4
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 3, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 0, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 0,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "park_close",
       "ascii": "O . . o . .\n. . # . . .\n. . # . . G\n. . . . . .\n. . . # . .\ng . . . . ."
@@ -68,20 +137,59 @@
       "colorLocks": true,
       "templateId": "LT02_LT08_thread_bottom",
       "walls": [
-        { "x": 2, "y": 0 },
-        { "x": 2, "y": 1 },
-        { "x": 2, "y": 3 },
-        { "x": 3, "y": 3 },
-        { "x": 4, "y": 5 }
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 5
+        }
       ],
       "blockers": [],
       "cats": [
-        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
-        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "gates": [
-        { "id": "gate_orange", "x": 1, "y": 4, "color": "orange", "colorId": "color_orange" },
-        { "id": "gate_gray", "x": 3, "y": 5, "color": "gray", "colorId": "color_gray" }
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 3,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
       ],
       "teach": "thread_bottom",
       "ascii": "O . # . . .\n. . # . . .\n. . . . . G\n. . # # . .\n. o . . . .\n. . . g # ."

@@ -1,0 +1,886 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Rival path kills \u2014 gate farms + Hold*/Park* spine",
+  "chapter": 3,
+  "title": "Rival Conditional B \u2014 path gate-farm reshapes",
+  "notes": "Gate farm kills only. Hold*/Park* spine deferred to Conditional C. L61\u2013L63 untouched. No friend_021.",
+  "levels": [
+    {
+      "id": "L24",
+      "name": "Arc Brake",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_arc_brake_gray",
+      "walls": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "arc_brake_gray",
+      "ascii": ".g#...\n......\n.o..O.\n.....#\n.....G\n#.#..."
+    },
+    {
+      "id": "L25",
+      "name": "Column Slip",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 10,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_column_slip_gray",
+      "walls": [
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 4
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 0,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "column_slip_gray",
+      "ascii": ".#.o#.\n......\nG...O.\n....g.\n...#.#\n......"
+    },
+    {
+      "id": "L29",
+      "name": "Pair Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_pair_cut_black",
+      "walls": [
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 3,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 4,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "pair_cut_black",
+      "ascii": "....o.\n...B..\n.#.#..\n...#b.\n.O....\n.....#"
+    },
+    {
+      "id": "L31",
+      "name": "West Slip",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_west_slip_black",
+      "walls": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 0,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 4,
+          "y": 2,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "west_slip_black",
+      "ascii": "......\n.#....\n..O.b.\n......\nB.....\n...#o."
+    },
+    {
+      "id": "L34",
+      "name": "Wall Seal",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_wall_seal_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 2,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "wall_seal_gray",
+      "ascii": "..O.g#\n....o.\n#.....\n#.....\n..G...\n......"
+    },
+    {
+      "id": "L38",
+      "name": "East Seal",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_east_seal_black",
+      "walls": [
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 3,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 2,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "east_seal_black",
+      "ascii": "..#..#\n..b...\n...O..\n...B..\n.o....\n....#."
+    },
+    {
+      "id": "L40",
+      "name": "South Seal",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_south_seal_gray",
+      "walls": [
+        {
+          "x": 4,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 3,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "south_seal_gray",
+      "ascii": "..o#O.\n......\n.....G\n#...#.\n...g..\n......"
+    },
+    {
+      "id": "L41",
+      "name": "South Slip",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_south_slip_black",
+      "walls": [
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 3,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 4,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "south_slip_black",
+      "ascii": "......\n...B.#\n...#..\n.#....\n....b.\no....O"
+    },
+    {
+      "id": "L44",
+      "name": "North Seal",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_north_seal_black",
+      "walls": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 4
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 2,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 0,
+          "y": 5,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "north_seal_black",
+      "ascii": "......\n..B...\no.....\n..#..#\n#....O\nb....."
+    },
+    {
+      "id": "L45",
+      "name": "North Slip",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_north_slip_black",
+      "walls": [
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 1,
+          "y": 0,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 0,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "north_slip_black",
+      "ascii": ".B...O\n.....#\n#..#..\n.....o\nb.....\n......"
+    },
+    {
+      "id": "L46",
+      "name": "Twin Peg",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_twin_peg_black",
+      "walls": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 5,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 5,
+          "y": 5,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "twin_peg_black",
+      "ascii": ".....#\n..o...\n..#.#.\n.....B\n..#O..\n.....b"
+    },
+    {
+      "id": "L47",
+      "name": "Side Seal",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_side_seal_black",
+      "walls": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 4,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 0,
+          "y": 2,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "side_seal_black",
+      "ascii": ".O....\n..#.Bo\nb.....\n......\n......\n.....#"
+    },
+    {
+      "id": "L49",
+      "name": "Step Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_step_cut_gray",
+      "walls": [
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 3,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "step_cut_gray",
+      "ascii": "..o.O.\n.#.#..\n.#..g.\n...G..\n......\n....#."
+    },
+    {
+      "id": "L53",
+      "name": "Catch Bar",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_catch_bar_gray",
+      "walls": [
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "catch_bar_gray",
+      "ascii": "..o#.#\n....g.\n.#...G\n......\n......\n....O."
+    }
+  ],
+  "teaches": {
+    "L24": "Arc Brake \u2014 path rewrite (unique gates)",
+    "L25": "Column Slip \u2014 path rewrite (unique gates)",
+    "L29": "Pair Cut \u2014 path rewrite (unique gates)",
+    "L31": "West Slip \u2014 path rewrite (unique gates)",
+    "L34": "Wall Seal \u2014 path rewrite (unique gates)",
+    "L38": "East Seal \u2014 path rewrite (unique gates)",
+    "L40": "South Seal \u2014 path rewrite (unique gates)",
+    "L41": "South Slip \u2014 path rewrite (unique gates)",
+    "L44": "North Seal \u2014 path rewrite (unique gates)",
+    "L45": "North Slip \u2014 path rewrite (unique gates)",
+    "L46": "Twin Peg \u2014 path rewrite (unique gates)",
+    "L47": "Side Seal \u2014 path rewrite (unique gates)",
+    "L49": "Step Cut \u2014 path rewrite (unique gates)",
+    "L53": "Catch Bar \u2014 path rewrite (unique gates)"
+  },
+  "solver": {
+    "min_slides": {
+      "L24": 10,
+      "L25": 9,
+      "L29": 9,
+      "L31": 9,
+      "L34": 8,
+      "L38": 9,
+      "L40": 10,
+      "L41": 9,
+      "L44": 9,
+      "L45": 9,
+      "L46": 9,
+      "L47": 9,
+      "L49": 9,
+      "L53": 9
+    }
+  },
+  "left_untouched": [
+    "L61",
+    "L62",
+    "L63"
+  ]
+}

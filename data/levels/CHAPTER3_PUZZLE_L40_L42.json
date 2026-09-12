@@ -7,44 +7,40 @@
   "levels": [
     {
       "id": "L40",
-      "name": "Solid South",
+      "name": "South Seal",
       "width": 6,
       "height": 6,
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_solid_south_gray",
+      "templateId": "LT02_LT08_south_seal_gray",
       "walls": [
         {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 5,
-          "y": 1
+          "x": 4,
+          "y": 3
         },
         {
           "x": 0,
-          "y": 4
+          "y": 3
         },
         {
-          "x": 4,
-          "y": 5
+          "x": 3,
+          "y": 0
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 5,
+          "x": 4,
           "y": 0,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 0,
-          "y": 1,
+          "x": 5,
+          "y": 2,
           "color": "gray",
           "colorId": "color_gray"
         }
@@ -52,47 +48,43 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 3,
-          "y": 2,
+          "x": 2,
+          "y": 0,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_gray",
           "x": 3,
-          "y": 3,
+          "y": 4,
           "color": "gray",
           "colorId": "color_gray"
         }
       ],
-      "teach": "solid_south_gray",
-      "ascii": ".#...O\nG....#\n...o..\n...g..\n#.....\n....#."
+      "teach": "south_seal_gray",
+      "ascii": "..o#O.\n......\n.....G\n#...#.\n...g..\n......"
     },
     {
       "id": "L41",
-      "name": "Vacate South",
+      "name": "South Slip",
       "width": 6,
       "height": 6,
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_vacate_south_black",
+      "templateId": "LT02_LT08_south_slip_black",
       "walls": [
         {
-          "x": 0,
-          "y": 0
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 3
         },
         {
           "x": 5,
           "y": 1
-        },
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 5
         }
       ],
       "blockers": [],
@@ -100,7 +92,7 @@
         {
           "id": "cat_orange",
           "x": 5,
-          "y": 0,
+          "y": 5,
           "color": "orange",
           "colorId": "color_orange"
         },
@@ -115,21 +107,21 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 3,
-          "y": 2,
+          "x": 0,
+          "y": 5,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_black",
-          "x": 3,
-          "y": 3,
+          "x": 4,
+          "y": 4,
           "color": "black",
           "colorId": "color_black"
         }
       ],
-      "teach": "vacate_south_black",
-      "ascii": "#....O\n...B.#\n...o..\n...b..\n.#....\n....#."
+      "teach": "south_slip_black",
+      "ascii": "......\n...B.#\n...#..\n.#....\n....b.\no....O"
     },
     {
       "id": "L42",

@@ -46,36 +46,36 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L21 Thread Park.** Park to brake the south lane, then thread west onto the house.
 - **L22 Hold West.** Park west of the house. Slide through and you miss the stop.
 - **L23 Hold Corner.** Hold the corner cell above the house — the open south lane overshoots.
-- **L24 Color Brake.** Gray house is the west solid. Climb into the color stop — park-high habits miss it.
-- **L25 Vacate Column.** Leave the house column, then the south solid. Park-low alone overshoots.
+- **L24 Arc Brake.** Gray house is the west solid. Climb into the color stop — park-high habits miss it.
+- **L25 Column Slip.** Leave the house column, then the south solid. Park-low alone overshoots.
 - **L26 Thread East.** Park above, then thread the east lane onto the house.
 - **L27 Thread Black.** First black coat + black house. Park east, then thread south.
 - **L28 Park West.** Park west of the house. L27's east park slides through.
-- **L29 Color Cross.** Black and orange lock adjacent. Hold-north habits miss the cross.
+- **L29 Pair Cut.** Black and orange lock adjacent. Hold-north habits miss the cross.
 - **L30 Thread South.** Thread onto the south black solid. Hold-south alone is not enough.
-- **L31 Vacate West.** Leave before the west black solid works. Hold-east habits miss the vacate.
+- **L31 West Slip.** Leave before the west black solid works. Hold-east habits miss the vacate.
 - **L32 Thread North.** Park above, then thread the north lane onto the house.
 - **L33 Thread West.** Sit past the house, then park west. North-first habits miss the stop.
-- **L34 Solid West.** The gray house is the west brake. Park a friend there and gray overshoots.
+- **L34 Wall Seal.** The gray house is the west brake. Park a friend there and gray overshoots.
 - **L35 Vacate First.** Leave the house column, then park west. L34's solid-west slide goes through.
 - **L36 Park Above.** Sit past south, then park above. L35's west park misses the stop.
 - **L37 Park Below.** Sit past north, then park below. L36's park-above misses the stop.
-- **L38 Solid East.** The black house is the east brake. Park a friend there and black overshoots.
+- **L38 East Seal.** The black house is the east brake. Park a friend there and black overshoots.
 - **L39 Vacate East.** Leave the house row, then the east solid. L38's solid-east slide goes through.
-- **L40 Solid South.** The gray house is the south brake. East-row vacate habits from L39 miss the stop.
-- **L41 Vacate South.** Leave the house column first, then the south solid.
+- **L40 South Seal.** The gray house is the south brake. East-row vacate habits from L39 miss the stop.
+- **L41 South Slip.** Leave the house column first, then the south solid.
 - **L42 Park East.** Hold the cell east of the mid house.
 - **L43 Thread West.** Park close under the mid house — L42 park-east overshoots. (Hold* mill title killed.)
-- **L44 Solid North.** The black house is the north brake.
-- **L45 Vacate North.** Leave the house column first, then the north solid.
-- **L46 Dual Brake.** Park east of the mid house — L45 vacate-north overshoots. (Hold* mill title killed.)
-- **L47 Solid West.** The black house is the west brake.
+- **L44 North Seal.** The black house is the north brake.
+- **L45 North Slip.** Leave the house column first, then the north solid.
+- **L46 Twin Peg.** Park east of the mid house — L45 vacate-north overshoots. (Hold* mill title killed.)
+- **L47 Side Seal.** The black house is the west brake.
 - **L48 Vacate Row.** Leave the house row first, then the west solid (≠ L31 Vacate West).
-- **L49 Color Step.** Gray mismatch solid is the setup step — vacate-row habits miss.
+- **L49 Step Cut.** Gray mismatch solid is the setup step — vacate-row habits miss.
 - **L50 Latch Through.** East corridor onto the mid house.
 - **L51 Offset Brake.**
 - **L52 Gate Weave.**
-- **L53 Color Latch.**
+- **L53 Catch Bar.**
 - **L54 Split Latch.**
 - **L55 Hook Route.**
 - **L56 Color Fork.**
