@@ -13,6 +13,12 @@ const ROOSTS = [
   { left: "16%", top: "56%" },
 ];
 
+
+/** Yard-tidy: shrink loafs once the parade crowds the porch. */
+function loafPx(friendCount: number): 48 | 72 {
+  return friendCount >= 10 ? 48 : 72;
+}
+
 export function YardScene({
   friends,
   hasBox,
@@ -20,6 +26,8 @@ export function YardScene({
   hasScratch,
   hasYarn,
   hasCushion,
+  hasFountain,
+  hasPerch,
   bangFriendId,
   onBang,
 }: {
@@ -29,9 +37,14 @@ export function YardScene({
   hasScratch?: boolean;
   hasYarn?: boolean;
   hasCushion?: boolean;
+  hasFountain?: boolean;
+  hasPerch?: boolean;
   bangFriendId?: string | null;
   onBang?: (instanceId: string) => void;
 }) {
+  const px = loafPx(friends.length);
+  const loafClass = px === 48 ? "h-12 w-12" : "h-[72px] w-[72px]";
+  const roostW = px === 48 ? "48px" : "72px";
   const mango = friends.find((friend) => friend.friendId === "friend_001");
   const biscuit = friends.find((friend) => friend.friendId === "friend_003");
   const tux = friends.find((friend) => friend.friendId === "friend_004");
@@ -85,7 +98,12 @@ export function YardScene({
 
       <FurnitureImg file="fence" className="absolute left-[6%] top-[14%] w-[56%]" />
       <FurnitureImg file="postBell" className="absolute right-[12%] top-[16%] w-[22%]" />
-      <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[24%]" />
+      {hasFountain ? (
+        <FurnitureImg file="fountain" className="absolute left-[10%] top-[38%] w-[24%]" />
+      ) : null}
+      {hasPerch ? (
+        <FurnitureImg file="swing" className="absolute right-[28%] top-[12%] w-[18%]" />
+      ) : null}
       {hasTree ? (
         <FurnitureImg file="miniTree" className="absolute right-[10%] top-[18%] w-[20%]" />
       ) : null}
@@ -119,13 +137,13 @@ export function YardScene({
 
       {mango && hasBox ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "34%", top: "62%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "34%", top: "62%" }}
         >
           <FriendSprite
             kit={friendById(mango.friendId)?.phenotype.artKit ?? "ginger"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === mango.instanceId ? (
             <button
@@ -143,13 +161,13 @@ export function YardScene({
 
       {mist ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "20%", top: "24%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "20%", top: "24%" }}
         >
           <FriendSprite
             kit={friendById(mist.friendId)?.phenotype.artKit ?? "mist"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === mist.instanceId ? (
             <button
@@ -167,13 +185,13 @@ export function YardScene({
 
       {pepper ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "64%", top: "20%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "64%", top: "20%" }}
         >
           <FriendSprite
             kit={friendById(pepper.friendId)?.phenotype.artKit ?? "pepper"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === pepper.instanceId ? (
             <button
@@ -191,13 +209,13 @@ export function YardScene({
 
       {noodle ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "40%", top: "78%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "40%", top: "78%" }}
         >
           <FriendSprite
             kit={friendById(noodle.friendId)?.phenotype.artKit ?? "noodle"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === noodle.instanceId ? (
             <button
@@ -215,13 +233,13 @@ export function YardScene({
 
       {clover ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "56%", top: "72%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "56%", top: "72%" }}
         >
           <FriendSprite
             kit={friendById(clover.friendId)?.phenotype.artKit ?? "clover"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === clover.instanceId ? (
             <button
@@ -239,13 +257,13 @@ export function YardScene({
 
       {ash ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "8%", top: "72%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "8%", top: "72%" }}
         >
           <FriendSprite
             kit={friendById(ash.friendId)?.phenotype.artKit ?? "ash"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === ash.instanceId ? (
             <button
@@ -263,13 +281,13 @@ export function YardScene({
 
       {oak ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "74%", top: "48%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "74%", top: "48%" }}
         >
           <FriendSprite
             kit={friendById(oak.friendId)?.phenotype.artKit ?? "oak"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === oak.instanceId ? (
             <button
@@ -286,13 +304,13 @@ export function YardScene({
       ) : null}
       {dumpling ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "86%", top: "52%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "86%", top: "52%" }}
         >
           <FriendSprite
             kit={friendById(dumpling.friendId)?.phenotype.artKit ?? "dumpling"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === dumpling.instanceId ? (
             <button
@@ -309,13 +327,13 @@ export function YardScene({
       ) : null}
       {stripe ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "44%", top: "48%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "44%", top: "48%" }}
         >
           <FriendSprite
             kit={friendById(stripe.friendId)?.phenotype.artKit ?? "stripe"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === stripe.instanceId ? (
             <button
@@ -332,13 +350,13 @@ export function YardScene({
       ) : null}
       {cloud ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "28%", top: "42%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "28%", top: "42%" }}
         >
           <FriendSprite
             kit={friendById(cloud.friendId)?.phenotype.artKit ?? "cloud"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === cloud.instanceId ? (
             <button
@@ -355,13 +373,13 @@ export function YardScene({
       ) : null}
       {donna ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "52%", top: "36%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "52%", top: "36%" }}
         >
           <FriendSprite
             kit={friendById(donna.friendId)?.phenotype.artKit ?? "donna"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === donna.instanceId ? (
             <button
@@ -378,13 +396,13 @@ export function YardScene({
       ) : null}
       {sunny ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "18%", top: "28%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "18%", top: "28%" }}
         >
           <FriendSprite
             kit={friendById(sunny.friendId)?.phenotype.artKit ?? "sunny"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === sunny.instanceId ? (
             <button
@@ -401,13 +419,13 @@ export function YardScene({
       ) : null}
       {nigel ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "62%", top: "44%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "62%", top: "44%" }}
         >
           <FriendSprite
             kit={friendById(nigel.friendId)?.phenotype.artKit ?? "nigel"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === nigel.instanceId ? (
             <button
@@ -424,13 +442,13 @@ export function YardScene({
       ) : null}
       {bean ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "40%", top: "22%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "40%", top: "22%" }}
         >
           <FriendSprite
             kit={friendById(bean.friendId)?.phenotype.artKit ?? "bean"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === bean.instanceId ? (
             <button
@@ -449,13 +467,13 @@ export function YardScene({
 
       {shadow ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "6%", top: "34%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "6%", top: "34%" }}
         >
           <FriendSprite
             kit={friendById(shadow.friendId)?.phenotype.artKit ?? "shadow"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === shadow.instanceId ? (
             <button
@@ -473,13 +491,13 @@ export function YardScene({
 
       {pumpkin ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "82%", top: "38%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "82%", top: "38%" }}
         >
           <FriendSprite
             kit={friendById(pumpkin.friendId)?.phenotype.artKit ?? "pumpkin"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === pumpkin.instanceId ? (
             <button
@@ -497,13 +515,13 @@ export function YardScene({
 
       {ghost ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "50%", top: "30%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "50%", top: "30%" }}
         >
           <FriendSprite
             kit={friendById(ghost.friendId)?.phenotype.artKit ?? "ghost"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === ghost.instanceId ? (
             <button
@@ -521,13 +539,13 @@ export function YardScene({
 
       {tux ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "70%", top: "64%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "70%", top: "64%" }}
         >
           <FriendSprite
             kit={friendById(tux.friendId)?.phenotype.artKit ?? "tuxedo"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === tux.instanceId ? (
             <button
@@ -545,13 +563,13 @@ export function YardScene({
 
       {biscuit && hasCushion ? (
         <div
-          className="yard-drop absolute w-[72px]"
-          style={{ left: "12%", top: "44%" }}
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "12%", top: "44%" }}
         >
           <FriendSprite
             kit={friendById(biscuit.friendId)?.phenotype.artKit ?? "cream"}
-            size={72}
-            className="h-[72px] w-[72px]"
+            size={px}
+            className={loafClass}
           />
           {bangFriendId === biscuit.instanceId ? (
             <button
@@ -573,13 +591,13 @@ export function YardScene({
         return (
           <div
             key={friend.instanceId}
-            className="yard-drop absolute w-[72px]"
-            style={{ left: roost.left, top: roost.top }}
+            className="yard-drop absolute"
+            style={{ width: roostW, left: roost.left, top: roost.top }}
           >
             <FriendSprite
               kit={catalog?.phenotype.artKit ?? "ginger"}
-              size={72}
-              className="h-[72px] w-[72px]"
+              size={px}
+              className={loafClass}
             />
             {bangFriendId === friend.instanceId ? (
               <button
