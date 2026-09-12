@@ -1,0 +1,35 @@
+{
+  "version": "chapter3_sunny_bang",
+  "status": "READY",
+  "friend_id": "friend_018",
+  "unlock_clear": 54,
+  "personality": "Bright",
+  "display_line": "Follows the warm patch around the lawn.",
+  "art": {
+    "loaf_48": "/assets/cats/sunny_loaf_48.svg",
+    "loaf_72": "/assets/cats/sunny_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "sunny"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Sunny",
+      "Sol",
+      "Beam"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_018": [
+      "{Name}: Follows the warm patch around the lawn.",
+      "{Name}: Already moved the cushion an inch into the light."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 54,
+    "sku_id": null,
+    "note": "Clear 54 gifts nothing \u2014 same cadence as Ink @ 6 through Donna @ 51. Box stays Mango@3. Sun Cushion stays Biscuit@9. Nigel@57 and Bean@60 stay later. Do not reuse Nigel/Steve/Greg or Mango/Pepper chips."
+  }
+}

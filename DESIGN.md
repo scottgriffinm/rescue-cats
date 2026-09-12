@@ -77,6 +77,10 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L52 Gate Weave.**
 - **L53 Color Latch.**
 - **L54 Split Latch.**
+- **L55 Rim Latch.**
+- **L56 Color Fork.**
+- **L57 Anchor Brake.**
+- **Sunny@54** — bright orange solid + marigold sun-belly; chips Sunny/Sol/Beam; no gift.
 - **Donna@51** — split-face calico loaf; chips Donna/Karen/Helen; no gift. Orange/black color-cross dual brake.
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
 - **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`.
@@ -91,7 +95,9 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **onClear(39) → Oak (`friend_013`) after L39.** Bark-warm classic blotch loaf, chips Oak / Acorn / Timber, no furniture gift. Pack: `data/chapter3_oak_bang.json`.
 - **onClear(42) → Dumpling (`friend_014`) after L42.** Plump cream-fold loaf, chips Dumpling / Bao / Potsticker, no furniture gift. Pack: `data/chapter3_dumpling_bang.json`.
 - **onClear(45) → Stripe (`friend_015`) after L45.** Orange road-map mackerel loaf, chips Stripe / Dash / Lane, no furniture gift. Pack: `data/chapter3_stripe_bang.json`.
-- **onClear(48) → Cloud (`friend_016`) after L48.** Puff-stack cream loaf, chips Cloud / Puff / Drift, no furniture gift. Pack: `data/chapter3_cloud_bang.json`. Donna@51 and Bean@60 ship later.
+- **onClear(48) → Cloud (`friend_016`) after L48.** Puff-stack cream loaf, chips Cloud / Puff / Drift, no furniture gift. Pack: `data/chapter3_cloud_bang.json`.
+- **onClear(51) → Donna (`friend_017`) after L51.** Split-face calico loaf, chips Donna / Karen / Helen, no furniture gift. Pack: `data/chapter3_donna_bang.json`.
+- **onClear(54) → Sunny (`friend_018`) after L54.** Warm solid sun-patch loaf, chips Sunny / Sol / Beam, no furniture gift. Pack: `data/chapter3_sunny_bang.json`. Nigel@57 and Bean@60 stay later.
 
 Retarget later templates by swapping JSON + keeping the slide helper.
 
@@ -123,13 +129,13 @@ Types: `CollectionLocks` in `src/lib/types.ts`. Values: `COLLECTION_LOCKS`.
 
 Load **`data/collection_CURRENT.json` only** (stamped FROZEN / v1.2 canonical). Ignore deprecated v1. If a stale `unlock_clear: 1` appears, ignore it.
 
-Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming + box gift. Unlock table covers **3 / 6 / 9 / 12 / 15 / 18 / 21 / 24 / 27 / 30 / 33 / 36 / 39 / 42 / 45 / 48**. CURRENT is frozen and correct. **NO Pebble.** Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, Dumpling@42, Stripe@45, Cloud@48, … Bean@60. Ignore any chat saying Pebble.
+Slice dopamine beat: **Mango @ `onClear(3)`** after teach L1–L3, then naming + box gift. Unlock table covers **3 / 6 / 9 / 12 / 15 / 18 / 21 / 24 / 27 / 30 / 33 / 36 / 39 / 42 / 45 / 48 / 51 / 54**. CURRENT is frozen and correct. **NO Pebble.** Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, Dumpling@42, Stripe@45, Cloud@48, Donna@51, Sunny@54, … Bean@60. Ignore any chat saying Pebble.
 
 Board color enums for the slice: `orange | gray | black`. LT08+ gates map to these strings; `color_orange` etc. normalize in `src/lib/colors.ts` + level hydrate.
 
 - First named friend **Mango (`friend_001`) at `onClear(3)`** after LT01 L1–L3.
-- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, Dumpling@42, Stripe@45, Cloud@48, … Bean@60. **NO Pebble.**
-- Clear 48 → 16 cats (through Cloud `friend_016`).
+- Parade: Mango@3, Ink@6, Biscuit@9, Tux@12, Ghost@15, Mist@18, Pepper@21, Pumpkin@24, Shadow@27 (first full-black), Noodle@30, Clover@33, Ash@36, Oak@39, Dumpling@42, Stripe@45, Cloud@48, Donna@51, Sunny@54, … Bean@60. **NO Pebble.**
+- Clear 54 → 18 cats (through Sunny `friend_018`).
 - Non-cat clears: Hearts only. Cats only on the every-3 cadence.
 - Furniture gifts: cardboard box with Mango @ 3; Sun Cushion with Biscuit @ 9.
 - Stars → yard cosmetics only.
