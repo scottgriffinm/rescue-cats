@@ -5237,7 +5237,7 @@ for (const level of LEVELS) {
   if (yard.includes('opacity="0.34"') || yard.includes("opacity='0.34'")) {
     throw new Error("yard lawn must not use 34% cream wash");
   }
-  if (!yard.includes("#EFE4D4")) throw new Error("porch must use paper-deep #EFE4D4");
+  if (!yard.includes("#DCC8A8")) throw new Error("porch must use cream-patio #DCC8A8");
   const beanArt = readFileSync(resolve("public/assets/cats/bean_loaf_72.svg"), "utf8");
   if (!beanArt.includes("#A85C2C") || !beanArt.includes("#4A2412")) {
     throw new Error("Bean polish must use #A85C2C body + #4A2412 kidneys");
