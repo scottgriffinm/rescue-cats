@@ -1051,16 +1051,16 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 1],
-      [3, 4],
-      [1, 5],
+      [1, 0],
+      [2, 4],
+      [1, 2],
     ],
     cats: [
-      ["cat_orange", 4, 5],
-      ["cat_gray", 3, 2],
+      ["cat_orange", 1, 5],
+      ["cat_gray", 4, 5],
     ],
     gates: [
-      ["gate_orange", 2, 3],
+      ["gate_orange", 2, 2],
       ["gate_gray", 5, 5],
     ],
   },
@@ -1085,21 +1085,21 @@ const LOCKED: Record<string, LockedSpec> = {
   },
   L54: {
     size: 6,
-    N: 11,
+    N: 12,
     colorLocks: true,
     colors: true,
     walls: [
-      [4, 4],
-      [1, 1],
-      [5, 4],
+      [3, 1],
+      [0, 2],
+      [2, 5],
     ],
     cats: [
-      ["cat_orange", 3, 4],
-      ["cat_black", 0, 4],
+      ["cat_orange", 1, 0],
+      ["cat_black", 2, 4],
     ],
     gates: [
-      ["gate_orange", 2, 3],
-      ["gate_black", 3, 3],
+      ["gate_orange", 1, 2],
+      ["gate_black", 4, 4],
     ],
   },
 
@@ -1596,15 +1596,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "s"],
   ],
   L52: [
-    ["cat_orange", "w"],
     ["cat_orange", "n"],
-    ["cat_gray", "e"],
-    ["cat_gray", "s"],
-    ["cat_gray", "w"],
+    ["cat_orange", "e"],
     ["cat_gray", "n"],
-    ["cat_orange", "s"],
+    ["cat_gray", "w"],
     ["cat_gray", "s"],
     ["cat_gray", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_gray", "s"],
   ],
   L53: [
     ["cat_gray", "e"],
@@ -1619,14 +1619,14 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L54: [
     ["cat_orange", "w"],
-    ["cat_orange", "n"],
-    ["cat_orange", "w"],
     ["cat_orange", "s"],
     ["cat_orange", "e"],
-    ["cat_black", "n"],
     ["cat_black", "e"],
-    ["cat_black", "s"],
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
     ["cat_black", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
   ],
 };
 
@@ -5196,18 +5196,34 @@ for (const level of LEVELS) {
   const l52 = LEVELS.find((level) => level.id === "L52")!;
   const l53 = LEVELS.find((level) => level.id === "L53")!;
   const l54 = LEVELS.find((level) => level.id === "L54")!;
-  if (l52.name !== "Thread North") throw new Error("L52 must be Thread North");
+  if (l52.name !== "Gate Weave") throw new Error("L52 must be Gate Weave");
   if (l53.name !== "Color Latch") throw new Error("L53 must be Color Latch");
-  if (l54.name !== "Swap Brake") throw new Error("L54 must be Swap Brake");
+  if (l54.name !== "Split Latch") throw new Error("L54 must be Split Latch");
   if (/\b(hold|park|close)\b/i.test([l52.name, l53.name, l54.name].join(" "))) {
     throw new Error("L52–L54 must not be Hold*/Park*/Close");
   }
   // pack name check
   const packNames = (chapter3oPack.levels as { id: string; name: string }[]).map((row) => `${row.id}:${row.name}`);
-  if (packNames.join(",") !== "L52:Thread North,L53:Color Latch,L54:Swap Brake") {
+  if (packNames.join(",") !== "L52:Gate Weave,L53:Color Latch,L54:Split Latch") {
     throw new Error(`Donna pack names drifted: ${packNames.join(",")}`);
   }
-  console.log("Donna @ onClear(51) ok · split-face calico loafs + L52–L54 wired (Thread North / Color Latch / Swap Brake)");
+  console.log("Donna @ onClear(51) ok · split-face calico loafs + L52–L54 wired (Gate Weave / Color Latch / Split Latch)");
+}
+
+
+{
+  const l52r = LEVELS.find((row) => row.id === "L52");
+  const l54r = LEVELS.find((row) => row.id === "L54");
+  const l32r = LEVELS.find((row) => row.id === "L32");
+  const l46r = LEVELS.find((row) => row.id === "L46");
+  if (!l52r || !l54r || !l32r || !l46r) throw new Error("missing L32/L46/L52/L54");
+  if (l52r.name !== "Gate Weave") throw new Error(`L52 must be Gate Weave, got ${l52r.name}`);
+  if (l54r.name !== "Split Latch") throw new Error(`L54 must be Split Latch, got ${l54r.name}`);
+  if (l52r.name === l32r.name) throw new Error("L52 must not name-collide with L32 Thread North");
+  if (/thread|dual|swap brake|\bhold\b|\bpark\b|\bclose\b/i.test(l52r.name + " " + l54r.name)) {
+    throw new Error("L52/L54 must not reuse Thread*/Dual*/Swap Brake / Hold*/Park*");
+  }
+  console.log("Rival rewrite L52/L54 ok · Gate Weave · Split Latch");
 }
 
 console.log("All authored boards ok");

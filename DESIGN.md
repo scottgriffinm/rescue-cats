@@ -74,9 +74,9 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L49 Color Step.** Gray mismatch solid is the setup step — vacate-row habits miss.
 - **L50 Latch Through.** East corridor onto the mid house.
 - **L51 Offset Brake.**
-- **L52 Thread North.**
+- **L52 Gate Weave.**
 - **L53 Color Latch.**
-- **L54 Swap Brake.**
+- **L54 Split Latch.**
 - **Donna@51** — split-face calico loaf; chips Donna/Karen/Helen; no gift. Orange/black color-cross dual brake.
 - **onClear(9) → Biscuit (`friend_003`).** Cream loaf, chips Biscuit / Mochi / Toast, Sun Cushion gift. Pack: `data/chapter3_biscuit_bang.json`.
 - **onClear(12) → Tux (`friend_004`) after L12.** Tuxedo loaf, chips Tux / Domino / Bowtie, no furniture gift. Pack: `data/chapter3_tux_bang.json`.

@@ -1,38 +1,38 @@
 {
   "id": "L54",
-  "name": "Swap Brake",
+  "name": "Split Latch",
   "width": 6,
   "height": 6,
-  "moveBudget": 11,
+  "moveBudget": 12,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_swap_brake_black",
+  "templateId": "LT02_LT08_split_latch_black",
   "walls": [
     {
-      "x": 4,
-      "y": 4
-    },
-    {
-      "x": 1,
+      "x": 3,
       "y": 1
     },
     {
-      "x": 5,
-      "y": 4
+      "x": 0,
+      "y": 2
+    },
+    {
+      "x": 2,
+      "y": 5
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 3,
-      "y": 4,
+      "x": 1,
+      "y": 0,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_black",
-      "x": 0,
+      "x": 2,
       "y": 4,
       "color": "black",
       "colorId": "color_black"
@@ -41,18 +41,18 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 2,
-      "y": 3,
+      "x": 1,
+      "y": 2,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_black",
-      "x": 3,
-      "y": 3,
+      "x": 4,
+      "y": 4,
       "color": "black",
       "colorId": "color_black"
     }
   ],
-  "teach": "swap_brake_black"
+  "teach": "split_latch_black"
 }
