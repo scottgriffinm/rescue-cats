@@ -5285,7 +5285,17 @@ for (const level of LEVELS) {
     throw new Error("no unlocks past Bean@60");
   }
   if (TUTORIAL_RESCUES.length !== 20) throw new Error("TUTORIAL_RESCUES must stay at 20 (through Bean)");
-  console.log("Sister polish ok · yard sage · Bean contrast · furniture nests · copy");
+  // Progress chrome: parade / friend-cadence milestones — not a LEVELS.map per-board dot wall.
+  if (/LEVELS\.map\(/.test(yardScreen)) {
+    throw new Error("Yard progress must not LEVELS.map into per-board dots");
+  }
+  if (!yardScreen.includes("PARADE_MILESTONES") || !yardScreen.includes("SLICE_UNLOCKS")) {
+    throw new Error("Yard progress must use PARADE_MILESTONES from SLICE_UNLOCKS parade cadence");
+  }
+  if (!yardScreen.includes("nextClear")) {
+    throw new Error("Yard progress must distinguish cleared vs current vs upcoming milestones");
+  }
+  console.log("Sister polish ok · yard sage · Bean contrast · furniture nests · copy · parade milestones");
 }
 
 
