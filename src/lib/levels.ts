@@ -81,7 +81,7 @@ const HEADLINES: Record<string, string> = {
   L56: "COLOR FORK",
   L57: "CORNER BRACE",
   L58: "PINCH ROUTE",
-  L59: "COLOR SHELF",
+  L59: "SKEW GATE",
   L60: "POST BRACE",
 };
 
@@ -143,7 +143,7 @@ const HINTS: Record<string, string> = {
   L56: "Color fork — pick the gray branch. Rim-latch habits miss the fork.",
   L57: "Corner brace on far corners — not Split Latch twin. Dual habits miss.",
   L58: "Pinch the gray route. Corner-brace habits miss the pinch.",
-  L59: "Color shelf — park on the gray ledge. Pinch habits miss the shelf.",
+  L59: "Skew the orange/gray houses — not Color Step’s vertical twin.",
   L60: "Post brace on far corners (0,0)/(5,5) — not the (1,1)/(4,4) twin.",
 };
 
