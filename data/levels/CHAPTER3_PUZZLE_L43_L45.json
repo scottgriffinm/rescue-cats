@@ -4,44 +4,44 @@
   "source": "Chapter 3 continuation after Dumpling@42",
   "chapter": 3,
   "title": "Chapter 3 boards L43\u2013L45 (Dumpling@42)",
-  "notes": "Campaign after L42 \u2192 Dumpling@42 \u2192 L43 \u2192 L44 \u2192 L45. L10 off-path. Habit breaks off L42 Park East. Matching gates never brake; mismatch solids. Collection owns Dumpling bang; Art owns dumpling-42 pack. Bean@60 still later.",
+  "notes": "L43 rewritten Thread West (Rival kill Park South Close rename mill \u2014 new corridor geometry + thread verb). L44 Solid North / L45 Vacate North unchanged. Campaign after L42 \u2192 Dumpling@42 \u2192 L43\u2013L45. L10 off-path.",
   "levels": [
     {
       "id": "L43",
-      "name": "Park South Close",
+      "name": "Thread West",
       "width": 6,
       "height": 6,
-      "moveBudget": 10,
+      "moveBudget": 12,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_park_south_close_gray",
+      "templateId": "LT02_LT08_thread_west_gray",
       "walls": [
         {
-          "x": 0,
+          "x": 3,
           "y": 1
         },
         {
-          "x": 0,
-          "y": 2
+          "x": 2,
+          "y": 4
         },
         {
-          "x": 3,
-          "y": 2
+          "x": 2,
+          "y": 0
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 2,
-          "y": 2,
+          "x": 0,
+          "y": 0,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 5,
-          "y": 3,
+          "x": 3,
+          "y": 2,
           "color": "gray",
           "colorId": "color_gray"
         }
@@ -49,7 +49,7 @@
       "gates": [
         {
           "id": "gate_orange",
-          "x": 2,
+          "x": 3,
           "y": 3,
           "color": "orange",
           "colorId": "color_orange"
@@ -62,8 +62,8 @@
           "colorId": "color_gray"
         }
       ],
-      "teach": "park_south_close_gray",
-      "ascii": "......\n#.....\n#.O#..\n..o..G\n......\n.....g"
+      "teach": "thread_west_gray",
+      "ascii": "O.#...\n...#..\n...G..\n...o..\n..#...\n.....g"
     },
     {
       "id": "L44",
@@ -185,15 +185,13 @@
     }
   ],
   "teaches": {
-    "L43": "Park South Close \u2014 park under the mid house; L42 east-park overshoots",
+    "L43": "Thread West \u2014 corridor onto the mid house; L42 east-park overshoots",
     "L44": "Solid North \u2014 black house is the north brake",
     "L45": "Vacate North \u2014 leave the column, then the north solid"
   },
   "solver": {
     "min_slides": {
-      "L43": 7,
-      "L44": 7,
-      "L45": 8
+      "L43": 11
     }
   }
 }

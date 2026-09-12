@@ -256,7 +256,7 @@
     },
     {
       "id": "L43",
-      "moveBudget": 10,
+      "moveBudget": 12,
       "nudges": 3,
       "colorLocks": true
     },
@@ -274,7 +274,7 @@
     },
     {
       "id": "L46",
-      "moveBudget": 10,
+      "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true
     },
