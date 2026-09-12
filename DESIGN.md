@@ -57,7 +57,7 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L32 Thread North.** Park above, then thread the north lane onto the house.
 - **L33 Thread West.** Sit past the house, then park west. North-first habits miss the stop.
 - **L34 Wall Seal.** The gray house is the west brake. Park a friend there and gray overshoots.
-- **L35 Vacate First.** Leave the house column, then park west. L34's solid-west slide goes through.
+- **L35 Clear First.** Leave the house column, then park west. L34's solid-west slide goes through.
 - **L36 High Brake.** Sit past south, then park above. L35's west park misses the stop.
 - **L37 Low Brake.** Sit past north, then park below. L36's park-above misses the stop.
 - **L38 East Seal.** The black house is the east brake. Park a friend there and black overshoots.
@@ -72,7 +72,7 @@ Same slide engine. Campaign after L9 is **L11–L51** (skip L10).
 - **L47 Side Seal.** The black house is the west brake.
 - **L48 Vacate Row.** Leave the house row first, then the west solid (≠ L31 Vacate West).
 - **L49 Step Cut.** Gray mismatch solid is the setup step — vacate-row habits miss.
-- **L50 Latch Through.** East corridor onto the mid house.
+- **L50 Commit Through.** East corridor onto the mid house.
 - **L51 Offset Brake.**
 - **L52 Gate Weave.**
 - **L53 Catch Bar.**

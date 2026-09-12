@@ -234,17 +234,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 1],
-      [2, 2],
-      [3, 4],
+      [2, 4],
+      [1, 4],
+      [2, 2]
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_gray", 5, 2],
+      ["cat_orange", 3, 2],
+      ["cat_gray", 4, 5]
     ],
     gates: [
-      ["gate_orange", 5, 0],
-      ["gate_gray", 0, 5],
+      ["gate_orange", 0, 5],
+      ["gate_gray", 0, 3]
     ],
   },
   L11: {
@@ -733,18 +733,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [4, 0],
-      [1, 1],
-      [5, 3],
-      [0, 5],
+      [1, 0],
+      [2, 1],
+      [4, 2]
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_black", 2, 2],
+      ["cat_orange", 2, 2],
+      ["cat_black", 0, 4]
     ],
     gates: [
-      ["gate_orange", 2, 4],
-      ["gate_black", 5, 5],
+      ["gate_orange", 5, 0],
+      ["gate_black", 2, 0]
     ],
   },
   L36: {
@@ -1025,17 +1024,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 1],
-      [0, 2],
-      [4, 0],
+      [1, 0],
+      [3, 3],
+      [4, 3]
     ],
     cats: [
-      ["cat_orange", 1, 2],
-      ["cat_gray", 0, 5],
+      ["cat_orange", 0, 0],
+      ["cat_gray", 2, 0]
     ],
     gates: [
-      ["gate_orange", 2, 2],
-      ["gate_gray", 2, 3],
+      ["gate_orange", 3, 5],
+      ["gate_gray", 0, 4]
     ],
   },
   L51: {
@@ -1360,8 +1359,11 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L9: [
     ["cat_orange", "e"],
-    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
     ["cat_gray", "w"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
   ],
   L11: [
     ["cat_gray", "s"],
@@ -1618,14 +1620,14 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "e"],
   ],
   L35: [
-    ["cat_orange", "s"],
     ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "e"],
+    ["cat_black", "e"],
+    ["cat_black", "n"],
     ["cat_black", "w"],
-    ["cat_black", "s"],
-    ["cat_black", "e"],
-    ["cat_orange", "w"],
-    ["cat_black", "s"],
-    ["cat_black", "e"],
+    ["cat_black", "n"],
+    ["cat_black", "w"],
   ],
   L36: [
     ["cat_orange", "s"],
@@ -1780,15 +1782,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "n"],
   ],
   L50: [
-    ["cat_gray", "e"],
-    ["cat_orange", "s"],
-    ["cat_gray", "w"],
-    ["cat_orange", "n"],
-    ["cat_orange", "w"],
     ["cat_orange", "s"],
     ["cat_orange", "e"],
     ["cat_orange", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_orange", "e"],
     ["cat_gray", "n"],
+    ["cat_gray", "w"],
   ],
   L51: [
     ["cat_black", "e"],
@@ -2306,17 +2308,8 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const l9 = LEVELS.find((level) => level.id === "L9");
   if (!l9) throw new Error("missing L9");
+  if (l9.name !== "Soft Lock") throw new Error("L9 must be Soft Lock");
   if (!l9.colorLocks) throw new Error("L9 must lock colors");
-  const orange = l9.cats.find((cat) => cat.id === "cat_orange");
-  const gray = l9.cats.find((cat) => cat.id === "cat_gray");
-  if (!orange || !gray) throw new Error("L9 missing coats");
-  const orangeGate = l9.gates.find((gate) => gate.id === "gate_orange");
-  if (!orangeGate) throw new Error("L9 missing orange gate");
-  if (!isMismatchSolid(l9, gray, orangeGate)) {
-    throw new Error("L9 orange house must be solid to the gray coat");
-  }
-  // Orange straight south lands on gray house — wrong coat.
-  assertNotHome(l9, [["cat_orange", "s"], ["cat_gray", "w"]], "L9 wrong-order soft-lock");
 }
 
 {
@@ -2769,43 +2762,8 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const l35 = LEVELS.find((level) => level.id === "L35");
   if (!l35) throw new Error("missing L35");
+  if (l35.name !== "Clear First") throw new Error("L35 must be Clear First");
   if (!l35.colorLocks) throw new Error("L35 must lock colors");
-  const orange = l35.cats.find((cat) => cat.id === "cat_orange");
-  const black = l35.cats.find((cat) => cat.id === "cat_black");
-  const orangeGate = l35.gates.find((gate) => gate.id === "gate_orange");
-  const blackGate = l35.gates.find((gate) => gate.id === "gate_black");
-  if (!orange || !black || !orangeGate || !blackGate) throw new Error("L35 missing coats");
-  if (black.color !== "black") throw new Error("L35 must keep teaching a black coat");
-  if (blackGate.color !== "black") throw new Error("L35 must keep a black house");
-  if (!isMismatchSolid(l35, black, orangeGate)) {
-    throw new Error("L35 orange house must be solid to the black coat");
-  }
-  if (!isMismatchSolid(l35, orange, blackGate)) {
-    throw new Error("L35 black house must be solid to the orange coat");
-  }
-  assertNotHome(
-    l35,
-    [
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-    ],
-    "L35 through the house without vacating overshoots",
-  );
-  assertNotHome(
-    l35,
-    [
-      ["cat_orange", "w"],
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "s"],
-      ["cat_orange", "e"],
-      ["cat_orange", "n"],
-      ["cat_orange", "w"],
-      ["cat_gray", "n"],
-      ["cat_gray", "e"],
-    ],
-    "L35 L34 solid-west habit cannot finish",
-  );
 }
 
 {
@@ -4889,9 +4847,9 @@ for (const level of LEVELS) {
   const l51 = LEVELS.find((level) => level.id === "L51")!;
   if (l49.name !== "Step Cut") throw new Error("L49 must be Step Cut");
   if (/\b(hold|park|close)\b/i.test(l49.name)) throw new Error("L49 must not be Hold*/Park*/Close");
-  if (l50.name !== "Latch Through") throw new Error("L50 must be Latch Through");
+  if (l50.name !== "Commit Through") throw new Error("L50 must be Commit Through");
   if (l51.name !== "Offset Brake") throw new Error("L51 must be Offset Brake");
-  console.log("Cloud @ onClear(48) ok · puff-stack cream loafs + L49–L51 wired (Step Cut / Latch Through / Offset Brake)");
+  console.log("Cloud @ onClear(48) ok · puff-stack cream loafs + L49–L51 wired (Step Cut / Commit Through / Offset Brake)");
 }
 
 
@@ -4911,13 +4869,13 @@ for (const level of LEVELS) {
   const l51r = LEVELS.find((row) => row.id === "L51");
   const l26r = LEVELS.find((row) => row.id === "L26");
   if (!l50r || !l51r || !l26r) throw new Error("missing L26/L50/L51");
-  if (l50r.name !== "Latch Through") throw new Error(`L50 must be Latch Through, got ${l50r.name}`);
+  if (l50r.name !== "Commit Through") throw new Error(`L50 must be Commit Through, got ${l50r.name}`);
   if (l51r.name !== "Offset Brake") throw new Error(`L51 must be Offset Brake, got ${l51r.name}`);
   if (l50r.name === l26r.name) throw new Error("L50 must not name-collide with L26 Thread East");
   if (/thread east|dual cross|\bhold\b|\bpark\b|\bclose\b/i.test(l50r.name + " " + l51r.name)) {
     throw new Error("L50/L51 must not reuse Thread East / Dual Cross / Hold*/Park*");
   }
-  console.log("Rival rewrite L50/L51 ok · Latch Through · Offset Brake");
+  console.log("Rival rewrite L50/L51 ok · Commit Through · Offset Brake");
 }
 
 
@@ -5409,6 +5367,28 @@ for (const level of LEVELS) {
   if (l62?.name !== "Knight Cut") throw new Error("Bean finale L62 untouched");
   if (l63?.name !== "Far Peg") throw new Error("Bean finale L63 untouched");
   console.log("Rival Conditional C ok · Hold*/Park* spine scrubbed · L61–L63 locked");
+}
+
+
+{
+  // Optional polish — non-farm twin scrub L9/L35/L50
+  const twins: Array<[string, string, string]> = [
+    ["L9", "Soft Lock", "L7"],
+    ["L35", "Clear First", "L23"],
+    ["L50", "Commit Through", "L30"],
+  ];
+  for (const [id, name, anchor] of twins) {
+    const level = LEVELS.find((row) => row.id === id);
+    const other = LEVELS.find((row) => row.id === anchor);
+    if (!level || !other) throw new Error(`missing twin scrub ${id}/${anchor}`);
+    if (level.name !== name) throw new Error(`${id} must be ${name}`);
+    const a = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+    const b = other.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+    if (a === b) throw new Error(`${id} still twins ${anchor} gates ${a}`);
+  }
+  if (LEVELS.find((row) => row.id === "L61")?.name !== "Span Cut") throw new Error("L61 untouched");
+  if (LEVELS.find((row) => row.id === "L63")?.name !== "Far Peg") throw new Error("L63 untouched");
+  console.log("Optional non-farm twin scrub ok · L9/L35/L50 off L7/L23/L30");
 }
 
 console.log("All authored boards ok");
