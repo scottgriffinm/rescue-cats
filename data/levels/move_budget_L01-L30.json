@@ -289,6 +289,24 @@
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true
+    },
+    {
+      "id": "L52",
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true
+    },
+    {
+      "id": "L53",
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true
+    },
+    {
+      "id": "L54",
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true
     }
   ]
 }
