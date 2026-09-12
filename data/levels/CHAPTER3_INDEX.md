@@ -1,6 +1,6 @@
 # Chapter 3 puzzle index
 
-Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13–L15 → Ghost @ 15 → L16–L18 → Mist @ 18 → L19–L21 → Pepper @ 21 → L22–L24 → Pumpkin @ 24 → L25–L27 → Shadow @ 27 → L28–L30 → Noodle @ 30 → L31–L33 → Clover @ 33 → L34–L36 → Ash @ 36 → L37–L39 → Oak @ 39 → L40–L42 → Dumpling @ 42 → L43–L45 → Stripe @ 45 → L46–L48**. **L10 is not on the path.** Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On color-lock boards, a **mismatch house is a solid**. A parked friend is the brake onto a mid-board matching house.
+Campaign continues **L1–L9 → Biscuit @ 9 → L11–L12 → Tux @ 12 → L13–L15 → Ghost @ 15 → L16–L18 → Mist @ 18 → L19–L21 → Pepper @ 21 → L22–L24 → Pumpkin @ 24 → L25–L27 → Shadow @ 27 → L28–L30 → Noodle @ 30 → L31–L33 → Clover @ 33 → L34–L36 → Ash @ 36 → L37–L39 → Oak @ 39 → L40–L42 → Dumpling @ 42 → L43–L45 → Stripe @ 45 → L46–L48 → Cloud @ 48 → L49–L51**. **L10 is not on the path.** Grid origin is top-left. Slides stop on **wall | cat | edge** only. Matching gates never brake. On color-lock boards, a **mismatch house is a solid**. A parked friend is the brake onto a mid-board matching house.
 
 | Id | Pack | Teach | Color locks |
 | --- | --- | --- | --- |
@@ -42,8 +42,11 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 | L46 | `CHAPTER3_PUZZLE_L46_L48.json` / `L46.json` | Dual Brake — color-cross sequential brake; not Park East Close | yes · mismatch solid |
 | L47 | `CHAPTER3_PUZZLE_L46_L48.json` / `L47.json` | Solid West — black house is the west brake | yes · mismatch solid |
 | L48 | `CHAPTER3_PUZZLE_L46_L48.json` / `L48.json` | Vacate Row — leave the house row, then the west solid (≠ L31 Vacate West) | yes · mismatch solid |
+| L49 | `CHAPTER3_PUZZLE_L49_L51.json` / `L49.json` | Color Step — gray mismatch solid is the setup step | yes · mismatch solid |
+| L50 | `CHAPTER3_PUZZLE_L49_L51.json` / `L50.json` | Thread East — east corridor onto the mid house | yes · mismatch solid |
+| L51 | `CHAPTER3_PUZZLE_L49_L51.json` / `L51.json` | Dual Cross — orange/black color-cross dual brake | yes · mismatch solid |
 
-`CHAPTER3_PUZZLE_L11_L12.json` is the **campaign import** after the locked L4–L9 pack. `CHAPTER3_PUZZLE_L13_L15.json` continues after L12. `CHAPTER3_PUZZLE_L16_L18.json` continues after L15. `CHAPTER3_PUZZLE_L19_L21.json` continues after L18. `CHAPTER3_PUZZLE_L22_L24.json` continues after L21. `CHAPTER3_PUZZLE_L25_L27.json` continues after L24. `CHAPTER3_PUZZLE_L28_L30.json` continues after L27. `CHAPTER3_PUZZLE_L31_L33.json` continues after L30. `CHAPTER3_PUZZLE_L34_L36.json` continues after L33. `CHAPTER3_PUZZLE_L37_L39.json` continues after L36. `CHAPTER3_PUZZLE_L40_L42.json` continues after L39. `CHAPTER3_PUZZLE_L43_L45.json` continues after L42. `CHAPTER3_PUZZLE_L46_L48.json` continues after L45. Pink plays L11 next after L9.
+`CHAPTER3_PUZZLE_L11_L12.json` is the **campaign import** after the locked L4–L9 pack. `CHAPTER3_PUZZLE_L13_L15.json` continues after L12. `CHAPTER3_PUZZLE_L16_L18.json` continues after L15. `CHAPTER3_PUZZLE_L19_L21.json` continues after L18. `CHAPTER3_PUZZLE_L22_L24.json` continues after L21. `CHAPTER3_PUZZLE_L25_L27.json` continues after L24. `CHAPTER3_PUZZLE_L28_L30.json` continues after L27. `CHAPTER3_PUZZLE_L31_L33.json` continues after L30. `CHAPTER3_PUZZLE_L34_L36.json` continues after L33. `CHAPTER3_PUZZLE_L37_L39.json` continues after L36. `CHAPTER3_PUZZLE_L40_L42.json` continues after L39. `CHAPTER3_PUZZLE_L43_L45.json` continues after L42. `CHAPTER3_PUZZLE_L46_L48.json` continues after L45. `CHAPTER3_PUZZLE_L49_L51.json` continues after L48. Pink plays L11 next after L9.
 
 ## Collection / art (same beat)
 
@@ -68,7 +71,7 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 - First-night: `{Name}: Lucky, or just very good at finding boxes.`
 - Ash (`friend_012`) at `onClear(36)` after **L36** — chips **Cinder / Soot / Hearth**, warm hearth-ash loaf, no furniture gift
 - First-night: `{Name}: Warm like a hearth that just went quiet.`
-- Porch shows fifteen friends when owned (Mango / Ink / Biscuit / Tux / Ghost / Mist / Pepper / Pumpkin / Shadow / Noodle / Clover / Ash / Oak / Dumpling / Stripe) plus box, cushion, and shop props
+- Porch shows sixteen friends when owned (Mango / Ink / Biscuit / Tux / Ghost / Mist / Pepper / Pumpkin / Shadow / Noodle / Clover / Ash / Oak / Dumpling / Stripe / Cloud) plus box, cushion, and shop props
 - Hearts shop SKUs unchanged: scratcher 15♥ + mini tree 40♥ from clear ≥3; yarn swing 40♥ from clear ≥6. Mini Cat Tree is a shop card when not owned (not an auto-grant).
 - Oak (`friend_013`) at `onClear(39)` after **L39** — chips **Oak / Acorn / Timber**, bark-warm blotch loaf, no furniture gift
 - First-night: `{Name}: Sturdy loaf. Will outlast the furniture.`
@@ -76,7 +79,9 @@ L31 | `CHAPTER3_PUZZLE_L31_L33.json` / `L31.json` | Vacate West — leave before
 - First-night: `{Name}: Perfectly folded. Frequently steaming.`
 - Stripe (`friend_015`) at `onClear(45)` after **L45** — chips **Stripe / Dash / Lane**, orange road-map mackerel loaf, no furniture gift
 - First-night: `{Name}: Wears the road map on their back.`
-- Cloud @ 48 and Bean @ 60 ship later — clearing L46–L48 must not open Cloud or Bean UI
+- Cloud (`friend_016`) at `onClear(48)` after **L48** — chips **Cloud / Puff / Drift**, puff-stack cream loaf, no furniture gift
+- First-night: `{Name}: Floats from cushion to cushion.`
+- Donna @ 51 and Bean @ 60 ship later — clearing L49–L51 must not open Donna or Bean UI
 
 ## Engine
 

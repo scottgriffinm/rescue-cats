@@ -25,4 +25,4 @@ Pack JSON: `chapter3_stripe_bang.json`. Overlay on `collection_CURRENT.json`. No
 
 Dumpling / Bao / Potsticker · Oak / Acorn / Timber · Noodle / Ramen / Twirl · Pepper / Spice / Pip · Pumpkin / Squash / Ember · Biscuit / Mochi / Toast · Cinder / Soot / Hearth · Midnight / Inkspot / Onyx · Bean / Cloud / Mango.
 
-Mango still unlocks at 3. Dumpling at 42. **Cloud@48 and Bean@60 stay later** — clearing L46–L48 must not open Cloud or Bean UI.
+Mango still unlocks at 3. Dumpling at 42. **Donna@51 and Bean@60 stay later** — Cloud ships at 48; clearing L46–L48 must not open Donna or Bean UI.

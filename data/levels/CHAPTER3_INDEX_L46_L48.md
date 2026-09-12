@@ -10,4 +10,4 @@ Campaign continues **… → L43–L45 → Stripe @ 45 → L46–L48**. **L10 st
 
 Habit breaks: L45 Vacate North → L46 Park East Close (new axis + close park; Hold* mill title killed). L46 park-east-close → L47 needs a west solid. L47 solid-west-from-row → L48 must vacate the row first (reshaped off L31 name/template collision).
 
-Stripe (`friend_015`) unlocks at `onClear(45)` — Collection Lead owns the bang pack. Puzzle Lead owns these boards only. Cloud@48 and Bean@60 stay later.
+Stripe (`friend_015`) unlocks at `onClear(45)` — Collection Lead owns the bang pack. Puzzle Lead owns these boards only. Cloud@48 ships next; Donna@51 and Bean@60 stay later.
