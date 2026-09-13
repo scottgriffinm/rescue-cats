@@ -2094,19 +2094,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 5],
-      [0, 3],
-      [4, 2],
-      [5, 3],
-      [5, 2]
+      [2, 5],
+      [3, 3],
+      [5, 5]
     ],
     cats: [
-      ["cat_orange", 5, 4],
-      ["cat_gray", 2, 2]
+      ["cat_orange", 3, 4],
+      ["cat_gray", 0, 2]
     ],
     gates: [
-      ["gate_orange", 5, 5],
-      ["gate_gray", 3, 4]
+      ["gate_orange", 5, 1],
+      ["gate_gray", 1, 2]
     ],
   }
 };
@@ -3173,15 +3171,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "n"],
   ],
   L102: [
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
     ["cat_orange", "e"],
     ["cat_orange", "n"],
+    ["cat_gray", "n"],
     ["cat_orange", "w"],
-    ["cat_gray", "e"],
-    ["cat_orange", "e"],
     ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
+    ["cat_orange", "e"],
   ],
 };
 
@@ -7793,11 +7791,11 @@ for (const level of LEVELS) {
 
 
 {
-  // Ch4 Plum@99 + L100–L102 triad (Greengage/Sloe/Quince — deltas (0,3)/(0,2)/(2,1); Damson chip-only)
+  // Ch4 Plum@99 + L100–L102 triad (Greengage/Sloe/Medlar — deltas (0,3)/(0,2)/(4,-1); Damson chip-only; Quince kill)
   for (const [id, name] of [
     ["L100", "Greengage Cut"],
     ["L101", "Sloe Gap"],
-    ["L102", "Quince Stop"],
+    ["L102", "Medlar Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -7876,11 +7874,19 @@ for (const level of LEVELS) {
   const l101 = LEVELS.find((r) => r.id === "L101")!;
   const l102 = LEVELS.find((r) => r.id === "L102")!;
   if (/damson/i.test(l100.name) || /damson/i.test(l102.name)) throw new Error("Damson is chip-only — ban as level name");
-  if (/cobbler/i.test(l102.name)) throw new Error("L102 must be Quince Stop, not Cobbler");
+  if (/quince/i.test(l102.name)) throw new Error("L102 must be Medlar Stop, not Quince");
+  if (/cobbler/i.test(l102.name)) throw new Error("L102 must be Medlar Stop, not Cobbler");
   const plumGatePair = (level: typeof l100) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
   if (plumGatePair(l100) !== "2,0/2,3") throw new Error(`L100 gates must be delta (0,3) pair, got ${plumGatePair(l100)}`);
   if (plumGatePair(l101) !== "3,0/3,2") throw new Error(`L101 gates must be delta (0,2) pair, got ${plumGatePair(l101)}`);
-  if (plumGatePair(l102) !== "3,4/5,5") throw new Error(`L102 gates must be delta (2,1) pair, got ${plumGatePair(l102)}`);
+  if (plumGatePair(l102) !== "1,2/5,1") throw new Error(`L102 gates must be delta (4,-1) pair, got ${plumGatePair(l102)}`);
+  // Medlar Stop — off Nori orange seat (5,5)
+  const occ102 = new Set([
+    ...l102.cats.map((c) => `${c.x},${c.y}`),
+    ...l102.gates.map((g) => `${g.x},${g.y}`),
+  ]);
+  if (occ102.has("5,5")) throw new Error("L102 Medlar must be off Nori seat (5,5)");
+  if (!l102.walls.some((w) => w.x === 5 && w.y === 5)) throw new Error("L102 Medlar must wall-off (5,5)");
   const l100Gray = l100.gates.find((g) => g.color === "gray" || g.id === "gate_gray");
   if (l100Gray && l100Gray.x === 4 && l100Gray.y === 5) {
     throw new Error("L100 must not reuse Chive gray seat (4,5)");
@@ -7905,7 +7911,7 @@ for (const level of LEVELS) {
   if (!existsSync(resolve("data/collection/CH4_FRIEND_033.md"))) throw new Error("missing CH4_FRIEND_033.md");
   if (!existsSync(resolve("data/collection/chapter4_plum_bang.json"))) throw new Error("missing collection plum bang");
   if (!existsSync(resolve("data/chapter4_plum_bang.json"))) throw new Error("missing chapter4_plum_bang.json");
-  console.log("Ch4 Plum@99 + L100–L102 ok · chips Plum/Damson/Stone · coat #2C1A24 + gloss #5A3048 · Greengage Cut / Sloe Gap / Quince Stop · Fig/Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Plum@99 + L100–L102 ok · chips Plum/Damson/Stone · coat #2C1A24 + gloss #5A3048 · Greengage Cut / Sloe Gap / Medlar Stop · Fig/Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
 
 
