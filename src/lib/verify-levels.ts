@@ -2053,35 +2053,39 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 3],
-      [4, 5],
-      [0, 1]
+      [5, 5],
+      [2, 1],
+      [5, 4],
+      [0, 2],
+      [1, 3]
     ],
     cats: [
-      ["cat_orange", 1, 0],
-      ["cat_gray", 2, 0]
+      ["cat_orange", 0, 4],
+      ["cat_gray", 4, 2]
     ],
     gates: [
-      ["gate_orange", 0, 3],
-      ["gate_gray", 5, 5]
+      ["gate_orange", 2, 0],
+      ["gate_gray", 2, 3]
     ],
   },
   L101: {
     size: 6,
-    N: 12,
+    N: 11,
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 0],
-      [3, 1]
+      [4, 4],
+      [4, 5],
+      [2, 4],
+      [0, 0]
     ],
     cats: [
-      ["cat_orange", 3, 4],
-      ["cat_black", 5, 1]
+      ["cat_orange", 1, 3],
+      ["cat_black", 2, 0]
     ],
     gates: [
-      ["gate_orange", 0, 0],
-      ["gate_black", 4, 2]
+      ["gate_orange", 3, 0],
+      ["gate_black", 3, 2]
     ],
   },
   L102: {
@@ -2090,16 +2094,19 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [4, 4],
+      [1, 5],
+      [0, 3],
+      [4, 2],
+      [5, 3],
       [5, 2]
     ],
     cats: [
-      ["cat_orange", 0, 4],
-      ["cat_gray", 4, 3]
+      ["cat_orange", 5, 4],
+      ["cat_gray", 2, 2]
     ],
     gates: [
-      ["gate_orange", 1, 3],
-      ["gate_gray", 2, 0]
+      ["gate_orange", 5, 5],
+      ["gate_gray", 3, 4]
     ],
   }
 };
@@ -3144,37 +3151,37 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "s"],
   ],
   L100: [
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_orange", "n"],
-    ["cat_gray", "s"],
+    ["cat_orange", "e"],
     ["cat_gray", "w"],
+    ["cat_orange", "n"],
     ["cat_gray", "n"],
-    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_gray", "s"],
     ["cat_gray", "e"],
     ["cat_gray", "s"],
+    ["cat_gray", "w"],
   ],
   L101: [
-    ["cat_orange", "s"],
-    ["cat_black", "s"],
     ["cat_orange", "e"],
     ["cat_orange", "n"],
-    ["cat_black", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
     ["cat_black", "w"],
     ["cat_black", "s"],
-    ["cat_orange", "w"],
+    ["cat_black", "e"],
+    ["cat_black", "n"],
     ["cat_orange", "n"],
   ],
   L102: [
     ["cat_orange", "s"],
-    ["cat_orange", "e"],
-    ["cat_orange", "n"],
-    ["cat_gray", "n"],
     ["cat_orange", "w"],
     ["cat_gray", "s"],
-    ["cat_gray", "w"],
     ["cat_orange", "e"],
-    ["cat_gray", "n"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_gray", "e"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
   ],
 };
 
@@ -7782,11 +7789,11 @@ for (const level of LEVELS) {
 
 
 {
-  // Ch4 Plum@99 + L100–L102 triad (Damson/Sloe/Cobbler — deltas (5,2)/(4,2)/(1,-3); off Chive (4,5) / Lovage)
+  // Ch4 Plum@99 + L100–L102 triad (Greengage/Sloe/Quince — deltas (0,3)/(0,2)/(2,1); Damson chip-only)
   for (const [id, name] of [
-    ["L100", "Damson Cut"],
+    ["L100", "Greengage Cut"],
     ["L101", "Sloe Gap"],
-    ["L102", "Cobbler Stop"],
+    ["L102", "Quince Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -7857,14 +7864,16 @@ for (const level of LEVELS) {
   if (SLICE_UNLOCKS[102]) throw new Error("no friend_034 @102 this slice");
   if (/pebble|Pebble/i.test(plum48 + plum72)) throw new Error("Plum art must not use Pebble");
   if (/fig|olive|pit/i.test(plum48 + plum72)) throw new Error("Plum art must not collide Fig marks");
-  // Deltas (5,2)/(4,2)/(1,-3)
+  // Deltas (0,3)/(0,2)/(2,1) — Damson is a Plum naming chip only, never a level name
   const l100 = LEVELS.find((r) => r.id === "L100")!;
   const l101 = LEVELS.find((r) => r.id === "L101")!;
   const l102 = LEVELS.find((r) => r.id === "L102")!;
+  if (/damson/i.test(l100.name) || /damson/i.test(l102.name)) throw new Error("Damson is chip-only — ban as level name");
+  if (/cobbler/i.test(l102.name)) throw new Error("L102 must be Quince Stop, not Cobbler");
   const plumGatePair = (level: typeof l100) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (plumGatePair(l100) !== "0,3/5,5") throw new Error(`L100 gates must be delta (5,2) pair, got ${plumGatePair(l100)}`);
-  if (plumGatePair(l101) !== "0,0/4,2") throw new Error(`L101 gates must be delta (4,2) pair, got ${plumGatePair(l101)}`);
-  if (plumGatePair(l102) !== "1,3/2,0") throw new Error(`L102 gates must be delta (1,-3) pair, got ${plumGatePair(l102)}`);
+  if (plumGatePair(l100) !== "2,0/2,3") throw new Error(`L100 gates must be delta (0,3) pair, got ${plumGatePair(l100)}`);
+  if (plumGatePair(l101) !== "3,0/3,2") throw new Error(`L101 gates must be delta (0,2) pair, got ${plumGatePair(l101)}`);
+  if (plumGatePair(l102) !== "3,4/5,5") throw new Error(`L102 gates must be delta (2,1) pair, got ${plumGatePair(l102)}`);
   const l100Gray = l100.gates.find((g) => g.color === "gray" || g.id === "gate_gray");
   if (l100Gray && l100Gray.x === 4 && l100Gray.y === 5) {
     throw new Error("L100 must not reuse Chive gray seat (4,5)");
@@ -7889,7 +7898,7 @@ for (const level of LEVELS) {
   if (!existsSync(resolve("data/collection/CH4_FRIEND_033.md"))) throw new Error("missing CH4_FRIEND_033.md");
   if (!existsSync(resolve("data/collection/chapter4_plum_bang.json"))) throw new Error("missing collection plum bang");
   if (!existsSync(resolve("data/chapter4_plum_bang.json"))) throw new Error("missing chapter4_plum_bang.json");
-  console.log("Ch4 Plum@99 + L100–L102 ok · chips Plum/Damson/Stone · coat #7A3B5C + bloom #C9A0B4 · Damson Cut / Sloe Gap / Cobbler Stop · Fig/Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Plum@99 + L100–L102 ok · chips Plum/Damson/Stone · coat #7A3B5C + bloom #C9A0B4 · Greengage Cut / Sloe Gap / Quince Stop · Fig/Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
 
 
