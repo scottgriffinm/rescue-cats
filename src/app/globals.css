@@ -328,6 +328,65 @@ a {
   }
 }
 
+
+
+/* Phone viewport: kill overlapping chrome (parade chips, roost names, bangs, HUD). */
+.yard-roost-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 1px 4px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 86%, transparent);
+}
+
+.yard-bang {
+  /* Keep the 44px touch target, but don't let the hit box steal neighbor taps sideways. */
+  touch-action: manipulation;
+}
+
+.parade-chip {
+  touch-action: manipulation;
+}
+
+@media (max-width: 430px) {
+  :root {
+    --ctrl-band-gap: 8px;
+    --dpad-visual-scale: 0.8;
+  }
+
+  .parade-chip-label {
+    font-size: 7px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Dense porch: FriendsMet owns the roster — hide sticker name chips so loafs don't collide with labels. */
+  .yard-scene[data-crowd="dense"] .yard-roost-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+    background: transparent;
+  }
+
+  .yard-bang {
+    /* Slightly tuck bang so it stays inside the yard on narrow widths. */
+    transform: translate(-50%, -68%);
+  }
+}
+
+@media (min-width: 431px) {
+  .parade-chip-label {
+    font-size: 8px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

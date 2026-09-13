@@ -139,17 +139,17 @@ export function YardScreen() {
 
   return (
     <GameShell>
-      <header className="px-6 pt-7 text-center">
+      <header className="px-4 pt-5 text-center sm:px-6 sm:pt-7">
         <p className="font-display text-[11px] tracking-[0.28em] text-ink/40">
           PORCH / LAWN
         </p>
-        <h1 className="mt-1 font-display text-[2.1rem] leading-none tracking-wide">
+        <h1 className="mt-1 font-display text-[1.85rem] leading-none tracking-wide sm:text-[2.1rem]">
           RESCUE <span className="text-clay">CATS</span>
         </h1>
-        <div className="mt-3 flex items-center justify-center gap-3 text-xs text-ink/55">
+        <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-ink/55">
           <ComfortMeter value={comfort} pulseKey={comfortPulse} />
-          <span>♥ {save.hearts}</span>
-          <span className="inline-flex items-center gap-0.5">
+          <span className="inline-flex items-center gap-1 tabular-nums">♥ {save.hearts}</span>
+          <span className="inline-flex items-center gap-0.5 tabular-nums">
             <UiIcon name="star_marigold" className="h-3.5 w-3.5" />
             {save.stars}
           </span>
@@ -221,7 +221,7 @@ export function YardScreen() {
       <FriendsMet friends={save.friends} />
 
       <div
-        className="flex flex-wrap items-end justify-center gap-1.5 px-6"
+        className="parade-progress grid grid-cols-5 gap-x-1 gap-y-3 px-3 sm:grid-cols-6 sm:gap-x-1.5 sm:px-5 md:grid-cols-8 lg:flex lg:flex-wrap lg:items-end lg:justify-center lg:gap-1.5 lg:px-6"
         aria-label="Parade progress"
       >
         {(() => {
@@ -238,7 +238,7 @@ export function YardScreen() {
               <Link
                 key={milestone.friendId}
                 href={`/level/${level.id}`}
-                className={`flex flex-col items-center gap-0.5 rounded-md px-0.5 transition-all ${
+                className={`parade-chip flex min-h-11 min-w-0 flex-col items-center justify-end gap-0.5 rounded-md px-0.5 transition-all ${
                   current ? "opacity-100" : done ? "opacity-90" : "opacity-45"
                 }`}
                 aria-label={`${label} at clear ${milestone.clear}${
@@ -257,7 +257,7 @@ export function YardScreen() {
                   aria-hidden
                 />
                 <span
-                  className={`max-w-[2.6rem] truncate font-display text-[8px] leading-none tracking-wide ${
+                  className={`parade-chip-label w-full max-w-full truncate text-center font-display text-[8px] leading-none tracking-wide ${
                     current ? "text-ink" : done ? "text-clay" : "text-ink/40"
                   }`}
                 >
@@ -269,7 +269,7 @@ export function YardScreen() {
         })()}
       </div>
 
-      <footer className="space-y-3 px-5 pb-6 pt-4">
+      <footer className="space-y-3 px-4 pb-6 pt-3 sm:px-5 sm:pt-4">
         <Link
           href={allDone ? `/level/${LEVELS[0].id}` : `/level/${upcoming.id}`}
           className="inline-flex h-11 w-full items-center justify-center rounded-[10px] bg-ink px-5 font-display text-base tracking-wide text-paper shadow-[0_3px_0_#2B2A28]"
@@ -330,7 +330,7 @@ function ComfortMeter({ value, pulseKey }: { value: number; pulseKey: number }) 
     >
       <span>Comfort</span>
       <div
-        className="h-2 w-16 overflow-hidden rounded-full border border-ink/25 bg-paper-deep"
+        className="h-2 w-12 overflow-hidden rounded-full border border-ink/25 bg-paper-deep sm:w-16"
         aria-hidden
       >
         <div

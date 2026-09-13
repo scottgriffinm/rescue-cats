@@ -28,9 +28,9 @@ const ROOSTS = [
 ];
 
 
-/** Yard-tidy: shrink loafs once the parade crowds the porch. */
+/** Yard-tidy: shrink loafs once the parade crowds the porch (earlier on dense yards). */
 function loafPx(friendCount: number): 48 | 72 {
-  return friendCount >= 10 ? 48 : 72;
+  return friendCount >= 8 ? 48 : 72;
 }
 
 function furnPop(highlightSku: string | null | undefined, skuId: string) {
@@ -134,7 +134,10 @@ export function YardScene({
   );
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[min(100%,28rem)]">
+    <div
+      className="yard-scene relative mx-auto aspect-square w-full max-w-[min(100%,28rem)] overflow-visible"
+      data-crowd={friends.length >= 12 ? "dense" : "open"}
+    >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/assets/ui/yard_iso.svg"
@@ -207,13 +210,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(mango.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${mango.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{mango.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{mango.name}</p>
         </div>
       ) : null}
 
@@ -231,13 +234,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(mist.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${mist.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{mist.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{mist.name}</p>
         </div>
       ) : null}
 
@@ -255,13 +258,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(pepper.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${pepper.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{pepper.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{pepper.name}</p>
         </div>
       ) : null}
 
@@ -279,13 +282,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(noodle.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${noodle.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{noodle.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{noodle.name}</p>
         </div>
       ) : null}
 
@@ -303,13 +306,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(clover.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${clover.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{clover.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{clover.name}</p>
         </div>
       ) : null}
 
@@ -327,13 +330,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(ash.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${ash.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{ash.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{ash.name}</p>
         </div>
       ) : null}
 
@@ -351,13 +354,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(oak.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${oak.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{oak.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{oak.name}</p>
         </div>
       ) : null}
       {dumpling ? (
@@ -374,13 +377,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(dumpling.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${dumpling.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{dumpling.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{dumpling.name}</p>
         </div>
       ) : null}
       {stripe ? (
@@ -397,13 +400,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(stripe.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${stripe.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{stripe.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{stripe.name}</p>
         </div>
       ) : null}
       {cloud ? (
@@ -420,13 +423,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(cloud.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${cloud.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{cloud.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{cloud.name}</p>
         </div>
       ) : null}
       {donna ? (
@@ -443,13 +446,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(donna.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${donna.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{donna.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{donna.name}</p>
         </div>
       ) : null}
       {sunny ? (
@@ -466,13 +469,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(sunny.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${sunny.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{sunny.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{sunny.name}</p>
         </div>
       ) : null}
       {nigel ? (
@@ -489,13 +492,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(nigel.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${nigel.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{nigel.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{nigel.name}</p>
         </div>
       ) : null}
       {bean ? (
@@ -512,13 +515,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(bean.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${bean.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{bean.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{bean.name}</p>
         </div>
       ) : null}
       {velvet ? (
@@ -535,13 +538,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(velvet.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${velvet.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{velvet.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{velvet.name}</p>
         </div>
       ) : null}
       {coral ? (
@@ -558,13 +561,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(coral.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${coral.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{coral.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{coral.name}</p>
         </div>
       ) : null}
 
@@ -582,13 +585,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(blue.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${blue.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{blue.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{blue.name}</p>
         </div>
       ) : null}
 
@@ -606,13 +609,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(maple.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${maple.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{maple.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{maple.name}</p>
         </div>
       ) : null}
 
@@ -630,13 +633,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(steve.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${steve.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{steve.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{steve.name}</p>
         </div>
       ) : null}
 
@@ -654,13 +657,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(cocoa.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${cocoa.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{cocoa.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{cocoa.name}</p>
         </div>
       ) : null}
 
@@ -679,13 +682,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(linen.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${linen.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{linen.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{linen.name}</p>
         </div>
       ) : null}
 
@@ -704,13 +707,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(juniper.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${juniper.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{juniper.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{juniper.name}</p>
         </div>
       ) : null}
 
@@ -728,13 +731,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(ivory.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${ivory.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{ivory.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{ivory.name}</p>
         </div>
       ) : null}
 
@@ -753,13 +756,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(clay.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${clay.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{clay.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{clay.name}</p>
         </div>
       ) : null}
 
@@ -777,13 +780,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(basil.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${basil.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{basil.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{basil.name}</p>
         </div>
       ) : null}
 
@@ -801,13 +804,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(fig.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${fig.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{fig.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{fig.name}</p>
         </div>
       ) : null}
 
@@ -825,13 +828,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(plum.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${plum.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{plum.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{plum.name}</p>
         </div>
       ) : null}
 
@@ -849,13 +852,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(shadow.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${shadow.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{shadow.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{shadow.name}</p>
         </div>
       ) : null}
 
@@ -873,13 +876,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(pumpkin.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${pumpkin.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{pumpkin.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{pumpkin.name}</p>
         </div>
       ) : null}
 
@@ -897,13 +900,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(ghost.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${ghost.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{ghost.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{ghost.name}</p>
         </div>
       ) : null}
 
@@ -921,13 +924,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(tux.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${tux.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{tux.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{tux.name}</p>
         </div>
       ) : null}
 
@@ -945,13 +948,13 @@ export function YardScene({
             <button
               type="button"
               onClick={() => onBang?.(biscuit.instanceId)}
-              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
               aria-label={`${biscuit.name} has something to say`}
             >
               <UiIcon name="bubble_bang" className="h-7 w-7" />
             </button>
           ) : null}
-          <p className="text-center font-display text-[11px] text-ink/70">{biscuit.name}</p>
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{biscuit.name}</p>
         </div>
       ) : null}
 
@@ -973,13 +976,13 @@ export function YardScene({
               <button
                 type="button"
                 onClick={() => onBang?.(friend.instanceId)}
-                className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+                className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
                 aria-label={`${friend.name} has something to say`}
               >
                 <UiIcon name="bubble_bang" className="h-7 w-7" />
               </button>
             ) : null}
-            <p className="text-center font-display text-[11px] text-ink/70">{friend.name}</p>
+            <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{friend.name}</p>
           </div>
         );
       })}
