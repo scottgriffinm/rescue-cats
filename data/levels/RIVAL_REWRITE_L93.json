@@ -1,0 +1,79 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Rival Conditional \u2014 KILL L93 Chervil Stop Step Off (4,1)",
+  "chapter": 4,
+  "title": "L93 Lovage Stop (L91 Marjoram Cut + L92 Fennel Gap stay)",
+  "notes": "L91/L92 lean Pass. L93 Chervil Stop KILL \u2192 Lovage Stop. Gate-pair off (4,1)/L13 Step Off. Clay@90 collect/art Pass. Basil@93 gated.",
+  "levels": [
+    {
+      "id": "L93",
+      "name": "Lovage Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_lovage_stop_gray",
+      "walls": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 3,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 2,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "lovage_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L93": "Lovage Stop \u2014 not Chervil / Step Off delta farm"
+  },
+  "solver": {
+    "min_slides": {
+      "L93": 7
+    }
+  },
+  "kept": [
+    "L91",
+    "L92"
+  ]
+}

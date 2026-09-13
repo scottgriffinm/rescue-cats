@@ -1903,18 +1903,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 4],
-      [5, 5],
+      [2, 3],
       [3, 0],
-      [4, 3]
+      [4, 4]
     ],
     cats: [
-      ["cat_orange", 4, 0],
-      ["cat_gray", 1, 1]
+      ["cat_orange", 5, 1],
+      ["cat_gray", 3, 2],
     ],
     gates: [
-      ["gate_orange", 0, 3],
-      ["gate_gray", 4, 4]
+      ["gate_orange", 0, 2],
+      ["gate_gray", 2, 0],
     ],
   }
 };
@@ -2884,13 +2883,11 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   L93: [
     ["cat_orange", "s"],
     ["cat_orange", "w"],
-    ["cat_orange", "n"],
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
-    ["cat_gray", "e"],
     ["cat_gray", "n"],
+    ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
   ],
 };
 
@@ -7175,17 +7172,17 @@ for (const level of LEVELS) {
 
 
 {
-  // Ch4 Clay@90 + L91–L93 triad (Marjoram/Fennel/Chervil — Sumac/Mace/Thyme killed)
+  // Ch4 Clay@90 + L91–L93 triad (Marjoram/Fennel/Lovage — Chervil Step Off kill)
   for (const [id, name] of [
     ["L91", "Marjoram Cut"],
     ["L92", "Fennel Gap"],
-    ["L93", "Chervil Stop"],
+    ["L93", "Lovage Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
     if (level.name !== name) throw new Error(`${id} must be ${name}`);
     if (!level.colorLocks) throw new Error(`${id} must lock colors`);
-    if (/\b(hold|park|close|pepper|sumac|mace|thyme)\b/i.test(level.name)) {
+    if (/\b(hold|park|close|pepper|sumac|mace|thyme|chervil)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Hold*/Park*/Close/Pepper/Sumac/Mace/Thyme`);
     }
     const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
@@ -7242,7 +7239,7 @@ for (const level of LEVELS) {
   if (/sumac|mace|thyme/i.test([LEVELS.find((r)=>r.id==="L91")?.name, LEVELS.find((r)=>r.id==="L92")?.name, LEVELS.find((r)=>r.id==="L93")?.name].join(","))) {
     throw new Error("L91–L93 must not ship Sumac/Mace/Thyme");
   }
-  console.log("Ch4 Clay@90 + L91–L93 ok · chips Clay/Brick/Terra · terracotta #C85A3C · Marjoram Cut / Fennel Gap / Chervil Stop · Nutmeg/Cumin/Sage kept · Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Clay@90 + L91–L93 ok · chips Clay/Brick/Terra · terracotta #C85A3C · Marjoram Cut / Fennel Gap / Lovage Stop · Nutmeg/Cumin/Sage kept · Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
 
 
