@@ -105,8 +105,8 @@ const HEADLINES: Record<string, string> = {
   L74: "FERN GAP",
   L75: "EMBER STOP",
   L76: "CEDAR CUT",
-  L77: "POLLEN GAP",
-  L78: "SAP STOP",
+  L77: "NEEDLE GAP",
+  L78: "RESIN STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -185,8 +185,8 @@ const HINTS: Record<string, string> = {
   L74: "Fern gap — ferned gray gap after the Blue beat.",
   L75: "Ember stop — orange/black ember stops; not adjacent.",
   L76: "Cedar cut — cedar the route onto orange.",
-  L77: "Pollen gap — pollen gray gap after the Maple beat.",
-  L78: "Sap stop — orange/black sap stops; not adjacent.",
+  L77: "Needle gap — orange house off the Cedar (3,0) seat.",
+  L78: "Resin stop — orange/black resin stops; not a Step Off twin.",
 };
 
 type RawLevel = {

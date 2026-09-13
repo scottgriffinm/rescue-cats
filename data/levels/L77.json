@@ -1,47 +1,35 @@
 {
   "id": "L77",
-  "name": "Pollen Gap",
+  "name": "Needle Gap",
   "width": 6,
   "height": 6,
   "moveBudget": 11,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_pollen_gap_gray",
+  "templateId": "LT02_LT08_needle_gap_gray",
   "walls": [
     {
-      "x": 5,
+      "x": 2,
       "y": 5
     },
     {
       "x": 1,
-      "y": 5
-    },
-    {
-      "x": 5,
-      "y": 1
-    },
-    {
-      "x": 4,
-      "y": 2
-    },
-    {
-      "x": 5,
-      "y": 0
+      "y": 3
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 1,
-      "y": 3,
+      "x": 0,
+      "y": 0,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_gray",
-      "x": 2,
-      "y": 5,
+      "x": 0,
+      "y": 1,
       "color": "gray",
       "colorId": "color_gray"
     }
@@ -49,18 +37,18 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 3,
-      "y": 0,
+      "x": 5,
+      "y": 2,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_gray",
-      "x": 2,
+      "x": 1,
       "y": 4,
       "color": "gray",
       "colorId": "color_gray"
     }
   ],
-  "teach": "pollen_gap_gray"
+  "teach": "needle_gap_gray"
 }

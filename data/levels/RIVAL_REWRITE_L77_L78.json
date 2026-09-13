@@ -1,74 +1,10 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "status": "SHIP READY \u2014 Steve Rival Pass; Cocoa gated",
-  "source": "Chapter 4 continuation after Maple@75 / friend_025",
+  "source": "Rival Conditional \u2014 KILL L77 Pollen Gap + L78 Sap Stop",
   "chapter": 4,
-  "title": "Chapter 4 boards L76\u2013L78 (Needle Gap / Resin Stop reshape)",
+  "title": "L77 Needle Gap + L78 Resin Stop (L76 Cedar Cut stays)",
   "notes": "L76 Cedar Cut leans \u2014 keep. L77 Pollen Gap KILL \u2192 Needle Gap (orange off (3,0); not gray near-Cedar 1,-4). L78 Sap Stop KILL \u2192 Resin Stop (not delta 4,1 / L13 Step Off). Steve collect/coat Pass stands. Cocoa@78 gated until boards Pass.",
   "levels": [
-    {
-      "id": "L76",
-      "name": "Cedar Cut",
-      "width": 6,
-      "height": 6,
-      "moveBudget": 11,
-      "nudges": 3,
-      "colorLocks": true,
-      "templateId": "LT02_LT08_cedar_cut_gray",
-      "walls": [
-        {
-          "x": 3,
-          "y": 1
-        },
-        {
-          "x": 3,
-          "y": 3
-        },
-        {
-          "x": 0,
-          "y": 4
-        },
-        {
-          "x": 4,
-          "y": 3
-        }
-      ],
-      "blockers": [],
-      "cats": [
-        {
-          "id": "cat_orange",
-          "x": 5,
-          "y": 0,
-          "color": "orange",
-          "colorId": "color_orange"
-        },
-        {
-          "id": "cat_gray",
-          "x": 2,
-          "y": 3,
-          "color": "gray",
-          "colorId": "color_gray"
-        }
-      ],
-      "gates": [
-        {
-          "id": "gate_orange",
-          "x": 2,
-          "y": 5,
-          "color": "orange",
-          "colorId": "color_orange"
-        },
-        {
-          "id": "gate_gray",
-          "x": 3,
-          "y": 0,
-          "color": "gray",
-          "colorId": "color_gray"
-        }
-      ],
-      "teach": "cedar_cut_gray",
-      "ascii": "...g.O\n...#..\n......\n..G##.\n#.....\n..o..."
-    },
     {
       "id": "L77",
       "name": "Needle Gap",
@@ -189,15 +125,16 @@
     }
   ],
   "teaches": {
-    "L76": "Cedar Cut \u2014 cedar the route onto orange",
     "L77": "Needle Gap \u2014 needled gray gap; orange house not stuck at (3,0)",
     "L78": "Resin Stop \u2014 orange/black resin stops; not Sap Stop / Step Off delta farm"
   },
   "solver": {
     "min_slides": {
-      "L76": 8,
       "L77": 8,
       "L78": 8
     }
-  }
+  },
+  "kept": [
+    "L76"
+  ]
 }

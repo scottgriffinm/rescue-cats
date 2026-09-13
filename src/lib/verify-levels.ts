@@ -1567,19 +1567,16 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 5],
-      [1, 5],
-      [5, 1],
-      [4, 2],
-      [5, 0]
+      [2, 5],
+      [1, 3]
     ],
     cats: [
-      ["cat_orange", 1, 3],
-      ["cat_gray", 2, 5]
+      ["cat_orange", 0, 0],
+      ["cat_gray", 0, 1]
     ],
     gates: [
-      ["gate_orange", 3, 0],
-      ["gate_gray", 2, 4]
+      ["gate_orange", 5, 2],
+      ["gate_gray", 1, 4]
     ],
   },
   L78: {
@@ -1588,17 +1585,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 0],
-      [1, 4],
-      [3, 0]
+      [4, 0],
+      [3, 2],
+      [0, 3],
+      [1, 5]
     ],
     cats: [
-      ["cat_orange", 4, 1],
-      ["cat_black", 0, 0]
+      ["cat_orange", 5, 5],
+      ["cat_black", 0, 2]
     ],
     gates: [
-      ["gate_orange", 1, 3],
-      ["gate_black", 5, 4]
+      ["gate_orange", 1, 4],
+      ["gate_black", 5, 0]
     ],
   }
 };
@@ -2393,27 +2391,24 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "s"],
   ],
   L77: [
-    ["cat_orange", "w"],
-    ["cat_gray", "e"],
-    ["cat_gray", "n"],
-    ["cat_gray", "w"],
-    ["cat_gray", "s"],
     ["cat_orange", "e"],
     ["cat_orange", "s"],
-    ["cat_orange", "w"],
     ["cat_gray", "e"],
     ["cat_orange", "n"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
   ],
   L78: [
-    ["cat_orange", "e"],
+    ["cat_orange", "w"],
+    ["cat_black", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
     ["cat_orange", "s"],
     ["cat_black", "s"],
     ["cat_black", "e"],
     ["cat_black", "n"],
-    ["cat_orange", "w"],
-    ["cat_orange", "n"],
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
   ],
 };
 
@@ -6207,8 +6202,8 @@ for (const level of LEVELS) {
   // Ch4 Steve@75 + L76–L78 triad
   for (const [id, name] of [
     ["L76", "Cedar Cut"],
-    ["L77", "Pollen Gap"],
-    ["L78", "Sap Stop"],
+    ["L77", "Needle Gap"],
+    ["L78", "Resin Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -6254,7 +6249,38 @@ for (const level of LEVELS) {
   if (chipsForFriend("friend_022").join(",") !== "Coral,Bloom,Petal") throw new Error("Coral chips untouched");
   if (chipsForFriend("friend_021").join(",") !== "Velvet,Plush,Dove") throw new Error("Velvet chips untouched");
   if (SLICE_UNLOCKS[78]) throw new Error("no friend_026 @78 this slice");
-  console.log("Ch4 Steve@75 + L76–L78 ok · chips Steve/Bob/Ned · Cedar Cut / Pollen Gap / Sap Stop · Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Steve@75 + L76–L78 ok · chips Steve/Bob/Ned · Cedar Cut / Needle Gap / Resin Stop · Maple/Blue/Coral/Velvet/Bean locked");
+}
+
+
+{
+  // Rival Steve Conditional — L77/L78 Pollen/Sap kills
+  const l76 = LEVELS.find((row) => row.id === "L76")!;
+  const l77 = LEVELS.find((row) => row.id === "L77")!;
+  const l78 = LEVELS.find((row) => row.id === "L78")!;
+  if (l76.name !== "Cedar Cut") throw new Error("L76 Cedar Cut must stay");
+  if (l77.name !== "Needle Gap") throw new Error("L77 must be Needle Gap");
+  if (l78.name !== "Resin Stop") throw new Error("L78 must be Resin Stop");
+  const old = new Set(["2,4/3,0", "1,3/5,4"]);
+  for (const level of [l77, l78]) {
+    const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+    if (old.has(pair)) throw new Error(`${level.id} still on old Pollen/Sap gates`);
+    if (/\b(hold|park|close|pollen|sap)\b/i.test(level.name)) {
+      throw new Error(`${level.id} must not keep Pollen/Sap/Hold*`);
+    }
+  }
+  const orange77 = l77.gates.find((g) => g.id === "gate_orange" || g.color === "orange");
+  if (orange77 && orange77.x === 3 && orange77.y === 0) {
+    throw new Error("L77 orange must leave (3,0)");
+  }
+  if (shippedFriendForClear(75)?.friendId !== "friend_025") throw new Error("Steve@75 must stay");
+  if (SLICE_UNLOCKS[78]) throw new Error("Cocoa@78 / friend_026 gated");
+  if (shippedFriendForClear(72)?.friendId !== "friend_024") throw new Error("Maple@72 locked");
+  if (shippedFriendForClear(69)?.friendId !== "friend_023") throw new Error("Blue@69 locked");
+  if (shippedFriendForClear(66)?.friendId !== "friend_022") throw new Error("Coral@66 locked");
+  if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 locked");
+  if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 locked");
+  console.log("Rival rewrite L77/L78 ok · Needle Gap · Resin Stop · L76 Cedar Cut · Steve locked · Cocoa gated");
 }
 
 console.log("All authored boards ok");
