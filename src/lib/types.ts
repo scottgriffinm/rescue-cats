@@ -38,7 +38,8 @@ export type ArtKit =
   | "clay"
   | "basil"
   | "fig"
-  | "plum";
+  | "plum"
+  | "thistle";
 
 export type PieceCat = {
   id: string;

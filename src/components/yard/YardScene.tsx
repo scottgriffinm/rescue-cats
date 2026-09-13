@@ -97,6 +97,7 @@ export function YardScene({
   const basil = friends.find((friend) => friend.friendId === "friend_031");
   const fig = friends.find((friend) => friend.friendId === "friend_032");
   const plum = friends.find((friend) => friend.friendId === "friend_033");
+  const thistle = friends.find((friend) => friend.friendId === "friend_034");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -130,7 +131,8 @@ export function YardScene({
       friend.friendId !== "friend_030" &&
       friend.friendId !== "friend_031" &&
       friend.friendId !== "friend_032" &&
-      friend.friendId !== "friend_033",
+      friend.friendId !== "friend_033" &&
+      friend.friendId !== "friend_034",
   );
 
   return (
@@ -835,6 +837,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{plum.name}</p>
+        </div>
+      ) : null}
+
+      {thistle ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "8%", top: "26%" }}
+        >
+          <FriendSprite
+            kit={friendById(thistle.friendId)?.phenotype.artKit ?? "thistle"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === thistle.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(thistle.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${thistle.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{thistle.name}</p>
         </div>
       ) : null}
 
