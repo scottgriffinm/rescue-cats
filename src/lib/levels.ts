@@ -132,9 +132,9 @@ const HEADLINES: Record<string, string> = {
   L94: "CHIVE CUT",
   L95: "SAVORY GAP",
   L96: "DILL STOP",
-  L97: "CRESS CUT",
-  L98: "RUE GAP",
-  L99: "MINT STOP",
+  L97: "KELP CUT",
+  L98: "NORI GAP",
+  L99: "BRINE STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -233,9 +233,9 @@ const HINTS: Record<string, string> = {
   L94: "Chive cut — chive the route onto orange; gray off Lovage (0,2).",
   L95: "Savory gap — savory black gap after the Basil beat.",
   L96: "Dill stop — orange/gray dill stops; not adjacent.",
-  L97: "Cress cut — cress the route onto orange; habit-break off Chive Cut.",
-  L98: "Rue gap — rue black gap after the Fig beat.",
-  L99: "Mint stop — orange/gray mint stops; not Hold*/Park*.",
+  L97: "Kelp cut — kelp the route onto orange; gray off Dill (2,4).",
+  L98: "Nori gap — nori black gap after the Fig beat; off Chive (4,5).",
+  L99: "Brine stop — orange/gray brine stops; off Chive (4,5) / Lovage (0,2).",
 };
 
 type RawLevel = {
