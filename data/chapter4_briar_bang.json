@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_briar_bang",
+  "status": "READY",
+  "friend_id": "friend_035",
+  "unlock_clear": 105,
+  "personality": "Tangled",
+  "display_line": "Tangled soft. Already claimed the bramble gap.",
+  "default_name": "Briar",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/briar_loaf_48.svg",
+    "loaf_72": "/assets/cats/briar_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "briar"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Briar",
+      "Thorn",
+      "Hedge"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_035": [
+      "{Name}: Tangled soft. Already claimed the bramble gap.",
+      "{Name}: Looks thorny. Kneads like a pillow."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 105,
+    "sku_id": null,
+    "note": "Ch4. Thistle Pass next. No gift. Ban Thistle/Burr/Bramble and all prior pools. Bean parade stands. No Pebble."
+  }
+}
