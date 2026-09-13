@@ -32,6 +32,7 @@ import chapter4j from "../../data/levels/CHAPTER4_PUZZLE_L91_L93.json";
 import chapter4k from "../../data/levels/CHAPTER4_PUZZLE_L94_L96.json";
 import chapter4l from "../../data/levels/CHAPTER4_PUZZLE_L97_L99.json";
 import chapter4m from "../../data/levels/CHAPTER4_PUZZLE_L100_L102.json";
+import chapter4n from "../../data/levels/CHAPTER4_PUZZLE_L103_L105.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -139,6 +140,9 @@ const HEADLINES: Record<string, string> = {
   L100: "GREENGAGE CUT",
   L101: "SLOE GAP",
   L102: "MEDLAR STOP",
+  L103: "FENCE CUT",
+  L104: "BURR GAP",
+  L105: "PERCH STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -243,6 +247,9 @@ const HINTS: Record<string, string> = {
   L100: "Greengage cut — greengage the route onto orange; habit-break Cut.",
   L101: "Sloe gap — sloe black gap after the Plum beat.",
   L102: "Medlar stop — orange/gray medlar stops; off Nori (5,5); not Hold*/Park*.",
+  L103: "Fence cut — cut around the fence onto orange; not Greengage same-column.",
+  L104: "Burr gap — burr black gap after the Thistle beat; black threads first.",
+  L105: "Perch stop — orange/gray perch stops; off Medlar (5,1)/(1,2); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -330,6 +337,7 @@ const authored = [
   ...chapter4k.levels,
   ...chapter4l.levels,
   ...chapter4m.levels,
+  ...chapter4n.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

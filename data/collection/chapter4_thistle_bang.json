@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_thistle_bang",
+  "status": "READY",
+  "friend_id": "friend_034",
+  "unlock_clear": 102,
+  "personality": "Soft-prickle",
+  "display_line": "Soft prickles. Already claimed the fence-post perch.",
+  "default_name": "Thistle",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/thistle_loaf_48.svg",
+    "loaf_72": "/assets/cats/thistle_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "thistle"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Thistle",
+      "Burr",
+      "Bramble"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_034": [
+      "{Name}: Soft prickles. Already claimed the fence-post perch.",
+      "{Name}: Looks sharp. Sits soft."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 102,
+    "sku_id": null,
+    "note": "Ch4. Plum Pass next. No gift. Ban Plum/Damson/Stone and all prior pools. Bean parade stands. No Pebble."
+  }
+}
