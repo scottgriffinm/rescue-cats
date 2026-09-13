@@ -5478,7 +5478,7 @@ for (const level of LEVELS) {
   if (!roostsBlock) throw new Error("YardScene ROOSTS missing");
   const roostCount = (roostsBlock[1].match(/left:/g) ?? []).length;
   if (roostCount < 20) throw new Error(`ROOSTS must have ≥20 seats, got ${roostCount}`);
-  // ban inventing friend_022+ (Ch4 opener is friend_021 only)
+  // ban inventing friend_023+ (Coral@66 shipped; next gated)
   const srcHit = [
     "src/lib/collection.ts",
     "src/components/yard/YardScreen.tsx",
@@ -5486,13 +5486,14 @@ for (const level of LEVELS) {
     "src/lib/levels.ts",
   ].flatMap((file) => {
     const text = readFileSync(resolve(file), "utf8");
-    return /friend_02[2-9]|friend_03/.test(text) ? [file] : [];
+    return /friend_02[3-9]|friend_03/.test(text) ? [file] : [];
   });
-  if (srcHit.length) throw new Error(`friend_022+ must not appear in ${srcHit.join(",")}`);
-  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) {
-    throw new Error("no unlocks at 61/66/69 — Velvet@63 only past Bean");
+  if (srcHit.length) throw new Error(`friend_023+ must not appear in ${srcHit.join(",")}`);
+  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[69]) {
+    throw new Error("no unlocks at 61/69 — Coral@66 only past Velvet");
   }
-  if (TUTORIAL_RESCUES.length !== 21) throw new Error("TUTORIAL_RESCUES must be 21 (through Velvet)");
+  if (SLICE_UNLOCKS[66] !== "friend_022") throw new Error("SLICE_UNLOCKS[66] must be friend_022");
+  if (TUTORIAL_RESCUES.length !== 22) throw new Error("TUTORIAL_RESCUES must be 22 (through Coral)");
   // Progress chrome: parade / friend-cadence milestones — not a LEVELS.map per-board dot wall.
   if (/LEVELS\.map\(/.test(yardScreen)) {
     throw new Error("Yard progress must not LEVELS.map into per-board dots");
@@ -5537,8 +5538,11 @@ for (const level of LEVELS) {
   if (!yardScene.includes("hasFountain") || !yardScene.includes("hasPerch")) {
     throw new Error("YardScene must gate fountain + perch on ownership");
   }
-  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) {
-    throw new Error("no unlocks at 61/66/69 — Velvet@63 only past Bean");
+  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[69]) {
+    throw new Error("no unlocks at 61/69 — Coral@66 past Velvet");
+  }
+  if (SLICE_UNLOCKS[66] !== "friend_022") {
+    throw new Error("SLICE_UNLOCKS[66] must be friend_022");
   }
   console.log("Rival Conditional A ok · fountain@18/90 · perch@36/120 · gifts 27/48 · yard gates");
 }
@@ -5647,7 +5651,7 @@ for (const level of LEVELS) {
   const yardV = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardV.match(/const velvet =/g) || []).length !== 1) throw new Error("YardScene must declare velvet once");
   if ((yardV.match(/\{velvet \?/g) || []).length !== 1) throw new Error("YardScene must render velvet once");
-  if (TUTORIAL_RESCUES.length !== 21) throw new Error("Met must include through Velvet (21)");
+  if (TUTORIAL_RESCUES.length < 21) throw new Error("Met must include through Velvet (≥21)");
   if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 parade lock");
   for (const [id, name] of [
     ["L64", "Curl Path"],
@@ -5667,7 +5671,7 @@ for (const level of LEVELS) {
   if (LEVELS.find((row) => row.id === "L61")?.name !== "Span Cut") throw new Error("L61 untouched");
   if (LEVELS.find((row) => row.id === "L62")?.name !== "Knight Cut") throw new Error("L62 untouched");
   if (LEVELS.find((row) => row.id === "L63")?.name !== "Far Peg") throw new Error("L63 untouched");
-  if (SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) throw new Error("friend_022 gated until Collection/Art");
+  if (SLICE_UNLOCKS[69]) throw new Error("no friend_023 @69 this slice");
   console.log("Ch4 Velvet@63 + L64–L66 ok · chips Velvet/Plush/Dove · Curl Path / Wedge Gap / Peg Split · Bean parade locked");
 }
 
@@ -5694,13 +5698,13 @@ for (const level of LEVELS) {
   if (pair64 === pair65) throw new Error("L65 must not twin L64 gates");
   if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 must stay");
   if (chipsForFriend("friend_021").join(",") !== "Velvet,Plush,Dove") throw new Error("Velvet chips untouched");
-  if (SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) throw new Error("no friend_022");
+  if (SLICE_UNLOCKS[69]) throw new Error("no friend_023");
   console.log("Rival rewrite L64/L65 ok · Curl Path · Wedge Gap · L66 Peg Split · Velvet locked");
 }
 
 
 {
-  // Ch4 L67–L69 triad (friend_022 awaits Collection/Art)
+  // Ch4 L67–L69 triad + Coral@66 unlock
   for (const [id, name] of [
     ["L67", "Tide Cut"],
     ["L68", "Plush Gap"],
@@ -5719,9 +5723,35 @@ for (const level of LEVELS) {
   if (LEVELS.find((row) => row.id === "L64")?.name !== "Curl Path") throw new Error("L64 Curl Path locked");
   if (LEVELS.find((row) => row.id === "L65")?.name !== "Wedge Gap") throw new Error("L65 Wedge Gap locked");
   if (LEVELS.find((row) => row.id === "L66")?.name !== "Peg Split") throw new Error("L66 Peg Split locked");
-  if (shippedFriendForClear(66)) throw new Error("friend_022 gated until Collection/Art");
+  if (SLICE_UNLOCKS[66] !== "friend_022") throw new Error("SLICE_UNLOCKS[66] must be friend_022");
+  if (shippedFriendForClear(66)?.friendId !== "friend_022") throw new Error("onClear(66) must award Coral");
+  const coral = friendById("friend_022");
+  if (!coral) throw new Error("friend_022 missing from CATALOG");
+  if (coral.defaultName !== "Coral") throw new Error("default name must be Coral");
+  if (coral.unlockClear !== 66) throw new Error("Coral unlockClear must be 66");
+  if (coral.phenotype.artKit !== "mochi") throw new Error("Coral artKit must be mochi");
+  if (coral.phenotype.personality !== "Sweet") throw new Error("Coral personality must be Sweet");
+  if (coral.phenotype.boardColor !== "orange") throw new Error("Coral boardColor must be orange");
+  if (chipsForFriend("friend_022").join(",") !== "Coral,Bloom,Petal") {
+    throw new Error(`Coral chips must be Coral/Bloom/Petal, got ${chipsForFriend("friend_022").join(",")}`);
+  }
+  if (chipsForFriend("friend_003").includes("Mochi") === false && chipsForFriend("friend_003").join(",").includes("Mochi") === false) {
+    /* Biscuit may list Mochi among chips — soft: ensure Coral does not steal it */
+  }
+  if (chipsForFriend("friend_022").includes("Mochi")) throw new Error("Coral must not use Biscuit Mochi chip");
+  const coral48 = readFileSync(resolve("public/assets/cats/mochi_loaf_48.svg"), "utf8");
+  const coral72 = readFileSync(resolve("public/assets/cats/mochi_loaf_72.svg"), "utf8");
+  if (!coral48.includes("#E9B7A6") || !coral72.includes("#E9B7A6")) throw new Error("Coral loaf must use cream #E9B7A6");
+  if (!coral48.includes("#F6DDD2") || !coral72.includes("#F6DDD2")) throw new Error("Coral loaf must use belly #F6DDD2");
+  if (furnitureGiftsForClear(66).length) throw new Error("Coral@66 must gift no furniture");
+  const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
+  if ((yardC.match(/const coral =/g) || []).length !== 1) throw new Error("YardScene must declare coral once");
+  if ((yardC.match(/\{coral \?/g) || []).length !== 1) throw new Error("YardScene must render coral once");
+  if (TUTORIAL_RESCUES.length !== 22) throw new Error("Met must include through Coral (22)");
+  if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 must stay");
+  if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 parade lock");
   if (SLICE_UNLOCKS[69]) throw new Error("no unlock @69 this slice");
-  console.log("Ch4 L67–L69 ok · Tide Cut / Plush Gap / Dusk Peg · friend_022 gated");
+  console.log("Ch4 Coral@66 + L67–L69 ok · chips Coral/Bloom/Petal · Tide Cut / Plush Gap / Dusk Peg · Velvet/Bean locked");
 }
 
 console.log("All authored boards ok");
