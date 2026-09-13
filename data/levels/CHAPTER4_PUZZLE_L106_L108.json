@@ -1,0 +1,209 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Thistle Pass \u2014 L106\u2013L108 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L106\u2013L108",
+  "notes": "L106 Vine Cut / L107 Thorn Gap / L108 Nest Stop \u2014 off Fence/Burr/Perch habits; no WRAP/edge twin of Nori/Medlar.",
+  "levels": [
+    {
+      "id": "L106",
+      "name": "Vine Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_vine_cut_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 4,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 0,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "vine_cut_gray"
+    },
+    {
+      "id": "L107",
+      "name": "Thorn Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_thorn_gap_black",
+      "walls": [
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 4
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 4,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 2,
+          "y": 5,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "thorn_gap_black"
+    },
+    {
+      "id": "L108",
+      "name": "Nest Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_nest_stop_gray",
+      "walls": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 4
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "nest_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L106": "Vine Cut \u2014 stacked column cut; not Fence horizontal brake",
+    "L107": "Thorn Gap \u2014 orange vacates first; not Burr black-thread",
+    "L108": "Nest Stop \u2014 same-row nest; not Perch corner start"
+  },
+  "solver": {
+    "min_slides": {
+      "L106": 10,
+      "L107": 11,
+      "L108": 11
+    }
+  },
+  "deltas": {
+    "L106": "(4, 1)",
+    "L107": "(2, -4)",
+    "L108": "(4, 0)"
+  }
+}

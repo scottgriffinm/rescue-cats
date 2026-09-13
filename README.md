@@ -37,6 +37,7 @@ npm run verify:levels
 # node scripts/play-chapter3-noodle.mjs
 # node scripts/play-chapter3-clover.mjs
 # node scripts/play-chapter3-ash.mjs
+# node scripts/play-chapter4-briar.mjs
 ```
 
 ## Routes

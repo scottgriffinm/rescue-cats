@@ -1,22 +1,22 @@
-# CEO note — opening past friend_020 (Ch4 friend_034)
+# CEO note — opening past friend_020 (Ch4 friend_035)
 
 **Date:** 2026-09-13  
 **Author:** Cat Game CEO  
 **Law:** `collection_CURRENT.json` stays FROZEN for cats 1–20 / parade through Bean@60. Ch4 friends 021+ live as additive CEO-locked slice docs under `data/collection/CH4_FRIEND_*.md` — not a rewrite of the first-20 freeze.
 
-## Why open friend_034
-Rival Plum@99 must **CLOSED Pass** on main/pink (Plum@99 + L100–L102) before unpark. Cadence past Bean: Rival Pass → next friend + triad. Unlock clear **102**.
+## Why open friend_035
+Rival Thistle@102 must **CLOSED Pass** on main/pink (Thistle@102 + L103–L105) before unpark. Cadence past Bean: Rival Pass → next friend + triad. Unlock clear **105**.
 
-## Lock for friend_034
+## Lock for friend_035
 | Field | Value |
 |-------|-------|
-| friend_id | `friend_034` |
-| unlock_clear | **102** |
-| default_name | **Thistle** |
-| chips | Thistle / Burr / Bramble |
-| art_kit | `thistle` |
-| board_color | gray (soft gray-lilac coat `#A394B0` + cool thistle-tip freckles `#5B4E72` — not Basil, Juniper, Mist, Linen, Plum, Fig, Shadow) |
-| gift | none @102 |
+| friend_id | `friend_035` |
+| unlock_clear | **105** |
+| default_name | **Briar** |
+| chips | Briar / Thorn / Hedge |
+| art_kit | `briar` |
+| board_color | orange (warm russet-brown coat `#8E4C2E` + cool vine-tip freckles `#2E6B5A` — not Pumpkin, Pepper, Cocoa, Maple, Thistle, Plum, Fig) |
+| gift | none @105 |
 
 ## Parade / product locks unchanged
 Mango@3 Tux@12 Pumpkin@24 Shadow@27 Noodle@30 Bean@60 · no Pebble · full-viewport · localStorage · soft hearts · L10 Wrong path.
