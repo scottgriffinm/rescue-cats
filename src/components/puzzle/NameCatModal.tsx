@@ -65,8 +65,8 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
     catalog.friendId === BEAN_FRIEND_ID;
 
   return (
-    <div className="fixed inset-0 z-30 flex items-end justify-center bg-ink/30 px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-16 sm:items-center">
-      <div className="paper-card modal-spring w-full max-w-md rounded-[1.5rem] p-6">
+    <div className="fixed inset-0 z-30 flex items-end justify-center overflow-y-auto bg-ink/30 px-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:items-center sm:px-4 sm:pt-16">
+      <div className="paper-card modal-spring my-auto w-full max-w-md rounded-[1.5rem] p-4 sm:p-6">
         <div className="flex justify-center">
           <UiIcon name="star_marigold" className="h-8 w-8" />
         </div>
@@ -110,7 +110,7 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
                   key={chip}
                   type="button"
                   onClick={() => setName(chip)}
-                  className={`h-9 rounded-full border-2 px-3 font-display text-sm ${
+                  className={`h-10 min-w-[4.5rem] rounded-full border-2 px-3 font-display text-sm ${
                     selected
                       ? "border-ink bg-wood text-ink"
                       : "border-ink/25 bg-paper text-ink/80"
