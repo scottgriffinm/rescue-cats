@@ -88,8 +88,8 @@ const HEADLINES: Record<string, string> = {
   L61: "SPAN CUT",
   L62: "KNIGHT CUT",
   L63: "FAR PEG",
-  L64: "DRIFT CUT",
-  L65: "SHELF BREAK",
+  L64: "CURL PATH",
+  L65: "WEDGE GAP",
   L66: "PEG SPLIT",
 };
 
@@ -156,8 +156,8 @@ const HINTS: Record<string, string> = {
   L61: "Span cut across the gray gap. Post-brace habits miss the cut.",
   L62: "Knight-step the orange/gray houses — not Color Fork’s same-row twin.",
   L63: "Far peg on the black house. Offset — Dual habits miss.",
-  L64: "Drift cut across the gray gap — not a finale twin.",
-  L65: "Shelf break — leave before the solid lands.",
+  L64: "Curl path onto orange — not a Span Cut twin.",
+  L65: "Wedge gap — gray seats east, not an L64 translate.",
   L66: "Peg split on far corners — dual habits miss.",
 };
 

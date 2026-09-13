@@ -1294,19 +1294,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 1],
-      [5, 1],
-      [4, 2],
       [4, 5],
-      [3, 2]
+      [2, 4],
+      [1, 2],
+      [1, 3]
     ],
     cats: [
-      ["cat_orange", 0, 4],
-      ["cat_gray", 5, 4]
+      ["cat_orange", 0, 5],
+      ["cat_gray", 0, 2]
     ],
     gates: [
-      ["gate_orange", 3, 1],
-      ["gate_gray", 0, 5]
+      ["gate_orange", 5, 3],
+      ["gate_gray", 3, 4]
     ],
   },
   L65: {
@@ -1315,17 +1314,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 0],
-      [2, 1],
-      [4, 2]
+      [2, 3],
+      [0, 3],
+      [1, 3],
+      [3, 1]
     ],
     cats: [
-      ["cat_orange", 5, 1],
-      ["cat_gray", 4, 3]
+      ["cat_orange", 3, 4],
+      ["cat_gray", 4, 4]
     ],
     gates: [
       ["gate_orange", 4, 1],
-      ["gate_gray", 1, 5]
+      ["gate_gray", 5, 4]
     ],
   },
   L66: {
@@ -1996,26 +1996,26 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "s"],
   ],
   L64: [
-    ["cat_gray", "w"],
-    ["cat_orange", "n"],
     ["cat_gray", "n"],
-    ["cat_gray", "e"],
+    ["cat_orange", "n"],
     ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_gray", "e"],
     ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_orange", "s"],
+    ["cat_gray", "w"],
   ],
   L65: [
-    ["cat_orange", "w"],
+    ["cat_gray", "s"],
+    ["cat_orange", "e"],
     ["cat_orange", "n"],
-    ["cat_orange", "w"],
+    ["cat_gray", "n"],
     ["cat_orange", "s"],
     ["cat_gray", "s"],
     ["cat_gray", "w"],
-    ["cat_orange", "n"],
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
   ],
   L66: [
     ["cat_black", "e"],
@@ -5545,8 +5545,8 @@ for (const level of LEVELS) {
   if (TUTORIAL_RESCUES.length !== 21) throw new Error("Met must include through Velvet (21)");
   if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 parade lock");
   for (const [id, name] of [
-    ["L64", "Drift Cut"],
-    ["L65", "Shelf Break"],
+    ["L64", "Curl Path"],
+    ["L65", "Wedge Gap"],
     ["L66", "Peg Split"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
@@ -5563,7 +5563,34 @@ for (const level of LEVELS) {
   if (LEVELS.find((row) => row.id === "L62")?.name !== "Knight Cut") throw new Error("L62 untouched");
   if (LEVELS.find((row) => row.id === "L63")?.name !== "Far Peg") throw new Error("L63 untouched");
   if (SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) throw new Error("no unlocks past Velvet@63 yet");
-  console.log("Ch4 Velvet@63 + L64–L66 ok · chips Velvet/Plush/Dove · Drift Cut / Shelf Break / Peg Split · Bean parade locked");
+  console.log("Ch4 Velvet@63 + L64–L66 ok · chips Velvet/Plush/Dove · Curl Path / Wedge Gap / Peg Split · Bean parade locked");
+}
+
+
+{
+  // Rival Velvet Conditional — L64/L65 off Span Cut delta
+  const l64 = LEVELS.find((row) => row.id === "L64")!;
+  const l65 = LEVELS.find((row) => row.id === "L65")!;
+  const l66 = LEVELS.find((row) => row.id === "L66")!;
+  if (l64.name !== "Curl Path") throw new Error("L64 must be Curl Path");
+  if (l65.name !== "Wedge Gap") throw new Error("L65 must be Wedge Gap");
+  if (l66.name !== "Peg Split") throw new Error("L66 Peg Split must stay");
+  const pair64 = l64.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  const pair65 = l65.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (pair64 === "0,5/3,1" || pair65 === "1,5/4,1") throw new Error("old Drift/Shelf gate pairs must die");
+  const span = LEVELS.find((row) => row.id === "L61")!;
+  const spanGates = [...span.gates].sort((a, b) => a.x - b.x || a.y - b.y);
+  const l64Gates = [...l64.gates].sort((a, b) => a.x - b.x || a.y - b.y);
+  const dx = l64Gates[1].x - l64Gates[0].x;
+  const dy = l64Gates[1].y - l64Gates[0].y;
+  const sdx = spanGates[1].x - spanGates[0].x;
+  const sdy = spanGates[1].y - spanGates[0].y;
+  if (dx === sdx && dy === sdy) throw new Error("L64 must not share Span Cut gate delta");
+  if (pair64 === pair65) throw new Error("L65 must not twin L64 gates");
+  if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 must stay");
+  if (chipsForFriend("friend_021").join(",") !== "Velvet,Plush,Dove") throw new Error("Velvet chips untouched");
+  if (SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) throw new Error("no friend_022");
+  console.log("Rival rewrite L64/L65 ok · Curl Path · Wedge Gap · L66 Peg Split · Velvet locked");
 }
 
 console.log("All authored boards ok");
