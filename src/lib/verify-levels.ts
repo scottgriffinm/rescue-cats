@@ -19,6 +19,7 @@ import chapter3oPack from "../../data/levels/CHAPTER3_PUZZLE_L52_L54.json";
 import chapter3pPack from "../../data/levels/CHAPTER3_PUZZLE_L55_L57.json";
 import chapter3qPack from "../../data/levels/CHAPTER3_PUZZLE_L58_L60.json";
 import chapter3rPack from "../../data/levels/CHAPTER3_PUZZLE_L61_L63.json";
+import chapter4aPack from "../../data/levels/CHAPTER4_PUZZLE_L64_L66.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
@@ -78,6 +79,9 @@ import l60Pack from "../../data/levels/L60.json";
 import l61Pack from "../../data/levels/L61.json";
 import l62Pack from "../../data/levels/L62.json";
 import l63Pack from "../../data/levels/L63.json";
+import l64Pack from "../../data/levels/L64.json";
+import l65Pack from "../../data/levels/L65.json";
+import l66Pack from "../../data/levels/L66.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
@@ -1284,7 +1288,64 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_black", 5, 1],
     ],
   },
-
+  L64: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 1],
+      [5, 1],
+      [4, 2],
+      [4, 5],
+      [3, 2]
+    ],
+    cats: [
+      ["cat_orange", 0, 4],
+      ["cat_gray", 5, 4]
+    ],
+    gates: [
+      ["gate_orange", 3, 1],
+      ["gate_gray", 0, 5]
+    ],
+  },
+  L65: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [5, 0],
+      [2, 1],
+      [4, 2]
+    ],
+    cats: [
+      ["cat_orange", 5, 1],
+      ["cat_gray", 4, 3]
+    ],
+    gates: [
+      ["gate_orange", 4, 1],
+      ["gate_gray", 1, 5]
+    ],
+  },
+  L66: {
+    size: 6,
+    N: 12,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [2, 3],
+      [3, 3]
+    ],
+    cats: [
+      ["cat_orange", 1, 0],
+      ["cat_black", 3, 4]
+    ],
+    gates: [
+      ["gate_orange", 5, 5],
+      ["gate_black", 4, 3]
+    ],
+  }
 };
 
 function assertLocked(level: Level, spec: LockedSpec) {
@@ -1934,6 +1995,39 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "e"],
     ["cat_black", "s"],
   ],
+  L64: [
+    ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
+  ],
+  L65: [
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+  ],
+  L66: [
+    ["cat_black", "e"],
+    ["cat_black", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_black", "s"],
+    ["cat_orange", "e"],
+    ["cat_black", "n"],
+    ["cat_black", "w"],
+    ["cat_orange", "s"],
+  ],
 };
 
 function play(level: Level, script: Array<[string, Dir]>, requireWin = true) {
@@ -2020,7 +2114,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45,L46,L47,L48,L49,L50,L51,L52,L53,L54,L55,L56,L57,L58,L59,L60,L61,L62,L63") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45,L46,L47,L48,L49,L50,L51,L52,L53,L54,L55,L56,L57,L58,L59,L60,L61,L62,L63,L64,L65,L66") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
   for (const id of [
@@ -2120,6 +2214,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       ...chapter3pPack.levels,
       ...chapter3qPack.levels,
       ...chapter3rPack.levels,
+      ...chapter4aPack.levels,
     ].map((level) => [
       level.id,
       level as PackedBoard,
@@ -2185,6 +2280,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L61: [l61Pack as PackedBoard],
     L62: [l62Pack as PackedBoard],
     L63: [l63Pack as PackedBoard],
+    L64: [l64Pack as PackedBoard],
+    L65: [l65Pack as PackedBoard],
+    L66: [l66Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -2271,7 +2369,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       }
     }
   }
-  console.log("Standalone L4–L9 + L11–L63 + LT02/L06-07/LT08 match locked coords");
+  console.log("Standalone L4–L9 + L11–L66 + LT02/L06-07/LT08 match locked coords");
 }
 
 {
@@ -4334,11 +4432,11 @@ for (const level of LEVELS) {
   if (l39.number !== 39) throw new Error(`L39 HUD number must be 39, got ${l39.number}`);
   if (l9.number !== 9) throw new Error(`L9 HUD number must be 9, got ${l9.number}`);
   if (l11.number !== 11) throw new Error(`L11 HUD number must be 11, got ${l11.number}`);
-  if (CAMPAIGN_LEVEL_COUNT !== 63) {
-    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 63 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 66) {
+    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 66 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
   }
-  if (LEVELS.length !== 62) {
-    throw new Error(`campaign board count must stay 62 with L10 off-path, got ${LEVELS.length}`);
+  if (LEVELS.length !== 65) {
+    throw new Error(`campaign board count must stay 65 with L10 off-path, got ${LEVELS.length}`);
   }
   for (const level of LEVELS) {
     const parsed = Number(level.id.replace(/^L/i, ""));
@@ -4371,7 +4469,9 @@ for (const level of LEVELS) {
   const afterL60 = nextCampaignLevel("L60");
   if (afterL60?.id !== "L61") throw new Error("L60 must route to L61");
   const afterL63 = nextCampaignLevel("L63");
-  if (afterL63) throw new Error("L63 must be the last campaign board");
+  if (afterL63?.id !== "L64") throw new Error(`L63 must lead to L64, got ${afterL63?.id}`);
+  const afterL66 = nextCampaignLevel("L66");
+  if (afterL66) throw new Error("L66 must be the last campaign board");
   const l48hud = LEVELS.find((level) => level.id === "L48");
   if (!l48hud || l48hud.number !== 48) throw new Error(`L48 HUD number must be 48, got ${l48hud?.number}`);
   const l51hud = LEVELS.find((level) => level.id === "L51");
@@ -4384,7 +4484,10 @@ for (const level of LEVELS) {
   if (!l60hud || l60hud.number !== 60) throw new Error(`L60 HUD number must be 60, got ${l60hud?.number}`);
   const l63hud = LEVELS.find((level) => level.id === "L63");
   if (!l63hud || l63hud.number !== 63) throw new Error(`L63 HUD number must be 63, got ${l63hud?.number}`);
-  console.log("Level index HUD locks ok · L20=20/63 · L63=63/63 · L9→L11 · L48→L49 · L51→L52 · L54→L55 · L57→L58 · L60→L61");
+  const l66hud = LEVELS.find((level) => level.id === "L66");
+  if (!l66hud || l66hud.number !== 66) throw new Error(`L66 HUD number must be 66, got ${l66hud?.number}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 66) throw new Error(`HUD denom must be 66, got ${CAMPAIGN_LEVEL_COUNT}`);
+  console.log("Level index HUD locks ok · L20=20/66 · L66=66/66 · L9→L11 · L48→L49 · L63→L64 · L60→L61");
 }
 
 {
@@ -5411,6 +5514,32 @@ for (const level of LEVELS) {
   if (LEVELS.find((row) => row.id === "L61")?.name !== "Span Cut") throw new Error("L61 untouched");
   if (LEVELS.find((row) => row.id === "L63")?.name !== "Far Peg") throw new Error("L63 untouched");
   console.log("Optional non-farm twin scrub ok · L9/L35/L50 off L7/L23/L30");
+}
+
+
+{
+  // Ch4 OPEN — L64–L66 triad (Velvet@63 awaits Art)
+  for (const [id, name] of [
+    ["L64", "Drift Cut"],
+    ["L65", "Shelf Break"],
+    ["L66", "Peg Split"],
+  ] as const) {
+    const level = LEVELS.find((row) => row.id === id);
+    if (!level) throw new Error(`missing ${id}`);
+    if (level.name !== name) throw new Error(`${id} must be ${name}`);
+    if (!level.colorLocks) throw new Error(`${id} must lock colors`);
+    if (/\b(hold|park|close)\b/i.test(level.name)) throw new Error(`${id} must not be Hold*/Park*/Close`);
+    const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+    if (pair === "3,2/3,3" || pair === "2,2/3,2" || pair === "2,3/3,3") {
+      throw new Error(`${id} on gate-farm pair`);
+    }
+  }
+  if (LEVELS.find((row) => row.id === "L61")?.name !== "Span Cut") throw new Error("L61 untouched");
+  if (LEVELS.find((row) => row.id === "L62")?.name !== "Knight Cut") throw new Error("L62 untouched");
+  if (LEVELS.find((row) => row.id === "L63")?.name !== "Far Peg") throw new Error("L63 untouched");
+  if (shippedFriendForClear(63)) throw new Error("Velvet@63 gated until Art kit ships");
+  if (SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) throw new Error("no unlocks past Velvet@63 yet");
+  console.log("Ch4 L64–L66 ok · Drift Cut / Shelf Break / Peg Split · L61–L63 locked · Velvet gated");
 }
 
 console.log("All authored boards ok");
