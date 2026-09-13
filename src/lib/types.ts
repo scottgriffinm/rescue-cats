@@ -36,7 +36,8 @@ export type ArtKit =
   | "juniper"
   | "ivory"
   | "clay"
-  | "basil";
+  | "basil"
+  | "fig";
 
 export type PieceCat = {
   id: string;

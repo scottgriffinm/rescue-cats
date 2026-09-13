@@ -30,6 +30,7 @@ import chapter4h from "../../data/levels/CHAPTER4_PUZZLE_L85_L87.json";
 import chapter4i from "../../data/levels/CHAPTER4_PUZZLE_L88_L90.json";
 import chapter4j from "../../data/levels/CHAPTER4_PUZZLE_L91_L93.json";
 import chapter4k from "../../data/levels/CHAPTER4_PUZZLE_L94_L96.json";
+import chapter4l from "../../data/levels/CHAPTER4_PUZZLE_L97_L99.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -131,6 +132,9 @@ const HEADLINES: Record<string, string> = {
   L94: "CHIVE CUT",
   L95: "SAVORY GAP",
   L96: "DILL STOP",
+  L97: "CRESS CUT",
+  L98: "RUE GAP",
+  L99: "MINT STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -229,6 +233,9 @@ const HINTS: Record<string, string> = {
   L94: "Chive cut — chive the route onto orange; gray off Lovage (0,2).",
   L95: "Savory gap — savory black gap after the Basil beat.",
   L96: "Dill stop — orange/gray dill stops; not adjacent.",
+  L97: "Cress cut — cress the route onto orange; habit-break off Chive Cut.",
+  L98: "Rue gap — rue black gap after the Fig beat.",
+  L99: "Mint stop — orange/gray mint stops; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -314,6 +321,7 @@ const authored = [
   ...chapter4i.levels,
   ...chapter4j.levels,
   ...chapter4k.levels,
+  ...chapter4l.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
