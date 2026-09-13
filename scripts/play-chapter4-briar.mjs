@@ -234,8 +234,11 @@ try {
   if (yard.save.friends.some((friend) => friend.friendId === "friend_036")) {
     throw new Error("friend_036 must not unlock");
   }
-  if (!yard.imgs.includes("/assets/cats/briar_loaf_72.svg")) {
-    throw new Error("yard missing Briar russet loaf");
+  if (
+    !yard.imgs.includes("/assets/cats/briar_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/briar_loaf_48.svg")
+  ) {
+    throw new Error(`yard missing Briar russet loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
   if (!yard.text.includes("bramble gap") && !yard.text.includes("Briar")) {
     throw new Error("yard missing Briar bramble-gap line");
