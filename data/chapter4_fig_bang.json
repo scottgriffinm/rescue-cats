@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_fig_bang",
+  "status": "READY",
+  "friend_id": "friend_032",
+  "unlock_clear": 96,
+  "personality": "Ripe",
+  "display_line": "Sweet and a little seedy. Already claimed the warm sill.",
+  "default_name": "Fig",
+  "tier": "C",
+  "color": "Cream",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/fig_loaf_48.svg",
+    "loaf_72": "/assets/cats/fig_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "fig"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Fig", "Olive", "Pit"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_032": [
+      "{Name}: Sweet and a little seedy. Already claimed the warm sill.",
+      "{Name}: Ripe mood. Soft center."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 96,
+    "sku_id": null,
+    "note": "Ch4. Basil Pass next. No gift. Ban Basil/Pesto/Herb and all prior pools. Bean parade stands. No Pebble."
+  }
+}

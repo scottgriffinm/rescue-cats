@@ -1,0 +1,209 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY \u2014 Fig@96 / friend_032",
+  "source": "Fig@96 Collection locked \u2014 L97\u2013L99",
+  "chapter": 4,
+  "title": "Chapter 4 boards L97\u2013L99",
+  "notes": "Fig@96. Cress Cut / Rue Gap / Mint Stop. L97\u2013L98 deltas unique vs L40\u201396; L99 unique vs L64\u201396 (delta space exhausted). Off Chive (4,5) / Lovage (2,-2). No farms / Hold*/Park*/Close.",
+  "levels": [
+    {
+      "id": "L97",
+      "name": "Cress Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_cress_cut_gray",
+      "walls": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 2,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 2,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "cress_cut_gray"
+    },
+    {
+      "id": "L98",
+      "name": "Rue Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_rue_gap_black",
+      "walls": [
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 1,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 4,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "rue_gap_black"
+    },
+    {
+      "id": "L99",
+      "name": "Mint Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_mint_stop_gray",
+      "walls": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 2,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "mint_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L97": "Cress Cut \u2014 habit-break off Chive Cut",
+    "L98": "Rue Gap \u2014 color-lock brake (orange/black)",
+    "L99": "Mint Stop \u2014 stop teach, not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L97": 9,
+      "L98": 9,
+      "L99": 9
+    }
+  },
+  "deltas": {
+    "L97": "(3, 0)",
+    "L98": "(0, 2)",
+    "L99": "(3, 3)"
+  }
+}
