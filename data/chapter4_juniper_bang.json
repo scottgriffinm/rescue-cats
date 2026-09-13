@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_juniper_bang",
+  "status": "READY",
+  "friend_id": "friend_028",
+  "unlock_clear": 84,
+  "personality": "Crisp",
+  "display_line": "Sharp as a hedge. Already claimed the fence line.",
+  "default_name": "Juniper",
+  "tier": "B",
+  "color": "Gray",
+  "pattern": "Spotted",
+  "art": {
+    "loaf_48": "/assets/cats/juniper_loaf_48.svg",
+    "loaf_72": "/assets/cats/juniper_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "juniper"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Juniper", "Moss", "Sage"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_028": [
+      "{Name}: Sharp as a hedge. Already claimed the fence line.",
+      "{Name}: Crisp opinions. Softer paws."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 84,
+    "sku_id": null,
+    "note": "Ch4 prep only. No gift. Avoid Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Mist/Donna/Nigel/Biscuit-Mochi/Clover pools. Bean parade stands. No Pebble."
+  }
+}
