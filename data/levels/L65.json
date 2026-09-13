@@ -1,39 +1,43 @@
 {
   "id": "L65",
-  "name": "Shelf Break",
+  "name": "Wedge Gap",
   "width": 6,
   "height": 6,
   "moveBudget": 11,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_shelf_break_gray",
+  "templateId": "LT02_LT08_wedge_gap_gray",
   "walls": [
     {
-      "x": 5,
-      "y": 0
-    },
-    {
       "x": 2,
-      "y": 1
+      "y": 3
     },
     {
-      "x": 4,
-      "y": 2
+      "x": 0,
+      "y": 3
+    },
+    {
+      "x": 1,
+      "y": 3
+    },
+    {
+      "x": 3,
+      "y": 1
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 5,
-      "y": 1,
+      "x": 3,
+      "y": 4,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_gray",
       "x": 4,
-      "y": 3,
+      "y": 4,
       "color": "gray",
       "colorId": "color_gray"
     }
@@ -48,11 +52,11 @@
     },
     {
       "id": "gate_gray",
-      "x": 1,
-      "y": 5,
+      "x": 5,
+      "y": 4,
       "color": "gray",
       "colorId": "color_gray"
     }
   ],
-  "teach": "shelf_break_gray"
+  "teach": "wedge_gap_gray"
 }
