@@ -1,43 +1,39 @@
 {
   "id": "L80",
-  "name": "Parch Gap",
+  "name": "Vellum Gap",
   "width": 6,
   "height": 6,
   "moveBudget": 11,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_parch_gap_gray",
+  "templateId": "LT02_LT08_vellum_gap_gray",
   "walls": [
     {
       "x": 0,
-      "y": 2
-    },
-    {
-      "x": 4,
-      "y": 0
-    },
-    {
-      "x": 1,
       "y": 3
     },
     {
-      "x": 1,
+      "x": 0,
       "y": 5
+    },
+    {
+      "x": 0,
+      "y": 0
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 5,
-      "y": 2,
+      "x": 0,
+      "y": 1,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_gray",
-      "x": 5,
-      "y": 1,
+      "x": 2,
+      "y": 3,
       "color": "gray",
       "colorId": "color_gray"
     }
@@ -45,18 +41,18 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 0,
-      "y": 0,
+      "x": 1,
+      "y": 3,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_gray",
       "x": 5,
-      "y": 4,
+      "y": 0,
       "color": "gray",
       "colorId": "color_gray"
     }
   ],
-  "teach": "parch_gap_gray"
+  "teach": "vellum_gap_gray"
 }
