@@ -138,7 +138,7 @@ const HEADLINES: Record<string, string> = {
   L99: "BRINE STOP",
   L100: "GREENGAGE CUT",
   L101: "SLOE GAP",
-  L102: "QUINCE STOP",
+  L102: "MEDLAR STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -242,7 +242,7 @@ const HINTS: Record<string, string> = {
   L99: "Brine stop — orange/gray brine stops; off Chive (4,5) / Lovage (0,2).",
   L100: "Greengage cut — greengage the route onto orange; habit-break Cut.",
   L101: "Sloe gap — sloe black gap after the Plum beat.",
-  L102: "Quince stop — orange/gray quince stops; not Hold*/Park*.",
+  L102: "Medlar stop — orange/gray medlar stops; off Nori (5,5); not Hold*/Park*.",
 };
 
 type RawLevel = {

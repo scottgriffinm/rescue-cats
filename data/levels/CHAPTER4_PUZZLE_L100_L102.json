@@ -1,10 +1,10 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "status": "SHIP READY \u2014 Plum@99 / friend_033",
+  "status": "SHIP READY \u2014 Rival rewrite L102 only",
   "source": "Fig Pass \u2014 L100\u2013L102 need",
   "chapter": 4,
   "title": "Chapter 4 boards L100\u2013L102",
-  "notes": "Greengage Cut / Sloe Gap / Quince Stop (Cobbler scrubbed). Deltas unique vs L64\u201399 incl Kelp/Nori/Brine. Off banned seats (4,5)/(2,4)/(0,2). No (4,2) Hold South twin. No farms / Hold*/Park*/Close. Color-lock.",
+  "notes": "L100 Greengage / L101 Sloe kept. L102 Medlar Stop (WRAP kill \u2014 off Nori (5,5)).",
   "levels": [
     {
       "id": "L100",
@@ -136,47 +136,39 @@
     },
     {
       "id": "L102",
-      "name": "Quince Stop",
+      "name": "Medlar Stop",
       "width": 6,
       "height": 6,
       "moveBudget": 12,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_quince_stop_gray",
+      "templateId": "LT02_LT08_medlar_stop_gray",
       "walls": [
         {
-          "x": 1,
+          "x": 2,
           "y": 5
         },
         {
-          "x": 0,
-          "y": 3
-        },
-        {
-          "x": 4,
-          "y": 2
-        },
-        {
-          "x": 5,
+          "x": 3,
           "y": 3
         },
         {
           "x": 5,
-          "y": 2
+          "y": 5
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 5,
+          "x": 3,
           "y": 4,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 2,
+          "x": 0,
           "y": 2,
           "color": "gray",
           "colorId": "color_gray"
@@ -186,25 +178,25 @@
         {
           "id": "gate_orange",
           "x": 5,
-          "y": 5,
+          "y": 1,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_gray",
-          "x": 3,
-          "y": 4,
+          "x": 1,
+          "y": 2,
           "color": "gray",
           "colorId": "color_gray"
         }
       ],
-      "teach": "quince_stop_gray"
+      "teach": "medlar_stop_gray"
     }
   ],
   "teaches": {
     "L100": "Greengage Cut \u2014 not Damson (Plum chip collision)",
     "L101": "Sloe Gap \u2014 color-lock brake (orange/black)",
-    "L102": "Quince Stop \u2014 not Cobbler; stop teach"
+    "L102": "Medlar Stop \u2014 not Quince; seat \u2260 Nori (5,5)"
   },
   "solver": {
     "min_slides": {
@@ -216,6 +208,6 @@
   "deltas": {
     "L100": "(0, 3)",
     "L101": "(0, 2)",
-    "L102": "(2, 1)"
+    "L102": "(4, -1)"
   }
 }
