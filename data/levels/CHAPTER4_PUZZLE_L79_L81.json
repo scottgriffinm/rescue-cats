@@ -1,0 +1,215 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY \u2014 Steve Rival Pass; Cocoa@78",
+  "source": "Chapter 4 continuation after Steve@78 / friend_026",
+  "chapter": 4,
+  "title": "Chapter 4 boards L79\u2013L81",
+  "notes": "PREP for after Steve Rival Pass. Distinct from Cedar/Pollen/Sap and Glint/Fern/Ember. No farm pairs. No Hold*/Park*/Close. No known delta farms.",
+  "levels": [
+    {
+      "id": "L79",
+      "name": "Quill Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_quill_cut_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 0,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "quill_cut_gray",
+      "ascii": "g..#..\n#.....\n...#.o\n......\n.G....\n.#O..."
+    },
+    {
+      "id": "L80",
+      "name": "Parch Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_parch_gap_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "parch_gap_gray",
+      "ascii": "o...#.\n.....G\n#....O\n.#....\n.....g\n.#...."
+    },
+    {
+      "id": "L81",
+      "name": "Stamp Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_stamp_stop_black",
+      "walls": [
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 2,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 2,
+          "y": 0,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "stamp_stop_black",
+      "ascii": "..b.#.\n..#...\n....O.\n..#...\n..B...\n#.#..o"
+    }
+  ],
+  "teaches": {
+    "L79": "Quill Cut \u2014 quill the route onto orange",
+    "L80": "Parch Gap \u2014 parchment gray gap after Steve beat",
+    "L81": "Stamp Stop \u2014 orange/black stamp stops; not adjacent"
+  },
+  "solver": {
+    "min_slides": {
+      "L79": 9,
+      "L80": 8,
+      "L81": 8
+    }
+  }
+}
