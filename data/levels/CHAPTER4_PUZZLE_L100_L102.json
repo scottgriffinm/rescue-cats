@@ -1,0 +1,193 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY \u2014 Plum@99 / friend_033",
+  "source": "Plum@99 Collection locked \u2014 L100\u2013L102",
+  "chapter": 4,
+  "title": "Chapter 4 boards L100\u2013L102",
+  "notes": "Plum@99. Damson Cut / Sloe Gap / Cobbler Stop. L100\u2013L102 deltas (5,2)/(4,2)/(1,-3). Off Chive gray (4,5) / Lovage (0,2). No farms / Hold*/Park*/Close. Soft-share ok vs early L40\u201399.",
+  "levels": [
+    {
+      "id": "L100",
+      "name": "Damson Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_damson_cut_gray",
+      "walls": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 2,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "damson_cut_gray"
+    },
+    {
+      "id": "L101",
+      "name": "Sloe Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_sloe_gap_black",
+      "walls": [
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 5,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 4,
+          "y": 2,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "sloe_gap_black"
+    },
+    {
+      "id": "L102",
+      "name": "Cobbler Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_cobbler_stop_gray",
+      "walls": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 4,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 2,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "cobbler_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L100": "Damson Cut \u2014 habit-break Cut",
+    "L101": "Sloe Gap \u2014 color-lock Gap (orange/black)",
+    "L102": "Cobbler Stop \u2014 stop teach, not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L100": 9,
+      "L101": 9,
+      "L102": 9
+    }
+  },
+  "deltas": {
+    "L100": "(5, 2)",
+    "L101": "(4, 2)",
+    "L102": "(1, -3)"
+  }
+}
