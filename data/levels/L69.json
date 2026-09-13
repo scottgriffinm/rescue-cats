@@ -1,0 +1,58 @@
+{
+  "id": "L69",
+  "name": "Dusk Peg",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 12,
+  "nudges": 3,
+  "colorLocks": true,
+  "templateId": "LT02_LT08_dusk_peg_black",
+  "walls": [
+    {
+      "x": 0,
+      "y": 5
+    },
+    {
+      "x": 1,
+      "y": 4
+    },
+    {
+      "x": 3,
+      "y": 0
+    }
+  ],
+  "blockers": [],
+  "cats": [
+    {
+      "id": "cat_orange",
+      "x": 0,
+      "y": 4,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "cat_black",
+      "x": 1,
+      "y": 1,
+      "color": "black",
+      "colorId": "color_black"
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate_orange",
+      "x": 4,
+      "y": 0,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "gate_black",
+      "x": 4,
+      "y": 5,
+      "color": "black",
+      "colorId": "color_black"
+    }
+  ],
+  "teach": "dusk_peg_black"
+}
