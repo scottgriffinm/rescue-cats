@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_mochi_bang",
+  "status": "READY",
+  "friend_id": "friend_022",
+  "unlock_clear": 66,
+  "personality": "Sweet",
+  "display_line": "Warm as a porch petal. Already claimed the softest light.",
+  "default_name": "Coral",
+  "tier": "C",
+  "color": "Cream",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/mochi_loaf_48.svg",
+    "loaf_72": "/assets/cats/mochi_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "mochi"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Coral", "Bloom", "Petal"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_022": [
+      "{Name}: Warm as a porch petal. Already claimed the softest light.",
+      "{Name}: Soft, round, and slightly smug about the cushion."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 66,
+    "sku_id": null,
+    "note": "Ch4. Renamed off Mochi (Biscuit owns that chip). No gift. Velvet@63 and Bean@60 stand. No Pebble."
+  }
+}
