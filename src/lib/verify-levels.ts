@@ -5286,7 +5286,7 @@ for (const level of LEVELS) {
   }
   if (shippedFriendForClear(61)) throw new Error("L61 must not award a friend");
   if (shippedFriendForClear(62)) throw new Error("L62 must not award a friend");
-  if (shippedFriendForClear(63)) throw new Error("L63 must not award a friend");
+  // Ch4: Velvet@63 on L63 clear (Bean finale boards stay)
   // parade lock — no Pebble
   for (const friend of [friendForClear(3), friendForClear(12), friendForClear(24), friendForClear(27), friendForClear(30), friendForClear(60)]) {
     if (!friend) throw new Error("parade lock friend missing");
@@ -5373,7 +5373,7 @@ for (const level of LEVELS) {
   if (!roostsBlock) throw new Error("YardScene ROOSTS missing");
   const roostCount = (roostsBlock[1].match(/left:/g) ?? []).length;
   if (roostCount < 20) throw new Error(`ROOSTS must have ≥20 seats, got ${roostCount}`);
-  // ban inventing friend_021 (scan gameplay sources only — this file names the ban)
+  // ban inventing friend_022+ (Ch4 opener is friend_021 only)
   const srcHit = [
     "src/lib/collection.ts",
     "src/components/yard/YardScreen.tsx",
@@ -5381,13 +5381,13 @@ for (const level of LEVELS) {
     "src/lib/levels.ts",
   ].flatMap((file) => {
     const text = readFileSync(resolve(file), "utf8");
-    return /friend_021/.test(text) ? [file] : [];
+    return /friend_02[2-9]|friend_03/.test(text) ? [file] : [];
   });
-  if (srcHit.length) throw new Error(`friend_021 must not appear in ${srcHit.join(",")}`);
-  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[63] || SLICE_UNLOCKS[66]) {
-    throw new Error("no unlocks past Bean@60");
+  if (srcHit.length) throw new Error(`friend_022+ must not appear in ${srcHit.join(",")}`);
+  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) {
+    throw new Error("no unlocks at 61/66/69 — Velvet@63 only past Bean");
   }
-  if (TUTORIAL_RESCUES.length !== 20) throw new Error("TUTORIAL_RESCUES must stay at 20 (through Bean)");
+  if (TUTORIAL_RESCUES.length !== 21) throw new Error("TUTORIAL_RESCUES must be 21 (through Velvet)");
   // Progress chrome: parade / friend-cadence milestones — not a LEVELS.map per-board dot wall.
   if (/LEVELS\.map\(/.test(yardScreen)) {
     throw new Error("Yard progress must not LEVELS.map into per-board dots");
@@ -5432,8 +5432,8 @@ for (const level of LEVELS) {
   if (!yardScene.includes("hasFountain") || !yardScene.includes("hasPerch")) {
     throw new Error("YardScene must gate fountain + perch on ownership");
   }
-  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[63] || SLICE_UNLOCKS[66]) {
-    throw new Error("no unlocks past Bean@60");
+  if (SLICE_UNLOCKS[61] || SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) {
+    throw new Error("no unlocks at 61/66/69 — Velvet@63 only past Bean");
   }
   console.log("Rival Conditional A ok · fountain@18/90 · perch@36/120 · gifts 27/48 · yard gates");
 }
@@ -5518,7 +5518,32 @@ for (const level of LEVELS) {
 
 
 {
-  // Ch4 OPEN — L64–L66 triad (Velvet@63 awaits Art)
+  // Ch4 OPEN — Velvet@63 + L64–L66
+  if (SLICE_UNLOCKS[63] !== "friend_021") throw new Error("SLICE_UNLOCKS[63] must be friend_021");
+  if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("onClear(63) must award Velvet");
+  const velvet = friendById("friend_021");
+  if (!velvet) throw new Error("friend_021 missing from CATALOG");
+  if (velvet.defaultName !== "Velvet") throw new Error("default name must be Velvet");
+  if (velvet.unlockClear !== 63) throw new Error("Velvet unlockClear must be 63");
+  if (velvet.phenotype.artKit !== "velvet") throw new Error("Velvet artKit must be velvet");
+  if (velvet.phenotype.personality !== "Plush") throw new Error("Velvet personality must be Plush");
+  if (velvet.phenotype.boardColor !== "gray") throw new Error("Velvet boardColor must be gray");
+  if (chipsForFriend("friend_021").join(",") !== "Velvet,Plush,Dove") {
+    throw new Error(`Velvet chips must be Velvet/Plush/Dove, got ${chipsForFriend("friend_021").join(",")}`);
+  }
+  const velvet48 = readFileSync(resolve("public/assets/cats/velvet_loaf_48.svg"), "utf8");
+  const velvet72 = readFileSync(resolve("public/assets/cats/velvet_loaf_72.svg"), "utf8");
+  if (!velvet48.includes("#6E6576") || !velvet72.includes("#6E6576")) throw new Error("Velvet loaf must use dusk #6E6576");
+  if (!velvet48.includes("#B7AEB8") || !velvet72.includes("#B7AEB8")) throw new Error("Velvet loaf must use dove belly #B7AEB8");
+  if (!velvet72.includes("rx=\"17.2\"") && !velvet72.includes("rx=\"17.2\"")) {
+    /* soft check */
+  }
+  if (furnitureGiftsForClear(63).length) throw new Error("Velvet@63 must gift no furniture");
+  const yardV = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
+  if ((yardV.match(/const velvet =/g) || []).length !== 1) throw new Error("YardScene must declare velvet once");
+  if ((yardV.match(/\{velvet \?/g) || []).length !== 1) throw new Error("YardScene must render velvet once");
+  if (TUTORIAL_RESCUES.length !== 21) throw new Error("Met must include through Velvet (21)");
+  if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 parade lock");
   for (const [id, name] of [
     ["L64", "Drift Cut"],
     ["L65", "Shelf Break"],
@@ -5537,9 +5562,8 @@ for (const level of LEVELS) {
   if (LEVELS.find((row) => row.id === "L61")?.name !== "Span Cut") throw new Error("L61 untouched");
   if (LEVELS.find((row) => row.id === "L62")?.name !== "Knight Cut") throw new Error("L62 untouched");
   if (LEVELS.find((row) => row.id === "L63")?.name !== "Far Peg") throw new Error("L63 untouched");
-  if (shippedFriendForClear(63)) throw new Error("Velvet@63 gated until Art kit ships");
   if (SLICE_UNLOCKS[66] || SLICE_UNLOCKS[69]) throw new Error("no unlocks past Velvet@63 yet");
-  console.log("Ch4 L64–L66 ok · Drift Cut / Shelf Break / Peg Split · L61–L63 locked · Velvet gated");
+  console.log("Ch4 Velvet@63 + L64–L66 ok · chips Velvet/Plush/Dove · Drift Cut / Shelf Break / Peg Split · Bean parade locked");
 }
 
 console.log("All authored boards ok");
