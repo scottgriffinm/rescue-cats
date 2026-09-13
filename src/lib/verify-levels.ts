@@ -4637,6 +4637,41 @@ for (const level of LEVELS) {
 }
 
 {
+  // Mango@3 orange-mackerel loaf lock (Liz sister-kill — was flat ginger blob)
+  const mango = friendForClear(3);
+  if (mango?.friendId !== "friend_001") throw new Error(`onClear(3) must unlock Mango, got ${mango?.friendId ?? "none"}`);
+  if (mango.defaultName !== "Mango") throw new Error("default name must be Mango");
+  if (mango.phenotype.artKit !== "ginger") throw new Error("Mango artKit must be ginger");
+  if (mango.phenotype.pattern !== "Mackerel") throw new Error("Mango must stay orange mackerel");
+  if (ART_KIT_PATH.ginger.loaf48 !== "/assets/cats/ginger_loaf_48.svg") {
+    throw new Error("Mango yard/unlock must map ginger 48 → ginger_loaf_48");
+  }
+  if (ART_KIT_PATH.ginger.loaf72 !== "/assets/cats/ginger_loaf_72.svg") {
+    throw new Error("Mango yard/unlock must map ginger 72 → ginger_loaf_72");
+  }
+  for (const file of [
+    "public/assets/cats/ginger_loaf_48.svg",
+    "public/assets/cats/ginger_loaf_72.svg",
+    "public/assets/cats/ginger_loaf_160.svg",
+  ]) {
+    if (!existsSync(resolve(file))) throw new Error(`missing art ${file}`);
+  }
+  const mango48 = readFileSync(resolve("public/assets/cats/ginger_loaf_48.svg"), "utf8");
+  const mango72 = readFileSync(resolve("public/assets/cats/ginger_loaf_72.svg"), "utf8");
+  const mango160 = readFileSync(resolve("public/assets/cats/ginger_loaf_160.svg"), "utf8");
+  for (const [label, art] of [["48", mango48], ["72", mango72], ["160", mango160]] as const) {
+    if (!art.includes("#D38B5D")) throw new Error(`Mango loaf ${label} must use coat #D38B5D`);
+    if (!art.includes("#B06D4D")) throw new Error(`Mango loaf ${label} must show mackerel stripes #B06D4D`);
+    if (!art.includes("#E8C4A0")) throw new Error(`Mango loaf ${label} must use belly #E8C4A0`);
+    if (!art.includes("clipPath") || !art.includes("mango-loaf-")) {
+      throw new Error(`Mango loaf ${label} must clip mackerel stripes`);
+    }
+  }
+  console.log("Mango @ onClear(3) ok · orange-mackerel ginger loafs · coat #D38B5D + stripes #B06D4D");
+}
+
+
+{
   const pepper = friendForClear(21);
   if (pepper?.friendId !== "friend_007") {
     throw new Error(`onClear(21) must unlock Pepper, got ${pepper?.friendId ?? "none"}`);
