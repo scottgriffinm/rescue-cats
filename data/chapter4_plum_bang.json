@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_plum_bang",
+  "status": "READY",
+  "friend_id": "friend_033",
+  "unlock_clear": 99,
+  "personality": "Jammy",
+  "display_line": "Dusted with bloom. Already claimed the jam jar sill.",
+  "default_name": "Plum",
+  "tier": "C",
+  "color": "Purple",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/plum_loaf_48.svg",
+    "loaf_72": "/assets/cats/plum_loaf_72.svg",
+    "board_color": "black",
+    "art_kit": "plum"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Plum",
+      "Damson",
+      "Stone"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_033": [
+      "{Name}: Dusted with bloom. Already claimed the jam jar sill.",
+      "{Name}: Jammy. Soft. Slightly sticky about personal space."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 99,
+    "sku_id": null,
+    "note": "Ch4. Fig Pass next. No gift. Ban Fig/Olive/Pit and all prior pools. Bean parade stands. No Pebble."
+  }
+}

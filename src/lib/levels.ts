@@ -31,6 +31,7 @@ import chapter4i from "../../data/levels/CHAPTER4_PUZZLE_L88_L90.json";
 import chapter4j from "../../data/levels/CHAPTER4_PUZZLE_L91_L93.json";
 import chapter4k from "../../data/levels/CHAPTER4_PUZZLE_L94_L96.json";
 import chapter4l from "../../data/levels/CHAPTER4_PUZZLE_L97_L99.json";
+import chapter4m from "../../data/levels/CHAPTER4_PUZZLE_L100_L102.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -135,6 +136,9 @@ const HEADLINES: Record<string, string> = {
   L97: "KELP CUT",
   L98: "NORI GAP",
   L99: "BRINE STOP",
+  L100: "DAMSON CUT",
+  L101: "SLOE GAP",
+  L102: "COBBLER STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -236,6 +240,9 @@ const HINTS: Record<string, string> = {
   L97: "Kelp cut — kelp the route onto orange; gray off Dill (2,4).",
   L98: "Nori gap — nori black gap after the Fig beat; off Chive (4,5).",
   L99: "Brine stop — orange/gray brine stops; off Chive (4,5) / Lovage (0,2).",
+  L100: "Damson cut — damson the route onto orange; habit-break Cut.",
+  L101: "Sloe gap — sloe black gap after the Plum beat.",
+  L102: "Cobbler stop — orange/gray cobbler stops; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -322,6 +329,7 @@ const authored = [
   ...chapter4j.levels,
   ...chapter4k.levels,
   ...chapter4l.levels,
+  ...chapter4m.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

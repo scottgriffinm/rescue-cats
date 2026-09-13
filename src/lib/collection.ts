@@ -30,6 +30,7 @@ import chapter4Ivory from "../../data/chapter4_ivory_bang.json";
 import chapter4Clay from "../../data/chapter4_clay_bang.json";
 import chapter4Basil from "../../data/chapter4_basil_bang.json";
 import chapter4Fig from "../../data/chapter4_fig_bang.json";
+import chapter4Plum from "../../data/chapter4_plum_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -89,7 +90,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "ivory" ||
     raw === "clay" ||
     raw === "basil" ||
-    raw === "fig"
+    raw === "fig" ||
+    raw === "plum"
   ) {
     return raw;
   }
@@ -355,6 +357,7 @@ export const CHAPTER4_IVORY = chapter4Ivory;
 export const CHAPTER4_CLAY = chapter4Clay;
 export const CHAPTER4_BASIL = chapter4Basil;
 export const CHAPTER4_FIG = chapter4Fig;
+export const CHAPTER4_PLUM = chapter4Plum;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -386,6 +389,7 @@ export const IVORY_FRIEND_ID = chapter4Ivory.friend_id;
 export const CLAY_FRIEND_ID = chapter4Clay.friend_id;
 export const BASIL_FRIEND_ID = chapter4Basil.friend_id;
 export const FIG_FRIEND_ID = chapter4Fig.friend_id;
+export const PLUM_FRIEND_ID = chapter4Plum.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -631,6 +635,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "orange",
     },
   },
+  {
+    friendId: chapter4Plum.friend_id,
+    defaultName: chapter4Plum.default_name,
+    unlockClear: chapter4Plum.unlock_clear,
+    displayLine: chapter4Plum.display_line,
+    tier: chapter4Plum.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_purple_solid_regular_regular_plum",
+      breed: "Domestic Shorthair",
+      color: chapter4Plum.color,
+      pattern: chapter4Plum.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Plum.personality,
+      artKit: "plum",
+      boardColor: "black",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -652,7 +676,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 32);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 33);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -698,6 +722,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   90: "friend_030",
   93: "friend_031",
   96: "friend_032",
+  99: "friend_033",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -870,6 +895,9 @@ export const BASIL_NAMING_CHIPS: string[] = CHAPTER4_BASIL.naming.suggestion_chi
 /** Fig naming chips — dusty-cream + seed pits; ban Basil/Pesto/Herb and all prior pools. */
 export const FIG_NAMING_CHIPS: string[] = CHAPTER4_FIG.naming.suggestion_chips;
 
+/** Plum naming chips — fruit plum + bloom dust; ban Fig/Olive/Pit and all prior pools. */
+export const PLUM_NAMING_CHIPS: string[] = CHAPTER4_PLUM.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -964,6 +992,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === FIG_FRIEND_ID || friendId === "friend_032") {
     return [...FIG_NAMING_CHIPS];
   }
+  if (friendId === PLUM_FRIEND_ID || friendId === "friend_033") {
+    return [...PLUM_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -997,6 +1028,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Grounded") return [...CLAY_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Fresh") return [...BASIL_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Ripe") return [...FIG_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Jammy") return [...PLUM_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -1103,6 +1135,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === FIG_FRIEND_ID || friendId === "friend_032") {
     return shufflePool([...FIG_NAMING_CHIPS], count);
   }
+  if (friendId === PLUM_FRIEND_ID || friendId === "friend_033") {
+    return shufflePool([...PLUM_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -1150,6 +1185,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_CLAY.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_BASIL.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_FIG.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_PLUM.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));

@@ -96,6 +96,7 @@ export function YardScene({
   const clay = friends.find((friend) => friend.friendId === "friend_030");
   const basil = friends.find((friend) => friend.friendId === "friend_031");
   const fig = friends.find((friend) => friend.friendId === "friend_032");
+  const plum = friends.find((friend) => friend.friendId === "friend_033");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -128,7 +129,8 @@ export function YardScene({
       friend.friendId !== "friend_029" &&
       friend.friendId !== "friend_030" &&
       friend.friendId !== "friend_031" &&
-      friend.friendId !== "friend_032",
+      friend.friendId !== "friend_032" &&
+      friend.friendId !== "friend_033",
   );
 
   return (
@@ -806,6 +808,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{fig.name}</p>
+        </div>
+      ) : null}
+
+      {plum ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "70%", top: "42%" }}
+        >
+          <FriendSprite
+            kit={friendById(plum.friendId)?.phenotype.artKit ?? "plum"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === plum.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(plum.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${plum.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{plum.name}</p>
         </div>
       ) : null}
 
