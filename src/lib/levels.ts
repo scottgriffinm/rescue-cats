@@ -235,7 +235,7 @@ const HINTS: Record<string, string> = {
   L96: "Dill stop — orange/gray dill stops; not adjacent.",
   L97: "Kelp cut — kelp the route onto orange; gray off Dill (2,4).",
   L98: "Nori gap — nori black gap after the Fig beat; off Chive (4,5).",
-  L99: "Brine stop — orange/gray brine stops; off Chive (4,5).",
+  L99: "Brine stop — orange/gray brine stops; off Chive (4,5) / Lovage (0,2).",
 };
 
 type RawLevel = {

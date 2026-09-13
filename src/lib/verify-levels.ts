@@ -7631,13 +7631,12 @@ for (const level of LEVELS) {
   if (figGatePair(l97) !== "0,1/1,5") throw new Error(`L97 gates must be delta (1,4) pair, got ${figGatePair(l97)}`);
   if (figGatePair(l98) !== "3,5/5,5") throw new Error(`L98 gates must be delta (2,0) pair, got ${figGatePair(l98)}`);
   if (figGatePair(l99) !== "1,1/4,1") throw new Error(`L99 gates must be delta (3,0) pair, got ${figGatePair(l99)}`);
-  const l97Gray = l97.gates.find((g) => g.color === "gray" || g.id === "gate_gray");
-  if (l97Gray && l97Gray.x === 2 && l97Gray.y === 4) {
-    throw new Error("L97 must not reuse Dill gray seat (2,4)");
-  }
-  for (const level of [l98, l99]) {
-    if (level.gates.some((g) => g.x === 4 && g.y === 5)) {
-      throw new Error(`${level.id} must not reuse Chive seat (4,5)`);
+  // Forbid Dill (2,4) / Chive (4,5) / Lovage (0,2) reuse on L97–L99
+  for (const level of [l97, l98, l99]) {
+    for (const g of level.gates) {
+      if (g.x === 2 && g.y === 4) throw new Error(`${level.id} must not reuse Dill seat (2,4)`);
+      if (g.x === 4 && g.y === 5) throw new Error(`${level.id} must not reuse Chive seat (4,5)`);
+      if (g.x === 0 && g.y === 2) throw new Error(`${level.id} must not reuse Lovage seat (0,2)`);
     }
   }
   if (/cress|rue|mint/i.test([l97.name, l98.name, l99.name].join(","))) {
@@ -7646,7 +7645,7 @@ for (const level of LEVELS) {
   if (ART_KIT_PATH.fig.loaf48 !== "/assets/cats/fig_loaf_48.svg") throw new Error("ART_KIT_PATH.fig loaf48");
   if (ART_KIT_PATH.fig.loaf72 !== "/assets/cats/fig_loaf_72.svg") throw new Error("ART_KIT_PATH.fig loaf72");
   if (ART_KIT_PATH.basil.loaf48 !== "/assets/cats/basil_loaf_48.svg") throw new Error("Basil kit must stay");
-  console.log("Ch4 Fig@96 + L97–L99 ok · chips Fig/Olive/Pit · dusty #C9B08C + pits #6A4A38 · Kelp Cut / Nori Gap / Brine Stop · Chive kept · Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Fig@96 + L97–L99 ok · chips Fig/Olive/Pit · dusty #C9B08C + pits #6A4A38 · Kelp Cut / Nori Gap / Brine Stop · Dill/Chive/Lovage seats banned · Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
 
 {
@@ -7663,6 +7662,11 @@ for (const level of LEVELS) {
     if (old.has(pair)) throw new Error(`${level.id} still on old Cress/Rue/Mint gates`);
     if (/\b(hold|park|close|cress|rue|mint)\b/i.test(level.name)) {
       throw new Error(`${level.id} must not keep Cress/Rue/Mint/Hold*`);
+    }
+    for (const g of level.gates) {
+      if (g.x === 2 && g.y === 4) throw new Error(`${level.id} must not reuse Dill seat (2,4)`);
+      if (g.x === 4 && g.y === 5) throw new Error(`${level.id} must not reuse Chive seat (4,5)`);
+      if (g.x === 0 && g.y === 2) throw new Error(`${level.id} must not reuse Lovage seat (0,2)`);
     }
   }
   if (shippedFriendForClear(96)?.friendId !== "friend_032") throw new Error("Fig@96 must stay");
