@@ -1,0 +1,83 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Rival Conditional \u2014 KILL L85 Sable Cut",
+  "chapter": 4,
+  "title": "L85 Umber Cut (L86 Twill Gap / L87 Flax Stop stay)",
+  "notes": "L86 Twill Gap / L87 Flax Stop lean \u2014 keep. L85 Sable Cut KILL \u2192 Umber Cut (orange off L84 Bitter (1,5)). Juniper collect/coat Pass stands. Ivory@87 gated until boards Pass.",
+  "levels": [
+    {
+      "id": "L85",
+      "name": "Umber Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_umber_cut_gray",
+      "walls": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 0,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "umber_cut_gray"
+    }
+  ],
+  "teaches": {
+    "L85": "Umber Cut \u2014 not Sable; orange \u2260 L84 (1,5)"
+  },
+  "solver": {
+    "min_slides": {
+      "L85": 9
+    }
+  },
+  "kept": [
+    "L86",
+    "L87"
+  ]
+}

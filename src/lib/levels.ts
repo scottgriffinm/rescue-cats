@@ -116,7 +116,7 @@ const HEADLINES: Record<string, string> = {
   L82: "TRUFFLE CUT",
   L83: "FOAM GAP",
   L84: "BITTER STOP",
-  L85: "SABLE CUT",
+  L85: "UMBER CUT",
   L86: "TWILL GAP",
   L87: "FLAX STOP",
 };
@@ -205,7 +205,7 @@ const HINTS: Record<string, string> = {
   L82: "Truffle cut — truffle the route onto orange.",
   L83: "Foam gap — foam gray gap after the Cocoa beat.",
   L84: "Bitter stop — orange/black bitter stops; not adjacent.",
-  L85: "Sable cut — sable the route onto orange.",
+  L85: "Umber cut — umber the route onto orange.",
   L86: "Twill gap — twill black gap after the Linen beat.",
   L87: "Flax stop — orange/gray flax stops; not adjacent.",
 };
