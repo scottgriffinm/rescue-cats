@@ -1,20 +1,16 @@
 {
   "id": "L93",
-  "name": "Chervil Stop",
+  "name": "Lovage Stop",
   "width": 6,
   "height": 6,
   "moveBudget": 12,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_chervil_stop_gray",
+  "templateId": "LT02_LT08_lovage_stop_gray",
   "walls": [
     {
       "x": 2,
-      "y": 4
-    },
-    {
-      "x": 5,
-      "y": 5
+      "y": 3
     },
     {
       "x": 3,
@@ -22,22 +18,22 @@
     },
     {
       "x": 4,
-      "y": 3
+      "y": 4
     }
   ],
   "blockers": [],
   "cats": [
     {
       "id": "cat_orange",
-      "x": 4,
-      "y": 0,
+      "x": 5,
+      "y": 1,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_gray",
-      "x": 1,
-      "y": 1,
+      "x": 3,
+      "y": 2,
       "color": "gray",
       "colorId": "color_gray"
     }
@@ -46,17 +42,17 @@
     {
       "id": "gate_orange",
       "x": 0,
-      "y": 3,
+      "y": 2,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_gray",
-      "x": 4,
-      "y": 4,
+      "x": 2,
+      "y": 0,
       "color": "gray",
       "colorId": "color_gray"
     }
   ],
-  "teach": "chervil_stop_gray"
+  "teach": "lovage_stop_gray"
 }

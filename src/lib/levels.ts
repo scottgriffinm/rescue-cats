@@ -126,7 +126,7 @@ const HEADLINES: Record<string, string> = {
   L90: "SAGE STOP",
   L91: "MARJORAM CUT",
   L92: "FENNEL GAP",
-  L93: "CHERVIL STOP",
+  L93: "LOVAGE STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -221,7 +221,7 @@ const HINTS: Record<string, string> = {
   L90: "Sage stop — orange/gray sage stops; not adjacent.",
   L91: "Marjoram cut — marjoram the route onto orange.",
   L92: "Fennel gap — fennel black gap after the Clay beat.",
-  L93: "Chervil stop — orange/gray chervil stops; not adjacent.",
+  L93: "Lovage stop — orange/gray lovage stops; not Step Off (4,1).",
 };
 
 type RawLevel = {

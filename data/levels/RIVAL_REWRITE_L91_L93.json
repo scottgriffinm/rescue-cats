@@ -1,10 +1,10 @@
 {
   "schema": "rescue_cats.level_pack.v1",
   "status": "SHIP READY \u2014 Clay@90 / Ivory Pass delta-scrub",
-  "source": "Ivory Pass \u2014 Sumac/Mace/Thyme killed (delta twins); rewrite",
+  "source": "Rival Conditional \u2014 L93 Chervil\u2192Lovage; L91/L92 kept",
   "chapter": 4,
   "title": "Chapter 4 boards L91\u2013L93",
-  "notes": "Sumac (3,-1) / Mace (2,-3 Fern) / Thyme (4,2) KILL. \u2192 Marjoram Cut / Fennel Gap / Chervil Stop. Deltas are the last 3 unused vs all shipped color-lock L1\u2013L90 (incl Nutmeg/Cumin/Sage). No farm pairs / Hold*/Park*/Close.",
+  "notes": "Sumac/Mace/Thyme already killed. Chervil (4,1 Step Off) KILL \u2192 Lovage Stop pair (2,-2).",
   "levels": [
     {
       "id": "L91",
@@ -136,21 +136,17 @@
     },
     {
       "id": "L93",
-      "name": "Chervil Stop",
+      "name": "Lovage Stop",
       "width": 6,
       "height": 6,
       "moveBudget": 12,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_chervil_stop_gray",
+      "templateId": "LT02_LT08_lovage_stop_gray",
       "walls": [
         {
           "x": 2,
-          "y": 4
-        },
-        {
-          "x": 5,
-          "y": 5
+          "y": 3
         },
         {
           "x": 3,
@@ -158,22 +154,22 @@
         },
         {
           "x": 4,
-          "y": 3
+          "y": 4
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 4,
-          "y": 0,
+          "x": 5,
+          "y": 1,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 1,
-          "y": 1,
+          "x": 3,
+          "y": 2,
           "color": "gray",
           "colorId": "color_gray"
         }
@@ -182,43 +178,44 @@
         {
           "id": "gate_orange",
           "x": 0,
-          "y": 3,
+          "y": 2,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_gray",
-          "x": 4,
-          "y": 4,
+          "x": 2,
+          "y": 0,
           "color": "gray",
           "colorId": "color_gray"
         }
       ],
-      "teach": "chervil_stop_gray"
+      "teach": "lovage_stop_gray"
     }
   ],
   "teaches": {
     "L91": "Marjoram Cut \u2014 not Sumac; delta unique vs all shipped",
     "L92": "Fennel Gap \u2014 not Mace; off Fern twin",
-    "L93": "Chervil Stop \u2014 not Thyme; delta unique vs all shipped"
+    "L93": "Lovage Stop \u2014 not Chervil / Step Off"
   },
   "solver": {
     "min_slides": {
       "L91": 9,
       "L92": 8,
-      "L93": 9
+      "L93": 7
     }
   },
   "delta_audit": {
     "killed": {
       "Sumac": "(3,-1)",
       "Mace": "(2,-3)",
-      "Thyme": "(4,2)"
+      "Thyme": "(4,2)",
+      "Chervil": "(4,1)"
     },
     "new": {
       "L91": "(4, -5)",
       "L92": "(1, -4)",
-      "L93": "(4, 1)"
+      "L93": "2,-2"
     }
   }
 }
