@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_cocoa_bang",
+  "status": "READY",
+  "friend_id": "friend_026",
+  "unlock_clear": 78,
+  "personality": "Mellow",
+  "display_line": "Warm as cocoa. Already melted into the cushion.",
+  "default_name": "Cocoa",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/cocoa_loaf_48.svg",
+    "loaf_72": "/assets/cats/cocoa_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "cocoa"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Cocoa", "Mocha", "Fudge"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_026": [
+      "{Name}: Warm as cocoa. Already melted into the cushion.",
+      "{Name}: Rich, quiet, and not sharing the sun patch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 78,
+    "sku_id": null,
+    "note": "Ch4 prep only. No gift. Avoid Steve/Maple/Blue/Coral/Velvet/Donna/Nigel/Biscuit-Mochi pools. Bean parade stands. No Pebble."
+  }
+}
