@@ -1735,19 +1735,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 1],
-      [2, 2],
-      [5, 3],
-      [1, 3],
-      [5, 2]
+      [2, 3],
+      [5, 0],
+      [3, 5],
+      [1, 5]
     ],
     cats: [
-      ["cat_orange", 2, 1],
-      ["cat_gray", 4, 3]
+      ["cat_orange", 0, 1],
+      ["cat_gray", 0, 2]
     ],
     gates: [
-      ["gate_orange", 1, 5],
-      ["gate_gray", 5, 0]
+      ["gate_orange", 0, 0],
+      ["gate_gray", 4, 3]
     ],
   },
   L86: {
@@ -2669,15 +2668,15 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "s"],
   ],
   L85: [
-    ["cat_gray", "n"],
-    ["cat_gray", "w"],
-    ["cat_gray", "s"],
     ["cat_orange", "n"],
     ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "n"],
     ["cat_gray", "e"],
+    ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
   ],
   L86: [
     ["cat_black", "e"],
@@ -6759,7 +6758,7 @@ for (const level of LEVELS) {
 {
   // Ch4 Juniper@84 + L85–L87 triad
   for (const [id, name] of [
-    ["L85", "Sable Cut"],
+    ["L85", "Umber Cut"],
     ["L86", "Twill Gap"],
     ["L87", "Flax Stop"],
   ] as const) {
@@ -6815,7 +6814,40 @@ for (const level of LEVELS) {
   if (chipsForFriend("friend_021").join(",") !== "Velvet,Plush,Dove") throw new Error("Velvet chips untouched");
   if (SLICE_UNLOCKS[87]) throw new Error("no friend_029 @87 this slice");
   if (/pebble|Pebble/i.test(juniper48 + juniper72)) throw new Error("Juniper art must not use Pebble");
-  console.log("Ch4 Juniper@84 + L85–L87 ok · chips Juniper/Moss/Sage · Sable Cut / Twill Gap / Flax Stop · Truffle/Foam/Bitter kept · Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Juniper@84 + L85–L87 ok · chips Juniper/Moss/Sage · Umber Cut / Twill Gap / Flax Stop · Truffle/Foam/Bitter kept · Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+}
+
+
+{
+  // Rival Juniper Conditional — L85 Sable Cut kill → Umber Cut
+  const l85 = LEVELS.find((row) => row.id === "L85")!;
+  const l86 = LEVELS.find((row) => row.id === "L86")!;
+  const l87 = LEVELS.find((row) => row.id === "L87")!;
+  if (l86.name !== "Twill Gap") throw new Error("L86 Twill Gap must stay");
+  if (l87.name !== "Flax Stop") throw new Error("L87 Flax Stop must stay");
+  if (l85.name !== "Umber Cut") throw new Error("L85 must be Umber Cut");
+  if (/\b(hold|park|close|sable|ivory)\b/i.test(l85.name)) {
+    throw new Error("L85 must not keep Sable/Ivory/Hold*");
+  }
+  const orange85 = l85.gates.find((g) => g.id === "gate_orange" || g.color === "orange");
+  if (orange85 && orange85.x === 1 && orange85.y === 5) {
+    throw new Error("L85 orange must leave L84 Bitter (1,5)");
+  }
+  const oldPair = l85.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (oldPair === "1,5/5,0") throw new Error("L85 still on old Sable Cut gates");
+  if (shippedFriendForClear(84)?.friendId !== "friend_028") throw new Error("Juniper@84 Pass must stand");
+  if (SLICE_UNLOCKS[84] !== "friend_028") throw new Error("SLICE_UNLOCKS[84] friend_028 stays");
+  if (chipsForFriend("friend_028").join(",") !== "Juniper,Moss,Sage") throw new Error("Juniper chips untouched");
+  if (SLICE_UNLOCKS[87]) throw new Error("no friend_029 @87 — Ivory gated");
+  if (shippedFriendForClear(81)?.friendId !== "friend_027") throw new Error("Linen@81 locked");
+  if (shippedFriendForClear(78)?.friendId !== "friend_026") throw new Error("Cocoa@78 locked");
+  if (shippedFriendForClear(75)?.friendId !== "friend_025") throw new Error("Steve@75 locked");
+  if (shippedFriendForClear(72)?.friendId !== "friend_024") throw new Error("Maple@72 locked");
+  if (shippedFriendForClear(69)?.friendId !== "friend_023") throw new Error("Blue@69 locked");
+  if (shippedFriendForClear(66)?.friendId !== "friend_022") throw new Error("Coral@66 locked");
+  if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 locked");
+  if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 locked");
+  console.log("Rival rewrite L85 ok · Umber Cut · L86 Twill Gap · L87 Flax Stop · Juniper Pass · no Ivory/friend_029");
 }
 
 console.log("All authored boards ok");
