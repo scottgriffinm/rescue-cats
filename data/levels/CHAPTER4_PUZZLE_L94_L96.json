@@ -1,47 +1,55 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "status": "SHIP READY \u2014 Basil@93",
+  "status": "SHIP READY \u2014 Rival rewrite L94 only",
   "source": "Basil@93 need \u2014 L94\u2013L96",
   "chapter": 4,
   "title": "Chapter 4 boards L94\u2013L96",
-  "notes": "Sorrel Cut / Savory Gap / Dill Stop (Tarragon scrubbed \u2014 L93 owns Tarragon Stop). No free deltas vs full L1\u201393; unique vs L40\u201393 + Rival kills; off Lovage (2,-2). No farms / Hold*/Park*/Close. Color-lock.",
+  "notes": "L95 Savory / L96 Dill kept. L94 Chive Cut (Rival rewrite \u2014 gray off Lovage (0,2)).",
   "levels": [
     {
       "id": "L94",
-      "name": "Sorrel Cut",
+      "name": "Chive Cut",
       "width": 6,
       "height": 6,
       "moveBudget": 11,
       "nudges": 3,
       "colorLocks": true,
-      "templateId": "LT02_LT08_sorrel_cut_gray",
+      "templateId": "LT02_LT08_chive_cut_gray",
       "walls": [
         {
           "x": 4,
-          "y": 5
+          "y": 4
         },
         {
-          "x": 3,
-          "y": 3
+          "x": 0,
+          "y": 4
         },
         {
           "x": 5,
+          "y": 1
+        },
+        {
+          "x": 3,
           "y": 0
+        },
+        {
+          "x": 2,
+          "y": 3
         }
       ],
       "blockers": [],
       "cats": [
         {
           "id": "cat_orange",
-          "x": 3,
-          "y": 2,
+          "x": 0,
+          "y": 3,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "cat_gray",
-          "x": 5,
-          "y": 3,
+          "x": 1,
+          "y": 1,
           "color": "gray",
           "colorId": "color_gray"
         }
@@ -50,19 +58,19 @@
         {
           "id": "gate_orange",
           "x": 0,
-          "y": 4,
+          "y": 0,
           "color": "orange",
           "colorId": "color_orange"
         },
         {
           "id": "gate_gray",
-          "x": 0,
-          "y": 2,
+          "x": 4,
+          "y": 5,
           "color": "gray",
           "colorId": "color_gray"
         }
       ],
-      "teach": "sorrel_cut_gray"
+      "teach": "chive_cut_gray"
     },
     {
       "id": "L95",
@@ -186,7 +194,7 @@
     }
   ],
   "teaches": {
-    "L94": "Sorrel Cut \u2014 habit-break off Marjoram",
+    "L94": "Chive Cut \u2014 not Sorrel; gray \u2260 Lovage (0,2)",
     "L95": "Savory Gap \u2014 not Tarragon name; color-lock brake",
     "L96": "Dill Stop \u2014 stop teach, not Hold*/Park*"
   },
@@ -198,7 +206,7 @@
     }
   },
   "deltas": {
-    "L94": "(0, 2)",
+    "L94": "(4, 5)",
     "L95": "(1, 1)",
     "L96": "(0, 1)"
   }

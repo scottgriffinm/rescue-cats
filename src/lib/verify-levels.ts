@@ -1926,17 +1926,19 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [4, 5],
-      [3, 3],
-      [5, 0]
+      [4, 4],
+      [0, 4],
+      [5, 1],
+      [3, 0],
+      [2, 3]
     ],
     cats: [
-      ["cat_orange", 3, 2],
-      ["cat_gray", 5, 3]
+      ["cat_orange", 0, 3],
+      ["cat_gray", 1, 1]
     ],
     gates: [
-      ["gate_orange", 0, 4],
-      ["gate_gray", 0, 2]
+      ["gate_orange", 0, 0],
+      ["gate_gray", 4, 5]
     ],
   },
   L95: {
@@ -2954,13 +2956,13 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   L94: [
     ["cat_orange", "e"],
     ["cat_orange", "n"],
-    ["cat_gray", "n"],
-    ["cat_orange", "w"],
-    ["cat_orange", "n"],
     ["cat_orange", "e"],
     ["cat_orange", "s"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_orange", "n"],
     ["cat_orange", "w"],
-    ["cat_gray", "w"],
+    ["cat_orange", "n"],
   ],
   L95: [
     ["cat_orange", "s"],
@@ -7349,9 +7351,9 @@ for (const level of LEVELS) {
 
 
 {
-  // Ch4 Basil@93 + L94–L96 triad (Sorrel/Savory/Dill — deltas (0,2)/(1,1)/(0,1))
+  // Ch4 Basil@93 + L94–L96 triad (Chive/Savory/Dill — deltas (4,5)/(1,1)/(0,1); Sorrel Lovage-reuse kill)
   for (const [id, name] of [
-    ["L94", "Sorrel Cut"],
+    ["L94", "Chive Cut"],
     ["L95", "Savory Gap"],
     ["L96", "Dill Stop"],
   ] as const) {
@@ -7359,8 +7361,8 @@ for (const level of LEVELS) {
     if (!level) throw new Error(`missing ${id}`);
     if (level.name !== name) throw new Error(`${id} must be ${name}`);
     if (!level.colorLocks) throw new Error(`${id} must lock colors`);
-    if (/\b(hold|park|close|pepper|tarragon)\b/i.test(level.name)) {
-      throw new Error(`${id} must not be Hold*/Park*/Close/Pepper/Tarragon`);
+    if (/\b(hold|park|close|pepper|tarragon|sorrel)\b/i.test(level.name)) {
+      throw new Error(`${id} must not be Hold*/Park*/Close/Pepper/Tarragon/Sorrel`);
     }
     const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
     if (pair === "3,2/3,3" || pair === "2,2/3,2" || pair === "2,3/3,3") {
@@ -7387,6 +7389,8 @@ for (const level of LEVELS) {
   if (!basil48.includes("#7A9B6A") || !basil72.includes("#7A9B6A")) throw new Error("Basil loaf must use sage #7A9B6A");
   if (!basil48.includes("#D5E2C8") || !basil72.includes("#D5E2C8")) throw new Error("Basil loaf must use belly #D5E2C8");
   if (!basil48.includes("#5E7A52") || !basil72.includes("#5E7A52")) throw new Error("Basil loaf must use ear #5E7A52");
+  if (!basil48.includes("#2F4A2C") || !basil72.includes("#2F4A2C")) throw new Error("Basil loaf must use herb-leaf spots #2F4A2C");
+  if (!basil48.includes("<path") || !basil72.includes("<path")) throw new Error("Basil loaf must punch leaf-spot path marks");
   if (furnitureGiftsForClear(93).length) throw new Error("Basil@93 must gift no furniture");
   const yardB = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardB.match(/const basil =/g) || []).length !== 1) throw new Error("YardScene must declare basil once");
@@ -7418,17 +7422,22 @@ for (const level of LEVELS) {
   if (/tarragon/i.test([LEVELS.find((r)=>r.id==="L94")?.name, LEVELS.find((r)=>r.id==="L95")?.name, LEVELS.find((r)=>r.id==="L96")?.name].join(","))) {
     throw new Error("L94–L96 must not ship Tarragon");
   }
-  // Final deltas lock (0,2)/(1,1)/(0,1) — reject draft (3,0)/(4,2)/(4,5)
+  // Final deltas lock (4,5)/(1,1)/(0,1) — kill Sorrel gray Lovage seat (0,2)
   const l94 = LEVELS.find((r) => r.id === "L94")!;
   const l95 = LEVELS.find((r) => r.id === "L95")!;
   const l96 = LEVELS.find((r) => r.id === "L96")!;
   const gatePair = (level: typeof l94) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (gatePair(l94) !== "0,2/0,4") throw new Error(`L94 gates must be delta (0,2) pair, got ${gatePair(l94)}`);
+  if (gatePair(l94) !== "0,0/4,5") throw new Error(`L94 gates must be delta (4,5) pair, got ${gatePair(l94)}`);
   if (gatePair(l95) !== "1,4/2,5") throw new Error(`L95 gates must be delta (1,1) pair, got ${gatePair(l95)}`);
   if (gatePair(l96) !== "2,3/2,4") throw new Error(`L96 gates must be delta (0,1) pair, got ${gatePair(l96)}`);
+  const l94Gray = l94.gates.find((g) => g.color === "gray" || g.id === "gate_gray");
+  if (!l94Gray || (l94Gray.x === 0 && l94Gray.y === 2)) {
+    throw new Error("L94 must not reuse Sorrel/Lovage gray seat (0,2)");
+  }
+  if (/sorrel/i.test(l94.name)) throw new Error("L94 must not ship Sorrel Cut");
   if (ART_KIT_PATH.basil.loaf48 !== "/assets/cats/basil_loaf_48.svg") throw new Error("ART_KIT_PATH.basil loaf48");
   if (ART_KIT_PATH.basil.loaf72 !== "/assets/cats/basil_loaf_72.svg") throw new Error("ART_KIT_PATH.basil loaf72");
-  console.log("Ch4 Basil@93 + L94–L96 ok · chips Basil/Pesto/Herb · sage #7A9B6A · Sorrel Cut / Savory Gap / Dill Stop · Lovage kept · Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Basil@93 + L94–L96 ok · chips Basil/Pesto/Herb · sage #7A9B6A · herb spots #2F4A2C · Chive Cut / Savory Gap / Dill Stop · Lovage kept · Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
 
 

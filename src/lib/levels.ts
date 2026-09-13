@@ -128,7 +128,7 @@ const HEADLINES: Record<string, string> = {
   L91: "MARJORAM CUT",
   L92: "FENNEL GAP",
   L93: "LOVAGE STOP",
-  L94: "SORREL CUT",
+  L94: "CHIVE CUT",
   L95: "SAVORY GAP",
   L96: "DILL STOP",
 };
@@ -226,7 +226,7 @@ const HINTS: Record<string, string> = {
   L91: "Marjoram cut — marjoram the route onto orange.",
   L92: "Fennel gap — fennel black gap after the Clay beat.",
   L93: "Lovage stop — orange/gray lovage stops; not Step Off (4,1).",
-  L94: "Sorrel cut — sorrel the route onto orange.",
+  L94: "Chive cut — chive the route onto orange; gray off Lovage (0,2).",
   L95: "Savory gap — savory black gap after the Basil beat.",
   L96: "Dill stop — orange/gray dill stops; not adjacent.",
 };
