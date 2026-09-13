@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_ivy_bang",
+  "status": "READY",
+  "friend_id": "friend_036",
+  "unlock_clear": 108,
+  "personality": "Climb-soft",
+  "display_line": "Climbs soft. Already claimed the porch rail.",
+  "default_name": "Ivy",
+  "tier": "C",
+  "color": "Black",
+  "pattern": "Spotted",
+  "art": {
+    "loaf_48": "/assets/cats/ivy_loaf_48.svg",
+    "loaf_72": "/assets/cats/ivy_loaf_72.svg",
+    "board_color": "black",
+    "art_kit": "ivy"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Ivy",
+      "Tendril",
+      "Climb"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_036": [
+      "{Name}: Climbs soft. Already claimed the porch rail.",
+      "{Name}: Looks wild. Naps in the shade."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 108,
+    "sku_id": null,
+    "note": "Ch4. Briar Pass next. No gift. Ban Briar/Thorn/Hedge and all prior pools. Bean parade stands. No Pebble."
+  }
+}
