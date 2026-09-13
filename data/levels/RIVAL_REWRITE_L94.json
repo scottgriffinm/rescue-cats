@@ -1,0 +1,88 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Rival Conditional \u2014 KILL L94 Sorrel Cut gray (0,2) / L93 Lovage",
+  "chapter": 4,
+  "title": "L94 Chive Cut (L95 Savory / L96 Dill stay)",
+  "notes": "L95 Savory Gap / L96 Dill Stop lean \u2014 keep. L94 Sorrel Cut KILL \u2192 Chive Cut (gray off L93 Lovage seat (0,2)). Basil collect Pass stands; coat soft-kill parallel. No friend_032.",
+  "levels": [
+    {
+      "id": "L94",
+      "name": "Chive Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_chive_cut_gray",
+      "walls": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 3
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "chive_cut_gray"
+    }
+  ],
+  "teaches": {
+    "L94": "Chive Cut \u2014 not Sorrel; gray \u2260 Lovage (0,2)"
+  },
+  "solver": {
+    "min_slides": {
+      "L94": 9
+    }
+  },
+  "kept": [
+    "L95",
+    "L96"
+  ],
+  "delta": "(4, 5)"
+}
