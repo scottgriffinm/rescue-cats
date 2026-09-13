@@ -1903,18 +1903,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 4],
-      [5, 5],
-      [3, 0],
-      [4, 3]
+      [3, 1],
+      [5, 1],
+      [5, 2]
     ],
     cats: [
-      ["cat_orange", 4, 0],
-      ["cat_gray", 1, 1]
+      ["cat_orange", 3, 3],
+      ["cat_gray", 1, 4]
     ],
     gates: [
-      ["gate_orange", 0, 3],
-      ["gate_gray", 4, 4]
+      ["gate_orange", 2, 0],
+      ["gate_gray", 1, 3]
     ],
   }
 };
@@ -2883,14 +2882,14 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
   ],
   L93: [
     ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_orange", "n"],
     ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
     ["cat_gray", "e"],
     ["cat_gray", "n"],
+    ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_gray", "e"],
+    ["cat_orange", "n"],
   ],
 };
 
@@ -7175,18 +7174,18 @@ for (const level of LEVELS) {
 
 
 {
-  // Ch4 Clay@90 + L91–L93 triad (Marjoram/Fennel/Chervil — Sumac/Mace/Thyme killed)
+  // Ch4 Clay@90 + L91–L93 triad (Marjoram/Fennel/Tarragon — Sumac/Mace/Thyme/Chervil killed)
   for (const [id, name] of [
     ["L91", "Marjoram Cut"],
     ["L92", "Fennel Gap"],
-    ["L93", "Chervil Stop"],
+    ["L93", "Tarragon Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
     if (level.name !== name) throw new Error(`${id} must be ${name}`);
     if (!level.colorLocks) throw new Error(`${id} must lock colors`);
-    if (/\b(hold|park|close|pepper|sumac|mace|thyme)\b/i.test(level.name)) {
-      throw new Error(`${id} must not be Hold*/Park*/Close/Pepper/Sumac/Mace/Thyme`);
+    if (/\b(hold|park|close|pepper|sumac|mace|thyme|chervil)\b/i.test(level.name)) {
+      throw new Error(`${id} must not be Hold*/Park*/Close/Pepper/Sumac/Mace/Thyme/Chervil`);
     }
     const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
     if (pair === "3,2/3,3" || pair === "2,2/3,2" || pair === "2,3/3,3") {
@@ -7239,10 +7238,26 @@ for (const level of LEVELS) {
   if (chipsForFriend("friend_021").join(",") !== "Velvet,Plush,Dove") throw new Error("Velvet chips untouched");
   if (SLICE_UNLOCKS[93]) throw new Error("no friend_031 @93 this slice");
   if (/pebble|Pebble/i.test(clay48 + clay72)) throw new Error("Clay art must not use Pebble");
-  if (/sumac|mace|thyme/i.test([LEVELS.find((r)=>r.id==="L91")?.name, LEVELS.find((r)=>r.id==="L92")?.name, LEVELS.find((r)=>r.id==="L93")?.name].join(","))) {
-    throw new Error("L91–L93 must not ship Sumac/Mace/Thyme");
+  if (/sumac|mace|thyme|chervil/i.test([LEVELS.find((r)=>r.id==="L91")?.name, LEVELS.find((r)=>r.id==="L92")?.name, LEVELS.find((r)=>r.id==="L93")?.name].join(","))) {
+    throw new Error("L91–L93 must not ship Sumac/Mace/Thyme/Chervil");
   }
-  console.log("Ch4 Clay@90 + L91–L93 ok · chips Clay/Brick/Terra · terracotta #C85A3C · Marjoram Cut / Fennel Gap / Chervil Stop · Nutmeg/Cumin/Sage kept · Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Clay@90 + L91–L93 ok · chips Clay/Brick/Terra · terracotta #C85A3C · Marjoram Cut / Fennel Gap / Tarragon Stop · Nutmeg/Cumin/Sage kept · Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+}
+
+{
+  // Rival Conditional — L93 only (Chervil → Tarragon). L91/L92 lean; Clay@90 Pass; no friend_031.
+  const l91 = LEVELS.find((row) => row.id === "L91");
+  const l92 = LEVELS.find((row) => row.id === "L92");
+  const l93 = LEVELS.find((row) => row.id === "L93");
+  if (!l91 || l91.name !== "Marjoram Cut") throw new Error("L91 Marjoram Cut locked");
+  if (!l92 || l92.name !== "Fennel Gap") throw new Error("L92 Fennel Gap locked");
+  if (!l93 || l93.name !== "Tarragon Stop") throw new Error("L93 must be Tarragon Stop");
+  if (/\b(chervil|hold|park|close)\b/i.test(l93.name)) throw new Error("L93 must not keep Chervil/Hold*");
+  if (SLICE_UNLOCKS[90] !== "friend_030") throw new Error("Clay@90 unlock locked");
+  if (shippedFriendForClear(90)?.friendId !== "friend_030") throw new Error("Clay@90 onClear locked");
+  if (SLICE_UNLOCKS[93]) throw new Error("no friend_031 @93");
+  if (chipsForFriend("friend_030").join(",") !== "Clay,Brick,Terra") throw new Error("Clay chips locked");
+  console.log("Rival rewrite L93 ok · Tarragon Stop · L91 Marjoram / L92 Fennel lean · Clay@90 Pass · no friend_031");
 }
 
 

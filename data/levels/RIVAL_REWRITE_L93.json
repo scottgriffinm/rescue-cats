@@ -1,0 +1,84 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "source": "Rival Conditional \u2014 KILL L93 Chervil Stop delta (4,1) / L13 Step Off",
+  "chapter": 4,
+  "title": "L93 Tarragon Stop (L91 Marjoram / L92 Fennel stay)",
+  "notes": "L91 Marjoram Cut / L92 Fennel Gap lean \u2014 keep. L93 Chervil Stop KILL \u2192 Tarragon Stop (off (4,1)/L13; same kill as Sap\u2192Resin). Delta (1, -3) unique vs L40+ and Marjoram/Fennel; early twins: ['L38:East Seal', 'L38:East Seal[m]']. Clay collect+coat Pass stands. No friend_031.",
+  "levels": [
+    {
+      "id": "L93",
+      "name": "Tarragon Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tarragon_stop_gray",
+      "walls": [
+        {
+          "x": 3,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "tarragon_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L93": "Tarragon Stop \u2014 not Chervil; delta \u2260 (4,1)/L13"
+  },
+  "solver": {
+    "min_slides": {
+      "L93": 9
+    }
+  },
+  "kept": [
+    "L91",
+    "L92"
+  ],
+  "delta": "(1, -3)",
+  "early_twins": [
+    "L38:East Seal",
+    "L38:East Seal[m]"
+  ]
+}
