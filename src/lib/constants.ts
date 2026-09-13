@@ -32,7 +32,8 @@ export const ART_KIT_PATH: Record<
   | "blue"
   | "maple"
   | "steve"
-  | "cocoa",
+  | "cocoa"
+  | "linen",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -142,6 +143,10 @@ export const ART_KIT_PATH: Record<
   cocoa: {
     loaf48: "/assets/cats/cocoa_loaf_48.svg",
     loaf72: "/assets/cats/cocoa_loaf_72.svg",
+  },
+  linen: {
+    loaf48: "/assets/cats/linen_loaf_48.svg",
+    loaf72: "/assets/cats/linen_loaf_72.svg",
   },
 };
 

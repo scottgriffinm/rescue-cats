@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_linen_bang",
+  "status": "READY",
+  "friend_id": "friend_027",
+  "unlock_clear": 81,
+  "personality": "Hazy",
+  "display_line": "Soft as folded linen. Already claimed the quiet step.",
+  "default_name": "Linen",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/linen_loaf_48.svg",
+    "loaf_72": "/assets/cats/linen_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "linen"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Linen", "Gauze", "Whisper"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_027": [
+      "{Name}: Soft as folded linen. Already claimed the quiet step.",
+      "{Name}: Quiet in, quieter out. The porch softens."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 81,
+    "sku_id": null,
+    "note": "Ch4 prep. Renamed off Misty (Mist collision). No gift. Bean parade stands. No Pebble."
+  }
+}

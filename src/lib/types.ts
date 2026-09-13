@@ -31,7 +31,8 @@ export type ArtKit =
   | "blue"
   | "maple"
   | "steve"
-  | "cocoa";
+  | "cocoa"
+  | "linen";
 
 export type PieceCat = {
   id: string;
