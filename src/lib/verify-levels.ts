@@ -7827,10 +7827,11 @@ for (const level of LEVELS) {
   }
   const plum48 = readFileSync(resolve("public/assets/cats/plum_loaf_48.svg"), "utf8");
   const plum72 = readFileSync(resolve("public/assets/cats/plum_loaf_72.svg"), "utf8");
-  if (!plum48.includes("#7A3B5C") || !plum72.includes("#7A3B5C")) throw new Error("Plum loaf must use coat #7A3B5C");
-  if (!plum48.includes("#5C2D46") || !plum72.includes("#5C2D46")) throw new Error("Plum loaf must use ears #5C2D46");
-  if (!plum48.includes("#E8C8D4") || !plum72.includes("#E8C8D4")) throw new Error("Plum loaf must use belly #E8C8D4");
-  if (!plum48.includes("#C9A0B4") || !plum72.includes("#C9A0B4")) throw new Error("Plum loaf must use bloom dust #C9A0B4");
+  if (!plum48.includes("#2C1A24") || !plum72.includes("#2C1A24")) throw new Error("Plum loaf must use plum-black coat #2C1A24");
+  if (!plum48.includes("#5A3048") || !plum72.includes("#5A3048")) throw new Error("Plum loaf must use gloss #5A3048");
+  if (!plum48.includes("#4A3040") || !plum72.includes("#4A3040")) throw new Error("Plum loaf must use belly #4A3040");
+  if (plum48.includes("#7A3B5C") || plum72.includes("#7A3B5C")) throw new Error("Plum loaf must not use jammy fruit-purple #7A3B5C");
+  if (plum48.includes("#C9A0B4") || plum72.includes("#C9A0B4") || /bloom/i.test(plum48 + plum72)) throw new Error("Plum loaf must not use bloom dust");
   if (furnitureGiftsForClear(99).length) throw new Error("Plum@99 must gift no furniture");
   const yardP = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardP.match(/const plum =/g) || []).length !== 1) throw new Error("YardScene must declare plum once");
@@ -7898,7 +7899,7 @@ for (const level of LEVELS) {
   if (!existsSync(resolve("data/collection/CH4_FRIEND_033.md"))) throw new Error("missing CH4_FRIEND_033.md");
   if (!existsSync(resolve("data/collection/chapter4_plum_bang.json"))) throw new Error("missing collection plum bang");
   if (!existsSync(resolve("data/chapter4_plum_bang.json"))) throw new Error("missing chapter4_plum_bang.json");
-  console.log("Ch4 Plum@99 + L100–L102 ok · chips Plum/Damson/Stone · coat #7A3B5C + bloom #C9A0B4 · Greengage Cut / Sloe Gap / Quince Stop · Fig/Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Plum@99 + L100–L102 ok · chips Plum/Damson/Stone · coat #2C1A24 + gloss #5A3048 · Greengage Cut / Sloe Gap / Quince Stop · Fig/Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
 
 
