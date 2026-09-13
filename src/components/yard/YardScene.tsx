@@ -91,6 +91,7 @@ export function YardScene({
   const steve = friends.find((friend) => friend.friendId === "friend_025");
   const cocoa = friends.find((friend) => friend.friendId === "friend_026");
   const linen = friends.find((friend) => friend.friendId === "friend_027");
+  const juniper = friends.find((friend) => friend.friendId === "friend_028");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -118,7 +119,8 @@ export function YardScene({
       friend.friendId !== "friend_024" &&
       friend.friendId !== "friend_025" &&
       friend.friendId !== "friend_026" &&
-      friend.friendId !== "friend_027",
+      friend.friendId !== "friend_027" &&
+      friend.friendId !== "friend_028",
   );
 
   return (
@@ -674,6 +676,31 @@ export function YardScene({
             </button>
           ) : null}
           <p className="text-center font-display text-[11px] text-ink/70">{linen.name}</p>
+        </div>
+      ) : null}
+
+
+      {juniper ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "16%", top: "8%" }}
+        >
+          <FriendSprite
+            kit={friendById(juniper.friendId)?.phenotype.artKit ?? "juniper"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === juniper.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(juniper.instanceId)}
+              className="absolute -right-2 -top-4 grid h-11 w-11 place-items-center"
+              aria-label={`${juniper.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="text-center font-display text-[11px] text-ink/70">{juniper.name}</p>
         </div>
       ) : null}
 
