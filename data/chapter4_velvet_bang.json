@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_velvet_bang",
+  "status": "READY",
+  "friend_id": "friend_021",
+  "unlock_clear": 63,
+  "personality": "Plush",
+  "display_line": "Soft as dusk. Already claimed the quietest corner.",
+  "default_name": "Velvet",
+  "tier": "B",
+  "color": "Gray",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/velvet_loaf_48.svg",
+    "loaf_72": "/assets/cats/velvet_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "velvet"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Velvet", "Plush", "Dove"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_021": [
+      "{Name}: Soft as dusk. Already claimed the quietest corner.",
+      "{Name}: Arrived without a sound. The porch got quieter."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 63,
+    "sku_id": null,
+    "note": "Ch4 opener. No gift. Parade through Bean@60 stands. No Pebble. Soft hearts only."
+  }
+}
