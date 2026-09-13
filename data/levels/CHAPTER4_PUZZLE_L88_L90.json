@@ -1,0 +1,216 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY \u2014 Ivory@87 / after Juniper Pass",
+  "source": "Chapter 4 continuation after Juniper@87",
+  "chapter": 4,
+  "title": "Chapter 4 boards L88\u2013L90",
+  "notes": "Promoted from PREP after Juniper Rival Pass. Clove Cut / Anise Gap / Bay Stop. Distinct from Umber/Twill/Flax and Truffle/Foam/Bitter. No farm pairs. No Hold*/Park*/Close. Color-lock.",
+  "levels": [
+    {
+      "id": "L88",
+      "name": "Clove Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_clove_cut_gray",
+      "walls": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 0,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "clove_cut_gray"
+    },
+    {
+      "id": "L89",
+      "name": "Anise Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_anise_gap_black",
+      "walls": [
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 3
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 1,
+          "y": 5,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 2,
+          "y": 0,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "anise_gap_black"
+    },
+    {
+      "id": "L90",
+      "name": "Bay Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_bay_stop_gray",
+      "walls": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 3,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 2,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "bay_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L88": "Clove Cut \u2014 habit-break off Sable Cut",
+    "L89": "Anise Gap \u2014 color-lock brake (orange/black); not friend Pepper",
+    "L90": "Bay Stop \u2014 stop teach, not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L88": 9,
+      "L89": 8,
+      "L90": 9
+    }
+  }
+}

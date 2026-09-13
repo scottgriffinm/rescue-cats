@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_ivory_bang",
+  "status": "READY",
+  "friend_id": "friend_029",
+  "unlock_clear": 87,
+  "personality": "Polished",
+  "display_line": "Neat as a napkin. Already straightened the cushion.",
+  "default_name": "Ivory",
+  "tier": "C",
+  "color": "Cream",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/ivory_loaf_48.svg",
+    "loaf_72": "/assets/cats/ivory_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "ivory"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Ivory", "Lace", "Sheer"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_029": [
+      "{Name}: Neat as a napkin. Already straightened the cushion.",
+      "{Name}: Polished paws. Higher standards than the porch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 87,
+    "sku_id": null,
+    "note": "Ch4 prep only. No gift. Avoid Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Clover/Mist/Donna/Nigel/Biscuit-Mochi/Ghost pools. Bean parade stands. No Pebble."
+  }
+}
