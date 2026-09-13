@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_maple_bang",
+  "status": "READY",
+  "friend_id": "friend_024",
+  "unlock_clear": 72,
+  "personality": "Autumn",
+  "display_line": "Smells like leaves. Already chosen the sunniest board.",
+  "default_name": "Maple",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Classic",
+  "art": {
+    "loaf_48": "/assets/cats/maple_loaf_48.svg",
+    "loaf_72": "/assets/cats/maple_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "maple"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Maple", "Hazel", "Amber"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_024": [
+      "{Name}: Smells like leaves. Already chosen the sunniest board.",
+      "{Name}: Autumn energy, year-round nap schedule."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 72,
+    "sku_id": null,
+    "note": "Ch4 prep only. No gift. Avoid Blue/Coral/Velvet/Biscuit-Mochi pools. Bean parade stands. No Pebble."
+  }
+}
