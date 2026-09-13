@@ -20,6 +20,7 @@ import chapter3p from "../../data/levels/CHAPTER3_PUZZLE_L55_L57.json";
 import chapter3q from "../../data/levels/CHAPTER3_PUZZLE_L58_L60.json";
 import chapter3r from "../../data/levels/CHAPTER3_PUZZLE_L61_L63.json";
 import chapter4a from "../../data/levels/CHAPTER4_PUZZLE_L64_L66.json";
+import chapter4b from "../../data/levels/CHAPTER4_PUZZLE_L67_L69.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -91,6 +92,9 @@ const HEADLINES: Record<string, string> = {
   L64: "CURL PATH",
   L65: "WEDGE GAP",
   L66: "PEG SPLIT",
+  L67: "TIDE CUT",
+  L68: "PLUSH GAP",
+  L69: "DUSK PEG",
 };
 
 const HINTS: Record<string, string> = {
@@ -159,6 +163,9 @@ const HINTS: Record<string, string> = {
   L64: "Curl path onto orange — not a Span Cut twin.",
   L65: "Wedge gap — gray seats east, not an L64 translate.",
   L66: "Peg split on far corners — dual habits miss.",
+  L67: "Tide cut — gray drifts before the orange seats.",
+  L68: "Plush gap — leave room, then commit.",
+  L69: "Dusk peg on the black house — offset habits miss.",
 };
 
 type RawLevel = {
@@ -234,6 +241,7 @@ const authored = [
   ...chapter3q.levels,
   ...chapter3r.levels,
   ...chapter4a.levels,
+  ...chapter4b.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

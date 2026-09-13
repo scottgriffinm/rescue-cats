@@ -1,0 +1,203 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY \u2014 Velvet Rival Pass; friend_022 triad",
+  "source": "Chapter 4 continuation after Velvet@63",
+  "chapter": 4,
+  "title": "Chapter 4 boards L67\u2013L69",
+  "notes": "After L64\u2013L66 / Velvet@63 \u2192 L67\u2013L69 (toward clear 66). No farmed gates. No Hold*/Park*. L61\u2013L66 untouched. No Pebble.",
+  "levels": [
+    {
+      "id": "L67",
+      "name": "Tide Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tide_cut_gray",
+      "walls": [
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 1,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "tide_cut_gray",
+      "ascii": ".G...#\n....g.\no..O..\n.#....\n......\n.#...."
+    },
+    {
+      "id": "L68",
+      "name": "Plush Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_plush_gap_gray",
+      "walls": [
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 3
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "plush_gap_gray",
+      "ascii": "O.....\n.g....\n.#....\n.#....\n.Go...\n..#..#"
+    },
+    {
+      "id": "L69",
+      "name": "Dusk Peg",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_dusk_peg_black",
+      "walls": [
+        {
+          "x": 0,
+          "y": 5
+        },
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 1,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 4,
+          "y": 5,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "dusk_peg_black",
+      "ascii": "...#o.\n.B....\n......\n......\nO#....\n#...b."
+    }
+  ],
+  "teaches": {
+    "L67": "Tide Cut \u2014 tide the route onto orange",
+    "L68": "Plush Gap \u2014 gray gap after Velvet beat",
+    "L69": "Dusk Peg \u2014 orange/black dusk pegs; not adjacent"
+  },
+  "solver": {
+    "min_slides": {
+      "L67": 10,
+      "L68": 9,
+      "L69": 10
+    }
+  }
+}
