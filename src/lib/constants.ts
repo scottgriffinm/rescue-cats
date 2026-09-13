@@ -28,7 +28,8 @@ export const ART_KIT_PATH: Record<
   | "nigel"
   | "bean"
   | "velvet"
-  | "coral",
+  | "coral"
+  | "blue",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -122,6 +123,10 @@ export const ART_KIT_PATH: Record<
   coral: {
     loaf48: "/assets/cats/coral_loaf_48.svg",
     loaf72: "/assets/cats/coral_loaf_72.svg",
+  },
+  blue: {
+    loaf48: "/assets/cats/blue_loaf_48.svg",
+    loaf72: "/assets/cats/blue_loaf_72.svg",
   },
 };
 
