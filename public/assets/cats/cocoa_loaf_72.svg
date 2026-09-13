@@ -1,5 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="cocoa-loaf-72">
+      <ellipse cx="24" cy="31" rx="17.6" ry="10.4"/>
+    </clipPath>
+  </defs>
   <ellipse cx="24" cy="31" rx="17.6" ry="10.4" fill="#A85E38" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#cocoa-loaf-72)">
+    <ellipse cx="15.2" cy="29.4" rx="5.4" ry="4.8" fill="#6F3A22"/>
+    <path d="M30 26 C34 27.5 35.5 31 33.2 34" fill="none" stroke="#6F3A22" stroke-width="2.4" stroke-linecap="round"/>
+  </g>
   <path d="M10.8 25 C10.2 18.4 15 16.2 17.2 21" fill="#8A4A2C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M37.2 25 C37.8 18.4 33 16.2 30.8 21" fill="#8A4A2C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
   <ellipse cx="24" cy="34.2" rx="7.6" ry="4.4" fill="#E2C4A4"/>

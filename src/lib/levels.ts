@@ -108,8 +108,8 @@ const HEADLINES: Record<string, string> = {
   L76: "CEDAR CUT",
   L77: "NEEDLE GAP",
   L78: "RESIN STOP",
-  L79: "QUILL CUT",
-  L80: "PARCH GAP",
+  L79: "NIB CUT",
+  L80: "VELLUM GAP",
   L81: "STAMP STOP",
 };
 
@@ -191,8 +191,8 @@ const HINTS: Record<string, string> = {
   L76: "Cedar cut — cedar the route onto orange.",
   L77: "Needle gap — orange house off the Cedar (3,0) seat.",
   L78: "Resin stop — orange/black resin stops; not a Step Off twin.",
-  L79: "Quill cut — quill the route onto orange.",
-  L80: "Parch gap — parchment gray gap after the Steve beat.",
+  L79: "Nib cut — nib the route onto orange.",
+  L80: "Vellum gap — vellum gray gap after the Cocoa beat.",
   L81: "Stamp stop — orange/black stamp stops; not adjacent.",
 };
 

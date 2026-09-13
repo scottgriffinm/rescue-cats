@@ -1609,18 +1609,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [0, 1],
-      [3, 2],
-      [1, 5],
-      [3, 0]
+      [1, 1],
+      [2, 2],
+      [3, 4],
+      [1, 5]
     ],
     cats: [
-      ["cat_orange", 2, 5],
-      ["cat_gray", 1, 4]
+      ["cat_orange", 0, 5],
+      ["cat_gray", 4, 1]
     ],
     gates: [
-      ["gate_orange", 5, 2],
-      ["gate_gray", 0, 0]
+      ["gate_orange", 1, 0],
+      ["gate_gray", 5, 3]
     ],
   },
   L80: {
@@ -1629,18 +1629,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [0, 2],
-      [4, 0],
-      [1, 3],
-      [1, 5]
+      [0, 3],
+      [0, 5],
+      [0, 0]
     ],
     cats: [
-      ["cat_orange", 5, 2],
-      ["cat_gray", 5, 1]
+      ["cat_orange", 0, 1],
+      ["cat_gray", 2, 3]
     ],
     gates: [
-      ["gate_orange", 0, 0],
-      ["gate_gray", 5, 4]
+      ["gate_orange", 1, 3],
+      ["gate_gray", 5, 0]
     ],
   },
   L81: {
@@ -2476,25 +2475,25 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_black", "n"],
   ],
   L79: [
-    ["cat_orange", "e"],
     ["cat_orange", "n"],
-    ["cat_gray", "e"],
     ["cat_gray", "n"],
-    ["cat_orange", "s"],
+    ["cat_gray", "w"],
+    ["cat_orange", "e"],
+    ["cat_gray", "e"],
     ["cat_gray", "s"],
     ["cat_gray", "w"],
     ["cat_gray", "n"],
-    ["cat_gray", "w"],
+    ["cat_gray", "e"],
   ],
   L80: [
-    ["cat_orange", "s"],
-    ["cat_orange", "w"],
-    ["cat_orange", "s"],
     ["cat_orange", "e"],
     ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
+    ["cat_orange", "s"],
     ["cat_orange", "w"],
-    ["cat_orange", "n"],
-    ["cat_orange", "w"],
+    ["cat_gray", "n"],
   ],
   L81: [
     ["cat_orange", "n"],
@@ -6394,8 +6393,8 @@ for (const level of LEVELS) {
 {
   // Ch4 Cocoa@78 + L79–L81 triad
   for (const [id, name] of [
-    ["L79", "Quill Cut"],
-    ["L80", "Parch Gap"],
+    ["L79", "Nib Cut"],
+    ["L80", "Vellum Gap"],
     ["L81", "Stamp Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
@@ -6427,6 +6426,8 @@ for (const level of LEVELS) {
   const cocoa72 = readFileSync(resolve("public/assets/cats/cocoa_loaf_72.svg"), "utf8");
   if (!cocoa48.includes("#A85E38") || !cocoa72.includes("#A85E38")) throw new Error("Cocoa loaf must use deep cocoa #A85E38");
   if (!cocoa48.includes("#E2C4A4") || !cocoa72.includes("#E2C4A4")) throw new Error("Cocoa loaf must use milk belly #E2C4A4");
+  if (!cocoa48.includes("#6F3A22") || !cocoa72.includes("#6F3A22")) throw new Error("Cocoa loaf must keep mocha mottling #6F3A22");
+  if (!cocoa48.includes("clipPath") || !cocoa72.includes("clipPath")) throw new Error("Cocoa loaf must clip mottling");
   if (furnitureGiftsForClear(78).length) throw new Error("Cocoa@78 must gift no furniture");
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const cocoa =/g) || []).length !== 1) throw new Error("YardScene must declare cocoa once");
@@ -6444,7 +6445,41 @@ for (const level of LEVELS) {
   if (chipsForFriend("friend_022").join(",") !== "Coral,Bloom,Petal") throw new Error("Coral chips untouched");
   if (chipsForFriend("friend_021").join(",") !== "Velvet,Plush,Dove") throw new Error("Velvet chips untouched");
   if (SLICE_UNLOCKS[81]) throw new Error("no friend_027 @81 this slice");
-  console.log("Ch4 Cocoa@78 + L79–L81 ok · chips Cocoa/Mocha/Fudge · Quill Cut / Parch Gap / Stamp Stop · Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Cocoa@78 + L79–L81 ok · chips Cocoa/Mocha/Fudge · Nib Cut / Vellum Gap / Stamp Stop · Steve/Maple/Blue/Coral/Velvet/Bean locked");
+}
+
+
+{
+  // Rival Cocoa Conditional — L79/L80 Quill/Parch kills
+  const l79 = LEVELS.find((row) => row.id === "L79")!;
+  const l80 = LEVELS.find((row) => row.id === "L80")!;
+  const l81 = LEVELS.find((row) => row.id === "L81")!;
+  if (l81.name !== "Stamp Stop") throw new Error("L81 Stamp Stop must stay");
+  if (l79.name !== "Nib Cut") throw new Error("L79 must be Nib Cut");
+  if (l80.name !== "Vellum Gap") throw new Error("L80 must be Vellum Gap");
+  const old = new Set(["0,0/5,2", "0,0/5,4"]);
+  for (const level of [l79, l80]) {
+    const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+    if (old.has(pair)) throw new Error(`${level.id} still on old Quill/Parch gates`);
+    if (/\b(hold|park|close|quill|parch)\b/i.test(level.name)) {
+      throw new Error(`${level.id} must not keep Quill/Parch/Hold*`);
+    }
+  }
+  const orange79 = l79.gates.find((g) => g.id === "gate_orange" || g.color === "orange");
+  if (orange79 && orange79.x === 5 && orange79.y === 2) {
+    throw new Error("L79 orange must leave (5,2)");
+  }
+  if (shippedFriendForClear(78)?.friendId !== "friend_026") throw new Error("Cocoa@78 Pass must stand");
+  if (SLICE_UNLOCKS[78] !== "friend_026") throw new Error("SLICE_UNLOCKS[78] friend_026 stays");
+  if (chipsForFriend("friend_026").join(",") !== "Cocoa,Mocha,Fudge") throw new Error("Cocoa chips untouched");
+  if (SLICE_UNLOCKS[81]) throw new Error("no friend_027 / Linen @81");
+  if (shippedFriendForClear(75)?.friendId !== "friend_025") throw new Error("Steve@75 locked");
+  if (shippedFriendForClear(72)?.friendId !== "friend_024") throw new Error("Maple@72 locked");
+  if (shippedFriendForClear(69)?.friendId !== "friend_023") throw new Error("Blue@69 locked");
+  if (shippedFriendForClear(66)?.friendId !== "friend_022") throw new Error("Coral@66 locked");
+  if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 locked");
+  if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 locked");
+  console.log("Rival rewrite L79/L80 ok · Nib Cut · Vellum Gap · L81 Stamp Stop · Cocoa Pass · no Linen/friend_027");
 }
 
 console.log("All authored boards ok");
