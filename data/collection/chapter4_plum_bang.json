@@ -4,7 +4,7 @@
   "friend_id": "friend_033",
   "unlock_clear": 99,
   "personality": "Jammy",
-  "display_line": "Dusted with bloom. Already claimed the jam jar sill.",
+  "display_line": "Plum-black gloss. Already claimed the jam jar sill.",
   "default_name": "Plum",
   "tier": "C",
   "color": "Purple",
@@ -27,7 +27,7 @@
   },
   "bang_copy": {
     "friend_033": [
-      "{Name}: Dusted with bloom. Already claimed the jam jar sill.",
+      "{Name}: Plum-black gloss. Already claimed the jam jar sill.",
       "{Name}: Jammy. Soft. Slightly sticky about personal space."
     ]
   },

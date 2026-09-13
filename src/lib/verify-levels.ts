@@ -7818,6 +7818,8 @@ for (const level of LEVELS) {
   if (plum.unlockClear !== 99) throw new Error("Plum unlockClear must be 99");
   if (plum.phenotype.artKit !== "plum") throw new Error("Plum artKit must be plum");
   if (plum.phenotype.personality !== "Jammy") throw new Error("Plum personality must be Jammy");
+  if (/bloom/i.test(plum.displayLine || "")) throw new Error("Plum displayLine must not mention bloom after plum-black recast");
+  if (!/plum-black gloss/i.test(plum.displayLine || "")) throw new Error("Plum displayLine must lead with plum-black gloss");
   if (plum.phenotype.boardColor !== "black") throw new Error("Plum boardColor must be black");
   if (chipsForFriend("friend_033").join(",") !== "Plum,Damson,Stone") {
     throw new Error(`Plum chips must be Plum/Damson/Stone, got ${chipsForFriend("friend_033").join(",")}`);
