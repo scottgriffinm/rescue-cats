@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { PRODUCT_NAME } from "@/lib/constants";
 import { Fredoka, Nunito } from "next/font/google";
 import { SaveProvider } from "@/components/providers/SaveProvider";
 import "./globals.css";
@@ -14,7 +15,7 @@ const fredoka = Fredoka({
 });
 
 export const metadata: Metadata = {
-  title: "Rescue Cats",
+  title: PRODUCT_NAME,
   description:
     "A paper-yard puzzle game: slide cats home, name a friend, and keep them on a cream porch.",
   icons: { icon: "/icon.svg" },
