@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_blue_bang",
+  "status": "READY",
+  "friend_id": "friend_023",
+  "unlock_clear": 69,
+  "personality": "Cool",
+  "display_line": "Cool as a porch shadow at noon. Already measuring the fence.",
+  "default_name": "Blue",
+  "tier": "B",
+  "color": "Gray",
+  "pattern": "Mackerel",
+  "art": {
+    "loaf_48": "/assets/cats/blue_loaf_48.svg",
+    "loaf_72": "/assets/cats/blue_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "blue"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Blue", "Silver", "Steel"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_023": [
+      "{Name}: Cool as a porch shadow at noon. Already measuring the fence.",
+      "{Name}: Arrived like weather. The posts are acceptable."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 69,
+    "sku_id": null,
+    "note": "Ch4 prep. No gift. Avoid Coral/Velvet/Biscuit-Mochi pools. Bean parade stands. No Pebble."
+  }
+}

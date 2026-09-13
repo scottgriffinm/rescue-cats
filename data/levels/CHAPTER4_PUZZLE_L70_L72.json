@@ -1,0 +1,211 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "READY \u2014 ship after Coral Rival Pass; friend_023 Blue@69",
+  "source": "Chapter 4 continuation after Coral@69 / friend_023",
+  "chapter": 4,
+  "title": "Chapter 4 boards L70\u2013L72 (Blue@69 ready)",
+  "notes": "READY for after Coral Rival Pass. Blue@69 friend_023. Shoal Cut / Anemone Gap / Harbor Stop \u2014 distinct from Tide/Plush/Dusk and Curl/Wedge/Peg Split. No farm pairs. No Hold*/Park*/Close. No Span Cut (3,-4) deltas.",
+  "levels": [
+    {
+      "id": "L70",
+      "name": "Shoal Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_shoal_cut_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 3
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 0,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 0,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "shoal_cut_gray",
+      "ascii": "G....#\n#.....\n......\n.#...o\n.O....\ng....."
+    },
+    {
+      "id": "L71",
+      "name": "Anemone Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_anemone_gap_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 1,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 3,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "anemone_gap_gray",
+      "ascii": "..O#..\n....o.\n....#.\n#.....\n.g.G..\n.#...."
+    },
+    {
+      "id": "L72",
+      "name": "Harbor Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_harbor_stop_black",
+      "walls": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 0,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 3,
+          "y": 2,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "harbor_stop_black",
+      "ascii": "....o.\n....##\n#..b..\n...#..\nB.#...\nO....."
+    }
+  ],
+  "teaches": {
+    "L70": "Shoal Cut \u2014 shoal the route onto orange",
+    "L71": "Anemone Gap \u2014 gray anemone gap after Coral beat",
+    "L72": "Harbor Stop \u2014 orange/black harbor stops; not adjacent"
+  },
+  "solver": {
+    "min_slides": {
+      "L70": 9,
+      "L71": 10,
+      "L72": 9
+    }
+  }
+}

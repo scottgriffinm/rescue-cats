@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="blue-loaf-48">
+      <ellipse cx="24" cy="28" rx="16" ry="12"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="28" rx="16" ry="12" fill="#7B8896" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#blue-loaf-48)" fill="none" stroke="#4E5B68" stroke-width="2" stroke-linecap="round">
+    <path d="M20 18 L22.2 22.5 L24 19.2 L25.8 22.5 L28 18"/>
+    <path d="M14 24 C16 28 16 32 14 36"/>
+    <path d="M19.5 23 C21.4 29 21.4 33 19.5 38"/>
+    <path d="M28.5 23 C26.6 29 26.6 33 28.5 38"/>
+    <path d="M34 24 C32 28 32 32 34 36"/>
+  </g>
+  <path d="M12 20 C12 14 16 12 18 16" fill="#5E6A78" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36 20 C36 14 32 12 30 16" fill="#5E6A78" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="32.4" rx="7" ry="5.2" fill="#C5D0D8"/>
+  <circle cx="18" cy="26" r="1.6" fill="#2B2A28"/>
+  <circle cx="28" cy="26" r="1.6" fill="#2B2A28"/>
+  <path d="M38 32 C42 30 44 34 40 36" fill="none" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/>
+</svg>
