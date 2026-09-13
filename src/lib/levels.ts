@@ -23,6 +23,7 @@ import chapter4a from "../../data/levels/CHAPTER4_PUZZLE_L64_L66.json";
 import chapter4b from "../../data/levels/CHAPTER4_PUZZLE_L67_L69.json";
 import chapter4c from "../../data/levels/CHAPTER4_PUZZLE_L70_L72.json";
 import chapter4d from "../../data/levels/CHAPTER4_PUZZLE_L73_L75.json";
+import chapter4e from "../../data/levels/CHAPTER4_PUZZLE_L76_L78.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -103,6 +104,9 @@ const HEADLINES: Record<string, string> = {
   L73: "GLINT CUT",
   L74: "FERN GAP",
   L75: "EMBER STOP",
+  L76: "CEDAR CUT",
+  L77: "POLLEN GAP",
+  L78: "SAP STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -180,6 +184,9 @@ const HINTS: Record<string, string> = {
   L73: "Glint cut — glint the route onto orange.",
   L74: "Fern gap — ferned gray gap after the Blue beat.",
   L75: "Ember stop — orange/black ember stops; not adjacent.",
+  L76: "Cedar cut — cedar the route onto orange.",
+  L77: "Pollen gap — pollen gray gap after the Maple beat.",
+  L78: "Sap stop — orange/black sap stops; not adjacent.",
 };
 
 type RawLevel = {
@@ -258,6 +265,7 @@ const authored = [
   ...chapter4b.levels,
   ...chapter4c.levels,
   ...chapter4d.levels,
+  ...chapter4e.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_steve_bang",
+  "status": "READY",
+  "friend_id": "friend_025",
+  "unlock_clear": 75,
+  "personality": "Casual",
+  "display_line": "Treats the porch like office hours. Already checked the fountain.",
+  "default_name": "Steve",
+  "tier": "C",
+  "color": "Black",
+  "pattern": "Bicolor",
+  "art": {
+    "loaf_48": "/assets/cats/steve_loaf_48.svg",
+    "loaf_72": "/assets/cats/steve_loaf_72.svg",
+    "board_color": "black",
+    "art_kit": "steve"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Steve", "Bob", "Ned"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_025": [
+      "{Name}: Treats the porch like office hours. Already checked the fountain.",
+      "{Name}: Casual. Capable. Slightly judgmental about the scratcher."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 75,
+    "sku_id": null,
+    "note": "Ch4 prep only. No gift. Avoid Maple/Blue/Coral/Velvet/Biscuit-Mochi/Nigel/Donna pools. Bean parade stands. No Pebble."
+  }
+}
