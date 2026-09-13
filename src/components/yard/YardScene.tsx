@@ -528,7 +528,7 @@ export function YardScene({
           style={{ width: roostW, left: "48%", top: "58%" }}
         >
           <FriendSprite
-            kit={friendById(coral.friendId)?.phenotype.artKit ?? "mochi"}
+            kit={friendById(coral.friendId)?.phenotype.artKit ?? "coral"}
             size={px}
             className={loafClass}
           />

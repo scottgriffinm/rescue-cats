@@ -3,7 +3,8 @@
   "status": "FROZEN",
   "canonical": true,
   "notes": {
-    "ceo_override": "Mango unlocks at onClear(3), not clear 1. Cats 1–20 at clears 3,6,9,…,60. Ignore deprecated collection_v1_pack.json. No Pebble.",
+    "ceo_override": "Mango unlocks at onClear(3), not clear 1. Cats 1–20 at clears 3,6,9,…,60. Ignore deprecated collection_v1_pack.json. No Pebble. Extended: Coral@66 (friend_022) via chapter4_coral_bang.json — Bloom / coral kit.",
+    "ceo_ch4_coral": "2026-09-13 CEO lock: friend_022 Coral@66 Orange/Solid Bloom art_kit coral chips Coral/Bloom/Petal. Not mochi/Sweet/Cream. Boards L67–L69 Tide Cut / Plush Gap / Dusk Peg stand. No Pebble. No friend_023.",
     "ss_rarity": "milestone-first (not seasonal)",
     "hearts": "soft Hearts only — no IAP / Heart packs in this slice",
     "naming": "always allow duplicate names; never auto-merge"

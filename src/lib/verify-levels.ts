@@ -5729,8 +5729,8 @@ for (const level of LEVELS) {
   if (!coral) throw new Error("friend_022 missing from CATALOG");
   if (coral.defaultName !== "Coral") throw new Error("default name must be Coral");
   if (coral.unlockClear !== 66) throw new Error("Coral unlockClear must be 66");
-  if (coral.phenotype.artKit !== "mochi") throw new Error("Coral artKit must be mochi");
-  if (coral.phenotype.personality !== "Sweet") throw new Error("Coral personality must be Sweet");
+  if (coral.phenotype.artKit !== "coral") throw new Error("Coral artKit must be coral");
+  if (coral.phenotype.personality !== "Bloom") throw new Error("Coral personality must be Bloom");
   if (coral.phenotype.boardColor !== "orange") throw new Error("Coral boardColor must be orange");
   if (chipsForFriend("friend_022").join(",") !== "Coral,Bloom,Petal") {
     throw new Error(`Coral chips must be Coral/Bloom/Petal, got ${chipsForFriend("friend_022").join(",")}`);
@@ -5739,10 +5739,10 @@ for (const level of LEVELS) {
     /* Biscuit may list Mochi among chips — soft: ensure Coral does not steal it */
   }
   if (chipsForFriend("friend_022").includes("Mochi")) throw new Error("Coral must not use Biscuit Mochi chip");
-  const coral48 = readFileSync(resolve("public/assets/cats/mochi_loaf_48.svg"), "utf8");
-  const coral72 = readFileSync(resolve("public/assets/cats/mochi_loaf_72.svg"), "utf8");
-  if (!coral48.includes("#E9B7A6") || !coral72.includes("#E9B7A6")) throw new Error("Coral loaf must use cream #E9B7A6");
-  if (!coral48.includes("#F6DDD2") || !coral72.includes("#F6DDD2")) throw new Error("Coral loaf must use belly #F6DDD2");
+  const coral48 = readFileSync(resolve("public/assets/cats/coral_loaf_48.svg"), "utf8");
+  const coral72 = readFileSync(resolve("public/assets/cats/coral_loaf_72.svg"), "utf8");
+  if (!coral48.includes("#E07A5F") || !coral72.includes("#E07A5F")) throw new Error("Coral loaf must use #E07A5F");
+  if (!coral48.includes("#F3E6D8") || !coral72.includes("#F3E6D8")) throw new Error("Coral loaf must use cream belly #F3E6D8");
   if (furnitureGiftsForClear(66).length) throw new Error("Coral@66 must gift no furniture");
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const coral =/g) || []).length !== 1) throw new Error("YardScene must declare coral once");
