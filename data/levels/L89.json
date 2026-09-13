@@ -1,31 +1,23 @@
 {
   "id": "L89",
-  "name": "Anise Gap",
+  "name": "Cumin Gap",
   "width": 6,
   "height": 6,
   "moveBudget": 11,
   "nudges": 3,
   "colorLocks": true,
-  "templateId": "LT02_LT08_anise_gap_black",
+  "templateId": "LT02_LT08_cumin_gap_black",
   "walls": [
     {
-      "x": 0,
-      "y": 1
+      "x": 5,
+      "y": 5
+    },
+    {
+      "x": 2,
+      "y": 5
     },
     {
       "x": 4,
-      "y": 0
-    },
-    {
-      "x": 4,
-      "y": 1
-    },
-    {
-      "x": 1,
-      "y": 4
-    },
-    {
-      "x": 1,
       "y": 3
     }
   ],
@@ -33,15 +25,15 @@
   "cats": [
     {
       "id": "cat_orange",
-      "x": 0,
-      "y": 0,
+      "x": 1,
+      "y": 3,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "cat_black",
-      "x": 1,
-      "y": 5,
+      "x": 2,
+      "y": 0,
       "color": "black",
       "colorId": "color_black"
     }
@@ -49,18 +41,18 @@
   "gates": [
     {
       "id": "gate_orange",
-      "x": 3,
-      "y": 2,
+      "x": 0,
+      "y": 0,
       "color": "orange",
       "colorId": "color_orange"
     },
     {
       "id": "gate_black",
-      "x": 2,
-      "y": 0,
+      "x": 3,
+      "y": 4,
       "color": "black",
       "colorId": "color_black"
     }
   ],
-  "teach": "anise_gap_black"
+  "teach": "cumin_gap_black"
 }

@@ -1800,18 +1800,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 1],
-      [2, 5],
-      [0, 4],
-      [2, 1]
+      [0, 0],
+      [4, 5],
+      [3, 0]
     ],
     cats: [
-      ["cat_orange", 0, 5],
-      ["cat_gray", 1, 3]
+      ["cat_orange", 4, 3],
+      ["cat_gray", 3, 2]
     ],
     gates: [
-      ["gate_orange", 2, 2],
-      ["gate_gray", 0, 3]
+      ["gate_orange", 5, 4],
+      ["gate_gray", 1, 0]
     ],
   },
   L89: {
@@ -1820,19 +1819,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [0, 1],
-      [4, 0],
-      [4, 1],
-      [1, 4],
-      [1, 3]
+      [5, 5],
+      [2, 5],
+      [4, 3]
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_black", 1, 5]
+      ["cat_orange", 1, 3],
+      ["cat_black", 2, 0]
     ],
     gates: [
-      ["gate_orange", 3, 2],
-      ["gate_black", 2, 0]
+      ["gate_orange", 0, 0],
+      ["gate_black", 3, 4]
     ],
   },
   L90: {
@@ -1841,19 +1838,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [4, 2],
-      [5, 0],
-      [0, 5],
-      [1, 0],
-      [3, 5]
+      [0, 2],
+      [2, 0],
+      [3, 2],
+      [1, 4]
     ],
     cats: [
-      ["cat_orange", 2, 2],
-      ["cat_gray", 3, 3]
+      ["cat_orange", 0, 0],
+      ["cat_gray", 3, 1]
     ],
     gates: [
-      ["gate_orange", 5, 1],
-      ["gate_gray", 2, 3]
+      ["gate_orange", 0, 1],
+      ["gate_gray", 3, 3]
     ],
   }
 };
@@ -2767,36 +2763,37 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "s"],
   ],
   L88: [
-    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_gray", "e"],
     ["cat_gray", "n"],
     ["cat_gray", "w"],
-    ["cat_orange", "n"],
-    ["cat_orange", "e"],
-    ["cat_gray", "e"],
-    ["cat_orange", "w"],
-    ["cat_gray", "w"],
     ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_orange", "e"],
   ],
   L89: [
+    ["cat_orange", "n"],
+    ["cat_black", "s"],
     ["cat_orange", "e"],
     ["cat_orange", "s"],
-    ["cat_orange", "e"],
-    ["cat_black", "w"],
-    ["cat_black", "n"],
+    ["cat_orange", "w"],
     ["cat_black", "e"],
-    ["cat_orange", "w"],
-    ["cat_black", "n"],
-  ],
-  L90: [
-    ["cat_orange", "w"],
-    ["cat_orange", "s"],
-    ["cat_gray", "s"],
-    ["cat_orange", "e"],
-    ["cat_gray", "n"],
-    ["cat_gray", "w"],
-    ["cat_gray", "s"],
     ["cat_orange", "e"],
     ["cat_orange", "n"],
+    ["cat_orange", "w"],
+  ],
+  L90: [
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_gray", "n"],
   ],
 };
 
@@ -6961,9 +6958,9 @@ for (const level of LEVELS) {
 {
   // Ch4 Ivory@87 + L88–L90 triad
   for (const [id, name] of [
-    ["L88", "Clove Cut"],
-    ["L89", "Anise Gap"],
-    ["L90", "Bay Stop"],
+    ["L88", "Nutmeg Cut"],
+    ["L89", "Cumin Gap"],
+    ["L90", "Sage Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -6992,9 +6989,11 @@ for (const level of LEVELS) {
   }
   const ivory48 = readFileSync(resolve("public/assets/cats/ivory_loaf_48.svg"), "utf8");
   const ivory72 = readFileSync(resolve("public/assets/cats/ivory_loaf_72.svg"), "utf8");
-  if (!ivory48.includes("#E4E0D8") || !ivory72.includes("#E4E0D8")) throw new Error("Ivory loaf must use paper-cream #E4E0D8");
-  if (!ivory48.includes("#F7F6F2") || !ivory72.includes("#F7F6F2")) throw new Error("Ivory loaf must use belly #F7F6F2");
-  if (!ivory48.includes("#C8C6C0") || !ivory72.includes("#C8C6C0")) throw new Error("Ivory loaf must use ear #C8C6C0");
+  if (!ivory48.includes("#EBE3C4") || !ivory72.includes("#EBE3C4")) throw new Error("Ivory loaf must use napkin #EBE3C4");
+  if (!ivory48.includes("#C4B896") || !ivory72.includes("#C4B896")) throw new Error("Ivory loaf must show lace weave #C4B896");
+  if (!ivory48.includes("#F3EBD0") || !ivory72.includes("#F3EBD0")) throw new Error("Ivory loaf must use belly #F3EBD0");
+  if (!ivory48.includes("#C9C09A") || !ivory72.includes("#C9C09A")) throw new Error("Ivory loaf must use ear #C9C09A");
+  if (!ivory48.includes("clipPath") || !ivory72.includes("clipPath")) throw new Error("Ivory loaf must clip lace weave");
   if (furnitureGiftsForClear(87).length) throw new Error("Ivory@87 must gift no furniture");
   const yardI = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardI.match(/const ivory =/g) || []).length !== 1) throw new Error("YardScene must declare ivory once");
@@ -7022,7 +7021,50 @@ for (const level of LEVELS) {
   if (/chalk|sill|cream|porcelain/i.test(chipsForFriend("friend_029").join(","))) {
     throw new Error("Ivory chips must stay Ivory/Lace/Sheer — not Chalk/Sill/Cream/Porcelain");
   }
-  console.log("Ch4 Ivory@87 + L88–L90 ok · chips Ivory/Lace/Sheer · Clove Cut / Anise Gap / Bay Stop · Umber/Twill/Flax kept · Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Ivory@87 + L88–L90 ok · chips Ivory/Lace/Sheer · Nutmeg Cut / Cumin Gap / Sage Stop · Umber/Twill/Flax kept · Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+}
+
+
+
+{
+  // Rival Ivory Conditional — L88–L90 Clove/Anise/Bay kill → Nutmeg/Cumin/Sage
+  const l88 = LEVELS.find((row) => row.id === "L88")!;
+  const l89 = LEVELS.find((row) => row.id === "L89")!;
+  const l90 = LEVELS.find((row) => row.id === "L90")!;
+  if (l88.name !== "Nutmeg Cut") throw new Error("L88 must be Nutmeg Cut");
+  if (l89.name !== "Cumin Gap") throw new Error("L89 must be Cumin Gap");
+  if (l90.name !== "Sage Stop") throw new Error("L90 must be Sage Stop");
+  if (/\b(hold|park|close|clove|anise|bay|clay)\b/i.test(l88.name + " " + l89.name + " " + l90.name)) {
+    throw new Error("L88–L90 must not keep Clove/Anise/Bay/Clay/Hold*");
+  }
+  const pair88 = l88.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  const pair89 = l89.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  const pair90 = l90.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (pair88 === "0,3/2,2") throw new Error("L88 still on old Clove Cut gates");
+  if (pair89 === "2,0/3,2") throw new Error("L89 still on old Anise Gap gates");
+  if (pair90 === "2,3/5,1") throw new Error("L90 still on old Bay Stop gates");
+  const delta = (level: typeof l88) => {
+    const orange = level.gates.find((g) => g.id === "gate_orange" || g.color === "orange")!;
+    const other = level.gates.find((g) => g !== orange)!;
+    return `(${orange.x - other.x},${orange.y - other.y})`;
+  };
+  if (delta(l88) === "(2,-1)") throw new Error("L88 still on killed delta (2,-1)/L64 Curl");
+  if (delta(l89) === "(1,2)") throw new Error("L89 still on killed delta (1,2)/L66 Peg");
+  if (delta(l90) === "(3,-2)") throw new Error("L90 still on killed delta (3,-2)/L73 Glint");
+  if (shippedFriendForClear(87)?.friendId !== "friend_029") throw new Error("Ivory@87 Pass must stand");
+  if (SLICE_UNLOCKS[87] !== "friend_029") throw new Error("SLICE_UNLOCKS[87] friend_029 stays");
+  if (chipsForFriend("friend_029").join(",") !== "Ivory,Lace,Sheer") throw new Error("Ivory chips untouched");
+  if (SLICE_UNLOCKS[90]) throw new Error("no friend_030 @90 — Clay gated");
+  if (shippedFriendForClear(84)?.friendId !== "friend_028") throw new Error("Juniper@84 locked");
+  if (shippedFriendForClear(81)?.friendId !== "friend_027") throw new Error("Linen@81 locked");
+  if (shippedFriendForClear(78)?.friendId !== "friend_026") throw new Error("Cocoa@78 locked");
+  if (shippedFriendForClear(75)?.friendId !== "friend_025") throw new Error("Steve@75 locked");
+  if (shippedFriendForClear(72)?.friendId !== "friend_024") throw new Error("Maple@72 locked");
+  if (shippedFriendForClear(69)?.friendId !== "friend_023") throw new Error("Blue@69 locked");
+  if (shippedFriendForClear(66)?.friendId !== "friend_022") throw new Error("Coral@66 locked");
+  if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 locked");
+  if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 locked");
+  console.log("Rival rewrite L88–L90 ok · Nutmeg Cut / Cumin Gap / Sage Stop · Ivory Pass · chips Ivory/Lace/Sheer · no Clay/friend_030");
 }
 
 console.log("All authored boards ok");

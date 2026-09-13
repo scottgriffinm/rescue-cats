@@ -120,9 +120,9 @@ const HEADLINES: Record<string, string> = {
   L85: "UMBER CUT",
   L86: "TWILL GAP",
   L87: "FLAX STOP",
-  L88: "CLOVE CUT",
-  L89: "ANISE GAP",
-  L90: "BAY STOP",
+  L88: "NUTMEG CUT",
+  L89: "CUMIN GAP",
+  L90: "SAGE STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -212,9 +212,9 @@ const HINTS: Record<string, string> = {
   L85: "Umber cut — umber the route onto orange.",
   L86: "Twill gap — twill black gap after the Linen beat.",
   L87: "Flax stop — orange/gray flax stops; not adjacent.",
-  L88: "Clove cut — clove the route onto orange.",
-  L89: "Anise gap — anise black gap after the Juniper beat.",
-  L90: "Bay stop — orange/gray bay stops; not adjacent.",
+  L88: "Nutmeg cut — nutmeg the route onto orange.",
+  L89: "Cumin gap — cumin black gap after the Ivory beat.",
+  L90: "Sage stop — orange/gray sage stops; not adjacent.",
 };
 
 type RawLevel = {

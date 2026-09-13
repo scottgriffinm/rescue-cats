@@ -1,9 +1,8 @@
 {
   "schema": "rescue_cats.level_pack.v1",
-  "status": "SHIP READY \u2014 Rival rewrite L88\u2013L90 (delta twins)",
-  "source": "Chapter 4 continuation after Juniper@87",
+  "source": "Rival Conditional \u2014 KILL ALL L88\u2013L90 (delta twins)",
   "chapter": 4,
-  "title": "Chapter 4 boards L88\u2013L90 (Rival rewrite)",
+  "title": "L88 Nutmeg Cut / L89 Cumin Gap / L90 Sage Stop",
   "notes": "L88 Clove Cut KILL \u2192 Nutmeg Cut (off delta (2,-1)/L64 Curl). L89 Anise Gap KILL \u2192 Cumin Gap (off delta (1,2)/L66 Peg + L12/L27). L90 Bay Stop KILL \u2192 Sage Stop (off delta (3,-2)/L73 Glint). Exact cells unique is NOT enough \u2014 deltas unique vs shipped. Ivory collect Pass stands; Clay@90 gated until boards+coat Pass.",
   "levels": [
     {
@@ -196,5 +195,10 @@
       "L89": 9,
       "L90": 9
     }
+  },
+  "killed_deltas": {
+    "L88": "(2,-1)",
+    "L89": "(1,2)",
+    "L90": "(3,-2)"
   }
 }
