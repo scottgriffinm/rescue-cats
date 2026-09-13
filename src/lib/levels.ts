@@ -92,9 +92,9 @@ const HEADLINES: Record<string, string> = {
   L64: "CURL PATH",
   L65: "WEDGE GAP",
   L66: "PEG SPLIT",
-  L67: "TIDE CUT",
-  L68: "PLUSH GAP",
-  L69: "DUSK PEG",
+  L67: "RIPPLE CUT",
+  L68: "MOSS GAP",
+  L69: "INK STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -163,9 +163,9 @@ const HINTS: Record<string, string> = {
   L64: "Curl path onto orange — not a Span Cut twin.",
   L65: "Wedge gap — gray seats east, not an L64 translate.",
   L66: "Peg split on far corners — dual habits miss.",
-  L67: "Tide cut — gray drifts before the orange seats.",
-  L68: "Plush gap — leave room, then commit.",
-  L69: "Dusk peg on the black house — offset habits miss.",
+  L67: "Ripple cut — slide the gray before the orange docks.",
+  L68: "Moss gap — leave the seam, then commit.",
+  L69: "Ink stop on the black house — offset habits miss.",
 };
 
 type RawLevel = {
