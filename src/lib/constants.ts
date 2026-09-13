@@ -2,7 +2,7 @@ export const SAVE_KEY = "rescue-cats.save.v2";
 export const STARTING_LIVES = 3;
 export const STARTING_TICKETS = 1;
 export const MAX_NAME_LENGTH = 16;
-export const PRODUCT_NAME = "Rescue Cats";
+export const PRODUCT_NAME = "Maddie & Liz’s Rescue";
 export const TEMPLATE_ID = "LT01_teach_slide";
 
 export const ART_KIT_PATH: Record<

@@ -19,7 +19,7 @@ import {
   shopUnlocked,
   withName,
 } from "@/lib/collection";
-import { FIRST_NIGHT_BANG_MS } from "@/lib/constants";
+import { FIRST_NIGHT_BANG_MS, PRODUCT_NAME } from "@/lib/constants";
 import { LEVELS, nextLevel } from "@/lib/levels";
 
 /** Parade cadence chips — clears 3…60 → Mango…Bean (not one dot per board). */
@@ -144,7 +144,8 @@ export function YardScreen() {
           PORCH / LAWN
         </p>
         <h1 className="mt-1 font-display text-[1.85rem] leading-none tracking-wide sm:text-[2.1rem]">
-          RESCUE <span className="text-clay">CATS</span>
+          {PRODUCT_NAME.slice(0, PRODUCT_NAME.lastIndexOf(" "))}{" "}
+          <span className="text-clay">{PRODUCT_NAME.slice(PRODUCT_NAME.lastIndexOf(" ") + 1)}</span>
         </h1>
         <div className="mt-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs text-ink/55">
           <ComfortMeter value={comfort} pulseKey={comfortPulse} />
