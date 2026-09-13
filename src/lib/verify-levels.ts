@@ -1356,17 +1356,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 0],
-      [1, 3],
-      [1, 5]
+      [4, 0],
+      [5, 5],
+      [4, 1]
     ],
     cats: [
-      ["cat_orange", 3, 2],
-      ["cat_gray", 1, 0]
+      ["cat_orange", 3, 4],
+      ["cat_gray", 4, 5]
     ],
     gates: [
-      ["gate_orange", 0, 2],
-      ["gate_gray", 4, 1]
+      ["gate_orange", 3, 2],
+      ["gate_gray", 4, 2]
     ],
   },
   L68: {
@@ -1375,18 +1375,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [2, 5],
-      [1, 2],
-      [5, 5],
-      [1, 3]
+      [5, 3],
+      [5, 4],
+      [4, 0],
+      [5, 2]
     ],
     cats: [
-      ["cat_orange", 0, 0],
-      ["cat_gray", 1, 4]
+      ["cat_orange", 5, 5],
+      ["cat_gray", 2, 4]
     ],
     gates: [
-      ["gate_orange", 2, 4],
-      ["gate_gray", 1, 1]
+      ["gate_orange", 0, 1],
+      ["gate_gray", 5, 0]
     ],
   },
   L69: {
@@ -1395,17 +1395,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [0, 5],
-      [1, 4],
-      [3, 0]
+      [2, 3],
+      [0, 2],
+      [2, 0]
     ],
     cats: [
-      ["cat_orange", 0, 4],
-      ["cat_black", 1, 1]
+      ["cat_orange", 0, 0],
+      ["cat_black", 3, 4]
     ],
     gates: [
-      ["gate_orange", 4, 0],
-      ["gate_black", 4, 5]
+      ["gate_orange", 3, 3],
+      ["gate_black", 1, 0]
     ],
   }
 };
@@ -2091,39 +2091,37 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "s"],
   ],
   L67: [
-    ["cat_orange", "w"],
-    ["cat_gray", "s"],
-    ["cat_gray", "e"],
-    ["cat_orange", "e"],
-    ["cat_gray", "n"],
     ["cat_gray", "w"],
     ["cat_gray", "n"],
     ["cat_gray", "e"],
     ["cat_gray", "s"],
-    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
   ],
   L68: [
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
     ["cat_orange", "w"],
     ["cat_orange", "n"],
     ["cat_gray", "w"],
     ["cat_gray", "n"],
-    ["cat_gray", "e"],
     ["cat_orange", "s"],
-    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
+    ["cat_gray", "e"],
+    ["cat_gray", "n"],
   ],
   L69: [
-    ["cat_orange", "n"],
-    ["cat_orange", "e"],
     ["cat_orange", "s"],
     ["cat_orange", "e"],
     ["cat_orange", "n"],
-    ["cat_orange", "e"],
-    ["cat_black", "e"],
-    ["cat_orange", "n"],
     ["cat_orange", "w"],
-    ["cat_black", "s"],
+    ["cat_orange", "s"],
+    ["cat_black", "w"],
+    ["cat_black", "n"],
+    ["cat_black", "e"],
+    ["cat_black", "n"],
   ],
 };
 
@@ -5706,9 +5704,9 @@ for (const level of LEVELS) {
 {
   // Ch4 L67–L69 triad + Coral@66 unlock
   for (const [id, name] of [
-    ["L67", "Tide Cut"],
-    ["L68", "Plush Gap"],
-    ["L69", "Dusk Peg"],
+    ["L67", "Ripple Cut"],
+    ["L68", "Moss Gap"],
+    ["L69", "Ink Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -5751,7 +5749,29 @@ for (const level of LEVELS) {
   if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 must stay");
   if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 parade lock");
   if (SLICE_UNLOCKS[69]) throw new Error("no unlock @69 this slice");
-  console.log("Ch4 Coral@66 + L67–L69 ok · chips Coral/Bloom/Petal · Tide Cut / Plush Gap / Dusk Peg · Velvet/Bean locked");
+  console.log("Ch4 Coral@66 + L67–L69 ok · chips Coral/Bloom/Petal · Ripple Cut / Moss Gap / Ink Stop · Velvet/Bean locked");
+}
+
+
+{
+  // Rival Coral Conditional — L67/L68/L69 delta farms
+  const l67 = LEVELS.find((row) => row.id === "L67")!;
+  const l68 = LEVELS.find((row) => row.id === "L68")!;
+  const l69 = LEVELS.find((row) => row.id === "L69")!;
+  if (l67.name !== "Ripple Cut") throw new Error("L67 must be Ripple Cut");
+  if (l68.name !== "Moss Gap") throw new Error("L68 must be Moss Gap");
+  if (l69.name !== "Ink Stop") throw new Error("L69 must be Ink Stop");
+  const old = new Set(["0,2/4,1", "1,1/2,4", "4,0/4,5"]);
+  for (const level of [l67, l68, l69]) {
+    const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+    if (old.has(pair)) throw new Error(`${level.id} still on old Tide/Plush/Dusk gates`);
+    if (/\b(hold|park|close|tide|plush|dusk)\b/i.test(level.name)) {
+      throw new Error(`${level.id} must not keep Tide/Plush/Dusk/Hold*`);
+    }
+  }
+  if (shippedFriendForClear(66)?.friendId !== "friend_022") throw new Error("Coral@66 must stay");
+  if (SLICE_UNLOCKS[69]) throw new Error("Blue@69 / friend_023 gated");
+  console.log("Rival rewrite L67/L68/L69 ok · Ripple Cut · Moss Gap · Ink Stop · Coral locked · Blue gated");
 }
 
 console.log("All authored boards ok");
