@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_coral_bang",
+  "status": "READY",
+  "friend_id": "friend_022",
+  "unlock_clear": 66,
+  "personality": "Bloom",
+  "display_line": "Warm as porch light. Already picked the sunniest brick.",
+  "default_name": "Coral",
+  "tier": "B",
+  "color": "Orange",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/coral_loaf_48.svg",
+    "loaf_72": "/assets/cats/coral_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "coral"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Coral", "Bloom", "Petal"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_022": [
+      "{Name}: Warm as porch light. Already picked the sunniest brick.",
+      "{Name}: Brought the afternoon with them. The porch blushed."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 66,
+    "sku_id": null,
+    "note": "Ch4 second rescue. No gift. Parade through Bean@60 + Velvet@63 stand. No Pebble. Soft hearts only."
+  }
+}
