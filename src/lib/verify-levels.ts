@@ -6907,8 +6907,12 @@ for (const level of LEVELS) {
   if (chipsForFriend("friend_022").includes("Mochi")) throw new Error("Coral must not use Biscuit Mochi chip");
   const coral48 = readFileSync(resolve("public/assets/cats/coral_loaf_48.svg"), "utf8");
   const coral72 = readFileSync(resolve("public/assets/cats/coral_loaf_72.svg"), "utf8");
-  if (!coral48.includes("#E07A5F") || !coral72.includes("#E07A5F")) throw new Error("Coral loaf must use #E07A5F");
-  if (!coral48.includes("#F3E6D8") || !coral72.includes("#F3E6D8")) throw new Error("Coral loaf must use cream belly #F3E6D8");
+  if (!coral48.includes("#E9B7A6") || !coral72.includes("#E9B7A6")) throw new Error("Coral loaf must use cream coat #E9B7A6");
+  if (!coral48.includes("#F3D0C4") || !coral72.includes("#F3D0C4")) throw new Error("Coral loaf must use sheen #F3D0C4");
+  if (!coral48.includes("#F6DDD2") || !coral72.includes("#F6DDD2")) throw new Error("Coral loaf must use belly #F6DDD2");
+  if (coral48.includes("#E07A5F") || coral72.includes("#E07A5F")) throw new Error("Coral loaf must not use Pumpkin-twin salmon #E07A5F");
+  if (coral48.includes("#E07A32") || coral72.includes("#E07A32")) throw new Error("Coral loaf must not use Pumpkin orange #E07A32");
+  if (coral48.includes("#D4A017") || coral72.includes("#D4A017")) throw new Error("Coral loaf must not use gold eyes #D4A017");
   if (furnitureGiftsForClear(66).length) throw new Error("Coral@66 must gift no furniture");
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const coral =/g) || []).length !== 1) throw new Error("YardScene must declare coral once");
@@ -6917,7 +6921,7 @@ for (const level of LEVELS) {
   if (shippedFriendForClear(63)?.friendId !== "friend_021") throw new Error("Velvet@63 must stay");
   if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 parade lock");
   if (SLICE_UNLOCKS[69] !== "friend_023") throw new Error("SLICE_UNLOCKS[69] must be friend_023");
-  console.log("Ch4 Coral@66 + L67–L69 ok · chips Coral/Bloom/Petal · Ripple Cut / Moss Gap / Ink Stop · Velvet/Bean locked");
+  console.log("Ch4 Coral@66 + L67–L69 ok · chips Coral/Bloom/Petal · cream #E9B7A6 + sheen #F3D0C4 · Ripple Cut / Moss Gap / Ink Stop · Velvet/Bean locked");
 }
 
 {
