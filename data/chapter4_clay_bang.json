@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_clay_bang",
+  "status": "READY",
+  "friend_id": "friend_030",
+  "unlock_clear": 90,
+  "personality": "Grounded",
+  "display_line": "Solid as the porch pots. Already leaning on the post.",
+  "default_name": "Clay",
+  "tier": "B",
+  "color": "Orange",
+  "pattern": "Solid",
+  "art": {
+    "loaf_48": "/assets/cats/clay_loaf_48.svg",
+    "loaf_72": "/assets/cats/clay_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "clay"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Clay", "Brick", "Terra"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_030": [
+      "{Name}: Solid as the porch pots. Already leaning on the post.",
+      "{Name}: Grounded. Warm. Not moving for anyone."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 90,
+    "sku_id": null,
+    "note": "Ch4 prep only. Clear-90 milestone. No gift. Avoid Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Ghost/Biscuit-Mochi pools. Bean parade stands. No Pebble."
+  }
+}
