@@ -1990,19 +1990,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [1, 1],
-      [4, 5],
-      [5, 0],
-      [0, 5],
+      [4, 2],
+      [2, 4],
+      [0, 3],
       [3, 5]
     ],
     cats: [
-      ["cat_orange", 1, 2],
-      ["cat_gray", 2, 3]
+      ["cat_orange", 1, 0],
+      ["cat_gray", 3, 2]
     ],
     gates: [
-      ["gate_orange", 5, 4],
-      ["gate_gray", 2, 4]
+      ["gate_orange", 0, 1],
+      ["gate_gray", 1, 5]
     ],
   },
   L98: {
@@ -2011,17 +2010,17 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [3, 1],
-      [2, 2],
-      [3, 0]
+      [2, 3],
+      [5, 3],
+      [2, 4]
     ],
     cats: [
-      ["cat_orange", 1, 1],
+      ["cat_orange", 2, 0],
       ["cat_black", 1, 3]
     ],
     gates: [
-      ["gate_orange", 4, 5],
-      ["gate_black", 4, 3]
+      ["gate_orange", 5, 5],
+      ["gate_black", 3, 5]
     ],
   },
   L99: {
@@ -2030,17 +2029,18 @@ const LOCKED: Record<string, LockedSpec> = {
     colorLocks: true,
     colors: true,
     walls: [
-      [5, 5],
-      [0, 5],
-      [3, 0]
+      [1, 2],
+      [3, 3],
+      [3, 4],
+      [0, 0]
     ],
     cats: [
-      ["cat_orange", 4, 4],
-      ["cat_gray", 2, 4]
+      ["cat_orange", 0, 5],
+      ["cat_gray", 2, 5]
     ],
     gates: [
-      ["gate_orange", 4, 5],
-      ["gate_gray", 1, 2]
+      ["gate_orange", 4, 1],
+      ["gate_gray", 1, 1]
     ],
   }
 };
@@ -3050,37 +3050,39 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_gray", "n"],
   ],
   L97: [
-    ["cat_orange", "e"],
-    ["cat_orange", "s"],
-    ["cat_gray", "e"],
-    ["cat_orange", "n"],
-    ["cat_orange", "w"],
+    ["cat_gray", "n"],
     ["cat_gray", "w"],
-    ["cat_gray", "s"],
-    ["cat_gray", "e"],
-    ["cat_orange", "e"],
-  ],
-  L98: [
-    ["cat_black", "e"],
-    ["cat_orange", "s"],
-    ["cat_black", "s"],
-    ["cat_orange", "e"],
-    ["cat_orange", "n"],
-    ["cat_black", "n"],
-    ["cat_black", "w"],
-    ["cat_black", "s"],
-    ["cat_orange", "s"],
-  ],
-  L99: [
     ["cat_orange", "s"],
     ["cat_gray", "s"],
     ["cat_gray", "w"],
     ["cat_gray", "n"],
-    ["cat_orange", "w"],
     ["cat_orange", "n"],
+    ["cat_orange", "w"],
     ["cat_gray", "s"],
-    ["cat_orange", "s"],
+  ],
+  L98: [
+    ["cat_orange", "w"],
+    ["cat_black", "n"],
+    ["cat_black", "e"],
     ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_black", "w"],
+    ["cat_black", "s"],
+    ["cat_black", "e"],
+    ["cat_orange", "e"],
+  ],
+  L99: [
+    ["cat_gray", "n"],
+    ["cat_orange", "e"],
+    ["cat_gray", "e"],
+    ["cat_orange", "n"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
+    ["cat_gray", "e"],
+    ["cat_orange", "w"],
+    ["cat_gray", "n"],
+    ["cat_gray", "w"],
+    ["cat_gray", "s"],
   ],
 };
 
@@ -7549,18 +7551,18 @@ for (const level of LEVELS) {
 
 
 {
-  // Ch4 Fig@96 + L97–L99 triad (Cress/Rue/Mint — deltas (3,0)/(0,2)/(3,3); off Chive (4,5) / Lovage)
+  // Ch4 Fig@96 + L97–L99 triad (Kelp/Nori/Brine — deltas (1,4)/(2,0)/(3,0); Cress/Rue/Mint seat-farm kill)
   for (const [id, name] of [
-    ["L97", "Cress Cut"],
-    ["L98", "Rue Gap"],
-    ["L99", "Mint Stop"],
+    ["L97", "Kelp Cut"],
+    ["L98", "Nori Gap"],
+    ["L99", "Brine Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
     if (level.name !== name) throw new Error(`${id} must be ${name}`);
     if (!level.colorLocks) throw new Error(`${id} must lock colors`);
-    if (/\b(hold|park|close|pepper|tarragon|basil|pesto|herb)\b/i.test(level.name)) {
-      throw new Error(`${id} must not be Hold*/Park*/Close/Pepper/Tarragon/Basil`);
+    if (/\b(hold|park|close|pepper|tarragon|basil|pesto|herb|cress|rue|mint)\b/i.test(level.name)) {
+      throw new Error(`${id} must not be Hold*/Park*/Close/Pepper/Tarragon/Basil/Cress/Rue/Mint`);
     }
     const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
     if (pair === "3,2/3,3" || pair === "2,2/3,2" || pair === "2,3/3,3") {
@@ -7621,22 +7623,56 @@ for (const level of LEVELS) {
   if (SLICE_UNLOCKS[99]) throw new Error("no friend_033 @99 this slice");
   if (/pebble|Pebble/i.test(fig48 + fig72)) throw new Error("Fig art must not use Pebble");
   if (/basil|pesto|herb/i.test(fig48 + fig72)) throw new Error("Fig art must not collide Basil leaf marks");
-  // Deltas (3,0)/(0,2)/(3,3) — off Chive gray (4,5)
+  // Deltas (1,4)/(2,0)/(3,0) — kill Cress/Rue/Mint farms; off Dill (2,4) / Chive (4,5) / Lovage (0,2)
   const l97 = LEVELS.find((r) => r.id === "L97")!;
   const l98 = LEVELS.find((r) => r.id === "L98")!;
   const l99 = LEVELS.find((r) => r.id === "L99")!;
   const figGatePair = (level: typeof l97) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (figGatePair(l97) !== "2,4/5,4") throw new Error(`L97 gates must be delta (3,0) pair, got ${figGatePair(l97)}`);
-  if (figGatePair(l98) !== "4,3/4,5") throw new Error(`L98 gates must be delta (0,2) pair, got ${figGatePair(l98)}`);
-  if (figGatePair(l99) !== "1,2/4,5") throw new Error(`L99 gates must be delta (3,3) pair, got ${figGatePair(l99)}`);
+  if (figGatePair(l97) !== "0,1/1,5") throw new Error(`L97 gates must be delta (1,4) pair, got ${figGatePair(l97)}`);
+  if (figGatePair(l98) !== "3,5/5,5") throw new Error(`L98 gates must be delta (2,0) pair, got ${figGatePair(l98)}`);
+  if (figGatePair(l99) !== "1,1/4,1") throw new Error(`L99 gates must be delta (3,0) pair, got ${figGatePair(l99)}`);
   const l97Gray = l97.gates.find((g) => g.color === "gray" || g.id === "gate_gray");
-  if (l97Gray && l97Gray.x === 4 && l97Gray.y === 5) {
-    throw new Error("L97 must not reuse Chive gray seat (4,5)");
+  if (l97Gray && l97Gray.x === 2 && l97Gray.y === 4) {
+    throw new Error("L97 must not reuse Dill gray seat (2,4)");
+  }
+  for (const level of [l98, l99]) {
+    if (level.gates.some((g) => g.x === 4 && g.y === 5)) {
+      throw new Error(`${level.id} must not reuse Chive seat (4,5)`);
+    }
+  }
+  if (/cress|rue|mint/i.test([l97.name, l98.name, l99.name].join(","))) {
+    throw new Error("L97–L99 must not ship Cress/Rue/Mint");
   }
   if (ART_KIT_PATH.fig.loaf48 !== "/assets/cats/fig_loaf_48.svg") throw new Error("ART_KIT_PATH.fig loaf48");
   if (ART_KIT_PATH.fig.loaf72 !== "/assets/cats/fig_loaf_72.svg") throw new Error("ART_KIT_PATH.fig loaf72");
   if (ART_KIT_PATH.basil.loaf48 !== "/assets/cats/basil_loaf_48.svg") throw new Error("Basil kit must stay");
-  console.log("Ch4 Fig@96 + L97–L99 ok · chips Fig/Olive/Pit · dusty #C9B08C + pits #6A4A38 · Cress Cut / Rue Gap / Mint Stop · Chive kept · Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Fig@96 + L97–L99 ok · chips Fig/Olive/Pit · dusty #C9B08C + pits #6A4A38 · Kelp Cut / Nori Gap / Brine Stop · Chive kept · Basil/Clay/Ivory/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+}
+
+{
+  // Rival Fig Conditional — L97–L99 Cress/Rue/Mint seat-farm kills
+  const l97 = LEVELS.find((row) => row.id === "L97")!;
+  const l98 = LEVELS.find((row) => row.id === "L98")!;
+  const l99 = LEVELS.find((row) => row.id === "L99")!;
+  if (l97.name !== "Kelp Cut") throw new Error("L97 must be Kelp Cut");
+  if (l98.name !== "Nori Gap") throw new Error("L98 must be Nori Gap");
+  if (l99.name !== "Brine Stop") throw new Error("L99 must be Brine Stop");
+  const old = new Set(["2,4/5,4", "4,3/4,5", "1,2/4,5"]);
+  for (const level of [l97, l98, l99]) {
+    const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+    if (old.has(pair)) throw new Error(`${level.id} still on old Cress/Rue/Mint gates`);
+    if (/\b(hold|park|close|cress|rue|mint)\b/i.test(level.name)) {
+      throw new Error(`${level.id} must not keep Cress/Rue/Mint/Hold*`);
+    }
+  }
+  if (shippedFriendForClear(96)?.friendId !== "friend_032") throw new Error("Fig@96 must stay");
+  if (SLICE_UNLOCKS[96] !== "friend_032") throw new Error("SLICE_UNLOCKS[96] Fig locked");
+  if (SLICE_UNLOCKS[99]) throw new Error("no friend_033 @99");
+  if (chipsForFriend("friend_032").join(",") !== "Fig,Olive,Pit") throw new Error("Fig chips locked");
+  if (LEVELS.find((r) => r.id === "L94")?.name !== "Chive Cut") throw new Error("L94 Chive Cut locked");
+  if (shippedFriendForClear(93)?.friendId !== "friend_031") throw new Error("Basil@93 locked");
+  if (shippedFriendForClear(60)?.friendId !== "friend_020") throw new Error("Bean@60 parade lock");
+  console.log("Rival rewrite L97–L99 ok · Kelp Cut / Nori Gap / Brine Stop · Fig@96 Pass · no friend_033 / Pebble");
 }
 
 
