@@ -1,0 +1,208 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY \u2014 Ch4 OPEN",
+  "source": "Chapter 4 open \u2014 first triad after Bean finale",
+  "chapter": 4,
+  "title": "Chapter 4 boards L64\u2013L66",
+  "notes": "Ch4 OPEN. After L61\u2013L63 Bean finale \u2192 L64\u2013L66. No farmed gate pairs. No Hold*/Park*/Close. L61\u2013L63 untouched. No friend_021 invent. L10 off-path.",
+  "levels": [
+    {
+      "id": "L64",
+      "name": "Drift Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_drift_cut_gray",
+      "walls": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 0,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "drift_cut_gray",
+      "ascii": "......\n..#o.#\n...##.\n......\nO....G\ng...#."
+    },
+    {
+      "id": "L65",
+      "name": "Shelf Break",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_shelf_break_gray",
+      "walls": [
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 4,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 1,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "shelf_break_gray",
+      "ascii": ".....#\n..#.oO\n....#.\n....G.\n......\n.g...."
+    },
+    {
+      "id": "L66",
+      "name": "Peg Split",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_peg_split_black",
+      "walls": [
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 3,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 4,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "peg_split_black",
+      "ascii": ".O....\n......\n......\n..##b.\n...B..\n.....o"
+    }
+  ],
+  "teaches": {
+    "L64": "Drift Cut \u2014 drift the route onto orange past gray",
+    "L65": "Shelf Break \u2014 gray shelf breaks the easy lane",
+    "L66": "Peg Split \u2014 orange/black pegs split; not adjacent farm"
+  },
+  "solver": {
+    "min_slides": {
+      "L64": 9,
+      "L65": 9,
+      "L66": 9
+    }
+  },
+  "left_untouched": [
+    "L61",
+    "L62",
+    "L63"
+  ]
+}
