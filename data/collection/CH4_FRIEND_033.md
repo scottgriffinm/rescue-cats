@@ -10,11 +10,11 @@
 | unlock_clear | **99** |
 | default_name | **Plum** |
 | tier | C |
-| color / pattern | Purple / Solid (fruit plum + bloom dust) |
+| color / pattern | Purple / Solid (plum-black gloss — no bloom dust) |
 | personality | Jammy |
 | board_color | black |
-| art_kit | `plum` (deep fruit-purple loaf — not Velvet cool mauve, not Shadow black, not Cocoa brown, not Fig cream, not Coral petal, not Ghost pale) |
-| display_line | Dusted with bloom. Already claimed the jam jar sill. |
+| art_kit | `plum` (plum-black loaf `#2C1A24` + gloss `#5A3048` — not jammy `#7A3B5C`, no bloom, not Velvet/Shadow/Cocoa/Fig) |
+| display_line | Plum-black gloss. Already claimed the jam jar sill. |
 
 ## Chips
 **Plum / Damson / Stone**
@@ -23,7 +23,7 @@ Ban: Fig/Olive/Pit · Basil/Pesto/Herb · Clay/Brick/Terra · Ivory/Lace/Sheer �
 
 ## Bang
 ```
-"{Name}: Dusted with bloom. Already claimed the jam jar sill."
+"{Name}: Plum-black gloss. Already claimed the jam jar sill."
 "{Name}: Jammy. Soft. Slightly sticky about personal space."
 ```
 Yard: `{Name} claimed the jam jar sill.`

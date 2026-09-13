@@ -895,7 +895,7 @@ export const BASIL_NAMING_CHIPS: string[] = CHAPTER4_BASIL.naming.suggestion_chi
 /** Fig naming chips — dusty-cream + seed pits; ban Basil/Pesto/Herb and all prior pools. */
 export const FIG_NAMING_CHIPS: string[] = CHAPTER4_FIG.naming.suggestion_chips;
 
-/** Plum naming chips — fruit plum + bloom dust; ban Fig/Olive/Pit and all prior pools. */
+/** Plum naming chips — plum-black gloss; ban Fig/Olive/Pit and all prior pools. */
 export const PLUM_NAMING_CHIPS: string[] = CHAPTER4_PLUM.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
