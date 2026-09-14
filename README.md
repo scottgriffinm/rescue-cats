@@ -41,6 +41,7 @@ npm run verify:levels
 # node scripts/play-chapter4-ivy.mjs
 # node scripts/play-chapter4-nettle.mjs
 # node scripts/play-chapter4-sorrel.mjs
+# node scripts/play-chapter4-fennel.mjs
 ```
 
 ## Routes
