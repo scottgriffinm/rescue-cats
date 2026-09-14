@@ -1,0 +1,62 @@
+{
+  "id": "L116",
+  "name": "Zest Gap",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 11,
+  "nudges": 3,
+  "colorLocks": true,
+  "templateId": "LT02_LT08_zest_gap_black",
+  "walls": [
+    {
+      "x": 5,
+      "y": 0
+    },
+    {
+      "x": 3,
+      "y": 1
+    },
+    {
+      "x": 5,
+      "y": 1
+    },
+    {
+      "x": 4,
+      "y": 5
+    }
+  ],
+  "blockers": [],
+  "cats": [
+    {
+      "id": "cat_orange",
+      "x": 3,
+      "y": 2,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "cat_black",
+      "x": 2,
+      "y": 5,
+      "color": "black",
+      "colorId": "color_black"
+    }
+  ],
+  "gates": [
+    {
+      "id": "gate_orange",
+      "x": 5,
+      "y": 4,
+      "color": "orange",
+      "colorId": "color_orange"
+    },
+    {
+      "id": "gate_black",
+      "x": 3,
+      "y": 0,
+      "color": "black",
+      "colorId": "color_black"
+    }
+  ],
+  "teach": "zest_gap_black"
+}
