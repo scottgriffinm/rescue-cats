@@ -271,7 +271,7 @@ export function verifyChapter4Peony(solves: Record<string, Array<[string, Dir]>>
   const l178 = LEVELS.find((r) => r.id === "L178")!;
   const l179 = LEVELS.find((r) => r.id === "L179")!;
   const l180 = LEVELS.find((r) => r.id === "L180")!;
-  if (/wax|rose|tray|snow|velvet|dish|drift|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|bloom|citrus|earl|saucer|daisy|tea|cup|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pot|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|seed|frondlet|ledge|garnish|bed|gardenia|camellia|peony/i.test([l178.name, l179.name].join(","))) {
+  if (/\b(wax|rose|tray|snow|velvet|dish|drift|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|bloom|citrus|earl|saucer|daisy|tea|cup|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pot|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|seed|frondlet|ledge|garnish|bed|gardenia|camellia|peony)\b/i.test([l178.name, l179.name].join(","))) {
     throw new Error("L178–L179 must not reuse Wax/Rose/Tray/Snow/Velvet/Dish/Roselle/Punch/Sip/Cream/Blush/Cup/Bloom/Saucer/Peony and prior triad names");
   }
   const peonyGatePair = (level: typeof l178) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
