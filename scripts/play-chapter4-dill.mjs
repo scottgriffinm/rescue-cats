@@ -1,6 +1,6 @@
 /**
- * Chapter 4 beat: L126 → Parsley@126 naming, then L127–L129.
- * When Dill@129 is shipped, L129 clear awards Dill (pending). L10 stays off-path.
+ * Chapter 4 beat: L129 → Dill@129 naming, then L130–L132.
+ * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-parsley";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-dill";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -64,6 +64,7 @@ const PARADE = [
   ["friend_039", "Fennel", 117],
   ["friend_040", "Chervil", 120],
   ["friend_041", "Lovage", 123],
+  ["friend_042", "Parsley", 126],
 ];
 
 const completedIds = [
@@ -76,7 +77,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 115 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 118 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -102,7 +103,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Lovage claimed the rib bed."],
+  bubbles: ["Parsley claimed the garnish rail."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -151,23 +152,22 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L126`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("BED STOP"));
-  await shot(page, "01_l126_before_parsley");
+  await page.goto(`${BASE}/level/L129`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("GARNISH STOP"));
+  await shot(page, "01_l129_before_dill");
   await play(
     page,
     [
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowRight"],
+      ["orange", "ArrowLeft"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowRight"],
       ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowRight"],
     ],
     "New friend!",
   );
@@ -185,59 +185,58 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("parsley naming", modal);
+  console.log("dill naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Parsley prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Dill prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Fresh curl. Already claimed the garnish rail.") {
-    throw new Error(`Parsley display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft frond. Already claimed the pickle jar ledge.") {
+    throw new Error(`Dill display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Parsley,Curl,Sprig") {
-    throw new Error(`Parsley chips must be Parsley/Curl/Sprig, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Dill,Frondlet,Seed") {
+    throw new Error(`Dill chips must be Dill/Frondlet/Seed, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Parsley") ||
+    modal.chips.includes("Curl") ||
+    modal.chips.includes("Sprig") ||
     modal.chips.includes("Lovage") ||
-    modal.chips.includes("Stem") ||
-    modal.chips.includes("Rib") ||
-    modal.chips.includes("Chervil") ||
-    modal.chips.includes("Frill") ||
-    modal.chips.includes("Lace") ||
+    modal.chips.includes("Frond") ||
     modal.chips.includes("Fennel") ||
     modal.chips.includes("Pebble") ||
-    modal.chips.includes("Sorrel")
+    modal.chips.includes("Chervil")
   ) {
-    throw new Error("Parsley chips collided with Lovage/Chervil/Fennel/Sorrel/Pebble pools");
+    throw new Error("Dill chips collided with Parsley/Lovage/Fennel/Chervil/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/parsley_loaf_72.svg")) {
-    throw new Error(`Parsley hero missing parsley-leaf loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/dill_loaf_72.svg")) {
+    throw new Error(`Dill hero missing dill-frond loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/parsley_loaf_72.svg")) {
+    throw new Error("Dill hero must not use the Parsley loaf");
   }
   if (modal.hero.includes("/assets/cats/lovage_loaf_72.svg")) {
-    throw new Error("Parsley hero must not use the Lovage loaf");
+    throw new Error("Dill hero must not use the Lovage loaf");
   }
   if (modal.hero.includes("/assets/cats/chervil_loaf_72.svg")) {
-    throw new Error("Parsley hero must not use the Chervil loaf");
+    throw new Error("Dill hero must not use the Chervil loaf");
   }
   if (modal.hero.includes("/assets/cats/fennel_loaf_72.svg")) {
-    throw new Error("Parsley hero must not use the Fennel loaf");
+    throw new Error("Dill hero must not use the Fennel loaf");
   }
   if (modal.hero.includes("/assets/cats/basil_loaf_72.svg")) {
-    throw new Error("Parsley hero must not use the Basil loaf");
+    throw new Error("Dill hero must not use the Basil loaf");
   }
   if (modal.hero.includes("/assets/cats/nettle_loaf_72.svg")) {
-    throw new Error("Parsley hero must not use the Nettle loaf");
+    throw new Error("Dill hero must not use the Nettle loaf");
   }
-  if (modal.hero.includes("/assets/cats/sorrel_loaf_72.svg")) {
-    throw new Error("Parsley hero must not use the Sorrel loaf");
-  }
-  await shot(page, "02_parsley_naming");
+  await shot(page, "02_dill_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Parsley") &&
-      ((document.body.innerText || "").includes("garnish") ||
-        (document.body.innerText || "").includes("rail") ||
+      (document.body.innerText || "").includes("Dill") &&
+      ((document.body.innerText || "").includes("pickle") ||
+        (document.body.innerText || "").includes("ledge") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -250,93 +249,93 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_042")) {
-    throw new Error("Parsley was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_043")) {
+    throw new Error("Dill was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_042")?.name !== "Parsley") {
-    throw new Error("Parsley name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_043")?.name !== "Dill") {
+    throw new Error("Dill name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_043")) {
-    throw new Error("friend_043 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_044")) {
+    throw new Error("friend_044 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/parsley_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/parsley_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/dill_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/dill_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Parsley parsley-leaf loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Dill dill-frond loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("garnish") && !yard.text.includes("Parsley")) {
-    throw new Error("yard missing Parsley garnish rail line");
+  if (!yard.text.includes("pickle") && !yard.text.includes("Dill")) {
+    throw new Error("yard missing Dill pickle jar ledge line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_parsley_yard");
+  await shot(page, "03_dill_yard");
 
-  await page.goto(`${BASE}/level/L127`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CURL CUT"));
+  await page.goto(`${BASE}/level/L130`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SEED CUT"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
       ["gray", "ArrowDown"],
-      ["orange", "ArrowLeft"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L128`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SPRIG GAP"));
+  await page.goto(`${BASE}/level/L131`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("FRONDLET GAP"));
+  await play(
+    page,
+    [
+      ["black", "ArrowLeft"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+    ],
+    "Home",
+  );
+  await shot(page, "04_l131_win");
+
+  await page.goto(`${BASE}/level/L132`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("LEDGE STOP"));
   await play(
     page,
     [
       ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
-    ],
-    "Home",
-  );
-  await shot(page, "04_l128_win");
-
-  await page.goto(`${BASE}/level/L129`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("GARNISH STOP"));
-  await play(
-    page,
-    [
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
       ["gray", "ArrowRight"],
       ["orange", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
+      ["gray", "ArrowDown"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l129_win");
+  await shot(page, "05_l132_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     text: document.body.innerText,
     storageKeys: Object.keys(localStorage),
   }));
-  for (const id of ["L126", "L127", "L128", "L129"]) {
+  for (const id of ["L129", "L130", "L131", "L132"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -344,17 +343,17 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_043")) {
-    throw new Error("L129 clear must queue Dill when friend_043 is present");
-  }
   if (after.save.friends.some((friend) => friend.friendId === "friend_044")) {
     throw new Error("friend_044 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_044")) {
-    throw new Error("L129 clear must not queue friend_044");
+    throw new Error("L132 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_042").length !== 1) {
-    throw new Error("L129 must not unlock a Parsley duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L132 must not open a next-friend naming modal");
+  }
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_043").length !== 1) {
+    throw new Error("L132 must not unlock a Dill duplicate");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -374,9 +373,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L126 + PARSLEY + L127-129 OK");
+  console.log("CHAPTER 4 L129 + DILL + L130-132 OK");
 } catch (error) {
-  console.error("CHAPTER 4 PARSLEY FAIL", error);
+  console.error("CHAPTER 4 DILL FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

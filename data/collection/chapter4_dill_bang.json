@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_dill_bang",
+  "status": "READY",
+  "friend_id": "friend_043",
+  "unlock_clear": 129,
+  "personality": "Seed-soft",
+  "display_line": "Soft frond. Already claimed the pickle jar ledge.",
+  "default_name": "Dill",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/dill_loaf_48.svg",
+    "loaf_72": "/assets/cats/dill_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "dill"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Dill",
+      "Frondlet",
+      "Seed"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_043": [
+      "{Name}: Soft frond. Already claimed the pickle jar ledge.",
+      "{Name}: Looks seed-cut. Owns the ledge."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 129,
+    "sku_id": null,
+    "note": "Ch4. Parsley Pass next. No gift. Ban Parsley/Curl/Sprig and all prior pools. Use Frondlet not Frond. Bean parade stands. No Pebble."
+  }
+}
