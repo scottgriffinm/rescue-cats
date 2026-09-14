@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_parsley_bang",
+  "status": "READY",
+  "friend_id": "friend_042",
+  "unlock_clear": 126,
+  "personality": "Curl-soft",
+  "display_line": "Fresh curl. Already claimed the garnish rail.",
+  "default_name": "Parsley",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/parsley_loaf_48.svg",
+    "loaf_72": "/assets/cats/parsley_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "parsley"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Parsley",
+      "Curl",
+      "Sprig"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_042": [
+      "{Name}: Fresh curl. Already claimed the garnish rail.",
+      "{Name}: Looks curl-cut. Owns the rail."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 126,
+    "sku_id": null,
+    "note": "Ch4. Lovage Pass next. No gift. Ban Lovage/Stem/Rib and all prior pools. Bean parade stands. No Pebble."
+  }
+}

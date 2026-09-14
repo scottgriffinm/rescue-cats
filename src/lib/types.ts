@@ -46,7 +46,8 @@ export type ArtKit =
   | "sorrel"
   | "fennel"
   | "chervil"
-  | "lovage";
+  | "lovage"
+  | "parsley";
 
 export type PieceCat = {
   id: string;
