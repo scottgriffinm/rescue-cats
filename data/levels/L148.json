@@ -1,0 +1,25 @@
+{
+  "id": "L148",
+  "name": "Chill Cut",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 11,
+  "nudges": 3,
+  "colorLocks": true,
+  "templateId": "LT02_LT08_chill_cut_orange",
+  "walls": [
+    { "x": 4, "y": 0 },
+    { "x": 3, "y": 0 },
+    { "x": 4, "y": 3 }
+  ],
+  "blockers": [],
+  "cats": [
+    { "id": "cat_orange", "x": 0, "y": 1, "color": "orange", "colorId": "color_orange" },
+    { "id": "cat_gray", "x": 4, "y": 2, "color": "gray", "colorId": "color_gray" }
+  ],
+  "gates": [
+    { "id": "gate_orange", "x": 2, "y": 5, "color": "orange", "colorId": "color_orange" },
+    { "id": "gate_gray", "x": 3, "y": 2, "color": "gray", "colorId": "color_gray" }
+  ],
+  "teach": "chill_cut_orange"
+}
