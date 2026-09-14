@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_azalea_bang",
+  "status": "READY",
+  "friend_id": "friend_060",
+  "unlock_clear": 180,
+  "personality": "Planter-soft",
+  "display_line": "Bright fuchsia. Already claimed the azalea planter.",
+  "default_name": "Azalea",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/azalea_loaf_48.svg",
+    "loaf_72": "/assets/cats/azalea_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "azalea"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Azalea", "Fizz", "Flare"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_060": [
+      "{Name}: Bright fuchsia. Already claimed the azalea planter.",
+      "{Name}: Looks yard-bright. Owns the planter."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 180,
+    "sku_id": null,
+    "note": "Ch4. Peony Pass next. No gift. Ban Peony/Bud/Satin and all prior pools. Bean parade stands. No Pebble. Azalea chip is CEO-locked on Azalea. No friend_061."
+  }
+}

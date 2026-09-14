@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Peony Pass — L181–L183 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L181–L183",
+  "notes": "L181 Fizz Cut / L182 Flare Gap / L183 Planter Stop — off Bud Cut / Satin Gap / Bowl Stop habits; not Azalea Cut/Gap/Stop title clones; not Bowl Stop (L180); no WRAP/edge twin of Nori/Medlar; L183 off Bowl/Tray/Dish/Sip/L168-Bowl/Bloom/Saucer seats.",
+  "levels": [
+    {
+      "id": "L181",
+      "name": "Fizz Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_fizz_cut_gray",
+      "walls": [
+        { "x": 4, "y": 3 },
+        { "x": 5, "y": 3 },
+        { "x": 1, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "fizz_cut_gray"
+    },
+    {
+      "id": "L182",
+      "name": "Flare Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_flare_gap_black",
+      "walls": [
+        { "x": 5, "y": 4 },
+        { "x": 5, "y": 1 },
+        { "x": 2, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 3, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "flare_gap_black"
+    },
+    {
+      "id": "L183",
+      "name": "Planter Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_planter_stop_gray",
+      "walls": [
+        { "x": 1, "y": 2 },
+        { "x": 3, "y": 1 },
+        { "x": 0, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 4, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "planter_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L181": "Fizz Cut — gray south first; orange cuts after; not Bud orange-east, not Wax gray-north, not Snow gray-west, not Roselle gray-east, not Cream orange-west, not Citrus orange-east, not Daisy orange-north, not Bloom orange-south, not Chill gray-north",
+    "L182": "Flare Gap — orange west then black threads; not Satin black-east, not Rose orange-east, not Velvet black-north, not Punch orange-south, not Blush black-south, not Earl black-east, not Calm black-west, not Dream orange-north, not Frost orange-east",
+    "L183": "Planter Stop — azalea-planter seats; not Bowl (0,3)/(4,2)/(4,3)/(0,4), not Tray (4,0)/(3,4)/(1,0)/(4,1), not Dish (2,1)/(3,0)/(1,1)/(0,0), not Sip (2,2)/(5,4)/(2,3)/(0,2), not L168 Bowl (3,2)/(3,3)/(0,1)/(1,3), not Bloom (0,5)/(5,0)/(1,4)/(5,1), not Saucer (2,0)/(2,5)/(5,3)/(1,2); not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L181": 10,
+      "L182": 11,
+      "L183": 10
+    }
+  },
+  "deltas": {
+    "L181": "(-1, -4)",
+    "L182": "(-1, -1)",
+    "L183": "(-1, 1)"
+  }
+}
