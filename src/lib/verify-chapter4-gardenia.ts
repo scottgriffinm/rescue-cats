@@ -244,14 +244,14 @@ export function verifyChapter4Gardenia(solves: Record<string, Array<[string, Dir
   const yardG = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardG.match(/const gardenia =/g) || []).length !== 1) throw new Error("YardScene must declare gardenia once");
   if ((yardG.match(/\{gardenia \?/g) || []).length !== 1) throw new Error("YardScene must render gardenia once");
-  if (TUTORIAL_RESCUES.length !== 57) throw new Error("Met must include through Gardenia (57)");
+  if (TUTORIAL_RESCUES.length !== 58) throw new Error("Met must include through Gardenia (57)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[174]) throw new Error("no friend_058 @174 this slice");
+  if (SLICE_UNLOCKS[174] !== "friend_058") throw new Error("SLICE_UNLOCKS[174] must be friend_058 after Camellia ship");
   if (/pebble|Pebble/i.test(gardenia48 + gardenia72)) throw new Error("Gardenia art must not use Pebble");
   if (/hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(gardenia48 + gardenia72)) {
     throw new Error("Gardenia art must not collide Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

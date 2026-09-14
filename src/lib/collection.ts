@@ -55,6 +55,7 @@ import chapter4Jasmine from "../../data/chapter4_jasmine_bang.json";
 import chapter4Magnolia from "../../data/chapter4_magnolia_bang.json";
 import chapter4Hibiscus from "../../data/chapter4_hibiscus_bang.json";
 import chapter4Gardenia from "../../data/chapter4_gardenia_bang.json";
+import chapter4Camellia from "../../data/chapter4_camellia_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -139,7 +140,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "jasmine" ||
     raw === "magnolia" ||
     raw === "hibiscus" ||
-    raw === "gardenia"
+    raw === "gardenia" ||
+    raw === "camellia"
   ) {
     return raw;
   }
@@ -430,6 +432,7 @@ export const CHAPTER4_JASMINE = chapter4Jasmine;
 export const CHAPTER4_MAGNOLIA = chapter4Magnolia;
 export const CHAPTER4_HIBISCUS = chapter4Hibiscus;
 export const CHAPTER4_GARDENIA = chapter4Gardenia;
+export const CHAPTER4_CAMELLIA = chapter4Camellia;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -486,6 +489,7 @@ export const JASMINE_FRIEND_ID = chapter4Jasmine.friend_id;
 export const MAGNOLIA_FRIEND_ID = chapter4Magnolia.friend_id;
 export const HIBISCUS_FRIEND_ID = chapter4Hibiscus.friend_id;
 export const GARDENIA_FRIEND_ID = chapter4Gardenia.friend_id;
+export const CAMELLIA_FRIEND_ID = chapter4Camellia.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1231,6 +1235,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Camellia.friend_id,
+    defaultName: chapter4Camellia.default_name,
+    unlockClear: chapter4Camellia.unlock_clear,
+    displayLine: chapter4Camellia.display_line,
+    tier: chapter4Camellia.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_orange_freckled_regular_regular_camellia",
+      breed: "Domestic Shorthair",
+      color: chapter4Camellia.color,
+      pattern: chapter4Camellia.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Camellia.personality,
+      artKit: "camellia",
+      boardColor: "orange",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1252,7 +1276,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 57);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 58);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1323,6 +1347,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   165: "friend_055",
   168: "friend_056",
   171: "friend_057",
+  174: "friend_058",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -1570,6 +1595,9 @@ export const HIBISCUS_NAMING_CHIPS: string[] = CHAPTER4_HIBISCUS.naming.suggesti
 /** Gardenia naming chips — soft porcelain + tiny leaf freckles; ban Hibiscus/Roselle/Punch and all prior pools. */
 export const GARDENIA_NAMING_CHIPS: string[] = CHAPTER4_GARDENIA.naming.suggestion_chips;
 
+/** Camellia naming chips — deep rose-camellia + wax freckles; ban Gardenia/Snow/Velvet and all prior pools. */
+export const CAMELLIA_NAMING_CHIPS: string[] = CHAPTER4_CAMELLIA.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -1739,6 +1767,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === GARDENIA_FRIEND_ID || friendId === "friend_057") {
     return [...GARDENIA_NAMING_CHIPS];
   }
+  if (friendId === CAMELLIA_FRIEND_ID || friendId === "friend_058") {
+    return [...CAMELLIA_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -1797,6 +1828,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Bowl-soft") return [...MAGNOLIA_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Sip-soft") return [...HIBISCUS_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Dish-soft") return [...GARDENIA_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Tray-soft") return [...CAMELLIA_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -1978,6 +2010,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === GARDENIA_FRIEND_ID || friendId === "friend_057") {
     return shufflePool([...GARDENIA_NAMING_CHIPS], count);
   }
+  if (friendId === CAMELLIA_FRIEND_ID || friendId === "friend_058") {
+    return shufflePool([...CAMELLIA_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -2050,6 +2085,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_MAGNOLIA.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_HIBISCUS.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_GARDENIA.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_CAMELLIA.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -2118,6 +2154,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Bowl-soft") return "magnolia bowl";
   if (personality === "Sip-soft") return "hibiscus cup";
   if (personality === "Dish-soft") return "gardenia dish";
+  if (personality === "Tray-soft") return "camellia tray";
   return "sun patch";
 }
 

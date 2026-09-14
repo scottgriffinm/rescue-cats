@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="camellia-loaf-48">
+      <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6" fill="#C45A6A" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#camellia-loaf-48)" fill="#5A2030">
+    <path d="M15.6 24.7 C16.2 25.15 16.2 25.85 15.6 26.25 C15.0 25.85 15.0 25.15 15.6 24.7Z"/>
+    <path d="M24.4 22.45 C24.95 22.85 24.95 23.5 24.4 23.9 C23.85 23.5 23.85 22.85 24.4 22.45Z"/>
+    <path d="M31.4 24.35 C31.95 24.8 31.95 25.5 31.4 25.9 C30.85 25.5 30.85 24.8 31.4 24.35Z"/>
+    <path d="M18.4 30.85 C18.9 31.25 18.9 31.9 18.4 32.3 C17.9 31.9 17.9 31.25 18.4 30.85Z"/>
+    <path d="M27.6 32.65 C28.15 33.05 28.15 33.75 27.6 34.15 C27.05 33.75 27.05 33.05 27.6 32.65Z"/>
+    <path d="M33.2 29.4 C33.7 29.8 33.7 30.4 33.2 30.8 C32.7 30.4 32.7 29.8 33.2 29.4Z"/>
+    <path d="M21.0 28.15 C21.5 28.55 21.5 29.2 21.0 29.6 C20.5 29.2 20.5 28.55 21.0 28.15Z"/>
+  </g>
+  <path d="M11.6 21.4 C11.2 14.8 15.8 12.8 17.8 17.4" fill="#8E3848" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36.4 21.4 C36.8 14.8 32.2 12.8 30.2 17.4" fill="#8E3848" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="33.8" rx="7" ry="4.6" fill="#F3C8CC"/>
+  <circle cx="18" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.4" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="18.45" cy="26.7" r="0.4" fill="#FFF5F2"/>
+  <circle cx="28.85" cy="26.7" r="0.4" fill="#FFF5F2"/>
+  <path d="M39.2 34 C42.4 32.8 43.6 36.4 40.8 37.6" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
