@@ -139,7 +139,7 @@ export function verifyChapter4Dill(solves: Record<string, Array<[string, Dir]>>)
   const yardD = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardD.match(/const dill =/g) || []).length !== 1) throw new Error("YardScene must declare dill once");
   if ((yardD.match(/\{dill \?/g) || []).length !== 1) throw new Error("YardScene must render dill once");
-  if (TUTORIAL_RESCUES.length !== 45) throw new Error("Met must include through Dill (43)");
+  if (TUTORIAL_RESCUES.length !== 46) throw new Error("Met must include through Dill (43)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -148,6 +148,7 @@ export function verifyChapter4Dill(solves: Record<string, Array<[string, Dir]>>)
   }
   if (SLICE_UNLOCKS[132] !== "friend_044") throw new Error("SLICE_UNLOCKS[132] must be friend_044 after Tarragon ship");
   if (SLICE_UNLOCKS[135] !== "friend_045") throw new Error("SLICE_UNLOCKS[135] must be friend_045 after Oregano ship");
+  if (SLICE_UNLOCKS[138] !== "friend_046") throw new Error("SLICE_UNLOCKS[138] must be friend_046 after Marjoram ship");
   if (/pebble|Pebble/i.test(dill48 + dill72)) throw new Error("Dill art must not use Pebble");
   if (/parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(dill48 + dill72)) {
     throw new Error("Dill art must not collide Parsley/Lovage/Chervil/Fennel marks");

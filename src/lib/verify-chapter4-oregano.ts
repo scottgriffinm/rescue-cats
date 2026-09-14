@@ -203,14 +203,14 @@ export function verifyChapter4Oregano(solves: Record<string, Array<[string, Dir]
   const yardO = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardO.match(/const oregano =/g) || []).length !== 1) throw new Error("YardScene must declare oregano once");
   if ((yardO.match(/\{oregano \?/g) || []).length !== 1) throw new Error("YardScene must render oregano once");
-  if (TUTORIAL_RESCUES.length !== 45) throw new Error("Met must include through Oregano (45)");
+  if (TUTORIAL_RESCUES.length !== 46) throw new Error("Met must include through Oregano (45)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[138]) throw new Error("no friend_046 @138 this slice");
+  if (SLICE_UNLOCKS[138] !== "friend_046") throw new Error("SLICE_UNLOCKS[138] must be friend_046 after Marjoram ship");
   if (/pebble|Pebble/i.test(oregano48 + oregano72)) throw new Error("Oregano art must not use Pebble");
   if (/tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(oregano48 + oregano72)) {
     throw new Error("Oregano art must not collide Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

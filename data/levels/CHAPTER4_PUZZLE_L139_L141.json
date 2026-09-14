@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Oregano Pass — L139–L141 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L139–L141",
+  "notes": "L139 Softleaf Cut / L140 Dusty Gap / L141 Peel Stop — off Wild/Bunch/Stone habits; not Marjoram Cut/Gap/Stop; no WRAP/edge twin of Nori/Medlar; not L138 Pizza / L135 Cruet / L132 Ledge / L129 Garnish / L126 Bed seats.",
+  "levels": [
+    {
+      "id": "L139",
+      "name": "Softleaf Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_softleaf_cut_gray",
+      "walls": [
+        { "x": 1, "y": 5 },
+        { "x": 5, "y": 3 },
+        { "x": 4, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 5, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "softleaf_cut_gray"
+    },
+    {
+      "id": "L140",
+      "name": "Dusty Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_dusty_gap_black",
+      "walls": [
+        { "x": 2, "y": 2 },
+        { "x": 1, "y": 5 },
+        { "x": 0, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 3, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "dusty_gap_black"
+    },
+    {
+      "id": "L141",
+      "name": "Peel Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_peel_stop_gray",
+      "walls": [
+        { "x": 4, "y": 1 },
+        { "x": 1, "y": 5 },
+        { "x": 0, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 4, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "peel_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L139": "Softleaf Cut — orange east first; gray cuts after; not Stone gray-east, not Spear orange-west, not Seed gray-south, not Curl orange-south, not Frill orange-north",
+    "L140": "Dusty Gap — black north then orange threads; not Wild orange-west, not Bitters black-south, not Frondlet black-west, not Sprig orange-north, not Lace orange-south",
+    "L141": "Peel Stop — peel-offset seats; not Pizza (1,1)/(0,2), not Cruet (1,4)/(5,3), not Ledge (1,5)/(2,1), not Garnish (2,4), not Bed (3,1), not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L139": 10,
+      "L140": 11,
+      "L141": 11
+    }
+  },
+  "deltas": {
+    "L139": "(2, -1)",
+    "L140": "(1, -2)",
+    "L141": "(4, 3)"
+  }
+}

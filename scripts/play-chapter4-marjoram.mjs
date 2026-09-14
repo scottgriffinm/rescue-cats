@@ -1,6 +1,6 @@
 /**
- * Chapter 4 beat: L135 → Oregano@135 naming, then L136–L138.
- * When Marjoram@138 is shipped, L138 clear awards Marjoram (pending). L10 stays off-path.
+ * Chapter 4 beat: L138 → Marjoram@138 naming, then L139–L141.
+ * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-oregano";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-marjoram";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -67,6 +67,7 @@ const PARADE = [
   ["friend_042", "Parsley", 126],
   ["friend_043", "Dill", 129],
   ["friend_044", "Tarragon", 132],
+  ["friend_045", "Oregano", 135],
 ];
 
 const completedIds = [
@@ -79,7 +80,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 124 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 127 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -105,7 +106,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Tarragon claimed the vinegar cruet."],
+  bubbles: ["Oregano claimed the pizza stone."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -154,23 +155,22 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L135`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CRUET STOP"));
-  await shot(page, "01_l135_before_oregano");
+  await page.goto(`${BASE}/level/L138`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("PIZZA STOP"));
+  await shot(page, "01_l138_before_marjoram");
   await play(
     page,
     [
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
+      ["gray", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -188,17 +188,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("oregano naming", modal);
+  console.log("marjoram naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Oregano prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Marjoram prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Wild dusty. Already claimed the pizza stone.") {
-    throw new Error(`Oregano display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft dusty. Already claimed the pizza peel.") {
+    throw new Error(`Marjoram display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Oregano,Wild,Bunch") {
-    throw new Error(`Oregano chips must be Oregano/Wild/Bunch, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Marjoram,Softleaf,Peel") {
+    throw new Error(`Marjoram chips must be Marjoram/Softleaf/Peel, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Oregano") ||
+    modal.chips.includes("Wild") ||
+    modal.chips.includes("Bunch") ||
     modal.chips.includes("Tarragon") ||
     modal.chips.includes("Spear") ||
     modal.chips.includes("Bitters") ||
@@ -214,44 +217,47 @@ try {
     modal.chips.includes("Pebble") ||
     modal.chips.includes("Chervil")
   ) {
-    throw new Error("Oregano chips collided with Tarragon/Dill/Parsley/Lovage/Fennel/Chervil/Pebble pools");
+    throw new Error("Marjoram chips collided with Oregano/Tarragon/Dill/Parsley/Lovage/Fennel/Chervil/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/oregano_loaf_72.svg")) {
-    throw new Error(`Oregano hero missing wild-oregano loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/marjoram_loaf_72.svg")) {
+    throw new Error(`Marjoram hero missing dusty-marjoram loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/oregano_loaf_72.svg")) {
+    throw new Error("Marjoram hero must not use the Oregano loaf");
   }
   if (modal.hero.includes("/assets/cats/tarragon_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Tarragon loaf");
+    throw new Error("Marjoram hero must not use the Tarragon loaf");
   }
   if (modal.hero.includes("/assets/cats/dill_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Dill loaf");
+    throw new Error("Marjoram hero must not use the Dill loaf");
   }
   if (modal.hero.includes("/assets/cats/parsley_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Parsley loaf");
+    throw new Error("Marjoram hero must not use the Parsley loaf");
   }
   if (modal.hero.includes("/assets/cats/lovage_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Lovage loaf");
+    throw new Error("Marjoram hero must not use the Lovage loaf");
   }
   if (modal.hero.includes("/assets/cats/chervil_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Chervil loaf");
+    throw new Error("Marjoram hero must not use the Chervil loaf");
   }
   if (modal.hero.includes("/assets/cats/fennel_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Fennel loaf");
+    throw new Error("Marjoram hero must not use the Fennel loaf");
   }
   if (modal.hero.includes("/assets/cats/basil_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Basil loaf");
+    throw new Error("Marjoram hero must not use the Basil loaf");
   }
   if (modal.hero.includes("/assets/cats/nettle_loaf_72.svg")) {
-    throw new Error("Oregano hero must not use the Nettle loaf");
+    throw new Error("Marjoram hero must not use the Nettle loaf");
   }
-  await shot(page, "02_oregano_naming");
+  await shot(page, "02_marjoram_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Oregano") &&
+      (document.body.innerText || "").includes("Marjoram") &&
       ((document.body.innerText || "").includes("pizza") ||
-        (document.body.innerText || "").includes("stone") ||
+        (document.body.innerText || "").includes("peel") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -264,92 +270,94 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_045")) {
-    throw new Error("Oregano was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_046")) {
+    throw new Error("Marjoram was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_045")?.name !== "Oregano") {
-    throw new Error("Oregano name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_046")?.name !== "Marjoram") {
+    throw new Error("Marjoram name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_046")) {
-    throw new Error("friend_046 must not unlock at Oregano naming");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_047")) {
+    throw new Error("friend_047 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/oregano_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/oregano_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/marjoram_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/marjoram_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Oregano wild-oregano loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Marjoram dusty-marjoram loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("pizza") && !yard.text.includes("Oregano")) {
-    throw new Error("yard missing Oregano pizza stone line");
+  if (!yard.text.includes("peel") && !yard.text.includes("Marjoram")) {
+    throw new Error("yard missing Marjoram pizza peel line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_oregano_yard");
+  await shot(page, "03_marjoram_yard");
 
-  await page.goto(`${BASE}/level/L136`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("STONE CUT"));
+  await page.goto(`${BASE}/level/L139`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SOFTLEAF CUT"));
   await play(
     page,
     [
-      ["gray", "ArrowRight"],
       ["orange", "ArrowRight"],
-      ["gray", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
       ["orange", "ArrowRight"],
+      ["gray", "ArrowRight"],
       ["gray", "ArrowUp"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L137`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("WILD GAP"));
+  await page.goto(`${BASE}/level/L140`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("DUSTY GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowLeft"],
+      ["black", "ArrowUp"],
       ["orange", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["black", "ArrowDown"],
       ["black", "ArrowLeft"],
       ["black", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["black", "ArrowUp"],
       ["black", "ArrowRight"],
       ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
     ],
     "Home",
   );
-  await shot(page, "04_l137_win");
+  await shot(page, "04_l140_win");
 
-  await page.goto(`${BASE}/level/L138`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("PIZZA STOP"));
+  await page.goto(`${BASE}/level/L141`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("PEEL STOP"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowLeft"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowLeft"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l138_win");
+  await shot(page, "05_l141_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     text: document.body.innerText,
     storageKeys: Object.keys(localStorage),
   }));
-  for (const id of ["L135", "L136", "L137", "L138"]) {
+  for (const id of ["L138", "L139", "L140", "L141"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -357,17 +365,17 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_046")) {
-    throw new Error("L138 clear must queue Marjoram when friend_046 is present");
-  }
   if (after.save.friends.some((friend) => friend.friendId === "friend_047")) {
     throw new Error("friend_047 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_047")) {
-    throw new Error("L138 clear must not queue friend_047");
+    throw new Error("L141 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_045").length !== 1) {
-    throw new Error("L138 must not unlock an Oregano duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L141 must not open a next-friend naming modal");
+  }
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_046").length !== 1) {
+    throw new Error("L141 must not unlock a Marjoram duplicate");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -387,9 +395,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L135 + OREGANO + L136-138 OK");
+  console.log("CHAPTER 4 L138 + MARJORAM + L139-141 OK");
 } catch (error) {
-  console.error("CHAPTER 4 OREGANO FAIL", error);
+  console.error("CHAPTER 4 MARJORAM FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

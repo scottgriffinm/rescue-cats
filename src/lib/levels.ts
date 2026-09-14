@@ -44,6 +44,7 @@ import chapter4v from "../../data/levels/CHAPTER4_PUZZLE_L127_L129.json";
 import chapter4w from "../../data/levels/CHAPTER4_PUZZLE_L130_L132.json";
 import chapter4x from "../../data/levels/CHAPTER4_PUZZLE_L133_L135.json";
 import chapter4y from "../../data/levels/CHAPTER4_PUZZLE_L136_L138.json";
+import chapter4z from "../../data/levels/CHAPTER4_PUZZLE_L139_L141.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -187,6 +188,9 @@ const HEADLINES: Record<string, string> = {
   L136: "STONE CUT",
   L137: "WILD GAP",
   L138: "PIZZA STOP",
+  L139: "SOFTLEAF CUT",
+  L140: "DUSTY GAP",
+  L141: "PEEL STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -327,6 +331,9 @@ const HINTS: Record<string, string> = {
   L136: "Stone cut — gray east first; orange cuts after; not Spear orange-west, not Seed gray-south, not Curl orange-south, not Frill orange-north.",
   L137: "Wild gap — orange west then black threads; not Bitters black-south, not Frondlet black-west, not Sprig orange-north, not Lace orange-south.",
   L138: "Pizza stop — pizza-offset seats; off Cruet (1,4); off Ledge (1,5); off Garnish (2,4); off Bed (3,1); not Hold*/Park*.",
+  L139: "Softleaf cut — orange east first; gray cuts after; not Stone gray-east, not Spear orange-west, not Seed gray-south, not Curl orange-south, not Frill orange-north.",
+  L140: "Dusty gap — black north then orange threads; not Wild orange-west, not Bitters black-south, not Frondlet black-west, not Sprig orange-north, not Lace orange-south.",
+  L141: "Peel stop — peel-offset seats; off Pizza (1,1); off Cruet (1,4); off Ledge (1,5); off Garnish (2,4); off Bed (3,1); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -426,6 +433,7 @@ const authored = [
   ...chapter4w.levels,
   ...chapter4x.levels,
   ...chapter4y.levels,
+  ...chapter4z.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
