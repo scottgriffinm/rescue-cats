@@ -203,7 +203,7 @@ export function verifyChapter4Oregano(solves: Record<string, Array<[string, Dir]
   const yardO = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardO.match(/const oregano =/g) || []).length !== 1) throw new Error("YardScene must declare oregano once");
   if ((yardO.match(/\{oregano \?/g) || []).length !== 1) throw new Error("YardScene must render oregano once");
-  if (TUTORIAL_RESCUES.length !== 52) throw new Error("Met must include through Oregano (45)");
+  if (TUTORIAL_RESCUES.length !== 53) throw new Error("Met must include through Oregano (45)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -217,6 +217,7 @@ export function verifyChapter4Oregano(solves: Record<string, Array<[string, Dir]
   if (SLICE_UNLOCKS[150] !== "friend_050") throw new Error("SLICE_UNLOCKS[150] must be friend_050 after Catnip ship");
   if (SLICE_UNLOCKS[153] !== "friend_051") throw new Error("SLICE_UNLOCKS[153] must be friend_051 after Lavender ship");
   if (SLICE_UNLOCKS[156] !== "friend_052") throw new Error("SLICE_UNLOCKS[156] must be friend_052 after Chamomile ship");
+  if (SLICE_UNLOCKS[159] !== "friend_053") throw new Error("SLICE_UNLOCKS[159] must be friend_053 after Bergamot ship");
   if (/pebble|Pebble/i.test(oregano48 + oregano72)) throw new Error("Oregano art must not use Pebble");
   if (/tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(oregano48 + oregano72)) {
     throw new Error("Oregano art must not collide Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

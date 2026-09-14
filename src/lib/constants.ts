@@ -58,7 +58,8 @@ export const ART_KIT_PATH: Record<
   | "mint"
   | "catnip"
   | "lavender"
-  | "chamomile",
+  | "chamomile"
+  | "bergamot",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -272,6 +273,10 @@ export const ART_KIT_PATH: Record<
   chamomile: {
     loaf48: "/assets/cats/chamomile_loaf_48.svg",
     loaf72: "/assets/cats/chamomile_loaf_72.svg",
+  },
+  bergamot: {
+    loaf48: "/assets/cats/bergamot_loaf_48.svg",
+    loaf72: "/assets/cats/bergamot_loaf_72.svg",
   },
 };
 
