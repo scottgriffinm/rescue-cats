@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_oregano_bang",
+  "status": "READY",
+  "friend_id": "friend_045",
+  "unlock_clear": 135,
+  "personality": "Wild-soft",
+  "display_line": "Wild dusty. Already claimed the pizza stone.",
+  "default_name": "Oregano",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/oregano_loaf_48.svg",
+    "loaf_72": "/assets/cats/oregano_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "oregano"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Oregano",
+      "Wild",
+      "Bunch"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_045": [
+      "{Name}: Wild dusty. Already claimed the pizza stone.",
+      "{Name}: Looks wild-cut. Owns the pizza stone."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 135,
+    "sku_id": null,
+    "note": "Ch4. Tarragon Pass next. No gift. Ban Tarragon/Spear/Bitters and all prior pools. Bean parade stands. No Pebble."
+  }
+}
