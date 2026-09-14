@@ -257,7 +257,7 @@ export function verifyChapter4Peony(solves: Record<string, Array<[string, Dir]>>
   const yardP = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardP.match(/const peony =/g) || []).length !== 1) throw new Error("YardScene must declare peony once");
   if ((yardP.match(/\{peony \?/g) || []).length !== 1) throw new Error("YardScene must render peony once");
-  if (TUTORIAL_RESCUES.length !== 60) throw new Error("Met must include through Peony (59)");
+  if (TUTORIAL_RESCUES.length !== 61) throw new Error("Met must include through Peony (59)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -265,6 +265,7 @@ export function verifyChapter4Peony(solves: Record<string, Array<[string, Dir]>>
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
   if (SLICE_UNLOCKS[180] !== "friend_060") throw new Error("SLICE_UNLOCKS[180] must be friend_060 after Azalea ship");
+  if (SLICE_UNLOCKS[183] !== "friend_061") throw new Error("SLICE_UNLOCKS[183] must be friend_061 after Dahlia ship");
   if (/pebble|Pebble/i.test(peony48 + peony72)) throw new Error("Peony art must not use Pebble");
   if (/camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(peony48 + peony72)) {
     throw new Error("Peony art must not collide Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

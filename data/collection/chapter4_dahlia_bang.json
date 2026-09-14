@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_dahlia_bang",
+  "status": "READY",
+  "friend_id": "friend_061",
+  "unlock_clear": 183,
+  "personality": "Vase-soft",
+  "display_line": "Deep wine. Already claimed the dahlia vase.",
+  "default_name": "Dahlia",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/dahlia_loaf_48.svg",
+    "loaf_72": "/assets/cats/dahlia_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "dahlia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Dahlia", "Spire", "Ember"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_061": [
+      "{Name}: Deep wine. Already claimed the dahlia vase.",
+      "{Name}: Looks yard-bright. Owns the vase."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 183,
+    "sku_id": null,
+    "note": "Ch4. Azalea Pass next. No gift. Ban Azalea/Fizz/Flare and all prior pools. Bean parade stands. No Pebble. Dahlia chip is CEO-locked on Dahlia. No friend_062."
+  }
+}

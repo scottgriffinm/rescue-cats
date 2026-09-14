@@ -65,7 +65,8 @@ export type ArtKit =
   | "gardenia"
   | "camellia"
   | "peony"
-  | "azalea";
+  | "azalea"
+  | "dahlia";
 
 export type PieceCat = {
   id: string;
