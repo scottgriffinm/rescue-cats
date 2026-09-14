@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_sorrel_bang",
+  "status": "READY",
+  "friend_id": "friend_038",
+  "unlock_clear": 114,
+  "personality": "Zest-soft",
+  "display_line": "Zests soft. Already claimed the sunny stoop.",
+  "default_name": "Sorrel",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/sorrel_loaf_48.svg",
+    "loaf_72": "/assets/cats/sorrel_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "sorrel"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Sorrel",
+      "Dock",
+      "Zest"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_038": [
+      "{Name}: Zests soft. Already claimed the sunny stoop.",
+      "{Name}: Looks tart. Sleeps on the stoop."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 114,
+    "sku_id": null,
+    "note": "Ch4. Nettle Pass next. No gift. Ban Nettle/Sting/Leaf and all prior pools. Bean parade stands. No Pebble."
+  }
+}

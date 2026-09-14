@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="sorrel-loaf-72">
+      <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6" fill="#C8D24A" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#sorrel-loaf-72)" fill="#E8A04A">
+    <ellipse cx="16.4" cy="24.6" rx="1.7" ry="1.15" transform="rotate(-18 16.4 24.6)"/>
+    <ellipse cx="23.6" cy="22.4" rx="1.85" ry="1.2" transform="rotate(12 23.6 22.4)"/>
+    <ellipse cx="31.2" cy="25.0" rx="1.6" ry="1.1" transform="rotate(-8 31.2 25.0)"/>
+    <ellipse cx="18.8" cy="32.2" rx="1.45" ry="1.0" transform="rotate(22 18.8 32.2)"/>
+    <ellipse cx="29.4" cy="33.0" rx="1.55" ry="1.05" transform="rotate(-14 29.4 33.0)"/>
+  </g>
+  <path d="M11.6 21.4 C11.2 14.8 15.8 12.8 17.8 17.4" fill="#9EAE38" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36.4 21.4 C36.8 14.8 32.2 12.8 30.2 17.4" fill="#9EAE38" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="33.8" rx="7" ry="4.6" fill="#F2EAB0"/>
+  <circle cx="18" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.4" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="18.45" cy="26.7" r="0.4" fill="#FFF4C8"/>
+  <circle cx="28.85" cy="26.7" r="0.4" fill="#FFF4C8"/>
+  <path d="M39.2 34 C42.4 32.8 43.6 36.4 40.8 37.6" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
