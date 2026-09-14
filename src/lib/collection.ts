@@ -37,6 +37,7 @@ import chapter4Ivy from "../../data/chapter4_ivy_bang.json";
 import chapter4Nettle from "../../data/chapter4_nettle_bang.json";
 import chapter4Sorrel from "../../data/chapter4_sorrel_bang.json";
 import chapter4Fennel from "../../data/chapter4_fennel_bang.json";
+import chapter4Chervil from "../../data/chapter4_chervil_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -103,7 +104,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "ivy" ||
     raw === "nettle" ||
     raw === "sorrel" ||
-    raw === "fennel"
+    raw === "fennel" ||
+    raw === "chervil"
   ) {
     return raw;
   }
@@ -376,6 +378,7 @@ export const CHAPTER4_IVY = chapter4Ivy;
 export const CHAPTER4_NETTLE = chapter4Nettle;
 export const CHAPTER4_SORREL = chapter4Sorrel;
 export const CHAPTER4_FENNEL = chapter4Fennel;
+export const CHAPTER4_CHERVIL = chapter4Chervil;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -414,6 +417,7 @@ export const IVY_FRIEND_ID = chapter4Ivy.friend_id;
 export const NETTLE_FRIEND_ID = chapter4Nettle.friend_id;
 export const SORREL_FRIEND_ID = chapter4Sorrel.friend_id;
 export const FENNEL_FRIEND_ID = chapter4Fennel.friend_id;
+export const CHERVIL_FRIEND_ID = chapter4Chervil.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -799,6 +803,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Chervil.friend_id,
+    defaultName: chapter4Chervil.default_name,
+    unlockClear: chapter4Chervil.unlock_clear,
+    displayLine: chapter4Chervil.display_line,
+    tier: chapter4Chervil.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_gray_freckled_regular_regular_chervil",
+      breed: "Domestic Shorthair",
+      color: chapter4Chervil.color,
+      pattern: chapter4Chervil.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Chervil.personality,
+      artKit: "chervil",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -820,7 +844,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 39);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 40);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -873,6 +897,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   111: "friend_037",
   114: "friend_038",
   117: "friend_039",
+  120: "friend_040",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -1066,6 +1091,9 @@ export const SORREL_NAMING_CHIPS: string[] = CHAPTER4_SORREL.naming.suggestion_c
 /** Fennel naming chips — pale cream-gold + soft frond freckles; ban Sorrel/Dock/Zest and all prior pools. */
 export const FENNEL_NAMING_CHIPS: string[] = CHAPTER4_FENNEL.naming.suggestion_chips;
 
+/** Chervil naming chips — pale herb-lace green + fine lace freckles; ban Fennel/Frond/Anise and all prior pools. */
+export const CHERVIL_NAMING_CHIPS: string[] = CHAPTER4_CHERVIL.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -1181,6 +1209,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === FENNEL_FRIEND_ID || friendId === "friend_039") {
     return [...FENNEL_NAMING_CHIPS];
   }
+  if (friendId === CHERVIL_FRIEND_ID || friendId === "friend_040") {
+    return [...CHERVIL_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -1221,6 +1252,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Sting-soft") return [...NETTLE_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Zest-soft") return [...SORREL_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Anise-soft") return [...FENNEL_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Lace-soft") return [...CHERVIL_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -1348,6 +1380,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === FENNEL_FRIEND_ID || friendId === "friend_039") {
     return shufflePool([...FENNEL_NAMING_CHIPS], count);
   }
+  if (friendId === CHERVIL_FRIEND_ID || friendId === "friend_040") {
+    return shufflePool([...CHERVIL_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -1402,6 +1437,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_NETTLE.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_SORREL.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_FENNEL.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_CHERVIL.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -1452,6 +1488,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Climb-soft") return "porch rail";
   if (personality === "Sting-soft") return "shady under-rail";
   if (personality === "Anise-soft") return "frond stoop";
+  if (personality === "Lace-soft") return "herb sill";
   return "sun patch";
 }
 

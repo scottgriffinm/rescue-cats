@@ -45,7 +45,8 @@ export const ART_KIT_PATH: Record<
   | "ivy"
   | "nettle"
   | "sorrel"
-  | "fennel",
+  | "fennel"
+  | "chervil",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -207,6 +208,10 @@ export const ART_KIT_PATH: Record<
   fennel: {
     loaf48: "/assets/cats/fennel_loaf_48.svg",
     loaf72: "/assets/cats/fennel_loaf_72.svg",
+  },
+  chervil: {
+    loaf48: "/assets/cats/chervil_loaf_48.svg",
+    loaf72: "/assets/cats/chervil_loaf_72.svg",
   },
 };
 
