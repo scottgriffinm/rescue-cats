@@ -44,6 +44,7 @@ import {
   HIBISCUS_FRIEND_ID,
   GARDENIA_FRIEND_ID,
   CAMELLIA_FRIEND_ID,
+  PEONY_FRIEND_ID,
   NAMING,
   shuffleNameChips,
 } from "@/lib/collection";
@@ -98,7 +99,8 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
     catalog.friendId === MAGNOLIA_FRIEND_ID ||
     catalog.friendId === HIBISCUS_FRIEND_ID ||
     catalog.friendId === GARDENIA_FRIEND_ID ||
-    catalog.friendId === CAMELLIA_FRIEND_ID;
+    catalog.friendId === CAMELLIA_FRIEND_ID ||
+    catalog.friendId === PEONY_FRIEND_ID;
 
   return (
     <div className="fixed inset-0 z-30 flex items-end justify-center overflow-y-auto bg-ink/30 px-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:items-center sm:px-4 sm:pt-16">

@@ -64,7 +64,8 @@ export const ART_KIT_PATH: Record<
   | "magnolia"
   | "hibiscus"
   | "gardenia"
-  | "camellia",
+  | "camellia"
+  | "peony",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -302,6 +303,10 @@ export const ART_KIT_PATH: Record<
   camellia: {
     loaf48: "/assets/cats/camellia_loaf_48.svg",
     loaf72: "/assets/cats/camellia_loaf_72.svg",
+  },
+  peony: {
+    loaf48: "/assets/cats/peony_loaf_48.svg",
+    loaf72: "/assets/cats/peony_loaf_72.svg",
   },
 };
 

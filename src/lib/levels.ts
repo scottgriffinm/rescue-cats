@@ -57,6 +57,7 @@ import chapter4ai from "../../data/levels/CHAPTER4_PUZZLE_L166_L168.json";
 import chapter4aj from "../../data/levels/CHAPTER4_PUZZLE_L169_L171.json";
 import chapter4ak from "../../data/levels/CHAPTER4_PUZZLE_L172_L174.json";
 import chapter4al from "../../data/levels/CHAPTER4_PUZZLE_L175_L177.json";
+import chapter4am from "../../data/levels/CHAPTER4_PUZZLE_L178_L180.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -239,6 +240,9 @@ const HEADLINES: Record<string, string> = {
   L175: "WAX CUT",
   L176: "ROSE GAP",
   L177: "TRAY STOP",
+  L178: "BUD CUT",
+  L179: "SATIN GAP",
+  L180: "BOWL STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -418,6 +422,9 @@ const HINTS: Record<string, string> = {
   L175: "Wax cut — gray north first; orange cuts after; not Snow gray-west, not Roselle gray-east, not Cream orange-west, not Citrus orange-east, not Daisy orange-north, not Bloom orange-south, not Nip gray-south, not Chill gray-north.",
   L176: "Rose gap — orange east then black threads; not Velvet black-north, not Punch orange-south, not Blush black-south, not Honey orange-west, not Earl black-east, not Calm black-west, not Dream orange-north, not Frost orange-east.",
   L177: "Tray stop — tray-stop seats; off Dish (2,1)/(3,0)/(1,1)/(0,0); off Sip (2,2)/(5,4)/(2,3)/(0,2); off Bowl (3,2)/(3,3)/(0,1)/(1,3); off Bloom (0,5)/(5,0)/(1,4)/(5,1); off Saucer (2,0)/(2,5)/(5,3)/(1,2); off Cup (4,4)/(5,2)/(3,1)/(1,5); not Hold*/Park*.",
+  L178: "Bud cut — orange east first; gray cuts after; not Wax gray-north, not Snow gray-west, not Roselle gray-east, not Cream orange-west, not Citrus orange-east, not Daisy orange-north, not Bloom orange-south, not Nip gray-south, not Chill gray-north.",
+  L179: "Satin gap — black east then orange threads; not Rose orange-east, not Velvet black-north, not Punch orange-south, not Blush black-south, not Honey orange-west, not Earl black-east, not Calm black-west, not Dream orange-north, not Frost orange-east.",
+  L180: "Bowl stop — peony-bowl seats; off Tray (4,0)/(3,4)/(1,0)/(4,1); off Dish (2,1)/(3,0)/(1,1)/(0,0); off Sip (2,2)/(5,4)/(2,3)/(0,2); off Bowl (3,2)/(3,3)/(0,1)/(1,3); off Bloom (0,5)/(5,0)/(1,4)/(5,1); off Saucer (2,0)/(2,5)/(5,3)/(1,2); off Cup (4,4)/(5,2)/(3,1)/(1,5); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -530,6 +537,7 @@ const authored = [
   ...chapter4aj.levels,
   ...chapter4ak.levels,
   ...chapter4al.levels,
+  ...chapter4am.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
