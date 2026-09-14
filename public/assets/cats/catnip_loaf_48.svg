@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="catnip-loaf-48">
+      <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6" fill="#8FBF9A" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#catnip-loaf-48)" fill="#2F5C3A">
+    <circle cx="15.8" cy="25.2" r="0.55"/>
+    <circle cx="23.6" cy="22.8" r="0.48"/>
+    <circle cx="31.2" cy="25.4" r="0.52"/>
+    <circle cx="17.6" cy="31.4" r="0.46"/>
+    <circle cx="26.8" cy="34.0" r="0.5"/>
+    <circle cx="34.0" cy="30.0" r="0.42"/>
+    <circle cx="20.6" cy="28.2" r="0.4"/>
+  </g>
+  <path d="M11.6 21.4 C11.2 14.8 15.8 12.8 17.8 17.4" fill="#5A9A6C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36.4 21.4 C36.8 14.8 32.2 12.8 30.2 17.4" fill="#5A9A6C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="33.8" rx="7" ry="4.6" fill="#DCEFE2"/>
+  <circle cx="18" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.4" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="18.45" cy="26.7" r="0.4" fill="#F2FBF4"/>
+  <circle cx="28.85" cy="26.7" r="0.4" fill="#F2FBF4"/>
+  <path d="M39.2 34 C42.4 32.8 43.6 36.4 40.8 37.6" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

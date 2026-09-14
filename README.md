@@ -52,6 +52,7 @@ npm run verify:levels
 # node scripts/play-chapter4-thyme.mjs
 # node scripts/play-chapter4-rosemary.mjs
 # node scripts/play-chapter4-mint.mjs
+# node scripts/play-chapter4-catnip.mjs
 ```
 
 ## Routes

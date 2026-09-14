@@ -207,7 +207,7 @@ export function verifyChapter4Marjoram(solves: Record<string, Array<[string, Dir
   const yardM = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardM.match(/const marjoram =/g) || []).length !== 1) throw new Error("YardScene must declare marjoram once");
   if ((yardM.match(/\{marjoram \?/g) || []).length !== 1) throw new Error("YardScene must render marjoram once");
-  if (TUTORIAL_RESCUES.length !== 49) throw new Error("Met must include through Marjoram (46)");
+  if (TUTORIAL_RESCUES.length !== 50) throw new Error("Met must include through Marjoram (46)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -217,6 +217,7 @@ export function verifyChapter4Marjoram(solves: Record<string, Array<[string, Dir
   if (SLICE_UNLOCKS[141] !== "friend_047") throw new Error("SLICE_UNLOCKS[141] must be friend_047 after Thyme ship");
   if (SLICE_UNLOCKS[144] !== "friend_048") throw new Error("SLICE_UNLOCKS[144] must be friend_048 after Rosemary ship");
   if (SLICE_UNLOCKS[147] !== "friend_049") throw new Error("SLICE_UNLOCKS[147] must be friend_049 after Mint ship");
+  if (SLICE_UNLOCKS[150] !== "friend_050") throw new Error("SLICE_UNLOCKS[150] must be friend_050 after Catnip ship");
   if (/pebble|Pebble/i.test(marjoram48 + marjoram72)) throw new Error("Marjoram art must not use Pebble");
   if (/oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(marjoram48 + marjoram72)) {
     throw new Error("Marjoram art must not collide Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

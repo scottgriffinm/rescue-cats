@@ -1,6 +1,6 @@
 /**
- * Chapter 4 beat: L147 → Mint@147 naming, then L148–L150.
- * When Catnip@150 is shipped, L150 clear awards Catnip (pending). L10 stays off-path.
+ * Chapter 4 beat: L150 → Catnip@150 naming, then L151–L153.
+ * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-mint";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-catnip";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -71,6 +71,7 @@ const PARADE = [
   ["friend_046", "Marjoram", 138],
   ["friend_047", "Thyme", 141],
   ["friend_048", "Rosemary", 144],
+  ["friend_049", "Mint", 147],
 ];
 
 const completedIds = [
@@ -83,7 +84,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 136 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 139 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -109,7 +110,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Rosemary claimed the rosemary pot."],
+  bubbles: ["Mint claimed the mint tin."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -158,23 +159,23 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L147`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("POT STOP"));
-  await shot(page, "01_l147_before_mint");
+  await page.goto(`${BASE}/level/L150`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("TIN STOP"));
+  await shot(page, "01_l150_before_catnip");
   await play(
     page,
     [
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
       ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
     ],
     "New friend!",
   );
@@ -192,17 +193,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("mint naming", modal);
+  console.log("catnip naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Mint prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Catnip prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Cool frost. Already claimed the mint tin.") {
-    throw new Error(`Mint display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft meadow. Already claimed the catnip pouch.") {
+    throw new Error(`Catnip display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Mint,Chill,Frost") {
-    throw new Error(`Mint chips must be Mint/Chill/Frost, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Catnip,Nip,Dream") {
+    throw new Error(`Catnip chips must be Catnip/Nip/Dream, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Mint") ||
+    modal.chips.includes("Chill") ||
+    modal.chips.includes("Frost") ||
     modal.chips.includes("Rosemary") ||
     modal.chips.includes("Needle") ||
     modal.chips.includes("Woody") ||
@@ -228,58 +232,62 @@ try {
     modal.chips.includes("Frond") ||
     modal.chips.includes("Fennel") ||
     modal.chips.includes("Pebble") ||
+    modal.chips.includes("Sage") ||
     modal.chips.includes("Chervil")
   ) {
-    throw new Error("Mint chips collided with Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Fennel/Chervil/Pebble pools");
+    throw new Error("Catnip chips collided with Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Fennel/Chervil/Pebble/Sage pools");
   }
-  if (!modal.hero.includes("/assets/cats/mint_loaf_72.svg")) {
-    throw new Error(`Mint hero missing mint-frost loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/catnip_loaf_72.svg")) {
+    throw new Error(`Catnip hero missing meadow-green loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/mint_loaf_72.svg")) {
+    throw new Error("Catnip hero must not use the Mint loaf");
   }
   if (modal.hero.includes("/assets/cats/rosemary_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Rosemary loaf");
+    throw new Error("Catnip hero must not use the Rosemary loaf");
   }
   if (modal.hero.includes("/assets/cats/thyme_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Thyme loaf");
+    throw new Error("Catnip hero must not use the Thyme loaf");
   }
   if (modal.hero.includes("/assets/cats/marjoram_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Marjoram loaf");
+    throw new Error("Catnip hero must not use the Marjoram loaf");
   }
   if (modal.hero.includes("/assets/cats/oregano_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Oregano loaf");
+    throw new Error("Catnip hero must not use the Oregano loaf");
   }
   if (modal.hero.includes("/assets/cats/tarragon_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Tarragon loaf");
+    throw new Error("Catnip hero must not use the Tarragon loaf");
   }
   if (modal.hero.includes("/assets/cats/dill_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Dill loaf");
+    throw new Error("Catnip hero must not use the Dill loaf");
   }
   if (modal.hero.includes("/assets/cats/parsley_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Parsley loaf");
+    throw new Error("Catnip hero must not use the Parsley loaf");
   }
   if (modal.hero.includes("/assets/cats/lovage_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Lovage loaf");
+    throw new Error("Catnip hero must not use the Lovage loaf");
   }
   if (modal.hero.includes("/assets/cats/chervil_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Chervil loaf");
+    throw new Error("Catnip hero must not use the Chervil loaf");
   }
   if (modal.hero.includes("/assets/cats/fennel_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Fennel loaf");
+    throw new Error("Catnip hero must not use the Fennel loaf");
   }
   if (modal.hero.includes("/assets/cats/basil_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Basil loaf");
+    throw new Error("Catnip hero must not use the Basil loaf");
   }
   if (modal.hero.includes("/assets/cats/nettle_loaf_72.svg")) {
-    throw new Error("Mint hero must not use the Nettle loaf");
+    throw new Error("Catnip hero must not use the Nettle loaf");
   }
-  await shot(page, "02_mint_naming");
+  await shot(page, "02_catnip_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Mint") &&
-      ((document.body.innerText || "").includes("tin") ||
-        (document.body.innerText || "").includes("mint") ||
+      (document.body.innerText || "").includes("Catnip") &&
+      ((document.body.innerText || "").includes("pouch") ||
+        (document.body.innerText || "").includes("catnip") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -292,93 +300,92 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_049")) {
-    throw new Error("Mint was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_050")) {
+    throw new Error("Catnip was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_049")?.name !== "Mint") {
-    throw new Error("Mint name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_050")?.name !== "Catnip") {
+    throw new Error("Catnip name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_050")) {
-    throw new Error("friend_050 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_051")) {
+    throw new Error("friend_051 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/mint_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/mint_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/catnip_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/catnip_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Mint mint-frost loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Catnip meadow-green loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("tin") && !yard.text.includes("Mint")) {
-    throw new Error("yard missing Mint mint tin line");
+  if (!yard.text.includes("pouch") && !yard.text.includes("Catnip")) {
+    throw new Error("yard missing Catnip catnip pouch line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_mint_yard");
+  await shot(page, "03_catnip_yard");
 
-  await page.goto(`${BASE}/level/L148`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CHILL CUT"));
+  await page.goto(`${BASE}/level/L151`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("NIP CUT"));
   await play(
     page,
     [
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowRight"],
       ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
       ["orange", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowUp"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L149`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("FROST GAP"));
+  await page.goto(`${BASE}/level/L152`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("DREAM GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
       ["black", "ArrowRight"],
       ["black", "ArrowDown"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowDown"],
     ],
     "Home",
   );
-  await shot(page, "04_l149_win");
+  await shot(page, "04_l152_win");
 
-  await page.goto(`${BASE}/level/L150`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("TIN STOP"));
+  await page.goto(`${BASE}/level/L153`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("POUCH STOP"));
   await play(
     page,
     [
+      ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
       ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l150_win");
+  await shot(page, "05_l153_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     text: document.body.innerText,
     storageKeys: Object.keys(localStorage),
   }));
-  for (const id of ["L147", "L148", "L149", "L150"]) {
+  for (const id of ["L150", "L151", "L152", "L153"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -386,14 +393,17 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_050")) {
-    throw new Error("L150 clear must queue Catnip when friend_050 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_051")) {
+    throw new Error("friend_051 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_051")) {
-    throw new Error("L150 clear must not queue friend_051");
+    throw new Error("L153 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_049").length !== 1) {
-    throw new Error("L150 must not unlock a Mint duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L153 must not open a next-friend naming modal");
+  }
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_050").length !== 1) {
+    throw new Error("L153 must not unlock a Catnip duplicate");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -413,9 +423,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L147 + MINT + L148-150 OK");
+  console.log("CHAPTER 4 L150 + CATNIP + L151-153 OK");
 } catch (error) {
-  console.error("CHAPTER 4 MINT FAIL", error);
+  console.error("CHAPTER 4 CATNIP FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {
