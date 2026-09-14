@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_magnolia_bang",
+  "status": "READY",
+  "friend_id": "friend_055",
+  "unlock_clear": 165,
+  "personality": "Bowl-soft",
+  "display_line": "Soft cream. Already claimed the magnolia bowl.",
+  "default_name": "Magnolia",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/magnolia_loaf_48.svg",
+    "loaf_72": "/assets/cats/magnolia_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "magnolia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Magnolia", "Cream", "Blush"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_055": [
+      "{Name}: Soft cream. Already claimed the magnolia bowl.",
+      "{Name}: Looks yard-bright. Owns the bowl."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 165,
+    "sku_id": null,
+    "note": "Ch4. Jasmine Pass next. No gift. Ban Jasmine/Blossom/Honey and all prior pools. Bean parade stands. No Pebble. Cream chip is CEO-locked on Magnolia."
+  }
+}

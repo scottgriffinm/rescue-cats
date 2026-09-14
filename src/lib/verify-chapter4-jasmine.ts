@@ -232,14 +232,14 @@ export function verifyChapter4Jasmine(solves: Record<string, Array<[string, Dir]
   const yardJ = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardJ.match(/const jasmine =/g) || []).length !== 1) throw new Error("YardScene must declare jasmine once");
   if ((yardJ.match(/\{jasmine \?/g) || []).length !== 1) throw new Error("YardScene must render jasmine once");
-  if (TUTORIAL_RESCUES.length !== 54) throw new Error("Met must include through Jasmine (54)");
+  if (TUTORIAL_RESCUES.length !== 55) throw new Error("Met must include through Jasmine (54)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[165]) throw new Error("no friend_055 @165 this slice");
+  if (SLICE_UNLOCKS[165] !== "friend_055") throw new Error("SLICE_UNLOCKS[165] must be friend_055 after Magnolia ship");
   if (/pebble|Pebble/i.test(jasmine48 + jasmine72)) throw new Error("Jasmine art must not use Pebble");
   if (/bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(jasmine48 + jasmine72)) {
     throw new Error("Jasmine art must not collide Bergamot/Chamomile/Lavender/Catnip/Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

@@ -222,7 +222,7 @@ export function verifyChapter4Lavender(solves: Record<string, Array<[string, Dir
   const yardL = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardL.match(/const lavender =/g) || []).length !== 1) throw new Error("YardScene must declare lavender once");
   if ((yardL.match(/\{lavender \?/g) || []).length !== 1) throw new Error("YardScene must render lavender once");
-  if (TUTORIAL_RESCUES.length !== 54) throw new Error("Met must include through Lavender (51)");
+  if (TUTORIAL_RESCUES.length !== 55) throw new Error("Met must include through Lavender (51)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -232,6 +232,7 @@ export function verifyChapter4Lavender(solves: Record<string, Array<[string, Dir
   if (SLICE_UNLOCKS[156] !== "friend_052") throw new Error("SLICE_UNLOCKS[156] must be friend_052 after Chamomile ship");
   if (SLICE_UNLOCKS[159] !== "friend_053") throw new Error("SLICE_UNLOCKS[159] must be friend_053 after Bergamot ship");
   if (SLICE_UNLOCKS[162] !== "friend_054") throw new Error("SLICE_UNLOCKS[162] must be friend_054 after Jasmine ship");
+  if (SLICE_UNLOCKS[165] !== "friend_055") throw new Error("SLICE_UNLOCKS[165] must be friend_055 after Magnolia ship");
   if (/pebble|Pebble/i.test(lavender48 + lavender72)) throw new Error("Lavender art must not use Pebble");
   if (/catnip|mint|chill|frost|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(lavender48 + lavender72)) {
     throw new Error("Lavender art must not collide Catnip/Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
