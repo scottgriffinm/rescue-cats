@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_nettle_bang",
+  "status": "READY",
+  "friend_id": "friend_037",
+  "unlock_clear": 111,
+  "personality": "Sting-soft",
+  "display_line": "Stings soft. Already claimed the shady under-rail.",
+  "default_name": "Nettle",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/nettle_loaf_48.svg",
+    "loaf_72": "/assets/cats/nettle_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "nettle"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Nettle",
+      "Sting",
+      "Leaf"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_037": [
+      "{Name}: Stings soft. Already claimed the shady under-rail.",
+      "{Name}: Looks leafy. Sleeps under the rail."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 111,
+    "sku_id": null,
+    "note": "Ch4. Ivy Pass next. No gift. Ban Ivy/Tendril/Climb and all prior pools. Bean parade stands. No Pebble."
+  }
+}

@@ -39,6 +39,7 @@ npm run verify:levels
 # node scripts/play-chapter3-ash.mjs
 # node scripts/play-chapter4-briar.mjs
 # node scripts/play-chapter4-ivy.mjs
+# node scripts/play-chapter4-nettle.mjs
 ```
 
 ## Routes

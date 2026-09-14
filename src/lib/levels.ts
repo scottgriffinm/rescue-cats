@@ -35,6 +35,7 @@ import chapter4m from "../../data/levels/CHAPTER4_PUZZLE_L100_L102.json";
 import chapter4n from "../../data/levels/CHAPTER4_PUZZLE_L103_L105.json";
 import chapter4o from "../../data/levels/CHAPTER4_PUZZLE_L106_L108.json";
 import chapter4p from "../../data/levels/CHAPTER4_PUZZLE_L109_L111.json";
+import chapter4q from "../../data/levels/CHAPTER4_PUZZLE_L112_L114.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -151,6 +152,9 @@ const HEADLINES: Record<string, string> = {
   L109: "RAIL CUT",
   L110: "SHADE GAP",
   L111: "PORCH STOP",
+  L112: "STEM CUT",
+  L113: "STING GAP",
+  L114: "UNDER STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -264,6 +268,9 @@ const HINTS: Record<string, string> = {
   L109: "Rail cut — gray sits mid-rail; orange rails south then cuts; not Vine stacked column.",
   L110: "Shade gap — orange south-west first; black threads the shade after; not Thorn orange-north.",
   L111: "Porch stop — column porch seats; off Nest same-row; not Hold*/Park*.",
+  L112: "Stem cut — orange west then south; gray threads the stem; not Rail south-then-cut.",
+  L113: "Sting gap — orange west-north first; black stings after; not Shade orange-south-west.",
+  L114: "Under stop — diagonal under-rail seats; off Porch column; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -354,6 +361,7 @@ const authored = [
   ...chapter4n.levels,
   ...chapter4o.levels,
   ...chapter4p.levels,
+  ...chapter4q.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

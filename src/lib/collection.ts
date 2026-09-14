@@ -34,6 +34,7 @@ import chapter4Plum from "../../data/chapter4_plum_bang.json";
 import chapter4Thistle from "../../data/chapter4_thistle_bang.json";
 import chapter4Briar from "../../data/chapter4_briar_bang.json";
 import chapter4Ivy from "../../data/chapter4_ivy_bang.json";
+import chapter4Nettle from "../../data/chapter4_nettle_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -97,7 +98,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "plum" ||
     raw === "thistle" ||
     raw === "briar" ||
-    raw === "ivy"
+    raw === "ivy" ||
+    raw === "nettle"
   ) {
     return raw;
   }
@@ -367,6 +369,7 @@ export const CHAPTER4_PLUM = chapter4Plum;
 export const CHAPTER4_THISTLE = chapter4Thistle;
 export const CHAPTER4_BRIAR = chapter4Briar;
 export const CHAPTER4_IVY = chapter4Ivy;
+export const CHAPTER4_NETTLE = chapter4Nettle;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -402,6 +405,7 @@ export const PLUM_FRIEND_ID = chapter4Plum.friend_id;
 export const THISTLE_FRIEND_ID = chapter4Thistle.friend_id;
 export const BRIAR_FRIEND_ID = chapter4Briar.friend_id;
 export const IVY_FRIEND_ID = chapter4Ivy.friend_id;
+export const NETTLE_FRIEND_ID = chapter4Nettle.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -727,6 +731,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "black",
     },
   },
+  {
+    friendId: chapter4Nettle.friend_id,
+    defaultName: chapter4Nettle.default_name,
+    unlockClear: chapter4Nettle.unlock_clear,
+    displayLine: chapter4Nettle.display_line,
+    tier: chapter4Nettle.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_gray_freckled_regular_regular_nettle",
+      breed: "Domestic Shorthair",
+      color: chapter4Nettle.color,
+      pattern: chapter4Nettle.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Nettle.personality,
+      artKit: "nettle",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -748,7 +772,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 36);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 37);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -798,6 +822,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   102: "friend_034",
   105: "friend_035",
   108: "friend_036",
+  111: "friend_037",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -982,6 +1007,9 @@ export const BRIAR_NAMING_CHIPS: string[] = CHAPTER4_BRIAR.naming.suggestion_chi
 /** Ivy naming chips — green-black + cream tendrils; ban Briar/Thorn/Hedge and all prior pools. */
 export const IVY_NAMING_CHIPS: string[] = CHAPTER4_IVY.naming.suggestion_chips;
 
+/** Nettle naming chips — sage-green-gray + pale leaf-tips; ban Ivy/Tendril/Climb and all prior pools. */
+export const NETTLE_NAMING_CHIPS: string[] = CHAPTER4_NETTLE.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -1088,6 +1116,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === IVY_FRIEND_ID || friendId === "friend_036") {
     return [...IVY_NAMING_CHIPS];
   }
+  if (friendId === NETTLE_FRIEND_ID || friendId === "friend_037") {
+    return [...NETTLE_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -1125,6 +1156,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Soft-prickle") return [...THISTLE_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Tangled") return [...BRIAR_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Climb-soft") return [...IVY_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Sting-soft") return [...NETTLE_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -1243,6 +1275,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === IVY_FRIEND_ID || friendId === "friend_036") {
     return shufflePool([...IVY_NAMING_CHIPS], count);
   }
+  if (friendId === NETTLE_FRIEND_ID || friendId === "friend_037") {
+    return shufflePool([...NETTLE_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -1294,6 +1329,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_THISTLE.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_BRIAR.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_IVY.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_NETTLE.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -1342,6 +1378,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Soft-prickle") return "fence-post perch";
   if (personality === "Tangled") return "bramble gap";
   if (personality === "Climb-soft") return "porch rail";
+  if (personality === "Sting-soft") return "shady under-rail";
   return "sun patch";
 }
 

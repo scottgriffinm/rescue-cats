@@ -100,6 +100,7 @@ export function YardScene({
   const thistle = friends.find((friend) => friend.friendId === "friend_034");
   const briar = friends.find((friend) => friend.friendId === "friend_035");
   const ivy = friends.find((friend) => friend.friendId === "friend_036");
+  const nettle = friends.find((friend) => friend.friendId === "friend_037");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -136,7 +137,8 @@ export function YardScene({
       friend.friendId !== "friend_033" &&
       friend.friendId !== "friend_034" &&
       friend.friendId !== "friend_035" &&
-      friend.friendId !== "friend_036",
+      friend.friendId !== "friend_036" &&
+      friend.friendId !== "friend_037",
   );
 
   return (
@@ -913,6 +915,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{ivy.name}</p>
+        </div>
+      ) : null}
+
+      {nettle ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "78%", top: "20%" }}
+        >
+          <FriendSprite
+            kit={friendById(nettle.friendId)?.phenotype.artKit ?? "nettle"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === nettle.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(nettle.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${nettle.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{nettle.name}</p>
         </div>
       ) : null}
 
