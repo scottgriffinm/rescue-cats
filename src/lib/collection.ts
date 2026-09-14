@@ -45,6 +45,7 @@ import chapter4Tarragon from "../../data/chapter4_tarragon_bang.json";
 import chapter4Oregano from "../../data/chapter4_oregano_bang.json";
 import chapter4Marjoram from "../../data/chapter4_marjoram_bang.json";
 import chapter4Thyme from "../../data/chapter4_thyme_bang.json";
+import chapter4Rosemary from "../../data/chapter4_rosemary_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -119,7 +120,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "tarragon" ||
     raw === "oregano" ||
     raw === "marjoram" ||
-    raw === "thyme"
+    raw === "thyme" ||
+    raw === "rosemary"
   ) {
     return raw;
   }
@@ -400,6 +402,7 @@ export const CHAPTER4_TARRAGON = chapter4Tarragon;
 export const CHAPTER4_OREGANO = chapter4Oregano;
 export const CHAPTER4_MARJORAM = chapter4Marjoram;
 export const CHAPTER4_THYME = chapter4Thyme;
+export const CHAPTER4_ROSEMARY = chapter4Rosemary;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -446,6 +449,7 @@ export const TARRAGON_FRIEND_ID = chapter4Tarragon.friend_id;
 export const OREGANO_FRIEND_ID = chapter4Oregano.friend_id;
 export const MARJORAM_FRIEND_ID = chapter4Marjoram.friend_id;
 export const THYME_FRIEND_ID = chapter4Thyme.friend_id;
+export const ROSEMARY_FRIEND_ID = chapter4Rosemary.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -991,6 +995,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Rosemary.friend_id,
+    defaultName: chapter4Rosemary.default_name,
+    unlockClear: chapter4Rosemary.unlock_clear,
+    displayLine: chapter4Rosemary.display_line,
+    tier: chapter4Rosemary.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_gray_freckled_regular_regular_rosemary",
+      breed: "Domestic Shorthair",
+      color: chapter4Rosemary.color,
+      pattern: chapter4Rosemary.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Rosemary.personality,
+      artKit: "rosemary",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1012,7 +1036,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 47);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 48);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1073,6 +1097,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   135: "friend_045",
   138: "friend_046",
   141: "friend_047",
+  144: "friend_048",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -1290,6 +1315,9 @@ export const MARJORAM_NAMING_CHIPS: string[] = CHAPTER4_MARJORAM.naming.suggesti
 /** Thyme naming chips — soft dusty-thyme + tiny twig freckles; ban Marjoram/Softleaf/Peel and all prior pools. */
 export const THYME_NAMING_CHIPS: string[] = CHAPTER4_THYME.naming.suggestion_chips;
 
+/** Rosemary naming chips — cool dusty-rosemary + tiny needle freckles; ban Thyme/Pinch/Twig and all prior pools. */
+export const ROSEMARY_NAMING_CHIPS: string[] = CHAPTER4_ROSEMARY.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -1429,6 +1457,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === THYME_FRIEND_ID || friendId === "friend_047") {
     return [...THYME_NAMING_CHIPS];
   }
+  if (friendId === ROSEMARY_FRIEND_ID || friendId === "friend_048") {
+    return [...ROSEMARY_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -1477,6 +1508,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Wild-soft") return [...OREGANO_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Peel-soft") return [...MARJORAM_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Jar-tiny") return [...THYME_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Pot-cool") return [...ROSEMARY_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -1628,6 +1660,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === THYME_FRIEND_ID || friendId === "friend_047") {
     return shufflePool([...THYME_NAMING_CHIPS], count);
   }
+  if (friendId === ROSEMARY_FRIEND_ID || friendId === "friend_048") {
+    return shufflePool([...ROSEMARY_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -1690,6 +1725,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_OREGANO.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_MARJORAM.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_THYME.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_ROSEMARY.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -1748,6 +1784,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Wild-soft") return "pizza stone";
   if (personality === "Peel-soft") return "pizza peel";
   if (personality === "Jar-tiny") return "thyme jar";
+  if (personality === "Pot-cool") return "rosemary pot";
   return "sun patch";
 }
 

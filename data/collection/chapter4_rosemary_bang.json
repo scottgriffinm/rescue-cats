@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_rosemary_bang",
+  "status": "READY",
+  "friend_id": "friend_048",
+  "unlock_clear": 144,
+  "personality": "Pot-cool",
+  "display_line": "Cool dusty. Already claimed the rosemary pot.",
+  "default_name": "Rosemary",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/rosemary_loaf_48.svg",
+    "loaf_72": "/assets/cats/rosemary_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "rosemary"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Rosemary",
+      "Needle",
+      "Woody"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_048": [
+      "{Name}: Cool dusty. Already claimed the rosemary pot.",
+      "{Name}: Looks kitchen-cool. Owns the pot."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 144,
+    "sku_id": null,
+    "note": "Ch4. Thyme Pass next. No gift. Ban Thyme/Pinch/Twig and all prior pools. Bean parade stands. No Pebble."
+  }
+}
