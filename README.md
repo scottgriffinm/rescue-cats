@@ -56,6 +56,7 @@ npm run verify:levels
 # node scripts/play-chapter4-lavender.mjs
 # node scripts/play-chapter4-chamomile.mjs
 # node scripts/play-chapter4-bergamot.mjs
+# node scripts/play-chapter4-jasmine.mjs
 ```
 
 ## Routes
