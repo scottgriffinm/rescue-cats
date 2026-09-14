@@ -53,7 +53,8 @@ export const ART_KIT_PATH: Record<
   | "tarragon"
   | "oregano"
   | "marjoram"
-  | "thyme",
+  | "thyme"
+  | "rosemary",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -247,6 +248,10 @@ export const ART_KIT_PATH: Record<
   thyme: {
     loaf48: "/assets/cats/thyme_loaf_48.svg",
     loaf72: "/assets/cats/thyme_loaf_72.svg",
+  },
+  rosemary: {
+    loaf48: "/assets/cats/rosemary_loaf_48.svg",
+    loaf72: "/assets/cats/rosemary_loaf_72.svg",
   },
 };
 

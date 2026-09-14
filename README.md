@@ -50,6 +50,7 @@ npm run verify:levels
 # node scripts/play-chapter4-oregano.mjs
 # node scripts/play-chapter4-marjoram.mjs
 # node scripts/play-chapter4-thyme.mjs
+# node scripts/play-chapter4-rosemary.mjs
 ```
 
 ## Routes

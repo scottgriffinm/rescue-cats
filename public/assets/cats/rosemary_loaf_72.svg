@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="rosemary-loaf-72">
+      <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6" fill="#7A9B88" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <g clip-path="url(#rosemary-loaf-72)" fill="#2F463C">
+    <ellipse cx="16.2" cy="24.8" rx="0.28" ry="1.55" transform="rotate(-18 16.2 24.8)"/>
+    <ellipse cx="22.4" cy="23.2" rx="0.26" ry="1.7" transform="rotate(8 22.4 23.2)"/>
+    <ellipse cx="31.0" cy="24.6" rx="0.28" ry="1.6" transform="rotate(-22 31.0 24.6)"/>
+    <ellipse cx="18.6" cy="32.2" rx="0.24" ry="1.45" transform="rotate(14 18.6 32.2)"/>
+    <ellipse cx="27.8" cy="33.0" rx="0.26" ry="1.6" transform="rotate(-10 27.8 33.0)"/>
+    <ellipse cx="33.6" cy="29.0" rx="0.22" ry="1.4" transform="rotate(16 33.6 29.0)"/>
+    <ellipse cx="21.2" cy="28.6" rx="0.22" ry="1.3" transform="rotate(-26 21.2 28.6)"/>
+  </g>
+  <path d="M11.6 21.4 C11.2 14.8 15.8 12.8 17.8 17.4" fill="#5A7A6C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36.4 21.4 C36.8 14.8 32.2 12.8 30.2 17.4" fill="#5A7A6C" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="33.8" rx="7" ry="4.6" fill="#C8D6CE"/>
+  <circle cx="18" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.4" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="18.45" cy="26.7" r="0.4" fill="#E8F2EC"/>
+  <circle cx="28.85" cy="26.7" r="0.4" fill="#E8F2EC"/>
+  <path d="M39.2 34 C42.4 32.8 43.6 36.4 40.8 37.6" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
