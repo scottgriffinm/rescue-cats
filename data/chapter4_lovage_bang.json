@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_lovage_bang",
+  "status": "READY",
+  "friend_id": "friend_041",
+  "unlock_clear": 123,
+  "personality": "Rib-soft",
+  "display_line": "Celery-stem green. Already claimed the rib bed.",
+  "default_name": "Lovage",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/lovage_loaf_48.svg",
+    "loaf_72": "/assets/cats/lovage_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "lovage"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Lovage",
+      "Stem",
+      "Rib"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_041": [
+      "{Name}: Celery-stem green. Already claimed the rib bed.",
+      "{Name}: Looks stem-cut. Owns the bed."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 123,
+    "sku_id": null,
+    "note": "Ch4. Chervil Pass next. No gift. Ban Chervil/Frill/Lace and all prior pools. Bean parade stands. No Pebble."
+  }
+}
