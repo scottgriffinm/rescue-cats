@@ -225,14 +225,14 @@ export function verifyChapter4Chamomile(solves: Record<string, Array<[string, Di
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const chamomile =/g) || []).length !== 1) throw new Error("YardScene must declare chamomile once");
   if ((yardC.match(/\{chamomile \?/g) || []).length !== 1) throw new Error("YardScene must render chamomile once");
-  if (TUTORIAL_RESCUES.length !== 52) throw new Error("Met must include through Chamomile (52)");
+  if (TUTORIAL_RESCUES.length !== 53) throw new Error("Met must include through Chamomile (52)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[159]) throw new Error("no friend_053 @159 this slice");
+  if (SLICE_UNLOCKS[159] !== "friend_053") throw new Error("SLICE_UNLOCKS[159] must be friend_053 after Bergamot ship");
   if (/pebble|Pebble/i.test(chamomile48 + chamomile72)) throw new Error("Chamomile art must not use Pebble");
   if (/lavender|bloom|calm|catnip|mint|chill|frost|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(chamomile48 + chamomile72)) {
     throw new Error("Chamomile art must not collide Lavender/Catnip/Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

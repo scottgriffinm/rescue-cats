@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_bergamot_bang",
+  "status": "READY",
+  "friend_id": "friend_053",
+  "unlock_clear": 159,
+  "personality": "Saucer-soft",
+  "display_line": "Bright citrus. Already claimed the bergamot saucer.",
+  "default_name": "Bergamot",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/bergamot_loaf_48.svg",
+    "loaf_72": "/assets/cats/bergamot_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "bergamot"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Bergamot",
+      "Citrus",
+      "Earl"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_053": [
+      "{Name}: Bright citrus. Already claimed the bergamot saucer.",
+      "{Name}: Looks yard-bright. Owns the saucer."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 159,
+    "sku_id": null,
+    "note": "Ch4. Chamomile Pass next. No gift. Ban Chamomile/Daisy/Tea and all prior pools. Bean parade stands. No Pebble. Citrus chip is CEO-locked on Bergamot."
+  }
+}

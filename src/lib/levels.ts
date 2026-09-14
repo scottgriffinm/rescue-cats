@@ -51,6 +51,7 @@ import chapter4ac from "../../data/levels/CHAPTER4_PUZZLE_L148_L150.json";
 import chapter4ad from "../../data/levels/CHAPTER4_PUZZLE_L151_L153.json";
 import chapter4ae from "../../data/levels/CHAPTER4_PUZZLE_L154_L156.json";
 import chapter4af from "../../data/levels/CHAPTER4_PUZZLE_L157_L159.json";
+import chapter4ag from "../../data/levels/CHAPTER4_PUZZLE_L160_L162.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -215,6 +216,9 @@ const HEADLINES: Record<string, string> = {
   L157: "DAISY CUT",
   L158: "TEA GAP",
   L159: "CUP STOP",
+  L160: "CITRUS CUT",
+  L161: "EARL GAP",
+  L162: "SAUCER STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -376,6 +380,9 @@ const HINTS: Record<string, string> = {
   L157: "Daisy cut — orange north first; gray cuts after; not Bloom orange-south, not Nip gray-south, not Chill gray-north.",
   L158: "Tea gap — black north then orange threads; not Calm black-west, not Dream orange-north, not Frost orange-east.",
   L159: "Cup stop — cup-offset seats; off Bundle (2,4)/(1,1)/(2,1)/(4,5); off Pouch (4,2)/(4,0)/(4,1)/(0,4); off Tin (0,3)/(3,5); off Pot (1,3)/(2,2); off Jar (3,2)/(5,4); not Hold*/Park*.",
+  L160: "Citrus cut — orange east first; gray cuts after; not Daisy orange-north, not Bloom orange-south, not Nip gray-south, not Chill gray-north.",
+  L161: "Earl gap — black east then orange threads; not Tea black-north, not Calm black-west, not Dream orange-north, not Frost orange-east.",
+  L162: "Saucer stop — saucer-offset seats; off Cup (4,4)/(5,2)/(3,1)/(1,5); off Bundle (2,4)/(1,1)/(2,1)/(4,5); off Pouch (4,2)/(4,0)/(4,1)/(0,4); off Tin (0,3)/(3,5); off Pot (1,3)/(2,2); off Jar (3,2)/(5,4); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -482,6 +489,7 @@ const authored = [
   ...chapter4ad.levels,
   ...chapter4ae.levels,
   ...chapter4af.levels,
+  ...chapter4ag.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
