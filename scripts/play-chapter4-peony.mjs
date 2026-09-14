@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L174 → Camellia@174 naming, then L175–L177.
+ * Chapter 4 beat: L177 → Peony@177 naming, then L178–L180.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-camellia";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-peony";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -80,6 +80,7 @@ const PARADE = [
   ["friend_055", "Magnolia", 165],
   ["friend_056", "Hibiscus", 168],
   ["friend_057", "Gardenia", 171],
+  ["friend_058", "Camellia", 174],
 ];
 
 const completedIds = [
@@ -92,7 +93,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 163 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 166 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -118,7 +119,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Gardenia claimed the gardenia dish."],
+  bubbles: ["Camellia claimed the camellia tray."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -167,23 +168,23 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L174`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("DISH CLAIM"));
-  await shot(page, "01_l174_before_camellia");
+  await page.goto(`${BASE}/level/L177`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("TRAY STOP"));
+  await shot(page, "01_l177_before_peony");
   await play(
     page,
     [
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
       ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -201,17 +202,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("camellia naming", modal);
+  console.log("peony naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Camellia prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Peony prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Soft wax. Already claimed the camellia tray.") {
-    throw new Error(`Camellia display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft petal. Already claimed the peony bowl.") {
+    throw new Error(`Peony display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Camellia,Wax,Rose") {
-    throw new Error(`Camellia chips must be Camellia/Wax/Rose, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Peony,Bud,Satin") {
+    throw new Error(`Peony chips must be Peony/Bud/Satin, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Camellia") ||
+    modal.chips.includes("Wax") ||
+    modal.chips.includes("Rose") ||
     modal.chips.includes("Gardenia") ||
     modal.chips.includes("Snow") ||
     modal.chips.includes("Velvet") ||
@@ -243,32 +247,35 @@ try {
     modal.chips.includes("Sheer") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Camellia chips collided with Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Pebble pools");
+    throw new Error("Peony chips collided with Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error(`Camellia hero missing rose-camellia loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
+    throw new Error(`Peony hero missing blush-petal loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
+    throw new Error("Peony hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Camellia hero must not use the Gardenia loaf");
+    throw new Error("Peony hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Camellia hero must not use the Hibiscus loaf");
+    throw new Error("Peony hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Camellia hero must not use the Magnolia loaf");
+    throw new Error("Peony hero must not use the Magnolia loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Camellia hero must not use the Jasmine loaf");
+    throw new Error("Peony hero must not use the Jasmine loaf");
   }
-  await shot(page, "02_camellia_naming");
+  await shot(page, "02_peony_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Camellia") &&
-      ((document.body.innerText || "").includes("tray") ||
-        (document.body.innerText || "").includes("camellia") ||
+      (document.body.innerText || "").includes("Peony") &&
+      ((document.body.innerText || "").includes("bowl") ||
+        (document.body.innerText || "").includes("peony") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -281,87 +288,86 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_058")) {
-    throw new Error("Camellia was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_059")) {
+    throw new Error("Peony was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_058")?.name !== "Camellia") {
-    throw new Error("Camellia name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_059")?.name !== "Peony") {
+    throw new Error("Peony name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_059")) {
-    throw new Error("friend_059 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_060")) {
+    throw new Error("friend_060 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/camellia_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/camellia_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/peony_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/peony_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Camellia rose-camellia loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Peony blush-petal loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("tray") && !yard.text.includes("Camellia")) {
-    throw new Error("yard missing Camellia camellia tray line");
+  if (!yard.text.includes("bowl") && !yard.text.includes("Peony")) {
+    throw new Error("yard missing Peony peony bowl line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_camellia_yard");
+  await shot(page, "03_peony_yard");
 
-  await page.goto(`${BASE}/level/L175`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("WAX CUT"));
+  await page.goto(`${BASE}/level/L178`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BUD CUT"));
   await play(
     page,
     [
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
       ["orange", "ArrowRight"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowDown"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L176`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("ROSE GAP"));
+  await page.goto(`${BASE}/level/L179`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SATIN GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["black", "ArrowRight"],
       ["black", "ArrowDown"],
       ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowRight"],
       ["orange", "ArrowDown"],
-      ["black", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
     ],
     "Home",
   );
-  await shot(page, "04_l176_win");
+  await shot(page, "04_l179_win");
 
-  await page.goto(`${BASE}/level/L177`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("TRAY STOP"));
+  await page.goto(`${BASE}/level/L180`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BOWL STOP"));
   await play(
     page,
     [
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
       ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
+      ["gray", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l177_win");
+  await shot(page, "05_l180_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -369,7 +375,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L174", "L175", "L176", "L177"]) {
+  for (const id of ["L177", "L178", "L179", "L180"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -377,20 +383,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_059")) {
-    throw new Error("friend_059 must stay pending, not named, on the Camellia slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_059")) {
-    throw new Error("L177 clear must queue Peony when friend_059 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_060")) {
+    throw new Error("friend_060 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_060")) {
-    throw new Error("L177 clear must not queue friend_060");
+    throw new Error("L180 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_058").length !== 1) {
-    throw new Error("L177 must not unlock a Camellia duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L180 must not open a next-friend naming modal");
   }
-  if (!after.hud.includes("177") && !after.text.includes("177")) {
-    throw new Error("Campaign HUD must show through 177 after L177 clear");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_059").length !== 1) {
+    throw new Error("L180 must not unlock a Peony duplicate");
+  }
+  if (!after.hud.includes("180") && !after.text.includes("180")) {
+    throw new Error("Campaign HUD must show through 180 after L180 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -410,9 +416,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L174 + CAMELLIA + L175-177 OK");
+  console.log("CHAPTER 4 L177 + PEONY + L178-180 OK");
 } catch (error) {
-  console.error("CHAPTER 4 CAMELLIA FAIL", error);
+  console.error("CHAPTER 4 PEONY FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_peony_bang",
+  "status": "READY",
+  "friend_id": "friend_059",
+  "unlock_clear": 177,
+  "personality": "Petal-soft",
+  "display_line": "Soft petal. Already claimed the peony bowl.",
+  "default_name": "Peony",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/peony_loaf_48.svg",
+    "loaf_72": "/assets/cats/peony_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "peony"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Peony", "Bud", "Satin"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_059": [
+      "{Name}: Soft petal. Already claimed the peony bowl.",
+      "{Name}: Looks yard-bright. Owns the bowl."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 177,
+    "sku_id": null,
+    "note": "Ch4. Camellia Pass next. No gift. Ban Camellia/Wax/Rose and all prior pools. Bean parade stands. No Pebble. Peony chip is CEO-locked on Peony. No friend_060."
+  }
+}
