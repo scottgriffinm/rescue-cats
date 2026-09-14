@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L153 → Lavender@153 naming, then L154–L156.
+ * Chapter 4 beat: L156 → Chamomile@156 naming, then L157–L159.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-lavender";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-chamomile";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -73,6 +73,7 @@ const PARADE = [
   ["friend_048", "Rosemary", 144],
   ["friend_049", "Mint", 147],
   ["friend_050", "Catnip", 150],
+  ["friend_051", "Lavender", 153],
 ];
 
 const completedIds = [
@@ -85,7 +86,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 142 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 145 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -111,7 +112,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Catnip claimed the catnip pouch."],
+  bubbles: ["Lavender claimed the lavender bundle."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -160,22 +161,22 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L153`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("POUCH STOP"));
-  await shot(page, "01_l153_before_lavender");
+  await page.goto(`${BASE}/level/L156`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BUNDLE STOP"));
+  await shot(page, "01_l156_before_chamomile");
   await play(
     page,
     [
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
     ],
     "New friend!",
   );
@@ -193,57 +194,54 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("lavender naming", modal);
+  console.log("chamomile naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Lavender prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Chamomile prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Soft lilac. Already claimed the lavender bundle.") {
-    throw new Error(`Lavender display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft cream. Already claimed the chamomile cup.") {
+    throw new Error(`Chamomile display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Lavender,Bloom,Calm") {
-    throw new Error(`Lavender chips must be Lavender/Bloom/Calm, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Chamomile,Daisy,Tea") {
+    throw new Error(`Chamomile chips must be Chamomile/Daisy/Tea, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Lavender") ||
+    modal.chips.includes("Bloom") ||
+    modal.chips.includes("Calm") ||
     modal.chips.includes("Catnip") ||
     modal.chips.includes("Nip") ||
     modal.chips.includes("Dream") ||
     modal.chips.includes("Mint") ||
     modal.chips.includes("Chill") ||
     modal.chips.includes("Frost") ||
-    modal.chips.includes("Rosemary") ||
-    modal.chips.includes("Needle") ||
-    modal.chips.includes("Woody") ||
-    modal.chips.includes("Thyme") ||
-    modal.chips.includes("Pinch") ||
-    modal.chips.includes("Twig") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Lavender chips collided with Catnip/Mint/Rosemary/Thyme/Pebble pools");
+    throw new Error("Chamomile chips collided with Lavender/Catnip/Mint/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/lavender_loaf_72.svg")) {
-    throw new Error(`Lavender hero missing lilac-gray loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/chamomile_loaf_72.svg")) {
+    throw new Error(`Chamomile hero missing cream-gold loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/lavender_loaf_72.svg")) {
+    throw new Error("Chamomile hero must not use the Lavender loaf");
   }
   if (modal.hero.includes("/assets/cats/catnip_loaf_72.svg")) {
-    throw new Error("Lavender hero must not use the Catnip loaf");
+    throw new Error("Chamomile hero must not use the Catnip loaf");
   }
   if (modal.hero.includes("/assets/cats/mint_loaf_72.svg")) {
-    throw new Error("Lavender hero must not use the Mint loaf");
+    throw new Error("Chamomile hero must not use the Mint loaf");
   }
-  if (modal.hero.includes("/assets/cats/rosemary_loaf_72.svg")) {
-    throw new Error("Lavender hero must not use the Rosemary loaf");
+  if (modal.hero.includes("/assets/cats/fennel_loaf_72.svg")) {
+    throw new Error("Chamomile hero must not use the Fennel loaf");
   }
-  if (modal.hero.includes("/assets/cats/thyme_loaf_72.svg")) {
-    throw new Error("Lavender hero must not use the Thyme loaf");
-  }
-  await shot(page, "02_lavender_naming");
+  await shot(page, "02_chamomile_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Lavender") &&
-      ((document.body.innerText || "").includes("bundle") ||
-        (document.body.innerText || "").includes("lavender") ||
+      (document.body.innerText || "").includes("Chamomile") &&
+      ((document.body.innerText || "").includes("cup") ||
+        (document.body.innerText || "").includes("chamomile") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -256,93 +254,94 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_051")) {
-    throw new Error("Lavender was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_052")) {
+    throw new Error("Chamomile was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_051")?.name !== "Lavender") {
-    throw new Error("Lavender name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_052")?.name !== "Chamomile") {
+    throw new Error("Chamomile name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_052")) {
-    throw new Error("friend_052 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_053")) {
+    throw new Error("friend_053 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/lavender_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/lavender_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/chamomile_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/chamomile_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Lavender lilac-gray loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Chamomile cream-gold loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("bundle") && !yard.text.includes("Lavender")) {
-    throw new Error("yard missing Lavender lavender bundle line");
+  if (!yard.text.includes("cup") && !yard.text.includes("Chamomile")) {
+    throw new Error("yard missing Chamomile chamomile cup line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_lavender_yard");
+  await shot(page, "03_chamomile_yard");
 
-  await page.goto(`${BASE}/level/L154`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("BLOOM CUT"));
+  await page.goto(`${BASE}/level/L157`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("DAISY CUT"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
       ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["gray", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L155`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CALM GAP"));
+  await page.goto(`${BASE}/level/L158`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("TEA GAP"));
   await play(
     page,
     [
-      ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowRight"],
       ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
       ["black", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowRight"],
       ["orange", "ArrowLeft"],
-      ["black", "ArrowLeft"],
+      ["orange", "ArrowDown"],
     ],
     "Home",
   );
-  await shot(page, "04_l155_win");
+  await shot(page, "04_l158_win");
 
-  await page.goto(`${BASE}/level/L156`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("BUNDLE STOP"));
+  await page.goto(`${BASE}/level/L159`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CUP STOP"));
   await play(
     page,
     [
       ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowDown"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowRight"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l156_win");
+  await shot(page, "05_l159_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     text: document.body.innerText,
     storageKeys: Object.keys(localStorage),
   }));
-  for (const id of ["L153", "L154", "L155", "L156"]) {
+  for (const id of ["L156", "L157", "L158", "L159"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -350,17 +349,17 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_052")) {
-    throw new Error("friend_052 must stay pending, not named, on the Lavender slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_052")) {
-    throw new Error("L156 clear must queue Chamomile when friend_052 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_053")) {
+    throw new Error("friend_053 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_053")) {
-    throw new Error("L156 clear must not queue friend_053");
+    throw new Error("L159 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_051").length !== 1) {
-    throw new Error("L156 must not unlock a Lavender duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L159 must not open a next-friend naming modal");
+  }
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_052").length !== 1) {
+    throw new Error("L159 must not unlock a Chamomile duplicate");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -380,9 +379,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L153 + LAVENDER + L154-156 OK");
+  console.log("CHAPTER 4 L156 + CHAMOMILE + L157-159 OK");
 } catch (error) {
-  console.error("CHAPTER 4 LAVENDER FAIL", error);
+  console.error("CHAPTER 4 CHAMOMILE FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_chamomile_bang",
+  "status": "READY",
+  "friend_id": "friend_052",
+  "unlock_clear": 156,
+  "personality": "Cup-soft",
+  "display_line": "Soft cream. Already claimed the chamomile cup.",
+  "default_name": "Chamomile",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/chamomile_loaf_48.svg",
+    "loaf_72": "/assets/cats/chamomile_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "chamomile"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Chamomile",
+      "Daisy",
+      "Tea"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_052": [
+      "{Name}: Soft cream. Already claimed the chamomile cup.",
+      "{Name}: Looks yard-happy. Owns the cup."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 156,
+    "sku_id": null,
+    "note": "Ch4. Lavender Pass next. No gift. Ban Lavender/Bloom/Calm and all prior pools. Bean parade stands. No Pebble. Daisy chip is CEO-locked on Chamomile."
+  }
+}

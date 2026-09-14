@@ -50,6 +50,7 @@ import chapter4ab from "../../data/levels/CHAPTER4_PUZZLE_L145_L147.json";
 import chapter4ac from "../../data/levels/CHAPTER4_PUZZLE_L148_L150.json";
 import chapter4ad from "../../data/levels/CHAPTER4_PUZZLE_L151_L153.json";
 import chapter4ae from "../../data/levels/CHAPTER4_PUZZLE_L154_L156.json";
+import chapter4af from "../../data/levels/CHAPTER4_PUZZLE_L157_L159.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -211,6 +212,9 @@ const HEADLINES: Record<string, string> = {
   L154: "BLOOM CUT",
   L155: "CALM GAP",
   L156: "BUNDLE STOP",
+  L157: "DAISY CUT",
+  L158: "TEA GAP",
+  L159: "CUP STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -369,6 +373,9 @@ const HINTS: Record<string, string> = {
   L154: "Bloom cut — orange south first; gray cuts after; not Nip gray-south, not Chill gray-north, not Needle orange-north, not Pinch gray-west, not Softleaf orange-east, not Stone gray-east, not Spear orange-west.",
   L155: "Calm gap — black west then orange threads; not Dream orange-north, not Frost orange-east, not Woody orange-south, not Twig black-east, not Dusty black-north, not Wild orange-west, not Bitters black-south.",
   L156: "Bundle stop — bundle-offset seats; off Pouch (4,2)/(4,0)/(4,1)/(0,4); off Tin (0,3)/(3,5); off Pot (1,3)/(2,2); off Jar (3,2)/(5,4); not Hold*/Park*.",
+  L157: "Daisy cut — orange north first; gray cuts after; not Bloom orange-south, not Nip gray-south, not Chill gray-north.",
+  L158: "Tea gap — black north then orange threads; not Calm black-west, not Dream orange-north, not Frost orange-east.",
+  L159: "Cup stop — cup-offset seats; off Bundle (2,4)/(1,1)/(2,1)/(4,5); off Pouch (4,2)/(4,0)/(4,1)/(0,4); off Tin (0,3)/(3,5); off Pot (1,3)/(2,2); off Jar (3,2)/(5,4); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -474,6 +481,7 @@ const authored = [
   ...chapter4ac.levels,
   ...chapter4ad.levels,
   ...chapter4ae.levels,
+  ...chapter4af.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

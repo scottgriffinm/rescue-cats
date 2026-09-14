@@ -115,6 +115,7 @@ export function YardScene({
   const mint = friends.find((friend) => friend.friendId === "friend_049");
   const catnip = friends.find((friend) => friend.friendId === "friend_050");
   const lavender = friends.find((friend) => friend.friendId === "friend_051");
+  const chamomile = friends.find((friend) => friend.friendId === "friend_052");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -166,7 +167,8 @@ export function YardScene({
       friend.friendId !== "friend_048" &&
       friend.friendId !== "friend_049" &&
       friend.friendId !== "friend_050" &&
-      friend.friendId !== "friend_051",
+      friend.friendId !== "friend_051" &&
+      friend.friendId !== "friend_052",
   );
 
   return (
@@ -1303,6 +1305,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{lavender.name}</p>
+        </div>
+      ) : null}
+
+      {chamomile ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "50%", top: "97%" }}
+        >
+          <FriendSprite
+            kit={friendById(chamomile.friendId)?.phenotype.artKit ?? "chamomile"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === chamomile.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(chamomile.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${chamomile.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{chamomile.name}</p>
         </div>
       ) : null}
 

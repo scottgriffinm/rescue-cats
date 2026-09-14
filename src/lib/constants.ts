@@ -268,6 +268,10 @@ export const ART_KIT_PATH: Record<
     loaf48: "/assets/cats/lavender_loaf_48.svg",
     loaf72: "/assets/cats/lavender_loaf_72.svg",
   },
+  chamomile: {
+    loaf48: "/assets/cats/chamomile_loaf_48.svg",
+    loaf72: "/assets/cats/chamomile_loaf_72.svg",
+  },
 };
 
 export const PUZZLE_BELLY_SRC = {

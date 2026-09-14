@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Lavender Pass — L157–L159 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L157–L159",
+  "notes": "L157 Daisy Cut / L158 Tea Gap / L159 Cup Stop — off Bloom/Calm/Bundle habits; not Chamomile Cut/Gap/Stop; no WRAP/edge twin of Nori/Medlar; not L156 Bundle / L153 Pouch / L150 Tin / L147 Pot / L144 Jar seats.",
+  "levels": [
+    {
+      "id": "L157",
+      "name": "Daisy Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_daisy_cut_gray",
+      "walls": [
+        { "x": 5, "y": 4 },
+        { "x": 3, "y": 3 },
+        { "x": 3, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "daisy_cut_gray"
+    },
+    {
+      "id": "L158",
+      "name": "Tea Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tea_gap_black",
+      "walls": [
+        { "x": 0, "y": 5 },
+        { "x": 0, "y": 2 },
+        { "x": 5, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 4, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 3, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "tea_gap_black"
+    },
+    {
+      "id": "L159",
+      "name": "Cup Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_cup_stop_gray",
+      "walls": [
+        { "x": 0, "y": 0 },
+        { "x": 2, "y": 4 },
+        { "x": 4, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "cup_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L157": "Daisy Cut — orange north first; gray cuts after; not Bloom orange-south, not Nip gray-south, not Chill gray-north",
+    "L158": "Tea Gap — black north then orange threads; not Calm black-west, not Dream orange-north, not Frost orange-east",
+    "L159": "Cup Stop — cup-offset seats; not Bundle (2,4)/(1,1)/(2,1)/(4,5), not Pouch (4,2)/(4,0)/(4,1)/(0,4), not Tin (0,3)/(3,5), not Pot (1,3)/(2,2), not Jar (3,2)/(5,4), not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L157": 11,
+      "L158": 10,
+      "L159": 11
+    }
+  },
+  "deltas": {
+    "L157": "(0, 2)",
+    "L158": "(3, 1)",
+    "L159": "(2, -4)"
+  }
+}
