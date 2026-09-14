@@ -229,7 +229,7 @@ export function verifyChapter4Bergamot(solves: Record<string, Array<[string, Dir
   const yardB = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardB.match(/const bergamot =/g) || []).length !== 1) throw new Error("YardScene must declare bergamot once");
   if ((yardB.match(/\{bergamot \?/g) || []).length !== 1) throw new Error("YardScene must render bergamot once");
-  if (TUTORIAL_RESCUES.length !== 57) throw new Error("Met must include through Bergamot (53)");
+  if (TUTORIAL_RESCUES.length !== 58) throw new Error("Met must include through Bergamot (53)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -240,6 +240,7 @@ export function verifyChapter4Bergamot(solves: Record<string, Array<[string, Dir
   if (SLICE_UNLOCKS[165] !== "friend_055") throw new Error("SLICE_UNLOCKS[165] must be friend_055 after Magnolia ship");
   if (SLICE_UNLOCKS[168] !== "friend_056") throw new Error("SLICE_UNLOCKS[168] must be friend_056 after Hibiscus ship");
   if (SLICE_UNLOCKS[171] !== "friend_057") throw new Error("SLICE_UNLOCKS[171] must be friend_057 after Gardenia ship");
+  if (SLICE_UNLOCKS[174] !== "friend_058") throw new Error("SLICE_UNLOCKS[174] must be friend_058 after Camellia ship");
   if (/pebble|Pebble/i.test(bergamot48 + bergamot72)) throw new Error("Bergamot art must not use Pebble");
   if (/chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(bergamot48 + bergamot72)) {
     throw new Error("Bergamot art must not collide Chamomile/Lavender/Catnip/Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

@@ -225,7 +225,7 @@ export function verifyChapter4Chamomile(solves: Record<string, Array<[string, Di
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const chamomile =/g) || []).length !== 1) throw new Error("YardScene must declare chamomile once");
   if ((yardC.match(/\{chamomile \?/g) || []).length !== 1) throw new Error("YardScene must render chamomile once");
-  if (TUTORIAL_RESCUES.length !== 57) throw new Error("Met must include through Chamomile (52)");
+  if (TUTORIAL_RESCUES.length !== 58) throw new Error("Met must include through Chamomile (52)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -237,6 +237,7 @@ export function verifyChapter4Chamomile(solves: Record<string, Array<[string, Di
   if (SLICE_UNLOCKS[165] !== "friend_055") throw new Error("SLICE_UNLOCKS[165] must be friend_055 after Magnolia ship");
   if (SLICE_UNLOCKS[168] !== "friend_056") throw new Error("SLICE_UNLOCKS[168] must be friend_056 after Hibiscus ship");
   if (SLICE_UNLOCKS[171] !== "friend_057") throw new Error("SLICE_UNLOCKS[171] must be friend_057 after Gardenia ship");
+  if (SLICE_UNLOCKS[174] !== "friend_058") throw new Error("SLICE_UNLOCKS[174] must be friend_058 after Camellia ship");
   if (/pebble|Pebble/i.test(chamomile48 + chamomile72)) throw new Error("Chamomile art must not use Pebble");
   if (/lavender|bloom|calm|catnip|mint|chill|frost|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(chamomile48 + chamomile72)) {
     throw new Error("Chamomile art must not collide Lavender/Catnip/Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
