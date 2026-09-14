@@ -14,6 +14,7 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
+  [180, "friend_060", "Azalea@180 must stay after this slice"],
   [174, "friend_058", "Camellia@174 must stay"],
   [171, "friend_057", "Gardenia@171 must stay"],
   [168, "friend_056", "Hibiscus@168 must stay"],
@@ -256,14 +257,14 @@ export function verifyChapter4Peony(solves: Record<string, Array<[string, Dir]>>
   const yardP = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardP.match(/const peony =/g) || []).length !== 1) throw new Error("YardScene must declare peony once");
   if ((yardP.match(/\{peony \?/g) || []).length !== 1) throw new Error("YardScene must render peony once");
-  if (TUTORIAL_RESCUES.length !== 59) throw new Error("Met must include through Peony (59)");
+  if (TUTORIAL_RESCUES.length !== 60) throw new Error("Met must include through Peony (59)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[180]) throw new Error("no friend_060 @180 this slice");
+  if (SLICE_UNLOCKS[180] !== "friend_060") throw new Error("SLICE_UNLOCKS[180] must be friend_060 after Azalea ship");
   if (/pebble|Pebble/i.test(peony48 + peony72)) throw new Error("Peony art must not use Pebble");
   if (/camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(peony48 + peony72)) {
     throw new Error("Peony art must not collide Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
