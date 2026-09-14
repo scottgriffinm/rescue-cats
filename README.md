@@ -47,6 +47,7 @@ npm run verify:levels
 # node scripts/play-chapter4-parsley.mjs
 # node scripts/play-chapter4-dill.mjs
 # node scripts/play-chapter4-tarragon.mjs
+# node scripts/play-chapter4-oregano.mjs
 ```
 
 ## Routes
