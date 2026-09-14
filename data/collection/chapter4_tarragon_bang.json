@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_tarragon_bang",
+  "status": "READY",
+  "friend_id": "friend_044",
+  "unlock_clear": 132,
+  "personality": "Spear-soft",
+  "display_line": "Soft spear. Already claimed the vinegar cruet.",
+  "default_name": "Tarragon",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/tarragon_loaf_48.svg",
+    "loaf_72": "/assets/cats/tarragon_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "tarragon"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Tarragon",
+      "Spear",
+      "Bitters"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_044": [
+      "{Name}: Soft spear. Already claimed the vinegar cruet.",
+      "{Name}: Looks spear-cut. Owns the cruet."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 132,
+    "sku_id": null,
+    "note": "Ch4. Dill Pass next. No gift. Ban Dill/Frondlet/Seed and all prior pools. Bean parade stands. No Pebble."
+  }
+}

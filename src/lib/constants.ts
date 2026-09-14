@@ -49,7 +49,8 @@ export const ART_KIT_PATH: Record<
   | "chervil"
   | "lovage"
   | "parsley"
-  | "dill",
+  | "dill"
+  | "tarragon",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -227,6 +228,10 @@ export const ART_KIT_PATH: Record<
   dill: {
     loaf48: "/assets/cats/dill_loaf_48.svg",
     loaf72: "/assets/cats/dill_loaf_72.svg",
+  },
+  tarragon: {
+    loaf48: "/assets/cats/tarragon_loaf_48.svg",
+    loaf72: "/assets/cats/tarragon_loaf_72.svg",
   },
 };
 
