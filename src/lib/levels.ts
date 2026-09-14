@@ -40,6 +40,7 @@ import chapter4r from "../../data/levels/CHAPTER4_PUZZLE_L115_L117.json";
 import chapter4s from "../../data/levels/CHAPTER4_PUZZLE_L118_L120.json";
 import chapter4t from "../../data/levels/CHAPTER4_PUZZLE_L121_L123.json";
 import chapter4u from "../../data/levels/CHAPTER4_PUZZLE_L124_L126.json";
+import chapter4v from "../../data/levels/CHAPTER4_PUZZLE_L127_L129.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -171,6 +172,9 @@ const HEADLINES: Record<string, string> = {
   L124: "RIB CUT",
   L125: "RIB GAP",
   L126: "BED STOP",
+  L127: "CURL CUT",
+  L128: "SPRIG GAP",
+  L129: "GARNISH STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -299,6 +303,9 @@ const HINTS: Record<string, string> = {
   L124: "Rib cut — gray north first; orange cuts after; not Frill orange-north, not Stem west-then-south.",
   L125: "Rib gap — orange east then black threads; not Lace orange-south, not Anise black-east.",
   L126: "Bed stop — bed-offset seats; off Sill (1,3); off Breeze (1,-2); off Stoop (1,1); not Hold*/Park*.",
+  L127: "Curl cut — orange south first; gray curls after; not Rib gray-north, not Frill orange-north.",
+  L128: "Sprig gap — orange north then black threads; not Rib orange-east, not Lace orange-south.",
+  L129: "Garnish stop — garnish-offset seats; off Bed (2,1); off Sill (1,3); off Breeze (1,-2); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -394,6 +401,7 @@ const authored = [
   ...chapter4s.levels,
   ...chapter4t.levels,
   ...chapter4u.levels,
+  ...chapter4v.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
