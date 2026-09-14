@@ -225,14 +225,14 @@ export function verifyChapter4Catnip(solves: Record<string, Array<[string, Dir]>
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const catnip =/g) || []).length !== 1) throw new Error("YardScene must declare catnip once");
   if ((yardC.match(/\{catnip \?/g) || []).length !== 1) throw new Error("YardScene must render catnip once");
-  if (TUTORIAL_RESCUES.length !== 50) throw new Error("Met must include through Catnip (50)");
+  if (TUTORIAL_RESCUES.length !== 51) throw new Error("Met must include through Catnip (50)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[153]) throw new Error("no friend_051 @153 this slice");
+  if (SLICE_UNLOCKS[153] !== "friend_051") throw new Error("SLICE_UNLOCKS[153] must be friend_051 after Lavender ship");
   if (/pebble|Pebble/i.test(catnip48 + catnip72)) throw new Error("Catnip art must not use Pebble");
   if (/mint|chill|frost|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(catnip48 + catnip72)) {
     throw new Error("Catnip art must not collide Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
