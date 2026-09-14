@@ -41,7 +41,8 @@ export const ART_KIT_PATH: Record<
   | "fig"
   | "plum"
   | "thistle"
-  | "briar",
+  | "briar"
+  | "ivy",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -187,6 +188,10 @@ export const ART_KIT_PATH: Record<
   briar: {
     loaf48: "/assets/cats/briar_loaf_48.svg",
     loaf72: "/assets/cats/briar_loaf_72.svg",
+  },
+  ivy: {
+    loaf48: "/assets/cats/ivy_loaf_48.svg",
+    loaf72: "/assets/cats/ivy_loaf_72.svg",
   },
 };
 
