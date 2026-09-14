@@ -57,7 +57,8 @@ export const ART_KIT_PATH: Record<
   | "rosemary"
   | "mint"
   | "catnip"
-  | "lavender",
+  | "lavender"
+  | "chamomile",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
