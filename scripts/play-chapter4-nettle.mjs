@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L108 → Ivy@108 naming, then L109–L111.
+ * Chapter 4 beat: L111 → Nettle@111 naming, then L112–L114.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-ivy";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-nettle";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -58,6 +58,7 @@ const PARADE = [
   ["friend_033", "Plum", 99],
   ["friend_034", "Thistle", 102],
   ["friend_035", "Briar", 105],
+  ["friend_036", "Ivy", 108],
 ];
 
 const completedIds = [
@@ -70,7 +71,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 97 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 100 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -96,7 +97,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Briar claimed the bramble gap."],
+  bubbles: ["Ivy claimed the porch rail."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -145,23 +146,22 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L108`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("NEST STOP"));
-  await shot(page, "01_l108_before_ivy");
+  await page.goto(`${BASE}/level/L111`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("PORCH STOP"));
+  await shot(page, "01_l111_before_nettle");
   await play(
     page,
     [
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowDown"],
     ],
     "New friend!",
   );
@@ -179,42 +179,42 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("ivy naming", modal);
+  console.log("nettle naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Ivy prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Nettle prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Climbs soft. Already claimed the porch rail.") {
-    throw new Error(`Ivy display line drifted: ${modal.line}`);
+  if (modal.line !== "Stings soft. Already claimed the shady under-rail.") {
+    throw new Error(`Nettle display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Ivy,Tendril,Climb") {
-    throw new Error(`Ivy chips must be Ivy/Tendril/Climb, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Nettle,Sting,Leaf") {
+    throw new Error(`Nettle chips must be Nettle/Sting/Leaf, got ${modal.chips.join("/")}`);
   }
   if (
-    modal.chips.includes("Briar") ||
-    modal.chips.includes("Thorn") ||
-    modal.chips.includes("Hedge") ||
+    modal.chips.includes("Ivy") ||
+    modal.chips.includes("Tendril") ||
+    modal.chips.includes("Climb") ||
     modal.chips.includes("Pebble") ||
-    modal.chips.includes("Thistle")
+    modal.chips.includes("Briar")
   ) {
-    throw new Error("Ivy chips collided with Briar/Thistle/Pebble pools");
+    throw new Error("Nettle chips collided with Ivy/Briar/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/ivy_loaf_72.svg")) {
-    throw new Error(`Ivy hero missing green-black loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/nettle_loaf_72.svg")) {
+    throw new Error(`Nettle hero missing sage-green-gray loaf: ${modal.hero}`);
   }
-  if (modal.hero.includes("/assets/cats/shadow_loaf_72.svg")) {
-    throw new Error("Ivy hero must not use the Shadow loaf");
+  if (modal.hero.includes("/assets/cats/ivy_loaf_72.svg")) {
+    throw new Error("Nettle hero must not use the Ivy loaf");
   }
-  if (modal.hero.includes("/assets/cats/briar_loaf_72.svg")) {
-    throw new Error("Ivy hero must not use the Briar loaf");
+  if (modal.hero.includes("/assets/cats/basil_loaf_72.svg")) {
+    throw new Error("Nettle hero must not use the Basil loaf");
   }
-  await shot(page, "02_ivy_naming");
+  await shot(page, "02_nettle_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Ivy") &&
-      ((document.body.innerText || "").includes("porch rail") ||
+      (document.body.innerText || "").includes("Nettle") &&
+      ((document.body.innerText || "").includes("under-rail") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -227,93 +227,94 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_036")) {
-    throw new Error("Ivy was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_037")) {
+    throw new Error("Nettle was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_036")?.name !== "Ivy") {
-    throw new Error("Ivy name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_037")?.name !== "Nettle") {
+    throw new Error("Nettle name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_037")) {
-    throw new Error("friend_037 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_038")) {
+    throw new Error("friend_038 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/ivy_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/ivy_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/nettle_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/nettle_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Ivy green-black loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Nettle sage-green-gray loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("porch rail") && !yard.text.includes("Ivy")) {
-    throw new Error("yard missing Ivy porch-rail line");
+  if (!yard.text.includes("under-rail") && !yard.text.includes("Nettle")) {
+    throw new Error("yard missing Nettle under-rail line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_ivy_yard");
+  await shot(page, "03_nettle_yard");
 
-  await page.goto(`${BASE}/level/L109`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("RAIL CUT"));
+  await page.goto(`${BASE}/level/L112`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("STEM CUT"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
       ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L110`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SHADE GAP"));
+  await page.goto(`${BASE}/level/L113`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("STING GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["black", "ArrowDown"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
       ["black", "ArrowLeft"],
       ["black", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["orange", "ArrowUp"],
       ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["orange", "ArrowRight"],
+      ["black", "ArrowDown"],
     ],
     "Home",
   );
-  await shot(page, "04_l110_win");
+  await shot(page, "04_l113_win");
 
-  await page.goto(`${BASE}/level/L111`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("PORCH STOP"));
+  await page.goto(`${BASE}/level/L114`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("UNDER STOP"));
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["gray", "ArrowDown"],
-      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l111_win");
+  await shot(page, "05_l114_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     text: document.body.innerText,
     storageKeys: Object.keys(localStorage),
   }));
-  for (const id of ["L108", "L109", "L110", "L111"]) {
+  for (const id of ["L111", "L112", "L113", "L114"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -321,14 +322,17 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_037")) {
-    throw new Error("L111 clear must queue Nettle");
-  }
   if (after.save.friends.some((friend) => friend.friendId === "friend_038")) {
     throw new Error("friend_038 must not unlock this slice");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_036").length !== 1) {
-    throw new Error("L111 must not unlock an Ivy duplicate");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_038")) {
+    throw new Error("L114 clear must not queue the next friend");
+  }
+  if (after.text.includes("New friend!")) {
+    throw new Error("L114 must not open a next-friend naming modal");
+  }
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_037").length !== 1) {
+    throw new Error("L114 must not unlock a Nettle duplicate");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -348,9 +352,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L108 + IVY + L109-111 OK");
+  console.log("CHAPTER 4 L111 + NETTLE + L112-114 OK");
 } catch (error) {
-  console.error("CHAPTER 4 IVY FAIL", error);
+  console.error("CHAPTER 4 NETTLE FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {
