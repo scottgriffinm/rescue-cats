@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_gardenia_bang",
+  "status": "READY",
+  "friend_id": "friend_057",
+  "unlock_clear": 171,
+  "personality": "Dish-soft",
+  "display_line": "Soft porcelain. Already claimed the gardenia dish.",
+  "default_name": "Gardenia",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/gardenia_loaf_48.svg",
+    "loaf_72": "/assets/cats/gardenia_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "gardenia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Gardenia", "Snow", "Velvet"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_057": [
+      "{Name}: Soft porcelain. Already claimed the gardenia dish.",
+      "{Name}: Looks yard-bright. Owns the dish."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 171,
+    "sku_id": null,
+    "note": "Ch4. Hibiscus Pass next. No gift. Ban Hibiscus/Roselle/Punch and all prior pools. Bean parade stands. No Pebble. Gardenia chip is CEO-locked on Gardenia. No friend_058."
+  }
+}
