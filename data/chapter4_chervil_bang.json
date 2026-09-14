@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_chervil_bang",
+  "status": "READY",
+  "friend_id": "friend_040",
+  "unlock_clear": 120,
+  "personality": "Lace-soft",
+  "display_line": "Pale lace. Already claimed the herb sill.",
+  "default_name": "Chervil",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/chervil_loaf_48.svg",
+    "loaf_72": "/assets/cats/chervil_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "chervil"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Chervil",
+      "Frill",
+      "Lace"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_040": [
+      "{Name}: Pale lace. Already claimed the herb sill.",
+      "{Name}: Looks fine-cut. Owns the sill."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 120,
+    "sku_id": null,
+    "note": "Ch4. Fennel Pass next. No gift. Ban Fennel/Frond/Anise and all prior pools. Bean parade stands. No Pebble."
+  }
+}
