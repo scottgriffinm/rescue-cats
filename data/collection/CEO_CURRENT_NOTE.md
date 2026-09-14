@@ -1,22 +1,22 @@
-# CEO note — opening past friend_020 (Ch4 friend_038)
+# CEO note — opening past friend_020 (Ch4 friend_039)
 
 **Date:** 2026-09-14  
 **Author:** Cat Game CEO  
 **Law:** `collection_CURRENT.json` stays FROZEN for cats 1–20 / parade through Bean@60. Ch4 friends 021+ live as additive CEO-locked slice docs under `data/collection/CH4_FRIEND_*.md` — not a rewrite of the first-20 freeze.
 
-## Why open friend_038
-Rival Nettle@111 must **CLOSED Pass** on main/pink (Nettle@111 + L112–L114) before unpark. Cadence past Bean: Rival Pass → next friend + triad. Unlock clear **114**.
+## Why open friend_039
+Rival Sorrel@114 must **CLOSED Pass** on main/pink (Sorrel@114 + L115–L117) before unpark. Cadence past Bean: Rival Pass → next friend + triad. Unlock clear **117**.
 
-## Lock for friend_038
+## Lock for friend_039
 | Field | Value |
 |-------|-------|
-| friend_id | `friend_038` |
-| unlock_clear | **114** |
-| default_name | **Sorrel** |
-| chips | Sorrel / Dock / Zest |
-| art_kit | `sorrel` |
-| board_color | orange (warm lemon-green coat `#C8D24A` + soft tart freckles `#E8A04A` — not Nettle, Basil, Ivy, Juniper, Pepper, Pumpkin, Clover) |
-| gift | none @114 |
+| friend_id | `friend_039` |
+| unlock_clear | **117** |
+| default_name | **Fennel** |
+| chips | Fennel / Frond / Anise |
+| art_kit | `fennel` |
+| board_color | gray (pale cream-gold coat `#E6C86E` + soft frond freckles `#8A7C38` — not Sorrel, Ivory, Fig, Basil, Juniper, Sunny, Linen) |
+| gift | none @117 |
 
 ## Parade / product locks unchanged
 Mango@3 Tux@12 Pumpkin@24 Shadow@27 Noodle@30 Bean@60 · no Pebble · full-viewport · localStorage · soft hearts · L10 Wrong path.

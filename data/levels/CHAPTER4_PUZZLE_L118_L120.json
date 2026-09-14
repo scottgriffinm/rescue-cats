@@ -1,0 +1,209 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Sorrel Pass \u2014 L118\u2013L120 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L118\u2013L120",
+  "notes": "L118 Frond Cut / L119 Anise Gap / L120 Breeze Stop \u2014 off Dock/Zest/Stoop habits; no WRAP/edge twin of Nori/Medlar; not L92 Fennel Gap.",
+  "levels": [
+    {
+      "id": "L118",
+      "name": "Frond Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_frond_cut_gray",
+      "walls": [
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 4,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "frond_cut_gray"
+    },
+    {
+      "id": "L119",
+      "name": "Anise Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_anise_gap_black",
+      "walls": [
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 0,
+          "y": 0,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 2,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "anise_gap_black"
+    },
+    {
+      "id": "L120",
+      "name": "Breeze Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_breeze_stop_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 4,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 5,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "breeze_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L118": "Frond Cut \u2014 gray east first; orange cuts after; not Dock orange-east, not Stem west-then-south",
+    "L119": "Anise Gap \u2014 black east then orange threads; not Zest orange-east, not Sting west-north, not Shade south-west",
+    "L120": "Breeze Stop \u2014 breeze-offset seats; not Stoop (1,1), not Under diagonal, not Porch column"
+  },
+  "solver": {
+    "min_slides": {
+      "L118": 10,
+      "L119": 11,
+      "L120": 10
+    }
+  },
+  "deltas": {
+    "L118": "(4, -1)",
+    "L119": "(2, 1)",
+    "L120": "(1, -2)"
+  }
+}

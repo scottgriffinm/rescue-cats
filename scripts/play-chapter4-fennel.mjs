@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L114 → Sorrel@114 naming, then L115–L117.
+ * Chapter 4 beat: L117 → Fennel@117 naming, then L118–L120.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-sorrel";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-fennel";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -60,6 +60,7 @@ const PARADE = [
   ["friend_035", "Briar", 105],
   ["friend_036", "Ivy", 108],
   ["friend_037", "Nettle", 111],
+  ["friend_038", "Sorrel", 114],
 ];
 
 const completedIds = [
@@ -72,7 +73,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 103 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 106 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -98,7 +99,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Nettle claimed the shady under-rail."],
+  bubbles: ["Sorrel claimed the sunny stoop."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -147,23 +148,23 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L114`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("UNDER STOP"));
-  await shot(page, "01_l114_before_sorrel");
+  await page.goto(`${BASE}/level/L117`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("STOOP STOP"));
+  await shot(page, "01_l117_before_fennel");
   await play(
     page,
     [
       ["orange", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
+      ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
+      ["gray", "ArrowRight"],
       ["gray", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["orange", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -181,44 +182,44 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("sorrel naming", modal);
+  console.log("fennel naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Sorrel prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Fennel prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Zests soft. Already claimed the sunny stoop.") {
-    throw new Error(`Sorrel display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft anise. Already claimed the frond stoop.") {
+    throw new Error(`Fennel display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Sorrel,Dock,Zest") {
-    throw new Error(`Sorrel chips must be Sorrel/Dock/Zest, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Fennel,Frond,Anise") {
+    throw new Error(`Fennel chips must be Fennel/Frond/Anise, got ${modal.chips.join("/")}`);
   }
   if (
-    modal.chips.includes("Nettle") ||
-    modal.chips.includes("Sting") ||
-    modal.chips.includes("Leaf") ||
+    modal.chips.includes("Sorrel") ||
+    modal.chips.includes("Dock") ||
+    modal.chips.includes("Zest") ||
     modal.chips.includes("Pebble") ||
-    modal.chips.includes("Ivy")
+    modal.chips.includes("Nettle")
   ) {
-    throw new Error("Sorrel chips collided with Nettle/Ivy/Pebble pools");
+    throw new Error("Fennel chips collided with Sorrel/Nettle/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/sorrel_loaf_72.svg")) {
-    throw new Error(`Sorrel hero missing lemon-green loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/fennel_loaf_72.svg")) {
+    throw new Error(`Fennel hero missing cream-gold loaf: ${modal.hero}`);
   }
-  if (modal.hero.includes("/assets/cats/nettle_loaf_72.svg")) {
-    throw new Error("Sorrel hero must not use the Nettle loaf");
+  if (modal.hero.includes("/assets/cats/sorrel_loaf_72.svg")) {
+    throw new Error("Fennel hero must not use the Sorrel loaf");
   }
-  if (modal.hero.includes("/assets/cats/basil_loaf_72.svg")) {
-    throw new Error("Sorrel hero must not use the Basil loaf");
+  if (modal.hero.includes("/assets/cats/ivory_loaf_72.svg")) {
+    throw new Error("Fennel hero must not use the Ivory loaf");
   }
-  if (modal.hero.includes("/assets/cats/ivy_loaf_72.svg")) {
-    throw new Error("Sorrel hero must not use the Ivy loaf");
+  if (modal.hero.includes("/assets/cats/fig_loaf_72.svg")) {
+    throw new Error("Fennel hero must not use the Fig loaf");
   }
-  await shot(page, "02_sorrel_naming");
+  await shot(page, "02_fennel_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Sorrel") &&
+      (document.body.innerText || "").includes("Fennel") &&
       ((document.body.innerText || "").includes("stoop") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
@@ -232,93 +233,93 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_038")) {
-    throw new Error("Sorrel was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_039")) {
+    throw new Error("Fennel was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_038")?.name !== "Sorrel") {
-    throw new Error("Sorrel name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_039")?.name !== "Fennel") {
+    throw new Error("Fennel name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_039")) {
-    throw new Error("friend_039 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_040")) {
+    throw new Error("friend_040 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/sorrel_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/sorrel_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/fennel_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/fennel_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Sorrel lemon-green loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Fennel cream-gold loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("stoop") && !yard.text.includes("Sorrel")) {
-    throw new Error("yard missing Sorrel sunny stoop line");
+  if (!yard.text.includes("stoop") && !yard.text.includes("Fennel")) {
+    throw new Error("yard missing Fennel frond stoop line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_sorrel_yard");
+  await shot(page, "03_fennel_yard");
 
-  await page.goto(`${BASE}/level/L115`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("DOCK CUT"));
+  await page.goto(`${BASE}/level/L118`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("FROND CUT"));
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
       ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
-      ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowRight"],
       ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L116`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("ZEST GAP"));
+  await page.goto(`${BASE}/level/L119`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("ANISE GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
       ["black", "ArrowRight"],
-      ["black", "ArrowUp"],
-      ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
+      ["black", "ArrowDown"],
       ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
       ["orange", "ArrowDown"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+    ],
+    "Home",
+  );
+  await shot(page, "04_l119_win");
+
+  await page.goto(`${BASE}/level/L120`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BREEZE STOP"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
     ],
     "Home",
   );
-  await shot(page, "04_l116_win");
-
-  await page.goto(`${BASE}/level/L117`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("STOOP STOP"));
-  await play(
-    page,
-    [
-      ["orange", "ArrowUp"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-    ],
-    "New friend!",
-  );
-  await shot(page, "05_l117_win");
+  await shot(page, "05_l120_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     text: document.body.innerText,
     storageKeys: Object.keys(localStorage),
   }));
-  for (const id of ["L114", "L115", "L116", "L117"]) {
+  for (const id of ["L117", "L118", "L119", "L120"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -326,14 +327,17 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_039")) {
-    throw new Error("L117 clear must queue Fennel");
-  }
   if (after.save.friends.some((friend) => friend.friendId === "friend_040")) {
     throw new Error("friend_040 must not unlock this slice");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_038").length !== 1) {
-    throw new Error("L117 must not unlock a Sorrel duplicate");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_040")) {
+    throw new Error("L120 clear must not queue the next friend");
+  }
+  if (after.text.includes("New friend!")) {
+    throw new Error("L120 must not open a next-friend naming modal");
+  }
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_039").length !== 1) {
+    throw new Error("L120 must not unlock a Fennel duplicate");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -353,9 +357,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L114 + SORREL + L115-117 OK");
+  console.log("CHAPTER 4 L117 + FENNEL + L118-120 OK");
 } catch (error) {
-  console.error("CHAPTER 4 SORREL FAIL", error);
+  console.error("CHAPTER 4 FENNEL FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

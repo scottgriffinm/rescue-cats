@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_fennel_bang",
+  "status": "READY",
+  "friend_id": "friend_039",
+  "unlock_clear": 117,
+  "personality": "Anise-soft",
+  "display_line": "Soft anise. Already claimed the frond stoop.",
+  "default_name": "Fennel",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/fennel_loaf_48.svg",
+    "loaf_72": "/assets/cats/fennel_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "fennel"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Fennel",
+      "Frond",
+      "Anise"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_039": [
+      "{Name}: Soft anise. Already claimed the frond stoop.",
+      "{Name}: Looks delicate. Owns the breeze."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 117,
+    "sku_id": null,
+    "note": "Ch4. Sorrel Pass next. No gift. Ban Sorrel/Dock/Zest and all prior pools. Bean parade stands. No Pebble."
+  }
+}
