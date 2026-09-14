@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_jasmine_bang",
+  "status": "READY",
+  "friend_id": "friend_054",
+  "unlock_clear": 162,
+  "personality": "Bloom-soft",
+  "display_line": "Soft ivory. Already claimed the jasmine bloom.",
+  "default_name": "Jasmine",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/jasmine_loaf_48.svg",
+    "loaf_72": "/assets/cats/jasmine_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "jasmine"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Jasmine",
+      "Blossom",
+      "Honey"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_054": [
+      "{Name}: Soft ivory. Already claimed the jasmine bloom.",
+      "{Name}: Looks yard-bright. Owns the bloom."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 162,
+    "sku_id": null,
+    "note": "Ch4. Bergamot Pass next. No gift. Ban Bergamot/Citrus/Earl and all prior pools. Bean parade stands. No Pebble. Blossom chip is CEO-locked on Jasmine."
+  }
+}
