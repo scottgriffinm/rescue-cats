@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Jasmine Pass — L166–L168 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L166–L168",
+  "notes": "L166 Cream Cut / L167 Blush Gap / L168 Bowl Stop — off Blossom/Honey/Bloom habits; not Magnolia Cut/Gap/Stop; no WRAP/edge twin of Nori/Medlar; not L165 Bloom / L162 Saucer / L159 Cup / L156 Bundle / L153 Pouch / L150 Tin seats. Oldest Jar/Pot seats dropped — Bloom plus recent Stops exhaust the grid.",
+  "levels": [
+    {
+      "id": "L166",
+      "name": "Cream Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_cream_cut_orange",
+      "walls": [
+        { "x": 5, "y": 3 },
+        { "x": 1, "y": 5 },
+        { "x": 0, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "cream_cut_orange"
+    },
+    {
+      "id": "L167",
+      "name": "Blush Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_blush_gap_black",
+      "walls": [
+        { "x": 0, "y": 0 },
+        { "x": 1, "y": 0 },
+        { "x": 1, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 5, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "blush_gap_black"
+    },
+    {
+      "id": "L168",
+      "name": "Bowl Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_bowl_stop_orange",
+      "walls": [
+        { "x": 4, "y": 0 },
+        { "x": 0, "y": 2 },
+        { "x": 1, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "bowl_stop_orange"
+    }
+  ],
+  "teaches": {
+    "L166": "Cream Cut — orange west first; gray cuts after; not Blossom gray-west, not Citrus orange-east, not Daisy orange-north, not Bloom orange-south, not Nip gray-south, not Chill gray-north",
+    "L167": "Blush Gap — black south then orange threads; not Honey orange-west, not Earl black-east, not Tea black-north, not Calm black-west, not Dream orange-north, not Frost orange-east",
+    "L168": "Bowl Stop — bowl-offset seats; not Bloom (0,5)/(5,0)/(1,4)/(5,1), not Saucer (2,0)/(2,5)/(5,3)/(1,2), not Cup (4,4)/(5,2)/(3,1)/(1,5), not Bundle (2,4)/(1,1)/(2,1)/(4,5), not Pouch (4,2)/(4,0)/(4,1)/(0,4), not Tin (0,3)/(3,5), not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L166": 10,
+      "L167": 11,
+      "L168": 10
+    }
+  },
+  "deltas": {
+    "L166": "(0, 2)",
+    "L167": "(-2, -1)",
+    "L168": "(1, 2)"
+  }
+}

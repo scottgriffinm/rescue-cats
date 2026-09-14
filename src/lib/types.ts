@@ -59,7 +59,8 @@ export type ArtKit =
   | "lavender"
   | "chamomile"
   | "bergamot"
-  | "jasmine";
+  | "jasmine"
+  | "magnolia";
 
 export type PieceCat = {
   id: string;
