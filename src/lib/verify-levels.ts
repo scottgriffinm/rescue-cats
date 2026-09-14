@@ -6497,11 +6497,11 @@ for (const level of LEVELS) {
   if (l39.number !== 39) throw new Error(`L39 HUD number must be 39, got ${l39.number}`);
   if (l9.number !== 9) throw new Error(`L9 HUD number must be 9, got ${l9.number}`);
   if (l11.number !== 11) throw new Error(`L11 HUD number must be 11, got ${l11.number}`);
-  if (CAMPAIGN_LEVEL_COUNT !== 123) {
-    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 123 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 126) {
+    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 126 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
   }
-  if (LEVELS.length !== 122) {
-    throw new Error(`campaign board count must stay 122 with L10 off-path, got ${LEVELS.length}`);
+  if (LEVELS.length !== 125) {
+    throw new Error(`campaign board count must stay 125 with L10 off-path, got ${LEVELS.length}`);
   }
   for (const level of LEVELS) {
     const parsed = Number(level.id.replace(/^L/i, ""));
