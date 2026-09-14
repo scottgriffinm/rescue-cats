@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Parsley Pass — L130–L132 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L130–L132",
+  "notes": "L130 Seed Cut / L131 Frondlet Gap / L132 Ledge Stop — off Curl/Sprig/Garnish habits; not Dill Cut/Gap/Stop; no WRAP/edge twin of Nori/Medlar; not L129 Garnish Stop seats.",
+  "levels": [
+    {
+      "id": "L130",
+      "name": "Seed Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_seed_cut_gray",
+      "walls": [
+        { "x": 3, "y": 5 },
+        { "x": 1, "y": 3 },
+        { "x": 0, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 2, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "seed_cut_gray"
+    },
+    {
+      "id": "L131",
+      "name": "Frondlet Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 12,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_frondlet_gap_black",
+      "walls": [
+        { "x": 4, "y": 4 },
+        { "x": 0, "y": 3 },
+        { "x": 1, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 4, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "frondlet_gap_black"
+    },
+    {
+      "id": "L132",
+      "name": "Ledge Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_ledge_stop_gray",
+      "walls": [
+        { "x": 5, "y": 5 },
+        { "x": 4, "y": 1 },
+        { "x": 0, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "ledge_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L130": "Seed Cut — gray south first; orange cuts after; not Curl orange-south, not Rib gray-north, not Frill orange-north",
+    "L131": "Frondlet Gap — black west then orange threads; not Sprig orange-north, not Rib orange-east, not Lace orange-south",
+    "L132": "Ledge Stop — ledge-offset seats; not Garnish (2,4), not Bed (2,1), not Sill (1,3), not Breeze (1,-2), not Stoop (1,1)"
+  },
+  "solver": {
+    "min_slides": {
+      "L130": 10,
+      "L131": 11,
+      "L132": 10
+    }
+  },
+  "deltas": {
+    "L130": "(-2, -2)",
+    "L131": "(-1, -2)",
+    "L132": "(-1, 4)"
+  }
+}

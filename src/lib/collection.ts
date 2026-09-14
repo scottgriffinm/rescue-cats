@@ -40,6 +40,7 @@ import chapter4Fennel from "../../data/chapter4_fennel_bang.json";
 import chapter4Chervil from "../../data/chapter4_chervil_bang.json";
 import chapter4Lovage from "../../data/chapter4_lovage_bang.json";
 import chapter4Parsley from "../../data/chapter4_parsley_bang.json";
+import chapter4Dill from "../../data/chapter4_dill_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -109,7 +110,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "fennel" ||
     raw === "chervil" ||
     raw === "lovage" ||
-    raw === "parsley"
+    raw === "parsley" ||
+    raw === "dill"
   ) {
     return raw;
   }
@@ -385,6 +387,7 @@ export const CHAPTER4_FENNEL = chapter4Fennel;
 export const CHAPTER4_CHERVIL = chapter4Chervil;
 export const CHAPTER4_LOVAGE = chapter4Lovage;
 export const CHAPTER4_PARSLEY = chapter4Parsley;
+export const CHAPTER4_DILL = chapter4Dill;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -426,6 +429,7 @@ export const FENNEL_FRIEND_ID = chapter4Fennel.friend_id;
 export const CHERVIL_FRIEND_ID = chapter4Chervil.friend_id;
 export const LOVAGE_FRIEND_ID = chapter4Lovage.friend_id;
 export const PARSLEY_FRIEND_ID = chapter4Parsley.friend_id;
+export const DILL_FRIEND_ID = chapter4Dill.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -871,6 +875,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Dill.friend_id,
+    defaultName: chapter4Dill.default_name,
+    unlockClear: chapter4Dill.unlock_clear,
+    displayLine: chapter4Dill.display_line,
+    tier: chapter4Dill.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_gray_freckled_regular_regular_dill",
+      breed: "Domestic Shorthair",
+      color: chapter4Dill.color,
+      pattern: chapter4Dill.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Dill.personality,
+      artKit: "dill",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -892,7 +916,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 42);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 43);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -948,6 +972,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   120: "friend_040",
   123: "friend_041",
   126: "friend_042",
+  129: "friend_043",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -1150,6 +1175,9 @@ export const LOVAGE_NAMING_CHIPS: string[] = CHAPTER4_LOVAGE.naming.suggestion_c
 /** Parsley naming chips — fresh parsley-leaf green + curl freckles; ban Lovage/Stem/Rib and all prior pools. */
 export const PARSLEY_NAMING_CHIPS: string[] = CHAPTER4_PARSLEY.naming.suggestion_chips;
 
+/** Dill naming chips — dill-frond soft green + seed freckles; ban Parsley/Curl/Sprig and all prior pools. Use Frondlet not Frond. */
+export const DILL_NAMING_CHIPS: string[] = CHAPTER4_DILL.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -1274,6 +1302,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === PARSLEY_FRIEND_ID || friendId === "friend_042") {
     return [...PARSLEY_NAMING_CHIPS];
   }
+  if (friendId === DILL_FRIEND_ID || friendId === "friend_043") {
+    return [...DILL_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -1317,6 +1348,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Lace-soft") return [...CHERVIL_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Rib-soft") return [...LOVAGE_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Curl-soft") return [...PARSLEY_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Seed-soft") return [...DILL_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -1453,6 +1485,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === PARSLEY_FRIEND_ID || friendId === "friend_042") {
     return shufflePool([...PARSLEY_NAMING_CHIPS], count);
   }
+  if (friendId === DILL_FRIEND_ID || friendId === "friend_043") {
+    return shufflePool([...DILL_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -1510,6 +1545,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_CHERVIL.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_LOVAGE.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_PARSLEY.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_DILL.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -1563,6 +1599,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Lace-soft") return "herb sill";
   if (personality === "Rib-soft") return "rib bed";
   if (personality === "Curl-soft") return "garnish rail";
+  if (personality === "Seed-soft") return "pickle jar ledge";
   return "sun patch";
 }
 
