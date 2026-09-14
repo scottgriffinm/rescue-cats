@@ -110,6 +110,7 @@ export function YardScene({
   const tarragon = friends.find((friend) => friend.friendId === "friend_044");
   const oregano = friends.find((friend) => friend.friendId === "friend_045");
   const marjoram = friends.find((friend) => friend.friendId === "friend_046");
+  const thyme = friends.find((friend) => friend.friendId === "friend_047");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -156,7 +157,8 @@ export function YardScene({
       friend.friendId !== "friend_043" &&
       friend.friendId !== "friend_044" &&
       friend.friendId !== "friend_045" &&
-      friend.friendId !== "friend_046",
+      friend.friendId !== "friend_046" &&
+      friend.friendId !== "friend_047",
   );
 
   return (
@@ -1173,6 +1175,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{marjoram.name}</p>
+        </div>
+      ) : null}
+
+      {thyme ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "62%", top: "98%" }}
+        >
+          <FriendSprite
+            kit={friendById(thyme.friendId)?.phenotype.artKit ?? "thyme"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === thyme.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(thyme.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${thyme.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{thyme.name}</p>
         </div>
       ) : null}
 

@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Marjoram Pass — L142–L144 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L142–L144",
+  "notes": "L142 Pinch Cut / L143 Twig Gap / L144 Jar Stop — off Softleaf/Peel/Pizza habits; not Thyme Cut/Gap/Stop; no WRAP/edge twin of Nori/Medlar; not L141 Peel / L138 Pizza / L135 Cruet / L132 Ledge / L129 Garnish / L126 Bed seats.",
+  "levels": [
+    {
+      "id": "L142",
+      "name": "Pinch Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_pinch_cut_gray",
+      "walls": [
+        { "x": 2, "y": 1 },
+        { "x": 5, "y": 1 },
+        { "x": 0, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 5, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "pinch_cut_gray"
+    },
+    {
+      "id": "L143",
+      "name": "Twig Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_twig_gap_black",
+      "walls": [
+        { "x": 2, "y": 3 },
+        { "x": 0, "y": 2 },
+        { "x": 2, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 4, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "twig_gap_black"
+    },
+    {
+      "id": "L144",
+      "name": "Jar Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_jar_stop_gray",
+      "walls": [
+        { "x": 3, "y": 5 },
+        { "x": 4, "y": 1 },
+        { "x": 2, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 5, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "jar_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L142": "Pinch Cut — gray west first; orange cuts after; not Softleaf orange-east, not Stone gray-east, not Spear orange-west, not Seed gray-south, not Curl orange-south, not Frill orange-north",
+    "L143": "Twig Gap — black east then orange threads; not Dusty black-north, not Wild orange-west, not Bitters black-south, not Frondlet black-west, not Sprig orange-north, not Lace orange-south",
+    "L144": "Jar Stop — jar-offset seats; not Peel (0,1)/(4,4), not Pizza (1,1)/(0,2), not Cruet (1,4)/(5,3), not Ledge (1,5)/(2,1), not Garnish (2,4), not Bed (3,1), not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L142": 10,
+      "L143": 10,
+      "L144": 10
+    }
+  },
+  "deltas": {
+    "L142": "(4, -2)",
+    "L143": "(1, -4)",
+    "L144": "(2, 2)"
+  }
+}

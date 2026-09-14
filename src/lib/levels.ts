@@ -45,6 +45,7 @@ import chapter4w from "../../data/levels/CHAPTER4_PUZZLE_L130_L132.json";
 import chapter4x from "../../data/levels/CHAPTER4_PUZZLE_L133_L135.json";
 import chapter4y from "../../data/levels/CHAPTER4_PUZZLE_L136_L138.json";
 import chapter4z from "../../data/levels/CHAPTER4_PUZZLE_L139_L141.json";
+import chapter4aa from "../../data/levels/CHAPTER4_PUZZLE_L142_L144.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -191,6 +192,9 @@ const HEADLINES: Record<string, string> = {
   L139: "SOFTLEAF CUT",
   L140: "DUSTY GAP",
   L141: "PEEL STOP",
+  L142: "PINCH CUT",
+  L143: "TWIG GAP",
+  L144: "JAR STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -334,6 +338,9 @@ const HINTS: Record<string, string> = {
   L139: "Softleaf cut — orange east first; gray cuts after; not Stone gray-east, not Spear orange-west, not Seed gray-south, not Curl orange-south, not Frill orange-north.",
   L140: "Dusty gap — black north then orange threads; not Wild orange-west, not Bitters black-south, not Frondlet black-west, not Sprig orange-north, not Lace orange-south.",
   L141: "Peel stop — peel-offset seats; off Pizza (1,1); off Cruet (1,4); off Ledge (1,5); off Garnish (2,4); off Bed (3,1); not Hold*/Park*.",
+  L142: "Pinch cut — gray west first; orange cuts after; not Softleaf orange-east, not Stone gray-east, not Spear orange-west, not Seed gray-south, not Curl orange-south, not Frill orange-north.",
+  L143: "Twig gap — black east then orange threads; not Dusty black-north, not Wild orange-west, not Bitters black-south, not Frondlet black-west, not Sprig orange-north, not Lace orange-south.",
+  L144: "Jar stop — jar-offset seats; off Peel (0,1)/(4,4); off Pizza (1,1)/(0,2); off Cruet (1,4); off Ledge (1,5); off Garnish (2,4); off Bed (3,1); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -434,6 +441,7 @@ const authored = [
   ...chapter4x.levels,
   ...chapter4y.levels,
   ...chapter4z.levels,
+  ...chapter4aa.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

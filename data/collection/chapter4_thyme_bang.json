@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_thyme_bang",
+  "status": "READY",
+  "friend_id": "friend_047",
+  "unlock_clear": 141,
+  "personality": "Jar-tiny",
+  "display_line": "Tiny dusty. Already claimed the thyme jar.",
+  "default_name": "Thyme",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/thyme_loaf_48.svg",
+    "loaf_72": "/assets/cats/thyme_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "thyme"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Thyme",
+      "Pinch",
+      "Twig"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_047": [
+      "{Name}: Tiny dusty. Already claimed the thyme jar.",
+      "{Name}: Looks kitchen-tiny. Owns the jar."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 141,
+    "sku_id": null,
+    "note": "Ch4. Marjoram Pass next. No gift. Ban Marjoram/Softleaf/Peel and all prior pools. Bean parade stands. No Pebble."
+  }
+}
