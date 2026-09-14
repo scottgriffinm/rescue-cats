@@ -47,6 +47,7 @@ import chapter4Marjoram from "../../data/chapter4_marjoram_bang.json";
 import chapter4Thyme from "../../data/chapter4_thyme_bang.json";
 import chapter4Rosemary from "../../data/chapter4_rosemary_bang.json";
 import chapter4Mint from "../../data/chapter4_mint_bang.json";
+import chapter4Catnip from "../../data/chapter4_catnip_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -123,7 +124,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "marjoram" ||
     raw === "thyme" ||
     raw === "rosemary" ||
-    raw === "mint"
+    raw === "mint" ||
+    raw === "catnip"
   ) {
     return raw;
   }
@@ -406,6 +408,7 @@ export const CHAPTER4_MARJORAM = chapter4Marjoram;
 export const CHAPTER4_THYME = chapter4Thyme;
 export const CHAPTER4_ROSEMARY = chapter4Rosemary;
 export const CHAPTER4_MINT = chapter4Mint;
+export const CHAPTER4_CATNIP = chapter4Catnip;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -454,6 +457,7 @@ export const MARJORAM_FRIEND_ID = chapter4Marjoram.friend_id;
 export const THYME_FRIEND_ID = chapter4Thyme.friend_id;
 export const ROSEMARY_FRIEND_ID = chapter4Rosemary.friend_id;
 export const MINT_FRIEND_ID = chapter4Mint.friend_id;
+export const CATNIP_FRIEND_ID = chapter4Catnip.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1039,6 +1043,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Catnip.friend_id,
+    defaultName: chapter4Catnip.default_name,
+    unlockClear: chapter4Catnip.unlock_clear,
+    displayLine: chapter4Catnip.display_line,
+    tier: chapter4Catnip.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_gray_freckled_regular_regular_catnip",
+      breed: "Domestic Shorthair",
+      color: chapter4Catnip.color,
+      pattern: chapter4Catnip.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Catnip.personality,
+      artKit: "catnip",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1060,7 +1084,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 49);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 50);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1123,6 +1147,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   141: "friend_047",
   144: "friend_048",
   147: "friend_049",
+  150: "friend_050",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -1346,6 +1371,9 @@ export const ROSEMARY_NAMING_CHIPS: string[] = CHAPTER4_ROSEMARY.naming.suggesti
 /** Mint naming chips — cool mint-frost + tiny frost freckles; ban Rosemary/Needle/Woody and all prior pools. */
 export const MINT_NAMING_CHIPS: string[] = CHAPTER4_MINT.naming.suggestion_chips;
 
+/** Catnip naming chips — soft meadow-green + tiny petal freckles; ban Mint/Chill/Frost and all prior pools. */
+export const CATNIP_NAMING_CHIPS: string[] = CHAPTER4_CATNIP.naming.suggestion_chips;
+
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
     return [...INK_NAMING_CHIPS];
@@ -1491,6 +1519,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === MINT_FRIEND_ID || friendId === "friend_049") {
     return [...MINT_NAMING_CHIPS];
   }
+  if (friendId === CATNIP_FRIEND_ID || friendId === "friend_050") {
+    return [...CATNIP_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -1541,6 +1572,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Jar-tiny") return [...THYME_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Pot-cool") return [...ROSEMARY_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Tin-cool") return [...MINT_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Pouch-soft") return [...CATNIP_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -1698,6 +1730,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === MINT_FRIEND_ID || friendId === "friend_049") {
     return shufflePool([...MINT_NAMING_CHIPS], count);
   }
+  if (friendId === CATNIP_FRIEND_ID || friendId === "friend_050") {
+    return shufflePool([...CATNIP_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -1762,6 +1797,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_THYME.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_ROSEMARY.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_MINT.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_CATNIP.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -1822,6 +1858,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Jar-tiny") return "thyme jar";
   if (personality === "Pot-cool") return "rosemary pot";
   if (personality === "Tin-cool") return "mint tin";
+  if (personality === "Pouch-soft") return "catnip pouch";
   return "sun patch";
 }
 

@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_catnip_bang",
+  "status": "READY",
+  "friend_id": "friend_050",
+  "unlock_clear": 150,
+  "personality": "Pouch-soft",
+  "display_line": "Soft meadow. Already claimed the catnip pouch.",
+  "default_name": "Catnip",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/catnip_loaf_48.svg",
+    "loaf_72": "/assets/cats/catnip_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "catnip"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Catnip",
+      "Nip",
+      "Dream"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_050": [
+      "{Name}: Soft meadow. Already claimed the catnip pouch.",
+      "{Name}: Looks yard-happy. Owns the pouch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 150,
+    "sku_id": null,
+    "note": "Ch4. Mint Pass next. No gift. Ban Mint/Chill/Frost and all prior pools. Bean parade stands. No Pebble. Sage dropped — Juniper already used Sage chip."
+  }
+}
