@@ -217,7 +217,7 @@ export function verifyChapter4Rosemary(solves: Record<string, Array<[string, Dir
   const yardR = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardR.match(/const rosemary =/g) || []).length !== 1) throw new Error("YardScene must declare rosemary once");
   if ((yardR.match(/\{rosemary \?/g) || []).length !== 1) throw new Error("YardScene must render rosemary once");
-  if (TUTORIAL_RESCUES.length !== 50) throw new Error("Met must include through Rosemary (48)");
+  if (TUTORIAL_RESCUES.length !== 51) throw new Error("Met must include through Rosemary (48)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -226,6 +226,7 @@ export function verifyChapter4Rosemary(solves: Record<string, Array<[string, Dir
   }
   if (SLICE_UNLOCKS[147] !== "friend_049") throw new Error("SLICE_UNLOCKS[147] must be friend_049 after Mint ship");
   if (SLICE_UNLOCKS[150] !== "friend_050") throw new Error("SLICE_UNLOCKS[150] must be friend_050 after Catnip ship");
+  if (SLICE_UNLOCKS[153] !== "friend_051") throw new Error("SLICE_UNLOCKS[153] must be friend_051 after Lavender ship");
   if (/pebble|Pebble/i.test(rosemary48 + rosemary72)) throw new Error("Rosemary art must not use Pebble");
   if (/thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(rosemary48 + rosemary72)) {
     throw new Error("Rosemary art must not collide Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

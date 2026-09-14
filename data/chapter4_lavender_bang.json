@@ -1,0 +1,39 @@
+{
+  "version": "chapter4_lavender_bang",
+  "status": "READY",
+  "friend_id": "friend_051",
+  "unlock_clear": 153,
+  "personality": "Bundle-soft",
+  "display_line": "Soft lilac. Already claimed the lavender bundle.",
+  "default_name": "Lavender",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/lavender_loaf_48.svg",
+    "loaf_72": "/assets/cats/lavender_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "lavender"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": [
+      "Lavender",
+      "Bloom",
+      "Calm"
+    ],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_051": [
+      "{Name}: Soft lilac. Already claimed the lavender bundle.",
+      "{Name}: Looks yard-happy. Owns the bundle."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 153,
+    "sku_id": null,
+    "note": "Ch4. Catnip Pass next. No gift. Ban Catnip/Nip/Dream and all prior pools. Bean parade stands. No Pebble. Bloom chip is CEO-locked on Lavender."
+  }
+}

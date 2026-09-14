@@ -221,7 +221,7 @@ export function verifyChapter4Mint(solves: Record<string, Array<[string, Dir]>>)
   const yardM = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardM.match(/const mint =/g) || []).length !== 1) throw new Error("YardScene must declare mint once");
   if ((yardM.match(/\{mint \?/g) || []).length !== 1) throw new Error("YardScene must render mint once");
-  if (TUTORIAL_RESCUES.length !== 50) throw new Error("Met must include through Mint (49)");
+  if (TUTORIAL_RESCUES.length !== 51) throw new Error("Met must include through Mint (49)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -229,6 +229,7 @@ export function verifyChapter4Mint(solves: Record<string, Array<[string, Dir]>>)
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
   if (SLICE_UNLOCKS[150] !== "friend_050") throw new Error("SLICE_UNLOCKS[150] must be friend_050 after Catnip ship");
+  if (SLICE_UNLOCKS[153] !== "friend_051") throw new Error("SLICE_UNLOCKS[153] must be friend_051 after Lavender ship");
   if (/pebble|Pebble/i.test(mint48 + mint72)) throw new Error("Mint art must not use Pebble");
   if (/rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(mint48 + mint72)) {
     throw new Error("Mint art must not collide Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

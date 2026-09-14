@@ -55,7 +55,8 @@ export type ArtKit =
   | "thyme"
   | "rosemary"
   | "mint"
-  | "catnip";
+  | "catnip"
+  | "lavender";
 
 export type PieceCat = {
   id: string;

@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L150 → Catnip@150 naming, then L151–L153.
+ * Chapter 4 beat: L153 → Lavender@153 naming, then L154–L156.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-catnip";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-lavender";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -72,6 +72,7 @@ const PARADE = [
   ["friend_047", "Thyme", 141],
   ["friend_048", "Rosemary", 144],
   ["friend_049", "Mint", 147],
+  ["friend_050", "Catnip", 150],
 ];
 
 const completedIds = [
@@ -84,7 +85,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 139 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 142 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -110,7 +111,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Mint claimed the mint tin."],
+  bubbles: ["Catnip claimed the catnip pouch."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -159,23 +160,22 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L150`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("TIN STOP"));
-  await shot(page, "01_l150_before_catnip");
+  await page.goto(`${BASE}/level/L153`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("POUCH STOP"));
+  await shot(page, "01_l153_before_lavender");
   await play(
     page,
     [
+      ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
       ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
     ],
     "New friend!",
   );
@@ -193,17 +193,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("catnip naming", modal);
+  console.log("lavender naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Catnip prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Lavender prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Soft meadow. Already claimed the catnip pouch.") {
-    throw new Error(`Catnip display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft lilac. Already claimed the lavender bundle.") {
+    throw new Error(`Lavender display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Catnip,Nip,Dream") {
-    throw new Error(`Catnip chips must be Catnip/Nip/Dream, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Lavender,Bloom,Calm") {
+    throw new Error(`Lavender chips must be Lavender/Bloom/Calm, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Catnip") ||
+    modal.chips.includes("Nip") ||
+    modal.chips.includes("Dream") ||
     modal.chips.includes("Mint") ||
     modal.chips.includes("Chill") ||
     modal.chips.includes("Frost") ||
@@ -213,81 +216,34 @@ try {
     modal.chips.includes("Thyme") ||
     modal.chips.includes("Pinch") ||
     modal.chips.includes("Twig") ||
-    modal.chips.includes("Marjoram") ||
-    modal.chips.includes("Softleaf") ||
-    modal.chips.includes("Peel") ||
-    modal.chips.includes("Oregano") ||
-    modal.chips.includes("Wild") ||
-    modal.chips.includes("Bunch") ||
-    modal.chips.includes("Tarragon") ||
-    modal.chips.includes("Spear") ||
-    modal.chips.includes("Bitters") ||
-    modal.chips.includes("Dill") ||
-    modal.chips.includes("Frondlet") ||
-    modal.chips.includes("Seed") ||
-    modal.chips.includes("Parsley") ||
-    modal.chips.includes("Curl") ||
-    modal.chips.includes("Sprig") ||
-    modal.chips.includes("Lovage") ||
-    modal.chips.includes("Frond") ||
-    modal.chips.includes("Fennel") ||
-    modal.chips.includes("Pebble") ||
-    modal.chips.includes("Sage") ||
-    modal.chips.includes("Chervil")
+    modal.chips.includes("Pebble")
   ) {
-    throw new Error("Catnip chips collided with Mint/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Fennel/Chervil/Pebble/Sage pools");
+    throw new Error("Lavender chips collided with Catnip/Mint/Rosemary/Thyme/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/catnip_loaf_72.svg")) {
-    throw new Error(`Catnip hero missing meadow-green loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/lavender_loaf_72.svg")) {
+    throw new Error(`Lavender hero missing lilac-gray loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/catnip_loaf_72.svg")) {
+    throw new Error("Lavender hero must not use the Catnip loaf");
   }
   if (modal.hero.includes("/assets/cats/mint_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Mint loaf");
+    throw new Error("Lavender hero must not use the Mint loaf");
   }
   if (modal.hero.includes("/assets/cats/rosemary_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Rosemary loaf");
+    throw new Error("Lavender hero must not use the Rosemary loaf");
   }
   if (modal.hero.includes("/assets/cats/thyme_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Thyme loaf");
+    throw new Error("Lavender hero must not use the Thyme loaf");
   }
-  if (modal.hero.includes("/assets/cats/marjoram_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Marjoram loaf");
-  }
-  if (modal.hero.includes("/assets/cats/oregano_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Oregano loaf");
-  }
-  if (modal.hero.includes("/assets/cats/tarragon_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Tarragon loaf");
-  }
-  if (modal.hero.includes("/assets/cats/dill_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Dill loaf");
-  }
-  if (modal.hero.includes("/assets/cats/parsley_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Parsley loaf");
-  }
-  if (modal.hero.includes("/assets/cats/lovage_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Lovage loaf");
-  }
-  if (modal.hero.includes("/assets/cats/chervil_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Chervil loaf");
-  }
-  if (modal.hero.includes("/assets/cats/fennel_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Fennel loaf");
-  }
-  if (modal.hero.includes("/assets/cats/basil_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Basil loaf");
-  }
-  if (modal.hero.includes("/assets/cats/nettle_loaf_72.svg")) {
-    throw new Error("Catnip hero must not use the Nettle loaf");
-  }
-  await shot(page, "02_catnip_naming");
+  await shot(page, "02_lavender_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Catnip") &&
-      ((document.body.innerText || "").includes("pouch") ||
-        (document.body.innerText || "").includes("catnip") ||
+      (document.body.innerText || "").includes("Lavender") &&
+      ((document.body.innerText || "").includes("bundle") ||
+        (document.body.innerText || "").includes("lavender") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -300,92 +256,93 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_050")) {
-    throw new Error("Catnip was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_051")) {
+    throw new Error("Lavender was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_050")?.name !== "Catnip") {
-    throw new Error("Catnip name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_051")?.name !== "Lavender") {
+    throw new Error("Lavender name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_051")) {
-    throw new Error("friend_051 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_052")) {
+    throw new Error("friend_052 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/catnip_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/catnip_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/lavender_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/lavender_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Catnip meadow-green loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Lavender lilac-gray loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("pouch") && !yard.text.includes("Catnip")) {
-    throw new Error("yard missing Catnip catnip pouch line");
+  if (!yard.text.includes("bundle") && !yard.text.includes("Lavender")) {
+    throw new Error("yard missing Lavender lavender bundle line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_catnip_yard");
+  await shot(page, "03_lavender_yard");
 
-  await page.goto(`${BASE}/level/L151`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("NIP CUT"));
+  await page.goto(`${BASE}/level/L154`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BLOOM CUT"));
   await play(
     page,
     [
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
       ["gray", "ArrowDown"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowUp"],
       ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L152`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("DREAM GAP"));
+  await page.goto(`${BASE}/level/L155`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CALM GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowUp"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowUp"],
       ["black", "ArrowLeft"],
       ["black", "ArrowDown"],
       ["black", "ArrowRight"],
-      ["orange", "ArrowDown"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowLeft"],
     ],
     "Home",
   );
-  await shot(page, "04_l152_win");
+  await shot(page, "04_l155_win");
 
-  await page.goto(`${BASE}/level/L153`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("POUCH STOP"));
+  await page.goto(`${BASE}/level/L156`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BUNDLE STOP"));
   await play(
     page,
     [
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l153_win");
+  await shot(page, "05_l156_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     text: document.body.innerText,
     storageKeys: Object.keys(localStorage),
   }));
-  for (const id of ["L150", "L151", "L152", "L153"]) {
+  for (const id of ["L153", "L154", "L155", "L156"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -393,17 +350,17 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_051")) {
-    throw new Error("friend_051 must stay pending, not named, on the Catnip slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_051")) {
-    throw new Error("L153 clear must queue Lavender when friend_051 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_052")) {
+    throw new Error("friend_052 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_052")) {
-    throw new Error("L153 clear must not queue friend_052");
+    throw new Error("L156 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_050").length !== 1) {
-    throw new Error("L153 must not unlock a Catnip duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L156 must not open a next-friend naming modal");
+  }
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_051").length !== 1) {
+    throw new Error("L156 must not unlock a Lavender duplicate");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -423,9 +380,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L150 + CATNIP + L151-153 OK");
+  console.log("CHAPTER 4 L153 + LAVENDER + L154-156 OK");
 } catch (error) {
-  console.error("CHAPTER 4 CATNIP FAIL", error);
+  console.error("CHAPTER 4 LAVENDER FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {
