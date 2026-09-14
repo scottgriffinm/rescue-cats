@@ -62,7 +62,8 @@ export const ART_KIT_PATH: Record<
   | "bergamot"
   | "jasmine"
   | "magnolia"
-  | "hibiscus",
+  | "hibiscus"
+  | "gardenia",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -292,6 +293,10 @@ export const ART_KIT_PATH: Record<
   hibiscus: {
     loaf48: "/assets/cats/hibiscus_loaf_48.svg",
     loaf72: "/assets/cats/hibiscus_loaf_72.svg",
+  },
+  gardenia: {
+    loaf48: "/assets/cats/gardenia_loaf_48.svg",
+    loaf72: "/assets/cats/gardenia_loaf_72.svg",
   },
 };
 

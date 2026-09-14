@@ -240,14 +240,14 @@ export function verifyChapter4Hibiscus(solves: Record<string, Array<[string, Dir
   const yardH = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardH.match(/const hibiscus =/g) || []).length !== 1) throw new Error("YardScene must declare hibiscus once");
   if ((yardH.match(/\{hibiscus \?/g) || []).length !== 1) throw new Error("YardScene must render hibiscus once");
-  if (TUTORIAL_RESCUES.length !== 56) throw new Error("Met must include through Hibiscus (56)");
+  if (TUTORIAL_RESCUES.length !== 57) throw new Error("Met must include through Hibiscus (56)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[171]) throw new Error("no friend_057 @171 this slice");
+  if (SLICE_UNLOCKS[171] !== "friend_057") throw new Error("SLICE_UNLOCKS[171] must be friend_057 after Gardenia ship");
   if (/pebble|Pebble/i.test(hibiscus48 + hibiscus72)) throw new Error("Hibiscus art must not use Pebble");
   if (/magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(hibiscus48 + hibiscus72)) {
     throw new Error("Hibiscus art must not collide Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

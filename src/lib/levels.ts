@@ -55,6 +55,7 @@ import chapter4ag from "../../data/levels/CHAPTER4_PUZZLE_L160_L162.json";
 import chapter4ah from "../../data/levels/CHAPTER4_PUZZLE_L163_L165.json";
 import chapter4ai from "../../data/levels/CHAPTER4_PUZZLE_L166_L168.json";
 import chapter4aj from "../../data/levels/CHAPTER4_PUZZLE_L169_L171.json";
+import chapter4ak from "../../data/levels/CHAPTER4_PUZZLE_L172_L174.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -231,6 +232,9 @@ const HEADLINES: Record<string, string> = {
   L169: "ROSELLE CUT",
   L170: "PUNCH GAP",
   L171: "SIP STOP",
+  L172: "SNOW DRIFT",
+  L173: "VELVET LATCH",
+  L174: "DISH CLAIM",
 };
 
 const HINTS: Record<string, string> = {
@@ -404,6 +408,9 @@ const HINTS: Record<string, string> = {
   L169: "Roselle cut — gray east first; orange cuts after; not Cream orange-west, not Blossom gray-west, not Citrus orange-east, not Daisy orange-north, not Bloom orange-south, not Nip gray-south, not Chill gray-north.",
   L170: "Punch gap — orange south then black threads; not Blush black-south, not Honey orange-west, not Earl black-east, not Tea black-north, not Calm black-west, not Dream orange-north, not Frost orange-east.",
   L171: "Sip stop — cup-sip seats; off Bowl (3,2)/(3,3)/(0,1)/(1,3); off Bloom (0,5)/(5,0)/(1,4)/(5,1); off Saucer (2,0)/(2,5)/(5,3)/(1,2); off Cup (4,4)/(5,2)/(3,1)/(1,5); off Bundle (2,4)/(1,1)/(2,1)/(4,5); off Pouch (4,2)/(4,0)/(4,1)/(0,4); off Tin (0,3)/(3,5); not Hold*/Park*.",
+  L172: "Snow drift — gray west first; orange drifts after; not Roselle gray-east, not Cream orange-west, not Citrus orange-east, not Daisy orange-north, not Bloom orange-south, not Nip gray-south, not Chill gray-north.",
+  L173: "Velvet latch — black north then orange threads; not Punch orange-south, not Blush black-south, not Honey orange-west, not Earl black-east, not Calm black-west, not Dream orange-north, not Frost orange-east.",
+  L174: "Dish claim — dish-claim seats; off Sip (2,2)/(5,4)/(2,3)/(0,2); off Bowl (3,2)/(3,3)/(0,1)/(1,3); off Bloom (0,5)/(5,0)/(1,4)/(5,1); off Saucer (2,0)/(2,5)/(5,3)/(1,2); off Cup (4,4)/(5,2)/(3,1)/(1,5); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -514,6 +521,7 @@ const authored = [
   ...chapter4ah.levels,
   ...chapter4ai.levels,
   ...chapter4aj.levels,
+  ...chapter4ak.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

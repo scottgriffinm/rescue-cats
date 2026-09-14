@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L168 → Hibiscus@168 naming, then L169–L171.
+ * Chapter 4 beat: L171 → Gardenia@171 naming, then L172–L174.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-hibiscus";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-gardenia";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -78,6 +78,7 @@ const PARADE = [
   ["friend_053", "Bergamot", 159],
   ["friend_054", "Jasmine", 162],
   ["friend_055", "Magnolia", 165],
+  ["friend_056", "Hibiscus", 168],
 ];
 
 const completedIds = [
@@ -90,7 +91,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 157 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 160 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -116,7 +117,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Magnolia claimed the magnolia bowl."],
+  bubbles: ["Hibiscus claimed the hibiscus cup."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -165,22 +166,22 @@ try {
   }, SEED);
   await page.reload({ waitUntil: "networkidle0" });
 
-  await page.goto(`${BASE}/level/L168`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("BOWL STOP"));
-  await shot(page, "01_l168_before_hibiscus");
+  await page.goto(`${BASE}/level/L171`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SIP STOP"));
+  await shot(page, "01_l171_before_gardenia");
   await play(
     page,
     [
-      ["gray", "ArrowRight"],
+      ["orange", "ArrowRight"],
       ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowLeft"],
       ["gray", "ArrowUp"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -198,17 +199,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("hibiscus naming", modal);
+  console.log("gardenia naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Hibiscus prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Gardenia prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Deep tea-rose. Already claimed the hibiscus cup.") {
-    throw new Error(`Hibiscus display line drifted: ${modal.line}`);
+  if (modal.line !== "Soft porcelain. Already claimed the gardenia dish.") {
+    throw new Error(`Gardenia display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Hibiscus,Roselle,Punch") {
-    throw new Error(`Hibiscus chips must be Hibiscus/Roselle/Punch, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Gardenia,Snow,Velvet") {
+    throw new Error(`Gardenia chips must be Gardenia/Snow/Velvet, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Hibiscus") ||
+    modal.chips.includes("Roselle") ||
+    modal.chips.includes("Punch") ||
     modal.chips.includes("Magnolia") ||
     modal.chips.includes("Cream") ||
     modal.chips.includes("Blush") ||
@@ -234,35 +238,29 @@ try {
     modal.chips.includes("Sheer") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Hibiscus chips collided with Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Pebble pools");
+    throw new Error("Gardenia chips collided with Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error(`Hibiscus hero missing tea-rose loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
+    throw new Error(`Gardenia hero missing porcelain loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
+    throw new Error("Gardenia hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Hibiscus hero must not use the Magnolia loaf");
+    throw new Error("Gardenia hero must not use the Magnolia loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Hibiscus hero must not use the Jasmine loaf");
+    throw new Error("Gardenia hero must not use the Jasmine loaf");
   }
-  if (modal.hero.includes("/assets/cats/bergamot_loaf_72.svg")) {
-    throw new Error("Hibiscus hero must not use the Bergamot loaf");
-  }
-  if (modal.hero.includes("/assets/cats/chamomile_loaf_72.svg")) {
-    throw new Error("Hibiscus hero must not use the Chamomile loaf");
-  }
-  if (modal.hero.includes("/assets/cats/lavender_loaf_72.svg")) {
-    throw new Error("Hibiscus hero must not use the Lavender loaf");
-  }
-  await shot(page, "02_hibiscus_naming");
+  await shot(page, "02_gardenia_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Hibiscus") &&
-      ((document.body.innerText || "").includes("cup") ||
-        (document.body.innerText || "").includes("hibiscus") ||
+      (document.body.innerText || "").includes("Gardenia") &&
+      ((document.body.innerText || "").includes("dish") ||
+        (document.body.innerText || "").includes("gardenia") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -275,85 +273,88 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_056")) {
-    throw new Error("Hibiscus was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_057")) {
+    throw new Error("Gardenia was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_056")?.name !== "Hibiscus") {
-    throw new Error("Hibiscus name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_057")?.name !== "Gardenia") {
+    throw new Error("Gardenia name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_057")) {
-    throw new Error("friend_057 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_058")) {
+    throw new Error("friend_058 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/hibiscus_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/hibiscus_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/gardenia_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/gardenia_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Hibiscus tea-rose loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Gardenia porcelain loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("cup") && !yard.text.includes("Hibiscus")) {
-    throw new Error("yard missing Hibiscus hibiscus cup line");
+  if (!yard.text.includes("dish") && !yard.text.includes("Gardenia")) {
+    throw new Error("yard missing Gardenia gardenia dish line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_hibiscus_yard");
+  await shot(page, "03_gardenia_yard");
 
-  await page.goto(`${BASE}/level/L169`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("ROSELLE CUT"));
+  await page.goto(`${BASE}/level/L172`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SNOW DRIFT"));
   await play(
     page,
     [
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowUp"],
       ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowUp"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L170`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("PUNCH GAP"));
+  await page.goto(`${BASE}/level/L173`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("VELVET LATCH"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["black", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["black", "ArrowLeft"],
       ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
+      ["orange", "ArrowLeft"],
       ["black", "ArrowDown"],
-      ["black", "ArrowLeft"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
     ],
     "Home",
   );
-  await shot(page, "04_l170_win");
+  await shot(page, "04_l173_win");
 
-  await page.goto(`${BASE}/level/L171`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SIP STOP"));
+  await page.goto(`${BASE}/level/L174`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("DISH CLAIM"));
   await play(
     page,
     [
+      ["gray", "ArrowDown"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l171_win");
+  await shot(page, "05_l174_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -361,7 +362,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L168", "L169", "L170", "L171"]) {
+  for (const id of ["L171", "L172", "L173", "L174"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -369,20 +370,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_057")) {
-    throw new Error("friend_057 must stay pending, not named, on the Hibiscus slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_057")) {
-    throw new Error("L171 clear must queue Gardenia when friend_057 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_058")) {
+    throw new Error("friend_058 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_058")) {
-    throw new Error("L171 clear must not queue friend_058");
+    throw new Error("L174 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_056").length !== 1) {
-    throw new Error("L171 must not unlock a Hibiscus duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L174 must not open a next-friend naming modal");
   }
-  if (!after.hud.includes("171") && !after.text.includes("171")) {
-    throw new Error("Campaign HUD must show through 171 after L171 clear");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_057").length !== 1) {
+    throw new Error("L174 must not unlock a Gardenia duplicate");
+  }
+  if (!after.hud.includes("174") && !after.text.includes("174")) {
+    throw new Error("Campaign HUD must show through 174 after L174 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -402,9 +403,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L168 + HIBISCUS + L169-171 OK");
+  console.log("CHAPTER 4 L171 + GARDENIA + L172-174 OK");
 } catch (error) {
-  console.error("CHAPTER 4 HIBISCUS FAIL", error);
+  console.error("CHAPTER 4 GARDENIA FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {
