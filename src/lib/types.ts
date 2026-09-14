@@ -51,7 +51,8 @@ export type ArtKit =
   | "dill"
   | "tarragon"
   | "oregano"
-  | "marjoram";
+  | "marjoram"
+  | "thyme";
 
 export type PieceCat = {
   id: string;
