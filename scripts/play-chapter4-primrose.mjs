@@ -1,7 +1,7 @@
 /**
- * Chapter 4 beat: L231 → Heather@231 naming, then L232–L234.
+ * Chapter 4 beat: L234 → Primrose@234 naming, then L235–L237.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L231 queues Heather pending. L234 queues Primrose pending. Do not invent friend_079.
+ * L234 queues Primrose pending. Do not invent friend_079.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-heather";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-primrose";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -100,6 +100,7 @@ const PARADE = [
   ["friend_074", "Bluebell", 222],
   ["friend_075", "Snapdragon", 225],
   ["friend_076", "Marigold", 228],
+  ["friend_077", "Heather", 231],
 ];
 
 const completedIds = [
@@ -112,7 +113,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 220 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 223 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -138,7 +139,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Marigold claimed the marigold pot."],
+  bubbles: ["Heather claimed the heather sprig."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -188,22 +189,23 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L231`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SEED STOP"));
-  await shot(page, "01_l231_before_heather");
+  await page.goto(`${BASE}/level/L234`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("HEATH STOP"));
+  await shot(page, "01_l234_before_primrose");
   await play(
     page,
     [
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["black", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowDown"],
       ["black", "ArrowLeft"],
       ["black", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -221,17 +223,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("heather naming", modal);
+  console.log("primrose naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Heather prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Primrose prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Moor soft. Already claimed the heather sprig.") {
-    throw new Error(`Heather display line drifted: ${modal.line}`);
+  if (modal.line !== "Pale soft. Already claimed the primrose dish.") {
+    throw new Error(`Primrose display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Heather,Moor,Sprig") {
-    throw new Error(`Heather chips must be Heather/Moor/Sprig, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Primrose,Pale,Dish") {
+    throw new Error(`Primrose chips must be Primrose/Pale/Dish, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Heather") ||
+    modal.chips.includes("Moor") ||
+    modal.chips.includes("Sprig") ||
     modal.chips.includes("Marigold") ||
     modal.chips.includes("Gold") ||
     modal.chips.includes("Pot") ||
@@ -303,92 +308,95 @@ try {
     modal.chips.includes("Honey") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Heather chips collided with Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Primrose chips collided with Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/heather_loaf_72.svg")) {
-    throw new Error(`Heather hero missing moor-heather loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/primrose_loaf_72.svg")) {
+    throw new Error(`Primrose hero missing pale primrose loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/heather_loaf_72.svg")) {
+    throw new Error("Primrose hero must not use the Heather loaf");
   }
   if (modal.hero.includes("/assets/cats/marigold_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Marigold loaf");
+    throw new Error("Primrose hero must not use the Marigold loaf");
   }
   if (modal.hero.includes("/assets/cats/snapdragon_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Snapdragon loaf");
+    throw new Error("Primrose hero must not use the Snapdragon loaf");
   }
   if (modal.hero.includes("/assets/cats/bluebell_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Bluebell loaf");
+    throw new Error("Primrose hero must not use the Bluebell loaf");
   }
   if (modal.hero.includes("/assets/cats/foxglove_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Foxglove loaf");
+    throw new Error("Primrose hero must not use the Foxglove loaf");
   }
   if (modal.hero.includes("/assets/cats/hyacinth_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Hyacinth loaf");
+    throw new Error("Primrose hero must not use the Hyacinth loaf");
   }
   if (modal.hero.includes("/assets/cats/crocus_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Crocus loaf");
+    throw new Error("Primrose hero must not use the Crocus loaf");
   }
   if (modal.hero.includes("/assets/cats/lily_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Lily loaf");
+    throw new Error("Primrose hero must not use the Lily loaf");
   }
   if (modal.hero.includes("/assets/cats/violet_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Violet loaf");
+    throw new Error("Primrose hero must not use the Violet loaf");
   }
   if (modal.hero.includes("/assets/cats/tulip_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Tulip loaf");
+    throw new Error("Primrose hero must not use the Tulip loaf");
   }
   if (modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Poppy loaf");
+    throw new Error("Primrose hero must not use the Poppy loaf");
   }
   if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Lotus loaf");
+    throw new Error("Primrose hero must not use the Lotus loaf");
   }
   if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Orchid loaf");
+    throw new Error("Primrose hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Iris loaf");
+    throw new Error("Primrose hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Aster loaf");
+    throw new Error("Primrose hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Zinnia loaf");
+    throw new Error("Primrose hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Dahlia loaf");
+    throw new Error("Primrose hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Azalea loaf");
+    throw new Error("Primrose hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Peony loaf");
+    throw new Error("Primrose hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Camellia loaf");
+    throw new Error("Primrose hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Gardenia loaf");
+    throw new Error("Primrose hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Hibiscus loaf");
+    throw new Error("Primrose hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Jasmine loaf");
+    throw new Error("Primrose hero must not use the Jasmine loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Magnolia loaf");
+    throw new Error("Primrose hero must not use the Magnolia loaf");
   }
   if (modal.hero.includes("/assets/cats/lavender_loaf_72.svg")) {
-    throw new Error("Heather hero must not use the Lavender loaf");
+    throw new Error("Primrose hero must not use the Lavender loaf");
   }
-  await shot(page, "02_heather_naming");
+  await shot(page, "02_primrose_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Heather") &&
-      ((document.body.innerText || "").includes("sprig") ||
-        (document.body.innerText || "").includes("heather") ||
+      (document.body.innerText || "").includes("Primrose") &&
+      ((document.body.innerText || "").includes("dish") ||
+        (document.body.innerText || "").includes("primrose") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -401,86 +409,86 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_077")) {
-    throw new Error("Heather was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_078")) {
+    throw new Error("Primrose was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_077")?.name !== "Heather") {
-    throw new Error("Heather name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_078")?.name !== "Primrose") {
+    throw new Error("Primrose name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_078")) {
-    throw new Error("friend_078 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_079")) {
+    throw new Error("friend_079 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/heather_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/heather_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/primrose_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/primrose_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Heather moor-heather loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Primrose pale primrose loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("sprig") && !yard.text.includes("Heather")) {
-    throw new Error("yard missing Heather heather sprig line");
+  if (!yard.text.includes("dish") && !yard.text.includes("Primrose")) {
+    throw new Error("yard missing Primrose primrose dish line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_heather_yard");
+  await shot(page, "03_primrose_yard");
 
-  await page.goto(`${BASE}/level/L232`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("MOOR CUT"));
-  await play(
-    page,
-    [
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowUp"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-    ],
-    "Home",
-  );
-
-  await page.goto(`${BASE}/level/L233`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SPRIG GAP"));
+  await page.goto(`${BASE}/level/L235`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("PALE CUT"));
   await play(
     page,
     [
       ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
       ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
     ],
     "Home",
   );
-  await shot(page, "04_l233_win");
 
-  await page.goto(`${BASE}/level/L234`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("HEATH STOP"));
+  await page.goto(`${BASE}/level/L236`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("DISH GAP"));
   await play(
     page,
     [
       ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
       ["black", "ArrowRight"],
       ["orange", "ArrowDown"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+    ],
+    "Home",
+  );
+  await shot(page, "04_l236_win");
+
+  await page.goto(`${BASE}/level/L237`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("RUFF STOP"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["black", "ArrowRight"],
       ["black", "ArrowDown"],
       ["black", "ArrowRight"],
       ["black", "ArrowUp"],
       ["black", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l234_win");
+  await shot(page, "05_l237_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -488,7 +496,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L231", "L232", "L233", "L234"]) {
+  for (const id of ["L234", "L235", "L236", "L237"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -496,23 +504,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_078")) {
-    throw new Error("friend_078 must stay pending, not named, on the Heather slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_078")) {
-    throw new Error("L234 clear must queue Primrose when friend_078 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_079")) {
+    throw new Error("friend_079 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_079")) {
-    throw new Error("L234 clear must not queue friend_079");
+    throw new Error("L237 clear must not queue the next friend");
   }
-  if (!after.text.includes("Pale soft. Already claimed the primrose dish.")) {
-    throw new Error("L234 clear must show Primrose pending naming");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L237 must not open a next-friend naming modal");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_077").length !== 1) {
-    throw new Error("L234 must not unlock a Heather duplicate");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_078").length !== 1) {
+    throw new Error("L237 must not unlock a Primrose duplicate");
   }
   if (!after.hud.includes("237") && !after.text.includes("237")) {
-    throw new Error("Campaign HUD must show through 237 after L234 clear");
+    throw new Error("Campaign HUD must show through 237 after L237 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -532,9 +537,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L231 + HEATHER + L232-234 OK");
+  console.log("CHAPTER 4 L234 + PRIMROSE + L235-237 OK");
 } catch (error) {
-  console.error("CHAPTER 4 HEATHER FAIL", error);
+  console.error("CHAPTER 4 PRIMROSE FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_primrose_bang",
+  "status": "READY",
+  "friend_id": "friend_078",
+  "unlock_clear": 234,
+  "personality": "Primrose-soft",
+  "display_line": "Pale soft. Already claimed the primrose dish.",
+  "default_name": "Primrose",
+  "tier": "C",
+  "color": "Pale",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/primrose_loaf_48.svg",
+    "loaf_72": "/assets/cats/primrose_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "primrose"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Primrose", "Pale", "Dish"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_078": [
+      "{Name}: Pale soft. Already claimed the primrose dish.",
+      "{Name}: Looks yard-cool. Owns the dish."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 234,
+    "sku_id": null,
+    "note": "Ch4. Primrose Pass. No gift. Ban Heather/Moor/Sprig and all prior pools. Bean parade stands. No Pebble. Primrose, Pale, and Dish chips are CEO-locked on Primrose. No friend_079."
+  }
+}

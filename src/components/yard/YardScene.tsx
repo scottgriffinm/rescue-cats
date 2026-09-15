@@ -141,6 +141,7 @@ export function YardScene({
   const snapdragon = friends.find((friend) => friend.friendId === "friend_075");
   const marigold = friends.find((friend) => friend.friendId === "friend_076");
   const heather = friends.find((friend) => friend.friendId === "friend_077");
+  const primrose = friends.find((friend) => friend.friendId === "friend_078");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -218,7 +219,8 @@ export function YardScene({
       friend.friendId !== "friend_074" &&
       friend.friendId !== "friend_075" &&
       friend.friendId !== "friend_076" &&
-      friend.friendId !== "friend_077",
+      friend.friendId !== "friend_077" &&
+      friend.friendId !== "friend_078",
   );
 
   return (
@@ -1979,6 +1981,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{heather.name}</p>
+        </div>
+      ) : null}
+
+      {primrose ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "48%", top: "156%" }}
+        >
+          <FriendSprite
+            kit={friendById(primrose.friendId)?.phenotype.artKit ?? "primrose"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === primrose.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(primrose.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${primrose.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{primrose.name}</p>
         </div>
       ) : null}
 
