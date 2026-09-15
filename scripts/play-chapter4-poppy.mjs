@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L198 → Lotus@198 naming, then L199–L201.
+ * Chapter 4 beat: L201 → Poppy@201 naming, then L202–L204.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-lotus";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-poppy";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -88,6 +88,7 @@ const PARADE = [
   ["friend_063", "Aster", 189],
   ["friend_064", "Iris", 192],
   ["friend_065", "Orchid", 195],
+  ["friend_066", "Lotus", 198],
 ];
 
 const completedIds = [
@@ -100,7 +101,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 187 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 190 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -126,7 +127,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Orchid claimed the orchid spike."],
+  bubbles: ["Lotus claimed the lotus pad."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -176,22 +177,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L198`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SPIKE STOP"));
-  await shot(page, "01_l198_before_lotus");
+  await page.goto(`${BASE}/level/L201`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("POND STOP"));
+  await shot(page, "01_l201_before_poppy");
   await play(
     page,
     [
+      ["black", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
     ],
     "New friend!",
   );
@@ -209,15 +210,15 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("lotus naming", modal);
+  console.log("poppy naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Lotus prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Poppy prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Pond soft. Already claimed the lotus pad.") {
-    throw new Error(`Lotus display line drifted: ${modal.line}`);
+  if (modal.line !== "Field bright. Already claimed the poppy cup.") {
+    throw new Error(`Poppy display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Lotus,Pad,Ripple") {
-    throw new Error(`Lotus chips must be Lotus/Pad/Ripple, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Poppy,Capsule,Silk") {
+    throw new Error(`Poppy chips must be Poppy/Capsule/Silk, got ${modal.chips.join("/")}`);
   }
   if (
     modal.chips.includes("Iris") ||
@@ -256,52 +257,58 @@ try {
     modal.chips.includes("Orchid") ||
     modal.chips.includes("Spur") ||
     modal.chips.includes("Veil") ||
+    modal.chips.includes("Lotus") ||
+    modal.chips.includes("Pad") ||
+    modal.chips.includes("Ripple") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Lotus chips collided with Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Poppy chips collided with Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
-    throw new Error(`Lotus hero missing pale pink-lotus loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
+    throw new Error(`Poppy hero missing scarlet-poppy loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
+    throw new Error("Poppy hero must not use the Lotus loaf");
   }
   if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Orchid loaf");
+    throw new Error("Poppy hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Iris loaf");
+    throw new Error("Poppy hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Aster loaf");
+    throw new Error("Poppy hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Zinnia loaf");
+    throw new Error("Poppy hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Dahlia loaf");
+    throw new Error("Poppy hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Azalea loaf");
+    throw new Error("Poppy hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Peony loaf");
+    throw new Error("Poppy hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Camellia loaf");
+    throw new Error("Poppy hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Gardenia loaf");
+    throw new Error("Poppy hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Lotus hero must not use the Hibiscus loaf");
+    throw new Error("Poppy hero must not use the Hibiscus loaf");
   }
-  await shot(page, "02_lotus_naming");
+  await shot(page, "02_poppy_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Lotus") &&
-      ((document.body.innerText || "").includes("pad") ||
-        (document.body.innerText || "").includes("lotus") ||
+      (document.body.innerText || "").includes("Poppy") &&
+      ((document.body.innerText || "").includes("cup") ||
+        (document.body.innerText || "").includes("poppy") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -314,86 +321,87 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_066")) {
-    throw new Error("Lotus was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_067")) {
+    throw new Error("Poppy was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_066")?.name !== "Lotus") {
-    throw new Error("Lotus name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_067")?.name !== "Poppy") {
+    throw new Error("Poppy name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_067")) {
-    throw new Error("friend_067 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_068")) {
+    throw new Error("friend_068 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/lotus_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/lotus_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/poppy_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/poppy_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Lotus pale pink-lotus loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Poppy scarlet-poppy loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("pad") && !yard.text.includes("Lotus")) {
-    throw new Error("yard missing Lotus lotus pad line");
+  if (!yard.text.includes("cup") && !yard.text.includes("Poppy")) {
+    throw new Error("yard missing Poppy poppy cup line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_lotus_yard");
+  await shot(page, "03_poppy_yard");
 
-  await page.goto(`${BASE}/level/L199`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("PAD CUT"));
+  await page.goto(`${BASE}/level/L202`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CAPSULE CUT"));
   await play(
     page,
     [
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
+    ],
+    "Home",
+  );
+
+  await page.goto(`${BASE}/level/L203`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SILK GAP"));
+  await play(
+    page,
+    [
       ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
       ["gray", "ArrowRight"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
+      ["gray", "ArrowUp"],
     ],
     "Home",
   );
+  await shot(page, "04_l203_win");
 
-  await page.goto(`${BASE}/level/L200`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("RIPPLE GAP"));
+  await page.goto(`${BASE}/level/L204`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CUP STOP"));
   await play(
     page,
     [
-      ["black", "ArrowRight"],
-      ["black", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
       ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["orange", "ArrowUp"],
       ["black", "ArrowUp"],
       ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
     ],
     "Home",
   );
-  await shot(page, "04_l200_win");
-
-  await page.goto(`${BASE}/level/L201`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("POND STOP"));
-  await play(
-    page,
-    [
-      ["black", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-    ],
-    "New friend!",
-  );
-  await shot(page, "05_l201_win");
+  await shot(page, "05_l204_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -401,7 +409,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L198", "L199", "L200", "L201"]) {
+  for (const id of ["L201", "L202", "L203", "L204"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -409,20 +417,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_067")) {
-    throw new Error("friend_067 must stay pending, not named, on the Lotus slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_067")) {
-    throw new Error("L201 clear must queue Poppy when friend_067 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_068")) {
+    throw new Error("friend_068 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_068")) {
-    throw new Error("L201 clear must not queue friend_068");
+    throw new Error("L204 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_066").length !== 1) {
-    throw new Error("L201 must not unlock a Lotus duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L204 must not open a next-friend naming modal");
   }
-  if (!after.hud.includes("201") && !after.text.includes("201")) {
-    throw new Error("Campaign HUD must show through 201 after L201 clear");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_067").length !== 1) {
+    throw new Error("L204 must not unlock a Poppy duplicate");
+  }
+  if (!after.hud.includes("204") && !after.text.includes("204")) {
+    throw new Error("Campaign HUD must show through 204 after L204 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -442,9 +450,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L198 + LOTUS + L199-201 OK");
+  console.log("CHAPTER 4 L201 + POPPY + L202-204 OK");
 } catch (error) {
-  console.error("CHAPTER 4 LOTUS FAIL", error);
+  console.error("CHAPTER 4 POPPY FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

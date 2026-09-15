@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_poppy_bang",
+  "status": "READY",
+  "friend_id": "friend_067",
+  "unlock_clear": 201,
+  "personality": "Poppy-soft",
+  "display_line": "Field bright. Already claimed the poppy cup.",
+  "default_name": "Poppy",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/poppy_loaf_48.svg",
+    "loaf_72": "/assets/cats/poppy_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "poppy"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Poppy", "Capsule", "Silk"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_067": [
+      "{Name}: Field bright. Already claimed the poppy cup.",
+      "{Name}: Looks yard-cool. Owns the cup."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 201,
+    "sku_id": null,
+    "note": "Ch4. Lotus Pass next. No gift. Ban Lotus/Pad/Ripple and all prior pools. Bean parade stands. No Pebble. Poppy chip is CEO-locked on Poppy. No friend_068."
+  }
+}
