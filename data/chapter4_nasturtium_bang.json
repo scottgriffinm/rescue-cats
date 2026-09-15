@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_nasturtium_bang",
+  "status": "READY",
+  "friend_id": "friend_088",
+  "unlock_clear": 264,
+  "personality": "Nasturtium-soft",
+  "display_line": "Pepper soft. Already claimed the nasturtium tray.",
+  "default_name": "Nasturtium",
+  "tier": "C",
+  "color": "Pepper",
+  "pattern": "Tray",
+  "art": {
+    "loaf_48": "/assets/cats/nasturtium_loaf_48.svg",
+    "loaf_72": "/assets/cats/nasturtium_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "nasturtium"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Nasturtium", "Pepper", "Tray"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_088": [
+      "{Name}: Pepper soft. Already claimed the nasturtium tray.",
+      "{Name}: Looks yard-soft. Owns the tray."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 264,
+    "sku_id": null,
+    "note": "Ch4. Nasturtium Pass. No gift. Ban Geranium/Cluster/Sill and all prior pools. Bean parade stands. No Pebble. Nasturtium, Pepper, and Tray chips are CEO-locked on Nasturtium. No friend_089."
+  }
+}

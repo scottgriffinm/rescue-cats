@@ -1,0 +1,92 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Geranium Pass — L265–L267 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L265–L267",
+  "notes": "L265 Pepper Cut / L266 Tray Gap / L267 Tendril Stop — habit-break vs Clump Cut gray-first / Sill Gap black-first / Pane Stop orange-first; not Nasturtium Cut/Gap/Stop; not Hyacinth Cluster Cut; not Geranium Clump Cut; Tendril Stop avoids Pane/Tube/Fold/Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup/Clump/Cluster Stop collisions; no WRAP/edge twin of Nori/Medlar; L267 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L265",
+      "name": "Pepper Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_pepper_cut_orange",
+      "walls": [
+        { "x": 4, "y": 4 },
+        { "x": 5, "y": 3 },
+        { "x": 4, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 5, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "pepper_cut_orange"
+    },
+    {
+      "id": "L266",
+      "name": "Tray Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tray_gap_gray",
+      "walls": [
+        { "x": 5, "y": 4 },
+        { "x": 0, "y": 0 },
+        { "x": 0, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "tray_gap_gray"
+    },
+    {
+      "id": "L267",
+      "name": "Tendril Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tendril_stop_black",
+      "walls": [
+        { "x": 3, "y": 5 },
+        { "x": 1, "y": 3 },
+        { "x": 2, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 0, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 1, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "tendril_stop_black"
+    }
+  ],
+  "teaches": {
+    "pepper_cut_orange": "Orange south first; gray cuts after the pepper.",
+    "tray_gap_gray": "Gray east then orange threads the tray gap.",
+    "tendril_stop_black": "Black north first; orange seats the tendril."
+  },
+  "solver": { "min_slides": { "L265": 10, "L266": 10, "L267": 10 } },
+  "deltas": { "L265": "(3, 2)", "L266": "(0, 1)", "L267": "(4, 1)" }
+}

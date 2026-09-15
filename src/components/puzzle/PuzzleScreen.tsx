@@ -260,7 +260,7 @@ export function PuzzleScreen({ level }: { level: Level }) {
       {phase === "won" && earnedStars > 0 ? (
         <div className="pointer-events-none absolute left-1/2 top-20 z-10 flex -translate-x-1/2 gap-1 sm:top-24">
           {Array.from({ length: earnedStars }, (_, i) => (
-            <UiIcon key={i} name="star_geranium" className="h-7 w-7" />
+            <UiIcon key={i} name="star_nasturtium" className="h-7 w-7" />
           ))}
         </div>
       ) : null}
