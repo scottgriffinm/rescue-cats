@@ -352,7 +352,7 @@ export function verifyChapter4Cleome(solves: Record<string, Array<[string, Dir]>
   if ((yardG.match(/\{celosia \?/g) || []).length !== 1) throw new Error("YardScene must keep celosia once");
   if ((yardG.match(/const phlox =/g) || []).length !== 1) throw new Error("YardScene must keep phlox once");
   if ((yardG.match(/\{phlox \?/g) || []).length !== 1) throw new Error("YardScene must keep phlox once");
-  if (TUTORIAL_RESCUES.length !== 98) throw new Error("Met must include through Cleome (98)");
+  if (TUTORIAL_RESCUES.length !== 99) throw new Error("Met must include through Cleome (98) after Coreopsis (99)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -361,7 +361,7 @@ export function verifyChapter4Cleome(solves: Record<string, Array<[string, Dir]>
   }
   if (SLICE_UNLOCKS[291] !== "friend_097") throw new Error("SLICE_UNLOCKS[291] must be friend_097");
   if (SLICE_UNLOCKS[294] !== "friend_098") throw new Error("SLICE_UNLOCKS[294] must be friend_098");
-  if (SLICE_UNLOCKS[297]) throw new Error("no friend_099 @297 this slice");
+  if (SLICE_UNLOCKS[297] !== "friend_099") throw new Error("SLICE_UNLOCKS[297] must be friend_099 after Coreopsis ship");
   if (/pebble|Pebble/i.test(loaf48 + loaf72)) throw new Error("Cleome art must not use Pebble");
   if (/celosia|phlox|lantana|calendula|salvia|impatiens|verbena|pansy|petunia|nasturtium|geranium|begonia|marigold|buttercup/i.test(loaf48 + loaf72)) {
     throw new Error("Cleome art must not collide Celosia/Phlox and prior flower marks");
@@ -470,5 +470,5 @@ export function verifyChapter4Cleome(solves: Record<string, Array<[string, Dir]>
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Cleome@294 + L295–L297 ok · chips Cleome/Whisk/Pod · coat #C868E0 + whisk freckles #2A1030 · Whisk Cut / Pod Gap / Spider Stop · unique vs Plume Cut / Comb Gap / Flame Stop / Floret Cut / Bank Gap / Spray Stop · Celosia/Phlox/Lantana/Calendula/Salvia/Impatiens/Verbena/Pansy/Petunia and prior locked · no friend_099 · parade Bean stands");
+  console.log("Ch4 Cleome@294 + L295–L297 ok · chips Cleome/Whisk/Pod · coat #C868E0 + whisk freckles #2A1030 · Whisk Cut / Pod Gap / Spider Stop · unique vs Plume Cut / Comb Gap / Flame Stop / Floret Cut / Bank Gap / Spray Stop · Celosia/Phlox/Lantana/Calendula/Salvia/Impatiens/Verbena/Pansy/Petunia and prior locked · Coreopsis@297 shipped · parade Bean stands");
 }
