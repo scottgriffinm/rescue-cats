@@ -553,8 +553,8 @@ try {
   if (after.save.friends.filter((friend) => friend.friendId === "friend_083").length !== 1) {
     throw new Error("L252 must not unlock an Anemone duplicate");
   }
-  if (!after.hud.includes("258") && !after.text.includes("258")) {
-    throw new Error("Campaign HUD must show through 258 after L252 clear");
+  if (!after.hud.includes("261") && !after.text.includes("261")) {
+    throw new Error("Campaign HUD must show through 261 after L252 clear");
   }
   const paradeLocks = {
     friend_001: 3,

@@ -71,6 +71,7 @@ import {
   ANEMONE_FRIEND_ID,
   BEGONIA_FRIEND_ID,
   RANUNCULUS_FRIEND_ID,
+  FREESIA_FRIEND_ID,
   NAMING,
   shuffleNameChips,
 } from "@/lib/collection";
@@ -152,13 +153,14 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
     catalog.friendId === WISTERIA_FRIEND_ID ||
     catalog.friendId === ANEMONE_FRIEND_ID ||
     catalog.friendId === BEGONIA_FRIEND_ID ||
-    catalog.friendId === RANUNCULUS_FRIEND_ID;
+    catalog.friendId === RANUNCULUS_FRIEND_ID ||
+    catalog.friendId === FREESIA_FRIEND_ID;
 
   return (
     <div className="fixed inset-0 z-30 flex items-end justify-center overflow-y-auto bg-ink/30 px-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:items-center sm:px-4 sm:pt-16">
       <div className="paper-card modal-spring my-auto w-full max-w-md rounded-[1.5rem] p-4 sm:p-6">
         <div className="flex justify-center">
-          <UiIcon name="star_ranunculus" className="h-8 w-8" />
+          <UiIcon name="star_freesia" className="h-8 w-8" />
         </div>
         <h2 className="mt-2 text-center font-display text-3xl tracking-wide">
           {NAMING.title}

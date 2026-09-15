@@ -14,6 +14,7 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
+  [255, "friend_085", "Ranunculus@255 must stay"],
   [252, "friend_084", "Begonia@252 must stay"],
   [249, "friend_083", "Anemone@249 must stay"],
   [246, "friend_082", "Wisteria@246 must stay"],
@@ -87,6 +88,7 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
+  ["friend_085", "Ranunculus,Layer,Nest", "Ranunculus chips untouched"],
   ["friend_084", "Begonia,Ruffle,Planter", "Begonia chips untouched"],
   ["friend_083", "Anemone,Wind,Bowl", "Anemone chips untouched"],
   ["friend_082", "Wisteria,Cascade,Arbor", "Wisteria chips untouched"],
@@ -207,6 +209,7 @@ const BANNED_PAIRS = new Set([
   "3,0/3,3", "0,3/1,3", "2,4/5,1",
   "2,1/5,0", "3,0/4,2", "0,3/1,2",
   "0,2/3,2", "3,4/3,5", "0,2/2,1",
+  "3,3/5,1", "2,0/2,4", "2,3/4,0",
 ]);
 
 function stateKey(cats: PieceCat[]) {
@@ -257,11 +260,11 @@ function uniqueShortestCount(level: Level) {
   return { min, count };
 }
 
-export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, Dir]>>) {
+export function verifyChapter4Freesia(solves: Record<string, Array<[string, Dir]>>) {
   for (const [id, name] of [
-    ["L256", "Layer Cut"],
-    ["L257", "Nest Gap"],
-    ["L258", "Fold Stop"],
+    ["L259", "Trumpet Cut"],
+    ["L260", "Vase Gap"],
+    ["L261", "Tube Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -274,8 +277,11 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
     if (/\b(hold|park|close)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Hold*/Park*/Close`);
     }
-    if (/ranunculus (cut|gap|stop)/i.test(level.name)) {
-      throw new Error(`${id} must not be Ranunculus Cut/Gap/Stop`);
+    if (/freesia (cut|gap|stop)/i.test(level.name)) {
+      throw new Error(`${id} must not be Freesia Cut/Gap/Stop`);
+    }
+    if (/ranunculus (cut|gap|stop)|layer cut|nest gap|fold stop/i.test(level.name)) {
+      throw new Error(`${id} must not be Layer Cut/Nest Gap/Fold Stop/Ranunculus Cut/Gap/Stop`);
     }
     if (/begonia (cut|gap|stop)|ruffle cut|planter gap|leaf stop/i.test(level.name)) {
       throw new Error(`${id} must not be Ruffle Cut/Planter Gap/Leaf Stop/Begonia Cut/Gap/Stop`);
@@ -302,6 +308,9 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
     if (unique.min < 10 || unique.min > 11) throw new Error(`${id} shortest must be 10–11, got ${unique.min}`);
     if (level.moveBudget < unique.min) throw new Error(`${id} budget ${level.moveBudget} < shortest ${unique.min}`);
   }
+  if (LEVELS.find((row) => row.id === "L256")?.name !== "Layer Cut") throw new Error("L256 Layer Cut locked");
+  if (LEVELS.find((row) => row.id === "L257")?.name !== "Nest Gap") throw new Error("L257 Nest Gap locked");
+  if (LEVELS.find((row) => row.id === "L258")?.name !== "Fold Stop") throw new Error("L258 Fold Stop locked");
   if (LEVELS.find((row) => row.id === "L253")?.name !== "Ruffle Cut") throw new Error("L253 Ruffle Cut locked");
   if (LEVELS.find((row) => row.id === "L254")?.name !== "Planter Gap") throw new Error("L254 Planter Gap locked");
   if (LEVELS.find((row) => row.id === "L255")?.name !== "Leaf Stop") throw new Error("L255 Leaf Stop locked");
@@ -389,35 +398,37 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
   if (LEVELS.find((row) => row.id === "L168")?.name !== "Bowl Stop") throw new Error("L168 Bowl Stop locked");
   if (LEVELS.find((row) => row.id === "L165")?.name !== "Bloom Stop") throw new Error("L165 Bloom Stop locked");
   if (LEVELS.find((row) => row.id === "L162")?.name !== "Saucer Stop") throw new Error("L162 Saucer Stop locked");
-  if (SLICE_UNLOCKS[255] !== "friend_085") throw new Error("SLICE_UNLOCKS[255] must be friend_085");
-  if (shippedFriendForClear(255)?.friendId !== "friend_085") throw new Error("onClear(255) must award Ranunculus");
-  const ranunculus = friendById("friend_085");
-  if (!ranunculus) throw new Error("friend_085 missing from CATALOG");
-  if (ranunculus.defaultName !== "Ranunculus") throw new Error("default name must be Ranunculus");
-  if (ranunculus.unlockClear !== 255) throw new Error("Ranunculus unlockClear must be 255");
-  if (ranunculus.phenotype.artKit !== "ranunculus") throw new Error("Ranunculus artKit must be ranunculus");
-  if (ranunculus.phenotype.personality !== "Ranunculus-soft") throw new Error("Ranunculus personality must be Ranunculus-soft");
-  if (ranunculus.phenotype.boardColor !== "gray") throw new Error("Ranunculus boardColor must be gray");
-  if (ranunculus.phenotype.color !== "Layer") throw new Error("Ranunculus color must be Layer");
-  if (ranunculus.phenotype.pattern !== "Nest") throw new Error("Ranunculus pattern must be Nest");
-  if (chipsForFriend("friend_085").join(",") !== "Ranunculus,Layer,Nest") {
-    throw new Error(`Ranunculus chips must be Ranunculus/Layer/Nest, got ${chipsForFriend("friend_085").join(",")}`);
+  if (SLICE_UNLOCKS[258] !== "friend_086") throw new Error("SLICE_UNLOCKS[258] must be friend_086");
+  if (shippedFriendForClear(258)?.friendId !== "friend_086") throw new Error("onClear(258) must award Freesia");
+  const freesia = friendById("friend_086");
+  if (!freesia) throw new Error("friend_086 missing from CATALOG");
+  if (freesia.defaultName !== "Freesia") throw new Error("default name must be Freesia");
+  if (freesia.unlockClear !== 258) throw new Error("Freesia unlockClear must be 258");
+  if (freesia.phenotype.artKit !== "freesia") throw new Error("Freesia artKit must be freesia");
+  if (freesia.phenotype.personality !== "Freesia-soft") throw new Error("Freesia personality must be Freesia-soft");
+  if (freesia.phenotype.boardColor !== "orange") throw new Error("Freesia boardColor must be orange");
+  if (freesia.phenotype.color !== "Trumpet") throw new Error("Freesia color must be Trumpet");
+  if (freesia.phenotype.pattern !== "Vase") throw new Error("Freesia pattern must be Vase");
+  if (chipsForFriend("friend_086").join(",") !== "Freesia,Trumpet,Vase") {
+    throw new Error(`Freesia chips must be Freesia/Trumpet/Vase, got ${chipsForFriend("friend_086").join(",")}`);
   }
-  if (chipsForFriend("friend_085").some((c) => /begonia|^ruffle$|^planter$|anemone|^wind$|^bowl$|wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|^pot$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^cluster$|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
-    throw new Error("Ranunculus chips must ban Begonia/Ruffle/Planter and Anemone/Wind/Bowl and Wisteria/Cascade/Arbor and all prior pools/Pebble/Sage");
+  if (chipsForFriend("friend_086").some((c) => /ranunculus|^layer$|^nest$|begonia|^ruffle$|^planter$|anemone|^wind$|^bowl$|wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|^pot$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^cluster$|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
+    throw new Error("Freesia chips must ban Ranunculus/Layer/Nest and Begonia/Ruffle/Planter and Anemone/Wind/Bowl and Wisteria/Cascade/Arbor and all prior pools/Pebble/Sage");
   }
-  const ranunculus48 = readFileSync(resolve("public/assets/cats/ranunculus_loaf_48.svg"), "utf8");
-  const ranunculus72 = readFileSync(resolve("public/assets/cats/ranunculus_loaf_72.svg"), "utf8");
-  if (!ranunculus48.includes("#F4A0B8") || !ranunculus72.includes("#F4A0B8")) throw new Error("Ranunculus loaf must use layered coat #F4A0B8");
-  if (!ranunculus48.includes("#5A2840") || !ranunculus72.includes("#5A2840")) throw new Error("Ranunculus loaf must use center freckles #5A2840");
-  if (!ranunculus48.includes("#FFF8FA") || !ranunculus72.includes("#FFF8FA")) throw new Error("Ranunculus loaf must use belly #FFF8FA");
-  for (const hex of ["#E87868", "#3A2818", "#FFF4EE", "#C85040", "#F0A8C8", "#4A2038", "#FFF7FC", "#C03868", "#B8A0E8", "#3A2868", "#F2E6FF", "#6E48A8", "#7EC8E8", "#1A3A58", "#E8F8FC", "#4A9BB8", "#E8A0C0", "#5A2848", "#FFF9FD", "#D07898", "#F4C8DC", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#C89648", "#FFF8E0", "#9A5A8A", "#2A1830", "#7A3F6C", "#F0D6E8", "#FFF2F8", "#F0A020", "#4A3010", "#FFE9B4", "#C86E0C", "#FFF6D0", "#E07050", "#3A2010", "#B84A28", "#F3C8A8", "#C8A84A", "#C4B06A", "#4A7EC8", "#1A2848", "#D0E4F6", "#2E5A98", "#E8F4FF", "#D478A0", "#3A2030", "#B44A78", "#F8D4E6", "#FFF4FA", "#5A6EC8", "#1E2448", "#C8D2F0", "#3A4A88", "#F0F4FF", "#C45A9A", "#F4C2DC", "#9A3A78", "#FFF0F8", "#F5F0E6", "#C8A84A", "#FFF8EC", "#C4B06A", "#FEF6DC", "#6B4AA0", "#1E2A18", "#D2C4EA", "#4A3078", "#F8F4FF", "#E07090", "#2A4020", "#F8C4D2", "#C44868", "#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0", "#9B7EBD", "#3A2A58"]) {
-    if (ranunculus48.includes(hex) || ranunculus72.includes(hex)) throw new Error(`Ranunculus loaf must not use prior herb coat ${hex}`);
+  const freesia48 = readFileSync(resolve("public/assets/cats/freesia_loaf_48.svg"), "utf8");
+  const freesia72 = readFileSync(resolve("public/assets/cats/freesia_loaf_72.svg"), "utf8");
+  if (!freesia48.includes("#F5E080") || !freesia72.includes("#F5E080")) throw new Error("Freesia loaf must use trumpet coat #F5E080");
+  if (!freesia48.includes("#6A5020") || !freesia72.includes("#6A5020")) throw new Error("Freesia loaf must use throat freckles #6A5020");
+  if (!freesia48.includes("#FFFCEE") || !freesia72.includes("#FFFCEE")) throw new Error("Freesia loaf must use belly #FFFCEE");
+  for (const hex of ["#F4A0B8", "#5A2840", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#E8A020", "#5A3A10", "#E87868", "#3A2818", "#FFF4EE", "#C85040", "#F0A8C8", "#4A2038", "#FFF7FC", "#C03868", "#B8A0E8", "#3A2868", "#F2E6FF", "#6E48A8", "#7EC8E8", "#1A3A58", "#E8F8FC", "#4A9BB8", "#E8A0C0", "#5A2848", "#FFF9FD", "#D07898", "#F4C8DC", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#C89648", "#FFF8E0", "#9A5A8A", "#2A1830", "#7A3F6C", "#F0D6E8", "#FFF2F8", "#F0A020", "#4A3010", "#FFE9B4", "#C86E0C", "#FFF6D0", "#E07050", "#3A2010", "#B84A28", "#F3C8A8", "#C8A84A", "#C4B06A", "#4A7EC8", "#1A2848", "#D0E4F6", "#2E5A98", "#E8F4FF", "#D478A0", "#3A2030", "#B44A78", "#F8D4E6", "#FFF4FA", "#5A6EC8", "#1E2448", "#C8D2F0", "#3A4A88", "#F0F4FF", "#C45A9A", "#F4C2DC", "#9A3A78", "#FFF0F8", "#F5F0E6", "#C8A84A", "#FFF8EC", "#C4B06A", "#FEF6DC", "#6B4AA0", "#1E2A18", "#D2C4EA", "#4A3078", "#F8F4FF", "#E07090", "#2A4020", "#F8C4D2", "#C44868", "#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0", "#9B7EBD", "#3A2A58"]) {
+    if (freesia48.includes(hex) || freesia72.includes(hex)) throw new Error(`Freesia loaf must not use prior herb coat ${hex}`);
   }
-  if (furnitureGiftsForClear(255).length) throw new Error("Ranunculus@255 must gift no furniture");
+  if (furnitureGiftsForClear(258).length) throw new Error("Freesia@258 must gift no furniture");
   const yardF = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
-  if ((yardF.match(/const ranunculus =/g) || []).length !== 1) throw new Error("YardScene must declare ranunculus once");
-  if ((yardF.match(/\{ranunculus \?/g) || []).length !== 1) throw new Error("YardScene must render ranunculus once");
+  if ((yardF.match(/const freesia =/g) || []).length !== 1) throw new Error("YardScene must declare freesia once");
+  if ((yardF.match(/\{freesia \?/g) || []).length !== 1) throw new Error("YardScene must render freesia once");
+  if ((yardF.match(/const ranunculus =/g) || []).length !== 1) throw new Error("YardScene must keep ranunculus once");
+  if ((yardF.match(/\{ranunculus \?/g) || []).length !== 1) throw new Error("YardScene must keep ranunculus once");
   if ((yardF.match(/const begonia =/g) || []).length !== 1) throw new Error("YardScene must keep begonia once");
   if ((yardF.match(/\{begonia \?/g) || []).length !== 1) throw new Error("YardScene must keep begonia once");
   if ((yardF.match(/const anemone =/g) || []).length !== 1) throw new Error("YardScene must keep anemone once");
@@ -448,7 +459,7 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
   if ((yardF.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardF.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardF.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 86) throw new Error("Met must include through Ranunculus (85) after Freesia (86)");
+  if (TUTORIAL_RESCUES.length !== 86) throw new Error("Met must include through Freesia (86)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -460,22 +471,23 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
   if (SLICE_UNLOCKS[249] !== "friend_083") throw new Error("SLICE_UNLOCKS[249] must be friend_083");
   if (SLICE_UNLOCKS[252] !== "friend_084") throw new Error("SLICE_UNLOCKS[252] must be friend_084");
   if (SLICE_UNLOCKS[255] !== "friend_085") throw new Error("SLICE_UNLOCKS[255] must be friend_085");
-  if (SLICE_UNLOCKS[258] !== "friend_086") throw new Error("SLICE_UNLOCKS[258] must be friend_086 after Freesia ship");
-  if (/pebble|Pebble/i.test(ranunculus48 + ranunculus72)) throw new Error("Ranunculus art must not use Pebble");
-  if (/begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|cluster|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise/i.test(ranunculus48 + ranunculus72)) {
-    throw new Error("Ranunculus art must not collide Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");
+  if (SLICE_UNLOCKS[258] !== "friend_086") throw new Error("SLICE_UNLOCKS[258] must be friend_086");
+  if (SLICE_UNLOCKS[261]) throw new Error("no friend_087 @261 this slice");
+  if (/pebble|Pebble/i.test(freesia48 + freesia72)) throw new Error("Freesia art must not use Pebble");
+  if (/ranunculus|layered|begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|cluster|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise/i.test(freesia48 + freesia72)) {
+    throw new Error("Freesia art must not collide Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");
   }
-  const l247 = LEVELS.find((r) => r.id === "L256")!;
-  const l248 = LEVELS.find((r) => r.id === "L257")!;
-  const l249 = LEVELS.find((r) => r.id === "L258")!;
-  if (/\b(ruffle|planter|leaf|begonia|wind|bowl|whirl|anemone|cascade|arbor|droop|wisteria|vine|trellis|star|clematis|airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|pot|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|cluster|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|vase|dahlia|fizz|flare|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|poppy)\b/i.test([l247.name, l248.name].join(","))) {
-    throw new Error("L256–L257 must not reuse Ruffle/Planter/Leaf/Begonia/Wind/Bowl/Whirl/Anemone/Cascade/Arbor/Droop and prior triad names");
+  const l247 = LEVELS.find((r) => r.id === "L259")!;
+  const l248 = LEVELS.find((r) => r.id === "L260")!;
+  const l249 = LEVELS.find((r) => r.id === "L261")!;
+  if (/\b(layer|nest|fold|ranunculus|ruffle|planter|leaf|begonia|wind|bowl|whirl|anemone|cascade|arbor|droop|wisteria|vine|trellis|star|clematis|airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|pot|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|cluster|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|dahlia|fizz|flare|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|poppy)\b/i.test([l247.name, l248.name].join(","))) {
+    throw new Error("L259–L260 must not reuse Ruffle/Planter/Leaf/Begonia/Wind/Bowl/Whirl/Anemone/Cascade/Arbor/Droop and prior triad names");
   }
-  const ranunculusGatePair = (level: typeof l247) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (ranunculusGatePair(l247) !== "3,3/5,1") throw new Error(`L256 gates must be delta (2, 2) pair, got ${ranunculusGatePair(l247)}`);
-  if (ranunculusGatePair(l248) !== "2,0/2,4") throw new Error(`L257 gates must be delta (0, 4) pair, got ${ranunculusGatePair(l248)}`);
-  if (ranunculusGatePair(l249) !== "2,3/4,0") throw new Error(`L258 gates must be delta (2, 3) pair, got ${ranunculusGatePair(l249)}`);
-  const occ258 = [...l249.cats, ...l249.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
+  const freesiaGatePair = (level: typeof l247) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (freesiaGatePair(l247) !== "4,2/5,2") throw new Error(`L259 gates must be delta (1, 0) pair, got ${freesiaGatePair(l247)}`);
+  if (freesiaGatePair(l248) !== "0,4/3,3") throw new Error(`L260 gates must be delta (3, 1) pair, got ${freesiaGatePair(l248)}`);
+  if (freesiaGatePair(l249) !== "0,5/4,2") throw new Error(`L261 gates must be delta (4, 3) pair, got ${freesiaGatePair(l249)}`);
+  const occ261 = [...l249.cats, ...l249.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
   const priorOcc = new Set([
     "1,2;2,0;2,5;5,3",
     "0,5;2,4;4,3;4,5",
@@ -504,57 +516,58 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
     "0,2;1,5;2,1;3,1",
     "3,0;3,1;4,0;4,5",
     "0,5;3,2;5,1;5,3",
+    "1,0;1,2;2,3;4,0",
   ]);
-  if (priorOcc.has(occ258)) throw new Error("L258 Fold must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf occupancy");
-  if (occ258.split(";").includes("5,5")) throw new Error("L258 Fold must be off Nori seat (5,5)");
-  if (l249.gates[0].y === l249.gates[1].y) throw new Error("L258 Fold must not same-row Nest");
-  if (l249.gates[0].x === l249.gates[1].x) throw new Error("L258 Fold must not column Porch");
-  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L256 Layer must not stacked-column Vine");
+  if (priorOcc.has(occ261)) throw new Error("L261 Tube must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf occupancy");
+  if (occ261.split(";").includes("5,5")) throw new Error("L261 Tube must be off Nori seat (5,5)");
+  if (l249.gates[0].y === l249.gates[1].y) throw new Error("L261 Tube must not same-row Nest");
+  if (l249.gates[0].x === l249.gates[1].x) throw new Error("L261 Tube must not column Porch");
+  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L259 Trumpet must not stacked-column Vine");
 
-  if (solves.L256[0][0] === "cat_orange") {
-    throw new Error("L256 Layer Cut must not open orange-first (Ruffle Cut clone)");
+  if (solves.L259[0][0] === "cat_gray") {
+    throw new Error("L259 Trumpet Cut must not open gray-first (Layer Cut clone)");
   }
-  if (solves.L256[0][0] === "cat_gray" && solves.L256[0][1] === "n") {
-    throw new Error("L256 Layer Cut must not open gray-north (Wind Cut clone)");
+  if (solves.L259[0][0] === "cat_orange" && solves.L259[0][1] === "n") {
+    throw new Error("L259 Trumpet Cut must not open orange-north (Cascade Cut clone)");
   }
-  if (solves.L256[0][0] === "cat_gray" && solves.L256[0][1] === "s") {
-    throw new Error("L256 Layer Cut must not open gray-south (Arbor Gap clone)");
+  if (solves.L259[0][0] === "cat_orange" && solves.L259[0][1] === "s") {
+    throw new Error("L259 Trumpet Cut must not open orange-south (Ruffle Cut clone)");
   }
-  if (solves.L256[0][0] === "cat_gray" && solves.L256[0][1] === "w") {
-    throw new Error("L256 Layer Cut must not open gray-west (Planter Gap clone)");
+  if (solves.L259[0][0] === "cat_orange" && solves.L259[0][1] === "e") {
+    throw new Error("L259 Trumpet Cut must not open orange-east (Airy Cut clone)");
   }
-  if (solves.L257[0][0] === "cat_gray") {
-    throw new Error("L257 Nest Gap must not open gray-first (Planter Gap clone)");
+  if (solves.L260[0][0] === "cat_black") {
+    throw new Error("L260 Vase Gap must not open black-first (Nest Gap clone)");
   }
-  if (solves.L257[0][0] === "cat_black" && solves.L257[0][1] === "e") {
-    throw new Error("L257 Nest Gap must not open black-east (Bowl Gap clone)");
+  if (solves.L260[0][0] === "cat_gray" && solves.L260[0][1] === "n") {
+    throw new Error("L260 Vase Gap must not open gray-north (Wind Cut clone)");
   }
-  if (solves.L257[0][0] === "cat_black" && solves.L257[0][1] === "s") {
-    throw new Error("L257 Nest Gap must not open black-south (Trellis Gap clone)");
+  if (solves.L260[0][0] === "cat_gray" && solves.L260[0][1] === "s") {
+    throw new Error("L260 Vase Gap must not open gray-south (Arbor Gap clone)");
   }
-  if (solves.L257[0][0] === "cat_black" && solves.L257[0][1] === "n") {
-    throw new Error("L257 Nest Gap must not open black-north (Leaf Stop clone)");
+  if (solves.L260[0][0] === "cat_gray" && solves.L260[0][1] === "e") {
+    throw new Error("L260 Vase Gap must not open gray-east (Layer Cut clone)");
   }
-  if (solves.L258[0][0] === "cat_black") {
-    throw new Error("L258 Fold Stop must not open black-first (Leaf Stop clone)");
+  if (solves.L261[0][0] === "cat_orange") {
+    throw new Error("L261 Tube Stop must not open orange-first (Fold Stop clone)");
   }
-  if (solves.L258[0][0] === "cat_orange" && solves.L258[0][1] === "n") {
-    throw new Error("L258 Fold Stop must not open orange-north (Cascade Cut clone)");
+  if (solves.L261[0][0] === "cat_black" && solves.L261[0][1] === "n") {
+    throw new Error("L261 Tube Stop must not open black-north (Leaf Stop clone)");
   }
-  if (solves.L258[0][0] === "cat_orange" && solves.L258[0][1] === "s") {
-    throw new Error("L258 Fold Stop must not open orange-south (Ruffle Cut clone)");
+  if (solves.L261[0][0] === "cat_black" && solves.L261[0][1] === "s") {
+    throw new Error("L261 Tube Stop must not open black-south (Trellis Gap clone)");
   }
-  if (solves.L258[0][0] === "cat_orange" && solves.L258[0][1] === "e") {
-    throw new Error("L258 Fold Stop must not open orange-east (Airy Cut clone)");
+  if (solves.L261[0][0] === "cat_black" && solves.L261[0][1] === "w") {
+    throw new Error("L261 Tube Stop must not open black-west (Nest Gap clone)");
   }
-  if (solves.L256[0][0] !== "cat_gray") {
-    throw new Error("L256 Layer Cut must open gray-first");
+  if (solves.L259[0][0] !== "cat_orange") {
+    throw new Error("L259 Trumpet Cut must open orange-first");
   }
-  if (solves.L257[0][0] !== "cat_black") {
-    throw new Error("L257 Nest Gap must open black-first");
+  if (solves.L260[0][0] !== "cat_gray") {
+    throw new Error("L260 Vase Gap must open gray-first");
   }
-  if (solves.L258[0][0] !== "cat_orange") {
-    throw new Error("L258 Fold Stop must open orange-first");
+  if (solves.L261[0][0] !== "cat_black") {
+    throw new Error("L261 Tube Stop must open black-first");
   }
   for (const level of [l247, l248, l249]) {
     if (level.gates.every((g) => g.y === 5) || level.gates.every((g) => g.x === 5)) {
@@ -565,11 +578,13 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
   }
   const wallKeyO = (level: typeof l247) =>
     [...level.walls].map((w) => `${w.x},${w.y}`).sort().join(";");
-  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243", "L244", "L245", "L246", "L247", "L248", "L249", "L250", "L251", "L252", "L253", "L254", "L255"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
-  for (const id of ["L256", "L257", "L258"] as const) {
+  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243", "L244", "L245", "L246", "L247", "L248", "L249", "L250", "L251", "L252", "L253", "L254", "L255", "L256", "L257", "L258"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
+  for (const id of ["L259", "L260", "L261"] as const) {
     const key = wallKeyO(LEVELS.find((r) => r.id === id)!);
     if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L255`);
   }
+  if (ART_KIT_PATH.freesia.loaf48 !== "/assets/cats/freesia_loaf_48.svg") throw new Error("ART_KIT_PATH.freesia loaf48");
+  if (ART_KIT_PATH.freesia.loaf72 !== "/assets/cats/freesia_loaf_72.svg") throw new Error("ART_KIT_PATH.freesia loaf72");
   if (ART_KIT_PATH.ranunculus.loaf48 !== "/assets/cats/ranunculus_loaf_48.svg") throw new Error("ART_KIT_PATH.ranunculus loaf48");
   if (ART_KIT_PATH.ranunculus.loaf72 !== "/assets/cats/ranunculus_loaf_72.svg") throw new Error("ART_KIT_PATH.ranunculus loaf72");
   if (ART_KIT_PATH.begonia.loaf48 !== "/assets/cats/begonia_loaf_48.svg") throw new Error("ART_KIT_PATH.begonia loaf48");
@@ -610,7 +625,8 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
   if (ART_KIT_PATH.gardenia.loaf48 !== "/assets/cats/gardenia_loaf_48.svg") throw new Error("Gardenia kit must stay");
   if (ART_KIT_PATH.hibiscus.loaf48 !== "/assets/cats/hibiscus_loaf_48.svg") throw new Error("Hibiscus kit must stay");
   const saveF = readFileSync(resolve("src/components/providers/SaveProvider.tsx"), "utf8");
-  if (!saveF.includes("ranunculus nest")) throw new Error("SaveProvider must yard-bubble ranunculus nest for Ranunculus");
+  if (!saveF.includes("freesia vase")) throw new Error("SaveProvider must yard-bubble freesia vase for Freesia");
+  if (!saveF.includes("ranunculus nest")) throw new Error("SaveProvider must keep ranunculus nest for Ranunculus");
   if (!saveF.includes("begonia planter")) throw new Error("SaveProvider must keep begonia planter for Begonia");
   if (!saveF.includes("anemone bowl")) throw new Error("SaveProvider must yard-bubble anemone bowl for Anemone");
   if (!saveF.includes("wisteria arbor")) throw new Error("SaveProvider must yard-bubble wisteria arbor for Wisteria");
@@ -629,11 +645,12 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
   if (!saveF.includes("violet patch")) throw new Error("SaveProvider must keep violet patch for Violet");
   if (!saveF.includes("tulip vase")) throw new Error("SaveProvider must keep tulip vase for Tulip");
   if (!saveF.includes("poppy cup")) throw new Error("SaveProvider must keep poppy cup for Poppy");
-  if (!existsSync(resolve("data/collection/CH4_FRIEND_085.md"))) throw new Error("missing CH4_FRIEND_085.md");
-  if (!existsSync(resolve("data/collection/chapter4_ranunculus_bang.json"))) throw new Error("missing collection ranunculus bang");
-  if (!existsSync(resolve("data/chapter4_ranunculus_bang.json"))) throw new Error("missing chapter4_ranunculus_bang.json");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_086.md"))) throw new Error("missing CH4_FRIEND_086.md");
+  if (!existsSync(resolve("data/collection/chapter4_freesia_bang.json"))) throw new Error("missing collection freesia bang");
+  if (!existsSync(resolve("data/chapter4_freesia_bang.json"))) throw new Error("missing chapter4_freesia_bang.json");
   const nameModalF = readFileSync(resolve("src/components/puzzle/NameCatModal.tsx"), "utf8");
-  if (!nameModalF.includes("RANUNCULUS_FRIEND_ID")) throw new Error("NameCatModal must lockChips Ranunculus");
+  if (!nameModalF.includes("FREESIA_FRIEND_ID")) throw new Error("NameCatModal must lockChips Freesia");
+  if (!nameModalF.includes("RANUNCULUS_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Ranunculus");
   if (!nameModalF.includes("BEGONIA_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Begonia");
   if (!nameModalF.includes("ANEMONE_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Anemone");
   if (!nameModalF.includes("WISTERIA_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Wisteria");
@@ -662,5 +679,5 @@ export function verifyChapter4Ranunculus(solves: Record<string, Array<[string, D
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Ranunculus@255 + L256–L258 ok · chips Ranunculus/Layer/Nest · coat #F4A0B8 + center freckles #5A2840 · Layer Cut / Nest Gap / Fold Stop · Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Freesia@258 + L259–L261 ok · chips Freesia/Trumpet/Vase · coat #F5E080 + throat freckles #6A5020 · Trumpet Cut / Vase Gap / Tube Stop · Ranunculus/Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }

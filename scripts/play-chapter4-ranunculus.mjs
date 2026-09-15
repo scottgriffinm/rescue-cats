@@ -1,7 +1,7 @@
 /**
  * Chapter 4 beat: L255 → Ranunculus@255 naming, then L256–L258.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L255 queues Ranunculus pending. Do not invent friend_086.
+ * L255 queues Ranunculus pending. L258 queues Freesia when friend_086 is present.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -552,19 +552,22 @@ try {
     throw new Error("L10 must stay off the campaign path");
   }
   if (after.save.friends.some((friend) => friend.friendId === "friend_086")) {
-    throw new Error("friend_086 must not unlock this slice");
+    throw new Error("friend_086 must stay pending, not named, on the Ranunculus slice");
   }
-  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_086")) {
-    throw new Error("L258 clear must not queue the next friend");
+  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_086")) {
+    throw new Error("L258 clear must queue Freesia when friend_086 is present");
   }
-  if (after.text.includes("New friend!")) {
-    throw new Error("L258 must not open a next-friend naming modal");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_087")) {
+    throw new Error("L258 clear must not queue friend_087");
+  }
+  if (!after.text.includes("New friend!")) {
+    throw new Error("L258 clear must show Freesia pending naming");
   }
   if (after.save.friends.filter((friend) => friend.friendId === "friend_085").length !== 1) {
     throw new Error("L258 must not unlock a Ranunculus duplicate");
   }
-  if (!after.hud.includes("258") && !after.text.includes("258")) {
-    throw new Error("Campaign HUD must show through 258 after L258 clear");
+  if (!after.hud.includes("261") && !after.text.includes("261")) {
+    throw new Error("Campaign HUD must show through 261 after L258 clear");
   }
   const paradeLocks = {
     friend_001: 3,
