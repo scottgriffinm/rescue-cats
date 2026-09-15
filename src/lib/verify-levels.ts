@@ -13126,7 +13126,7 @@ for (const level of LEVELS) {
   if (!roostsBlock) throw new Error("YardScene ROOSTS missing");
   const roostCount = (roostsBlock[1].match(/left:/g) ?? []).length;
   if (roostCount < 20) throw new Error(`ROOSTS must have ≥20 seats, got ${roostCount}`);
-  // ban inventing friend_093+ (Impatiens@276 shipped; next gated)
+  // ban inventing friend_094+ (Salvia@279 shipped; next gated)
   const srcHit = [
     "src/lib/collection.ts",
     "src/components/yard/YardScreen.tsx",
@@ -13134,9 +13134,9 @@ for (const level of LEVELS) {
     "src/lib/levels.ts",
   ].flatMap((file) => {
     const text = readFileSync(resolve(file), "utf8");
-    return /friend_093/.test(text) ? [file] : [];
+    return /friend_094/.test(text) ? [file] : [];
   });
-  if (srcHit.length) throw new Error(`friend_093+ must not appear in ${srcHit.join(",")}`);
+  if (srcHit.length) throw new Error(`friend_094+ must not appear in ${srcHit.join(",")}`);
   if (SLICE_UNLOCKS[61]) {
     throw new Error("no unlock at 61 — Fig@96 past Basil");
   }
