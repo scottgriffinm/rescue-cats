@@ -229,7 +229,7 @@ export function verifyChapter4Bergamot(solves: Record<string, Array<[string, Dir
   const yardB = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardB.match(/const bergamot =/g) || []).length !== 1) throw new Error("YardScene must declare bergamot once");
   if ((yardB.match(/\{bergamot \?/g) || []).length !== 1) throw new Error("YardScene must render bergamot once");
-  if (TUTORIAL_RESCUES.length !== 92) throw new Error("Met must include through Bergamot (53)");
+  if (TUTORIAL_RESCUES.length !== 93) throw new Error("Met must include through Bergamot (53)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

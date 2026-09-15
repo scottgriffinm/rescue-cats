@@ -217,7 +217,7 @@ export function verifyChapter4Rosemary(solves: Record<string, Array<[string, Dir
   const yardR = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardR.match(/const rosemary =/g) || []).length !== 1) throw new Error("YardScene must declare rosemary once");
   if ((yardR.match(/\{rosemary \?/g) || []).length !== 1) throw new Error("YardScene must render rosemary once");
-  if (TUTORIAL_RESCUES.length !== 92) throw new Error("Met must include through Rosemary (48)");
+  if (TUTORIAL_RESCUES.length !== 93) throw new Error("Met must include through Rosemary (48)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

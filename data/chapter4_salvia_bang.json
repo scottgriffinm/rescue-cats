@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_salvia_bang",
+  "status": "READY",
+  "friend_id": "friend_093",
+  "unlock_clear": 279,
+  "personality": "Salvia-soft",
+  "display_line": "Sage soft. Already claimed the salvia torch.",
+  "default_name": "Salvia",
+  "tier": "C",
+  "color": "Sage",
+  "pattern": "Torch",
+  "art": {
+    "loaf_48": "/assets/cats/salvia_loaf_48.svg",
+    "loaf_72": "/assets/cats/salvia_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "salvia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Salvia", "Sage", "Torch"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_093": [
+      "{Name}: Sage soft. Already claimed the salvia torch.",
+      "{Name}: Looks yard-soft. Owns the torch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 279,
+    "sku_id": null,
+    "note": "Ch4. Salvia Pass. No gift. Ban Impatiens/Busy/Box and all prior pools. Bean parade stands. No Pebble. Salvia, Sage, and Torch chips are CEO-locked on Salvia. No friend_094."
+  }
+}
