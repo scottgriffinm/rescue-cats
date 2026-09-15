@@ -571,7 +571,7 @@ export function verifyChapter4Calendula(solves: Record<string, Array<[string, Di
   if ((yardG.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardG.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardG.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 97) throw new Error("Met must include through Calendula (94) after Celosia (97)");
+  if (TUTORIAL_RESCUES.length !== 98) throw new Error("Met must include through Calendula (94) after Celosia (97)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
