@@ -14,7 +14,7 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
-  [270, "friend_091", "Pansy@270 must stay"],
+  [270, "friend_090", "Pansy@270 must stay"],
   [267, "friend_089", "Petunia@267 must stay"],
   [264, "friend_088", "Nasturtium@264 must stay"],
   [261, "friend_087", "Geranium@261 must stay"],
@@ -93,7 +93,7 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
-  ["friend_091", "Verbena,Spike,Pot", "Pansy chips untouched"],
+  ["friend_090", "Pansy,Face,Saucer", "Pansy chips untouched"],
   ["friend_089", "Petunia,Flare,Basket", "Petunia chips untouched"],
   ["friend_088", "Nasturtium,Pepper,Tray", "Nasturtium chips untouched"],
   ["friend_087", "Geranium,Cluster,Sill", "Geranium chips untouched"],

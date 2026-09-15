@@ -10,7 +10,7 @@ import { join } from "node:path";
 const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
-const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43174";
+const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
 const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-verbena";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
