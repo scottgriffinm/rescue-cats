@@ -1,0 +1,92 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Nasturtium Pass — L268–L270 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L268–L270",
+  "notes": "L268 Flare Cut / L269 Basket Gap / L270 Frill Stop — habit-break vs Pepper Cut orange-first / Tray Gap gray-first / Tendril Stop black-first; not Petunia Cut/Gap/Stop; not Tendril/Ruffle/Clump/Cluster; Frill Stop avoids Pane/Tube/Fold/Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup/Clump/Cluster/Ruffle Stop collisions; no WRAP/edge twin of Nori/Medlar; L270 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L268",
+      "name": "Flare Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_flare_cut_gray",
+      "walls": [
+        { "x": 5, "y": 2 },
+        { "x": 0, "y": 4 },
+        { "x": 4, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "flare_cut_gray"
+    },
+    {
+      "id": "L269",
+      "name": "Basket Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_basket_gap_black",
+      "walls": [
+        { "x": 0, "y": 1 },
+        { "x": 2, "y": 4 },
+        { "x": 5, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 4, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 1, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "basket_gap_black"
+    },
+    {
+      "id": "L270",
+      "name": "Frill Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_frill_stop_orange",
+      "walls": [
+        { "x": 0, "y": 2 },
+        { "x": 0, "y": 3 },
+        { "x": 2, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 5, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 1, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "frill_stop_orange"
+    }
+  ],
+  "teaches": {
+    "flare_cut_gray": "Gray west first; orange cuts after the flare.",
+    "basket_gap_black": "Black north then orange threads the basket gap.",
+    "frill_stop_orange": "Orange west first; black seats the frill."
+  },
+  "solver": { "min_slides": { "L268": 11, "L269": 10, "L270": 10 } },
+  "deltas": { "L268": "(2, 1)", "L269": "(0, 3)", "L270": "(4, 2)" }
+}

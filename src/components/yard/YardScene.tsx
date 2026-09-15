@@ -152,6 +152,7 @@ export function YardScene({
   const freesia = friends.find((friend) => friend.friendId === "friend_086");
   const geranium = friends.find((friend) => friend.friendId === "friend_087");
   const nasturtium = friends.find((friend) => friend.friendId === "friend_088");
+  const petunia = friends.find((friend) => friend.friendId === "friend_089");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -240,7 +241,8 @@ export function YardScene({
       friend.friendId !== "friend_085" &&
       friend.friendId !== "friend_086" &&
       friend.friendId !== "friend_087" &&
-      friend.friendId !== "friend_088",
+      friend.friendId !== "friend_088" &&
+      friend.friendId !== "friend_089",
   );
 
   return (
@@ -2319,6 +2321,36 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{nasturtium.name}</p>
+        </div>
+      ) : null}
+
+      {petunia ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "72%", top: "252%" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/furniture/petuniaBasket.svg"
+            alt=""
+            className="pointer-events-none absolute left-1/2 top-[-8%] h-8 w-8 -translate-x-1/2 select-none"
+          />
+          <FriendSprite
+            kit={friendById(petunia.friendId)?.phenotype.artKit ?? "petunia"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === petunia.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(petunia.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${petunia.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{petunia.name}</p>
         </div>
       ) : null}
 
