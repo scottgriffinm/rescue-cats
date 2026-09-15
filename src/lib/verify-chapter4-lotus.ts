@@ -292,7 +292,7 @@ export function verifyChapter4Lotus(solves: Record<string, Array<[string, Dir]>>
   if ((yardO.match(/\{lotus \?/g) || []).length !== 1) throw new Error("YardScene must render lotus once");
   if ((yardO.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardO.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 95) throw new Error("Met must include through Lotus (66)");
+  if (TUTORIAL_RESCUES.length !== 96) throw new Error("Met must include through Lotus (66)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
