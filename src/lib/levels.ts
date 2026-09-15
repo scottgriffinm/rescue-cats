@@ -369,7 +369,7 @@ const HEADLINES: Record<string, string> = {
   L272: "SAUCER GAP",
   L273: "BLOTCH STOP",
   L274: "SPIKE CUT",
-  L275: "POT GAP",
+  L275: "URN GAP",
   L276: "TAPER STOP",
 };
 
@@ -647,7 +647,7 @@ const HINTS: Record<string, string> = {
   L272: "Saucer gap — gray north then orange threads; not Basket black-north, not Tray gray-east, not Flare gray-west, not Clump gray-south, not Vase gray-west.",
   L273: "Blotch stop — pansy-saucer seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill twins; off Nori (5,5); not Frill Stop; not Tendril Stop; not Pane Stop; not Tube Stop; not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Clump Stop; not Cluster Stop; not Ruffle Stop; not Hold*/Park*.",
   L274: "Spike cut — gray first; orange cuts after; not Face orange-north, not Flare gray-west, not Pepper orange-south, not Trumpet orange-west, not Cluster Cut, not Clump Cut, not Face Cut.",
-  L275: "Pot gap — black first then orange threads; not Saucer gray-north, not Basket black-north, not Tray gray-east, not Face orange-north, not Flare gray-west.",
+  L275: "Urn gap — black first then orange threads; not Saucer gray-north, not Basket black-north, not Tray gray-east, not Face orange-north, not Flare gray-west.",
   L276: "Taper stop — verbena-pot seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill/Blotch twins; off Nori (5,5); not Blotch Stop; not Frill Stop; not Tendril Stop; not Pane Stop; not Tube Stop; not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Clump Stop; not Cluster Stop; not Ruffle Stop; not Pot Stop; not Hold*/Park*.",
 };
 

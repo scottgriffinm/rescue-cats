@@ -537,7 +537,7 @@ try {
   );
 
   await page.goto(`${BASE}/level/L275`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("POT GAP"));
+  await page.waitForFunction(() => document.body.innerText.includes("URN GAP"));
   await play(
     page,
     [

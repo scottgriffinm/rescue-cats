@@ -224,7 +224,7 @@ const jobs = [
   },
   {
     id: "L275",
-    name: "Pot Gap",
+    name: "Urn Gap",
     teach: "pot_gap_black",
     colors: ["orange", "black"],
     kind: "gap",
@@ -340,7 +340,7 @@ const pack = {
   chapter: 4,
   title: "Chapter 4 boards L274–L276",
   notes:
-    "L274 Spike Cut / L275 Pot Gap / L276 Taper Stop — habit-break vs Face Cut orange-first / Saucer Gap gray-first / Blotch Stop black-first; not Verbena Cut/Gap/Stop; not Face/Saucer/Blotch/Frill/Tendril/Pane/Tube/Fold/Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup/Clump/Cluster/Ruffle; Taper Stop avoids Pot Stop (Marigold); L275 CEO-locked Pot Gap (L230 Marigold already uses that display title); no WRAP/edge twin of Nori/Medlar; L276 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill/Blotch twins and Nori (5,5).",
+    "L274 Spike Cut / L275 Urn Gap / L276 Taper Stop — habit-break vs Face Cut orange-first / Saucer Gap gray-first / Blotch Stop black-first; not Verbena Cut/Gap/Stop; not Face/Saucer/Blotch/Frill/Tendril/Pane/Tube/Fold/Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup/Clump/Cluster/Ruffle; Taper Stop avoids Pot Stop (Marigold); L275 Urn Gap unique vs L230 Marigold Pot Gap; no WRAP/edge twin of Nori/Medlar; L276 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill/Blotch twins and Nori (5,5).",
   levels: found.map((hit) => hit.level),
   teaches: {
     spike_cut_gray: "Gray first; orange cuts after the spike.",

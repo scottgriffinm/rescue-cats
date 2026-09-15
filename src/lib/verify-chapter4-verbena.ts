@@ -274,23 +274,26 @@ function uniqueShortestCount(level: Level) {
 
 export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]>>) {
   const titles = LEVELS.map((row) => row.name);
-  for (const title of ["Spike Cut", "Taper Stop"] as const) {
+  for (const title of ["Spike Cut", "Urn Gap", "Taper Stop"] as const) {
     if (titles.filter((name) => name === title).length !== 1) {
       throw new Error(`${title} must be unique across campaign titles`);
     }
   }
-  if (LEVELS.find((row) => row.id === "L275")?.name !== "Pot Gap") {
-    throw new Error("L275 must be CEO-locked Pot Gap");
+  if (LEVELS.find((row) => row.id === "L275")?.name !== "Urn Gap") {
+    throw new Error("L275 must be Urn Gap (unique vs L230 Pot Gap)");
   }
   if (LEVELS.find((row) => row.id === "L230")?.name !== "Pot Gap") {
     throw new Error("L230 Marigold Pot Gap must stay");
   }
-  if (LEVELS.filter((row) => row.id !== "L230" && row.id !== "L275" && row.name === "Pot Gap").length) {
-    throw new Error("Pot Gap may only exist on L230 and CEO-locked L275");
+  if (LEVELS.filter((row) => row.id !== "L230" && row.name === "Pot Gap").length) {
+    throw new Error("Pot Gap may only exist on L230 Marigold — L275 must be Urn Gap");
+  }
+  if (LEVELS.find((row) => row.id === "L189")?.name !== "Urn Stop") {
+    throw new Error("L189 Zinnia Urn Stop must stay (L275 is Urn Gap, not Urn Stop)");
   }
   for (const [id, name] of [
     ["L274", "Spike Cut"],
-    ["L275", "Pot Gap"],
+    ["L275", "Urn Gap"],
     ["L276", "Taper Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
@@ -346,7 +349,7 @@ export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]
     if (/\bairy cut\b|\bray gap\b|\bfloret stop\b|\bcosmos (cut|gap|stop)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Airy Cut/Ray Gap/Floret Stop/Cosmos Cut/Gap/Stop`);
     }
-    if (/meadow cut|gloss gap|petal stop|buttercup (cut|gap|stop)|pale cut|dish gap|ruff stop|primrose (cut|gap|stop)|moor cut|sprig gap|heath stop|heather (cut|gap|stop)|gold cut|seed stop|marigold (cut|gap|stop)|jaw cut|perch gap|dragon stop|snapdragon (cut|gap|stop)|cloche cut|ring gap|chime stop|bluebell (cut|gap|stop)|tower cut|throat gap|glove stop|foxglove (cut|gap|stop)|saffron cut|tip gap|stigma stop|crocus (cut|gap|stop)|pollen cut|crest gap|anther stop|lily (cut|gap|stop)|capsule cut|silk gap|cup stop|pad cut|ripple gap|pond stop|lotus (cut|gap|stop)|spur cut|veil gap|spike stop|orchid (cut|gap|stop)|blade cut|dew gap|stem stop|iris (cut|gap|stop)|petal cut|drift gap|dish stop|aster (cut|gap|stop)|quill cut|gleam gap|urn stop|zinnia (cut|gap|stop)|spire cut|ember gap|vase stop|dahlia (cut|gap|stop)|fizz cut|flare gap|planter stop|azalea (cut|gap|stop)|bud cut|satin gap|bowl stop|wax cut|rose gap|tray stop|snow drift|velvet latch|dish claim|gardenia (cut|gap|stop)|roselle cut|punch gap|sip stop|hibiscus (cut|gap|stop)|cream cut|blush gap|magnolia (cut|gap|stop)|blossom cut|honey gap|jasmine (cut|gap|stop)|citrus cut|earl gap|saucer stop|bergamot (cut|gap|stop)|daisy cut|tea gap|chamomile (cut|gap|stop)|bloom cut|calm gap|bundle stop|nip cut|dream gap|pouch stop|chill cut|frost gap|tin stop|lavender (cut|gap|stop)|catnip (cut|gap|stop)|mint (cut|gap|stop)|needle cut|woody gap|pot stop|rosemary (cut|gap|stop)|pinch cut|twig gap|jar stop|thyme (cut|gap|stop)|marjoram (cut|gap|stop)|softleaf cut|dusty gap|peel stop|oregano (cut|gap|stop)|stone cut|wild gap|pizza stop|tarragon (cut|gap|stop)|spear cut|bitters gap|cruet stop|dill (cut|gap|stop)|seed cut|frondlet gap|ledge stop|parsley (cut|gap|stop)|curl cut|garnish stop|peony (cut|gap|stop)|camellia (cut|gap|stop)|poppy (cut|gap|stop)|tulip (cut|gap|stop)|stem cut|glow gap|bloom stop|bell gap|raceme stop|hyacinth (cut|gap|stop)|patch cut|moss gap|thicket stop|violet (cut|gap|stop)|\bairy cut\b|\bray gap\b|\bfloret stop\b|\bcosmos (cut|gap|stop)\b/i.test(level.name)) {
+    if (/meadow cut|gloss gap|petal stop|buttercup (cut|gap|stop)|pale cut|dish gap|ruff stop|primrose (cut|gap|stop)|moor cut|sprig gap|heath stop|heather (cut|gap|stop)|gold cut|pot gap|seed stop|marigold (cut|gap|stop)|jaw cut|perch gap|dragon stop|snapdragon (cut|gap|stop)|cloche cut|ring gap|chime stop|bluebell (cut|gap|stop)|tower cut|throat gap|glove stop|foxglove (cut|gap|stop)|saffron cut|tip gap|stigma stop|crocus (cut|gap|stop)|pollen cut|crest gap|anther stop|lily (cut|gap|stop)|capsule cut|silk gap|cup stop|pad cut|ripple gap|pond stop|lotus (cut|gap|stop)|spur cut|veil gap|spike stop|orchid (cut|gap|stop)|blade cut|dew gap|stem stop|iris (cut|gap|stop)|petal cut|drift gap|dish stop|aster (cut|gap|stop)|quill cut|gleam gap|urn stop|zinnia (cut|gap|stop)|spire cut|ember gap|vase stop|dahlia (cut|gap|stop)|fizz cut|flare gap|planter stop|azalea (cut|gap|stop)|bud cut|satin gap|bowl stop|wax cut|rose gap|tray stop|snow drift|velvet latch|dish claim|gardenia (cut|gap|stop)|roselle cut|punch gap|sip stop|hibiscus (cut|gap|stop)|cream cut|blush gap|magnolia (cut|gap|stop)|blossom cut|honey gap|jasmine (cut|gap|stop)|citrus cut|earl gap|saucer stop|bergamot (cut|gap|stop)|daisy cut|tea gap|chamomile (cut|gap|stop)|bloom cut|calm gap|bundle stop|nip cut|dream gap|pouch stop|chill cut|frost gap|tin stop|lavender (cut|gap|stop)|catnip (cut|gap|stop)|mint (cut|gap|stop)|needle cut|woody gap|pot stop|rosemary (cut|gap|stop)|pinch cut|twig gap|jar stop|thyme (cut|gap|stop)|marjoram (cut|gap|stop)|softleaf cut|dusty gap|peel stop|oregano (cut|gap|stop)|stone cut|wild gap|pizza stop|tarragon (cut|gap|stop)|spear cut|bitters gap|cruet stop|dill (cut|gap|stop)|seed cut|frondlet gap|ledge stop|parsley (cut|gap|stop)|curl cut|garnish stop|peony (cut|gap|stop)|camellia (cut|gap|stop)|poppy (cut|gap|stop)|tulip (cut|gap|stop)|stem cut|glow gap|bloom stop|bell gap|raceme stop|hyacinth (cut|gap|stop)|patch cut|moss gap|thicket stop|violet (cut|gap|stop)|\bairy cut\b|\bray gap\b|\bfloret stop\b|\bcosmos (cut|gap|stop)\b/i.test(level.name)) {
       throw new Error(`${id} must not reuse prior triad names`);
     }
     const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
@@ -620,13 +623,13 @@ export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]
     throw new Error("L274 Spike Cut must not open gray-south (Clump Cut clone)");
   }
   if (solves.L275[0][0] === "cat_gray") {
-    throw new Error("L275 Pot Gap must not open gray-first (Saucer Gap clone)");
+    throw new Error("L275 Urn Gap must not open gray-first (Saucer Gap clone)");
   }
   if (solves.L275[0][0] === "cat_black" && solves.L275[0][1] === "n") {
-    throw new Error("L275 Pot Gap must not open black-north (Basket Gap clone)");
+    throw new Error("L275 Urn Gap must not open black-north (Basket Gap clone)");
   }
   if (solves.L275[0][0] === "cat_black" && solves.L275[0][1] === "e") {
-    throw new Error("L275 Pot Gap must not open black-east (Bowl Gap clone)");
+    throw new Error("L275 Urn Gap must not open black-east (Bowl Gap clone)");
   }
   if (solves.L276[0][0] === "cat_black") {
     throw new Error("L276 Taper Stop must not open black-first (Blotch Stop clone)");
@@ -638,7 +641,7 @@ export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]
     throw new Error("L274 Spike Cut must open gray-first");
   }
   if (solves.L275[0][0] !== "cat_black") {
-    throw new Error("L275 Pot Gap must open black-first");
+    throw new Error("L275 Urn Gap must open black-first");
   }
   if (solves.L276[0][0] !== "cat_orange") {
     throw new Error("L276 Taper Stop must open orange-first");
@@ -788,5 +791,5 @@ export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Verbena@273 + L274–L276 ok · chips Verbena/Spike/Pot · coat #C05090 + stem freckles #3A1830 · Spike Cut / Pot Gap / Taper Stop · unique vs Face Cut / Saucer Gap / Blotch Stop · Pansy/Petunia/Nasturtium/Geranium/Freesia/Ranunculus/Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Verbena@273 + L274–L276 ok · chips Verbena/Spike/Pot · coat #C05090 + stem freckles #3A1830 · Spike Cut / Urn Gap / Taper Stop · unique vs L230 Pot Gap / Face Cut / Saucer Gap / Blotch Stop · Pansy/Petunia/Nasturtium/Geranium/Freesia/Ranunculus/Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
