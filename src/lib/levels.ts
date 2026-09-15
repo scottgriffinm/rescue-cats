@@ -65,6 +65,7 @@ import chapter4aq from "../../data/levels/CHAPTER4_PUZZLE_L190_L192.json";
 import chapter4ar from "../../data/levels/CHAPTER4_PUZZLE_L193_L195.json";
 import chapter4as from "../../data/levels/CHAPTER4_PUZZLE_L196_L198.json";
 import chapter4at from "../../data/levels/CHAPTER4_PUZZLE_L199_L201.json";
+import chapter4au from "../../data/levels/CHAPTER4_PUZZLE_L202_L204.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -271,6 +272,9 @@ const HEADLINES: Record<string, string> = {
   L199: "PAD CUT",
   L200: "RIPPLE GAP",
   L201: "POND STOP",
+  L202: "CAPSULE CUT",
+  L203: "SILK GAP",
+  L204: "CUP STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -474,6 +478,9 @@ const HINTS: Record<string, string> = {
   L199: "Pad cut — gray west first; orange cuts after; not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south.",
   L200: "Ripple gap — black east then orange threads; not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west.",
   L201: "Pond stop — lotus-pad seats; off Spike (4,0)/(0,3)/(3,4)/(4,1); off Stem (1,1)/(0,1)/(4,2)/(1,0); off Dish (5,2)/(5,1)/(3,0)/(2,1); off Urn (0,5)/(3,2)/(1,4)/(5,0); off Vase (3,3)/(1,3)/(2,4)/(3,1); off Planter (1,5)/(4,5)/(4,4)/(3,5); not Hold*/Park*.",
+  L202: "Capsule cut — black north first; orange cuts after; not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south.",
+  L203: "Silk gap — gray south then orange threads; not Ripple black-east, not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west.",
+  L204: "Cup stop — poppy-cup seats; off Pad (0,5)/(4,5)/(2,4)/(4,3); off Pond (5,4)/(2,2)/(2,3)/(0,4); off Spike (4,0)/(0,3)/(3,4)/(4,1); off Stem (1,1)/(0,1)/(4,2)/(1,0); off Dish (5,2)/(5,1)/(3,0)/(2,1); off Urn (0,5)/(3,2)/(1,4)/(5,0); off Vase (3,3)/(1,3)/(2,4)/(3,1); off Planter (1,5)/(4,5)/(4,4)/(3,5); not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -594,6 +601,7 @@ const authored = [
   ...chapter4ar.levels,
   ...chapter4as.levels,
   ...chapter4at.levels,
+  ...chapter4au.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
