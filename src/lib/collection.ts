@@ -65,6 +65,7 @@ import chapter4Iris from "../../data/chapter4_iris_bang.json";
 import chapter4Orchid from "../../data/chapter4_orchid_bang.json";
 import chapter4Lotus from "../../data/chapter4_lotus_bang.json";
 import chapter4Poppy from "../../data/chapter4_poppy_bang.json";
+import chapter4Tulip from "../../data/chapter4_tulip_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -159,7 +160,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "iris" ||
     raw === "orchid" ||
     raw === "lotus" ||
-    raw === "poppy"
+    raw === "poppy" ||
+    raw === "tulip"
   ) {
     return raw;
   }
@@ -460,6 +462,7 @@ export const CHAPTER4_IRIS = chapter4Iris;
 export const CHAPTER4_ORCHID = chapter4Orchid;
 export const CHAPTER4_LOTUS = chapter4Lotus;
 export const CHAPTER4_POPPY = chapter4Poppy;
+export const CHAPTER4_TULIP = chapter4Tulip;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -526,6 +529,7 @@ export const IRIS_FRIEND_ID = chapter4Iris.friend_id;
 export const ORCHID_FRIEND_ID = chapter4Orchid.friend_id;
 export const LOTUS_FRIEND_ID = chapter4Lotus.friend_id;
 export const POPPY_FRIEND_ID = chapter4Poppy.friend_id;
+export const TULIP_FRIEND_ID = chapter4Tulip.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1471,6 +1475,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Tulip.friend_id,
+    defaultName: chapter4Tulip.default_name,
+    unlockClear: chapter4Tulip.unlock_clear,
+    displayLine: chapter4Tulip.display_line,
+    tier: chapter4Tulip.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_orange_freckled_regular_regular_tulip",
+      breed: "Domestic Shorthair",
+      color: chapter4Tulip.color,
+      pattern: chapter4Tulip.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Tulip.personality,
+      artKit: "tulip",
+      boardColor: "orange",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1492,7 +1516,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 67);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 68);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1573,6 +1597,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   195: "friend_065",
   198: "friend_066",
   201: "friend_067",
+  204: "friend_068",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -1833,6 +1858,7 @@ export const IRIS_NAMING_CHIPS: string[] = CHAPTER4_IRIS.naming.suggestion_chips
 export const ORCHID_NAMING_CHIPS: string[] = CHAPTER4_ORCHID.naming.suggestion_chips;
 export const LOTUS_NAMING_CHIPS: string[] = CHAPTER4_LOTUS.naming.suggestion_chips;
 export const POPPY_NAMING_CHIPS: string[] = CHAPTER4_POPPY.naming.suggestion_chips;
+export const TULIP_NAMING_CHIPS: string[] = CHAPTER4_TULIP.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -2033,6 +2059,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === POPPY_FRIEND_ID || friendId === "friend_067") {
     return [...POPPY_NAMING_CHIPS];
   }
+  if (friendId === TULIP_FRIEND_ID || friendId === "friend_068") {
+    return [...TULIP_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -2101,6 +2130,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Orchid-soft") return [...ORCHID_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Lotus-soft") return [...LOTUS_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Poppy-soft") return [...POPPY_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Tulip-soft") return [...TULIP_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -2312,6 +2342,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === POPPY_FRIEND_ID || friendId === "friend_067") {
     return shufflePool([...POPPY_NAMING_CHIPS], count);
   }
+  if (friendId === TULIP_FRIEND_ID || friendId === "friend_068") {
+    return shufflePool([...TULIP_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -2394,6 +2427,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_ORCHID.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_LOTUS.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_POPPY.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_TULIP.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -2472,6 +2506,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Orchid-soft") return "orchid spike";
   if (personality === "Lotus-soft") return "lotus pad";
   if (personality === "Poppy-soft") return "poppy cup";
+  if (personality === "Tulip-soft") return "tulip vase";
   return "sun patch";
 }
 
