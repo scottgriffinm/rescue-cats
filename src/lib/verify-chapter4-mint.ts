@@ -221,7 +221,7 @@ export function verifyChapter4Mint(solves: Record<string, Array<[string, Dir]>>)
   const yardM = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardM.match(/const mint =/g) || []).length !== 1) throw new Error("YardScene must declare mint once");
   if ((yardM.match(/\{mint \?/g) || []).length !== 1) throw new Error("YardScene must render mint once");
-  if (TUTORIAL_RESCUES.length !== 96) throw new Error("Met must include through Mint (49)");
+  if (TUTORIAL_RESCUES.length !== 97) throw new Error("Met must include through Mint (49)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

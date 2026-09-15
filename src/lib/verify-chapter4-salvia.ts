@@ -559,7 +559,7 @@ export function verifyChapter4Salvia(solves: Record<string, Array<[string, Dir]>
   if ((yardG.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardG.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardG.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 96) throw new Error("Met must include through Salvia (93) after Phlox (96)");
+  if (TUTORIAL_RESCUES.length !== 97) throw new Error("Met must include through Salvia (93) after Celosia (97)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -582,6 +582,7 @@ export function verifyChapter4Salvia(solves: Record<string, Array<[string, Dir]>
   if (SLICE_UNLOCKS[282] !== "friend_094") throw new Error("SLICE_UNLOCKS[282] must be friend_094 after Calendula ship");
   if (SLICE_UNLOCKS[285] !== "friend_095") throw new Error("SLICE_UNLOCKS[285] must be friend_095 after Lantana ship");
   if (SLICE_UNLOCKS[288] !== "friend_096") throw new Error("SLICE_UNLOCKS[288] must be friend_096 after Phlox ship");
+  if (SLICE_UNLOCKS[291] !== "friend_097") throw new Error("SLICE_UNLOCKS[291] must be friend_097 after Celosia ship");
   if (/pebble|Pebble/i.test(pansy48 + pansy72)) throw new Error("Salvia art must not use Pebble");
   if (/verbena|spike|pot|pansy|face|saucer|blotch|geranium|cluster|sill|freesia|trumpet|vase|ranunculus|layered|begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise|nasturtium|pepper|tray|petunia|flare|basket|pansy|face|saucer|blotch/i.test(pansy48 + pansy72)) {
     throw new Error("Salvia art must not collide Petunia/Nasturtium/Geranium/Freesia/Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");
