@@ -139,7 +139,7 @@ export function verifyChapter4Dill(solves: Record<string, Array<[string, Dir]>>)
   const yardD = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardD.match(/const dill =/g) || []).length !== 1) throw new Error("YardScene must declare dill once");
   if ((yardD.match(/\{dill \?/g) || []).length !== 1) throw new Error("YardScene must render dill once");
-  if (TUTORIAL_RESCUES.length !== 98) throw new Error("Met must include through Dill (43)");
+  if (TUTORIAL_RESCUES.length !== 99) throw new Error("Met must include through Dill (43)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

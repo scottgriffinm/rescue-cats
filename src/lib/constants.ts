@@ -104,7 +104,8 @@ export const ART_KIT_PATH: Record<
   | "lantana"
   | "phlox"
   | "celosia"
-  | "cleome",
+  | "cleome"
+  | "coreopsis",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -502,6 +503,10 @@ export const ART_KIT_PATH: Record<
   cleome: {
     loaf48: "/assets/cats/cleome_loaf_48.svg",
     loaf72: "/assets/cats/cleome_loaf_72.svg",
+  },
+  coreopsis: {
+    loaf48: "/assets/cats/coreopsis_loaf_48.svg",
+    loaf72: "/assets/cats/coreopsis_loaf_72.svg",
   },
 };
 

@@ -162,6 +162,7 @@ export function YardScene({
   const phlox = friends.find((friend) => friend.friendId === "friend_096");
   const celosia = friends.find((friend) => friend.friendId === "friend_097");
   const cleome = friends.find((friend) => friend.friendId === "friend_098");
+  const coreopsis = friends.find((friend) => friend.friendId === "friend_099");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -260,7 +261,8 @@ export function YardScene({
       friend.friendId !== "friend_095" &&
       friend.friendId !== "friend_096" &&
       friend.friendId !== "friend_097" &&
-      friend.friendId !== "friend_098",
+      friend.friendId !== "friend_098" &&
+      friend.friendId !== "friend_099",
   );
 
   return (
@@ -2639,6 +2641,36 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{cleome.name}</p>
+        </div>
+      ) : null}
+
+      {coreopsis ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "42%", top: "372%" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/furniture/coreopsisHoop.svg"
+            alt=""
+            className="pointer-events-none absolute left-1/2 top-[-8%] h-8 w-8 -translate-x-1/2 select-none"
+          />
+          <FriendSprite
+            kit={friendById(coreopsis.friendId)?.phenotype.artKit ?? "coreopsis"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === coreopsis.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(coreopsis.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${coreopsis.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{coreopsis.name}</p>
         </div>
       ) : null}
 

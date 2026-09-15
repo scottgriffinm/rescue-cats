@@ -236,7 +236,7 @@ export function verifyChapter4Magnolia(solves: Record<string, Array<[string, Dir
   const yardM = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardM.match(/const magnolia =/g) || []).length !== 1) throw new Error("YardScene must declare magnolia once");
   if ((yardM.match(/\{magnolia \?/g) || []).length !== 1) throw new Error("YardScene must render magnolia once");
-  if (TUTORIAL_RESCUES.length !== 98) throw new Error("Met must include through Magnolia (55)");
+  if (TUTORIAL_RESCUES.length !== 99) throw new Error("Met must include through Magnolia (55)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

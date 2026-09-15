@@ -345,7 +345,7 @@ export function verifyChapter4Phlox(solves: Record<string, Array<[string, Dir]>>
   if ((yardG.match(/\{lantana \?/g) || []).length !== 1) throw new Error("YardScene must keep lantana once");
   if ((yardG.match(/const calendula =/g) || []).length !== 1) throw new Error("YardScene must keep calendula once");
   if ((yardG.match(/\{calendula \?/g) || []).length !== 1) throw new Error("YardScene must keep calendula once");
-  if (TUTORIAL_RESCUES.length !== 98) throw new Error("Met must include through Phlox (96) after Celosia (97)");
+  if (TUTORIAL_RESCUES.length !== 99) throw new Error("Met must include through Phlox (96) after Celosia (97)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
