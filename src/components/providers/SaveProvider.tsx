@@ -329,9 +329,11 @@ export function SaveProvider({ children }: { children: React.ReactNode }) {
                                                                                                                                                                     ? [`${instance.name} claimed the primrose dish.`]
                                                                                                                                                                     : catalog.friendId === "friend_079"
                                                                                                                                                                       ? [`${instance.name} claimed the buttercup cup.`]
-                                                                                                                                                                      : catalog.friendId === "friend_080"
-                                                                                                                                                                        ? [`${instance.name} claimed the cosmos stem.`]
-                                                                                                                                                  : [];
+                                      : catalog.friendId === "friend_080"
+                                        ? [`${instance.name} claimed the cosmos stem.`]
+                                        : catalog.friendId === "friend_081"
+                                          ? [`${instance.name} claimed the clematis trellis.`]
+                  : [];
         setSave({
           ...current,
           friends,

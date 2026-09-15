@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_clematis_bang",
+  "status": "READY",
+  "friend_id": "friend_081",
+  "unlock_clear": 243,
+  "personality": "Clematis-soft",
+  "display_line": "Vine soft. Already claimed the clematis trellis.",
+  "default_name": "Clematis",
+  "tier": "C",
+  "color": "Vine",
+  "pattern": "Trellis",
+  "art": {
+    "loaf_48": "/assets/cats/clematis_loaf_48.svg",
+    "loaf_72": "/assets/cats/clematis_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "clematis"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Clematis", "Vine", "Trellis"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_081": [
+      "{Name}: Vine soft. Already claimed the clematis trellis.",
+      "{Name}: Looks yard-soft. Owns the trellis."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 243,
+    "sku_id": null,
+    "note": "Ch4. Clematis Pass. No gift. Ban Cosmos/Airy/Ray and all prior pools. Bean parade stands. No Pebble. Clematis, Vine, and Trellis chips are CEO-locked on Clematis. No friend_082."
+  }
+}

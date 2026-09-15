@@ -222,7 +222,7 @@ export function verifyChapter4Lavender(solves: Record<string, Array<[string, Dir
   const yardL = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardL.match(/const lavender =/g) || []).length !== 1) throw new Error("YardScene must declare lavender once");
   if ((yardL.match(/\{lavender \?/g) || []).length !== 1) throw new Error("YardScene must render lavender once");
-  if (TUTORIAL_RESCUES.length !== 80) throw new Error("Met must include through Lavender (51)");
+  if (TUTORIAL_RESCUES.length !== 81) throw new Error("Met must include through Lavender (51)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

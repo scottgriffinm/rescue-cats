@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Cosmos Pass — L244–L246 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L244–L246",
+  "notes": "L244 Vine Cut / L245 Trellis Gap / L246 Star Stop — habit-break vs Airy Cut orange-first / Ray Gap gray-first / Floret Stop black-first; not Vine/Trellis/Star title clones of Cosmos Cut/Gap/Stop; Star Stop avoids Floret/Petal/Stem/Cup Stop collisions; no WRAP/edge twin of Nori/Medlar; L246 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L244",
+      "name": "Vine Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_vine_cut_gray",
+      "walls": [
+        { "x": 5, "y": 4 },
+        { "x": 0, "y": 5 },
+        { "x": 4, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 5, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 2, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "vine_cut_gray"
+    },
+    {
+      "id": "L245",
+      "name": "Trellis Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_trellis_gap_black",
+      "walls": [
+        { "x": 3, "y": 3 },
+        { "x": 1, "y": 1 },
+        { "x": 0, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 0, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 4, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "trellis_gap_black"
+    },
+    {
+      "id": "L246",
+      "name": "Star Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_star_stop_orange",
+      "walls": [
+        { "x": 2, "y": 0 },
+        { "x": 3, "y": 1 },
+        { "x": 4, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "star_stop_orange"
+    }
+  ],
+  "teaches": {
+    "L244": "Vine Cut — gray south first; orange cuts after; not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west",
+    "L245": "Trellis Gap — black south then orange threads; not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north",
+    "L246": "Star Stop — clematis-trellis seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret twins; off Nori (5,5); not Hold*/Park*; title Star Stop (not Clematis Stop, not Floret Stop, not Iris Stem Stop, not Poppy Cup Stop, not Buttercup Petal Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L244": 10,
+      "L245": 10,
+      "L246": 10
+    }
+  },
+  "deltas": {
+    "L244": "(3, 1)",
+    "L245": "(1, 2)",
+    "L246": "(1, 1)"
+  }
+}
