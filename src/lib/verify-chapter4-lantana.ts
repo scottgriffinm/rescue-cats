@@ -313,7 +313,7 @@ export function verifyChapter4Lantana(solves: Record<string, Array<[string, Dir]
   if ((yardG.match(/\{calendula \?/g) || []).length !== 1) throw new Error("YardScene must keep calendula once");
   if ((yardG.match(/const salvia =/g) || []).length !== 1) throw new Error("YardScene must keep salvia once");
   if ((yardG.match(/\{salvia \?/g) || []).length !== 1) throw new Error("YardScene must keep salvia once");
-  if (TUTORIAL_RESCUES.length !== 96) throw new Error("Met must include through Lantana (95) after Phlox (96)");
+  if (TUTORIAL_RESCUES.length !== 97) throw new Error("Met must include through Lantana (95) after Celosia (97)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -323,6 +323,7 @@ export function verifyChapter4Lantana(solves: Record<string, Array<[string, Dir]
   if (SLICE_UNLOCKS[282] !== "friend_094") throw new Error("SLICE_UNLOCKS[282] must be friend_094");
   if (SLICE_UNLOCKS[285] !== "friend_095") throw new Error("SLICE_UNLOCKS[285] must be friend_095");
   if (SLICE_UNLOCKS[288] !== "friend_096") throw new Error("SLICE_UNLOCKS[288] must be friend_096 after Phlox ship");
+  if (SLICE_UNLOCKS[291] !== "friend_097") throw new Error("SLICE_UNLOCKS[291] must be friend_097 after Celosia ship");
   if (/pebble|Pebble/i.test(loaf48 + loaf72)) throw new Error("Lantana art must not use Pebble");
   if (/calendula|petal|salvia|impatiens|verbena|pansy|petunia|nasturtium|geranium|begonia|marigold|buttercup/i.test(loaf48 + loaf72)) {
     throw new Error("Lantana art must not collide Calendula/Salvia and prior flower marks");

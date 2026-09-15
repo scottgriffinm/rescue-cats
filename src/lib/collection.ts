@@ -94,6 +94,7 @@ import chapter4Salvia from "../../data/chapter4_salvia_bang.json";
 import chapter4Calendula from "../../data/chapter4_calendula_bang.json";
 import chapter4Lantana from "../../data/chapter4_lantana_bang.json";
 import chapter4Phlox from "../../data/chapter4_phlox_bang.json";
+import chapter4Celosia from "../../data/chapter4_celosia_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -217,7 +218,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "salvia" ||
     raw === "calendula" ||
     raw === "lantana" ||
-    raw === "phlox"
+    raw === "phlox" ||
+    raw === "celosia"
   ) {
     return raw;
   }
@@ -547,6 +549,7 @@ export const CHAPTER4_SALVIA = chapter4Salvia;
 export const CHAPTER4_CALENDULA = chapter4Calendula;
 export const CHAPTER4_LANTANA = chapter4Lantana;
 export const CHAPTER4_PHLOX = chapter4Phlox;
+export const CHAPTER4_CELOSIA = chapter4Celosia;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -642,6 +645,7 @@ export const SALVIA_FRIEND_ID = chapter4Salvia.friend_id;
 export const CALENDULA_FRIEND_ID = chapter4Calendula.friend_id;
 export const LANTANA_FRIEND_ID = chapter4Lantana.friend_id;
 export const PHLOX_FRIEND_ID = chapter4Phlox.friend_id;
+export const CELOSIA_FRIEND_ID = chapter4Celosia.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -2167,6 +2171,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "orange",
     },
   },
+  {
+    friendId: chapter4Celosia.friend_id,
+    defaultName: chapter4Celosia.default_name,
+    unlockClear: chapter4Celosia.unlock_clear,
+    displayLine: chapter4Celosia.display_line,
+    tier: chapter4Celosia.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_plume_comb_regular_regular_celosia",
+      breed: "Domestic Shorthair",
+      color: chapter4Celosia.color,
+      pattern: chapter4Celosia.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Celosia.personality,
+      artKit: "celosia",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -2188,7 +2212,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 96);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 97);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -2298,6 +2322,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   282: "friend_094",
   285: "friend_095",
   288: "friend_096",
+  291: "friend_097",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -2587,6 +2612,7 @@ export const SALVIA_NAMING_CHIPS: string[] = CHAPTER4_SALVIA.naming.suggestion_c
 export const CALENDULA_NAMING_CHIPS: string[] = CHAPTER4_CALENDULA.naming.suggestion_chips;
 export const LANTANA_NAMING_CHIPS: string[] = CHAPTER4_LANTANA.naming.suggestion_chips;
 export const PHLOX_NAMING_CHIPS: string[] = CHAPTER4_PHLOX.naming.suggestion_chips;
+export const CELOSIA_NAMING_CHIPS: string[] = CHAPTER4_CELOSIA.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -2873,6 +2899,9 @@ export function chipsForFriend(friendId: string): string[] {
   }
   if (friendId === PHLOX_FRIEND_ID || friendId === "friend_096") {
     return [...PHLOX_NAMING_CHIPS];
+  }
+  if (friendId === CELOSIA_FRIEND_ID || friendId === "friend_097") {
+    return [...CELOSIA_NAMING_CHIPS];
   }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
@@ -3248,6 +3277,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === PHLOX_FRIEND_ID || friendId === "friend_096") {
     return shufflePool([...PHLOX_NAMING_CHIPS], count);
   }
+  if (friendId === CELOSIA_FRIEND_ID || friendId === "friend_097") {
+    return shufflePool([...CELOSIA_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -3359,6 +3391,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_CALENDULA.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_LANTANA.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_PHLOX.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_CELOSIA.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -3466,6 +3499,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Calendula-soft") return "calendula tin";
   if (personality === "Lantana-soft") return "lantana mound";
   if (personality === "Phlox-soft") return "phlox bank";
+  if (personality === "Celosia-soft") return "celosia comb";
   return "sun patch";
 }
 

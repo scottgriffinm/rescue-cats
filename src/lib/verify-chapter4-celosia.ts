@@ -14,6 +14,7 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
+  [288, "friend_096", "Phlox@288 must stay"],
   [285, "friend_095", "Lantana@285 must stay"],
   [282, "friend_094", "Calendula@282 must stay"],
   [279, "friend_093", "Salvia@279 must stay"],
@@ -98,6 +99,7 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
+  ["friend_096", "Phlox,Floret,Bank", "Phlox chips untouched"],
   ["friend_095", "Lantana,Umbel,Mound", "Lantana chips untouched"],
   ["friend_094", "Calendula,Petal,Tin", "Calendula chips untouched"],
   ["friend_093", "Salvia,Sage,Torch", "Salvia chips untouched"],
@@ -227,29 +229,32 @@ function gatePair(level: Level) {
   return level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
 }
 
-export function verifyChapter4Phlox(solves: Record<string, Array<[string, Dir]>>) {
+export function verifyChapter4Celosia(solves: Record<string, Array<[string, Dir]>>) {
   const titles = LEVELS.map((row) => row.name);
-  for (const title of ["Floret Cut", "Bank Gap", "Spray Stop"] as const) {
+  for (const title of ["Plume Cut", "Comb Gap", "Flame Stop"] as const) {
     if (titles.filter((name) => name === title).length !== 1) {
       throw new Error(`${title} must be unique across campaign titles`);
     }
   }
   for (const prior of [
+    "Floret Cut",
+    "Bank Gap",
+    "Spray Stop",
     "Umbel Cut",
     "Mound Gap",
     "Bunch Stop",
     "Disk Cut",
     "Tin Gap",
     "Disc Stop",
-    "Sage Cut",
-    "Torch Gap",
-    "Bract Stop",
   ] as const) {
     if (titles.filter((name) => name === prior).length !== 1) {
       throw new Error(`${prior} must stay unique`);
     }
   }
   for (const banned of [
+    "Floret Cut",
+    "Bank Gap",
+    "Spray Stop",
     "Umbel Cut",
     "Mound Gap",
     "Bunch Stop",
@@ -267,17 +272,17 @@ export function verifyChapter4Phlox(solves: Record<string, Array<[string, Dir]>>
     "Urn Gap",
     "Taper Stop",
   ] as const) {
-    if (["L289", "L290", "L291"].some((id) => LEVELS.find((row) => row.id === id)?.name === banned)) {
-      throw new Error(`Phlox triad must not reuse ${banned}`);
+    if (["L292", "L293", "L294"].some((id) => LEVELS.find((row) => row.id === id)?.name === banned)) {
+      throw new Error(`Celosia triad must not reuse ${banned}`);
     }
   }
   const bannedPairs = new Set(
-    LEVELS.filter((row) => !["L289", "L290", "L291"].includes(row.id)).map(gatePair),
+    LEVELS.filter((row) => !["L292", "L293", "L294"].includes(row.id)).map(gatePair),
   );
   for (const [id, name] of [
-    ["L289", "Floret Cut"],
-    ["L290", "Bank Gap"],
-    ["L291", "Spray Stop"],
+    ["L292", "Plume Cut"],
+    ["L293", "Comb Gap"],
+    ["L294", "Flame Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -290,8 +295,8 @@ export function verifyChapter4Phlox(solves: Record<string, Array<[string, Dir]>>
     if (/\b(hold|park|close)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Hold*/Park*/Close`);
     }
-    if (/umbel cut|mound gap|bunch stop|disk cut|tin gap|disc stop|sage cut|torch gap|bract stop|lantana (cut|gap|stop)|calendula (cut|gap|stop)|salvia (cut|gap|stop)|impatiens (cut|gap|stop)|busy cut|box gap|touch stop|verbena (cut|gap|stop)|spike cut|urn gap|taper stop|petal cut/i.test(level.name)) {
-      throw new Error(`${id} must not be Umbel/Mound/Bunch/Disk/Tin/Disc/Sage/Torch/Bract and prior triad names`);
+    if (/floret cut|bank gap|spray stop|umbel cut|mound gap|bunch stop|disk cut|tin gap|disc stop|sage cut|torch gap|bract stop|phlox (cut|gap|stop)|lantana (cut|gap|stop)|calendula (cut|gap|stop)|salvia (cut|gap|stop)|impatiens (cut|gap|stop)|busy cut|box gap|touch stop|verbena (cut|gap|stop)|spike cut|urn gap|taper stop|petal cut/i.test(level.name)) {
+      throw new Error(`${id} must not be Floret/Bank/Spray/Umbel/Mound/Bunch/Disk/Tin/Disc and prior triad names`);
     }
     if (/cluster cut|clump cut|\bcluster\b|\bclump\b|\bfrill\b|tendril|ruffle stop/i.test(level.name)) {
       throw new Error(`${id} must not reuse Tendril/Ruffle/Clump/Cluster/Frill titles`);
@@ -303,129 +308,126 @@ export function verifyChapter4Phlox(solves: Record<string, Array<[string, Dir]>>
     if (unique.min < 10 || unique.min > 11) throw new Error(`${id} shortest must be 10–11, got ${unique.min}`);
     if (level.moveBudget < unique.min) throw new Error(`${id} budget ${level.moveBudget} < shortest ${unique.min}`);
   }
+  if (LEVELS.find((row) => row.id === "L289")?.name !== "Floret Cut") throw new Error("L289 Floret Cut locked");
+  if (LEVELS.find((row) => row.id === "L290")?.name !== "Bank Gap") throw new Error("L290 Bank Gap locked");
+  if (LEVELS.find((row) => row.id === "L291")?.name !== "Spray Stop") throw new Error("L291 Spray Stop locked");
   if (LEVELS.find((row) => row.id === "L286")?.name !== "Umbel Cut") throw new Error("L286 Umbel Cut locked");
   if (LEVELS.find((row) => row.id === "L287")?.name !== "Mound Gap") throw new Error("L287 Mound Gap locked");
   if (LEVELS.find((row) => row.id === "L288")?.name !== "Bunch Stop") throw new Error("L288 Bunch Stop locked");
-  if (LEVELS.find((row) => row.id === "L283")?.name !== "Disk Cut") throw new Error("L283 Disk Cut locked");
-  if (LEVELS.find((row) => row.id === "L284")?.name !== "Tin Gap") throw new Error("L284 Tin Gap locked");
-  if (LEVELS.find((row) => row.id === "L285")?.name !== "Disc Stop") throw new Error("L285 Disc Stop locked");
-  if (LEVELS.find((row) => row.id === "L280")?.name !== "Sage Cut") throw new Error("L280 Sage Cut locked");
-  if (LEVELS.find((row) => row.id === "L281")?.name !== "Torch Gap") throw new Error("L281 Torch Gap locked");
-  if (LEVELS.find((row) => row.id === "L282")?.name !== "Bract Stop") throw new Error("L282 Bract Stop locked");
-  if (SLICE_UNLOCKS[288] !== "friend_096") throw new Error("SLICE_UNLOCKS[288] must be friend_096");
-  if (shippedFriendForClear(288)?.friendId !== "friend_096") throw new Error("onClear(288) must award Phlox");
-  const phlox = friendById("friend_096");
-  if (!phlox) throw new Error("friend_096 missing from CATALOG");
-  if (phlox.defaultName !== "Phlox") throw new Error("default name must be Phlox");
-  if (phlox.unlockClear !== 288) throw new Error("Phlox unlockClear must be 288");
-  if (phlox.phenotype.artKit !== "phlox") throw new Error("Phlox artKit must be phlox");
-  if (phlox.phenotype.personality !== "Phlox-soft") throw new Error("Phlox personality must be Phlox-soft");
-  if (phlox.phenotype.boardColor !== "orange") throw new Error("Phlox boardColor must be orange");
-  if (phlox.phenotype.color !== "Floret") throw new Error("Phlox color must be Floret");
-  if (phlox.phenotype.pattern !== "Bank") throw new Error("Phlox pattern must be Bank");
-  if (chipsForFriend("friend_096").join(",") !== "Phlox,Floret,Bank") {
-    throw new Error(`Phlox chips must be Phlox/Floret/Bank, got ${chipsForFriend("friend_096").join(",")}`);
+  if (SLICE_UNLOCKS[291] !== "friend_097") throw new Error("SLICE_UNLOCKS[291] must be friend_097");
+  if (shippedFriendForClear(291)?.friendId !== "friend_097") throw new Error("onClear(291) must award Celosia");
+  const celosia = friendById("friend_097");
+  if (!celosia) throw new Error("friend_097 missing from CATALOG");
+  if (celosia.defaultName !== "Celosia") throw new Error("default name must be Celosia");
+  if (celosia.unlockClear !== 291) throw new Error("Celosia unlockClear must be 291");
+  if (celosia.phenotype.artKit !== "celosia") throw new Error("Celosia artKit must be celosia");
+  if (celosia.phenotype.personality !== "Celosia-soft") throw new Error("Celosia personality must be Celosia-soft");
+  if (celosia.phenotype.boardColor !== "gray") throw new Error("Celosia boardColor must be gray");
+  if (celosia.phenotype.color !== "Plume") throw new Error("Celosia color must be Plume");
+  if (celosia.phenotype.pattern !== "Comb") throw new Error("Celosia pattern must be Comb");
+  if (chipsForFriend("friend_097").join(",") !== "Celosia,Plume,Comb") {
+    throw new Error(`Celosia chips must be Celosia/Plume/Comb, got ${chipsForFriend("friend_097").join(",")}`);
   }
-  if (chipsForFriend("friend_096").some((c) => /lantana|^umbel$|^mound$|calendula|^petal$|^tin$|salvia|^sage$|^torch$|impatiens|^busy$|^box$|verbena|^spike$|^pot$|pansy|^face$|^saucer$|petunia|^flare$|^basket$|nasturtium|^pepper$|^tray$|geranium|^cluster$|^sill$|freesia|^trumpet$|^vase$|ranunculus|^layer$|^nest$|begonia|^ruffle$|^planter$|anemone|^wind$|^bowl$|wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^fern$|^clover$|^juniper$/i.test(c))) {
-    throw new Error("Phlox chips must ban Lantana/Umbel/Mound and all prior pools/Pebble");
+  if (chipsForFriend("friend_097").some((c) => /phlox|^floret$|^bank$|lantana|^umbel$|^mound$|calendula|^petal$|^tin$|salvia|^sage$|^torch$|impatiens|^busy$|^box$|verbena|^spike$|^pot$|pansy|^face$|^saucer$|petunia|^flare$|^basket$|nasturtium|^pepper$|^tray$|geranium|^cluster$|^sill$|freesia|^trumpet$|^vase$|ranunculus|^layer$|^nest$|begonia|^ruffle$|^planter$|anemone|^wind$|^bowl$|wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^fern$|^clover$|^juniper$/i.test(c))) {
+    throw new Error("Celosia chips must ban Phlox/Floret/Bank and all prior pools/Pebble");
   }
-  const loaf48 = readFileSync(resolve("public/assets/cats/phlox_loaf_48.svg"), "utf8");
-  const loaf72 = readFileSync(resolve("public/assets/cats/phlox_loaf_72.svg"), "utf8");
-  if (!loaf48.includes("#D878A8") || !loaf72.includes("#D878A8")) throw new Error("Phlox loaf must use coat #D878A8");
-  if (!loaf48.includes("#3A1830") || !loaf72.includes("#3A1830")) throw new Error("Phlox loaf must use floret freckles #3A1830");
-  if (!loaf48.includes("#FFF3E6") || !loaf72.includes("#FFF3E6")) throw new Error("Phlox loaf must use belly #FFF3E6");
-  for (const hex of ["#E86040", "#3A1810", "#FF6B9A", "#2A4018", "#C060A0", "#2A1030", "#6B5ACD", "#1A1030", "#F4A020", "#5A3010", "#F07830", "#3A2810", "#E87868", "#3A2818"]) {
-    if (loaf48.includes(hex) || loaf72.includes(hex)) throw new Error(`Phlox loaf must not use prior coat ${hex}`);
+  const loaf48 = readFileSync(resolve("public/assets/cats/celosia_loaf_48.svg"), "utf8");
+  const loaf72 = readFileSync(resolve("public/assets/cats/celosia_loaf_72.svg"), "utf8");
+  if (!loaf48.includes("#E04070") || !loaf72.includes("#E04070")) throw new Error("Celosia loaf must use coat #E04070");
+  if (!loaf48.includes("#2A1018") || !loaf72.includes("#2A1018")) throw new Error("Celosia loaf must use comb freckles #2A1018");
+  if (!loaf48.includes("#FFF3E6") || !loaf72.includes("#FFF3E6")) throw new Error("Celosia loaf must use belly #FFF3E6");
+  for (const hex of ["#D878A8", "#3A1830", "#E86040", "#3A1810", "#FF6B9A", "#2A4018", "#6B4C9A", "#2A1838", "#C060A0", "#2A1030", "#6B5ACD", "#1A1030", "#F4A020", "#5A3010", "#F07830", "#3A2810", "#E87868", "#3A2818"]) {
+    if (loaf48.includes(hex) || loaf72.includes(hex)) throw new Error(`Celosia loaf must not use prior coat ${hex}`);
   }
-  if (furnitureGiftsForClear(288).length) throw new Error("Phlox@288 must gift no furniture");
+  if (furnitureGiftsForClear(291).length) throw new Error("Celosia@291 must gift no furniture");
   const yardG = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
-  if ((yardG.match(/const phlox =/g) || []).length !== 1) throw new Error("YardScene must declare phlox once");
-  if ((yardG.match(/\{phlox \?/g) || []).length !== 1) throw new Error("YardScene must render phlox once");
+  if ((yardG.match(/const celosia =/g) || []).length !== 1) throw new Error("YardScene must declare celosia once");
+  if ((yardG.match(/\{celosia \?/g) || []).length !== 1) throw new Error("YardScene must render celosia once");
+  if ((yardG.match(/const phlox =/g) || []).length !== 1) throw new Error("YardScene must keep phlox once");
+  if ((yardG.match(/\{phlox \?/g) || []).length !== 1) throw new Error("YardScene must keep phlox once");
   if ((yardG.match(/const lantana =/g) || []).length !== 1) throw new Error("YardScene must keep lantana once");
   if ((yardG.match(/\{lantana \?/g) || []).length !== 1) throw new Error("YardScene must keep lantana once");
-  if ((yardG.match(/const calendula =/g) || []).length !== 1) throw new Error("YardScene must keep calendula once");
-  if ((yardG.match(/\{calendula \?/g) || []).length !== 1) throw new Error("YardScene must keep calendula once");
-  if (TUTORIAL_RESCUES.length !== 97) throw new Error("Met must include through Phlox (96) after Celosia (97)");
+  if (TUTORIAL_RESCUES.length !== 97) throw new Error("Met must include through Celosia (97)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[285] !== "friend_095") throw new Error("SLICE_UNLOCKS[285] must be friend_095");
   if (SLICE_UNLOCKS[288] !== "friend_096") throw new Error("SLICE_UNLOCKS[288] must be friend_096");
-  if (SLICE_UNLOCKS[291] !== "friend_097") throw new Error("SLICE_UNLOCKS[291] must be friend_097 after Celosia ship");
-  if (/pebble|Pebble/i.test(loaf48 + loaf72)) throw new Error("Phlox art must not use Pebble");
-  if (/lantana|calendula|salvia|impatiens|verbena|pansy|petunia|nasturtium|geranium|begonia|marigold|buttercup/i.test(loaf48 + loaf72)) {
-    throw new Error("Phlox art must not collide Lantana/Calendula and prior flower marks");
+  if (SLICE_UNLOCKS[291] !== "friend_097") throw new Error("SLICE_UNLOCKS[291] must be friend_097");
+  if (SLICE_UNLOCKS[294]) throw new Error("no friend_098 @294 this slice");
+  if (/pebble|Pebble/i.test(loaf48 + loaf72)) throw new Error("Celosia art must not use Pebble");
+  if (/phlox|lantana|calendula|salvia|impatiens|verbena|pansy|petunia|nasturtium|geranium|begonia|marigold|buttercup/i.test(loaf48 + loaf72)) {
+    throw new Error("Celosia art must not collide Phlox/Lantana and prior flower marks");
   }
-  const l289 = LEVELS.find((r) => r.id === "L289")!;
-  const l290 = LEVELS.find((r) => r.id === "L290")!;
-  const l291 = LEVELS.find((r) => r.id === "L291")!;
-  if (/\b(umbel|mound|bunch|disk|tin|disc|sage|torch|bract|calendula|salvia|busy|box|touch|spike|urn|taper|face|saucer|blotch|flare|basket|frill|petal|cluster|clump)\b/i.test(l289.name)) {
-    throw new Error("L289 must not reuse Umbel/Mound/Bunch/Disk/Tin/Disc/Sage/Torch/Bract and prior triad names");
+  const l292 = LEVELS.find((r) => r.id === "L292")!;
+  const l293 = LEVELS.find((r) => r.id === "L293")!;
+  const l294 = LEVELS.find((r) => r.id === "L294")!;
+  if (/\b(floret|bank|spray|umbel|mound|bunch|disk|tin|disc|sage|torch|bract|phlox|calendula|salvia|busy|box|touch|spike|urn|taper|face|saucer|blotch|flare|basket|frill|petal|cluster|clump)\b/i.test(l292.name)) {
+    throw new Error("L292 must not reuse Floret/Bank/Spray/Umbel/Mound/Bunch and prior triad names");
   }
-  if (gatePair(l289) !== "3,3/5,2") throw new Error(`L289 gates must be delta (2, 1) pair, got ${gatePair(l289)}`);
-  if (gatePair(l290) !== "1,1/3,5") throw new Error(`L290 gates must be delta (2, 4) pair, got ${gatePair(l290)}`);
-  if (gatePair(l291) !== "3,5/4,3") throw new Error(`L291 gates must be delta (1, 2) pair, got ${gatePair(l291)}`);
-  const occ291 = [...l291.cats, ...l291.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
+  if (gatePair(l292) !== "4,2/5,0") throw new Error(`L292 gates must be delta (1, 2) pair, got ${gatePair(l292)}`);
+  if (gatePair(l293) !== "1,3/2,0") throw new Error(`L293 gates must be delta (1, 3) pair, got ${gatePair(l293)}`);
+  if (gatePair(l294) !== "4,5/5,0") throw new Error(`L294 gates must be delta (1, 5) pair, got ${gatePair(l294)}`);
+  const occ294 = [...l294.cats, ...l294.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
   const priorOcc = new Set(
-    LEVELS.filter((row) => /stop/i.test(row.name) && row.id !== "L291").map((row) =>
+    LEVELS.filter((row) => /stop/i.test(row.name) && row.id !== "L294").map((row) =>
       [...row.cats, ...row.gates].map((p) => `${p.x},${p.y}`).sort().join(";"),
     ),
   );
-  if (priorOcc.has(occ291)) throw new Error("L291 Spray must not twin a prior Stop occupancy");
-  if (occ291.split(";").includes("5,5")) throw new Error("L291 Spray must be off Nori seat (5,5)");
-  if (l291.gates[0].y === l291.gates[1].y) throw new Error("L291 Spray must not same-row Nest");
-  if (l291.gates[0].x === l291.gates[1].x) throw new Error("L291 Spray must not column Porch");
-  if (l289.cats[0].x === l289.cats[1].x) throw new Error("L289 Floret must not stacked-column Vine");
+  if (priorOcc.has(occ294)) throw new Error("L294 Flame must not twin a prior Stop occupancy");
+  if (occ294.split(";").includes("5,5")) throw new Error("L294 Flame must be off Nori seat (5,5)");
+  if (l294.gates[0].y === l294.gates[1].y) throw new Error("L294 Flame must not same-row Nest");
+  if (l294.gates[0].x === l294.gates[1].x) throw new Error("L294 Flame must not column Porch");
+  if (l292.cats[0].x === l292.cats[1].x) throw new Error("L292 Plume must not stacked-column Vine");
 
-  if (solves.L289[0][0] === "cat_gray") {
-    throw new Error("L289 Floret Cut must not open gray-first (Umbel Cut clone)");
+  if (solves.L292[0][0] === "cat_orange") {
+    throw new Error("L292 Plume Cut must not open orange-first (Floret Cut clone)");
   }
-  if (solves.L289[0][0] === "cat_orange" && solves.L289[0][1] === "n") {
-    throw new Error("L289 Floret Cut must not open orange-north (Disk Cut clone)");
+  if (solves.L292[0][0] === "cat_gray" && solves.L292[0][1] === "w") {
+    throw new Error("L292 Plume Cut must not open gray-west (Umbel Cut clone)");
   }
-  if (solves.L289[0][0] === "cat_orange" && solves.L289[0][1] === "s") {
-    throw new Error("L289 Floret Cut must not open orange-south (Busy Cut clone)");
+  if (solves.L292[0][0] === "cat_gray" && solves.L292[0][1] === "e") {
+    throw new Error("L292 Plume Cut must not open gray-east (Bank Gap clone)");
   }
-  if (solves.L289[0][0] === "cat_orange" && solves.L289[0][1] === "w") {
-    throw new Error("L289 Floret Cut must not open orange-west (Bunch Stop clone)");
+  if (solves.L292[0][0] === "cat_gray" && solves.L292[0][1] === "s") {
+    throw new Error("L292 Plume Cut must not open gray-south (Sage Cut clone)");
   }
-  if (solves.L290[0][0] === "cat_black") {
-    throw new Error("L290 Bank Gap must not open black-first (Mound Gap clone)");
+  if (solves.L293[0][0] === "cat_gray") {
+    throw new Error("L293 Comb Gap must not open gray-first (Bank Gap clone)");
   }
-  if (solves.L290[0][0] === "cat_gray" && solves.L290[0][1] === "w") {
-    throw new Error("L290 Bank Gap must not open gray-west (Umbel Cut clone)");
+  if (solves.L293[0][0] === "cat_black" && solves.L293[0][1] === "e") {
+    throw new Error("L293 Comb Gap must not open black-east (Mound Gap / Spray Stop clone)");
   }
-  if (solves.L290[0][0] === "cat_gray" && solves.L290[0][1] === "n") {
-    throw new Error("L290 Bank Gap must not open gray-north (Tin Gap clone)");
+  if (solves.L293[0][0] === "cat_black" && solves.L293[0][1] === "w") {
+    throw new Error("L293 Comb Gap must not open black-west (Torch Gap clone)");
   }
-  if (solves.L290[0][0] === "cat_gray" && solves.L290[0][1] === "s") {
-    throw new Error("L290 Bank Gap must not open gray-south (Sage Cut clone)");
+  if (solves.L293[0][0] === "cat_black" && solves.L293[0][1] === "n") {
+    throw new Error("L293 Comb Gap must not open black-north (Disc Stop clone)");
   }
-  if (solves.L291[0][0] === "cat_orange") {
-    throw new Error("L291 Spray Stop must not open orange-first (Bunch Stop clone)");
+  if (solves.L294[0][0] === "cat_black") {
+    throw new Error("L294 Flame Stop must not open black-first (Spray Stop clone)");
   }
-  if (solves.L291[0][0] === "cat_black" && solves.L291[0][1] === "n") {
-    throw new Error("L291 Spray Stop must not open black-north (Disc Stop clone)");
+  if (solves.L294[0][0] === "cat_orange" && solves.L294[0][1] === "e") {
+    throw new Error("L294 Flame Stop must not open orange-east (Floret Cut clone)");
   }
-  if (solves.L291[0][0] === "cat_black" && solves.L291[0][1] === "w") {
-    throw new Error("L291 Spray Stop must not open black-west (Torch Gap clone)");
+  if (solves.L294[0][0] === "cat_orange" && solves.L294[0][1] === "n") {
+    throw new Error("L294 Flame Stop must not open orange-north (Disk Cut clone)");
   }
-  if (solves.L291[0][0] === "cat_black" && solves.L291[0][1] === "s") {
-    throw new Error("L291 Spray Stop must not open black-south (Touch Stop clone)");
+  if (solves.L294[0][0] === "cat_orange" && solves.L294[0][1] === "w") {
+    throw new Error("L294 Flame Stop must not open orange-west (Bunch Stop clone)");
   }
-  if (solves.L289[0][0] !== "cat_orange") {
-    throw new Error("L289 Floret Cut must open orange-first");
+  if (solves.L292[0][0] !== "cat_gray") {
+    throw new Error("L292 Plume Cut must open gray-first");
   }
-  if (solves.L290[0][0] !== "cat_gray") {
-    throw new Error("L290 Bank Gap must open gray-first");
+  if (solves.L293[0][0] !== "cat_black") {
+    throw new Error("L293 Comb Gap must open black-first");
   }
-  if (solves.L291[0][0] !== "cat_black") {
-    throw new Error("L291 Spray Stop must open black-first");
+  if (solves.L294[0][0] !== "cat_orange") {
+    throw new Error("L294 Flame Stop must open orange-first");
   }
-  for (const level of [l289, l290, l291]) {
+  for (const level of [l292, l293, l294]) {
     if (level.gates.every((g) => g.y === 5) || level.gates.every((g) => g.x === 5)) {
       throw new Error(`${level.id} must not WRAP/edge-twin Nori/Medlar`);
     }
@@ -433,29 +435,29 @@ export function verifyChapter4Phlox(solves: Record<string, Array<[string, Dir]>>
     if (!level.templateId.startsWith("LT02_LT08_")) throw new Error(`${level.id} must be LT02+LT08`);
   }
   const wallKeyO = (level: Level) => [...level.walls].map((w) => `${w.x},${w.y}`).sort().join(";");
-  const priorWallsO = LEVELS.filter((row) => !["L289", "L290", "L291"].includes(row.id)).map(wallKeyO);
-  for (const id of ["L289", "L290", "L291"] as const) {
+  const priorWallsO = LEVELS.filter((row) => !["L292", "L293", "L294"].includes(row.id)).map(wallKeyO);
+  for (const id of ["L292", "L293", "L294"] as const) {
     const key = wallKeyO(LEVELS.find((r) => r.id === id)!);
     if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of a prior board`);
   }
+  if (ART_KIT_PATH.celosia.loaf48 !== "/assets/cats/celosia_loaf_48.svg") throw new Error("ART_KIT_PATH.celosia loaf48");
+  if (ART_KIT_PATH.celosia.loaf72 !== "/assets/cats/celosia_loaf_72.svg") throw new Error("ART_KIT_PATH.celosia loaf72");
   if (ART_KIT_PATH.phlox.loaf48 !== "/assets/cats/phlox_loaf_48.svg") throw new Error("ART_KIT_PATH.phlox loaf48");
-  if (ART_KIT_PATH.phlox.loaf72 !== "/assets/cats/phlox_loaf_72.svg") throw new Error("ART_KIT_PATH.phlox loaf72");
   if (ART_KIT_PATH.lantana.loaf48 !== "/assets/cats/lantana_loaf_48.svg") throw new Error("ART_KIT_PATH.lantana loaf48");
-  if (ART_KIT_PATH.calendula.loaf48 !== "/assets/cats/calendula_loaf_48.svg") throw new Error("ART_KIT_PATH.calendula loaf48");
   const saveG = readFileSync(resolve("src/components/providers/SaveProvider.tsx"), "utf8");
+  if (!saveG.includes("celosia comb")) throw new Error("SaveProvider must yard-bubble celosia comb for Celosia");
   if (!saveG.includes("phlox bank")) throw new Error("SaveProvider must yard-bubble phlox bank for Phlox");
-  if (!saveG.includes("lantana mound")) throw new Error("SaveProvider must yard-bubble lantana mound for Lantana");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_097.md"))) throw new Error("missing CH4_FRIEND_097.md");
   if (!existsSync(resolve("data/collection/CH4_FRIEND_096.md"))) throw new Error("missing CH4_FRIEND_096.md");
-  if (!existsSync(resolve("data/collection/CH4_FRIEND_095.md"))) throw new Error("missing CH4_FRIEND_095.md");
-  if (!existsSync(resolve("data/collection/chapter4_phlox_bang.json"))) throw new Error("missing collection phlox bang");
-  if (!existsSync(resolve("data/chapter4_phlox_bang.json"))) throw new Error("missing chapter4_phlox_bang.json");
-  if (!existsSync(resolve("public/assets/furniture/phloxBank.svg"))) throw new Error("missing phlox-bank yard SVG");
-  if (!existsSync(resolve("public/assets/ui/star_phlox.svg"))) throw new Error("missing star_phlox");
-  const bank = readFileSync(resolve("public/assets/furniture/phloxBank.svg"), "utf8");
-  if (!bank.includes("#D878A8") || !bank.includes("#3A1830")) throw new Error("phlox bank must use cluster-panicle #D878A8 + floret #3A1830");
+  if (!existsSync(resolve("data/collection/chapter4_celosia_bang.json"))) throw new Error("missing collection celosia bang");
+  if (!existsSync(resolve("data/chapter4_celosia_bang.json"))) throw new Error("missing chapter4_celosia_bang.json");
+  if (!existsSync(resolve("public/assets/furniture/celosiaComb.svg"))) throw new Error("missing celosia-comb yard SVG");
+  if (!existsSync(resolve("public/assets/ui/star_celosia.svg"))) throw new Error("missing star_celosia");
+  const comb = readFileSync(resolve("public/assets/furniture/celosiaComb.svg"), "utf8");
+  if (!comb.includes("#E04070") || !comb.includes("#2A1018")) throw new Error("celosia comb must use flame-plume #E04070 + comb #2A1018");
   const nameModalG = readFileSync(resolve("src/components/puzzle/NameCatModal.tsx"), "utf8");
-  if (!nameModalG.includes("PHLOX_FRIEND_ID")) throw new Error("NameCatModal must lockChips Phlox");
-  if (!nameModalG.includes("LANTANA_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Lantana");
+  if (!nameModalG.includes("CELOSIA_FRIEND_ID")) throw new Error("NameCatModal must lockChips Celosia");
+  if (!nameModalG.includes("PHLOX_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Phlox");
   const shellC = readFileSync(resolve("src/components/shell/GameShell.tsx"), "utf8");
   if (!shellC.includes("Full-viewport") && !shellC.includes("full-viewport") && !shellC.includes("min-h-dvh")) {
     throw new Error("GameShell must stay full-viewport");
@@ -463,5 +465,5 @@ export function verifyChapter4Phlox(solves: Record<string, Array<[string, Dir]>>
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Phlox@288 + L289–L291 ok · chips Phlox/Floret/Bank · coat #D878A8 + floret freckles #3A1830 · Floret Cut / Bank Gap / Spray Stop · unique vs Umbel Cut / Mound Gap / Bunch Stop / Disk Cut / Tin Gap / Disc Stop · Lantana/Calendula/Salvia/Impatiens/Verbena/Pansy/Petunia and prior locked · Celosia@291 shipped · parade Bean stands");
+  console.log("Ch4 Celosia@291 + L292–L294 ok · chips Celosia/Plume/Comb · coat #E04070 + comb freckles #2A1018 · Plume Cut / Comb Gap / Flame Stop · unique vs Floret Cut / Bank Gap / Spray Stop / Umbel Cut / Mound Gap / Bunch Stop · Phlox/Lantana/Calendula/Salvia/Impatiens/Verbena/Pansy/Petunia and prior locked · no friend_098 · parade Bean stands");
 }

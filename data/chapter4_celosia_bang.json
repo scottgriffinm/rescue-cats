@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_celosia_bang",
+  "status": "READY",
+  "friend_id": "friend_097",
+  "unlock_clear": 291,
+  "personality": "Celosia-soft",
+  "display_line": "Plume soft. Already claimed the celosia comb.",
+  "default_name": "Celosia",
+  "tier": "C",
+  "color": "Plume",
+  "pattern": "Comb",
+  "art": {
+    "loaf_48": "/assets/cats/celosia_loaf_48.svg",
+    "loaf_72": "/assets/cats/celosia_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "celosia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Celosia", "Plume", "Comb"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_097": [
+      "{Name}: Plume soft. Already claimed the celosia comb.",
+      "{Name}: Looks yard-soft. Owns the comb."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 291,
+    "sku_id": null,
+    "note": "Ch4. Celosia Pass. No gift. Ban Phlox/Floret/Bank and all prior pools. Bean parade stands. No Pebble. Celosia, Plume, and Comb chips are CEO-locked on Celosia. No friend_098."
+  }
+}
