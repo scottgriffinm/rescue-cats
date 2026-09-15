@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_geranium_bang",
+  "status": "READY",
+  "friend_id": "friend_087",
+  "unlock_clear": 261,
+  "personality": "Geranium-soft",
+  "display_line": "Cluster soft. Already claimed the geranium sill.",
+  "default_name": "Geranium",
+  "tier": "C",
+  "color": "Cluster",
+  "pattern": "Sill",
+  "art": {
+    "loaf_48": "/assets/cats/geranium_loaf_48.svg",
+    "loaf_72": "/assets/cats/geranium_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "geranium"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Geranium", "Cluster", "Sill"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_087": [
+      "{Name}: Cluster soft. Already claimed the geranium sill.",
+      "{Name}: Looks yard-soft. Owns the sill."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 261,
+    "sku_id": null,
+    "note": "Ch4. Geranium Pass. No gift. Ban Freesia/Trumpet/Vase and all prior pools. Bean parade stands. No Pebble. Geranium, Cluster, and Sill chips are CEO-locked on Geranium. No friend_088."
+  }
+}

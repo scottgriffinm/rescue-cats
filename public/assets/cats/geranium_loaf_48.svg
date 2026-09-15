@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="geranium-loaf-48">
+      <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24.6" cy="30.2" rx="15.2" ry="11.2" fill="#C23A52" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6" fill="#E05070" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M12.2 22.8 C9.8 16.4 14.6 12.2 18.4 17.8" fill="#C23A52" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M35.8 22.8 C38.2 16.4 33.4 12.2 29.6 17.8" fill="#C23A52" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <g clip-path="url(#geranium-loaf-48)" fill="#2A4018">
+    <circle cx="22.4" cy="31.8" r="1.05"/>
+    <circle cx="25.4" cy="31.5" r="0.95"/>
+    <circle cx="24.0" cy="33.4" r="1.15"/>
+    <circle cx="21.6" cy="33.0" r="0.8"/>
+    <circle cx="26.4" cy="33.2" r="0.85"/>
+    <circle cx="23.8" cy="30.4" r="0.7"/>
+  </g>
+  <ellipse cx="24" cy="34.6" rx="6.4" ry="3.6" fill="#FFE8EE"/>
+  <circle cx="18" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.4" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.85" cy="26.7" r="0.4" fill="#FFFCF2"/>
+  <circle cx="18.45" cy="26.7" r="0.4" fill="#FFFCF2"/>
+  <path d="M39.2 34 C42.4 32.8 43.6 36.4 40.8 37.6" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>
