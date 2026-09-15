@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_pansy_bang",
+  "status": "READY",
+  "friend_id": "friend_090",
+  "unlock_clear": 270,
+  "personality": "Pansy-soft",
+  "display_line": "Face soft. Already claimed the pansy saucer.",
+  "default_name": "Pansy",
+  "tier": "C",
+  "color": "Face",
+  "pattern": "Saucer",
+  "art": {
+    "loaf_48": "/assets/cats/pansy_loaf_48.svg",
+    "loaf_72": "/assets/cats/pansy_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "pansy"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Pansy", "Face", "Saucer"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_090": [
+      "{Name}: Face soft. Already claimed the pansy saucer.",
+      "{Name}: Looks yard-soft. Owns the saucer."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 270,
+    "sku_id": null,
+    "note": "Ch4. Pansy Pass. No gift. Ban Petunia/Flare/Basket and all prior pools. Bean parade stands. No Pebble. Pansy, Face, and Saucer chips are CEO-locked on Pansy. No friend_091."
+  }
+}

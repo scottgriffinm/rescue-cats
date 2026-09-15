@@ -199,7 +199,7 @@ export function verifyChapter4Tarragon(solves: Record<string, Array<[string, Dir
   const yardT = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardT.match(/const tarragon =/g) || []).length !== 1) throw new Error("YardScene must declare tarragon once");
   if ((yardT.match(/\{tarragon \?/g) || []).length !== 1) throw new Error("YardScene must render tarragon once");
-  if (TUTORIAL_RESCUES.length !== 89) throw new Error("Met must include through Tarragon (44)");
+  if (TUTORIAL_RESCUES.length !== 90) throw new Error("Met must include through Tarragon (44)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
