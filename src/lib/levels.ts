@@ -89,6 +89,7 @@ import chapter4bo from "../../data/levels/CHAPTER4_PUZZLE_L262_L264.json";
 import chapter4bp from "../../data/levels/CHAPTER4_PUZZLE_L265_L267.json";
 import chapter4bq from "../../data/levels/CHAPTER4_PUZZLE_L268_L270.json";
 import chapter4br from "../../data/levels/CHAPTER4_PUZZLE_L271_L273.json";
+import chapter4bs from "../../data/levels/CHAPTER4_PUZZLE_L274_L276.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -367,6 +368,9 @@ const HEADLINES: Record<string, string> = {
   L271: "FACE CUT",
   L272: "SAUCER GAP",
   L273: "BLOTCH STOP",
+  L274: "SPIKE CUT",
+  L275: "URN GAP",
+  L276: "TAPER STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -642,6 +646,9 @@ const HINTS: Record<string, string> = {
   L271: "Face cut — orange north first; gray cuts after; not Flare gray-west, not Pepper orange-south, not Trumpet orange-west, not Cluster Cut, not Clump Cut, not Pepper Cut, not Flare Cut.",
   L272: "Saucer gap — gray north then orange threads; not Basket black-north, not Tray gray-east, not Flare gray-west, not Clump gray-south, not Vase gray-west.",
   L273: "Blotch stop — pansy-saucer seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill twins; off Nori (5,5); not Frill Stop; not Tendril Stop; not Pane Stop; not Tube Stop; not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Clump Stop; not Cluster Stop; not Ruffle Stop; not Hold*/Park*.",
+  L274: "Spike cut — gray first; orange cuts after; not Face orange-north, not Flare gray-west, not Pepper orange-south, not Trumpet orange-west, not Cluster Cut, not Clump Cut, not Face Cut.",
+  L275: "Urn gap — black first then orange threads; not Saucer gray-north, not Basket black-north, not Tray gray-east, not Face orange-north, not Flare gray-west.",
+  L276: "Taper stop — verbena-pot seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill/Blotch twins; off Nori (5,5); not Blotch Stop; not Frill Stop; not Tendril Stop; not Pane Stop; not Tube Stop; not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Clump Stop; not Cluster Stop; not Ruffle Stop; not Pot Stop; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -786,6 +793,7 @@ const authored = [
   ...chapter4bp.levels,
   ...chapter4bq.levels,
   ...chapter4br.levels,
+  ...chapter4bs.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

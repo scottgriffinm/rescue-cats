@@ -96,7 +96,8 @@ export const ART_KIT_PATH: Record<
   | "geranium"
   | "nasturtium"
   | "petunia"
-  | "pansy",
+  | "pansy"
+  | "verbena",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -462,6 +463,10 @@ export const ART_KIT_PATH: Record<
   pansy: {
     loaf48: "/assets/cats/pansy_loaf_48.svg",
     loaf72: "/assets/cats/pansy_loaf_72.svg",
+  },
+  verbena: {
+    loaf48: "/assets/cats/verbena_loaf_48.svg",
+    loaf72: "/assets/cats/verbena_loaf_72.svg",
   },
 };
 

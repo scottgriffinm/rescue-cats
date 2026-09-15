@@ -118,6 +118,7 @@ export const FURN_ASSETS = {
   nasturtiumTray: "/assets/furniture/nasturtiumTray.svg",
   petuniaBasket: "/assets/furniture/petuniaBasket.svg",
   pansySaucer: "/assets/furniture/pansySaucer.svg",
+  verbenaPot: "/assets/furniture/verbenaPot.svg",
 } as const;
 
 export const UI_ASSETS = {
@@ -125,6 +126,7 @@ export const UI_ASSETS = {
   input_name: "/assets/ui/input_name.svg",
   fail_mark: "/assets/ui/fail_mark.svg",
   fail_empty: "/assets/ui/fail_empty.svg",
+  star_verbena: "/assets/ui/star_verbena.svg",
   star_pansy: "/assets/ui/star_pansy.svg",
   star_petunia: "/assets/ui/star_petunia.svg",
   star_nasturtium: "/assets/ui/star_nasturtium.svg",

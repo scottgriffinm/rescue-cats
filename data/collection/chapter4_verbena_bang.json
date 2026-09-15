@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_verbena_bang",
+  "status": "READY",
+  "friend_id": "friend_091",
+  "unlock_clear": 273,
+  "personality": "Verbena-soft",
+  "display_line": "Spike soft. Already claimed the verbena pot.",
+  "default_name": "Verbena",
+  "tier": "C",
+  "color": "Spike",
+  "pattern": "Pot",
+  "art": {
+    "loaf_48": "/assets/cats/verbena_loaf_48.svg",
+    "loaf_72": "/assets/cats/verbena_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "verbena"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Verbena", "Spike", "Pot"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_091": [
+      "{Name}: Spike soft. Already claimed the verbena pot.",
+      "{Name}: Looks yard-soft. Owns the pot."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 273,
+    "sku_id": null,
+    "note": "Ch4. Verbena Pass. No gift. Ban Pansy/Face/Saucer and all prior pools. Bean parade stands. No Pebble. Verbena, Spike, and Pot chips are CEO-locked on Verbena. No friend_092."
+  }
+}
