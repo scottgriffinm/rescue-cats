@@ -265,7 +265,7 @@ function uniqueShortestCount(level: Level) {
 
 export function verifyChapter4Geranium(solves: Record<string, Array<[string, Dir]>>) {
   for (const [id, name] of [
-    ["L262", "Cluster Cut"],
+    ["L262", "Clump Cut"],
     ["L263", "Sill Gap"],
     ["L264", "Pane Stop"],
   ] as const) {
@@ -282,6 +282,9 @@ export function verifyChapter4Geranium(solves: Record<string, Array<[string, Dir
     }
     if (/geranium (cut|gap|stop)/i.test(level.name)) {
       throw new Error(`${id} must not be Geranium Cut/Gap/Stop`);
+    }
+    if (/cluster cut/i.test(level.name)) {
+      throw new Error(`${id} must not reuse Hyacinth Cluster Cut`);
     }
     if (/freesia (cut|gap|stop)|trumpet cut|vase gap|tube stop/i.test(level.name)) {
       throw new Error(`${id} must not be Trumpet Cut/Vase Gap/Tube Stop/Freesia Cut/Gap/Stop`);
@@ -357,6 +360,7 @@ export function verifyChapter4Geranium(solves: Record<string, Array<[string, Dir
   if (LEVELS.find((row) => row.id === "L221")?.name !== "Throat Gap") throw new Error("L221 Throat Gap locked");
   if (LEVELS.find((row) => row.id === "L222")?.name !== "Glove Stop") throw new Error("L222 Glove Stop locked");
   if (LEVELS.find((row) => row.id === "L217")?.name !== "Cluster Cut") throw new Error("L217 Cluster Cut locked");
+  if (LEVELS.find((row) => row.id === "L262")?.name === "Cluster Cut") throw new Error("L262 must not reuse Hyacinth Cluster Cut");
   if (LEVELS.find((row) => row.id === "L218")?.name !== "Bell Gap") throw new Error("L218 Bell Gap locked");
   if (LEVELS.find((row) => row.id === "L219")?.name !== "Raceme Stop") throw new Error("L219 Raceme Stop locked");
   if (LEVELS.find((row) => row.id === "L214")?.name !== "Saffron Cut") throw new Error("L214 Saffron Cut locked");
@@ -535,19 +539,19 @@ export function verifyChapter4Geranium(solves: Record<string, Array<[string, Dir
   if (occ261.split(";").includes("5,5")) throw new Error("L264 Pane must be off Nori seat (5,5)");
   if (l249.gates[0].y === l249.gates[1].y) throw new Error("L264 Pane must not same-row Nest");
   if (l249.gates[0].x === l249.gates[1].x) throw new Error("L264 Pane must not column Porch");
-  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L262 Cluster must not stacked-column Vine");
+  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L262 Clump must not stacked-column Vine");
 
   if (solves.L262[0][0] === "cat_orange") {
-    throw new Error("L262 Cluster Cut must not open orange-first (Trumpet Cut clone)");
+    throw new Error("L262 Clump Cut must not open orange-first (Trumpet Cut clone)");
   }
   if (solves.L262[0][0] === "cat_gray" && solves.L262[0][1] === "w") {
-    throw new Error("L262 Cluster Cut must not open gray-west (Vase Gap clone)");
+    throw new Error("L262 Clump Cut must not open gray-west (Vase Gap clone)");
   }
   if (solves.L262[0][0] === "cat_gray" && solves.L262[0][1] === "e") {
-    throw new Error("L262 Cluster Cut must not open gray-east (Layer Cut clone)");
+    throw new Error("L262 Clump Cut must not open gray-east (Layer Cut clone)");
   }
   if (solves.L262[0][0] === "cat_gray" && solves.L262[0][1] === "n") {
-    throw new Error("L262 Cluster Cut must not open gray-north (Wind Cut clone)");
+    throw new Error("L262 Clump Cut must not open gray-north (Wind Cut clone)");
   }
   if (solves.L263[0][0] === "cat_gray") {
     throw new Error("L263 Sill Gap must not open gray-first (Vase Gap clone)");
@@ -574,7 +578,7 @@ export function verifyChapter4Geranium(solves: Record<string, Array<[string, Dir
     throw new Error("L264 Pane Stop must not open orange-south (Ruffle Cut clone)");
   }
   if (solves.L262[0][0] !== "cat_gray") {
-    throw new Error("L262 Cluster Cut must open gray-first");
+    throw new Error("L262 Clump Cut must open gray-first");
   }
   if (solves.L263[0][0] !== "cat_black") {
     throw new Error("L263 Sill Gap must open black-first");
@@ -699,5 +703,5 @@ export function verifyChapter4Geranium(solves: Record<string, Array<[string, Dir
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Geranium@261 + L262–L264 ok · chips Geranium/Cluster/Sill · coat #E05070 + leaf freckles #2A4018 · Cluster Cut / Sill Gap / Pane Stop · Freesia/Ranunculus/Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Geranium@261 + L262–L264 ok · chips Geranium/Cluster/Sill · coat #E05070 + leaf freckles #2A4018 · Clump Cut / Sill Gap / Pane Stop · Freesia/Ranunculus/Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }

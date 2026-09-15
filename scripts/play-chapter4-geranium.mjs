@@ -493,7 +493,7 @@ try {
   await shot(page, "03_geranium_yard");
 
   await page.goto(`${BASE}/level/L262`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CLUSTER CUT"));
+  await page.waitForFunction(() => document.body.innerText.includes("CLUMP CUT"));
   await play(
     page,
     [

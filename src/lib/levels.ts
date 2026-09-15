@@ -352,7 +352,7 @@ const HEADLINES: Record<string, string> = {
   L259: "TRUMPET CUT",
   L260: "VASE GAP",
   L261: "TUBE STOP",
-  L262: "CLUSTER CUT",
+  L262: "CLUMP CUT",
   L263: "SILL GAP",
   L264: "PANE STOP",
 };
@@ -618,7 +618,7 @@ const HINTS: Record<string, string> = {
   L259: "Trumpet cut — orange west first; gray cuts after; not Layer gray-east, not Ruffle orange-south, not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Planter gray-west, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west.",
   L260: "Vase gap — gray west then orange threads; not Nest black-west, not Bowl black-east, not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Leaf black-north.",
   L261: "Tube stop — freesia-vase seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold twins; off Nori (5,5); not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Spire Stop; not Hold*/Park*.",
-  L262: "Cluster cut — gray south first; orange cuts after; not Trumpet orange-west, not Layer gray-east, not Ruffle orange-south, not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Planter gray-west, not Vase gray-west, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Saffron orange-west, not Pollen black-west, not Pad gray-west.",
+  L262: "Clump cut — gray south first; orange cuts after; not Trumpet orange-west, not Layer gray-east, not Ruffle orange-south, not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Planter gray-west, not Vase gray-west, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Saffron orange-west, not Pollen black-west, not Pad gray-west, not Cluster Cut.",
   L263: "Sill gap — black south then orange threads; not Vase gray-west, not Nest black-west, not Bowl black-east, not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Leaf black-north, not Tube black-east.",
   L264: "Pane stop — geranium-sill seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube twins; off Nori (5,5); not Tube Stop; not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Hold*/Park*.",
 };
