@@ -257,7 +257,7 @@ export function verifyChapter4Peony(solves: Record<string, Array<[string, Dir]>>
   const yardP = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardP.match(/const peony =/g) || []).length !== 1) throw new Error("YardScene must declare peony once");
   if ((yardP.match(/\{peony \?/g) || []).length !== 1) throw new Error("YardScene must render peony once");
-  if (TUTORIAL_RESCUES.length !== 86) throw new Error("Met must include through Peony (59)");
+  if (TUTORIAL_RESCUES.length !== 87) throw new Error("Met must include through Peony (59)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
