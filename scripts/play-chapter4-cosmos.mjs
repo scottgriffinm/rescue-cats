@@ -532,8 +532,8 @@ try {
   if (after.save.friends.filter((friend) => friend.friendId === "friend_080").length !== 1) {
     throw new Error("L243 must not unlock a Cosmos duplicate");
   }
-  if (!after.hud.includes("249") && !after.text.includes("249")) {
-    throw new Error("Campaign HUD must show through 249 after L243 clear");
+  if (!after.hud.includes("252") && !after.text.includes("252")) {
+    throw new Error("Campaign HUD must show through 252 after L243 clear");
   }
   const paradeLocks = {
     friend_001: 3,

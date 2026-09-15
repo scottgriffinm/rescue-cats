@@ -1,7 +1,7 @@
 /**
  * Chapter 4 beat: L246 → Wisteria@246 naming, then L247–L249.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L246 queues Wisteria pending. Do not invent friend_083.
+ * L246 queues Wisteria pending. L249 queues Anemone when friend_083 is present.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -513,7 +513,7 @@ try {
       ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
     ],
-    "Home",
+    "New friend!",
   );
   await shot(page, "05_l249_win");
 
@@ -532,19 +532,22 @@ try {
     throw new Error("L10 must stay off the campaign path");
   }
   if (after.save.friends.some((friend) => friend.friendId === "friend_083")) {
-    throw new Error("friend_083 must not unlock this slice");
+    throw new Error("friend_083 must stay pending, not named, on the Wisteria slice");
   }
-  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_083")) {
-    throw new Error("L249 clear must not queue the next friend");
+  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_083")) {
+    throw new Error("L249 clear must queue Anemone when friend_083 is present");
   }
-  if (after.text.includes("New friend!")) {
-    throw new Error("L249 must not open a next-friend naming modal");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_084")) {
+    throw new Error("L249 clear must not queue friend_084");
+  }
+  if (!after.text.includes("New friend!")) {
+    throw new Error("L249 clear must show Anemone pending naming");
   }
   if (after.save.friends.filter((friend) => friend.friendId === "friend_082").length !== 1) {
     throw new Error("L249 must not unlock a Wisteria duplicate");
   }
-  if (!after.hud.includes("249") && !after.text.includes("249")) {
-    throw new Error("Campaign HUD must show through 249 after L249 clear");
+  if (!after.hud.includes("252") && !after.text.includes("252")) {
+    throw new Error("Campaign HUD must show through 252 after L249 clear");
   }
   const paradeLocks = {
     friend_001: 3,

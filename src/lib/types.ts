@@ -87,7 +87,8 @@ export type ArtKit =
   | "buttercup"
   | "cosmos"
   | "clematis"
-  | "wisteria";
+  | "wisteria"
+  | "anemone";
 
 export type PieceCat = {
   id: string;

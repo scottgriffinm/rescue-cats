@@ -110,6 +110,7 @@ export const FURN_ASSETS = {
   cosmosStem: "/assets/furniture/cosmosStem.svg",
   clematisTrellis: "/assets/furniture/clematisTrellis.svg",
   wisteriaArbor: "/assets/furniture/wisteriaArbor.svg",
+  anemoneBowl: "/assets/furniture/anemoneBowl.svg",
 } as const;
 
 export const UI_ASSETS = {
@@ -117,6 +118,7 @@ export const UI_ASSETS = {
   input_name: "/assets/ui/input_name.svg",
   fail_mark: "/assets/ui/fail_mark.svg",
   fail_empty: "/assets/ui/fail_empty.svg",
+  star_anemone: "/assets/ui/star_anemone.svg",
   star_wisteria: "/assets/ui/star_wisteria.svg",
   star_clematis: "/assets/ui/star_clematis.svg",
   star_cosmos: "/assets/ui/star_cosmos.svg",

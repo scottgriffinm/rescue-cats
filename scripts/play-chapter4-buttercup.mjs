@@ -525,8 +525,8 @@ try {
   if (after.save.friends.filter((friend) => friend.friendId === "friend_079").length !== 1) {
     throw new Error("L240 must not unlock a Buttercup duplicate");
   }
-  if (!after.hud.includes("249") && !after.text.includes("249")) {
-    throw new Error("Campaign HUD must show through 249 after L240 clear");
+  if (!after.hud.includes("252") && !after.text.includes("252")) {
+    throw new Error("Campaign HUD must show through 252 after L240 clear");
   }
   const paradeLocks = {
     friend_001: 3,

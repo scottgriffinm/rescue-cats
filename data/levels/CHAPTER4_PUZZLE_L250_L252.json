@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Wisteria Pass — L250–L252 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L250–L252",
+  "notes": "L250 Wind Cut / L251 Bowl Gap / L252 Whirl Stop — habit-break vs Cascade Cut orange-first / Arbor Gap gray-first / Droop Stop black-first; not Wind/Bowl/Whirl title clones of Wisteria Cut/Gap/Stop; Whirl Stop avoids Droop/Star/Floret/Petal/Stem/Cup Stop collisions; no WRAP/edge twin of Nori/Medlar; L252 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L250",
+      "name": "Wind Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_wind_cut_gray",
+      "walls": [
+        { "x": 0, "y": 3 },
+        { "x": 3, "y": 1 },
+        { "x": 4, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 1, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "wind_cut_gray"
+    },
+    {
+      "id": "L251",
+      "name": "Bowl Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_bowl_gap_black",
+      "walls": [
+        { "x": 4, "y": 5 },
+        { "x": 2, "y": 2 },
+        { "x": 1, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 3, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 3, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "bowl_gap_black"
+    },
+    {
+      "id": "L252",
+      "name": "Whirl Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_whirl_stop_orange",
+      "walls": [
+        { "x": 5, "y": 4 },
+        { "x": 0, "y": 5 },
+        { "x": 1, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 3, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 4, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "whirl_stop_orange"
+    }
+  ],
+  "teaches": {
+    "L250": "Wind Cut — gray north first; orange cuts after; not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north clone title, not Pale gray-east, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west",
+    "L251": "Bowl Gap — black east then orange threads; not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north",
+    "L252": "Whirl Stop — anemone-bowl seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop twins; off Nori (5,5); not Hold*/Park*; title Whirl Stop (not Anemone Stop, not Droop Stop, not Star Stop, not Floret Stop, not Petal Stop, not Stem Stop, not Cup Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L250": 10,
+      "L251": 10,
+      "L252": 11
+    }
+  },
+  "deltas": {
+    "L250": "(1, 2)",
+    "L251": "(0, 1)",
+    "L252": "(1, 4)"
+  }
+}
