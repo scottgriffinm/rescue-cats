@@ -468,8 +468,8 @@ try {
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_074")) {
     throw new Error("L219 clear must not queue friend_074");
   }
-  if (after.text.includes("New friend!")) {
-    throw new Error("L219 must not open a next-friend naming modal");
+  if (!after.text.includes("Spotted soft. Already claimed the foxglove tower.")) {
+    throw new Error("L219 clear must show Foxglove pending naming");
   }
   if (after.save.friends.filter((friend) => friend.friendId === "friend_072").length !== 1) {
     throw new Error("L219 must not unlock a Hyacinth duplicate");
