@@ -77,6 +77,7 @@ import chapter4bcPack from "../../data/levels/CHAPTER4_PUZZLE_L226_L228.json";
 import chapter4bdPack from "../../data/levels/CHAPTER4_PUZZLE_L229_L231.json";
 import chapter4bePack from "../../data/levels/CHAPTER4_PUZZLE_L232_L234.json";
 import chapter4bfPack from "../../data/levels/CHAPTER4_PUZZLE_L235_L237.json";
+import chapter4bgPack from "../../data/levels/CHAPTER4_PUZZLE_L238_L240.json";
 import l4Pack from "../../data/levels/L4.json";
 import l5Pack from "../../data/levels/L5.json";
 import l6Pack from "../../data/levels/L6.json";
@@ -310,6 +311,9 @@ import l234Pack from "../../data/levels/L234.json";
 import l235Pack from "../../data/levels/L235.json";
 import l236Pack from "../../data/levels/L236.json";
 import l237Pack from "../../data/levels/L237.json";
+import l238Pack from "../../data/levels/L238.json";
+import l239Pack from "../../data/levels/L239.json";
+import l240Pack from "../../data/levels/L240.json";
 import lt02Pack from "../../data/levels/LT02-L04-L05.json";
 import l0607Pack from "../../data/levels/CHAPTER2_PUZZLE_L06_L07.json";
 import lt08Pack from "../../data/levels/LT08-L08-L09.json";
@@ -390,6 +394,7 @@ import { verifyChapter4Snapdragon } from "./verify-chapter4-snapdragon";
 import { verifyChapter4Marigold } from "./verify-chapter4-marigold";
 import { verifyChapter4Heather } from "./verify-chapter4-heather";
 import { verifyChapter4Primrose } from "./verify-chapter4-primrose";
+import { verifyChapter4Buttercup } from "./verify-chapter4-buttercup";
 import { paradeClearForLevel } from "./onClear";
 import { EMPTY_SAVE } from "./storage";
 import { allCatsOnGates, isMismatchSolid, legalDirs, slideCat } from "./slide";
@@ -4899,6 +4904,63 @@ const LOCKED: Record<string, LockedSpec> = {
       ["gate_orange", 5, 0],
       ["gate_black", 3, 2]
     ],
+  },
+  L238: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [0, 3],
+      [5, 4],
+      [0, 4]
+    ],
+    cats: [
+      ["cat_orange", 3, 1],
+      ["cat_gray", 5, 2]
+    ],
+    gates: [
+      ["gate_orange", 0, 1],
+      ["gate_gray", 1, 2]
+    ],
+  },
+  L239: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [5, 0],
+      [2, 4],
+      [1, 5]
+    ],
+    cats: [
+      ["cat_orange", 0, 0],
+      ["cat_black", 1, 4]
+    ],
+    gates: [
+      ["gate_orange", 0, 5],
+      ["gate_black", 2, 1]
+    ],
+  },
+  L240: {
+    size: 6,
+    N: 11,
+    colorLocks: true,
+    colors: true,
+    walls: [
+      [0, 4],
+      [0, 1],
+      [5, 2]
+    ],
+    cats: [
+      ["cat_orange", 2, 0],
+      ["cat_black", 2, 5]
+    ],
+    gates: [
+      ["gate_orange", 4, 2],
+      ["gate_black", 2, 1]
+    ],
   }
 };
 
@@ -7650,6 +7712,43 @@ const SOLVES: Record<string, Array<[string, Dir]>> = {
     ["cat_orange", "n"],
     ["cat_orange", "e"],
   ],
+  L238: [
+    ["cat_gray", "n"],
+    ["cat_gray", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_gray", "e"],
+    ["cat_gray", "s"],
+    ["cat_gray", "w"],
+    ["cat_gray", "n"],
+    ["cat_orange", "w"],
+  ],
+  L239: [
+    ["cat_black", "w"],
+    ["cat_black", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_black", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+  ],
+  L240: [
+    ["cat_black", "n"],
+    ["cat_orange", "e"],
+    ["cat_orange", "s"],
+    ["cat_orange", "w"],
+    ["cat_orange", "s"],
+    ["cat_orange", "e"],
+    ["cat_orange", "n"],
+    ["cat_orange", "w"],
+    ["cat_orange", "n"],
+    ["cat_orange", "e"],
+  ],
 };
 
 
@@ -7737,7 +7836,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
 {
   const ids = LEVELS.map((level) => level.id);
   if (ids.includes("L10")) throw new Error("L10 must not load on the campaign path");
-  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45,L46,L47,L48,L49,L50,L51,L52,L53,L54,L55,L56,L57,L58,L59,L60,L61,L62,L63,L64,L65,L66,L67,L68,L69,L70,L71,L72,L73,L74,L75,L76,L77,L78,L79,L80,L81,L82,L83,L84,L85,L86,L87,L88,L89,L90,L91,L92,L93,L94,L95,L96,L97,L98,L99,L100,L101,L102,L103,L104,L105,L106,L107,L108,L109,L110,L111,L112,L113,L114,L115,L116,L117,L118,L119,L120,L121,L122,L123,L124,L125,L126,L127,L128,L129,L130,L131,L132,L133,L134,L135,L136,L137,L138,L139,L140,L141,L142,L143,L144,L145,L146,L147,L148,L149,L150,L151,L152,L153,L154,L155,L156,L157,L158,L159,L160,L161,L162,L163,L164,L165,L166,L167,L168,L169,L170,L171,L172,L173,L174,L175,L176,L177,L178,L179,L180,L181,L182,L183,L184,L185,L186,L187,L188,L189,L190,L191,L192,L193,L194,L195,L196,L197,L198,L199,L200,L201,L202,L203,L204,L205,L206,L207,L208,L209,L210,L211,L212,L213,L214,L215,L216,L217,L218,L219,L220,L221,L222,L223,L224,L225,L226,L227,L228,L229,L230,L231,L232,L233,L234,L235,L236,L237") {
+  if (ids.join(",") !== "L1,L2,L3,L4,L5,L6,L7,L8,L9,L11,L12,L13,L14,L15,L16,L17,L18,L19,L20,L21,L22,L23,L24,L25,L26,L27,L28,L29,L30,L31,L32,L33,L34,L35,L36,L37,L38,L39,L40,L41,L42,L43,L44,L45,L46,L47,L48,L49,L50,L51,L52,L53,L54,L55,L56,L57,L58,L59,L60,L61,L62,L63,L64,L65,L66,L67,L68,L69,L70,L71,L72,L73,L74,L75,L76,L77,L78,L79,L80,L81,L82,L83,L84,L85,L86,L87,L88,L89,L90,L91,L92,L93,L94,L95,L96,L97,L98,L99,L100,L101,L102,L103,L104,L105,L106,L107,L108,L109,L110,L111,L112,L113,L114,L115,L116,L117,L118,L119,L120,L121,L122,L123,L124,L125,L126,L127,L128,L129,L130,L131,L132,L133,L134,L135,L136,L137,L138,L139,L140,L141,L142,L143,L144,L145,L146,L147,L148,L149,L150,L151,L152,L153,L154,L155,L156,L157,L158,L159,L160,L161,L162,L163,L164,L165,L166,L167,L168,L169,L170,L171,L172,L173,L174,L175,L176,L177,L178,L179,L180,L181,L182,L183,L184,L185,L186,L187,L188,L189,L190,L191,L192,L193,L194,L195,L196,L197,L198,L199,L200,L201,L202,L203,L204,L205,L206,L207,L208,L209,L210,L211,L212,L213,L214,L215,L216,L217,L218,L219,L220,L221,L222,L223,L224,L225,L226,L227,L228,L229,L230,L231,L232,L233,L234,L235,L236,L237,L238,L239,L240") {
     throw new Error(`campaign ids drifted: ${ids.join(",")}`);
   }
   for (const id of [
@@ -7895,6 +7994,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       ...chapter4bdPack.levels,
       ...chapter4bePack.levels,
       ...chapter4bfPack.levels,
+      ...chapter4bgPack.levels,
     ].map((level) => [
       level.id,
       level as PackedBoard,
@@ -8134,6 +8234,9 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
     L235: [l235Pack as PackedBoard],
     L236: [l236Pack as PackedBoard],
     L237: [l237Pack as PackedBoard],
+    L238: [l238Pack as PackedBoard],
+    L239: [l239Pack as PackedBoard],
+    L240: [l240Pack as PackedBoard],
   };
   const boardKey = (level: PackedBoard) => {
     const walls = [...(level.walls ?? [])].map((wall) => `${wall.x},${wall.y}`).sort().join(";");
@@ -8220,7 +8323,7 @@ function assertNotHome(level: Level, script: Array<[string, Dir]>, label: string
       }
     }
   }
-  console.log("Standalone L4–L9 + L11–L237 + LT02/L06-07/LT08 match locked coords");
+  console.log("Standalone L4–L9 + L11–L240 + LT02/L06-07/LT08 match locked coords");
 }
 
 {
@@ -10318,11 +10421,11 @@ for (const level of LEVELS) {
   if (l39.number !== 39) throw new Error(`L39 HUD number must be 39, got ${l39.number}`);
   if (l9.number !== 9) throw new Error(`L9 HUD number must be 9, got ${l9.number}`);
   if (l11.number !== 11) throw new Error(`L11 HUD number must be 11, got ${l11.number}`);
-  if (CAMPAIGN_LEVEL_COUNT !== 237) {
-    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 237 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 240) {
+    throw new Error(`CAMPAIGN_LEVEL_COUNT must be 240 (max L-id), got ${CAMPAIGN_LEVEL_COUNT}`);
   }
-  if (LEVELS.length !== 236) {
-    throw new Error(`campaign board count must stay 236 with L10 off-path, got ${LEVELS.length}`);
+  if (LEVELS.length !== 239) {
+    throw new Error(`campaign board count must stay 239 with L10 off-path, got ${LEVELS.length}`);
   }
   for (const level of LEVELS) {
     const parsed = Number(level.id.replace(/^L/i, ""));
@@ -10471,7 +10574,9 @@ for (const level of LEVELS) {
   const afterL234 = nextCampaignLevel("L234");
   if (afterL234?.id !== "L235") throw new Error(`L234 must lead to L235, got ${afterL234?.id ?? "none"}`);
   const afterL237 = nextCampaignLevel("L237");
-  if (afterL237) throw new Error("L237 must be the last campaign board");
+  if (afterL237?.id !== "L238") throw new Error(`L237 must lead to L238, got ${afterL237?.id ?? "none"}`);
+  const afterL240 = nextCampaignLevel("L240");
+  if (afterL240) throw new Error("L240 must be the last campaign board");
   const l48hud = LEVELS.find((level) => level.id === "L48");
   if (!l48hud || l48hud.number !== 48) throw new Error(`L48 HUD number must be 48, got ${l48hud?.number}`);
   const l51hud = LEVELS.find((level) => level.id === "L51");
@@ -10602,8 +10707,10 @@ for (const level of LEVELS) {
   if (!l234hud || l234hud.number !== 234) throw new Error(`L234 HUD number must be 234, got ${l234hud?.number}`);
   const l237hud = LEVELS.find((level) => level.id === "L237");
   if (!l237hud || l237hud.number !== 237) throw new Error(`L237 HUD number must be 237, got ${l237hud?.number}`);
-  if (CAMPAIGN_LEVEL_COUNT !== 237) throw new Error(`HUD denom must be 237, got ${CAMPAIGN_LEVEL_COUNT}`);
-  console.log("Level index HUD locks ok · L20=20/237 · L237=237/237 · L9→L11 · L234→L235 · L231→L232 · L228→L229 · L225→L226 · L222→L223 · L219→L220 · L216→L217 · L213→L214 · L210→L211 · L207→L208 · L204→L205 · L201→L202 · L198→L199 · L195→L196 · L192→L193 · L189→L190 · L186→L187 · L183→L184 · L180→L181 · L177→L178 · L174→L175 · L171→L172 · L168→L169 · L165→L166 · L162→L163 · L159→L160 · L156→L157 · L153→L154 · L150→L151 · L147→L148 · L144→L145 · L141→L142 · L138→L139 · L135→L136 · L132→L133 · L129→L130 · L126→L127 · L123→L124 · L120→L121 · L117→L118 · L114→L115 · L111→L112 · L108→L109 · L105→L106 · L102→L103 · L99→L100 · L96→L97 · L60→L61");
+  const l240hud = LEVELS.find((level) => level.id === "L240");
+  if (!l240hud || l240hud.number !== 240) throw new Error(`L240 HUD number must be 240, got ${l240hud?.number}`);
+  if (CAMPAIGN_LEVEL_COUNT !== 240) throw new Error(`HUD denom must be 240, got ${CAMPAIGN_LEVEL_COUNT}`);
+  console.log("Level index HUD locks ok · L20=20/240 · L240=240/240 · L9→L11 · L237→L238 · L234→L235 · L231→L232 · L228→L229 · L225→L226 · L222→L223 · L219→L220 · L216→L217 · L213→L214 · L210→L211 · L207→L208 · L204→L205 · L201→L202 · L198→L199 · L195→L196 · L192→L193 · L189→L190 · L186→L187 · L183→L184 · L180→L181 · L177→L178 · L174→L175 · L171→L172 · L168→L169 · L165→L166 · L162→L163 · L159→L160 · L156→L157 · L153→L154 · L150→L151 · L147→L148 · L144→L145 · L141→L142 · L138→L139 · L135→L136 · L132→L133 · L129→L130 · L126→L127 · L123→L124 · L120→L121 · L117→L118 · L114→L115 · L111→L112 · L108→L109 · L105→L106 · L102→L103 · L99→L100 · L96→L97 · L60→L61");
 }
 
 {
@@ -11489,7 +11596,7 @@ for (const level of LEVELS) {
   if (!roostsBlock) throw new Error("YardScene ROOSTS missing");
   const roostCount = (roostsBlock[1].match(/left:/g) ?? []).length;
   if (roostCount < 20) throw new Error(`ROOSTS must have ≥20 seats, got ${roostCount}`);
-  // ban inventing friend_079+ (Primrose@234 shipped; next gated)
+  // ban inventing friend_080+ (Buttercup@237 shipped; next gated)
   const srcHit = [
     "src/lib/collection.ts",
     "src/components/yard/YardScreen.tsx",
@@ -11497,9 +11604,9 @@ for (const level of LEVELS) {
     "src/lib/levels.ts",
   ].flatMap((file) => {
     const text = readFileSync(resolve(file), "utf8");
-    return /friend_079/.test(text) ? [file] : [];
+    return /friend_080/.test(text) ? [file] : [];
   });
-  if (srcHit.length) throw new Error(`friend_079+ must not appear in ${srcHit.join(",")}`);
+  if (srcHit.length) throw new Error(`friend_080+ must not appear in ${srcHit.join(",")}`);
   if (SLICE_UNLOCKS[61]) {
     throw new Error("no unlock at 61 — Fig@96 past Basil");
   }
@@ -11514,7 +11621,7 @@ for (const level of LEVELS) {
   if (SLICE_UNLOCKS[90] !== "friend_030") throw new Error("SLICE_UNLOCKS[90] must be friend_030");
   if (SLICE_UNLOCKS[93] !== "friend_031") throw new Error("SLICE_UNLOCKS[93] must be friend_031");
   if (SLICE_UNLOCKS[96] !== "friend_032") throw new Error("SLICE_UNLOCKS[96] must be friend_032");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("TUTORIAL_RESCUES must be 78 (through Primrose)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("TUTORIAL_RESCUES must be 79 (through Buttercup)");
   // Progress chrome: parade / friend-cadence milestones — not a LEVELS.map per-board dot wall.
   if (/LEVELS\.map\(/.test(yardScreen)) {
     throw new Error("Yard progress must not LEVELS.map into per-board dots");
@@ -12571,7 +12678,7 @@ for (const level of LEVELS) {
   const yardF = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardF.match(/const fig =/g) || []).length !== 1) throw new Error("YardScene must declare fig once");
   if ((yardF.match(/\{fig \?/g) || []).length !== 1) throw new Error("YardScene must render fig once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(93)?.friendId !== "friend_031") throw new Error("Basil@93 must stay");
   if (shippedFriendForClear(90)?.friendId !== "friend_030") throw new Error("Clay@90 must stay");
   if (shippedFriendForClear(87)?.friendId !== "friend_029") throw new Error("Ivory@87 must stay");
@@ -12706,7 +12813,7 @@ for (const level of LEVELS) {
   const yardP = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardP.match(/const plum =/g) || []).length !== 1) throw new Error("YardScene must declare plum once");
   if ((yardP.match(/\{plum \?/g) || []).length !== 1) throw new Error("YardScene must render plum once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(96)?.friendId !== "friend_032") throw new Error("Fig@96 must stay");
   if (shippedFriendForClear(93)?.friendId !== "friend_031") throw new Error("Basil@93 must stay");
   if (shippedFriendForClear(90)?.friendId !== "friend_030") throw new Error("Clay@90 must stay");
@@ -12837,7 +12944,7 @@ for (const level of LEVELS) {
   const yardT = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardT.match(/const thistle =/g) || []).length !== 1) throw new Error("YardScene must declare thistle once");
   if ((yardT.match(/\{thistle \?/g) || []).length !== 1) throw new Error("YardScene must render thistle once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(99)?.friendId !== "friend_033") throw new Error("Plum@99 must stay");
   if (shippedFriendForClear(96)?.friendId !== "friend_032") throw new Error("Fig@96 must stay");
   if (shippedFriendForClear(93)?.friendId !== "friend_031") throw new Error("Basil@93 must stay");
@@ -12967,7 +13074,7 @@ for (const level of LEVELS) {
   const yardB = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardB.match(/const briar =/g) || []).length !== 1) throw new Error("YardScene must declare briar once");
   if ((yardB.match(/\{briar \?/g) || []).length !== 1) throw new Error("YardScene must render briar once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(102)?.friendId !== "friend_034") throw new Error("Thistle@102 must stay");
   if (shippedFriendForClear(99)?.friendId !== "friend_033") throw new Error("Plum@99 must stay");
   if (shippedFriendForClear(96)?.friendId !== "friend_032") throw new Error("Fig@96 must stay");
@@ -13112,7 +13219,7 @@ for (const level of LEVELS) {
   const yardI = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardI.match(/const ivy =/g) || []).length !== 1) throw new Error("YardScene must declare ivy once");
   if ((yardI.match(/\{ivy \?/g) || []).length !== 1) throw new Error("YardScene must render ivy once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(105)?.friendId !== "friend_035") throw new Error("Briar@105 must stay");
   if (shippedFriendForClear(102)?.friendId !== "friend_034") throw new Error("Thistle@102 must stay");
   if (shippedFriendForClear(99)?.friendId !== "friend_033") throw new Error("Plum@99 must stay");
@@ -13269,7 +13376,7 @@ for (const level of LEVELS) {
   const yardN = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardN.match(/const nettle =/g) || []).length !== 1) throw new Error("YardScene must declare nettle once");
   if ((yardN.match(/\{nettle \?/g) || []).length !== 1) throw new Error("YardScene must render nettle once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(108)?.friendId !== "friend_036") throw new Error("Ivy@108 must stay");
   if (shippedFriendForClear(105)?.friendId !== "friend_035") throw new Error("Briar@105 must stay");
   if (shippedFriendForClear(102)?.friendId !== "friend_034") throw new Error("Thistle@102 must stay");
@@ -13435,7 +13542,7 @@ for (const level of LEVELS) {
   const yardS = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardS.match(/const sorrel =/g) || []).length !== 1) throw new Error("YardScene must declare sorrel once");
   if ((yardS.match(/\{sorrel \?/g) || []).length !== 1) throw new Error("YardScene must render sorrel once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(111)?.friendId !== "friend_037") throw new Error("Nettle@111 must stay");
   if (shippedFriendForClear(108)?.friendId !== "friend_036") throw new Error("Ivy@108 must stay");
   if (shippedFriendForClear(105)?.friendId !== "friend_035") throw new Error("Briar@105 must stay");
@@ -13607,7 +13714,7 @@ for (const level of LEVELS) {
   const yardF = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardF.match(/const fennel =/g) || []).length !== 1) throw new Error("YardScene must declare fennel once");
   if ((yardF.match(/\{fennel \?/g) || []).length !== 1) throw new Error("YardScene must render fennel once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(114)?.friendId !== "friend_038") throw new Error("Sorrel@114 must stay");
   if (shippedFriendForClear(111)?.friendId !== "friend_037") throw new Error("Nettle@111 must stay");
   if (shippedFriendForClear(108)?.friendId !== "friend_036") throw new Error("Ivy@108 must stay");
@@ -13788,7 +13895,7 @@ for (const level of LEVELS) {
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const chervil =/g) || []).length !== 1) throw new Error("YardScene must declare chervil once");
   if ((yardC.match(/\{chervil \?/g) || []).length !== 1) throw new Error("YardScene must render chervil once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(117)?.friendId !== "friend_039") throw new Error("Fennel@117 must stay");
   if (shippedFriendForClear(114)?.friendId !== "friend_038") throw new Error("Sorrel@114 must stay");
   if (shippedFriendForClear(111)?.friendId !== "friend_037") throw new Error("Nettle@111 must stay");
@@ -13981,7 +14088,7 @@ for (const level of LEVELS) {
   const yardL = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardL.match(/const lovage =/g) || []).length !== 1) throw new Error("YardScene must declare lovage once");
   if ((yardL.match(/\{lovage \?/g) || []).length !== 1) throw new Error("YardScene must render lovage once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(120)?.friendId !== "friend_040") throw new Error("Chervil@120 must stay");
   if (shippedFriendForClear(117)?.friendId !== "friend_039") throw new Error("Fennel@117 must stay");
   if (shippedFriendForClear(114)?.friendId !== "friend_038") throw new Error("Sorrel@114 must stay");
@@ -14204,7 +14311,7 @@ for (const level of LEVELS) {
   const yardP = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardP.match(/const parsley =/g) || []).length !== 1) throw new Error("YardScene must declare parsley once");
   if ((yardP.match(/\{parsley \?/g) || []).length !== 1) throw new Error("YardScene must render parsley once");
-  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Parsley (42)");
+  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Parsley (42)");
   if (shippedFriendForClear(123)?.friendId !== "friend_041") throw new Error("Lovage@123 must stay");
   if (shippedFriendForClear(120)?.friendId !== "friend_040") throw new Error("Chervil@120 must stay");
   if (shippedFriendForClear(117)?.friendId !== "friend_039") throw new Error("Fennel@117 must stay");
@@ -14369,5 +14476,6 @@ verifyChapter4Snapdragon(SOLVES);
 verifyChapter4Marigold(SOLVES);
 verifyChapter4Heather(SOLVES);
 verifyChapter4Primrose(SOLVES);
+verifyChapter4Buttercup(SOLVES);
 
 console.log("All authored boards ok");

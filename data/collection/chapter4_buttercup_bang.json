@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_buttercup_bang",
+  "status": "READY",
+  "friend_id": "friend_079",
+  "unlock_clear": 237,
+  "personality": "Buttercup-soft",
+  "display_line": "Meadow bright. Already claimed the buttercup cup.",
+  "default_name": "Buttercup",
+  "tier": "C",
+  "color": "Meadow",
+  "pattern": "Gloss",
+  "art": {
+    "loaf_48": "/assets/cats/buttercup_loaf_48.svg",
+    "loaf_72": "/assets/cats/buttercup_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "buttercup"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Buttercup", "Meadow", "Gloss"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_079": [
+      "{Name}: Meadow bright. Already claimed the buttercup cup.",
+      "{Name}: Looks yard-cool. Owns the cup."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 237,
+    "sku_id": null,
+    "note": "Ch4. Buttercup Pass. No gift. Ban Primrose/Pale/Dish and all prior pools. Bean parade stands. No Pebble. Buttercup, Meadow, and Gloss chips are CEO-locked on Buttercup. No friend_080."
+  }
+}

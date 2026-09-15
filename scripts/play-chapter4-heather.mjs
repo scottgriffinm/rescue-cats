@@ -1,7 +1,7 @@
 /**
  * Chapter 4 beat: L231 → Heather@231 naming, then L232–L234.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L231 queues Heather pending. L234 queues Primrose pending. Do not invent friend_079.
+ * L231 queues Heather pending. L234 queues Primrose pending. Do not invent friend_080.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -511,8 +511,8 @@ try {
   if (after.save.friends.filter((friend) => friend.friendId === "friend_077").length !== 1) {
     throw new Error("L234 must not unlock a Heather duplicate");
   }
-  if (!after.hud.includes("237") && !after.text.includes("237")) {
-    throw new Error("Campaign HUD must show through 237 after L234 clear");
+  if (!after.hud.includes("240") && !after.text.includes("240")) {
+    throw new Error("Campaign HUD must show through 240 after L234 clear");
   }
   const paradeLocks = {
     friend_001: 3,

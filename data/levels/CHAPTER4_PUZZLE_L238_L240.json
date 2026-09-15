@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Primrose Pass — L238–L240 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L238–L240",
+  "notes": "L238 Meadow Cut / L239 Gloss Gap / L240 Petal Stop — off Pale Cut / Dish Gap / Ruff Stop habits; not Moor/Sprig/Heath tropes; not Buttercup Cut/Gap/Stop title clones; Petal Stop avoids Poppy Cup Stop; no WRAP/edge twin of Nori/Medlar; L240 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L238",
+      "name": "Meadow Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_meadow_cut_gray",
+      "walls": [
+        { "x": 0, "y": 3 },
+        { "x": 5, "y": 4 },
+        { "x": 0, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "meadow_cut_gray"
+    },
+    {
+      "id": "L239",
+      "name": "Gloss Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_gloss_gap_black",
+      "walls": [
+        { "x": 5, "y": 0 },
+        { "x": 2, "y": 4 },
+        { "x": 1, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "gloss_gap_black"
+    },
+    {
+      "id": "L240",
+      "name": "Petal Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_petal_stop_black",
+      "walls": [
+        { "x": 0, "y": 4 },
+        { "x": 0, "y": 1 },
+        { "x": 5, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 2, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "petal_stop_black"
+    }
+  ],
+  "teaches": {
+    "L238": "Meadow Cut — gray north first; orange cuts after; not Pale gray-east, not Moor orange-north, not Gold black-south, not Jaw black-east, not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west, not Spur orange-east",
+    "L239": "Gloss Gap — black west then orange threads; not Dish black-south, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Throat gray-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north",
+    "L240": "Petal Stop — buttercup-cup seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff twins; off Nori (5,5); not Hold*/Park*; title Petal Stop (not Buttercup Stop, not Poppy Cup Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L238": 10,
+      "L239": 11,
+      "L240": 10
+    }
+  },
+  "deltas": {
+    "L238": "(1, 1)",
+    "L239": "(2, 4)",
+    "L240": "(2, 1)"
+  }
+}
