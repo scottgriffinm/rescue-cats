@@ -539,7 +539,7 @@ export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]
   if ((yardG.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardG.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardG.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 91) throw new Error("Met must include through Verbena (91)");
+  if (TUTORIAL_RESCUES.length !== 92) throw new Error("Met must include through Verbena (91)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -557,7 +557,7 @@ export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]
   if (SLICE_UNLOCKS[267] !== "friend_089") throw new Error("SLICE_UNLOCKS[267] must be friend_089");
   if (SLICE_UNLOCKS[270] !== "friend_090") throw new Error("SLICE_UNLOCKS[270] must be friend_090");
   if (SLICE_UNLOCKS[273] !== "friend_091") throw new Error("SLICE_UNLOCKS[273] must be friend_091");
-  if (SLICE_UNLOCKS[276]) throw new Error("no friend_092 @276 this slice");
+  if (SLICE_UNLOCKS[276] !== "friend_092") throw new Error("SLICE_UNLOCKS[276] must be friend_092 after Impatiens ship");
   if (/pebble|Pebble/i.test(pansy48 + pansy72)) throw new Error("Verbena art must not use Pebble");
   if (/geranium|cluster|sill|freesia|trumpet|vase|ranunculus|layered|begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise|nasturtium|pepper|tray|petunia|flare|basket|pansy|face|saucer|blotch/i.test(pansy48 + pansy72)) {
     throw new Error("Verbena art must not collide Petunia/Nasturtium/Geranium/Freesia/Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");

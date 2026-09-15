@@ -1,0 +1,201 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Verbena Pass — L277–L279 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L277–L279",
+  "notes": "L277 Busy Cut / L278 Box Gap / L279 Touch Stop — habit-break vs Spike Cut gray-first / Urn Gap black-first / Taper Stop orange-first; not Impatiens Cut/Gap/Stop; not Spike/Urn/Taper/Pot Gap; not Face/Saucer/Blotch/Frill/Tendril/Pane/Tube/Fold/Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup/Clump/Cluster/Ruffle; Touch Stop avoids Taper/Spike/Urn/Blotch/Face/Frill/Tendril/Pane/Tube/Fold/Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup/Clump/Cluster/Ruffle/Saucer/Pot Stop; no WRAP/edge twin of Nori/Medlar; L279 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill/Blotch/Taper twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L277",
+      "name": "Busy Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_busy_cut_orange",
+      "walls": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 1,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "busy_cut_orange"
+    },
+    {
+      "id": "L278",
+      "name": "Box Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_box_gap_gray",
+      "walls": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 1,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 4,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 5,
+          "y": 4,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "box_gap_gray"
+    },
+    {
+      "id": "L279",
+      "name": "Touch Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_touch_stop_black",
+      "walls": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 1,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 2,
+          "y": 2,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 2,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 1,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "touch_stop_black"
+    }
+  ],
+  "teaches": {
+    "busy_cut_orange": "Orange first; gray cuts after the busy slide.",
+    "box_gap_gray": "Gray first then orange threads the box gap.",
+    "touch_stop_black": "Black first; orange seats the touch."
+  },
+  "solver": {
+    "min_slides": {
+      "L277": 11,
+      "L278": 10,
+      "L279": 10
+    }
+  },
+  "deltas": {
+    "L277": "(3, 1)",
+    "L278": "(2, 3)",
+    "L279": "(1, 2)"
+  }
+}
