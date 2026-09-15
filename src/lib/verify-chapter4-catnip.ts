@@ -225,7 +225,7 @@ export function verifyChapter4Catnip(solves: Record<string, Array<[string, Dir]>
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const catnip =/g) || []).length !== 1) throw new Error("YardScene must declare catnip once");
   if ((yardC.match(/\{catnip \?/g) || []).length !== 1) throw new Error("YardScene must render catnip once");
-  if (TUTORIAL_RESCUES.length !== 72) throw new Error("Met must include through Catnip (50)");
+  if (TUTORIAL_RESCUES.length !== 73) throw new Error("Met must include through Catnip (50)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_foxglove_bang",
+  "status": "READY",
+  "friend_id": "friend_073",
+  "unlock_clear": 219,
+  "personality": "Foxglove-soft",
+  "display_line": "Spotted soft. Already claimed the foxglove tower.",
+  "default_name": "Foxglove",
+  "tier": "C",
+  "color": "Spotted",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/foxglove_loaf_48.svg",
+    "loaf_72": "/assets/cats/foxglove_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "foxglove"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Foxglove", "Tower", "Throat"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_073": [
+      "{Name}: Spotted soft. Already claimed the foxglove tower.",
+      "{Name}: Looks yard-cool. Owns the tower."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 219,
+    "sku_id": null,
+    "note": "Ch4. Foxglove Pass. No gift. Ban Hyacinth/Cluster/Bell and all prior pools. Bean parade stands. No Pebble. Foxglove, Tower, and Throat chips are CEO-locked on Foxglove. No friend_074."
+  }
+}
