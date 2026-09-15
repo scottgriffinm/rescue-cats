@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_iris_bang",
+  "status": "READY",
+  "friend_id": "friend_064",
+  "unlock_clear": 192,
+  "personality": "Iris-soft",
+  "display_line": "Soft indigo. Already claimed the iris stem.",
+  "default_name": "Iris",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/iris_loaf_48.svg",
+    "loaf_72": "/assets/cats/iris_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "iris"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Iris", "Blade", "Dew"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_064": [
+      "{Name}: Soft indigo. Already claimed the iris stem.",
+      "{Name}: Looks yard-cool. Owns the stem."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 192,
+    "sku_id": null,
+    "note": "Ch4. Aster Pass next. No gift. Ban Aster/Petal/Drift and all prior pools. Bean parade stands. No Pebble. Iris chip is CEO-locked on Iris. No friend_065."
+  }
+}

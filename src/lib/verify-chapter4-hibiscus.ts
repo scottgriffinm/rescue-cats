@@ -240,7 +240,7 @@ export function verifyChapter4Hibiscus(solves: Record<string, Array<[string, Dir
   const yardH = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardH.match(/const hibiscus =/g) || []).length !== 1) throw new Error("YardScene must declare hibiscus once");
   if ((yardH.match(/\{hibiscus \?/g) || []).length !== 1) throw new Error("YardScene must render hibiscus once");
-  if (TUTORIAL_RESCUES.length !== 63) throw new Error("Met must include through Hibiscus (56)");
+  if (TUTORIAL_RESCUES.length !== 64) throw new Error("Met must include through Hibiscus (56)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -254,6 +254,7 @@ export function verifyChapter4Hibiscus(solves: Record<string, Array<[string, Dir
   if (SLICE_UNLOCKS[183] !== "friend_061") throw new Error("SLICE_UNLOCKS[183] must be friend_061 after Dahlia ship");
   if (SLICE_UNLOCKS[186] !== "friend_062") throw new Error("SLICE_UNLOCKS[186] must be friend_062 after Zinnia ship");
   if (SLICE_UNLOCKS[189] !== "friend_063") throw new Error("SLICE_UNLOCKS[189] must be friend_063 after Aster ship");
+  if (SLICE_UNLOCKS[192] !== "friend_064") throw new Error("SLICE_UNLOCKS[192] must be friend_064 after Iris ship");
   if (/pebble|Pebble/i.test(hibiscus48 + hibiscus72)) throw new Error("Hibiscus art must not use Pebble");
   if (/magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(hibiscus48 + hibiscus72)) {
     throw new Error("Hibiscus art must not collide Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

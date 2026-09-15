@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Aster Pass — L193–L195 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L193–L195",
+  "notes": "L193 Blade Cut / L194 Dew Gap / L195 Stem Stop — off Petal Cut / Drift Gap / Dish Stop habits; not Quill/Gleam/Urn, not Spire/Ember/Vase tropes; not Iris Cut/Gap/Stop title clones; no WRAP/edge twin of Nori/Medlar; L195 off Dish/Urn/Vase/Planter/Sip/Saucer/Nori seats (Tray/Bowl/Dish-Claim reused — occupancy exhausted).",
+  "levels": [
+    {
+      "id": "L193",
+      "name": "Blade Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_blade_cut_gray",
+      "walls": [
+        { "x": 3, "y": 1 },
+        { "x": 0, "y": 5 },
+        { "x": 5, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "blade_cut_gray"
+    },
+    {
+      "id": "L194",
+      "name": "Dew Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_dew_gap_black",
+      "walls": [
+        { "x": 2, "y": 4 },
+        { "x": 4, "y": 2 },
+        { "x": 0, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 5, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "dew_gap_black"
+    },
+    {
+      "id": "L195",
+      "name": "Stem Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_stem_stop_orange",
+      "walls": [
+        { "x": 5, "y": 1 },
+        { "x": 0, "y": 5 },
+        { "x": 2, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "stem_stop_orange"
+    }
+  ],
+  "teaches": {
+    "L193": "Blade Cut — gray north first; orange cuts after; not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south",
+    "L194": "Dew Gap — orange north then black threads; not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west, not Satin black-east, not Velvet black-north",
+    "L195": "Stem Stop — iris-stem seats; not Dish (5,2)/(5,1)/(3,0)/(2,1), not Urn (0,5)/(3,2)/(1,4)/(5,0), not Vase (3,3)/(1,3)/(2,4)/(3,1), not Planter (1,5)/(4,5)/(4,4)/(3,5), not Sip (2,2)/(5,4)/(2,3)/(0,2), not Saucer (2,0)/(2,5)/(5,3)/(1,2); not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L193": 11,
+      "L194": 10,
+      "L195": 10
+    }
+  },
+  "deltas": {
+    "L193": "(-3, 2)",
+    "L194": "(-4, -2)",
+    "L195": "(3, 2)"
+  }
+}
