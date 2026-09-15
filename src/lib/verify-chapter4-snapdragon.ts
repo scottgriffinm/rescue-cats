@@ -355,7 +355,7 @@ export function verifyChapter4Snapdragon(solves: Record<string, Array<[string, D
   if ((yardF.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardF.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardF.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 76) throw new Error("Met must include through Marigold (76)");
+  if (TUTORIAL_RESCUES.length !== 77) throw new Error("Met must include through Heather (77)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

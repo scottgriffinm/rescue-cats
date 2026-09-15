@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_heather_bang",
+  "status": "READY",
+  "friend_id": "friend_077",
+  "unlock_clear": 231,
+  "personality": "Heather-soft",
+  "display_line": "Moor soft. Already claimed the heather sprig.",
+  "default_name": "Heather",
+  "tier": "C",
+  "color": "Moor",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/heather_loaf_48.svg",
+    "loaf_72": "/assets/cats/heather_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "heather"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Heather", "Moor", "Sprig"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_077": [
+      "{Name}: Moor soft. Already claimed the heather sprig.",
+      "{Name}: Looks yard-cool. Owns the sprig."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 231,
+    "sku_id": null,
+    "note": "Ch4. Heather Pass. No gift. Ban Marigold/Gold/Pot and all prior pools. Bean parade stands. No Pebble. Heather, Moor, and Sprig chips are CEO-locked on Heather. No friend_078."
+  }
+}
