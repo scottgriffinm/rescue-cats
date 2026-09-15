@@ -161,6 +161,7 @@ export function YardScene({
   const lantana = friends.find((friend) => friend.friendId === "friend_095");
   const phlox = friends.find((friend) => friend.friendId === "friend_096");
   const celosia = friends.find((friend) => friend.friendId === "friend_097");
+  const cleome = friends.find((friend) => friend.friendId === "friend_098");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -258,7 +259,8 @@ export function YardScene({
       friend.friendId !== "friend_094" &&
       friend.friendId !== "friend_095" &&
       friend.friendId !== "friend_096" &&
-      friend.friendId !== "friend_097",
+      friend.friendId !== "friend_097" &&
+      friend.friendId !== "friend_098",
   );
 
   return (
@@ -2607,6 +2609,36 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{celosia.name}</p>
+        </div>
+      ) : null}
+
+      {cleome ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "10%", top: "360%" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/furniture/cleomePod.svg"
+            alt=""
+            className="pointer-events-none absolute left-1/2 top-[-8%] h-8 w-8 -translate-x-1/2 select-none"
+          />
+          <FriendSprite
+            kit={friendById(cleome.friendId)?.phenotype.artKit ?? "cleome"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === cleome.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(cleome.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${cleome.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{cleome.name}</p>
         </div>
       ) : null}
 

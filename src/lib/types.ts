@@ -102,7 +102,8 @@ export type ArtKit =
   | "calendula"
   | "lantana"
   | "phlox"
-  | "celosia";
+  | "celosia"
+  | "cleome";
 
 export type PieceCat = {
   id: string;

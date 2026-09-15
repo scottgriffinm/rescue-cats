@@ -1,0 +1,201 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Celosia Pass — L295–L297 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L295–L297",
+  "notes": "L295 Whisk Cut / L296 Pod Gap / L297 Spider Stop — habit-break vs Plume Cut gray-first / Comb Gap black-first / Flame Stop orange-first; not Plume/Comb/Flame/Floret/Bank/Spray; Whisk Cut orange-first (not Plume gray); Pod Gap gray-first (not Comb black); Spider Stop black-first (not Flame orange); no WRAP/edge twin of Nori/Medlar; L297 occupancy off prior Stop twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L295",
+      "name": "Whisk Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_whisk_cut_orange",
+      "walls": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 0,
+          "y": 5
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 4,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 0,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 0,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 3,
+          "y": 3,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "whisk_cut_orange"
+    },
+    {
+      "id": "L296",
+      "name": "Pod Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_pod_gap_gray",
+      "walls": [
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 5,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 4,
+          "y": 2,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "pod_gap_gray"
+    },
+    {
+      "id": "L297",
+      "name": "Spider Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_spider_stop_black",
+      "walls": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 5,
+          "y": 2,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 5,
+          "y": 1,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 5,
+          "y": 0,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 3,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "spider_stop_black"
+    }
+  ],
+  "teaches": {
+    "whisk_cut_orange": "Orange first; gray cuts after the whisk slide.",
+    "pod_gap_gray": "Gray first then orange threads the pod gap.",
+    "spider_stop_black": "Black first; orange seats the spider."
+  },
+  "solver": {
+    "min_slides": {
+      "L295": 11,
+      "L296": 10,
+      "L297": 10
+    }
+  },
+  "deltas": {
+    "L295": "(3, 3)",
+    "L296": "(0, 2)",
+    "L297": "(2, 4)"
+  }
+}

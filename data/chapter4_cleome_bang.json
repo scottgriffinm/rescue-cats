@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_cleome_bang",
+  "status": "READY",
+  "friend_id": "friend_098",
+  "unlock_clear": 294,
+  "personality": "Cleome-soft",
+  "display_line": "Whisk soft. Already claimed the cleome pod.",
+  "default_name": "Cleome",
+  "tier": "C",
+  "color": "Whisk",
+  "pattern": "Pod",
+  "art": {
+    "loaf_48": "/assets/cats/cleome_loaf_48.svg",
+    "loaf_72": "/assets/cats/cleome_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "cleome"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Cleome", "Whisk", "Pod"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_098": [
+      "{Name}: Whisk soft. Already claimed the cleome pod.",
+      "{Name}: Looks yard-soft. Owns the pod."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 294,
+    "sku_id": null,
+    "note": "Ch4. Cleome Pass. No gift. Ban Celosia/Plume/Comb and all prior pools. Bean parade stands. No Pebble. Cleome, Whisk, and Pod chips are CEO-locked on Cleome. No friend_099."
+  }
+}
