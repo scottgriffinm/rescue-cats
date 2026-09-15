@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Iris Pass — L196–L198 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L196–L198",
+  "notes": "L196 Spur Cut / L197 Veil Gap / L198 Spike Stop — off Blade Cut / Dew Gap / Stem Stop habits; not Petal/Drift/Dish, not Quill/Gleam/Urn tropes; not Orchid Cut/Gap/Stop title clones; no WRAP/edge twin of Nori/Medlar; L198 off Stem/Dish/Urn/Vase/Planter/Sip/Saucer/Nori seats.",
+  "levels": [
+    {
+      "id": "L196",
+      "name": "Spur Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_spur_cut_gray",
+      "walls": [
+        { "x": 2, "y": 4 },
+        { "x": 0, "y": 4 },
+        { "x": 5, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 1, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "spur_cut_gray"
+    },
+    {
+      "id": "L197",
+      "name": "Veil Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_veil_gap_black",
+      "walls": [
+        { "x": 4, "y": 0 },
+        { "x": 1, "y": 3 },
+        { "x": 5, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 5, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 3, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "veil_gap_black"
+    },
+    {
+      "id": "L198",
+      "name": "Spike Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_spike_stop_orange",
+      "walls": [
+        { "x": 4, "y": 3 },
+        { "x": 5, "y": 1 },
+        { "x": 0, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "spike_stop_orange"
+    }
+  ],
+  "teaches": {
+    "L196": "Spur Cut — orange east first; gray cuts after; not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south",
+    "L197": "Veil Gap — orange south then black threads; not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west, not Satin black-east, not Velvet black-north",
+    "L198": "Spike Stop — orchid-spike seats; not Stem (1,1)/(0,1)/(4,2)/(1,0), not Dish (5,2)/(5,1)/(3,0)/(2,1), not Urn (0,5)/(3,2)/(1,4)/(5,0), not Vase (3,3)/(1,3)/(2,4)/(3,1), not Planter (1,5)/(4,5)/(4,4)/(3,5), not Sip (2,2)/(5,4)/(2,3)/(0,2), not Saucer (2,0)/(2,5)/(5,3)/(1,2); not Hold*/Park*"
+  },
+  "solver": {
+    "min_slides": {
+      "L196": 11,
+      "L197": 10,
+      "L198": 10
+    }
+  },
+  "deltas": {
+    "L196": "(4, -4)",
+    "L197": "(1, 1)",
+    "L198": "(1, -3)"
+  }
+}

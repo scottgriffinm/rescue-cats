@@ -70,7 +70,8 @@ export const ART_KIT_PATH: Record<
   | "dahlia"
   | "zinnia"
   | "aster"
-  | "iris",
+  | "iris"
+  | "orchid",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -332,6 +333,10 @@ export const ART_KIT_PATH: Record<
   iris: {
     loaf48: "/assets/cats/iris_loaf_48.svg",
     loaf72: "/assets/cats/iris_loaf_72.svg",
+  },
+  orchid: {
+    loaf48: "/assets/cats/orchid_loaf_48.svg",
+    loaf72: "/assets/cats/orchid_loaf_72.svg",
   },
 };
 

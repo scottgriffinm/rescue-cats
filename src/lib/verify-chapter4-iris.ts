@@ -278,14 +278,14 @@ export function verifyChapter4Iris(solves: Record<string, Array<[string, Dir]>>)
   const yardI = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardI.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must declare iris once");
   if ((yardI.match(/\{iris \?/g) || []).length !== 1) throw new Error("YardScene must render iris once");
-  if (TUTORIAL_RESCUES.length !== 64) throw new Error("Met must include through Iris (64)");
+  if (TUTORIAL_RESCUES.length !== 65) throw new Error("Met must include through Iris (64)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[195]) throw new Error("no friend_065 @195 this slice");
+  if (SLICE_UNLOCKS[195] !== "friend_065") throw new Error("SLICE_UNLOCKS[195] must be friend_065 after Orchid ship");
   if (/pebble|Pebble/i.test(iris48 + iris72)) throw new Error("Iris art must not use Pebble");
   if (/aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(iris48 + iris72)) {
     throw new Error("Iris art must not collide Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
