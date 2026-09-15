@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_orchid_bang",
+  "status": "READY",
+  "friend_id": "friend_065",
+  "unlock_clear": 195,
+  "personality": "Orchid-soft",
+  "display_line": "Soft blush. Already claimed the orchid spike.",
+  "default_name": "Orchid",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/orchid_loaf_48.svg",
+    "loaf_72": "/assets/cats/orchid_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "orchid"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Orchid", "Spur", "Veil"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_065": [
+      "{Name}: Soft blush. Already claimed the orchid spike.",
+      "{Name}: Looks yard-cool. Owns the spike."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 195,
+    "sku_id": null,
+    "note": "Ch4. Iris Pass next. No gift. Ban Iris/Blade/Dew and all prior pools. Bean parade stands. No Pebble. Orchid chip is CEO-locked on Orchid. No friend_066."
+  }
+}
