@@ -251,7 +251,7 @@ export function verifyChapter4Camellia(solves: Record<string, Array<[string, Dir
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const camellia =/g) || []).length !== 1) throw new Error("YardScene must declare camellia once");
   if ((yardC.match(/\{camellia \?/g) || []).length !== 1) throw new Error("YardScene must render camellia once");
-  if (TUTORIAL_RESCUES.length !== 75) throw new Error("Met must include through Camellia (58)");
+  if (TUTORIAL_RESCUES.length !== 76) throw new Error("Met must include through Camellia (58)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

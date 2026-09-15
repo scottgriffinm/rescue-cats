@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_marigold_bang",
+  "status": "READY",
+  "friend_id": "friend_076",
+  "unlock_clear": 228,
+  "personality": "Marigold-soft",
+  "display_line": "Sun gold. Already claimed the marigold pot.",
+  "default_name": "Marigold",
+  "tier": "C",
+  "color": "Sun",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/marigold_loaf_48.svg",
+    "loaf_72": "/assets/cats/marigold_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "marigold"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Marigold", "Gold", "Pot"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_076": [
+      "{Name}: Sun gold. Already claimed the marigold pot.",
+      "{Name}: Looks yard-cool. Owns the pot."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 228,
+    "sku_id": null,
+    "note": "Ch4. Marigold Pass. No gift. Ban Snapdragon/Jaw/Perch and all prior pools. Bean parade stands. No Pebble. Marigold, Gold, and Pot chips are CEO-locked on Marigold. No friend_077."
+  }
+}

@@ -80,7 +80,8 @@ export type ArtKit =
   | "hyacinth"
   | "foxglove"
   | "bluebell"
-  | "snapdragon";
+  | "snapdragon"
+  | "marigold";
 
 export type PieceCat = {
   id: string;

@@ -61,6 +61,7 @@ import {
   FOXGLOVE_FRIEND_ID,
   BLUEBELL_FRIEND_ID,
   SNAPDRAGON_FRIEND_ID,
+  MARIGOLD_FRIEND_ID,
   NAMING,
   shuffleNameChips,
 } from "@/lib/collection";
@@ -132,7 +133,8 @@ export function NameCatModal({ onNamed }: { onNamed: () => void }) {
     catalog.friendId === HYACINTH_FRIEND_ID ||
     catalog.friendId === FOXGLOVE_FRIEND_ID ||
     catalog.friendId === BLUEBELL_FRIEND_ID ||
-    catalog.friendId === SNAPDRAGON_FRIEND_ID;
+    catalog.friendId === SNAPDRAGON_FRIEND_ID ||
+    catalog.friendId === MARIGOLD_FRIEND_ID;
 
   return (
     <div className="fixed inset-0 z-30 flex items-end justify-center overflow-y-auto bg-ink/30 px-3 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-10 sm:items-center sm:px-4 sm:pt-16">

@@ -203,7 +203,7 @@ export function verifyChapter4Oregano(solves: Record<string, Array<[string, Dir]
   const yardO = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardO.match(/const oregano =/g) || []).length !== 1) throw new Error("YardScene must declare oregano once");
   if ((yardO.match(/\{oregano \?/g) || []).length !== 1) throw new Error("YardScene must render oregano once");
-  if (TUTORIAL_RESCUES.length !== 75) throw new Error("Met must include through Oregano (45)");
+  if (TUTORIAL_RESCUES.length !== 76) throw new Error("Met must include through Oregano (45)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
