@@ -154,6 +154,7 @@ export function YardScene({
   const nasturtium = friends.find((friend) => friend.friendId === "friend_088");
   const petunia = friends.find((friend) => friend.friendId === "friend_089");
   const pansy = friends.find((friend) => friend.friendId === "friend_090");
+  const verbena = friends.find((friend) => friend.friendId === "friend_091");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -244,7 +245,8 @@ export function YardScene({
       friend.friendId !== "friend_087" &&
       friend.friendId !== "friend_088" &&
       friend.friendId !== "friend_089" &&
-      friend.friendId !== "friend_090",
+      friend.friendId !== "friend_090" &&
+      friend.friendId !== "friend_091",
   );
 
   return (
@@ -2383,6 +2385,36 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{pansy.name}</p>
+        </div>
+      ) : null}
+
+      {verbena ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "52%", top: "276%" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/furniture/verbenaPot.svg"
+            alt=""
+            className="pointer-events-none absolute left-1/2 top-[-8%] h-8 w-8 -translate-x-1/2 select-none"
+          />
+          <FriendSprite
+            kit={friendById(verbena.friendId)?.phenotype.artKit ?? "verbena"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === verbena.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(verbena.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${verbena.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{verbena.name}</p>
         </div>
       ) : null}
 

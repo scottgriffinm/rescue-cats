@@ -14,6 +14,9 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
+  [270, "friend_091", "Pansy@270 must stay"],
+  [267, "friend_089", "Petunia@267 must stay"],
+  [264, "friend_088", "Nasturtium@264 must stay"],
   [261, "friend_087", "Geranium@261 must stay"],
   [258, "friend_086", "Freesia@258 must stay"],
   [255, "friend_085", "Ranunculus@255 must stay"],
@@ -90,6 +93,9 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
+  ["friend_091", "Verbena,Spike,Pot", "Pansy chips untouched"],
+  ["friend_089", "Petunia,Flare,Basket", "Petunia chips untouched"],
+  ["friend_088", "Nasturtium,Pepper,Tray", "Nasturtium chips untouched"],
   ["friend_087", "Geranium,Cluster,Sill", "Geranium chips untouched"],
   ["friend_086", "Freesia,Trumpet,Vase", "Freesia chips untouched"],
   ["friend_085", "Ranunculus,Layer,Nest", "Ranunculus chips untouched"],
@@ -215,6 +221,7 @@ const BANNED_PAIRS = new Set([
   "0,2/3,2", "3,4/3,5", "0,2/2,1",
   "3,3/5,1", "2,0/2,4", "2,3/4,0",
   "4,2/5,2", "0,4/3,3", "0,5/4,2",
+  "0,2/3,4", "4,0/4,1", "1,1/5,0",
 ]);
 
 function stateKey(cats: PieceCat[]) {
@@ -265,11 +272,26 @@ function uniqueShortestCount(level: Level) {
   return { min, count };
 }
 
-export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, Dir]>>) {
+export function verifyChapter4Verbena(solves: Record<string, Array<[string, Dir]>>) {
+  const titles = LEVELS.map((row) => row.name);
+  for (const title of ["Spike Cut", "Taper Stop"] as const) {
+    if (titles.filter((name) => name === title).length !== 1) {
+      throw new Error(`${title} must be unique across campaign titles`);
+    }
+  }
+  if (LEVELS.find((row) => row.id === "L275")?.name !== "Pot Gap") {
+    throw new Error("L275 must be CEO-locked Pot Gap");
+  }
+  if (LEVELS.find((row) => row.id === "L230")?.name !== "Pot Gap") {
+    throw new Error("L230 Marigold Pot Gap must stay");
+  }
+  if (LEVELS.filter((row) => row.id !== "L230" && row.id !== "L275" && row.name === "Pot Gap").length) {
+    throw new Error("Pot Gap may only exist on L230 and CEO-locked L275");
+  }
   for (const [id, name] of [
-    ["L265", "Pepper Cut"],
-    ["L266", "Tray Gap"],
-    ["L267", "Tendril Stop"],
+    ["L274", "Spike Cut"],
+    ["L275", "Pot Gap"],
+    ["L276", "Taper Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -282,8 +304,17 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
     if (/\b(hold|park|close)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Hold*/Park*/Close`);
     }
-    if (/nasturtium (cut|gap|stop)/i.test(level.name)) {
-      throw new Error(`${id} must not be Nasturtium Cut/Gap/Stop`);
+    if (/verbena (cut|gap|stop)/i.test(level.name)) {
+      throw new Error(`${id} must not be Verbena Cut/Gap/Stop`);
+    }
+    if (/petunia (cut|gap|stop)|flare cut|basket gap|frill stop|face cut|saucer gap|blotch stop|pansy (cut|gap|stop)/i.test(level.name)) {
+      throw new Error(`${id} must not be Flare Cut/Basket Gap/Frill Stop/Petunia Cut/Gap/Stop`);
+    }
+    if (/nasturtium (cut|gap|stop)|pepper cut|tray gap|tendril stop/i.test(level.name)) {
+      throw new Error(`${id} must not be Pepper Cut/Tray Gap/Tendril Stop/Nasturtium Cut/Gap/Stop`);
+    }
+    if (/tendril|ruffle stop|clump cut|cluster cut|\bclump\b|\bcluster\b|\bfrill\b/i.test(level.name)) {
+      throw new Error(`${id} must not reuse Tendril/Ruffle/Clump/Cluster/Frill titles`);
     }
     if (/geranium (cut|gap|stop)/i.test(level.name)) {
       throw new Error(`${id} must not be Geranium Cut/Gap/Stop`);
@@ -315,7 +346,7 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
     if (/\bairy cut\b|\bray gap\b|\bfloret stop\b|\bcosmos (cut|gap|stop)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Airy Cut/Ray Gap/Floret Stop/Cosmos Cut/Gap/Stop`);
     }
-    if (/meadow cut|gloss gap|petal stop|buttercup (cut|gap|stop)|pale cut|dish gap|ruff stop|primrose (cut|gap|stop)|moor cut|sprig gap|heath stop|heather (cut|gap|stop)|gold cut|pot gap|seed stop|marigold (cut|gap|stop)|jaw cut|perch gap|dragon stop|snapdragon (cut|gap|stop)|cloche cut|ring gap|chime stop|bluebell (cut|gap|stop)|tower cut|throat gap|glove stop|foxglove (cut|gap|stop)|saffron cut|tip gap|stigma stop|crocus (cut|gap|stop)|pollen cut|crest gap|anther stop|lily (cut|gap|stop)|capsule cut|silk gap|cup stop|pad cut|ripple gap|pond stop|lotus (cut|gap|stop)|spur cut|veil gap|spike stop|orchid (cut|gap|stop)|blade cut|dew gap|stem stop|iris (cut|gap|stop)|petal cut|drift gap|dish stop|aster (cut|gap|stop)|quill cut|gleam gap|urn stop|zinnia (cut|gap|stop)|spire cut|ember gap|vase stop|dahlia (cut|gap|stop)|fizz cut|flare gap|planter stop|azalea (cut|gap|stop)|bud cut|satin gap|bowl stop|wax cut|rose gap|tray stop|snow drift|velvet latch|dish claim|gardenia (cut|gap|stop)|roselle cut|punch gap|sip stop|hibiscus (cut|gap|stop)|cream cut|blush gap|magnolia (cut|gap|stop)|blossom cut|honey gap|jasmine (cut|gap|stop)|citrus cut|earl gap|saucer stop|bergamot (cut|gap|stop)|daisy cut|tea gap|chamomile (cut|gap|stop)|bloom cut|calm gap|bundle stop|nip cut|dream gap|pouch stop|chill cut|frost gap|tin stop|lavender (cut|gap|stop)|catnip (cut|gap|stop)|mint (cut|gap|stop)|needle cut|woody gap|pot stop|rosemary (cut|gap|stop)|pinch cut|twig gap|jar stop|thyme (cut|gap|stop)|marjoram (cut|gap|stop)|softleaf cut|dusty gap|peel stop|oregano (cut|gap|stop)|stone cut|wild gap|pizza stop|tarragon (cut|gap|stop)|spear cut|bitters gap|cruet stop|dill (cut|gap|stop)|seed cut|frondlet gap|ledge stop|parsley (cut|gap|stop)|curl cut|garnish stop|peony (cut|gap|stop)|camellia (cut|gap|stop)|poppy (cut|gap|stop)|tulip (cut|gap|stop)|stem cut|glow gap|bloom stop|bell gap|raceme stop|hyacinth (cut|gap|stop)|patch cut|moss gap|thicket stop|violet (cut|gap|stop)|\bairy cut\b|\bray gap\b|\bfloret stop\b|\bcosmos (cut|gap|stop)\b/i.test(level.name)) {
+    if (/meadow cut|gloss gap|petal stop|buttercup (cut|gap|stop)|pale cut|dish gap|ruff stop|primrose (cut|gap|stop)|moor cut|sprig gap|heath stop|heather (cut|gap|stop)|gold cut|seed stop|marigold (cut|gap|stop)|jaw cut|perch gap|dragon stop|snapdragon (cut|gap|stop)|cloche cut|ring gap|chime stop|bluebell (cut|gap|stop)|tower cut|throat gap|glove stop|foxglove (cut|gap|stop)|saffron cut|tip gap|stigma stop|crocus (cut|gap|stop)|pollen cut|crest gap|anther stop|lily (cut|gap|stop)|capsule cut|silk gap|cup stop|pad cut|ripple gap|pond stop|lotus (cut|gap|stop)|spur cut|veil gap|spike stop|orchid (cut|gap|stop)|blade cut|dew gap|stem stop|iris (cut|gap|stop)|petal cut|drift gap|dish stop|aster (cut|gap|stop)|quill cut|gleam gap|urn stop|zinnia (cut|gap|stop)|spire cut|ember gap|vase stop|dahlia (cut|gap|stop)|fizz cut|flare gap|planter stop|azalea (cut|gap|stop)|bud cut|satin gap|bowl stop|wax cut|rose gap|tray stop|snow drift|velvet latch|dish claim|gardenia (cut|gap|stop)|roselle cut|punch gap|sip stop|hibiscus (cut|gap|stop)|cream cut|blush gap|magnolia (cut|gap|stop)|blossom cut|honey gap|jasmine (cut|gap|stop)|citrus cut|earl gap|saucer stop|bergamot (cut|gap|stop)|daisy cut|tea gap|chamomile (cut|gap|stop)|bloom cut|calm gap|bundle stop|nip cut|dream gap|pouch stop|chill cut|frost gap|tin stop|lavender (cut|gap|stop)|catnip (cut|gap|stop)|mint (cut|gap|stop)|needle cut|woody gap|pot stop|rosemary (cut|gap|stop)|pinch cut|twig gap|jar stop|thyme (cut|gap|stop)|marjoram (cut|gap|stop)|softleaf cut|dusty gap|peel stop|oregano (cut|gap|stop)|stone cut|wild gap|pizza stop|tarragon (cut|gap|stop)|spear cut|bitters gap|cruet stop|dill (cut|gap|stop)|seed cut|frondlet gap|ledge stop|parsley (cut|gap|stop)|curl cut|garnish stop|peony (cut|gap|stop)|camellia (cut|gap|stop)|poppy (cut|gap|stop)|tulip (cut|gap|stop)|stem cut|glow gap|bloom stop|bell gap|raceme stop|hyacinth (cut|gap|stop)|patch cut|moss gap|thicket stop|violet (cut|gap|stop)|\bairy cut\b|\bray gap\b|\bfloret stop\b|\bcosmos (cut|gap|stop)\b/i.test(level.name)) {
       throw new Error(`${id} must not reuse prior triad names`);
     }
     const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
@@ -325,6 +356,15 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
     if (unique.min < 10 || unique.min > 11) throw new Error(`${id} shortest must be 10–11, got ${unique.min}`);
     if (level.moveBudget < unique.min) throw new Error(`${id} budget ${level.moveBudget} < shortest ${unique.min}`);
   }
+  if (LEVELS.find((row) => row.id === "L271")?.name !== "Face Cut") throw new Error("L271 Face Cut locked");
+  if (LEVELS.find((row) => row.id === "L272")?.name !== "Saucer Gap") throw new Error("L272 Saucer Gap locked");
+  if (LEVELS.find((row) => row.id === "L273")?.name !== "Blotch Stop") throw new Error("L273 Blotch Stop locked");
+  if (LEVELS.find((row) => row.id === "L268")?.name !== "Flare Cut") throw new Error("L268 Flare Cut locked");
+  if (LEVELS.find((row) => row.id === "L269")?.name !== "Basket Gap") throw new Error("L269 Basket Gap locked");
+  if (LEVELS.find((row) => row.id === "L270")?.name !== "Frill Stop") throw new Error("L270 Frill Stop locked");
+  if (LEVELS.find((row) => row.id === "L265")?.name !== "Pepper Cut") throw new Error("L265 Pepper Cut locked");
+  if (LEVELS.find((row) => row.id === "L266")?.name !== "Tray Gap") throw new Error("L266 Tray Gap locked");
+  if (LEVELS.find((row) => row.id === "L267")?.name !== "Tendril Stop") throw new Error("L267 Tendril Stop locked");
   if (LEVELS.find((row) => row.id === "L259")?.name !== "Trumpet Cut") throw new Error("L259 Trumpet Cut locked");
   if (LEVELS.find((row) => row.id === "L260")?.name !== "Vase Gap") throw new Error("L260 Vase Gap locked");
   if (LEVELS.find((row) => row.id === "L261")?.name !== "Tube Stop") throw new Error("L261 Tube Stop locked");
@@ -422,35 +462,44 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   if (LEVELS.find((row) => row.id === "L168")?.name !== "Bowl Stop") throw new Error("L168 Bowl Stop locked");
   if (LEVELS.find((row) => row.id === "L165")?.name !== "Bloom Stop") throw new Error("L165 Bloom Stop locked");
   if (LEVELS.find((row) => row.id === "L162")?.name !== "Saucer Stop") throw new Error("L162 Saucer Stop locked");
-  if (SLICE_UNLOCKS[264] !== "friend_088") throw new Error("SLICE_UNLOCKS[264] must be friend_088");
-  if (shippedFriendForClear(264)?.friendId !== "friend_088") throw new Error("onClear(264) must award Nasturtium");
-  const nasturtium = friendById("friend_088");
-  if (!nasturtium) throw new Error("friend_088 missing from CATALOG");
-  if (nasturtium.defaultName !== "Nasturtium") throw new Error("default name must be Nasturtium");
-  if (nasturtium.unlockClear !== 264) throw new Error("Nasturtium unlockClear must be 264");
-  if (nasturtium.phenotype.artKit !== "nasturtium") throw new Error("Nasturtium artKit must be nasturtium");
-  if (nasturtium.phenotype.personality !== "Nasturtium-soft") throw new Error("Nasturtium personality must be Nasturtium-soft");
-  if (nasturtium.phenotype.boardColor !== "orange") throw new Error("Nasturtium boardColor must be orange");
-  if (nasturtium.phenotype.color !== "Pepper") throw new Error("Nasturtium color must be Pepper");
-  if (nasturtium.phenotype.pattern !== "Tray") throw new Error("Nasturtium pattern must be Tray");
-  if (chipsForFriend("friend_088").join(",") !== "Nasturtium,Pepper,Tray") {
-    throw new Error(`Nasturtium chips must be Nasturtium/Pepper/Tray, got ${chipsForFriend("friend_088").join(",")}`);
+  if (SLICE_UNLOCKS[273] !== "friend_091") throw new Error("SLICE_UNLOCKS[273] must be friend_091");
+  if (shippedFriendForClear(273)?.friendId !== "friend_091") throw new Error("onClear(273) must award Verbena");
+  const verbena = friendById("friend_091");
+  if (!verbena) throw new Error("friend_091 missing from CATALOG");
+  if (verbena.defaultName !== "Verbena") throw new Error("default name must be Verbena");
+  if (verbena.unlockClear !== 273) throw new Error("Verbena unlockClear must be 273");
+  if (verbena.phenotype.artKit !== "verbena") throw new Error("Verbena artKit must be verbena");
+  if (verbena.phenotype.personality !== "Verbena-soft") throw new Error("Verbena personality must be Verbena-soft");
+  if (verbena.phenotype.boardColor !== "gray") throw new Error("Verbena boardColor must be gray");
+  if (verbena.phenotype.color !== "Spike") throw new Error("Verbena color must be Spike");
+  if (verbena.phenotype.pattern !== "Pot") throw new Error("Verbena pattern must be Pot");
+  if (chipsForFriend("friend_091").join(",") !== "Verbena,Spike,Pot") {
+    throw new Error(`Verbena chips must be Verbena/Spike/Pot, got ${chipsForFriend("friend_091").join(",")}`);
   }
-  if (chipsForFriend("friend_088").some((c) => /geranium|^cluster$|^sill$|freesia|^trumpet$|^vase$|ranunculus|^layer$|^nest$|begonia|^ruffle$|^planter$|anemone|^wind$|^bowl$|wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|^pot$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
-    throw new Error("Nasturtium chips must ban Geranium/Cluster/Sill and Freesia/Trumpet/Vase and all prior pools/Pebble/Sage");
+  if (chipsForFriend("friend_091").some((c) => /petunia|^flare$|^basket$|nasturtium|^pepper$|^tray$|geranium|^cluster$|^sill$|freesia|^trumpet$|^vase$|ranunculus|^layer$|^nest$|begonia|^ruffle$|^planter$|anemone|^wind$|^bowl$|wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|pansy|^face$|^saucer$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
+    throw new Error("Verbena chips must ban Petunia/Flare/Basket and Nasturtium/Pepper/Tray and Geranium/Cluster/Sill and all prior pools/Pebble/Sage");
   }
-  const nasturtium48 = readFileSync(resolve("public/assets/cats/nasturtium_loaf_48.svg"), "utf8");
-  const nasturtium72 = readFileSync(resolve("public/assets/cats/nasturtium_loaf_72.svg"), "utf8");
-  if (!nasturtium48.includes("#F07830") || !nasturtium72.includes("#F07830")) throw new Error("Nasturtium loaf must use pepper coat #F07830");
-  if (!nasturtium48.includes("#3A2810") || !nasturtium72.includes("#3A2810")) throw new Error("Nasturtium loaf must use vine freckles #3A2810");
-  if (!nasturtium48.includes("#FFE8D2") || !nasturtium72.includes("#FFE8D2")) throw new Error("Nasturtium loaf must use belly #FFE8D2");
+  const pansy48 = readFileSync(resolve("public/assets/cats/verbena_loaf_48.svg"), "utf8");
+  const pansy72 = readFileSync(resolve("public/assets/cats/verbena_loaf_72.svg"), "utf8");
+  if (!pansy48.includes("#C05090") || !pansy72.includes("#C05090")) throw new Error("Verbena loaf must use spike coat #C05090");
+  if (!pansy48.includes("#3A1830") || !pansy72.includes("#3A1830")) throw new Error("Verbena loaf must use stem freckles #3A1830");
+  if (!pansy48.includes("#FAD8EC") || !pansy72.includes("#FAD8EC")) throw new Error("Verbena loaf must use belly #FAD8EC");
   for (const hex of ["#E05070", "#2A4018", "#C23A52", "#FFE8EE", "#F5E080", "#6A5020", "#FFFCEE", "#D4BC48", "#F4A0B8", "#5A2840", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#E8A020", "#5A3A10", "#E87868", "#3A2818", "#FFF4EE", "#C85040", "#F0A8C8", "#4A2038", "#FFF7FC", "#C03868", "#B8A0E8", "#3A2868", "#F2E6FF", "#6E48A8", "#7EC8E8", "#1A3A58", "#E8F8FC", "#4A9BB8", "#E8A0C0", "#5A2848", "#FFF9FD", "#D07898", "#F4C8DC", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#C89648", "#FFF8E0", "#9A5A8A", "#2A1830", "#7A3F6C", "#F0D6E8", "#FFF2F8", "#F0A020", "#4A3010", "#FFE9B4", "#C86E0C", "#FFF6D0", "#E07050", "#3A2010", "#B84A28", "#F3C8A8", "#C8A84A", "#C4B06A", "#4A7EC8", "#1A2848", "#D0E4F6", "#2E5A98", "#E8F4FF", "#D478A0", "#3A2030", "#B44A78", "#F8D4E6", "#FFF4FA", "#5A6EC8", "#1E2448", "#C8D2F0", "#3A4A88", "#F0F4FF", "#C45A9A", "#F4C2DC", "#9A3A78", "#FFF0F8", "#F5F0E6", "#C8A84A", "#FFF8EC", "#C4B06A", "#FEF6DC", "#6B4AA0", "#1E2A18", "#D2C4EA", "#4A3078", "#F8F4FF", "#E07090", "#2A4020", "#F8C4D2", "#C44868", "#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0", "#9B7EBD", "#3A2A58"]) {
-    if (nasturtium48.includes(hex) || nasturtium72.includes(hex)) throw new Error(`Nasturtium loaf must not use prior herb coat ${hex}`);
+    if (pansy48.includes(hex) || pansy72.includes(hex)) throw new Error(`Verbena loaf must not use prior herb coat ${hex}`);
   }
-  if (furnitureGiftsForClear(264).length) throw new Error("Nasturtium@264 must gift no furniture");
+  for (const hex of ["#C070E0", "#3A1848", "#F6DCF8", "#8E3CB8", "#F07830", "#3A2810", "#FFE8D2", "#C85818", "#F5E080", "#6A5020", "#B8A0E8", "#3A2868", "#C989B8", "#3A2038", "#7A5A9A", "#2A1A40", "#7EC8E8", "#1A3A58", "#6B5ACD", "#1A1030", "#E8E4F8", "#4A3CA8"]) {
+    if (pansy48.includes(hex) || pansy72.includes(hex)) throw new Error(`Verbena loaf must not use prior flower coat ${hex}`);
+  }
+  if (furnitureGiftsForClear(273).length) throw new Error("Verbena@273 must gift no furniture");
   const yardG = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
-  if ((yardG.match(/const nasturtium =/g) || []).length !== 1) throw new Error("YardScene must declare nasturtium once");
-  if ((yardG.match(/\{nasturtium \?/g) || []).length !== 1) throw new Error("YardScene must render nasturtium once");
+  if ((yardG.match(/const verbena =/g) || []).length !== 1) throw new Error("YardScene must declare verbena once");
+  if ((yardG.match(/\{verbena \?/g) || []).length !== 1) throw new Error("YardScene must render verbena once");
+  if ((yardG.match(/const pansy =/g) || []).length !== 1) throw new Error("YardScene must keep pansy once");
+  if ((yardG.match(/\{pansy \?/g) || []).length !== 1) throw new Error("YardScene must keep pansy once");
+  if ((yardG.match(/const petunia =/g) || []).length !== 1) throw new Error("YardScene must keep petunia once");
+  if ((yardG.match(/\{petunia \?/g) || []).length !== 1) throw new Error("YardScene must keep petunia once");
+  if ((yardG.match(/const nasturtium =/g) || []).length !== 1) throw new Error("YardScene must keep nasturtium once");
+  if ((yardG.match(/\{nasturtium \?/g) || []).length !== 1) throw new Error("YardScene must keep nasturtium once");
   if ((yardG.match(/const geranium =/g) || []).length !== 1) throw new Error("YardScene must keep geranium once");
   if ((yardG.match(/\{geranium \?/g) || []).length !== 1) throw new Error("YardScene must keep geranium once");
   if ((yardG.match(/const freesia =/g) || []).length !== 1) throw new Error("YardScene must keep freesia once");
@@ -487,7 +536,7 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   if ((yardG.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardG.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardG.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 91) throw new Error("Met must include through Nasturtium (88) after Petunia (89)");
+  if (TUTORIAL_RESCUES.length !== 91) throw new Error("Met must include through Verbena (91)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -502,21 +551,24 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   if (SLICE_UNLOCKS[258] !== "friend_086") throw new Error("SLICE_UNLOCKS[258] must be friend_086");
   if (SLICE_UNLOCKS[261] !== "friend_087") throw new Error("SLICE_UNLOCKS[261] must be friend_087");
   if (SLICE_UNLOCKS[264] !== "friend_088") throw new Error("SLICE_UNLOCKS[264] must be friend_088");
-  if (SLICE_UNLOCKS[267] !== "friend_089") throw new Error("SLICE_UNLOCKS[267] must be friend_089 after Petunia ship");
-  if (/pebble|Pebble/i.test(nasturtium48 + nasturtium72)) throw new Error("Nasturtium art must not use Pebble");
-  if (/geranium|cluster|sill|freesia|trumpet|vase|ranunculus|layered|begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise/i.test(nasturtium48 + nasturtium72)) {
-    throw new Error("Nasturtium art must not collide Geranium/Freesia/Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");
+  if (SLICE_UNLOCKS[267] !== "friend_089") throw new Error("SLICE_UNLOCKS[267] must be friend_089");
+  if (SLICE_UNLOCKS[270] !== "friend_090") throw new Error("SLICE_UNLOCKS[270] must be friend_090");
+  if (SLICE_UNLOCKS[273] !== "friend_091") throw new Error("SLICE_UNLOCKS[273] must be friend_091");
+  if (SLICE_UNLOCKS[276]) throw new Error("no friend_092 @276 this slice");
+  if (/pebble|Pebble/i.test(pansy48 + pansy72)) throw new Error("Verbena art must not use Pebble");
+  if (/geranium|cluster|sill|freesia|trumpet|vase|ranunculus|layered|begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise|nasturtium|pepper|tray|petunia|flare|basket|pansy|face|saucer|blotch/i.test(pansy48 + pansy72)) {
+    throw new Error("Verbena art must not collide Petunia/Nasturtium/Geranium/Freesia/Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");
   }
-  const l247 = LEVELS.find((r) => r.id === "L265")!;
-  const l248 = LEVELS.find((r) => r.id === "L266")!;
-  const l249 = LEVELS.find((r) => r.id === "L267")!;
-  if (/\b(clump|sill|pane|cluster|geranium|trumpet|vase|tube|freesia|layer|nest|fold|ranunculus|ruffle|planter|leaf|begonia|wind|bowl|whirl|anemone|cascade|arbor|droop|wisteria|vine|trellis|star|clematis|airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|pot|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|dahlia|fizz|flare|azalea|wax|rose|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|poppy)\b/i.test([l247.name, l248.name].join(","))) {
-    throw new Error("L265–L266 must not reuse Clump/Sill/Pane/Cluster/Geranium/Trumpet/Vase/Tube and prior triad names");
+  const l247 = LEVELS.find((r) => r.id === "L274")!;
+  const l248 = LEVELS.find((r) => r.id === "L275")!;
+  const l249 = LEVELS.find((r) => r.id === "L276")!;
+  if (/\b(pepper|tray|tendril|nasturtium|clump|sill|pane|cluster|geranium|trumpet|vase|tube|freesia|layer|nest|fold|ranunculus|ruffle|planter|leaf|begonia|wind|bowl|whirl|anemone|cascade|arbor|droop|wisteria|vine|trellis|star|clematis|airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|dahlia|fizz|azalea|wax|rose|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|poppy|flare|basket|frill|petunia|face|saucer|blotch|pansy)\b/i.test(l247.name)) {
+    throw new Error("L274 must not reuse Face/Saucer/Blotch/Flare/Basket/Frill/Petunia/Pepper/Tray/Tendril and prior triad names");
   }
-  const nasturtiumGatePair = (level: typeof l247) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (nasturtiumGatePair(l247) !== "0,2/3,4") throw new Error(`L265 gates must be delta (3, 2) pair, got ${nasturtiumGatePair(l247)}`);
-  if (nasturtiumGatePair(l248) !== "4,0/4,1") throw new Error(`L266 gates must be delta (0, 1) pair, got ${nasturtiumGatePair(l248)}`);
-  if (nasturtiumGatePair(l249) !== "1,1/5,0") throw new Error(`L267 gates must be delta (4, 1) pair, got ${nasturtiumGatePair(l249)}`);
+  const pansyGatePair = (level: typeof l247) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (pansyGatePair(l247) !== "4,2/4,3") throw new Error(`L274 gates must be delta (0, 1) pair, got ${pansyGatePair(l247)}`);
+  if (pansyGatePair(l248) !== "4,3/5,3") throw new Error(`L275 gates must be delta (1, 0) pair, got ${pansyGatePair(l248)}`);
+  if (pansyGatePair(l249) !== "1,5/4,1") throw new Error(`L276 gates must be delta (3, 4) pair, got ${pansyGatePair(l249)}`);
   const occ261 = [...l249.cats, ...l249.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
   const priorOcc = new Set([
     "1,2;2,0;2,5;5,3",
@@ -549,45 +601,47 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
     "1,0;1,2;2,3;4,0",
     "0,5;4,2;4,3;5,1",
     "0,3;0,4;1,3;5,4",
+    "0,5;1,1;1,5;5,0",
+    "1,2;1,3;4,0;5,4",
   ]);
-  if (priorOcc.has(occ261)) throw new Error("L267 Tendril must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Pane occupancy");
-  if (occ261.split(";").includes("5,5")) throw new Error("L267 Tendril must be off Nori seat (5,5)");
-  if (l249.gates[0].y === l249.gates[1].y) throw new Error("L267 Tendril must not same-row Nest");
-  if (l249.gates[0].x === l249.gates[1].x) throw new Error("L267 Tendril must not column Porch");
-  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L265 Pepper must not stacked-column Vine");
+  if (priorOcc.has(occ261)) throw new Error("L276 Taper must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Pane/Tendril/Frill occupancy");
+  if (occ261.split(";").includes("5,5")) throw new Error("L276 Taper must be off Nori seat (5,5)");
+  if (l249.gates[0].y === l249.gates[1].y) throw new Error("L276 Taper must not same-row Nest");
+  if (l249.gates[0].x === l249.gates[1].x) throw new Error("L276 Taper must not column Porch");
+  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L274 Spike must not stacked-column Vine");
 
-  if (solves.L265[0][0] === "cat_gray") {
-    throw new Error("L265 Pepper Cut must not open gray-first (Clump Cut clone)");
+  if (solves.L274[0][0] === "cat_orange") {
+    throw new Error("L274 Spike Cut must not open orange-first (Face Cut clone)");
   }
-  if (solves.L265[0][0] === "cat_orange" && solves.L265[0][1] === "w") {
-    throw new Error("L265 Pepper Cut must not open orange-west (Trumpet Cut clone)");
+  if (solves.L274[0][0] === "cat_gray" && solves.L274[0][1] === "w") {
+    throw new Error("L274 Spike Cut must not open gray-west (Flare Cut clone)");
   }
-  if (solves.L266[0][0] === "cat_black") {
-    throw new Error("L266 Tray Gap must not open black-first (Sill Gap clone)");
+  if (solves.L274[0][0] === "cat_gray" && solves.L274[0][1] === "s") {
+    throw new Error("L274 Spike Cut must not open gray-south (Clump Cut clone)");
   }
-  if (solves.L266[0][0] === "cat_gray" && solves.L266[0][1] === "w") {
-    throw new Error("L266 Tray Gap must not open gray-west (Vase Gap clone)");
+  if (solves.L275[0][0] === "cat_gray") {
+    throw new Error("L275 Pot Gap must not open gray-first (Saucer Gap clone)");
   }
-  if (solves.L266[0][0] === "cat_gray" && solves.L266[0][1] === "s") {
-    throw new Error("L266 Tray Gap must not open gray-south (Clump Cut clone)");
+  if (solves.L275[0][0] === "cat_black" && solves.L275[0][1] === "n") {
+    throw new Error("L275 Pot Gap must not open black-north (Basket Gap clone)");
   }
-  if (solves.L267[0][0] === "cat_orange") {
-    throw new Error("L267 Tendril Stop must not open orange-first (Pane Stop clone)");
+  if (solves.L275[0][0] === "cat_black" && solves.L275[0][1] === "e") {
+    throw new Error("L275 Pot Gap must not open black-east (Bowl Gap clone)");
   }
-  if (solves.L267[0][0] === "cat_black" && solves.L267[0][1] === "e") {
-    throw new Error("L267 Tendril Stop must not open black-east (Tube Stop clone)");
+  if (solves.L276[0][0] === "cat_black") {
+    throw new Error("L276 Taper Stop must not open black-first (Blotch Stop clone)");
   }
-  if (solves.L267[0][0] === "cat_black" && solves.L267[0][1] === "s") {
-    throw new Error("L267 Tendril Stop must not open black-south (Sill Gap clone)");
+  if (solves.L276[0][0] === "cat_orange" && solves.L276[0][1] === "w") {
+    throw new Error("L276 Taper Stop must not open orange-west (Trumpet Cut clone)");
   }
-  if (solves.L265[0][0] !== "cat_orange") {
-    throw new Error("L265 Pepper Cut must open orange-first");
+  if (solves.L274[0][0] !== "cat_gray") {
+    throw new Error("L274 Spike Cut must open gray-first");
   }
-  if (solves.L266[0][0] !== "cat_gray") {
-    throw new Error("L266 Tray Gap must open gray-first");
+  if (solves.L275[0][0] !== "cat_black") {
+    throw new Error("L275 Pot Gap must open black-first");
   }
-  if (solves.L267[0][0] !== "cat_black") {
-    throw new Error("L267 Tendril Stop must open black-first");
+  if (solves.L276[0][0] !== "cat_orange") {
+    throw new Error("L276 Taper Stop must open orange-first");
   }
   for (const level of [l247, l248, l249]) {
     if (level.gates.every((g) => g.y === 5) || level.gates.every((g) => g.x === 5)) {
@@ -598,11 +652,17 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   }
   const wallKeyO = (level: typeof l247) =>
     [...level.walls].map((w) => `${w.x},${w.y}`).sort().join(";");
-  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243", "L244", "L245", "L246", "L247", "L248", "L249", "L250", "L251", "L252", "L253", "L254", "L255", "L256", "L257", "L258", "L259", "L260", "L261", "L262", "L263", "L264"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
-  for (const id of ["L265", "L266", "L267"] as const) {
+  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243", "L244", "L245", "L246", "L247", "L248", "L249", "L250", "L251", "L252", "L253", "L254", "L255", "L256", "L257", "L258", "L259", "L260", "L261", "L262", "L263", "L264", "L265", "L266", "L267", "L268", "L269", "L270", "L271", "L272", "L273"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
+  for (const id of ["L274", "L275", "L276"] as const) {
     const key = wallKeyO(LEVELS.find((r) => r.id === id)!);
-    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L264`);
+    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L273`);
   }
+  if (ART_KIT_PATH.verbena.loaf48 !== "/assets/cats/verbena_loaf_48.svg") throw new Error("ART_KIT_PATH.verbena loaf48");
+  if (ART_KIT_PATH.pansy.loaf48 !== "/assets/cats/pansy_loaf_48.svg") throw new Error("ART_KIT_PATH.pansy loaf48");
+  if (ART_KIT_PATH.verbena.loaf72 !== "/assets/cats/verbena_loaf_72.svg") throw new Error("ART_KIT_PATH.verbena loaf72");
+  if (ART_KIT_PATH.pansy.loaf72 !== "/assets/cats/pansy_loaf_72.svg") throw new Error("ART_KIT_PATH.pansy loaf72");
+  if (ART_KIT_PATH.petunia.loaf48 !== "/assets/cats/petunia_loaf_48.svg") throw new Error("ART_KIT_PATH.petunia loaf48");
+  if (ART_KIT_PATH.petunia.loaf72 !== "/assets/cats/petunia_loaf_72.svg") throw new Error("ART_KIT_PATH.petunia loaf72");
   if (ART_KIT_PATH.nasturtium.loaf48 !== "/assets/cats/nasturtium_loaf_48.svg") throw new Error("ART_KIT_PATH.nasturtium loaf48");
   if (ART_KIT_PATH.nasturtium.loaf72 !== "/assets/cats/nasturtium_loaf_72.svg") throw new Error("ART_KIT_PATH.nasturtium loaf72");
   if (ART_KIT_PATH.geranium.loaf48 !== "/assets/cats/geranium_loaf_48.svg") throw new Error("ART_KIT_PATH.geranium loaf48");
@@ -649,6 +709,9 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   if (ART_KIT_PATH.gardenia.loaf48 !== "/assets/cats/gardenia_loaf_48.svg") throw new Error("Gardenia kit must stay");
   if (ART_KIT_PATH.hibiscus.loaf48 !== "/assets/cats/hibiscus_loaf_48.svg") throw new Error("Hibiscus kit must stay");
   const saveG = readFileSync(resolve("src/components/providers/SaveProvider.tsx"), "utf8");
+  if (!saveG.includes("verbena pot")) throw new Error("SaveProvider must yard-bubble verbena pot for Verbena");
+  if (!saveG.includes("pansy saucer")) throw new Error("SaveProvider must yard-bubble pansy saucer for Pansy");
+  if (!saveG.includes("petunia basket")) throw new Error("SaveProvider must yard-bubble petunia basket for Petunia");
   if (!saveG.includes("nasturtium tray")) throw new Error("SaveProvider must yard-bubble nasturtium tray for Nasturtium");
   if (!saveG.includes("geranium sill")) throw new Error("SaveProvider must yard-bubble geranium sill for Geranium");
   if (!saveG.includes("freesia vase")) throw new Error("SaveProvider must yard-bubble freesia vase for Freesia");
@@ -671,16 +734,28 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   if (!saveG.includes("violet patch")) throw new Error("SaveProvider must keep violet patch for Violet");
   if (!saveG.includes("tulip vase")) throw new Error("SaveProvider must keep tulip vase for Tulip");
   if (!saveG.includes("poppy cup")) throw new Error("SaveProvider must keep poppy cup for Poppy");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_091.md"))) throw new Error("missing CH4_FRIEND_091.md");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_090.md"))) throw new Error("missing CH4_FRIEND_090.md");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_089.md"))) throw new Error("missing CH4_FRIEND_089.md");
   if (!existsSync(resolve("data/collection/CH4_FRIEND_088.md"))) throw new Error("missing CH4_FRIEND_088.md");
   if (!existsSync(resolve("data/collection/CH4_FRIEND_087.md"))) throw new Error("missing CH4_FRIEND_087.md");
   if (!existsSync(resolve("data/collection/CH4_FRIEND_086.md"))) throw new Error("missing CH4_FRIEND_086.md");
+  if (!existsSync(resolve("data/collection/chapter4_verbena_bang.json"))) throw new Error("missing collection verbena bang");
+  if (!existsSync(resolve("data/collection/chapter4_pansy_bang.json"))) throw new Error("missing collection pansy bang");
+  if (!existsSync(resolve("data/collection/chapter4_petunia_bang.json"))) throw new Error("missing collection petunia bang");
   if (!existsSync(resolve("data/collection/chapter4_nasturtium_bang.json"))) throw new Error("missing collection nasturtium bang");
   if (!existsSync(resolve("data/collection/chapter4_geranium_bang.json"))) throw new Error("missing collection geranium bang");
   if (!existsSync(resolve("data/collection/chapter4_freesia_bang.json"))) throw new Error("missing collection freesia bang");
+  if (!existsSync(resolve("data/chapter4_verbena_bang.json"))) throw new Error("missing chapter4_verbena_bang.json");
+  if (!existsSync(resolve("data/chapter4_pansy_bang.json"))) throw new Error("missing chapter4_pansy_bang.json");
+  if (!existsSync(resolve("data/chapter4_petunia_bang.json"))) throw new Error("missing chapter4_petunia_bang.json");
   if (!existsSync(resolve("data/chapter4_nasturtium_bang.json"))) throw new Error("missing chapter4_nasturtium_bang.json");
   if (!existsSync(resolve("data/chapter4_geranium_bang.json"))) throw new Error("missing chapter4_geranium_bang.json");
   if (!existsSync(resolve("data/chapter4_freesia_bang.json"))) throw new Error("missing chapter4_freesia_bang.json");
   const nameModalG = readFileSync(resolve("src/components/puzzle/NameCatModal.tsx"), "utf8");
+  if (!nameModalG.includes("VERBENA_FRIEND_ID")) throw new Error("NameCatModal must lockChips Verbena");
+  if (!nameModalG.includes("PANSY_FRIEND_ID")) throw new Error("NameCatModal must lockChips Pansy");
+  if (!nameModalG.includes("PETUNIA_FRIEND_ID")) throw new Error("NameCatModal must lockChips Petunia");
   if (!nameModalG.includes("NASTURTIUM_FRIEND_ID")) throw new Error("NameCatModal must lockChips Nasturtium");
   if (!nameModalG.includes("GERANIUM_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Geranium");
   if (!nameModalG.includes("FREESIA_FRIEND_ID")) throw new Error("NameCatModal must lockChips Freesia");
@@ -713,5 +788,5 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Nasturtium@264 + L265–L267 ok · chips Nasturtium/Pepper/Tray · coat #F07830 + vine freckles #3A2810 · Pepper Cut / Tray Gap / Tendril Stop · unique vs Cluster Cut and Clump Cut · Geranium/Freesia/Ranunculus/Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Verbena@273 + L274–L276 ok · chips Verbena/Spike/Pot · coat #C05090 + stem freckles #3A1830 · Spike Cut / Pot Gap / Taper Stop · unique vs Face Cut / Saucer Gap / Blotch Stop · Pansy/Petunia/Nasturtium/Geranium/Freesia/Ranunculus/Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
