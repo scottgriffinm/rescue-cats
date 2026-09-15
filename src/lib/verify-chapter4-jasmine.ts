@@ -232,7 +232,7 @@ export function verifyChapter4Jasmine(solves: Record<string, Array<[string, Dir]
   const yardJ = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardJ.match(/const jasmine =/g) || []).length !== 1) throw new Error("YardScene must declare jasmine once");
   if ((yardJ.match(/\{jasmine \?/g) || []).length !== 1) throw new Error("YardScene must render jasmine once");
-  if (TUTORIAL_RESCUES.length !== 69) throw new Error("Met must include through Jasmine (54)");
+  if (TUTORIAL_RESCUES.length !== 70) throw new Error("Met must include through Jasmine (54)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

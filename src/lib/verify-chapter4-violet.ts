@@ -313,7 +313,7 @@ export function verifyChapter4Violet(solves: Record<string, Array<[string, Dir]>
   if ((yardV.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardV.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardV.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 69) throw new Error("Met must include through Violet (69)");
+  if (TUTORIAL_RESCUES.length !== 70) throw new Error("Met must include through Violet (69)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -321,7 +321,7 @@ export function verifyChapter4Violet(solves: Record<string, Array<[string, Dir]>
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
   if (SLICE_UNLOCKS[207] !== "friend_069") throw new Error("SLICE_UNLOCKS[207] must be friend_069");
-  if (SLICE_UNLOCKS[210]) throw new Error("no friend_070 @210 this slice");
+  if (SLICE_UNLOCKS[210] !== "friend_070") throw new Error("SLICE_UNLOCKS[210] must be friend_070 after Lily ship");
   if (/pebble|Pebble/i.test(violet48 + violet72)) throw new Error("Violet art must not use Pebble");
   if (/tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|rib|chervil|frill|lace|fennel|anise/i.test(violet48 + violet72)) {
     throw new Error("Violet art must not collide Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

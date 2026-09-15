@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Violet Pass — L211–L213 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L211–L213",
+  "notes": "L211 Pollen Cut / L212 Crest Gap / L213 Anther Stop — off Patch Cut / Moss Gap / Thicket Stop habits; not Stem/Glow/Bloom tropes; not Lily Cut/Gap/Stop title clones; Anther Stop avoids Peony Bowl Stop; no WRAP/edge twin of Nori/Medlar; L213 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L211",
+      "name": "Pollen Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_pollen_cut_black",
+      "walls": [
+        { "x": 5, "y": 5 },
+        { "x": 1, "y": 2 },
+        { "x": 4, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 3, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "pollen_cut_black"
+    },
+    {
+      "id": "L212",
+      "name": "Crest Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_crest_gap_gray",
+      "walls": [
+        { "x": 4, "y": 0 },
+        { "x": 2, "y": 0 },
+        { "x": 3, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 1, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "crest_gap_gray"
+    },
+    {
+      "id": "L213",
+      "name": "Anther Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_anther_stop_black",
+      "walls": [
+        { "x": 5, "y": 1 },
+        { "x": 4, "y": 1 },
+        { "x": 0, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 2, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "anther_stop_black"
+    }
+  ],
+  "teaches": {
+    "L211": "Pollen Cut — black west first; orange cuts after; not Patch black-east, not Stem black-south, not Capsule black-north, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south",
+    "L212": "Crest Gap — gray west then orange threads; not Moss gray-north, not Glow gray-east, not Silk gray-south, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west",
+    "L213": "Anther Stop — lily-bowl seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket twins; off Nori (5,5); not Hold*/Park*; title Anther Stop (not Peony Bowl Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L211": 10,
+      "L212": 11,
+      "L213": 10
+    }
+  },
+  "deltas": {
+    "L211": "(3, -3)",
+    "L212": "(3, -3)",
+    "L213": "(-3, 1)"
+  }
+}
