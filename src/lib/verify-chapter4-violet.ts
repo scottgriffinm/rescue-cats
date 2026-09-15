@@ -313,7 +313,7 @@ export function verifyChapter4Violet(solves: Record<string, Array<[string, Dir]>
   if ((yardV.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardV.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardV.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 73) throw new Error("Met must include through Violet (69)");
+  if (TUTORIAL_RESCUES.length !== 74) throw new Error("Met must include through Violet (69)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="bluebell-loaf-72">
+      <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6" fill="#4A7EC8" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M11.6 21.4 C11.2 14.8 15.8 12.8 17.8 17.4" fill="#2E5A98" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36.4 21.4 C36.8 14.8 32.2 12.8 30.2 17.4" fill="#2E5A98" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#1A2848">
+    <circle cx="14.2" cy="15.2" r="0.62"/>
+    <circle cx="16.6" cy="14.4" r="0.5"/>
+    <circle cx="33.8" cy="15.2" r="0.62"/>
+    <circle cx="31.4" cy="14.4" r="0.5"/>
+    <circle cx="15.4" cy="17.2" r="0.42"/>
+    <circle cx="32.6" cy="17.0" r="0.42"/>
+  </g>
+  <g clip-path="url(#bluebell-loaf-72)" fill="#1A2848">
+    <circle cx="18.6" cy="22.4" r="0.48"/>
+    <circle cx="29.4" cy="22.2" r="0.46"/>
+  </g>
+  <ellipse cx="24" cy="33.8" rx="7" ry="4.6" fill="#D0E4F6"/>
+  <circle cx="18" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.4" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.85" cy="26.7" r="0.4" fill="#E8F4FF"/>
+  <circle cx="18.45" cy="26.7" r="0.4" fill="#E8F4FF"/>
+  <path d="M39.2 34 C42.4 32.8 43.6 36.4 40.8 37.6" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

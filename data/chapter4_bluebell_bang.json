@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_bluebell_bang",
+  "status": "READY",
+  "friend_id": "friend_074",
+  "unlock_clear": 222,
+  "personality": "Bluebell-soft",
+  "display_line": "Woodland blue. Already claimed the bluebell cloche.",
+  "default_name": "Bluebell",
+  "tier": "C",
+  "color": "Woodland",
+  "pattern": "Tipped",
+  "art": {
+    "loaf_48": "/assets/cats/bluebell_loaf_48.svg",
+    "loaf_72": "/assets/cats/bluebell_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "bluebell"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Bluebell", "Cloche", "Ring"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_074": [
+      "{Name}: Woodland blue. Already claimed the bluebell cloche.",
+      "{Name}: Looks yard-cool. Owns the cloche."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 222,
+    "sku_id": null,
+    "note": "Ch4. Bluebell Pass. No gift. Ban Foxglove/Tower/Throat and all prior pools. Bean parade stands. No Pebble. Bluebell, Cloche, and Ring chips are CEO-locked on Bluebell. No friend_075."
+  }
+}
