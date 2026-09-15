@@ -510,7 +510,7 @@ export function verifyChapter4Petunia(solves: Record<string, Array<[string, Dir]
   if ((yardG.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardG.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardG.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 89) throw new Error("Met must include through Petunia (89)");
+  if (TUTORIAL_RESCUES.length !== 90) throw new Error("Met must include through Petunia (89)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -526,7 +526,7 @@ export function verifyChapter4Petunia(solves: Record<string, Array<[string, Dir]
   if (SLICE_UNLOCKS[261] !== "friend_087") throw new Error("SLICE_UNLOCKS[261] must be friend_087");
   if (SLICE_UNLOCKS[264] !== "friend_088") throw new Error("SLICE_UNLOCKS[264] must be friend_088");
   if (SLICE_UNLOCKS[267] !== "friend_089") throw new Error("SLICE_UNLOCKS[267] must be friend_089");
-  if (SLICE_UNLOCKS[270]) throw new Error("no friend_090 @270 this slice");
+  if (SLICE_UNLOCKS[270] !== "friend_090") throw new Error("SLICE_UNLOCKS[270] must be friend_090 after Pansy ship");
   if (/pebble|Pebble/i.test(petunia48 + petunia72)) throw new Error("Petunia art must not use Pebble");
   if (/geranium|cluster|sill|freesia|trumpet|vase|ranunculus|layered|begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise|nasturtium|pepper|tray/i.test(petunia48 + petunia72)) {
     throw new Error("Petunia art must not collide Nasturtium/Geranium/Freesia/Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");
