@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_anemone_bang",
+  "status": "READY",
+  "friend_id": "friend_083",
+  "unlock_clear": 249,
+  "personality": "Anemone-soft",
+  "display_line": "Wind soft. Already claimed the anemone bowl.",
+  "default_name": "Anemone",
+  "tier": "C",
+  "color": "Wind",
+  "pattern": "Bowl",
+  "art": {
+    "loaf_48": "/assets/cats/anemone_loaf_48.svg",
+    "loaf_72": "/assets/cats/anemone_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "anemone"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Anemone", "Wind", "Bowl"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_083": [
+      "{Name}: Wind soft. Already claimed the anemone bowl.",
+      "{Name}: Looks yard-soft. Owns the bowl."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 249,
+    "sku_id": null,
+    "note": "Ch4. Anemone Pass. No gift. Ban Wisteria/Cascade/Arbor and all prior pools. Bean parade stands. No Pebble. Anemone, Wind, and Bowl chips are CEO-locked on Anemone. No friend_084."
+  }
+}

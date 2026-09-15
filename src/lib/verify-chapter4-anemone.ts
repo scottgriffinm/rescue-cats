@@ -14,6 +14,7 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
+  [246, "friend_082", "Wisteria@246 must stay"],
   [243, "friend_081", "Clematis@243 must stay"],
   [240, "friend_080", "Cosmos@240 must stay"],
   [237, "friend_079", "Buttercup@237 must stay"],
@@ -84,6 +85,7 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
+  ["friend_082", "Wisteria,Cascade,Arbor", "Wisteria chips untouched"],
   ["friend_081", "Clematis,Vine,Trellis", "Clematis chips untouched"],
   ["friend_080", "Cosmos,Airy,Ray", "Cosmos chips untouched"],
   ["friend_079", "Buttercup,Meadow,Gloss", "Buttercup chips untouched"],
@@ -199,6 +201,7 @@ const BANNED_PAIRS = new Set([
   "0,1/1,2", "0,5/2,1", "2,1/4,2",
   "3,0/3,3", "0,3/1,3", "2,4/5,1",
   "2,1/5,0", "3,0/4,2", "0,3/1,2",
+  "0,2/3,2", "3,4/3,5", "0,2/2,1",
 ]);
 
 function stateKey(cats: PieceCat[]) {
@@ -249,11 +252,11 @@ function uniqueShortestCount(level: Level) {
   return { min, count };
 }
 
-export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir]>>) {
+export function verifyChapter4Anemone(solves: Record<string, Array<[string, Dir]>>) {
   for (const [id, name] of [
-    ["L247", "Cascade Cut"],
-    ["L248", "Arbor Gap"],
-    ["L249", "Droop Stop"],
+    ["L250", "Wind Cut"],
+    ["L251", "Bowl Gap"],
+    ["L252", "Whirl Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -266,8 +269,11 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
     if (/\b(hold|park|close)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Hold*/Park*/Close`);
     }
-    if (/wisteria (cut|gap|stop)/i.test(level.name)) {
-      throw new Error(`${id} must not be Wisteria Cut/Gap/Stop`);
+    if (/anemone (cut|gap|stop)/i.test(level.name)) {
+      throw new Error(`${id} must not be Anemone Cut/Gap/Stop`);
+    }
+    if (/wisteria (cut|gap|stop)|cascade cut|arbor gap|droop stop/i.test(level.name)) {
+      throw new Error(`${id} must not be Cascade Cut/Arbor Gap/Droop Stop/Wisteria Cut/Gap/Stop`);
     }
     if (/clematis (cut|gap|stop)|vine cut|trellis gap|star stop/i.test(level.name)) {
       throw new Error(`${id} must not be Vine Cut/Trellis Gap/Star Stop/Clematis Cut/Gap/Stop`);
@@ -288,6 +294,9 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   if (LEVELS.find((row) => row.id === "L244")?.name !== "Vine Cut") throw new Error("L244 Vine Cut locked");
   if (LEVELS.find((row) => row.id === "L245")?.name !== "Trellis Gap") throw new Error("L245 Trellis Gap locked");
   if (LEVELS.find((row) => row.id === "L246")?.name !== "Star Stop") throw new Error("L246 Star Stop locked");
+  if (LEVELS.find((row) => row.id === "L247")?.name !== "Cascade Cut") throw new Error("L247 Cascade Cut locked");
+  if (LEVELS.find((row) => row.id === "L248")?.name !== "Arbor Gap") throw new Error("L248 Arbor Gap locked");
+  if (LEVELS.find((row) => row.id === "L249")?.name !== "Droop Stop") throw new Error("L249 Droop Stop locked");
   if (LEVELS.find((row) => row.id === "L241")?.name !== "Airy Cut") throw new Error("L241 Airy Cut locked");
   if (LEVELS.find((row) => row.id === "L242")?.name !== "Ray Gap") throw new Error("L242 Ray Gap locked");
   if (LEVELS.find((row) => row.id === "L243")?.name !== "Floret Stop") throw new Error("L243 Floret Stop locked");
@@ -363,35 +372,37 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   if (LEVELS.find((row) => row.id === "L168")?.name !== "Bowl Stop") throw new Error("L168 Bowl Stop locked");
   if (LEVELS.find((row) => row.id === "L165")?.name !== "Bloom Stop") throw new Error("L165 Bloom Stop locked");
   if (LEVELS.find((row) => row.id === "L162")?.name !== "Saucer Stop") throw new Error("L162 Saucer Stop locked");
-  if (SLICE_UNLOCKS[246] !== "friend_082") throw new Error("SLICE_UNLOCKS[246] must be friend_082");
-  if (shippedFriendForClear(246)?.friendId !== "friend_082") throw new Error("onClear(246) must award Wisteria");
-  const wisteria = friendById("friend_082");
-  if (!wisteria) throw new Error("friend_082 missing from CATALOG");
-  if (wisteria.defaultName !== "Wisteria") throw new Error("default name must be Wisteria");
-  if (wisteria.unlockClear !== 246) throw new Error("Wisteria unlockClear must be 246");
-  if (wisteria.phenotype.artKit !== "wisteria") throw new Error("Wisteria artKit must be wisteria");
-  if (wisteria.phenotype.personality !== "Wisteria-soft") throw new Error("Wisteria personality must be Wisteria-soft");
-  if (wisteria.phenotype.boardColor !== "orange") throw new Error("Wisteria boardColor must be orange");
-  if (wisteria.phenotype.color !== "Cascade") throw new Error("Wisteria color must be Cascade");
-  if (wisteria.phenotype.pattern !== "Arbor") throw new Error("Wisteria pattern must be Arbor");
-  if (chipsForFriend("friend_082").join(",") !== "Wisteria,Cascade,Arbor") {
-    throw new Error(`Wisteria chips must be Wisteria/Cascade/Arbor, got ${chipsForFriend("friend_082").join(",")}`);
+  if (SLICE_UNLOCKS[249] !== "friend_083") throw new Error("SLICE_UNLOCKS[249] must be friend_083");
+  if (shippedFriendForClear(249)?.friendId !== "friend_083") throw new Error("onClear(249) must award Anemone");
+  const anemone = friendById("friend_083");
+  if (!anemone) throw new Error("friend_083 missing from CATALOG");
+  if (anemone.defaultName !== "Anemone") throw new Error("default name must be Anemone");
+  if (anemone.unlockClear !== 249) throw new Error("Anemone unlockClear must be 249");
+  if (anemone.phenotype.artKit !== "anemone") throw new Error("Anemone artKit must be anemone");
+  if (anemone.phenotype.personality !== "Anemone-soft") throw new Error("Anemone personality must be Anemone-soft");
+  if (anemone.phenotype.boardColor !== "gray") throw new Error("Anemone boardColor must be gray");
+  if (anemone.phenotype.color !== "Wind") throw new Error("Anemone color must be Wind");
+  if (anemone.phenotype.pattern !== "Bowl") throw new Error("Anemone pattern must be Bowl");
+  if (chipsForFriend("friend_083").join(",") !== "Anemone,Wind,Bowl") {
+    throw new Error(`Anemone chips must be Anemone/Wind/Bowl, got ${chipsForFriend("friend_083").join(",")}`);
   }
-  if (chipsForFriend("friend_082").some((c) => /clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|^pot$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^cluster$|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
-    throw new Error("Wisteria chips must ban Clematis/Vine/Trellis and Cosmos/Airy/Ray and Buttercup/Meadow/Gloss/Primrose/Pale/Dish/Heather/Moor/Sprig/Marigold/Gold/Pot/Snapdragon/Jaw/Perch/Bluebell/Cloche/Ring/Foxglove/Tower/Throat/Hyacinth/Cluster/Bell/Crocus/Saffron/Tip/Lily/Pollen/Crest/Violet/Patch/Moss/Tulip/Stem/Glow/Poppy/Capsule/Silk/Lotus/Pad/Ripple/Orchid/Spur/Veil/Iris/Blade/Dew/Aster/Petal/Drift/Zinnia/Quill/Gleam/Dahlia/Spire/Ember/Azalea/Fizz/Flare/Peony/Bud/Satin/Camellia/Wax/Rose/Gardenia/Snow/Velvet/Hibiscus/Roselle/Punch/Magnolia/Cream/Blush/Jasmine/Blossom/Honey/Lavender/Bloom/Calm and all prior pools/Pebble/Sage");
+  if (chipsForFriend("friend_083").some((c) => /wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|^pot$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^cluster$|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
+    throw new Error("Anemone chips must ban Wisteria/Cascade/Arbor and Clematis/Vine/Trellis and Cosmos/Airy/Ray and Buttercup/Meadow/Gloss/Primrose/Pale/Dish/Heather/Moor/Sprig/Marigold/Gold/Pot/Snapdragon/Jaw/Perch/Bluebell/Cloche/Ring/Foxglove/Tower/Throat/Hyacinth/Cluster/Bell/Crocus/Saffron/Tip/Lily/Pollen/Crest/Violet/Patch/Moss/Tulip/Stem/Glow/Poppy/Capsule/Silk/Lotus/Pad/Ripple/Orchid/Spur/Veil/Iris/Blade/Dew/Aster/Petal/Drift/Zinnia/Quill/Gleam/Dahlia/Spire/Ember/Azalea/Fizz/Flare/Peony/Bud/Satin/Camellia/Wax/Rose/Gardenia/Snow/Velvet/Hibiscus/Roselle/Punch/Magnolia/Cream/Blush/Jasmine/Blossom/Honey/Lavender/Bloom/Calm and all prior pools/Pebble/Sage");
   }
-  const wisteria48 = readFileSync(resolve("public/assets/cats/wisteria_loaf_48.svg"), "utf8");
-  const wisteria72 = readFileSync(resolve("public/assets/cats/wisteria_loaf_72.svg"), "utf8");
-  if (!wisteria48.includes("#B8A0E8") || !wisteria72.includes("#B8A0E8")) throw new Error("Wisteria loaf must use cascade coat #B8A0E8");
-  if (!wisteria48.includes("#3A2868") || !wisteria72.includes("#3A2868")) throw new Error("Wisteria loaf must use deep freckles #3A2868");
-  if (!wisteria48.includes("#F2E6FF") || !wisteria72.includes("#F2E6FF")) throw new Error("Wisteria loaf must use belly #F2E6FF");
-  for (const hex of ["#7EC8E8", "#1A3A58", "#E8F8FC", "#4A9BB8", "#E8A0C0", "#5A2848", "#FFF9FD", "#D07898", "#F4C8DC", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#C89648", "#FFF8E0", "#9A5A8A", "#2A1830", "#7A3F6C", "#F0D6E8", "#FFF2F8", "#F0A020", "#4A3010", "#FFE9B4", "#C86E0C", "#FFF6D0", "#E07050", "#3A2010", "#B84A28", "#F3C8A8", "#C8A84A", "#C4B06A", "#4A7EC8", "#1A2848", "#D0E4F6", "#2E5A98", "#E8F4FF", "#D478A0", "#3A2030", "#B44A78", "#F8D4E6", "#FFF4FA", "#5A6EC8", "#1E2448", "#C8D2F0", "#3A4A88", "#F0F4FF", "#C45A9A", "#F4C2DC", "#9A3A78", "#FFF0F8", "#F5F0E6", "#C8A84A", "#FFF8EC", "#C4B06A", "#FEF6DC", "#6B4AA0", "#1E2A18", "#D2C4EA", "#4A3078", "#F8F4FF", "#E07090", "#2A4020", "#F8C4D2", "#C44868", "#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0", "#9B7EBD", "#3A2A58"]) {
-    if (wisteria48.includes(hex) || wisteria72.includes(hex)) throw new Error(`Wisteria loaf must not use prior herb coat ${hex}`);
+  const anemone48 = readFileSync(resolve("public/assets/cats/anemone_loaf_48.svg"), "utf8");
+  const anemone72 = readFileSync(resolve("public/assets/cats/anemone_loaf_72.svg"), "utf8");
+  if (!anemone48.includes("#F0A8C8") || !anemone72.includes("#F0A8C8")) throw new Error("Anemone loaf must use windflower coat #F0A8C8");
+  if (!anemone48.includes("#4A2038") || !anemone72.includes("#4A2038")) throw new Error("Anemone loaf must use dark freckles #4A2038");
+  if (!anemone48.includes("#FFF7FC") || !anemone72.includes("#FFF7FC")) throw new Error("Anemone loaf must use belly #FFF7FC");
+  for (const hex of ["#B8A0E8", "#3A2868", "#F2E6FF", "#6E48A8", "#7EC8E8", "#1A3A58", "#E8F8FC", "#4A9BB8", "#E8A0C0", "#5A2848", "#FFF9FD", "#D07898", "#F4C8DC", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#C89648", "#FFF8E0", "#9A5A8A", "#2A1830", "#7A3F6C", "#F0D6E8", "#FFF2F8", "#F0A020", "#4A3010", "#FFE9B4", "#C86E0C", "#FFF6D0", "#E07050", "#3A2010", "#B84A28", "#F3C8A8", "#C8A84A", "#C4B06A", "#4A7EC8", "#1A2848", "#D0E4F6", "#2E5A98", "#E8F4FF", "#D478A0", "#3A2030", "#B44A78", "#F8D4E6", "#FFF4FA", "#5A6EC8", "#1E2448", "#C8D2F0", "#3A4A88", "#F0F4FF", "#C45A9A", "#F4C2DC", "#9A3A78", "#FFF0F8", "#F5F0E6", "#C8A84A", "#FFF8EC", "#C4B06A", "#FEF6DC", "#6B4AA0", "#1E2A18", "#D2C4EA", "#4A3078", "#F8F4FF", "#E07090", "#2A4020", "#F8C4D2", "#C44868", "#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0", "#9B7EBD", "#3A2A58"]) {
+    if (anemone48.includes(hex) || anemone72.includes(hex)) throw new Error(`Anemone loaf must not use prior herb coat ${hex}`);
   }
-  if (furnitureGiftsForClear(246).length) throw new Error("Wisteria@246 must gift no furniture");
+  if (furnitureGiftsForClear(249).length) throw new Error("Anemone@249 must gift no furniture");
   const yardF = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
-  if ((yardF.match(/const wisteria =/g) || []).length !== 1) throw new Error("YardScene must declare wisteria once");
-  if ((yardF.match(/\{wisteria \?/g) || []).length !== 1) throw new Error("YardScene must render wisteria once");
+  if ((yardF.match(/const anemone =/g) || []).length !== 1) throw new Error("YardScene must declare anemone once");
+  if ((yardF.match(/\{anemone \?/g) || []).length !== 1) throw new Error("YardScene must render anemone once");
+  if ((yardF.match(/const wisteria =/g) || []).length !== 1) throw new Error("YardScene must keep wisteria once");
+  if ((yardF.match(/\{wisteria \?/g) || []).length !== 1) throw new Error("YardScene must keep wisteria once");
   if ((yardF.match(/const clematis =/g) || []).length !== 1) throw new Error("YardScene must keep clematis once");
   if ((yardF.match(/\{clematis \?/g) || []).length !== 1) throw new Error("YardScene must keep clematis once");
   if ((yardF.match(/const cosmos =/g) || []).length !== 1) throw new Error("YardScene must keep cosmos once");
@@ -416,7 +427,7 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   if ((yardF.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardF.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardF.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 83) throw new Error("Met must include through Wisteria (82) after Anemone (83)");
+  if (TUTORIAL_RESCUES.length !== 83) throw new Error("Met must include through Anemone (83)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -425,21 +436,22 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   }
   if (SLICE_UNLOCKS[243] !== "friend_081") throw new Error("SLICE_UNLOCKS[243] must be friend_081");
   if (SLICE_UNLOCKS[246] !== "friend_082") throw new Error("SLICE_UNLOCKS[246] must be friend_082");
-  if (SLICE_UNLOCKS[249] !== "friend_083") throw new Error("SLICE_UNLOCKS[249] must be friend_083 after Anemone ship");
-  if (/pebble|Pebble/i.test(wisteria48 + wisteria72)) throw new Error("Wisteria art must not use Pebble");
-  if (/clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|cluster|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise/i.test(wisteria48 + wisteria72)) {
-    throw new Error("Wisteria art must not collide Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
+  if (SLICE_UNLOCKS[249] !== "friend_083") throw new Error("SLICE_UNLOCKS[249] must be friend_083");
+  if (SLICE_UNLOCKS[252]) throw new Error("no friend_084 @252 this slice");
+  if (/pebble|Pebble/i.test(anemone48 + anemone72)) throw new Error("Anemone art must not use Pebble");
+  if (/wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|cluster|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise/i.test(anemone48 + anemone72)) {
+    throw new Error("Anemone art must not collide Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
   }
-  const l247 = LEVELS.find((r) => r.id === "L247")!;
-  const l248 = LEVELS.find((r) => r.id === "L248")!;
-  const l249 = LEVELS.find((r) => r.id === "L249")!;
-  if (/\b(vine|trellis|star|clematis|airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|pot|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|cluster|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|vase|dahlia|fizz|flare|planter|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|bowl|poppy)\b/i.test([l247.name, l248.name].join(","))) {
-    throw new Error("L247–L248 must not reuse Vine/Trellis/Star/Clematis/Airy/Ray/Floret/Cosmos and prior triad names");
+  const l247 = LEVELS.find((r) => r.id === "L250")!;
+  const l248 = LEVELS.find((r) => r.id === "L251")!;
+  const l249 = LEVELS.find((r) => r.id === "L252")!;
+  if (/\b(cascade|arbor|droop|wisteria|vine|trellis|star|clematis|airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|pot|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|cluster|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|vase|dahlia|fizz|flare|planter|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|poppy)\b/i.test([l247.name, l248.name].join(","))) {
+    throw new Error("L250–L251 must not reuse Cascade/Arbor/Droop/Wisteria/Vine/Trellis/Star/Clematis/Airy/Ray/Floret/Cosmos and prior triad names");
   }
-  const wisteriaGatePair = (level: typeof l247) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (wisteriaGatePair(l247) !== "0,2/3,2") throw new Error(`L247 gates must be delta (3, 0) pair, got ${wisteriaGatePair(l247)}`);
-  if (wisteriaGatePair(l248) !== "3,4/3,5") throw new Error(`L248 gates must be delta (0, 1) pair, got ${wisteriaGatePair(l248)}`);
-  if (wisteriaGatePair(l249) !== "0,2/2,1") throw new Error(`L249 gates must be delta (2, 1) pair, got ${wisteriaGatePair(l249)}`);
+  const anemoneGatePair = (level: typeof l247) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (anemoneGatePair(l247) !== "1,0/2,2") throw new Error(`L250 gates must be delta (1, 2) pair, got ${anemoneGatePair(l247)}`);
+  if (anemoneGatePair(l248) !== "3,1/3,2") throw new Error(`L251 gates must be delta (0, 1) pair, got ${anemoneGatePair(l248)}`);
+  if (anemoneGatePair(l249) !== "3,1/4,5") throw new Error(`L252 gates must be delta (1, 4) pair, got ${anemoneGatePair(l249)}`);
   const occ249 = [...l249.cats, ...l249.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
   const priorOcc = new Set([
     "1,2;2,0;2,5;5,3",
@@ -466,39 +478,40 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
     "2,0;2,1;2,5;4,2",
     "1,2;2,4;2,5;5,1",
     "0,3;1,2;1,5;2,5",
+    "0,2;1,5;2,1;3,1",
   ]);
-  if (priorOcc.has(occ249)) throw new Error("L249 Droop must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star occupancy");
-  if (occ249.split(";").includes("5,5")) throw new Error("L249 Droop must be off Nori seat (5,5)");
-  if (l249.gates[0].y === l249.gates[1].y) throw new Error("L249 Droop must not same-row Nest");
-  if (l249.gates[0].x === l249.gates[1].x) throw new Error("L249 Droop must not column Porch");
-  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L247 Cascade must not stacked-column Vine");
+  if (priorOcc.has(occ249)) throw new Error("L252 Whirl must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star occupancy");
+  if (occ249.split(";").includes("5,5")) throw new Error("L252 Whirl must be off Nori seat (5,5)");
+  if (l249.gates[0].y === l249.gates[1].y) throw new Error("L252 Whirl must not same-row Nest");
+  if (l249.gates[0].x === l249.gates[1].x) throw new Error("L252 Whirl must not column Porch");
+  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L250 Wind must not stacked-column Vine");
 
-  if (solves.L247[0][0] === "cat_orange" && solves.L247[0][1] === "e") {
-    throw new Error("L247 Cascade Cut must not open orange-east (Airy Cut clone)");
+  if (solves.L250[0][0] === "cat_orange") {
+    throw new Error("L250 Wind Cut must not open orange-first (Cascade Cut clone)");
   }
-  if (solves.L247[0][0] === "cat_gray") {
-    throw new Error("L247 Cascade Cut must not open gray-first (Vine Cut clone)");
+  if (solves.L250[0][0] === "cat_gray" && solves.L250[0][1] === "s") {
+    throw new Error("L250 Wind Cut must not open gray-south (Vine Cut clone)");
   }
-  if (solves.L248[0][0] === "cat_black") {
-    throw new Error("L248 Arbor Gap must not open black-first (Trellis Gap clone)");
+  if (solves.L251[0][0] === "cat_gray") {
+    throw new Error("L251 Bowl Gap must not open gray-first (Arbor Gap clone)");
   }
-  if (solves.L248[0][0] === "cat_gray" && solves.L248[0][1] === "w") {
-    throw new Error("L248 Arbor Gap must not open gray-west (Ray Gap clone)");
+  if (solves.L251[0][0] === "cat_black" && solves.L251[0][1] === "s") {
+    throw new Error("L251 Bowl Gap must not open black-south (Trellis Gap clone)");
   }
-  if (solves.L249[0][0] === "cat_orange") {
-    throw new Error("L249 Droop Stop must not open orange-first (Star Stop clone)");
+  if (solves.L252[0][0] === "cat_black") {
+    throw new Error("L252 Whirl Stop must not open black-first (Droop Stop clone)");
   }
-  if (solves.L249[0][0] === "cat_black" && solves.L249[0][1] === "w") {
-    throw new Error("L249 Droop Stop must not open black-west (Floret Stop clone)");
+  if (solves.L252[0][0] === "cat_orange" && solves.L252[0][1] === "w") {
+    throw new Error("L252 Whirl Stop must not open orange-west (Star Stop clone)");
   }
-  if (solves.L247[0][0] !== "cat_orange") {
-    throw new Error("L247 Cascade Cut must open orange-first");
+  if (solves.L250[0][0] !== "cat_gray") {
+    throw new Error("L250 Wind Cut must open gray-first");
   }
-  if (solves.L248[0][0] !== "cat_gray") {
-    throw new Error("L248 Arbor Gap must open gray-first");
+  if (solves.L251[0][0] !== "cat_black") {
+    throw new Error("L251 Bowl Gap must open black-first");
   }
-  if (solves.L249[0][0] !== "cat_black") {
-    throw new Error("L249 Droop Stop must open black-first");
+  if (solves.L252[0][0] !== "cat_orange") {
+    throw new Error("L252 Whirl Stop must open orange-first");
   }
   for (const level of [l247, l248, l249]) {
     if (level.gates.every((g) => g.y === 5) || level.gates.every((g) => g.x === 5)) {
@@ -509,11 +522,13 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   }
   const wallKeyO = (level: typeof l247) =>
     [...level.walls].map((w) => `${w.x},${w.y}`).sort().join(";");
-  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243", "L244", "L245", "L246"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
-  for (const id of ["L247", "L248", "L249"] as const) {
+  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243", "L244", "L245", "L246", "L247", "L248", "L249"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
+  for (const id of ["L250", "L251", "L252"] as const) {
     const key = wallKeyO(LEVELS.find((r) => r.id === id)!);
-    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L246`);
+    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L249`);
   }
+  if (ART_KIT_PATH.anemone.loaf48 !== "/assets/cats/anemone_loaf_48.svg") throw new Error("ART_KIT_PATH.anemone loaf48");
+  if (ART_KIT_PATH.anemone.loaf72 !== "/assets/cats/anemone_loaf_72.svg") throw new Error("ART_KIT_PATH.anemone loaf72");
   if (ART_KIT_PATH.wisteria.loaf48 !== "/assets/cats/wisteria_loaf_48.svg") throw new Error("ART_KIT_PATH.wisteria loaf48");
   if (ART_KIT_PATH.wisteria.loaf72 !== "/assets/cats/wisteria_loaf_72.svg") throw new Error("ART_KIT_PATH.wisteria loaf72");
   if (ART_KIT_PATH.clematis.loaf48 !== "/assets/cats/clematis_loaf_48.svg") throw new Error("ART_KIT_PATH.clematis loaf48");
@@ -548,6 +563,7 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   if (ART_KIT_PATH.gardenia.loaf48 !== "/assets/cats/gardenia_loaf_48.svg") throw new Error("Gardenia kit must stay");
   if (ART_KIT_PATH.hibiscus.loaf48 !== "/assets/cats/hibiscus_loaf_48.svg") throw new Error("Hibiscus kit must stay");
   const saveF = readFileSync(resolve("src/components/providers/SaveProvider.tsx"), "utf8");
+  if (!saveF.includes("anemone bowl")) throw new Error("SaveProvider must yard-bubble anemone bowl for Anemone");
   if (!saveF.includes("wisteria arbor")) throw new Error("SaveProvider must yard-bubble wisteria arbor for Wisteria");
   if (!saveF.includes("clematis trellis")) throw new Error("SaveProvider must yard-bubble clematis trellis for Clematis");
   if (!saveF.includes("cosmos stem")) throw new Error("SaveProvider must keep cosmos stem for Cosmos");
@@ -564,11 +580,12 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   if (!saveF.includes("violet patch")) throw new Error("SaveProvider must keep violet patch for Violet");
   if (!saveF.includes("tulip vase")) throw new Error("SaveProvider must keep tulip vase for Tulip");
   if (!saveF.includes("poppy cup")) throw new Error("SaveProvider must keep poppy cup for Poppy");
-  if (!existsSync(resolve("data/collection/CH4_FRIEND_082.md"))) throw new Error("missing CH4_FRIEND_082.md");
-  if (!existsSync(resolve("data/collection/chapter4_wisteria_bang.json"))) throw new Error("missing collection wisteria bang");
-  if (!existsSync(resolve("data/chapter4_wisteria_bang.json"))) throw new Error("missing chapter4_wisteria_bang.json");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_083.md"))) throw new Error("missing CH4_FRIEND_083.md");
+  if (!existsSync(resolve("data/collection/chapter4_anemone_bang.json"))) throw new Error("missing collection anemone bang");
+  if (!existsSync(resolve("data/chapter4_anemone_bang.json"))) throw new Error("missing chapter4_anemone_bang.json");
   const nameModalF = readFileSync(resolve("src/components/puzzle/NameCatModal.tsx"), "utf8");
-  if (!nameModalF.includes("WISTERIA_FRIEND_ID")) throw new Error("NameCatModal must lockChips Wisteria");
+  if (!nameModalF.includes("ANEMONE_FRIEND_ID")) throw new Error("NameCatModal must lockChips Anemone");
+  if (!nameModalF.includes("WISTERIA_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Wisteria");
   if (!nameModalF.includes("CLEMATIS_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Clematis");
   if (!nameModalF.includes("COSMOS_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Cosmos");
   if (!nameModalF.includes("BUTTERCUP_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Buttercup");
@@ -594,5 +611,5 @@ export function verifyChapter4Wisteria(solves: Record<string, Array<[string, Dir
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Wisteria@246 + L247–L249 ok · chips Wisteria/Cascade/Arbor · coat #B8A0E8 + deep freckles #3A2868 · Cascade Cut / Arbor Gap / Droop Stop · Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Anemone@249 + L250–L252 ok · chips Anemone/Wind/Bowl · coat #F0A8C8 + dark freckles #4A2038 · Wind Cut / Bowl Gap / Whirl Stop · Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
