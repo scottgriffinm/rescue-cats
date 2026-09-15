@@ -405,7 +405,7 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_093")) {
+  if (after.save.friends.some((friend) => friend.friendId === "friend_094")) {
     throw new Error("friend_094 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_094")) {
