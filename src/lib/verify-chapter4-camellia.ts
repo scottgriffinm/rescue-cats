@@ -251,7 +251,7 @@ export function verifyChapter4Camellia(solves: Record<string, Array<[string, Dir
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const camellia =/g) || []).length !== 1) throw new Error("YardScene must declare camellia once");
   if ((yardC.match(/\{camellia \?/g) || []).length !== 1) throw new Error("YardScene must render camellia once");
-  if (TUTORIAL_RESCUES.length !== 60) throw new Error("Met must include through Camellia (58)");
+  if (TUTORIAL_RESCUES.length !== 61) throw new Error("Met must include through Camellia (58)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -260,6 +260,7 @@ export function verifyChapter4Camellia(solves: Record<string, Array<[string, Dir
   }
   if (SLICE_UNLOCKS[177] !== "friend_059") throw new Error("SLICE_UNLOCKS[177] must be friend_059 after Peony ship");
   if (SLICE_UNLOCKS[180] !== "friend_060") throw new Error("SLICE_UNLOCKS[180] must be friend_060 after Azalea ship");
+  if (SLICE_UNLOCKS[183] !== "friend_061") throw new Error("SLICE_UNLOCKS[183] must be friend_061 after Dahlia ship");
   if (/pebble|Pebble/i.test(camellia48 + camellia72)) throw new Error("Camellia art must not use Pebble");
   if (/gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(camellia48 + camellia72)) {
     throw new Error("Camellia art must not collide Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

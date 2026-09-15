@@ -244,7 +244,7 @@ export function verifyChapter4Gardenia(solves: Record<string, Array<[string, Dir
   const yardG = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardG.match(/const gardenia =/g) || []).length !== 1) throw new Error("YardScene must declare gardenia once");
   if ((yardG.match(/\{gardenia \?/g) || []).length !== 1) throw new Error("YardScene must render gardenia once");
-  if (TUTORIAL_RESCUES.length !== 60) throw new Error("Met must include through Gardenia (57)");
+  if (TUTORIAL_RESCUES.length !== 61) throw new Error("Met must include through Gardenia (57)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -254,6 +254,7 @@ export function verifyChapter4Gardenia(solves: Record<string, Array<[string, Dir
   if (SLICE_UNLOCKS[174] !== "friend_058") throw new Error("SLICE_UNLOCKS[174] must be friend_058 after Camellia ship");
   if (SLICE_UNLOCKS[177] !== "friend_059") throw new Error("SLICE_UNLOCKS[177] must be friend_059 after Peony ship");
   if (SLICE_UNLOCKS[180] !== "friend_060") throw new Error("SLICE_UNLOCKS[180] must be friend_060 after Azalea ship");
+  if (SLICE_UNLOCKS[183] !== "friend_061") throw new Error("SLICE_UNLOCKS[183] must be friend_061 after Dahlia ship");
   if (/pebble|Pebble/i.test(gardenia48 + gardenia72)) throw new Error("Gardenia art must not use Pebble");
   if (/hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(gardenia48 + gardenia72)) {
     throw new Error("Gardenia art must not collide Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
