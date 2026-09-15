@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_tulip_bang",
+  "status": "READY",
+  "friend_id": "friend_068",
+  "unlock_clear": 204,
+  "personality": "Tulip-soft",
+  "display_line": "Spring bright. Already claimed the tulip vase.",
+  "default_name": "Tulip",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/tulip_loaf_48.svg",
+    "loaf_72": "/assets/cats/tulip_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "tulip"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Tulip", "Stem", "Glow"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_068": [
+      "{Name}: Spring bright. Already claimed the tulip vase.",
+      "{Name}: Looks yard-cool. Owns the vase."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 204,
+    "sku_id": null,
+    "note": "Ch4. Poppy Pass next. No gift. Ban Poppy/Capsule/Silk and all prior pools. Bean parade stands. No Pebble. Tulip chip is CEO-locked on Tulip. No friend_069."
+  }
+}

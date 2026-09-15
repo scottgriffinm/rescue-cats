@@ -1,6 +1,6 @@
 /**
- * Chapter 4 beat: L201 → Poppy@201 naming, then L202–L204.
- * L204 queues Tulip pending. Do not invent friend_069. L10 stays off-path.
+ * Chapter 4 beat: L204 → Tulip@204 naming, then L205–L207.
+ * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-poppy";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-tulip";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -89,6 +89,7 @@ const PARADE = [
   ["friend_064", "Iris", 192],
   ["friend_065", "Orchid", 195],
   ["friend_066", "Lotus", 198],
+  ["friend_067", "Poppy", 201],
 ];
 
 const completedIds = [
@@ -101,7 +102,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 190 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 193 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -127,7 +128,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Lotus claimed the lotus pad."],
+  bubbles: ["Poppy claimed the poppy cup."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -177,22 +178,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L201`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("POND STOP"));
-  await shot(page, "01_l201_before_poppy");
+  await page.goto(`${BASE}/level/L204`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CUP STOP"));
+  await shot(page, "01_l204_before_tulip");
   await play(
     page,
     [
-      ["black", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowDown"],
       ["black", "ArrowLeft"],
       ["black", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
     ],
     "New friend!",
   );
@@ -210,15 +211,15 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("poppy naming", modal);
+  console.log("tulip naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Poppy prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Tulip prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Field bright. Already claimed the poppy cup.") {
-    throw new Error(`Poppy display line drifted: ${modal.line}`);
+  if (modal.line !== "Spring bright. Already claimed the tulip vase.") {
+    throw new Error(`Tulip display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Poppy,Capsule,Silk") {
-    throw new Error(`Poppy chips must be Poppy/Capsule/Silk, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Tulip,Stem,Glow") {
+    throw new Error(`Tulip chips must be Tulip/Stem/Glow, got ${modal.chips.join("/")}`);
   }
   if (
     modal.chips.includes("Iris") ||
@@ -260,12 +261,18 @@ try {
     modal.chips.includes("Lotus") ||
     modal.chips.includes("Pad") ||
     modal.chips.includes("Ripple") ||
+    modal.chips.includes("Poppy") ||
+    modal.chips.includes("Capsule") ||
+    modal.chips.includes("Silk") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Poppy chips collided with Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Tulip chips collided with Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
-    throw new Error(`Poppy hero missing scarlet-poppy loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/tulip_loaf_72.svg")) {
+    throw new Error(`Tulip hero missing spring-tulip loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
+    throw new Error("Tulip hero must not use the Poppy loaf");
   }
   if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
     throw new Error("Poppy hero must not use the Lotus loaf");
@@ -300,15 +307,15 @@ try {
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
     throw new Error("Poppy hero must not use the Hibiscus loaf");
   }
-  await shot(page, "02_poppy_naming");
+  await shot(page, "02_tulip_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Poppy") &&
-      ((document.body.innerText || "").includes("cup") ||
-        (document.body.innerText || "").includes("poppy") ||
+      (document.body.innerText || "").includes("Tulip") &&
+      ((document.body.innerText || "").includes("vase") ||
+        (document.body.innerText || "").includes("tulip") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -321,87 +328,87 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_067")) {
-    throw new Error("Poppy was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_068")) {
+    throw new Error("Tulip was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_067")?.name !== "Poppy") {
-    throw new Error("Poppy name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_068")?.name !== "Tulip") {
+    throw new Error("Tulip name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_068")) {
-    throw new Error("friend_068 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_069")) {
+    throw new Error("friend_069 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/poppy_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/poppy_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/tulip_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/tulip_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Poppy scarlet-poppy loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Tulip spring-tulip loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("cup") && !yard.text.includes("Poppy")) {
-    throw new Error("yard missing Poppy poppy cup line");
+  if (!yard.text.includes("vase") && !yard.text.includes("Tulip")) {
+    throw new Error("yard missing Tulip tulip vase line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_poppy_yard");
+  await shot(page, "03_tulip_yard");
 
-  await page.goto(`${BASE}/level/L202`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CAPSULE CUT"));
+  await page.goto(`${BASE}/level/L205`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("STEM CUT"));
   await play(
     page,
     [
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
       ["black", "ArrowDown"],
       ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
       ["orange", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
       ["black", "ArrowDown"],
       ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L203`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SILK GAP"));
+  await page.goto(`${BASE}/level/L206`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("GLOW GAP"));
   await play(
     page,
     [
+      ["gray", "ArrowRight"],
       ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowRight"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
     ],
     "Home",
   );
-  await shot(page, "04_l203_win");
+  await shot(page, "04_l206_win");
 
-  await page.goto(`${BASE}/level/L204`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CUP STOP"));
+  await page.goto(`${BASE}/level/L207`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("BLOOM STOP"));
   await play(
     page,
     [
-      ["black", "ArrowLeft"],
       ["black", "ArrowUp"],
       ["black", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
+      ["black", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["black", "ArrowRight"],
       ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l204_win");
+  await shot(page, "05_l207_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -409,7 +416,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L201", "L202", "L203", "L204"]) {
+  for (const id of ["L204", "L205", "L206", "L207"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -417,20 +424,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_068")) {
-    throw new Error("friend_068 must stay pending, not named, on the Poppy slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_068")) {
-    throw new Error("L204 clear must queue Tulip when friend_068 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_069")) {
+    throw new Error("friend_069 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_069")) {
-    throw new Error("L204 clear must not queue friend_069");
+    throw new Error("L207 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_067").length !== 1) {
-    throw new Error("L204 must not unlock a Poppy duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L207 must not open a next-friend naming modal");
   }
-  if (!after.hud.includes("204") && !after.text.includes("204")) {
-    throw new Error("Campaign HUD must show through 204 after L204 clear");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_068").length !== 1) {
+    throw new Error("L207 must not unlock a Tulip duplicate");
+  }
+  if (!after.hud.includes("207") && !after.text.includes("207")) {
+    throw new Error("Campaign HUD must show through 207 after L207 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -450,9 +457,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L201 + POPPY + L202-204 OK");
+  console.log("CHAPTER 4 L204 + TULIP + L205-207 OK");
 } catch (error) {
-  console.error("CHAPTER 4 POPPY FAIL", error);
+  console.error("CHAPTER 4 TULIP FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

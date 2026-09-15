@@ -66,6 +66,7 @@ import chapter4ar from "../../data/levels/CHAPTER4_PUZZLE_L193_L195.json";
 import chapter4as from "../../data/levels/CHAPTER4_PUZZLE_L196_L198.json";
 import chapter4at from "../../data/levels/CHAPTER4_PUZZLE_L199_L201.json";
 import chapter4au from "../../data/levels/CHAPTER4_PUZZLE_L202_L204.json";
+import chapter4av from "../../data/levels/CHAPTER4_PUZZLE_L205_L207.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -275,6 +276,9 @@ const HEADLINES: Record<string, string> = {
   L202: "CAPSULE CUT",
   L203: "SILK GAP",
   L204: "CUP STOP",
+  L205: "STEM CUT",
+  L206: "GLOW GAP",
+  L207: "BLOOM STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -481,6 +485,9 @@ const HINTS: Record<string, string> = {
   L202: "Capsule cut — black north first; orange cuts after; not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south.",
   L203: "Silk gap — gray south then orange threads; not Ripple black-east, not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west.",
   L204: "Cup stop — poppy-cup seats; off Pad (0,5)/(4,5)/(2,4)/(4,3); off Pond (5,4)/(2,2)/(2,3)/(0,4); off Spike (4,0)/(0,3)/(3,4)/(4,1); off Stem (1,1)/(0,1)/(4,2)/(1,0); off Dish (5,2)/(5,1)/(3,0)/(2,1); off Urn (0,5)/(3,2)/(1,4)/(5,0); off Vase (3,3)/(1,3)/(2,4)/(3,1); off Planter (1,5)/(4,5)/(4,4)/(3,5); not Hold*/Park*.",
+  L205: "Stem cut — black south first; orange cuts after; not Capsule black-north, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south.",
+  L206: "Glow gap — gray east then orange threads; not Silk gray-south, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west.",
+  L207: "Bloom stop — tulip-vase seats; occupancy off Cup/Pad/Pond/Vase/Bloom twins; off Nori (5,5); not Dahlia Vase Stop; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -602,6 +609,7 @@ const authored = [
   ...chapter4as.levels,
   ...chapter4at.levels,
   ...chapter4au.levels,
+  ...chapter4av.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

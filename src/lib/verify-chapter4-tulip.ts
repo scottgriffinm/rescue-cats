@@ -14,6 +14,7 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
+  [201, "friend_067", "Poppy@201 must stay"],
   [198, "friend_066", "Lotus@198 must stay"],
   [195, "friend_065", "Orchid@195 must stay"],
   [192, "friend_064", "Iris@192 must stay"],
@@ -69,6 +70,7 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
+  ["friend_067", "Poppy,Capsule,Silk", "Poppy chips untouched"],
   ["friend_066", "Lotus,Pad,Ripple", "Lotus chips untouched"],
   ["friend_065", "Orchid,Spur,Veil", "Orchid chips untouched"],
   ["friend_064", "Iris,Blade,Dew", "Iris chips untouched"],
@@ -154,6 +156,7 @@ const BANNED_PAIRS = new Set([
   "1,2/4,0", "1,1/5,3", "1,0/4,2",
   "0,5/4,1", "2,0/3,1", "3,4/4,1",
   "2,4/4,3", "2,4/3,0", "0,4/2,3",
+  "3,5/5,3", "0,0/4,4", "1,2/2,5",
 ]);
 
 function stateKey(cats: PieceCat[]) {
@@ -204,11 +207,11 @@ function uniqueShortestCount(level: Level) {
   return { min, count };
 }
 
-export function verifyChapter4Poppy(solves: Record<string, Array<[string, Dir]>>) {
+export function verifyChapter4Tulip(solves: Record<string, Array<[string, Dir]>>) {
   for (const [id, name] of [
-    ["L202", "Capsule Cut"],
-    ["L203", "Silk Gap"],
-    ["L204", "Cup Stop"],
+    ["L205", "Stem Cut"],
+    ["L206", "Glow Gap"],
+    ["L207", "Bloom Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -221,10 +224,10 @@ export function verifyChapter4Poppy(solves: Record<string, Array<[string, Dir]>>
     if (/\b(hold|park|close)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Hold*/Park*/Close`);
     }
-    if (/poppy (cut|gap|stop)/i.test(level.name)) {
-      throw new Error(`${id} must not be Poppy Cut/Gap/Stop`);
+    if (/tulip (cut|gap|stop)/i.test(level.name)) {
+      throw new Error(`${id} must not be Tulip Cut/Gap/Stop`);
     }
-    if (/pad cut|ripple gap|pond stop|lotus (cut|gap|stop)|spur cut|veil gap|spike stop|orchid (cut|gap|stop)|blade cut|dew gap|stem stop|iris (cut|gap|stop)|petal cut|drift gap|dish stop|aster (cut|gap|stop)|quill cut|gleam gap|urn stop|zinnia (cut|gap|stop)|spire cut|ember gap|vase stop|dahlia (cut|gap|stop)|fizz cut|flare gap|planter stop|azalea (cut|gap|stop)|bud cut|satin gap|bowl stop|wax cut|rose gap|tray stop|snow drift|velvet latch|dish claim|gardenia (cut|gap|stop)|roselle cut|punch gap|sip stop|hibiscus (cut|gap|stop)|cream cut|blush gap|magnolia (cut|gap|stop)|blossom cut|honey gap|bloom stop|jasmine (cut|gap|stop)|citrus cut|earl gap|saucer stop|bergamot (cut|gap|stop)|daisy cut|tea gap|chamomile (cut|gap|stop)|bloom cut|calm gap|bundle stop|nip cut|dream gap|pouch stop|chill cut|frost gap|tin stop|lavender (cut|gap|stop)|catnip (cut|gap|stop)|mint (cut|gap|stop)|needle cut|woody gap|pot stop|rosemary (cut|gap|stop)|pinch cut|twig gap|jar stop|thyme (cut|gap|stop)|marjoram (cut|gap|stop)|softleaf cut|dusty gap|peel stop|oregano (cut|gap|stop)|stone cut|wild gap|pizza stop|tarragon (cut|gap|stop)|spear cut|bitters gap|cruet stop|dill (cut|gap|stop)|seed cut|frondlet gap|ledge stop|parsley (cut|gap|stop)|curl cut|sprig gap|garnish stop|peony (cut|gap|stop)|camellia (cut|gap|stop)/i.test(level.name)) {
+    if (/capsule cut|silk gap|cup stop|pad cut|ripple gap|pond stop|lotus (cut|gap|stop)|spur cut|veil gap|spike stop|orchid (cut|gap|stop)|blade cut|dew gap|stem stop|iris (cut|gap|stop)|petal cut|drift gap|dish stop|aster (cut|gap|stop)|quill cut|gleam gap|urn stop|zinnia (cut|gap|stop)|spire cut|ember gap|vase stop|dahlia (cut|gap|stop)|fizz cut|flare gap|planter stop|azalea (cut|gap|stop)|bud cut|satin gap|bowl stop|wax cut|rose gap|tray stop|snow drift|velvet latch|dish claim|gardenia (cut|gap|stop)|roselle cut|punch gap|sip stop|hibiscus (cut|gap|stop)|cream cut|blush gap|magnolia (cut|gap|stop)|blossom cut|honey gap|jasmine (cut|gap|stop)|citrus cut|earl gap|saucer stop|bergamot (cut|gap|stop)|daisy cut|tea gap|chamomile (cut|gap|stop)|bloom cut|calm gap|bundle stop|nip cut|dream gap|pouch stop|chill cut|frost gap|tin stop|lavender (cut|gap|stop)|catnip (cut|gap|stop)|mint (cut|gap|stop)|needle cut|woody gap|pot stop|rosemary (cut|gap|stop)|pinch cut|twig gap|jar stop|thyme (cut|gap|stop)|marjoram (cut|gap|stop)|softleaf cut|dusty gap|peel stop|oregano (cut|gap|stop)|stone cut|wild gap|pizza stop|tarragon (cut|gap|stop)|spear cut|bitters gap|cruet stop|dill (cut|gap|stop)|seed cut|frondlet gap|ledge stop|parsley (cut|gap|stop)|curl cut|sprig gap|garnish stop|peony (cut|gap|stop)|camellia (cut|gap|stop)|poppy (cut|gap|stop)/i.test(level.name)) {
       throw new Error(`${id} must not reuse prior triad names`);
     }
     const pair = level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
@@ -234,6 +237,9 @@ export function verifyChapter4Poppy(solves: Record<string, Array<[string, Dir]>>
     if (unique.min < 10 || unique.min > 11) throw new Error(`${id} shortest must be 10–11, got ${unique.min}`);
     if (level.moveBudget < unique.min) throw new Error(`${id} budget ${level.moveBudget} < shortest ${unique.min}`);
   }
+  if (LEVELS.find((row) => row.id === "L202")?.name !== "Capsule Cut") throw new Error("L202 Capsule Cut locked");
+  if (LEVELS.find((row) => row.id === "L203")?.name !== "Silk Gap") throw new Error("L203 Silk Gap locked");
+  if (LEVELS.find((row) => row.id === "L204")?.name !== "Cup Stop") throw new Error("L204 Cup Stop locked");
   if (LEVELS.find((row) => row.id === "L199")?.name !== "Pad Cut") throw new Error("L199 Pad Cut locked");
   if (LEVELS.find((row) => row.id === "L200")?.name !== "Ripple Gap") throw new Error("L200 Ripple Gap locked");
   if (LEVELS.find((row) => row.id === "L201")?.name !== "Pond Stop") throw new Error("L201 Pond Stop locked");
@@ -267,180 +273,177 @@ export function verifyChapter4Poppy(solves: Record<string, Array<[string, Dir]>>
   if (LEVELS.find((row) => row.id === "L168")?.name !== "Bowl Stop") throw new Error("L168 Bowl Stop locked");
   if (LEVELS.find((row) => row.id === "L165")?.name !== "Bloom Stop") throw new Error("L165 Bloom Stop locked");
   if (LEVELS.find((row) => row.id === "L162")?.name !== "Saucer Stop") throw new Error("L162 Saucer Stop locked");
-  if (SLICE_UNLOCKS[201] !== "friend_067") throw new Error("SLICE_UNLOCKS[201] must be friend_067");
-  if (shippedFriendForClear(201)?.friendId !== "friend_067") throw new Error("onClear(201) must award Poppy");
-  const poppy = friendById("friend_067");
-  if (!poppy) throw new Error("friend_067 missing from CATALOG");
-  if (poppy.defaultName !== "Poppy") throw new Error("default name must be Poppy");
-  if (poppy.unlockClear !== 201) throw new Error("Poppy unlockClear must be 201");
-  if (poppy.phenotype.artKit !== "poppy") throw new Error("Poppy artKit must be poppy");
-  if (poppy.phenotype.personality !== "Poppy-soft") throw new Error("Poppy personality must be Poppy-soft");
-  if (poppy.phenotype.boardColor !== "gray") throw new Error("Poppy boardColor must be gray");
-  if (poppy.phenotype.color !== "Gray") throw new Error("Poppy color must be Gray");
-  if (poppy.phenotype.pattern !== "Freckled") throw new Error("Poppy pattern must be Freckled");
-  if (chipsForFriend("friend_067").join(",") !== "Poppy,Capsule,Silk") {
-    throw new Error(`Poppy chips must be Poppy/Capsule/Silk, got ${chipsForFriend("friend_067").join(",")}`);
+  if (SLICE_UNLOCKS[204] !== "friend_068") throw new Error("SLICE_UNLOCKS[204] must be friend_068");
+  if (shippedFriendForClear(204)?.friendId !== "friend_068") throw new Error("onClear(204) must award Tulip");
+  const tulip = friendById("friend_068");
+  if (!tulip) throw new Error("friend_068 missing from CATALOG");
+  if (tulip.defaultName !== "Tulip") throw new Error("default name must be Tulip");
+  if (tulip.unlockClear !== 204) throw new Error("Tulip unlockClear must be 204");
+  if (tulip.phenotype.artKit !== "tulip") throw new Error("Tulip artKit must be tulip");
+  if (tulip.phenotype.personality !== "Tulip-soft") throw new Error("Tulip personality must be Tulip-soft");
+  if (tulip.phenotype.boardColor !== "orange") throw new Error("Tulip boardColor must be orange");
+  if (tulip.phenotype.color !== "Orange") throw new Error("Tulip color must be Orange");
+  if (tulip.phenotype.pattern !== "Freckled") throw new Error("Tulip pattern must be Freckled");
+  if (chipsForFriend("friend_068").join(",") !== "Tulip,Stem,Glow") {
+    throw new Error(`Tulip chips must be Tulip/Stem/Glow, got ${chipsForFriend("friend_068").join(",")}`);
   }
-  if (chipsForFriend("friend_067").some((c) => /lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$/i.test(c))) {
-    throw new Error("Poppy chips must ban Lotus/Pad/Ripple/Orchid/Spur/Veil/Iris/Blade/Dew/Aster/Petal/Drift/Zinnia/Quill/Gleam/Dahlia/Spire/Ember/Azalea/Fizz/Flare/Peony/Bud/Satin/Camellia/Wax/Rose/Gardenia/Snow/Velvet/Hibiscus/Roselle/Punch/Magnolia/Cream/Blush/Jasmine/Blossom/Honey and all prior pools/Pebble/Sage");
+  if (chipsForFriend("friend_068").some((c) => /poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|sprig|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$/i.test(c))) {
+    throw new Error("Tulip chips must ban Poppy/Capsule/Silk/Lotus/Pad/Ripple/Orchid/Spur/Veil/Iris/Blade/Dew/Aster/Petal/Drift/Zinnia/Quill/Gleam/Dahlia/Spire/Ember/Azalea/Fizz/Flare/Peony/Bud/Satin/Camellia/Wax/Rose/Gardenia/Snow/Velvet/Hibiscus/Roselle/Punch/Magnolia/Cream/Blush/Jasmine/Blossom/Honey and all prior pools/Pebble/Sage");
   }
-  const poppy48 = readFileSync(resolve("public/assets/cats/poppy_loaf_48.svg"), "utf8");
-  const poppy72 = readFileSync(resolve("public/assets/cats/poppy_loaf_72.svg"), "utf8");
-  if (!poppy48.includes("#D94A5A") || !poppy72.includes("#D94A5A")) throw new Error("Poppy loaf must use bold scarlet-poppy coat #D94A5A");
-  if (!poppy48.includes("#3A1218") || !poppy72.includes("#3A1218")) throw new Error("Poppy loaf must use seed freckles #3A1218");
-  if (!poppy48.includes("#F4B4B8") || !poppy72.includes("#F4B4B8")) throw new Error("Poppy loaf must use belly #F4B4B8");
-  for (const hex of ["#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0"]) {
-    if (poppy48.includes(hex) || poppy72.includes(hex)) throw new Error(`Poppy loaf must not use prior herb coat ${hex}`);
+  const tulip48 = readFileSync(resolve("public/assets/cats/tulip_loaf_48.svg"), "utf8");
+  const tulip72 = readFileSync(resolve("public/assets/cats/tulip_loaf_72.svg"), "utf8");
+  if (!tulip48.includes("#E07090") || !tulip72.includes("#E07090")) throw new Error("Tulip loaf must use spring tulip coat #E07090");
+  if (!tulip48.includes("#2A4020") || !tulip72.includes("#2A4020")) throw new Error("Tulip loaf must use stem freckles #2A4020");
+  if (!tulip48.includes("#F8C4D2") || !tulip72.includes("#F8C4D2")) throw new Error("Tulip loaf must use belly #F8C4D2");
+  for (const hex of ["#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0"]) {
+    if (tulip48.includes(hex) || tulip72.includes(hex)) throw new Error(`Tulip loaf must not use prior herb coat ${hex}`);
   }
-  if (furnitureGiftsForClear(201).length) throw new Error("Poppy@201 must gift no furniture");
+  if (furnitureGiftsForClear(204).length) throw new Error("Tulip@204 must gift no furniture");
   const yardO = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
-  if ((yardO.match(/const poppy =/g) || []).length !== 1) throw new Error("YardScene must declare poppy once");
-  if ((yardO.match(/\{poppy \?/g) || []).length !== 1) throw new Error("YardScene must render poppy once");
+  if ((yardO.match(/const tulip =/g) || []).length !== 1) throw new Error("YardScene must declare tulip once");
+  if ((yardO.match(/\{tulip \?/g) || []).length !== 1) throw new Error("YardScene must render tulip once");
+  if ((yardO.match(/const poppy =/g) || []).length !== 1) throw new Error("YardScene must keep poppy once");
   if ((yardO.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardO.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardO.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 68) throw new Error("Met must include through Poppy (67)");
+  if (TUTORIAL_RESCUES.length !== 68) throw new Error("Met must include through Tulip (68)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
   for (const [friendId, chips, message] of PRIOR_CHIPS) {
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
-  if (SLICE_UNLOCKS[204] !== "friend_068") throw new Error("SLICE_UNLOCKS[204] must be friend_068 after Tulip ship");
-  if (/pebble|Pebble/i.test(poppy48 + poppy72)) throw new Error("Poppy art must not use Pebble");
-  if (/lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|stem|rib|chervil|frill|lace|fennel|anise/i.test(poppy48 + poppy72)) {
-    throw new Error("Poppy art must not collide Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
+  if (SLICE_UNLOCKS[207]) throw new Error("no friend_069 @207 this slice");
+  if (/pebble|Pebble/i.test(tulip48 + tulip72)) throw new Error("Tulip art must not use Pebble");
+  if (/poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|rib|chervil|frill|lace|fennel|anise/i.test(tulip48 + tulip72)) {
+    throw new Error("Tulip art must not collide Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
   }
-  const l202 = LEVELS.find((r) => r.id === "L202")!;
-  const l203 = LEVELS.find((r) => r.id === "L203")!;
-  const l204 = LEVELS.find((r) => r.id === "L204")!;
-  if (/\b(pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|stem|iris|petal|drift|dish|aster|quill|gleam|urn|zinnia|spire|ember|vase|dahlia|fizz|flare|planter|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|bloom|citrus|earl|saucer|daisy|tea|cup|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pot|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|seed|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|bowl)\b/i.test([l202.name, l203.name].join(","))) {
-    throw new Error("L202–L203 must not reuse Pad/Ripple/Pond/Lotus/Spur/Veil/Spike/Orchid/Blade/Dew/Stem/Iris/Petal/Drift/Dish/Aster/Quill/Gleam/Urn/Zinnia/Spire/Ember/Vase/Dahlia/Fizz/Flare/Planter/Azalea/Wax/Rose/Tray/Snow/Velvet/Roselle/Punch/Sip/Cream/Blush/Cup/Bloom/Saucer/Peony/Bud/Satin/Bowl and prior triad names");
+  const l205 = LEVELS.find((r) => r.id === "L205")!;
+  const l206 = LEVELS.find((r) => r.id === "L206")!;
+  const l207 = LEVELS.find((r) => r.id === "L207")!;
+  if (/\b(pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|dish|aster|quill|gleam|urn|zinnia|spire|ember|vase|dahlia|fizz|flare|planter|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|bloom|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pot|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|seed|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|bowl|poppy)\b/i.test([l205.name, l206.name].join(","))) {
+    throw new Error("L205–L206 must not reuse Capsule/Silk/Cup/Pad/Ripple/Pond/Lotus/Spur/Veil/Spike/Orchid/Blade/Dew/Iris/Petal/Drift/Dish/Aster/Quill/Gleam/Urn/Zinnia/Spire/Ember/Vase/Dahlia/Fizz/Flare/Planter/Azalea/Wax/Rose/Tray/Snow/Velvet/Roselle/Punch/Sip/Cream/Blush/Bloom/Saucer/Peony/Bud/Satin/Bowl and prior triad names");
   }
-  const poppyGatePair = (level: typeof l202) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (poppyGatePair(l202) !== "3,5/5,3") throw new Error(`L202 gates must be delta (2, -2) pair, got ${poppyGatePair(l202)}`);
-  if (poppyGatePair(l203) !== "0,0/4,4") throw new Error(`L203 gates must be delta (4, 4) pair, got ${poppyGatePair(l203)}`);
-  if (poppyGatePair(l204) !== "1,2/2,5") throw new Error(`L204 gates must be delta (1, 3) pair, got ${poppyGatePair(l204)}`);
-  const occ204 = new Set([
-    ...l204.cats.map((c) => `${c.x},${c.y}`),
-    ...l204.gates.map((g) => `${g.x},${g.y}`),
+  const tulipGatePair = (level: typeof l205) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (tulipGatePair(l205) !== "4,1/5,2") throw new Error(`L205 gates must be delta (1, 1) pair, got ${tulipGatePair(l205)}`);
+  if (tulipGatePair(l206) !== "4,4/5,2") throw new Error(`L206 gates must be delta (1, -2) pair, got ${tulipGatePair(l206)}`);
+  if (tulipGatePair(l207) !== "3,5/4,1") throw new Error(`L207 gates must be delta (1, -4) pair, got ${tulipGatePair(l207)}`);
+  const occ207 = [...l207.cats, ...l207.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
+  const priorOcc = new Set([
+    "1,2;2,0;2,5;5,3",
+    "0,5;2,4;4,3;4,5",
+    "0,4;2,2;2,3;5,4",
+    "1,3;2,4;3,1;3,3",
+    "0,5;1,4;5,0;5,1",
+    "0,3;3,4;4,0;4,1",
+    "0,1;1,0;1,1;4,2",
+    "2,1;3,0;5,1;5,2",
+    "0,5;1,4;3,2;5,0",
+    "1,5;3,5;4,4;4,5",
   ]);
-  if (occ204.has("5,5")) throw new Error("L204 Cup must be off Nori seat (5,5)");
-  if (occ204.has("4,0") || occ204.has("0,3") || occ204.has("3,4") || occ204.has("4,1")) {
-    throw new Error("L204 Cup must be off Spike seats");
+  if (priorOcc.has(occ207)) throw new Error("L207 Bloom must not twin Cup/Pad/Pond/Vase/Bloom/Spike/Stem/Dish/Urn/Planter occupancy");
+  if (occ207.split(";").includes("5,5")) throw new Error("L207 Bloom must be off Nori seat (5,5)");
+  if (l207.gates[0].y === l207.gates[1].y) throw new Error("L207 Bloom must not same-row Nest");
+  if (l207.gates[0].x === l207.gates[1].x) throw new Error("L207 Bloom must not column Porch");
+  if (l205.cats[0].x === l205.cats[1].x) throw new Error("L205 Stem must not stacked-column Vine");
+  if (solves.L205[0][0] === "cat_black" && solves.L205[0][1] === "n") {
+    throw new Error("L205 Stem Cut must not open black-north (Capsule Cut clone)");
   }
-  if (occ204.has("1,1") || occ204.has("0,1") || occ204.has("4,2") || occ204.has("1,0")) {
-    throw new Error("L204 Cup must be off Stem seats");
+  if (solves.L205[0][0] === "cat_gray" && solves.L205[0][1] === "w") {
+    throw new Error("L205 Stem Cut must not open gray-west (Pad Cut clone)");
   }
-  if (occ204.has("5,2") || occ204.has("5,1") || occ204.has("3,0") || occ204.has("2,1")) {
-    throw new Error("L204 Cup must be off Dish seats");
+  if (solves.L205[0][0] === "cat_orange" && solves.L205[0][1] === "e") {
+    throw new Error("L205 Stem Cut must not open orange-east (Spur Cut clone)");
   }
-  if (occ204.has("0,5") || occ204.has("3,2") || occ204.has("1,4") || occ204.has("5,0")) {
-    throw new Error("L204 Cup must be off Urn seats");
+  if (solves.L205[0][0] === "cat_gray" && solves.L205[0][1] === "n") {
+    throw new Error("L205 Stem Cut must not open gray-north (Blade Cut clone)");
   }
-  if (occ204.has("3,3") || occ204.has("1,3") || occ204.has("2,4") || occ204.has("3,1")) {
-    throw new Error("L204 Cup must be off Vase seats");
+  if (solves.L205[0][0] === "cat_gray" && solves.L205[0][1] === "e") {
+    throw new Error("L205 Stem Cut must not open gray-east (Petal Cut clone)");
   }
-  if (occ204.has("1,5") || occ204.has("4,5") || occ204.has("4,4") || occ204.has("3,5")) {
-    throw new Error("L204 Cup must be off Planter seats");
+  if (solves.L205[0][0] === "cat_orange" && solves.L205[0][1] === "n") {
+    throw new Error("L205 Stem Cut must not open orange-north (Quill Cut clone)");
   }
-  if (occ204.has("0,5") || occ204.has("4,5") || occ204.has("2,4") || occ204.has("4,3")) {
-    throw new Error("L204 Cup must be off Pad seats");
+  if (solves.L205[0][0] === "cat_orange" && solves.L205[0][1] === "w") {
+    throw new Error("L205 Stem Cut must not open orange-west (Spire Cut clone)");
   }
-  if (occ204.has("5,4") || occ204.has("2,2") || occ204.has("2,3") || occ204.has("0,4")) {
-    throw new Error("L204 Cup must be off Pond seats");
+  if (solves.L205[0][0] === "cat_gray" && solves.L205[0][1] === "s") {
+    throw new Error("L205 Stem Cut must not open gray-south (Fizz Cut clone)");
   }
-  if (l204.gates[0].y === l204.gates[1].y) throw new Error("L204 Cup must not same-row Nest");
-  if (l204.gates[0].x === l204.gates[1].x) throw new Error("L204 Cup must not column Porch");
-  if (l202.cats[0].x === l202.cats[1].x) throw new Error("L202 Capsule must not stacked-column Vine");
-  if (solves.L202[0][0] === "cat_gray" && solves.L202[0][1] === "w") {
-    throw new Error("L202 Capsule Cut must not open gray-west (Pad Cut clone)");
+  if (solves.L205[0][0] === "cat_orange" && solves.L205[0][1] === "s") {
+    throw new Error("L205 Stem Cut must not open orange-south (Vase Stop clone)");
   }
-  if (solves.L202[0][0] === "cat_orange" && solves.L202[0][1] === "e") {
-    throw new Error("L202 Capsule Cut must not open orange-east (Spur Cut clone)");
+  if (solves.L206[0][0] === "cat_gray" && solves.L206[0][1] === "s") {
+    throw new Error("L206 Glow Gap must not open gray-south (Silk Gap clone)");
   }
-  if (solves.L202[0][0] === "cat_gray" && solves.L202[0][1] === "n") {
-    throw new Error("L202 Capsule Cut must not open gray-north (Blade Cut clone)");
+  if (solves.L206[0][0] === "cat_black" && solves.L206[0][1] === "e") {
+    throw new Error("L206 Glow Gap must not open black-east (Ripple Gap clone)");
   }
-  if (solves.L202[0][0] === "cat_gray" && solves.L202[0][1] === "e") {
-    throw new Error("L202 Capsule Cut must not open gray-east (Petal Cut clone)");
+  if (solves.L206[0][0] === "cat_orange" && solves.L206[0][1] === "s") {
+    throw new Error("L206 Glow Gap must not open orange-south (Veil Gap clone)");
   }
-  if (solves.L202[0][0] === "cat_orange" && solves.L202[0][1] === "n") {
-    throw new Error("L202 Capsule Cut must not open orange-north (Quill Cut clone)");
+  if (solves.L206[0][0] === "cat_orange" && solves.L206[0][1] === "n") {
+    throw new Error("L206 Glow Gap must not open orange-north (Dew Gap clone)");
   }
-  if (solves.L202[0][0] === "cat_orange" && solves.L202[0][1] === "w") {
-    throw new Error("L202 Capsule Cut must not open orange-west (Spire Cut clone)");
+  if (solves.L206[0][0] === "cat_orange" && solves.L206[0][1] === "e") {
+    throw new Error("L206 Glow Gap must not open orange-east (Drift Gap clone)");
   }
-  if (solves.L202[0][0] === "cat_gray" && solves.L202[0][1] === "s") {
-    throw new Error("L202 Capsule Cut must not open gray-south (Fizz Cut clone)");
+  if (solves.L206[0][0] === "cat_black" && solves.L206[0][1] === "w") {
+    throw new Error("L206 Glow Gap must not open black-west (Gleam Gap clone)");
   }
-  if (solves.L202[0][0] === "cat_orange" && solves.L202[0][1] === "s") {
-    throw new Error("L202 Capsule Cut must not open orange-south (Vase Stop clone)");
+  if (solves.L206[0][0] === "cat_black" && solves.L206[0][1] === "s") {
+    throw new Error("L206 Glow Gap must not open black-south (Ember Gap clone)");
   }
-  if (solves.L203[0][0] === "cat_black" && solves.L203[0][1] === "e") {
-    throw new Error("L203 Silk Gap must not open black-east (Ripple Gap clone)");
+  if (solves.L206[0][0] === "cat_orange" && solves.L206[0][1] === "w") {
+    throw new Error("L206 Glow Gap must not open orange-west (Flare Gap clone)");
   }
-  if (solves.L203[0][0] === "cat_orange" && solves.L203[0][1] === "s") {
-    throw new Error("L203 Silk Gap must not open orange-south (Veil Gap clone)");
+  if (solves.L207[0][0] === "cat_black" && solves.L207[0][1] === "w") {
+    throw new Error("L207 Bloom Stop must not open black-west (Cup Stop clone)");
   }
-  if (solves.L203[0][0] === "cat_orange" && solves.L203[0][1] === "n") {
-    throw new Error("L203 Silk Gap must not open orange-north (Dew Gap clone)");
+  if (solves.L207[0][0] === "cat_black" && solves.L207[0][1] === "e") {
+    throw new Error("L207 Bloom Stop must not open black-east (Pond Stop clone)");
   }
-  if (solves.L203[0][0] === "cat_orange" && solves.L203[0][1] === "e") {
-    throw new Error("L203 Silk Gap must not open orange-east (Drift Gap clone)");
+  if (solves.L207[0][0] === "cat_orange" && solves.L207[0][1] === "w") {
+    throw new Error("L207 Bloom Stop must not open orange-west (Spike Stop clone)");
   }
-  if (solves.L203[0][0] === "cat_black" && solves.L203[0][1] === "w") {
-    throw new Error("L203 Silk Gap must not open black-west (Gleam Gap clone)");
+  if (solves.L207[0][0] === "cat_orange" && solves.L207[0][1] === "e") {
+    throw new Error("L207 Bloom Stop must not open orange-east (Stem Stop clone)");
   }
-  if (solves.L203[0][0] === "cat_black" && solves.L203[0][1] === "s") {
-    throw new Error("L203 Silk Gap must not open black-south (Ember Gap clone)");
+  if (solves.L207[0][0] === "cat_gray" && solves.L207[0][1] === "n") {
+    throw new Error("L207 Bloom Stop must not open gray-north (Dish Stop clone)");
   }
-  if (solves.L203[0][0] === "cat_orange" && solves.L203[0][1] === "w") {
-    throw new Error("L203 Silk Gap must not open orange-west (Flare Gap clone)");
+  if (solves.L207[0][0] === "cat_gray" && solves.L207[0][1] === "w") {
+    throw new Error("L207 Bloom Stop must not open gray-west (Urn Stop clone)");
   }
-  if (solves.L204[0][0] === "cat_black" && solves.L204[0][1] === "e") {
-    throw new Error("L204 Cup Stop must not open black-east (Pond Stop clone)");
+  if (solves.L207[0][0] === "cat_orange" && solves.L207[0][1] === "n") {
+    throw new Error("L207 Bloom Stop must not open orange-north (Planter Stop clone)");
   }
-  if (solves.L204[0][0] === "cat_orange" && solves.L204[0][1] === "w") {
-    throw new Error("L204 Cup Stop must not open orange-west (Spike Stop clone)");
+  if (solves.L207[0][0] === "cat_orange" && solves.L207[0][1] === "s") {
+    throw new Error("L207 Bloom Stop must not open orange-south (Vase Stop clone)");
   }
-  if (solves.L204[0][0] === "cat_orange" && solves.L204[0][1] === "e") {
-    throw new Error("L204 Cup Stop must not open orange-east (Stem Stop clone)");
+  if (solves.L207[0][0] === "cat_gray" && solves.L207[0][1] === "s") {
+    throw new Error("L207 Bloom Stop must not open gray-south (Dish Claim clone)");
   }
-  if (solves.L204[0][0] === "cat_gray" && solves.L204[0][1] === "n") {
-    throw new Error("L204 Cup Stop must not open gray-north (Dish Stop clone)");
+  if (solves.L207[0][0] === "cat_gray" && solves.L207[0][1] === "e") {
+    throw new Error("L207 Bloom Stop must not open gray-east (Petal Cut clone)");
   }
-  if (solves.L204[0][0] === "cat_gray" && solves.L204[0][1] === "w") {
-    throw new Error("L204 Cup Stop must not open gray-west (Urn Stop clone)");
-  }
-  if (solves.L204[0][0] === "cat_orange" && solves.L204[0][1] === "n") {
-    throw new Error("L204 Cup Stop must not open orange-north (Planter Stop clone)");
-  }
-  if (solves.L204[0][0] === "cat_orange" && solves.L204[0][1] === "s") {
-    throw new Error("L204 Cup Stop must not open orange-south (Vase Stop clone)");
-  }
-  if (solves.L204[0][0] === "cat_gray" && solves.L204[0][1] === "s") {
-    throw new Error("L204 Cup Stop must not open gray-south (Dish Claim clone)");
-  }
-  if (solves.L204[0][0] === "cat_gray" && solves.L204[0][1] === "e") {
-    throw new Error("L204 Cup Stop must not open gray-east (Petal Cut clone)");
-  }
-  for (const level of [l202, l203, l204]) {
+  for (const level of [l205, l206, l207]) {
     if (level.gates.every((g) => g.y === 5) || level.gates.every((g) => g.x === 5)) {
       throw new Error(`${level.id} must not WRAP/edge-twin Nori/Medlar`);
     }
     if (level.width !== 6 || level.height !== 6) throw new Error(`${level.id} must be 6×6`);
     if (!level.templateId.startsWith("LT02_LT08_")) throw new Error(`${level.id} must be LT02+LT08`);
   }
-  const wallKeyO = (level: typeof l202) =>
+  const wallKeyO = (level: typeof l205) =>
     [...level.walls].map((w) => `${w.x},${w.y}`).sort().join(";");
-  const priorWallsO = ["L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
-  for (const id of ["L202", "L203", "L204"] as const) {
+  const priorWallsO = ["L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
+  for (const id of ["L205", "L206", "L207"] as const) {
     const key = wallKeyO(LEVELS.find((r) => r.id === id)!);
-    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L201`);
+    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L204`);
   }
-  if (ART_KIT_PATH.poppy.loaf48 !== "/assets/cats/poppy_loaf_48.svg") throw new Error("ART_KIT_PATH.poppy loaf48");
-  if (ART_KIT_PATH.poppy.loaf72 !== "/assets/cats/poppy_loaf_72.svg") throw new Error("ART_KIT_PATH.poppy loaf72");
+  if (ART_KIT_PATH.tulip.loaf48 !== "/assets/cats/tulip_loaf_48.svg") throw new Error("ART_KIT_PATH.tulip loaf48");
+  if (ART_KIT_PATH.tulip.loaf72 !== "/assets/cats/tulip_loaf_72.svg") throw new Error("ART_KIT_PATH.tulip loaf72");
+  if (ART_KIT_PATH.poppy.loaf48 !== "/assets/cats/poppy_loaf_48.svg") throw new Error("Poppy kit must stay");
   if (ART_KIT_PATH.lotus.loaf48 !== "/assets/cats/lotus_loaf_48.svg") throw new Error("Lotus kit must stay");
   if (ART_KIT_PATH.orchid.loaf48 !== "/assets/cats/orchid_loaf_48.svg") throw new Error("Orchid kit must stay");
   if (ART_KIT_PATH.iris.loaf48 !== "/assets/cats/iris_loaf_48.svg") throw new Error("Iris kit must stay");
@@ -453,12 +456,14 @@ export function verifyChapter4Poppy(solves: Record<string, Array<[string, Dir]>>
   if (ART_KIT_PATH.gardenia.loaf48 !== "/assets/cats/gardenia_loaf_48.svg") throw new Error("Gardenia kit must stay");
   if (ART_KIT_PATH.hibiscus.loaf48 !== "/assets/cats/hibiscus_loaf_48.svg") throw new Error("Hibiscus kit must stay");
   const saveO = readFileSync(resolve("src/components/providers/SaveProvider.tsx"), "utf8");
-  if (!saveO.includes("poppy cup")) throw new Error("SaveProvider must yard-bubble poppy cup for Poppy");
-  if (!existsSync(resolve("data/collection/CH4_FRIEND_067.md"))) throw new Error("missing CH4_FRIEND_067.md");
-  if (!existsSync(resolve("data/collection/chapter4_poppy_bang.json"))) throw new Error("missing collection poppy bang");
-  if (!existsSync(resolve("data/chapter4_poppy_bang.json"))) throw new Error("missing chapter4_poppy_bang.json");
+  if (!saveO.includes("tulip vase")) throw new Error("SaveProvider must yard-bubble tulip vase for Tulip");
+  if (!saveO.includes("poppy cup")) throw new Error("SaveProvider must keep poppy cup for Poppy");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_068.md"))) throw new Error("missing CH4_FRIEND_068.md");
+  if (!existsSync(resolve("data/collection/chapter4_tulip_bang.json"))) throw new Error("missing collection tulip bang");
+  if (!existsSync(resolve("data/chapter4_tulip_bang.json"))) throw new Error("missing chapter4_tulip_bang.json");
   const nameModalO = readFileSync(resolve("src/components/puzzle/NameCatModal.tsx"), "utf8");
-  if (!nameModalO.includes("POPPY_FRIEND_ID")) throw new Error("NameCatModal must lockChips Poppy");
+  if (!nameModalO.includes("TULIP_FRIEND_ID")) throw new Error("NameCatModal must lockChips Tulip");
+  if (!nameModalO.includes("POPPY_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Poppy");
   if (!nameModalO.includes("LOTUS_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Lotus");
   if (!nameModalO.includes("ORCHID_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Orchid");
   if (!nameModalO.includes("IRIS_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Iris");
@@ -469,5 +474,5 @@ export function verifyChapter4Poppy(solves: Record<string, Array<[string, Dir]>>
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellO)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Poppy@201 + L202–L204 ok · chips Poppy/Capsule/Silk · coat #D94A5A + seed freckles #3A1218 · Capsule Cut / Silk Gap / Cup Stop · Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Tulip@204 + L205–L207 ok · chips Tulip/Stem/Glow · coat #E07090 + stem freckles #2A4020 · Stem Cut / Glow Gap / Bloom Stop · Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }
