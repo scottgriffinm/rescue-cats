@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Buttercup Pass — L241–L243 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L241–L243",
+  "notes": "L241 Airy Cut / L242 Ray Gap / L243 Floret Stop — off Meadow Cut / Gloss Gap / Petal Stop habits; not Pale/Dish/Ruff tropes; not Cosmos Cut/Gap/Stop title clones; Floret Stop avoids Iris Stem Stop / Poppy Cup Stop / Buttercup Petal Stop; no WRAP/edge twin of Nori/Medlar; L243 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L241",
+      "name": "Airy Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_airy_cut_orange",
+      "walls": [
+        { "x": 5, "y": 2 },
+        { "x": 0, "y": 3 },
+        { "x": 2, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 5, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "airy_cut_orange"
+    },
+    {
+      "id": "L242",
+      "name": "Ray Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_ray_gap_gray",
+      "walls": [
+        { "x": 3, "y": 5 },
+        { "x": 4, "y": 0 },
+        { "x": 4, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 4, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "ray_gap_gray"
+    },
+    {
+      "id": "L243",
+      "name": "Floret Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_floret_stop_black",
+      "walls": [
+        { "x": 5, "y": 0 },
+        { "x": 0, "y": 1 },
+        { "x": 3, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 2, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "floret_stop_black"
+    }
+  ],
+  "teaches": {
+    "L241": "Airy Cut — orange east first; gray cuts after; not Meadow gray-north, not Pale gray-east, not Moor orange-north, not Gold black-south, not Jaw black-east, not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west",
+    "L242": "Ray Gap — gray west then orange threads; not Gloss black-west, not Dish black-south, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north",
+    "L243": "Floret Stop — cosmos-stem seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal twins; off Nori (5,5); not Hold*/Park*; title Floret Stop (not Cosmos Stop, not Iris Stem Stop, not Poppy Cup Stop, not Buttercup Petal Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L241": 10,
+      "L242": 11,
+      "L243": 10
+    }
+  },
+  "deltas": {
+    "L241": "(0, 3)",
+    "L242": "(1, 0)",
+    "L243": "(3, 3)"
+  }
+}

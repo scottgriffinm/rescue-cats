@@ -78,6 +78,7 @@ import chapter4bd from "../../data/levels/CHAPTER4_PUZZLE_L229_L231.json";
 import chapter4be from "../../data/levels/CHAPTER4_PUZZLE_L232_L234.json";
 import chapter4bf from "../../data/levels/CHAPTER4_PUZZLE_L235_L237.json";
 import chapter4bg from "../../data/levels/CHAPTER4_PUZZLE_L238_L240.json";
+import chapter4bh from "../../data/levels/CHAPTER4_PUZZLE_L241_L243.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -323,6 +324,9 @@ const HEADLINES: Record<string, string> = {
   L238: "MEADOW CUT",
   L239: "GLOSS GAP",
   L240: "PETAL STOP",
+  L241: "AIRY CUT",
+  L242: "RAY GAP",
+  L243: "FLORET STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -565,6 +569,9 @@ const HINTS: Record<string, string> = {
   L238: "Meadow cut — gray north first; orange cuts after; not Pale gray-east, not Moor orange-north, not Gold black-south, not Jaw black-east, not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west, not Spur orange-east.",
   L239: "Gloss gap — black west then orange threads; not Dish black-south, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Throat gray-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north.",
   L240: "Petal stop — buttercup-cup seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff twins; off Nori (5,5); not Poppy Cup Stop; not Hold*/Park*.",
+  L241: "Airy cut — orange east first; gray cuts after; not Meadow gray-north, not Pale gray-east, not Moor orange-north, not Gold black-south, not Jaw black-east, not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west.",
+  L242: "Ray gap — gray west then orange threads; not Gloss black-west, not Dish black-south, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north.",
+  L243: "Floret stop — cosmos-stem seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal twins; off Nori (5,5); not Iris Stem Stop; not Poppy Cup Stop; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -698,6 +705,7 @@ const authored = [
   ...chapter4be.levels,
   ...chapter4bf.levels,
   ...chapter4bg.levels,
+  ...chapter4bh.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

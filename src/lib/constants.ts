@@ -85,7 +85,8 @@ export const ART_KIT_PATH: Record<
   | "marigold"
   | "heather"
   | "primrose"
-  | "buttercup",
+  | "buttercup"
+  | "cosmos",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -407,6 +408,10 @@ export const ART_KIT_PATH: Record<
   buttercup: {
     loaf48: "/assets/cats/buttercup_loaf_48.svg",
     loaf72: "/assets/cats/buttercup_loaf_72.svg",
+  },
+  cosmos: {
+    loaf48: "/assets/cats/cosmos_loaf_48.svg",
+    loaf72: "/assets/cats/cosmos_loaf_72.svg",
   },
 };
 

@@ -213,7 +213,7 @@ export function verifyChapter4Thyme(solves: Record<string, Array<[string, Dir]>>
   const yardT = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardT.match(/const thyme =/g) || []).length !== 1) throw new Error("YardScene must declare thyme once");
   if ((yardT.match(/\{thyme \?/g) || []).length !== 1) throw new Error("YardScene must render thyme once");
-  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Thyme (47)");
+  if (TUTORIAL_RESCUES.length !== 80) throw new Error("Met must include through Thyme (47)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
