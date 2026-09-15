@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L195 → Orchid@195 naming, then L196–L198.
+ * Chapter 4 beat: L198 → Lotus@198 naming, then L199–L201.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
@@ -10,7 +10,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-orchid";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-lotus";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -87,6 +87,7 @@ const PARADE = [
   ["friend_062", "Zinnia", 186],
   ["friend_063", "Aster", 189],
   ["friend_064", "Iris", 192],
+  ["friend_065", "Orchid", 195],
 ];
 
 const completedIds = [
@@ -99,7 +100,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 184 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 187 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -125,7 +126,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Iris claimed the iris stem."],
+  bubbles: ["Orchid claimed the orchid spike."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -175,22 +176,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L195`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("STEM STOP"));
-  await shot(page, "01_l195_before_orchid");
+  await page.goto(`${BASE}/level/L198`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SPIKE STOP"));
+  await shot(page, "01_l198_before_lotus");
   await play(
     page,
     [
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
       ["orange", "ArrowDown"],
       ["gray", "ArrowRight"],
       ["orange", "ArrowUp"],
+      ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
     ],
     "New friend!",
   );
@@ -208,15 +209,15 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("orchid naming", modal);
+  console.log("lotus naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Orchid prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Lotus prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Soft blush. Already claimed the orchid spike.") {
-    throw new Error(`Orchid display line drifted: ${modal.line}`);
+  if (modal.line !== "Pond soft. Already claimed the lotus pad.") {
+    throw new Error(`Lotus display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Orchid,Spur,Veil") {
-    throw new Error(`Orchid chips must be Orchid/Spur/Veil, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Lotus,Pad,Ripple") {
+    throw new Error(`Lotus chips must be Lotus/Pad/Ripple, got ${modal.chips.join("/")}`);
   }
   if (
     modal.chips.includes("Iris") ||
@@ -252,49 +253,55 @@ try {
     modal.chips.includes("Jasmine") ||
     modal.chips.includes("Blossom") ||
     modal.chips.includes("Honey") ||
+    modal.chips.includes("Orchid") ||
+    modal.chips.includes("Spur") ||
+    modal.chips.includes("Veil") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Orchid chips collided with Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Lotus chips collided with Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error(`Orchid hero missing blush-orchid loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
+    throw new Error(`Lotus hero missing pale pink-lotus loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
+    throw new Error("Lotus hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Iris loaf");
+    throw new Error("Lotus hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Aster loaf");
+    throw new Error("Lotus hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Zinnia loaf");
+    throw new Error("Lotus hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Dahlia loaf");
+    throw new Error("Lotus hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Azalea loaf");
+    throw new Error("Lotus hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Peony loaf");
+    throw new Error("Lotus hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Camellia loaf");
+    throw new Error("Lotus hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Gardenia loaf");
+    throw new Error("Lotus hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Orchid hero must not use the Hibiscus loaf");
+    throw new Error("Lotus hero must not use the Hibiscus loaf");
   }
-  await shot(page, "02_orchid_naming");
+  await shot(page, "02_lotus_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Orchid") &&
-      ((document.body.innerText || "").includes("spike") ||
-        (document.body.innerText || "").includes("orchid") ||
+      (document.body.innerText || "").includes("Lotus") &&
+      ((document.body.innerText || "").includes("pad") ||
+        (document.body.innerText || "").includes("lotus") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -307,86 +314,86 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_065")) {
-    throw new Error("Orchid was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_066")) {
+    throw new Error("Lotus was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_065")?.name !== "Orchid") {
-    throw new Error("Orchid name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_066")?.name !== "Lotus") {
+    throw new Error("Lotus name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_066")) {
-    throw new Error("friend_066 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_067")) {
+    throw new Error("friend_067 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/orchid_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/orchid_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/lotus_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/lotus_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Orchid blush-orchid loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Lotus pale pink-lotus loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("spike") && !yard.text.includes("Orchid")) {
-    throw new Error("yard missing Orchid orchid spike line");
+  if (!yard.text.includes("pad") && !yard.text.includes("Lotus")) {
+    throw new Error("yard missing Lotus lotus pad line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_orchid_yard");
+  await shot(page, "03_lotus_yard");
 
-  await page.goto(`${BASE}/level/L196`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SPUR CUT"));
+  await page.goto(`${BASE}/level/L199`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("PAD CUT"));
   await play(
     page,
     [
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
+      ["gray", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["gray", "ArrowRight"],
       ["gray", "ArrowUp"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowDown"],
       ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L197`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("VEIL GAP"));
+  await page.goto(`${BASE}/level/L200`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("RIPPLE GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["black", "ArrowDown"],
       ["black", "ArrowRight"],
       ["black", "ArrowUp"],
-      ["black", "ArrowLeft"],
+      ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["orange", "ArrowUp"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowRight"],
     ],
     "Home",
   );
-  await shot(page, "04_l197_win");
+  await shot(page, "04_l200_win");
 
-  await page.goto(`${BASE}/level/L198`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("SPIKE STOP"));
+  await page.goto(`${BASE}/level/L201`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("POND STOP"));
   await play(
     page,
     [
+      ["black", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l198_win");
+  await shot(page, "05_l201_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -394,7 +401,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L195", "L196", "L197", "L198"]) {
+  for (const id of ["L198", "L199", "L200", "L201"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -402,20 +409,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_066")) {
-    throw new Error("friend_066 must stay pending, not named, on the Orchid slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_066")) {
-    throw new Error("L198 clear must queue Lotus when friend_066 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_067")) {
+    throw new Error("friend_067 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_067")) {
-    throw new Error("L198 clear must not queue friend_067");
+    throw new Error("L201 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_065").length !== 1) {
-    throw new Error("L198 must not unlock an Orchid duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L201 must not open a next-friend naming modal");
   }
-  if (!after.hud.includes("198") && !after.text.includes("198")) {
-    throw new Error("Campaign HUD must show through 198 after L198 clear");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_066").length !== 1) {
+    throw new Error("L201 must not unlock a Lotus duplicate");
+  }
+  if (!after.hud.includes("201") && !after.text.includes("201")) {
+    throw new Error("Campaign HUD must show through 201 after L201 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -435,9 +442,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L195 + ORCHID + L196-198 OK");
+  console.log("CHAPTER 4 L198 + LOTUS + L199-201 OK");
 } catch (error) {
-  console.error("CHAPTER 4 ORCHID FAIL", error);
+  console.error("CHAPTER 4 LOTUS FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {
