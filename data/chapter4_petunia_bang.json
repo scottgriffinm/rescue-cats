@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_petunia_bang",
+  "status": "READY",
+  "friend_id": "friend_089",
+  "unlock_clear": 267,
+  "personality": "Petunia-soft",
+  "display_line": "Flare soft. Already claimed the petunia basket.",
+  "default_name": "Petunia",
+  "tier": "C",
+  "color": "Flare",
+  "pattern": "Basket",
+  "art": {
+    "loaf_48": "/assets/cats/petunia_loaf_48.svg",
+    "loaf_72": "/assets/cats/petunia_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "petunia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Petunia", "Flare", "Basket"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_089": [
+      "{Name}: Flare soft. Already claimed the petunia basket.",
+      "{Name}: Looks yard-soft. Owns the basket."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 267,
+    "sku_id": null,
+    "note": "Ch4. Petunia Pass. No gift. Ban Nasturtium/Pepper/Tray and all prior pools. Bean parade stands. No Pebble. Petunia, Flare, and Basket chips are CEO-locked on Petunia. No friend_090."
+  }
+}
