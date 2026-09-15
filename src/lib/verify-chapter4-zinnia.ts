@@ -274,7 +274,7 @@ export function verifyChapter4Zinnia(solves: Record<string, Array<[string, Dir]>
   const yardZ = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardZ.match(/const zinnia =/g) || []).length !== 1) throw new Error("YardScene must declare zinnia once");
   if ((yardZ.match(/\{zinnia \?/g) || []).length !== 1) throw new Error("YardScene must render zinnia once");
-  if (TUTORIAL_RESCUES.length !== 93) throw new Error("Met must include through Zinnia (62)");
+  if (TUTORIAL_RESCUES.length !== 94) throw new Error("Met must include through Zinnia (62)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

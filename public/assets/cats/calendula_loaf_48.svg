@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+  <defs>
+    <clipPath id="calendula-loaf-48">
+      <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6"/>
+    </clipPath>
+  </defs>
+  <ellipse cx="24.6" cy="30.2" rx="15.2" ry="11.2" fill="#C87A10" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <ellipse cx="24" cy="29.2" rx="16.6" ry="12.6" fill="#F4A020" stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M11.4 23.4 C7.6 15.8 15.2 10.6 19.6 18.4" fill="#C87A10" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M36.6 23.4 C40.4 15.8 32.8 10.6 28.4 18.4" fill="#C87A10" stroke="#2B2A28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <g clip-path="url(#calendula-loaf-48)" fill="#5A3010">
+    <circle cx="19.4" cy="25.8" r="1.15"/>
+    <circle cx="28.0" cy="26.8" r="1.05"/>
+    <circle cx="24.6" cy="29.4" r="1.35"/>
+    <circle cx="17.6" cy="30.2" r="0.8"/>
+    <circle cx="30.2" cy="29.6" r="0.85"/>
+    <circle cx="21.8" cy="23.8" r="0.7"/>
+    <circle cx="26.8" cy="23.4" r="0.65"/>
+    <circle cx="22.8" cy="32.4" r="0.55"/>
+  </g>
+  <ellipse cx="24" cy="34.6" rx="6.4" ry="3.6" fill="#FFF8D2"/>
+  <circle cx="18" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.4" cy="27.2" r="1.6" fill="#2B2A28"/>
+  <circle cx="28.85" cy="26.7" r="0.4" fill="#FFFCF2"/>
+  <circle cx="18.45" cy="26.7" r="0.4" fill="#FFFCF2"/>
+  <path d="M39.2 34 C42.4 32.8 43.6 36.4 40.8 37.6" fill="none" stroke="#2B2A28" stroke-width="2.2" stroke-linecap="round"/>
+</svg>

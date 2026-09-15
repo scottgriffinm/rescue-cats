@@ -320,7 +320,7 @@ export function verifyChapter4Lily(solves: Record<string, Array<[string, Dir]>>)
   if ((yardL.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardL.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardL.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 93) throw new Error("Met must include through Lily (70)");
+  if (TUTORIAL_RESCUES.length !== 94) throw new Error("Met must include through Lily (70)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

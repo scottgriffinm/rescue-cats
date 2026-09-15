@@ -92,6 +92,7 @@ import chapter4br from "../../data/levels/CHAPTER4_PUZZLE_L271_L273.json";
 import chapter4bs from "../../data/levels/CHAPTER4_PUZZLE_L274_L276.json";
 import chapter4bt from "../../data/levels/CHAPTER4_PUZZLE_L277_L279.json";
 import chapter4bu from "../../data/levels/CHAPTER4_PUZZLE_L280_L282.json";
+import chapter4bv from "../../data/levels/CHAPTER4_PUZZLE_L283_L285.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -379,6 +380,9 @@ const HEADLINES: Record<string, string> = {
   L280: "SAGE CUT",
   L281: "TORCH GAP",
   L282: "BRACT STOP",
+  L283: "DISK CUT",
+  L284: "TIN GAP",
+  L285: "DISC STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -663,6 +667,9 @@ const HINTS: Record<string, string> = {
   L280: "Sage cut — gray south first; orange cuts after; not Busy orange-first, not Spike gray-east, not Face orange-north, not Flare gray-west, not Box gray-east, not Cluster Cut, not Clump Cut, not Busy Cut.",
   L281: "Torch gap — black west then orange threads; not Box gray-first, not Urn black-south, not Touch black-south, not Saucer gray-north, not Basket black-north, not Blotch black-east.",
   L282: "Bract stop — salvia-torch seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill/Blotch/Taper/Touch twins; off Nori (5,5); not Touch Stop; not Taper Stop; not Blotch Stop; not Frill Stop; not Tendril Stop; not Pane Stop; not Tube Stop; not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Clump Stop; not Cluster Stop; not Ruffle Stop; not Pot Stop; not Hold*/Park*.",
+  L283: "Disk cut — orange north first; gray cuts after; not Sage gray-first, not Busy orange-south, not Spike gray-east, not Face orange-north, not Petal Cut, not Cluster Cut, not Clump Cut, not Sage Cut.",
+  L284: "Tin gap — gray north then orange threads; not Torch black-first, not Box gray-east, not Urn black-south, not Touch black-south, not Saucer gray-north, not Basket black-north.",
+  L285: "Disc stop — calendula-tin seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold/Tube/Pane/Tendril/Frill/Blotch/Taper/Touch/Bract twins; off Nori (5,5); not Bract Stop; not Touch Stop; not Taper Stop; not Blotch Stop; not Frill Stop; not Tendril Stop; not Pane Stop; not Tube Stop; not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Clump Stop; not Cluster Stop; not Ruffle Stop; not Pot Stop; not Tin Stop; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -810,6 +817,7 @@ const authored = [
   ...chapter4bs.levels,
   ...chapter4bt.levels,
   ...chapter4bu.levels,
+  ...chapter4bv.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);
