@@ -87,7 +87,8 @@ export const ART_KIT_PATH: Record<
   | "primrose"
   | "buttercup"
   | "cosmos"
-  | "clematis",
+  | "clematis"
+  | "wisteria",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -417,6 +418,10 @@ export const ART_KIT_PATH: Record<
   clematis: {
     loaf48: "/assets/cats/clematis_loaf_48.svg",
     loaf72: "/assets/cats/clematis_loaf_72.svg",
+  },
+  wisteria: {
+    loaf48: "/assets/cats/wisteria_loaf_48.svg",
+    loaf72: "/assets/cats/wisteria_loaf_72.svg",
   },
 };
 

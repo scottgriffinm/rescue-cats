@@ -1,7 +1,7 @@
 /**
  * Chapter 4 beat: L243 → Clematis@243 naming, then L244–L246.
- * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L243 queues Clematis pending. Do not invent friend_082.
+ * L246 queues Wisteria pending. L10 stays off-path. localStorage only.
+ * Do not invent friend_083.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -505,7 +505,7 @@ try {
       ["orange", "ArrowDown"],
       ["gray", "ArrowLeft"],
     ],
-    "Home",
+    "New friend!",
   );
   await shot(page, "05_l246_win");
 
@@ -524,19 +524,22 @@ try {
     throw new Error("L10 must stay off the campaign path");
   }
   if (after.save.friends.some((friend) => friend.friendId === "friend_082")) {
-    throw new Error("friend_082 must not unlock this slice");
+    throw new Error("friend_082 must stay pending, not named, on the Clematis slice");
   }
-  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_082")) {
-    throw new Error("L246 clear must not queue the next friend");
+  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_082")) {
+    throw new Error("L246 clear must queue Wisteria when friend_082 is present");
   }
-  if (after.text.includes("New friend!")) {
-    throw new Error("L246 must not open a next-friend naming modal");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_083")) {
+    throw new Error("L246 clear must not queue friend_083");
+  }
+  if (!after.text.includes("New friend!")) {
+    throw new Error("L246 clear must show Wisteria pending naming");
   }
   if (after.save.friends.filter((friend) => friend.friendId === "friend_081").length !== 1) {
     throw new Error("L246 must not unlock a Clematis duplicate");
   }
-  if (!after.hud.includes("246") && !after.text.includes("246")) {
-    throw new Error("Campaign HUD must show through 246 after L246 clear");
+  if (!after.hud.includes("249") && !after.text.includes("249")) {
+    throw new Error("Campaign HUD must show through 249 after L246 clear");
   }
   const paradeLocks = {
     friend_001: 3,
