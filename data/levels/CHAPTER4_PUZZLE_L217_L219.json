@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Crocus Pass — L217–L219 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L217–L219",
+  "notes": "L217 Cluster Cut / L218 Bell Gap / L219 Raceme Stop — off Saffron Cut / Tip Gap / Stigma Stop habits; not Pollen/Crest/Anther tropes; not Hyacinth Cut/Gap/Stop title clones; Raceme Stop avoids Orchid Spike Stop; no WRAP/edge twin of Nori/Medlar; L219 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L217",
+      "name": "Cluster Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_cluster_cut_black",
+      "walls": [
+        { "x": 5, "y": 0 },
+        { "x": 0, "y": 0 },
+        { "x": 5, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "cluster_cut_black"
+    },
+    {
+      "id": "L218",
+      "name": "Bell Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_bell_gap_gray",
+      "walls": [
+        { "x": 2, "y": 5 },
+        { "x": 0, "y": 3 },
+        { "x": 3, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "bell_gap_gray"
+    },
+    {
+      "id": "L219",
+      "name": "Raceme Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_raceme_stop_black",
+      "walls": [
+        { "x": 1, "y": 4 },
+        { "x": 0, "y": 1 },
+        { "x": 4, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "raceme_stop_black"
+    }
+  ],
+  "teaches": {
+    "L217": "Cluster Cut — black north first; orange cuts after; not Saffron orange-west, not Pollen black-west, not Patch black-east, not Stem black-south, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Fizz gray-south, not Vase orange-south",
+    "L218": "Bell Gap — gray south then orange threads; not Tip orange-east, not Crest gray-west, not Moss gray-north, not Glow gray-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south, not Flare orange-west",
+    "L219": "Raceme Stop — hyacinth-spike seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma twins; off Nori (5,5); not Hold*/Park*; title Raceme Stop (not Orchid Spike Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L217": 10,
+      "L218": 11,
+      "L219": 11
+    }
+  },
+  "deltas": {
+    "L217": "(-1, -4)",
+    "L218": "(2, -1)",
+    "L219": "(-1, 3)"
+  }
+}

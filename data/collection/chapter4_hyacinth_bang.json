@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_hyacinth_bang",
+  "status": "READY",
+  "friend_id": "friend_072",
+  "unlock_clear": 216,
+  "personality": "Hyacinth-soft",
+  "display_line": "Cluster cool. Already claimed the hyacinth spike.",
+  "default_name": "Hyacinth",
+  "tier": "C",
+  "color": "Cluster",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/hyacinth_loaf_48.svg",
+    "loaf_72": "/assets/cats/hyacinth_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "hyacinth"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Hyacinth", "Cluster", "Bell"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_072": [
+      "{Name}: Cluster cool. Already claimed the hyacinth spike.",
+      "{Name}: Looks yard-cool. Owns the spike."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 216,
+    "sku_id": null,
+    "note": "Ch4. Crocus Pass next. No gift. Ban Crocus/Saffron/Tip and all prior pools. Bean parade stands. No Pebble. Hyacinth, Cluster, and Bell chips are CEO-locked on Hyacinth. No friend_073."
+  }
+}

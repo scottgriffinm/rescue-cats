@@ -327,7 +327,7 @@ export function verifyChapter4Crocus(solves: Record<string, Array<[string, Dir]>
   if ((yardC.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardC.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardC.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 71) throw new Error("Met must include through Crocus (71)");
+  if (TUTORIAL_RESCUES.length !== 72) throw new Error("Met must include through Crocus (71)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -335,7 +335,7 @@ export function verifyChapter4Crocus(solves: Record<string, Array<[string, Dir]>
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
   if (SLICE_UNLOCKS[213] !== "friend_071") throw new Error("SLICE_UNLOCKS[213] must be friend_071");
-  if (SLICE_UNLOCKS[216]) throw new Error("no friend_072 @216 this slice");
+  if (SLICE_UNLOCKS[216] !== "friend_072") throw new Error("SLICE_UNLOCKS[216] must be friend_072 after Hyacinth ship");
   if (/pebble|Pebble/i.test(crocus48 + crocus72)) throw new Error("Crocus art must not use Pebble");
   if (/lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|rib|chervil|frill|lace|fennel|anise/i.test(crocus48 + crocus72)) {
     throw new Error("Crocus art must not collide Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
