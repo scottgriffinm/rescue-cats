@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_wisteria_bang",
+  "status": "READY",
+  "friend_id": "friend_082",
+  "unlock_clear": 246,
+  "personality": "Wisteria-soft",
+  "display_line": "Cascade soft. Already claimed the wisteria arbor.",
+  "default_name": "Wisteria",
+  "tier": "C",
+  "color": "Cascade",
+  "pattern": "Arbor",
+  "art": {
+    "loaf_48": "/assets/cats/wisteria_loaf_48.svg",
+    "loaf_72": "/assets/cats/wisteria_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "wisteria"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Wisteria", "Cascade", "Arbor"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_082": [
+      "{Name}: Cascade soft. Already claimed the wisteria arbor.",
+      "{Name}: Looks yard-soft. Owns the arbor."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 246,
+    "sku_id": null,
+    "note": "Ch4. Wisteria Pass. No gift. Ban Clematis/Vine/Trellis and all prior pools. Bean parade stands. No Pebble. Wisteria, Cascade, and Arbor chips are CEO-locked on Wisteria. No friend_083."
+  }
+}

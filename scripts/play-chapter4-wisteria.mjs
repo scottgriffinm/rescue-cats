@@ -1,7 +1,7 @@
 /**
- * Chapter 4 beat: L240 → Cosmos@240 naming, then L241–L243.
- * L243 queues Clematis pending. L10 stays off-path. localStorage only.
- * L240 queues Cosmos pending. Do not invent friend_082.
+ * Chapter 4 beat: L246 → Wisteria@246 naming, then L247–L249.
+ * Next friend must not unlock. L10 stays off-path. localStorage only.
+ * L246 queues Wisteria pending. Do not invent friend_083.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-cosmos";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-wisteria";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -103,6 +103,8 @@ const PARADE = [
   ["friend_077", "Heather", 231],
   ["friend_078", "Primrose", 234],
   ["friend_079", "Buttercup", 237],
+  ["friend_080", "Cosmos", 240],
+  ["friend_081", "Clematis", 243],
 ];
 
 const completedIds = [
@@ -115,7 +117,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 229 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 235 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -141,7 +143,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Buttercup claimed the buttercup cup."],
+  bubbles: ["Clematis claimed the clematis trellis."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -191,22 +193,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L240`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("PETAL STOP"));
-  await shot(page, "01_l240_before_cosmos");
+  await page.goto(`${BASE}/level/L246`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("STAR STOP"));
+  await shot(page, "01_l246_before_wisteria");
   await play(
     page,
     [
-      ["black", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
       ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -224,15 +226,15 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("cosmos naming", modal);
+  console.log("wisteria naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Cosmos prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Wisteria prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Airy soft. Already claimed the cosmos stem.") {
-    throw new Error(`Cosmos display line drifted: ${modal.line}`);
+  if (modal.line !== "Cascade soft. Already claimed the wisteria arbor.") {
+    throw new Error(`Wisteria display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Cosmos,Airy,Ray") {
-    throw new Error(`Cosmos chips must be Cosmos/Airy/Ray, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Wisteria,Cascade,Arbor") {
+    throw new Error(`Wisteria chips must be Wisteria/Cascade/Arbor, got ${modal.chips.join("/")}`);
   }
   if (
     modal.chips.includes("Buttercup") ||
@@ -313,103 +315,115 @@ try {
     modal.chips.includes("Jasmine") ||
     modal.chips.includes("Blossom") ||
     modal.chips.includes("Honey") ||
-    modal.chips.includes("Pebble")
+    modal.chips.includes("Pebble") ||
+    modal.chips.includes("Cosmos") ||
+    modal.chips.includes("Airy") ||
+    modal.chips.includes("Ray") ||
+    modal.chips.includes("Clematis") ||
+    modal.chips.includes("Vine") ||
+    modal.chips.includes("Trellis")
   ) {
-    throw new Error("Cosmos chips collided with Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Wisteria chips collided with Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/cosmos_loaf_72.svg")) {
-    throw new Error(`Cosmos hero missing airy cosmos loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/wisteria_loaf_72.svg")) {
+    throw new Error(`Wisteria hero missing cascade loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/clematis_loaf_72.svg")) {
+    throw new Error("Wisteria hero must not use the Clematis loaf");
+  }
+  if (modal.hero.includes("/assets/cats/cosmos_loaf_72.svg")) {
+    throw new Error("Wisteria hero must not use the Cosmos loaf");
   }
   if (modal.hero.includes("/assets/cats/buttercup_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Buttercup loaf");
+    throw new Error("Clematis hero must not use the Buttercup loaf");
   }
   if (modal.hero.includes("/assets/cats/primrose_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Primrose loaf");
+    throw new Error("Clematis hero must not use the Primrose loaf");
   }
   if (modal.hero.includes("/assets/cats/heather_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Heather loaf");
+    throw new Error("Clematis hero must not use the Heather loaf");
   }
   if (modal.hero.includes("/assets/cats/marigold_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Marigold loaf");
+    throw new Error("Clematis hero must not use the Marigold loaf");
   }
   if (modal.hero.includes("/assets/cats/snapdragon_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Snapdragon loaf");
+    throw new Error("Clematis hero must not use the Snapdragon loaf");
   }
   if (modal.hero.includes("/assets/cats/bluebell_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Bluebell loaf");
+    throw new Error("Clematis hero must not use the Bluebell loaf");
   }
   if (modal.hero.includes("/assets/cats/foxglove_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Foxglove loaf");
+    throw new Error("Clematis hero must not use the Foxglove loaf");
   }
   if (modal.hero.includes("/assets/cats/hyacinth_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Hyacinth loaf");
+    throw new Error("Clematis hero must not use the Hyacinth loaf");
   }
   if (modal.hero.includes("/assets/cats/crocus_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Crocus loaf");
+    throw new Error("Clematis hero must not use the Crocus loaf");
   }
   if (modal.hero.includes("/assets/cats/lily_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Lily loaf");
+    throw new Error("Clematis hero must not use the Lily loaf");
   }
   if (modal.hero.includes("/assets/cats/violet_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Violet loaf");
+    throw new Error("Clematis hero must not use the Violet loaf");
   }
   if (modal.hero.includes("/assets/cats/tulip_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Tulip loaf");
+    throw new Error("Clematis hero must not use the Tulip loaf");
   }
   if (modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Poppy loaf");
+    throw new Error("Clematis hero must not use the Poppy loaf");
   }
   if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Lotus loaf");
+    throw new Error("Clematis hero must not use the Lotus loaf");
   }
   if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Orchid loaf");
+    throw new Error("Clematis hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Iris loaf");
+    throw new Error("Clematis hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Aster loaf");
+    throw new Error("Clematis hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Zinnia loaf");
+    throw new Error("Clematis hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Dahlia loaf");
+    throw new Error("Clematis hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Azalea loaf");
+    throw new Error("Clematis hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Peony loaf");
+    throw new Error("Clematis hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Camellia loaf");
+    throw new Error("Clematis hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Gardenia loaf");
+    throw new Error("Clematis hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Hibiscus loaf");
+    throw new Error("Clematis hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Jasmine loaf");
+    throw new Error("Clematis hero must not use the Jasmine loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Magnolia loaf");
+    throw new Error("Clematis hero must not use the Magnolia loaf");
   }
   if (modal.hero.includes("/assets/cats/lavender_loaf_72.svg")) {
-    throw new Error("Cosmos hero must not use the Lavender loaf");
+    throw new Error("Clematis hero must not use the Lavender loaf");
   }
-  await shot(page, "02_cosmos_naming");
+  await shot(page, "02_wisteria_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Cosmos") &&
-      ((document.body.innerText || "").includes("stem") ||
-        (document.body.innerText || "").includes("cosmos") ||
+      (document.body.innerText || "").includes("Wisteria") &&
+      ((document.body.innerText || "").includes("arbor") ||
+        (document.body.innerText || "").includes("wisteria") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -422,86 +436,86 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_080")) {
-    throw new Error("Cosmos was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_082")) {
+    throw new Error("Wisteria was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_080")?.name !== "Cosmos") {
-    throw new Error("Cosmos name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_082")?.name !== "Wisteria") {
+    throw new Error("Wisteria name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_081")) {
-    throw new Error("friend_081 must stay pending until L243");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_083")) {
+    throw new Error("friend_083 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/cosmos_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/cosmos_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/wisteria_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/wisteria_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Cosmos airy loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Wisteria cascade loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("stem") && !yard.text.includes("Cosmos")) {
-    throw new Error("yard missing Cosmos cosmos stem line");
+  if (!yard.text.includes("arbor") && !yard.text.includes("Wisteria")) {
+    throw new Error("yard missing Wisteria wisteria arbor line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_cosmos_yard");
+  await shot(page, "03_wisteria_yard");
 
-  await page.goto(`${BASE}/level/L241`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("AIRY CUT"));
+  await page.goto(`${BASE}/level/L247`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CASCADE CUT"));
   await play(
     page,
     [
-      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["gray", "ArrowLeft"],
+      ["orange", "ArrowLeft"],
       ["gray", "ArrowDown"],
-      ["orange", "ArrowRight"],
+      ["gray", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowLeft"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L242`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("RAY GAP"));
+  await page.goto(`${BASE}/level/L248`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("ARBOR GAP"));
   await play(
     page,
     [
-      ["gray", "ArrowLeft"],
       ["gray", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
-      ["gray", "ArrowLeft"],
+      ["gray", "ArrowRight"],
       ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowUp"],
       ["gray", "ArrowRight"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
     ],
     "Home",
   );
-  await shot(page, "04_l242_win");
+  await shot(page, "04_l248_win");
 
-  await page.goto(`${BASE}/level/L243`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("FLORET STOP"));
+  await page.goto(`${BASE}/level/L249`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("DROOP STOP"));
   await play(
     page,
     [
+      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
       ["black", "ArrowLeft"],
-      ["orange", "ArrowDown"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["black", "ArrowRight"],
       ["orange", "ArrowDown"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l243_win");
+  await shot(page, "05_l249_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -509,7 +523,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L240", "L241", "L242", "L243"]) {
+  for (const id of ["L246", "L247", "L248", "L249"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -517,23 +531,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_081")) {
-    throw new Error("friend_081 must stay pending, not named, on the Cosmos slice");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_083")) {
+    throw new Error("friend_083 must not unlock this slice");
   }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_081")) {
-    throw new Error("L243 clear must queue Clematis when friend_081 is present");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_083")) {
+    throw new Error("L249 clear must not queue the next friend");
   }
-  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_082")) {
-    throw new Error("L243 clear must not queue friend_082");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L249 must not open a next-friend naming modal");
   }
-  if (!after.text.includes("New friend!")) {
-    throw new Error("L243 clear must show Clematis pending naming");
-  }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_080").length !== 1) {
-    throw new Error("L243 must not unlock a Cosmos duplicate");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_082").length !== 1) {
+    throw new Error("L249 must not unlock a Wisteria duplicate");
   }
   if (!after.hud.includes("249") && !after.text.includes("249")) {
-    throw new Error("Campaign HUD must show through 249 after L243 clear");
+    throw new Error("Campaign HUD must show through 249 after L249 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -553,9 +564,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L240 + COSMOS + L241-243 OK");
+  console.log("CHAPTER 4 L246 + WISTERIA + L247-249 OK");
 } catch (error) {
-  console.error("CHAPTER 4 COSMOS FAIL", error);
+  console.error("CHAPTER 4 WISTERIA FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

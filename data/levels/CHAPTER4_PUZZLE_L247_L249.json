@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Clematis Pass — L247–L249 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L247–L249",
+  "notes": "L247 Cascade Cut / L248 Arbor Gap / L249 Droop Stop — habit-break vs Vine Cut gray-first / Trellis Gap black-first / Star Stop orange-first; not Cascade/Arbor/Droop title clones of Clematis Cut/Gap/Stop; Droop Stop avoids Star/Floret/Petal/Stem/Cup Stop collisions; no WRAP/edge twin of Nori/Medlar; L249 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L247",
+      "name": "Cascade Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_cascade_cut_orange",
+      "walls": [
+        { "x": 2, "y": 0 },
+        { "x": 3, "y": 5 },
+        { "x": 0, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 1, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "cascade_cut_orange"
+    },
+    {
+      "id": "L248",
+      "name": "Arbor Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_arbor_gap_gray",
+      "walls": [
+        { "x": 5, "y": 2 },
+        { "x": 0, "y": 1 },
+        { "x": 2, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "arbor_gap_gray"
+    },
+    {
+      "id": "L249",
+      "name": "Droop Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_droop_stop_black",
+      "walls": [
+        { "x": 3, "y": 2 },
+        { "x": 1, "y": 4 },
+        { "x": 5, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "droop_stop_black"
+    }
+  ],
+  "teaches": {
+    "L247": "Cascade Cut — orange north first; gray cuts after; not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Moor orange-north clone title, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west",
+    "L248": "Arbor Gap — gray south then orange threads; not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south clone title, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north",
+    "L249": "Droop Stop — wisteria-arbor seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star twins; off Nori (5,5); not Hold*/Park*; title Droop Stop (not Wisteria Stop, not Star Stop, not Floret Stop, not Iris Stem Stop, not Poppy Cup Stop, not Buttercup Petal Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L247": 10,
+      "L248": 11,
+      "L249": 10
+    }
+  },
+  "deltas": {
+    "L247": "(3, 0)",
+    "L248": "(0, 1)",
+    "L249": "(2, 1)"
+  }
+}

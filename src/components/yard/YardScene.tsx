@@ -145,6 +145,7 @@ export function YardScene({
   const buttercup = friends.find((friend) => friend.friendId === "friend_079");
   const cosmos = friends.find((friend) => friend.friendId === "friend_080");
   const clematis = friends.find((friend) => friend.friendId === "friend_081");
+  const wisteria = friends.find((friend) => friend.friendId === "friend_082");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -226,7 +227,8 @@ export function YardScene({
       friend.friendId !== "friend_078" &&
       friend.friendId !== "friend_079" &&
       friend.friendId !== "friend_080" &&
-      friend.friendId !== "friend_081",
+      friend.friendId !== "friend_081" &&
+      friend.friendId !== "friend_082",
   );
 
   return (
@@ -2095,6 +2097,36 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{clematis.name}</p>
+        </div>
+      ) : null}
+
+      {wisteria ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "58%", top: "188%" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/furniture/wisteriaArbor.svg"
+            alt=""
+            className="pointer-events-none absolute left-1/2 top-[-18%] h-10 w-7 -translate-x-1/2 select-none"
+          />
+          <FriendSprite
+            kit={friendById(wisteria.friendId)?.phenotype.artKit ?? "wisteria"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === wisteria.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(wisteria.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${wisteria.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{wisteria.name}</p>
         </div>
       ) : null}
 

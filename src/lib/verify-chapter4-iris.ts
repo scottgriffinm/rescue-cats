@@ -278,7 +278,7 @@ export function verifyChapter4Iris(solves: Record<string, Array<[string, Dir]>>)
   const yardI = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardI.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must declare iris once");
   if ((yardI.match(/\{iris \?/g) || []).length !== 1) throw new Error("YardScene must render iris once");
-  if (TUTORIAL_RESCUES.length !== 81) throw new Error("Met must include through Iris (64)");
+  if (TUTORIAL_RESCUES.length !== 82) throw new Error("Met must include through Iris (64)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
