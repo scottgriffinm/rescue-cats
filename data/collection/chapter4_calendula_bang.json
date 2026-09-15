@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_calendula_bang",
+  "status": "READY",
+  "friend_id": "friend_094",
+  "unlock_clear": 282,
+  "personality": "Calendula-soft",
+  "display_line": "Petal soft. Already claimed the calendula tin.",
+  "default_name": "Calendula",
+  "tier": "C",
+  "color": "Petal",
+  "pattern": "Tin",
+  "art": {
+    "loaf_48": "/assets/cats/calendula_loaf_48.svg",
+    "loaf_72": "/assets/cats/calendula_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "calendula"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Calendula", "Petal", "Tin"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_094": [
+      "{Name}: Petal soft. Already claimed the calendula tin.",
+      "{Name}: Looks yard-soft. Owns the tin."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 282,
+    "sku_id": null,
+    "note": "Ch4. Calendula Pass. No gift. Ban Salvia/Sage/Torch and all prior pools. Bean parade stands. No Pebble. Calendula, Petal, and Tin chips are CEO-locked on Calendula. No friend_095."
+  }
+}
