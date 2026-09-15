@@ -134,6 +134,7 @@ export function YardScene({
   const tulip = friends.find((friend) => friend.friendId === "friend_068");
   const violet = friends.find((friend) => friend.friendId === "friend_069");
   const lily = friends.find((friend) => friend.friendId === "friend_070");
+  const crocus = friends.find((friend) => friend.friendId === "friend_071");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -204,7 +205,8 @@ export function YardScene({
       friend.friendId !== "friend_067" &&
       friend.friendId !== "friend_068" &&
       friend.friendId !== "friend_069" &&
-      friend.friendId !== "friend_070",
+      friend.friendId !== "friend_070" &&
+      friend.friendId !== "friend_071",
   );
 
   return (
@@ -1797,6 +1799,30 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{lily.name}</p>
+        </div>
+      ) : null}
+
+      {crocus ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "48%", top: "136%" }}
+        >
+          <FriendSprite
+            kit={friendById(crocus.friendId)?.phenotype.artKit ?? "crocus"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === crocus.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(crocus.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${crocus.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{crocus.name}</p>
         </div>
       ) : null}
 

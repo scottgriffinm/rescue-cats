@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_crocus_bang",
+  "status": "READY",
+  "friend_id": "friend_071",
+  "unlock_clear": 213,
+  "personality": "Crocus-soft",
+  "display_line": "Saffron soft. Already claimed the crocus cup.",
+  "default_name": "Crocus",
+  "tier": "C",
+  "color": "Saffron",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/crocus_loaf_48.svg",
+    "loaf_72": "/assets/cats/crocus_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "crocus"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Crocus", "Saffron", "Tip"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_071": [
+      "{Name}: Saffron soft. Already claimed the crocus cup.",
+      "{Name}: Looks yard-cool. Owns the cup."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 213,
+    "sku_id": null,
+    "note": "Ch4. Lily Pass next. No gift. Ban Lily/Pollen/Crest and all prior pools. Bean parade stands. No Pebble. Crocus, Saffron, and Tip chips are CEO-locked on Crocus. No friend_072."
+  }
+}

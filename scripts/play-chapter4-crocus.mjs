@@ -1,7 +1,7 @@
 /**
- * Chapter 4 beat: L210 → Lily@210 naming, then L211–L213.
+ * Chapter 4 beat: L213 → Crocus@213 naming, then L214–L216.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L210 queues Lily pending. L213 queues Crocus pending. Do not invent friend_072.
+ * L213 queues Crocus pending. Do not invent friend_072.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-lily";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-crocus";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -93,6 +93,7 @@ const PARADE = [
   ["friend_067", "Poppy", 201],
   ["friend_068", "Tulip", 204],
   ["friend_069", "Violet", 207],
+  ["friend_070", "Lily", 210],
 ];
 
 const completedIds = [
@@ -105,7 +106,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 199 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 202 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -131,7 +132,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Violet claimed the violet patch."],
+  bubbles: ["Lily claimed the lily bowl."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -181,22 +182,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L210`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("THICKET STOP"));
-  await shot(page, "01_l210_before_lily");
+  await page.goto(`${BASE}/level/L213`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("ANTHER STOP"));
+  await shot(page, "01_l213_before_crocus");
   await play(
     page,
     [
-      ["black", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
       ["black", "ArrowLeft"],
       ["black", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
       ["black", "ArrowRight"],
-      ["orange", "ArrowDown"],
+      ["black", "ArrowUp"],
       ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowUp"],
     ],
     "New friend!",
   );
@@ -214,17 +215,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("lily naming", modal);
+  console.log("crocus naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Lily prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Crocus prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Ivory soft. Already claimed the lily bowl.") {
-    throw new Error(`Lily display line drifted: ${modal.line}`);
+  if (modal.line !== "Saffron soft. Already claimed the crocus cup.") {
+    throw new Error(`Crocus display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Lily,Pollen,Crest") {
-    throw new Error(`Lily chips must be Lily/Pollen/Crest, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Crocus,Saffron,Tip") {
+    throw new Error(`Crocus chips must be Crocus/Saffron/Tip, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Lily") ||
+    modal.chips.includes("Pollen") ||
+    modal.chips.includes("Crest") ||
     modal.chips.includes("Violet") ||
     modal.chips.includes("Patch") ||
     modal.chips.includes("Moss") ||
@@ -275,68 +279,71 @@ try {
     modal.chips.includes("Honey") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Lily chips collided with Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Crocus chips collided with Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/lily_loaf_72.svg")) {
-    throw new Error(`Lily hero missing ivory-lily loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/crocus_loaf_72.svg")) {
+    throw new Error(`Crocus hero missing saffron-crocus loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/lily_loaf_72.svg")) {
+    throw new Error("Crocus hero must not use the Lily loaf");
   }
   if (modal.hero.includes("/assets/cats/violet_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Violet loaf");
+    throw new Error("Crocus hero must not use the Violet loaf");
   }
   if (modal.hero.includes("/assets/cats/tulip_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Tulip loaf");
+    throw new Error("Crocus hero must not use the Tulip loaf");
   }
   if (modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Poppy loaf");
+    throw new Error("Crocus hero must not use the Poppy loaf");
   }
   if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Lotus loaf");
+    throw new Error("Crocus hero must not use the Lotus loaf");
   }
   if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Orchid loaf");
+    throw new Error("Crocus hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Iris loaf");
+    throw new Error("Crocus hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Aster loaf");
+    throw new Error("Crocus hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Zinnia loaf");
+    throw new Error("Crocus hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Dahlia loaf");
+    throw new Error("Crocus hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Azalea loaf");
+    throw new Error("Crocus hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Peony loaf");
+    throw new Error("Crocus hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Camellia loaf");
+    throw new Error("Crocus hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Gardenia loaf");
+    throw new Error("Crocus hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Hibiscus loaf");
+    throw new Error("Crocus hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Jasmine loaf");
+    throw new Error("Crocus hero must not use the Jasmine loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Lily hero must not use the Magnolia loaf");
+    throw new Error("Crocus hero must not use the Magnolia loaf");
   }
-  await shot(page, "02_lily_naming");
+  await shot(page, "02_crocus_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Lily") &&
-      ((document.body.innerText || "").includes("bowl") ||
-        (document.body.innerText || "").includes("lily") ||
+      (document.body.innerText || "").includes("Crocus") &&
+      ((document.body.innerText || "").includes("cup") ||
+        (document.body.innerText || "").includes("crocus") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -349,86 +356,87 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_070")) {
-    throw new Error("Lily was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_071")) {
+    throw new Error("Crocus was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_070")?.name !== "Lily") {
-    throw new Error("Lily name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_071")?.name !== "Crocus") {
+    throw new Error("Crocus name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_071")) {
-    throw new Error("friend_071 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_072")) {
+    throw new Error("friend_072 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/lily_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/lily_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/crocus_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/crocus_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Lily ivory-lily loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Crocus saffron-crocus loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("bowl") && !yard.text.includes("Lily")) {
-    throw new Error("yard missing Lily lily bowl line");
+  if (!yard.text.includes("cup") && !yard.text.includes("Crocus")) {
+    throw new Error("yard missing Crocus crocus cup line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_lily_yard");
+  await shot(page, "03_crocus_yard");
 
-  await page.goto(`${BASE}/level/L211`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("POLLEN CUT"));
+  await page.goto(`${BASE}/level/L214`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("SAFFRON CUT"));
   await play(
     page,
     [
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowUp"],
       ["black", "ArrowLeft"],
       ["black", "ArrowDown"],
-      ["black", "ArrowRight"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+    ],
+    "Home",
+  );
+
+  await page.goto(`${BASE}/level/L215`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("TIP GAP"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowRight"],
+    ],
+    "Home",
+  );
+  await shot(page, "04_l215_win");
+
+  await page.goto(`${BASE}/level/L216`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("STIGMA STOP"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
-    ],
-    "Home",
-  );
-
-  await page.goto(`${BASE}/level/L212`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CREST GAP"));
-  await play(
-    page,
-    [
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["orange", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-    ],
-    "Home",
-  );
-  await shot(page, "04_l212_win");
-
-  await page.goto(`${BASE}/level/L213`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("ANTHER STOP"));
-  await play(
-    page,
-    [
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowLeft"],
       ["black", "ArrowUp"],
     ],
-    "New friend!",
+    "Home",
   );
-  await shot(page, "05_l213_win");
+  await shot(page, "05_l216_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -436,7 +444,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L210", "L211", "L212", "L213"]) {
+  for (const id of ["L213", "L214", "L215", "L216"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -444,20 +452,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_071")) {
-    throw new Error("friend_071 must stay pending, not named, on the Lily slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_071")) {
-    throw new Error("L213 clear must queue Crocus when friend_071 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_072")) {
+    throw new Error("friend_072 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_072")) {
-    throw new Error("L213 clear must not queue friend_072");
+    throw new Error("L216 clear must not queue the next friend");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_070").length !== 1) {
-    throw new Error("L213 must not unlock a Lily duplicate");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L216 must not open a next-friend naming modal");
   }
-  if (!after.hud.includes("213") && !after.text.includes("213")) {
-    throw new Error("Campaign HUD must show through 213 after L213 clear");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_071").length !== 1) {
+    throw new Error("L216 must not unlock a Crocus duplicate");
+  }
+  if (!after.hud.includes("216") && !after.text.includes("216")) {
+    throw new Error("Campaign HUD must show through 216 after L216 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -477,9 +485,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L210 + LILY + L211-213 OK");
+  console.log("CHAPTER 4 L213 + CROCUS + L214-216 OK");
 } catch (error) {
-  console.error("CHAPTER 4 LILY FAIL", error);
+  console.error("CHAPTER 4 CROCUS FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Lily Pass — L214–L216 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L214–L216",
+  "notes": "L214 Saffron Cut / L215 Tip Gap / L216 Stigma Stop — off Pollen Cut / Crest Gap / Anther Stop habits; not Patch/Moss/Thicket tropes; not Crocus Cut/Gap/Stop title clones; Stigma Stop avoids Poppy Cup Stop; no WRAP/edge twin of Nori/Medlar; L216 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L214",
+      "name": "Saffron Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_saffron_cut_black",
+      "walls": [
+        { "x": 2, "y": 0 },
+        { "x": 4, "y": 4 },
+        { "x": 0, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 0, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 1, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "saffron_cut_black"
+    },
+    {
+      "id": "L215",
+      "name": "Tip Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tip_gap_gray",
+      "walls": [
+        { "x": 2, "y": 3 },
+        { "x": 5, "y": 4 },
+        { "x": 3, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 5, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "tip_gap_gray"
+    },
+    {
+      "id": "L216",
+      "name": "Stigma Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_stigma_stop_black",
+      "walls": [
+        { "x": 2, "y": 3 },
+        { "x": 3, "y": 2 },
+        { "x": 1, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 0, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "stigma_stop_black"
+    }
+  ],
+  "teaches": {
+    "L214": "Saffron Cut — orange west first; black cuts after; not Pollen black-west, not Patch black-east, not Stem black-south, not Capsule black-north, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Fizz gray-south, not Vase orange-south",
+    "L215": "Tip Gap — orange east then gray threads; not Crest gray-west, not Moss gray-north, not Glow gray-east, not Silk gray-south, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south, not Flare orange-west",
+    "L216": "Stigma Stop — crocus-cup seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther twins; off Nori (5,5); not Hold*/Park*; title Stigma Stop (not Poppy Cup Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L214": 11,
+      "L215": 11,
+      "L216": 10
+    }
+  },
+  "deltas": {
+    "L214": "(2, -4)",
+    "L215": "(1, -1)",
+    "L216": "(1, -1)"
+  }
+}
