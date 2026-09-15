@@ -79,7 +79,8 @@ export type ArtKit =
   | "crocus"
   | "hyacinth"
   | "foxglove"
-  | "bluebell";
+  | "bluebell"
+  | "snapdragon";
 
 export type PieceCat = {
   id: string;

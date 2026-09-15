@@ -73,6 +73,7 @@ import chapter4ay from "../../data/levels/CHAPTER4_PUZZLE_L214_L216.json";
 import chapter4az from "../../data/levels/CHAPTER4_PUZZLE_L217_L219.json";
 import chapter4ba from "../../data/levels/CHAPTER4_PUZZLE_L220_L222.json";
 import chapter4bb from "../../data/levels/CHAPTER4_PUZZLE_L223_L225.json";
+import chapter4bc from "../../data/levels/CHAPTER4_PUZZLE_L226_L228.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -303,6 +304,9 @@ const HEADLINES: Record<string, string> = {
   L223: "CLOCHE CUT",
   L224: "RING GAP",
   L225: "CHIME STOP",
+  L226: "JAW CUT",
+  L227: "PERCH GAP",
+  L228: "DRAGON STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -530,6 +534,9 @@ const HINTS: Record<string, string> = {
   L223: "Cloche cut — gray south first; orange cuts after; not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Patch black-east, not Stem black-south, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north.",
   L224: "Ring gap — orange west then gray threads; not Throat gray-west, not Bell gray-south, not Tip orange-east, not Moss gray-north, not Glow gray-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south.",
   L225: "Chime stop — bluebell-cloche seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove twins; off Nori (5,5); not Orchid Spike Stop; not Hold*/Park*.",
+  L226: "Jaw cut — black east first; orange cuts after; not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Stem black-south, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north.",
+  L227: "Perch gap — black north then orange threads; not Ring orange-west, not Throat gray-west, not Bell gray-south, not Tip orange-east, not Moss gray-north, not Glow gray-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south.",
+  L228: "Dragon stop — snapdragon-perch seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime twins; off Nori (5,5); not Orchid Spike Stop; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -658,6 +665,7 @@ const authored = [
   ...chapter4az.levels,
   ...chapter4ba.levels,
   ...chapter4bb.levels,
+  ...chapter4bc.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

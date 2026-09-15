@@ -72,6 +72,7 @@ import chapter4Crocus from "../../data/chapter4_crocus_bang.json";
 import chapter4Hyacinth from "../../data/chapter4_hyacinth_bang.json";
 import chapter4Foxglove from "../../data/chapter4_foxglove_bang.json";
 import chapter4Bluebell from "../../data/chapter4_bluebell_bang.json";
+import chapter4Snapdragon from "../../data/chapter4_snapdragon_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -173,7 +174,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "crocus" ||
     raw === "hyacinth" ||
     raw === "foxglove" ||
-    raw === "bluebell"
+    raw === "bluebell" ||
+    raw === "snapdragon"
   ) {
     return raw;
   }
@@ -481,6 +483,7 @@ export const CHAPTER4_CROCUS = chapter4Crocus;
 export const CHAPTER4_HYACINTH = chapter4Hyacinth;
 export const CHAPTER4_FOXGLOVE = chapter4Foxglove;
 export const CHAPTER4_BLUEBELL = chapter4Bluebell;
+export const CHAPTER4_SNAPDRAGON = chapter4Snapdragon;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -554,6 +557,7 @@ export const CROCUS_FRIEND_ID = chapter4Crocus.friend_id;
 export const HYACINTH_FRIEND_ID = chapter4Hyacinth.friend_id;
 export const FOXGLOVE_FRIEND_ID = chapter4Foxglove.friend_id;
 export const BLUEBELL_FRIEND_ID = chapter4Bluebell.friend_id;
+export const SNAPDRAGON_FRIEND_ID = chapter4Snapdragon.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1639,6 +1643,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "orange",
     },
   },
+  {
+    friendId: chapter4Snapdragon.friend_id,
+    defaultName: chapter4Snapdragon.default_name,
+    unlockClear: chapter4Snapdragon.unlock_clear,
+    displayLine: chapter4Snapdragon.display_line,
+    tier: chapter4Snapdragon.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_garden_freckled_regular_regular_snapdragon",
+      breed: "Domestic Shorthair",
+      color: chapter4Snapdragon.color,
+      pattern: chapter4Snapdragon.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Snapdragon.personality,
+      artKit: "snapdragon",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1660,7 +1684,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 74);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 75);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1748,6 +1772,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   216: "friend_072",
   219: "friend_073",
   222: "friend_074",
+  225: "friend_075",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -2015,6 +2040,7 @@ export const CROCUS_NAMING_CHIPS: string[] = CHAPTER4_CROCUS.naming.suggestion_c
 export const HYACINTH_NAMING_CHIPS: string[] = CHAPTER4_HYACINTH.naming.suggestion_chips;
 export const FOXGLOVE_NAMING_CHIPS: string[] = CHAPTER4_FOXGLOVE.naming.suggestion_chips;
 export const BLUEBELL_NAMING_CHIPS: string[] = CHAPTER4_BLUEBELL.naming.suggestion_chips;
+export const SNAPDRAGON_NAMING_CHIPS: string[] = CHAPTER4_SNAPDRAGON.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -2236,6 +2262,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === BLUEBELL_FRIEND_ID || friendId === "friend_074") {
     return [...BLUEBELL_NAMING_CHIPS];
   }
+  if (friendId === SNAPDRAGON_FRIEND_ID || friendId === "friend_075") {
+    return [...SNAPDRAGON_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -2311,6 +2340,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Hyacinth-soft") return [...HYACINTH_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Foxglove-soft") return [...FOXGLOVE_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Bluebell-soft") return [...BLUEBELL_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Snapdragon-soft") return [...SNAPDRAGON_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -2543,6 +2573,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === BLUEBELL_FRIEND_ID || friendId === "friend_074") {
     return shufflePool([...BLUEBELL_NAMING_CHIPS], count);
   }
+  if (friendId === SNAPDRAGON_FRIEND_ID || friendId === "friend_075") {
+    return shufflePool([...SNAPDRAGON_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -2632,6 +2665,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_HYACINTH.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_FOXGLOVE.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_BLUEBELL.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_SNAPDRAGON.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -2717,6 +2751,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Hyacinth-soft") return "hyacinth spike";
   if (personality === "Foxglove-soft") return "foxglove tower";
   if (personality === "Bluebell-soft") return "bluebell cloche";
+  if (personality === "Snapdragon-soft") return "snapdragon perch";
   return "sun patch";
 }
 

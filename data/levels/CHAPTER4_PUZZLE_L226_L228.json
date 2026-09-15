@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Bluebell Pass — L226–L228 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L226–L228",
+  "notes": "L226 Jaw Cut / L227 Perch Gap / L228 Dragon Stop — off Cloche Cut / Ring Gap / Chime Stop habits; not Tower/Throat/Glove tropes; not Snapdragon Cut/Gap/Stop title clones; Dragon Stop avoids Orchid Spike Stop; no WRAP/edge twin of Nori/Medlar; L228 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L226",
+      "name": "Jaw Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_jaw_cut_black",
+      "walls": [
+        { "x": 2, "y": 5 },
+        { "x": 2, "y": 3 },
+        { "x": 3, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 3, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "jaw_cut_black"
+    },
+    {
+      "id": "L227",
+      "name": "Perch Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_perch_gap_black",
+      "walls": [
+        { "x": 0, "y": 3 },
+        { "x": 4, "y": 0 },
+        { "x": 3, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 0, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "perch_gap_black"
+    },
+    {
+      "id": "L228",
+      "name": "Dragon Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_dragon_stop_orange",
+      "walls": [
+        { "x": 0, "y": 4 },
+        { "x": 1, "y": 1 },
+        { "x": 3, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "dragon_stop_orange"
+    }
+  ],
+  "teaches": {
+    "L226": "Jaw Cut — black east first; orange cuts after; not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Stem black-south, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north",
+    "L227": "Perch Gap — black north then orange threads; not Ring orange-west, not Throat gray-west, not Bell gray-south, not Tip orange-east, not Moss gray-north, not Glow gray-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south",
+    "L228": "Dragon Stop — snapdragon-perch seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime twins; off Nori (5,5); not Hold*/Park*; title Dragon Stop (not Snapdragon Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L226": 11,
+      "L227": 10,
+      "L228": 10
+    }
+  },
+  "deltas": {
+    "L226": "(-2, 0)",
+    "L227": "(2, -3)",
+    "L228": "(-2, -4)"
+  }
+}
