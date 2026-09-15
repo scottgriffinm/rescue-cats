@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Hyacinth Pass — L220–L222 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L220–L222",
+  "notes": "L220 Tower Cut / L221 Throat Gap / L222 Glove Stop — off Cluster Cut / Bell Gap / Raceme Stop habits; not Saffron/Tip/Stigma tropes; not Foxglove Cut/Gap/Stop title clones; Glove Stop avoids Orchid Spike Stop; no WRAP/edge twin of Nori/Medlar; L222 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L220",
+      "name": "Tower Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tower_cut_black",
+      "walls": [
+        { "x": 0, "y": 4 },
+        { "x": 3, "y": 5 },
+        { "x": 0, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 4, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 4, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "tower_cut_black"
+    },
+    {
+      "id": "L221",
+      "name": "Throat Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_throat_gap_gray",
+      "walls": [
+        { "x": 4, "y": 5 },
+        { "x": 3, "y": 0 },
+        { "x": 1, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "throat_gap_gray"
+    },
+    {
+      "id": "L222",
+      "name": "Glove Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_glove_stop_black",
+      "walls": [
+        { "x": 5, "y": 3 },
+        { "x": 2, "y": 0 },
+        { "x": 1, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 3, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 5, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 3, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "glove_stop_black"
+    }
+  ],
+  "teaches": {
+    "L220": "Tower Cut — orange south first; black cuts after; not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Patch black-east, not Stem black-south, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Fizz gray-south",
+    "L221": "Throat Gap — gray west then orange threads; not Bell gray-south, not Tip orange-east, not Crest gray-west clone dropped; not Moss gray-north, not Glow gray-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south, not Flare orange-west",
+    "L222": "Glove Stop — foxglove-tower seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme twins; off Nori (5,5); not Hold*/Park*; title Glove Stop (not Foxglove Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L220": 10,
+      "L221": 11,
+      "L222": 10
+    }
+  },
+  "deltas": {
+    "L220": "(-3, 1)",
+    "L221": "(-1, -2)",
+    "L222": "(2, 1)"
+  }
+}
