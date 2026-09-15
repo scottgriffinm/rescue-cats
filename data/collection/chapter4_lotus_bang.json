@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_lotus_bang",
+  "status": "READY",
+  "friend_id": "friend_066",
+  "unlock_clear": 198,
+  "personality": "Lotus-soft",
+  "display_line": "Pond soft. Already claimed the lotus pad.",
+  "default_name": "Lotus",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/lotus_loaf_48.svg",
+    "loaf_72": "/assets/cats/lotus_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "lotus"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Lotus", "Pad", "Ripple"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_066": [
+      "{Name}: Pond soft. Already claimed the lotus pad.",
+      "{Name}: Looks yard-cool. Owns the pad."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 198,
+    "sku_id": null,
+    "note": "Ch4. Orchid Pass next. No gift. Ban Orchid/Spur/Veil and all prior pools. Bean parade stands. No Pebble. Lotus chip is CEO-locked on Lotus. No friend_067."
+  }
+}
