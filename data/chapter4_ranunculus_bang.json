@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_ranunculus_bang",
+  "status": "READY",
+  "friend_id": "friend_085",
+  "unlock_clear": 255,
+  "personality": "Ranunculus-soft",
+  "display_line": "Layer soft. Already claimed the ranunculus nest.",
+  "default_name": "Ranunculus",
+  "tier": "C",
+  "color": "Layer",
+  "pattern": "Nest",
+  "art": {
+    "loaf_48": "/assets/cats/ranunculus_loaf_48.svg",
+    "loaf_72": "/assets/cats/ranunculus_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "ranunculus"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Ranunculus", "Layer", "Nest"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_085": [
+      "{Name}: Layer soft. Already claimed the ranunculus nest.",
+      "{Name}: Looks yard-soft. Owns the nest."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 255,
+    "sku_id": null,
+    "note": "Ch4. Ranunculus Pass. No gift. Ban Begonia/Ruffle/Planter and all prior pools. Bean parade stands. No Pebble. Ranunculus, Layer, and Nest chips are CEO-locked on Ranunculus. No friend_086."
+  }
+}
