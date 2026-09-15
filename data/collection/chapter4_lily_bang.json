@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_lily_bang",
+  "status": "READY",
+  "friend_id": "friend_070",
+  "unlock_clear": 210,
+  "personality": "Lily-soft",
+  "display_line": "Ivory soft. Already claimed the lily bowl.",
+  "default_name": "Lily",
+  "tier": "C",
+  "color": "Ivory",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/lily_loaf_48.svg",
+    "loaf_72": "/assets/cats/lily_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "lily"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Lily", "Pollen", "Crest"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_070": [
+      "{Name}: Ivory soft. Already claimed the lily bowl.",
+      "{Name}: Looks yard-cool. Owns the bowl."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 210,
+    "sku_id": null,
+    "note": "Ch4. Violet Pass next. No gift. Ban Violet/Patch/Moss and all prior pools. Bean parade stands. No Pebble. Lily, Pollen, and Crest chips are CEO-locked on Lily. No friend_071."
+  }
+}
