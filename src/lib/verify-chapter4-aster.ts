@@ -272,7 +272,7 @@ export function verifyChapter4Aster(solves: Record<string, Array<[string, Dir]>>
   const yardA = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardA.match(/const aster =/g) || []).length !== 1) throw new Error("YardScene must declare aster once");
   if ((yardA.match(/\{aster \?/g) || []).length !== 1) throw new Error("YardScene must render aster once");
-  if (TUTORIAL_RESCUES.length !== 79) throw new Error("Met must include through Aster (63)");
+  if (TUTORIAL_RESCUES.length !== 80) throw new Error("Met must include through Aster (63)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }

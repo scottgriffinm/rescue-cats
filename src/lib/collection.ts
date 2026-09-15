@@ -77,6 +77,7 @@ import chapter4Marigold from "../../data/chapter4_marigold_bang.json";
 import chapter4Heather from "../../data/chapter4_heather_bang.json";
 import chapter4Primrose from "../../data/chapter4_primrose_bang.json";
 import chapter4Buttercup from "../../data/chapter4_buttercup_bang.json";
+import chapter4Cosmos from "../../data/chapter4_cosmos_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -183,7 +184,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "marigold" ||
     raw === "heather" ||
     raw === "primrose" ||
-    raw === "buttercup"
+    raw === "buttercup" ||
+    raw === "cosmos"
   ) {
     return raw;
   }
@@ -496,6 +498,7 @@ export const CHAPTER4_MARIGOLD = chapter4Marigold;
 export const CHAPTER4_HEATHER = chapter4Heather;
 export const CHAPTER4_PRIMROSE = chapter4Primrose;
 export const CHAPTER4_BUTTERCUP = chapter4Buttercup;
+export const CHAPTER4_COSMOS = chapter4Cosmos;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -574,6 +577,7 @@ export const MARIGOLD_FRIEND_ID = chapter4Marigold.friend_id;
 export const HEATHER_FRIEND_ID = chapter4Heather.friend_id;
 export const PRIMROSE_FRIEND_ID = chapter4Primrose.friend_id;
 export const BUTTERCUP_FRIEND_ID = chapter4Buttercup.friend_id;
+export const COSMOS_FRIEND_ID = chapter4Cosmos.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1759,6 +1763,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Cosmos.friend_id,
+    defaultName: chapter4Cosmos.default_name,
+    unlockClear: chapter4Cosmos.unlock_clear,
+    displayLine: chapter4Cosmos.display_line,
+    tier: chapter4Cosmos.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_airy_ray_regular_regular_cosmos",
+      breed: "Domestic Shorthair",
+      color: chapter4Cosmos.color,
+      pattern: chapter4Cosmos.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Cosmos.personality,
+      artKit: "cosmos",
+      boardColor: "orange",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1780,7 +1804,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 79);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 80);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1873,6 +1897,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   231: "friend_077",
   234: "friend_078",
   237: "friend_079",
+  240: "friend_080",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -2145,6 +2170,7 @@ export const MARIGOLD_NAMING_CHIPS: string[] = CHAPTER4_MARIGOLD.naming.suggesti
 export const HEATHER_NAMING_CHIPS: string[] = CHAPTER4_HEATHER.naming.suggestion_chips;
 export const PRIMROSE_NAMING_CHIPS: string[] = CHAPTER4_PRIMROSE.naming.suggestion_chips;
 export const BUTTERCUP_NAMING_CHIPS: string[] = CHAPTER4_BUTTERCUP.naming.suggestion_chips;
+export const COSMOS_NAMING_CHIPS: string[] = CHAPTER4_COSMOS.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -2380,6 +2406,9 @@ export function chipsForFriend(friendId: string): string[] {
   }
   if (friendId === BUTTERCUP_FRIEND_ID || friendId === "friend_079") {
     return [...BUTTERCUP_NAMING_CHIPS];
+  }
+  if (friendId === COSMOS_FRIEND_ID || friendId === "friend_080") {
+    return [...COSMOS_NAMING_CHIPS];
   }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
@@ -2704,6 +2733,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === BUTTERCUP_FRIEND_ID || friendId === "friend_079") {
     return shufflePool([...BUTTERCUP_NAMING_CHIPS], count);
   }
+  if (friendId === COSMOS_FRIEND_ID || friendId === "friend_080") {
+    return shufflePool([...COSMOS_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -2798,6 +2830,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_HEATHER.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_PRIMROSE.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_BUTTERCUP.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_COSMOS.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -2888,6 +2921,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Heather-soft") return "heather sprig";
   if (personality === "Primrose-soft") return "primrose dish";
   if (personality === "Buttercup-soft") return "buttercup cup";
+  if (personality === "Cosmos-soft") return "cosmos stem";
   return "sun patch";
 }
 
