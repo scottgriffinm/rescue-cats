@@ -96,7 +96,8 @@ export type ArtKit =
   | "nasturtium"
   | "petunia"
   | "pansy"
-  | "verbena";
+  | "verbena"
+  | "impatiens";
 
 export type PieceCat = {
   id: string;
