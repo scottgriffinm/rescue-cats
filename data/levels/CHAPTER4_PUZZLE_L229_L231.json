@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Snapdragon Pass — L229–L231 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L229–L231",
+  "notes": "L229 Gold Cut / L230 Pot Gap / L231 Seed Stop — off Jaw Cut / Perch Gap / Dragon Stop habits; not Cloche/Ring/Chime tropes; not Marigold Cut/Gap/Stop title clones; Seed Stop avoids Orchid Spike Stop; no WRAP/edge twin of Nori/Medlar; L231 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L229",
+      "name": "Gold Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_gold_cut_black",
+      "walls": [
+        { "x": 2, "y": 2 },
+        { "x": 5, "y": 4 },
+        { "x": 0, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_black", "x": 4, "y": 2, "color": "black", "colorId": "color_black" },
+        { "id": "cat_gray", "x": 1, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_black", "x": 0, "y": 4, "color": "black", "colorId": "color_black" },
+        { "id": "gate_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "gold_cut_black"
+    },
+    {
+      "id": "L230",
+      "name": "Pot Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_pot_gap_gray",
+      "walls": [
+        { "x": 4, "y": 0 },
+        { "x": 5, "y": 1 },
+        { "x": 0, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 1, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 5, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "pot_gap_gray"
+    },
+    {
+      "id": "L231",
+      "name": "Seed Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_seed_stop_gray",
+      "walls": [
+        { "x": 4, "y": 3 },
+        { "x": 3, "y": 0 },
+        { "x": 0, "y": 1 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_black", "x": 3, "y": 5, "color": "black", "colorId": "color_black" },
+        { "id": "cat_gray", "x": 2, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_black", "x": 0, "y": 2, "color": "black", "colorId": "color_black" },
+        { "id": "gate_gray", "x": 1, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "seed_stop_gray"
+    }
+  ],
+  "teaches": {
+    "L229": "Gold Cut — black south first; gray cuts after; not Jaw black-east, not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north",
+    "L230": "Pot Gap — gray north then orange threads; not Perch black-north, not Ring orange-west, not Throat gray-west, not Bell gray-south, not Tip orange-east, not Glow gray-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south",
+    "L231": "Seed Stop — marigold-pot seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon twins; off Nori (5,5); not Hold*/Park*; title Seed Stop (not Marigold Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L229": 10,
+      "L230": 11,
+      "L231": 10
+    }
+  },
+  "deltas": {
+    "L229": "(3, 0)",
+    "L230": "(4, 1)",
+    "L231": "(1, 2)"
+  }
+}
