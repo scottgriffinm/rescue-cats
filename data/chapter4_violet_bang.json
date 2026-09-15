@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_violet_bang",
+  "status": "READY",
+  "friend_id": "friend_069",
+  "unlock_clear": 207,
+  "personality": "Violet-soft",
+  "display_line": "Woodland soft. Already claimed the violet patch.",
+  "default_name": "Violet",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/violet_loaf_48.svg",
+    "loaf_72": "/assets/cats/violet_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "violet"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Violet", "Patch", "Moss"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_069": [
+      "{Name}: Woodland soft. Already claimed the violet patch.",
+      "{Name}: Looks yard-cool. Owns the patch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 207,
+    "sku_id": null,
+    "note": "Ch4. Tulip Pass next. No gift. Ban Tulip/Stem/Glow and all prior pools. Bean parade stands. No Pebble. Patch and Moss chips are CEO-locked on Violet. No friend_070."
+  }
+}

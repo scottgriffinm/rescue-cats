@@ -73,7 +73,8 @@ export type ArtKit =
   | "orchid"
   | "lotus"
   | "poppy"
-  | "tulip";
+  | "tulip"
+  | "violet";
 
 export type PieceCat = {
   id: string;
