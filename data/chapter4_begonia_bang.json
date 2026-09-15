@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_begonia_bang",
+  "status": "READY",
+  "friend_id": "friend_084",
+  "unlock_clear": 252,
+  "personality": "Begonia-soft",
+  "display_line": "Ruffle soft. Already claimed the begonia planter.",
+  "default_name": "Begonia",
+  "tier": "C",
+  "color": "Ruffle",
+  "pattern": "Planter",
+  "art": {
+    "loaf_48": "/assets/cats/begonia_loaf_48.svg",
+    "loaf_72": "/assets/cats/begonia_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "begonia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Begonia", "Ruffle", "Planter"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_084": [
+      "{Name}: Ruffle soft. Already claimed the begonia planter.",
+      "{Name}: Looks yard-soft. Owns the planter."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 252,
+    "sku_id": null,
+    "note": "Ch4. Begonia Pass. No gift. Ban Anemone/Wind/Bowl and all prior pools. Bean parade stands. No Pebble. Begonia, Ruffle, and Planter chips are CEO-locked on Begonia. No friend_085."
+  }
+}

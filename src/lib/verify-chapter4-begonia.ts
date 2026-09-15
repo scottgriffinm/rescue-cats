@@ -14,6 +14,9 @@ import { allCatsOnGates, legalDirs, slideCat } from "./slide";
 import type { Dir, Level, PieceCat } from "./types";
 
 const PRIOR_UNLOCKS: Array<[number, string, string]> = [
+  [249, "friend_083", "Anemone@249 must stay"],
+  [246, "friend_082", "Wisteria@246 must stay"],
+  [243, "friend_081", "Clematis@243 must stay"],
   [240, "friend_080", "Cosmos@240 must stay"],
   [237, "friend_079", "Buttercup@237 must stay"],
   [234, "friend_078", "Primrose@234 must stay"],
@@ -83,6 +86,9 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
+  ["friend_083", "Anemone,Wind,Bowl", "Anemone chips untouched"],
+  ["friend_082", "Wisteria,Cascade,Arbor", "Wisteria chips untouched"],
+  ["friend_081", "Clematis,Vine,Trellis", "Clematis chips untouched"],
   ["friend_080", "Cosmos,Airy,Ray", "Cosmos chips untouched"],
   ["friend_079", "Buttercup,Meadow,Gloss", "Buttercup chips untouched"],
   ["friend_078", "Primrose,Pale,Dish", "Primrose chips untouched"],
@@ -146,6 +152,7 @@ const PRIOR_CHIPS: Array<[string, string, string]> = [
 ];
 
 const BANNED_PAIRS = new Set([
+  "1,0/2,2", "3,1/3,2", "3,1/4,5",
   "1,0/3,0", "0,4/2,1", "2,0/4,4",
   "3,2/3,3", "2,2/3,2", "2,3/3,3",
   "2,3/4,5", "0,3/3,2", "3,3/3,5",
@@ -196,6 +203,8 @@ const BANNED_PAIRS = new Set([
   "0,4/1,4", "1,3/3,4", "2,4/4,1",
   "0,1/1,2", "0,5/2,1", "2,1/4,2",
   "3,0/3,3", "0,3/1,3", "2,4/5,1",
+  "2,1/5,0", "3,0/4,2", "0,3/1,2",
+  "0,2/3,2", "3,4/3,5", "0,2/2,1",
 ]);
 
 function stateKey(cats: PieceCat[]) {
@@ -246,11 +255,11 @@ function uniqueShortestCount(level: Level) {
   return { min, count };
 }
 
-export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir]>>) {
+export function verifyChapter4Begonia(solves: Record<string, Array<[string, Dir]>>) {
   for (const [id, name] of [
-    ["L244", "Vine Cut"],
-    ["L245", "Trellis Gap"],
-    ["L246", "Star Stop"],
+    ["L253", "Ruffle Cut"],
+    ["L254", "Planter Gap"],
+    ["L255", "Leaf Stop"],
   ] as const) {
     const level = LEVELS.find((row) => row.id === id);
     if (!level) throw new Error(`missing ${id}`);
@@ -263,8 +272,17 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
     if (/\b(hold|park|close)\b/i.test(level.name)) {
       throw new Error(`${id} must not be Hold*/Park*/Close`);
     }
-    if (/clematis (cut|gap|stop)/i.test(level.name)) {
-      throw new Error(`${id} must not be Clematis Cut/Gap/Stop`);
+    if (/begonia (cut|gap|stop)/i.test(level.name)) {
+      throw new Error(`${id} must not be Begonia Cut/Gap/Stop`);
+    }
+    if (/anemone (cut|gap|stop)|wind cut|bowl gap|whirl stop/i.test(level.name)) {
+      throw new Error(`${id} must not be Wind Cut/Bowl Gap/Whirl Stop/Anemone Cut/Gap/Stop`);
+    }
+    if (/wisteria (cut|gap|stop)|cascade cut|arbor gap|droop stop/i.test(level.name)) {
+      throw new Error(`${id} must not be Cascade Cut/Arbor Gap/Droop Stop/Wisteria Cut/Gap/Stop`);
+    }
+    if (/clematis (cut|gap|stop)|vine cut|trellis gap|star stop/i.test(level.name)) {
+      throw new Error(`${id} must not be Vine Cut/Trellis Gap/Star Stop/Clematis Cut/Gap/Stop`);
     }
     if (/airy cut|ray gap|floret stop|cosmos (cut|gap|stop)/i.test(level.name)) {
       throw new Error(`${id} must not be Airy Cut/Ray Gap/Floret Stop/Cosmos Cut/Gap/Stop`);
@@ -279,6 +297,15 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
     if (unique.min < 10 || unique.min > 11) throw new Error(`${id} shortest must be 10–11, got ${unique.min}`);
     if (level.moveBudget < unique.min) throw new Error(`${id} budget ${level.moveBudget} < shortest ${unique.min}`);
   }
+  if (LEVELS.find((row) => row.id === "L244")?.name !== "Vine Cut") throw new Error("L244 Vine Cut locked");
+  if (LEVELS.find((row) => row.id === "L245")?.name !== "Trellis Gap") throw new Error("L245 Trellis Gap locked");
+  if (LEVELS.find((row) => row.id === "L246")?.name !== "Star Stop") throw new Error("L246 Star Stop locked");
+  if (LEVELS.find((row) => row.id === "L247")?.name !== "Cascade Cut") throw new Error("L247 Cascade Cut locked");
+  if (LEVELS.find((row) => row.id === "L248")?.name !== "Arbor Gap") throw new Error("L248 Arbor Gap locked");
+  if (LEVELS.find((row) => row.id === "L249")?.name !== "Droop Stop") throw new Error("L249 Droop Stop locked");
+  if (LEVELS.find((row) => row.id === "L250")?.name !== "Wind Cut") throw new Error("L250 Wind Cut locked");
+  if (LEVELS.find((row) => row.id === "L251")?.name !== "Bowl Gap") throw new Error("L251 Bowl Gap locked");
+  if (LEVELS.find((row) => row.id === "L252")?.name !== "Whirl Stop") throw new Error("L252 Whirl Stop locked");
   if (LEVELS.find((row) => row.id === "L241")?.name !== "Airy Cut") throw new Error("L241 Airy Cut locked");
   if (LEVELS.find((row) => row.id === "L242")?.name !== "Ray Gap") throw new Error("L242 Ray Gap locked");
   if (LEVELS.find((row) => row.id === "L243")?.name !== "Floret Stop") throw new Error("L243 Floret Stop locked");
@@ -354,35 +381,41 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
   if (LEVELS.find((row) => row.id === "L168")?.name !== "Bowl Stop") throw new Error("L168 Bowl Stop locked");
   if (LEVELS.find((row) => row.id === "L165")?.name !== "Bloom Stop") throw new Error("L165 Bloom Stop locked");
   if (LEVELS.find((row) => row.id === "L162")?.name !== "Saucer Stop") throw new Error("L162 Saucer Stop locked");
-  if (SLICE_UNLOCKS[243] !== "friend_081") throw new Error("SLICE_UNLOCKS[243] must be friend_081");
-  if (shippedFriendForClear(243)?.friendId !== "friend_081") throw new Error("onClear(243) must award Clematis");
-  const clematis = friendById("friend_081");
-  if (!clematis) throw new Error("friend_081 missing from CATALOG");
-  if (clematis.defaultName !== "Clematis") throw new Error("default name must be Clematis");
-  if (clematis.unlockClear !== 243) throw new Error("Clematis unlockClear must be 243");
-  if (clematis.phenotype.artKit !== "clematis") throw new Error("Clematis artKit must be clematis");
-  if (clematis.phenotype.personality !== "Clematis-soft") throw new Error("Clematis personality must be Clematis-soft");
-  if (clematis.phenotype.boardColor !== "gray") throw new Error("Clematis boardColor must be gray");
-  if (clematis.phenotype.color !== "Vine") throw new Error("Clematis color must be Vine");
-  if (clematis.phenotype.pattern !== "Trellis") throw new Error("Clematis pattern must be Trellis");
-  if (chipsForFriend("friend_081").join(",") !== "Clematis,Vine,Trellis") {
-    throw new Error(`Clematis chips must be Clematis/Vine/Trellis, got ${chipsForFriend("friend_081").join(",")}`);
+  if (SLICE_UNLOCKS[252] !== "friend_084") throw new Error("SLICE_UNLOCKS[252] must be friend_084");
+  if (shippedFriendForClear(252)?.friendId !== "friend_084") throw new Error("onClear(252) must award Begonia");
+  const begonia = friendById("friend_084");
+  if (!begonia) throw new Error("friend_084 missing from CATALOG");
+  if (begonia.defaultName !== "Begonia") throw new Error("default name must be Begonia");
+  if (begonia.unlockClear !== 252) throw new Error("Begonia unlockClear must be 252");
+  if (begonia.phenotype.artKit !== "begonia") throw new Error("Begonia artKit must be begonia");
+  if (begonia.phenotype.personality !== "Begonia-soft") throw new Error("Begonia personality must be Begonia-soft");
+  if (begonia.phenotype.boardColor !== "orange") throw new Error("Begonia boardColor must be orange");
+  if (begonia.phenotype.color !== "Ruffle") throw new Error("Begonia color must be Ruffle");
+  if (begonia.phenotype.pattern !== "Planter") throw new Error("Begonia pattern must be Planter");
+  if (chipsForFriend("friend_084").join(",") !== "Begonia,Ruffle,Planter") {
+    throw new Error(`Begonia chips must be Begonia/Ruffle/Planter, got ${chipsForFriend("friend_084").join(",")}`);
   }
-  if (chipsForFriend("friend_081").some((c) => /cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|^pot$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^cluster$|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
-    throw new Error("Clematis chips must ban Cosmos/Airy/Ray and Buttercup/Meadow/Gloss/Primrose/Pale/Dish/Heather/Moor/Sprig/Marigold/Gold/Pot/Snapdragon/Jaw/Perch/Bluebell/Cloche/Ring/Foxglove/Tower/Throat/Hyacinth/Cluster/Bell/Crocus/Saffron/Tip/Lily/Pollen/Crest/Violet/Patch/Moss/Tulip/Stem/Glow/Poppy/Capsule/Silk/Lotus/Pad/Ripple/Orchid/Spur/Veil/Iris/Blade/Dew/Aster/Petal/Drift/Zinnia/Quill/Gleam/Dahlia/Spire/Ember/Azalea/Fizz/Flare/Peony/Bud/Satin/Camellia/Wax/Rose/Gardenia/Snow/Velvet/Hibiscus/Roselle/Punch/Magnolia/Cream/Blush/Jasmine/Blossom/Honey and all prior pools/Pebble/Sage");
+  if (chipsForFriend("friend_084").some((c) => /anemone|^wind$|^bowl$|wisteria|^cascade$|^arbor$|clematis|^vine$|^trellis$|cosmos|^airy$|^ray$|buttercup|^meadow$|^gloss$|primrose|^pale$|^dish$|heather|^moor$|^sprig$|marigold|^gold$|^pot$|snapdragon|^jaw$|^perch$|bluebell|^cloche$|^ring$|foxglove|^tower$|^throat$|hyacinth|^cluster$|^bell$|crocus|^saffron$|^tip$|lily|^pollen$|^crest$|violet|^patch$|^moss$|tulip|^stem$|^glow$|poppy|^capsule$|^silk$|lotus|^pad$|^ripple$|orchid|^spur$|^veil$|iris|^blade$|^dew$|aster|^petal$|^drift$|zinnia|^quill$|^gleam$|dahlia|^spire$|^ember$|azalea|^fizz$|^flare$|peony|^bud$|^satin$|camellia|^wax$|^rose$|gardenia|^snow$|^velvet$|hibiscus|^roselle$|^punch$|magnolia|^cream$|^blush$|jasmine|^blossom$|^honey$|bergamot|^citrus$|^earl$|chamomile|^daisy$|^tea$|lavender|^bloom$|^calm$|catnip|^nip$|^dream$|mint|chill|^frost$|^ivory$|^lace$|^sheer$|rosemary|needle|^woody$|thyme|pinch|^twig$|marjoram|softleaf|^peel$|oregano|wild|^bunch$|tarragon|spear|bitters|dill|frondlet|^seed$|parsley|curl|lovage|^rib$|chervil|frill|lace|fennel|^frond$|anise|pebble|^sage$|^fern$|^clover$|^juniper$/i.test(c))) {
+    throw new Error("Begonia chips must ban Anemone/Wind/Bowl and Wisteria/Cascade/Arbor and all prior pools/Pebble/Sage");
   }
-  const clematis48 = readFileSync(resolve("public/assets/cats/clematis_loaf_48.svg"), "utf8");
-  const clematis72 = readFileSync(resolve("public/assets/cats/clematis_loaf_72.svg"), "utf8");
-  if (!clematis48.includes("#7EC8E8") || !clematis72.includes("#7EC8E8")) throw new Error("Clematis loaf must use vine-star coat #7EC8E8");
-  if (!clematis48.includes("#1A3A58") || !clematis72.includes("#1A3A58")) throw new Error("Clematis loaf must use deep freckles #1A3A58");
-  if (!clematis48.includes("#E8F8FC") || !clematis72.includes("#E8F8FC")) throw new Error("Clematis loaf must use belly #E8F8FC");
-  for (const hex of ["#E8A0C0", "#5A2848", "#FFF9FD", "#D07898", "#F4C8DC", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#C89648", "#FFF8E0", "#9A5A8A", "#2A1830", "#7A3F6C", "#F0D6E8", "#FFF2F8", "#F0A020", "#4A3010", "#FFE9B4", "#C86E0C", "#FFF6D0", "#E07050", "#3A2010", "#B84A28", "#F3C8A8", "#C8A84A", "#C4B06A", "#4A7EC8", "#1A2848", "#D0E4F6", "#2E5A98", "#E8F4FF", "#D478A0", "#3A2030", "#B44A78", "#F8D4E6", "#FFF4FA", "#5A6EC8", "#1E2448", "#C8D2F0", "#3A4A88", "#F0F4FF", "#C45A9A", "#F4C2DC", "#9A3A78", "#FFF0F8", "#F5F0E6", "#C8A84A", "#FFF8EC", "#C4B06A", "#FEF6DC", "#6B4AA0", "#1E2A18", "#D2C4EA", "#4A3078", "#F8F4FF", "#E07090", "#2A4020", "#F8C4D2", "#C44868", "#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0"]) {
-    if (clematis48.includes(hex) || clematis72.includes(hex)) throw new Error(`Clematis loaf must not use prior herb coat ${hex}`);
+  const begonia48 = readFileSync(resolve("public/assets/cats/begonia_loaf_48.svg"), "utf8");
+  const begonia72 = readFileSync(resolve("public/assets/cats/begonia_loaf_72.svg"), "utf8");
+  if (!begonia48.includes("#E87868") || !begonia72.includes("#E87868")) throw new Error("Begonia loaf must use ruffle coat #E87868");
+  if (!begonia48.includes("#3A2818") || !begonia72.includes("#3A2818")) throw new Error("Begonia loaf must use leaf freckles #3A2818");
+  if (!begonia48.includes("#FFF4EE") || !begonia72.includes("#FFF4EE")) throw new Error("Begonia loaf must use belly #FFF4EE");
+  for (const hex of ["#F0A8C8", "#4A2038", "#FFF7FC", "#C03868", "#B8A0E8", "#3A2868", "#F2E6FF", "#6E48A8", "#7EC8E8", "#1A3A58", "#E8F8FC", "#4A9BB8", "#E8A0C0", "#5A2848", "#FFF9FD", "#D07898", "#F4C8DC", "#F5D030", "#6A4A10", "#FFFCE8", "#E8B810", "#F2D4A0", "#8A5A20", "#C89648", "#FFF8E0", "#9A5A8A", "#2A1830", "#7A3F6C", "#F0D6E8", "#FFF2F8", "#F0A020", "#4A3010", "#FFE9B4", "#C86E0C", "#FFF6D0", "#E07050", "#3A2010", "#B84A28", "#F3C8A8", "#C8A84A", "#C4B06A", "#4A7EC8", "#1A2848", "#D0E4F6", "#2E5A98", "#E8F4FF", "#D478A0", "#3A2030", "#B44A78", "#F8D4E6", "#FFF4FA", "#5A6EC8", "#1E2448", "#C8D2F0", "#3A4A88", "#F0F4FF", "#C45A9A", "#F4C2DC", "#9A3A78", "#FFF0F8", "#F5F0E6", "#C8A84A", "#FFF8EC", "#C4B06A", "#FEF6DC", "#6B4AA0", "#1E2A18", "#D2C4EA", "#4A3078", "#F8F4FF", "#E07090", "#2A4020", "#F8C4D2", "#C44868", "#D94A5A", "#3A1218", "#F4B4B8", "#B02A3A", "#F2B8C8", "#4A2840", "#FAD6E0", "#D4899A", "#FFF5F8", "#C989B8", "#3A2038", "#EAC8DC", "#A86A96", "#FFE6F4", "#5B4F9A", "#1C1630", "#B6A8DE", "#3D3474", "#E4DCFF", "#7B6BB5", "#2A2040", "#C8B8EE", "#5A4A92", "#EDE6FF", "#E85A2A", "#3A1808", "#F4A06A", "#B33A14", "#8B2E4A", "#2A1018", "#C86A80", "#5C1832", "#B84A8C", "#3F1830", "#E8A0C4", "#7A2458", "#E8B4C8", "#5A3048", "#F7DCE6", "#C4789A", "#C45A6A", "#5A2030", "#F3C8CC", "#8E3848", "#F6F1E8", "#4F6B4A", "#FFFBF3", "#C5C0B2", "#D46A8A", "#5A1F3A", "#C24A6E", "#EBB0C2", "#F7E8D2", "#C48A7A", "#FFF4E4", "#E8B8A4", "#F2D4C4", "#6E3A42", "#F4EFE6", "#7A6B4E", "#FBF7EE", "#F0C98A", "#9A5A1A", "#FFF1C4", "#E8D5A3", "#8A6B2E", "#F7E8C4", "#C4A66A", "#B8A0C8", "#5A3F6E", "#EDE4F4", "#8A6AA8", "#8FBF9A", "#2F5C3A", "#DCEFE2", "#7EC8A3", "#2F6B52", "#D4F4E8", "#7A9B88", "#2F463C", "#C8D6CE", "#A3B57C", "#4E5C36", "#D2D8B0", "#8FA86A", "#3F5230", "#D8D4A8", "#7A9A4E", "#4A5C2E", "#6B8F4E", "#2F4A28", "#C4D6A4", "#8FBF7A", "#4A6B3E", "#6FA86A", "#3F6B3C", "#9CB87A", "#5E7348", "#C6D9B4", "#5E7F52", "#E6C86E", "#7A9B6A", "#6A7D6E", "#1A2C24", "#7E8F86", "#C8D24A", "#EBE3C4", "#C9C09A", "#F3EBD0", "#9B7EBD", "#3A2A58"]) {
+    if (begonia48.includes(hex) || begonia72.includes(hex)) throw new Error(`Begonia loaf must not use prior herb coat ${hex}`);
   }
-  if (furnitureGiftsForClear(243).length) throw new Error("Clematis@243 must gift no furniture");
+  if (furnitureGiftsForClear(252).length) throw new Error("Begonia@252 must gift no furniture");
   const yardF = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
-  if ((yardF.match(/const clematis =/g) || []).length !== 1) throw new Error("YardScene must declare clematis once");
-  if ((yardF.match(/\{clematis \?/g) || []).length !== 1) throw new Error("YardScene must render clematis once");
+  if ((yardF.match(/const begonia =/g) || []).length !== 1) throw new Error("YardScene must declare begonia once");
+  if ((yardF.match(/\{begonia \?/g) || []).length !== 1) throw new Error("YardScene must render begonia once");
+  if ((yardF.match(/const anemone =/g) || []).length !== 1) throw new Error("YardScene must keep anemone once");
+  if ((yardF.match(/\{anemone \?/g) || []).length !== 1) throw new Error("YardScene must keep anemone once");
+  if ((yardF.match(/const wisteria =/g) || []).length !== 1) throw new Error("YardScene must keep wisteria once");
+  if ((yardF.match(/\{wisteria \?/g) || []).length !== 1) throw new Error("YardScene must keep wisteria once");
+  if ((yardF.match(/const clematis =/g) || []).length !== 1) throw new Error("YardScene must keep clematis once");
+  if ((yardF.match(/\{clematis \?/g) || []).length !== 1) throw new Error("YardScene must keep clematis once");
   if ((yardF.match(/const cosmos =/g) || []).length !== 1) throw new Error("YardScene must keep cosmos once");
   if ((yardF.match(/\{cosmos \?/g) || []).length !== 1) throw new Error("YardScene must keep cosmos once");
   if ((yardF.match(/const buttercup =/g) || []).length !== 1) throw new Error("YardScene must keep buttercup once");
@@ -405,7 +438,7 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
   if ((yardF.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardF.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardF.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 84) throw new Error("Met must include through Clematis (81) after Anemone (83)");
+  if (TUTORIAL_RESCUES.length !== 84) throw new Error("Met must include through Begonia (84)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -413,22 +446,25 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
   if (SLICE_UNLOCKS[243] !== "friend_081") throw new Error("SLICE_UNLOCKS[243] must be friend_081");
-  if (SLICE_UNLOCKS[246] !== "friend_082") throw new Error("SLICE_UNLOCKS[246] must be friend_082 after Wisteria ship");
-  if (/pebble|Pebble/i.test(clematis48 + clematis72)) throw new Error("Clematis art must not use Pebble");
-  if (/cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|cluster|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise/i.test(clematis48 + clematis72)) {
-    throw new Error("Clematis art must not collide Cosmos/ Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");
+  if (SLICE_UNLOCKS[246] !== "friend_082") throw new Error("SLICE_UNLOCKS[246] must be friend_082");
+  if (SLICE_UNLOCKS[249] !== "friend_083") throw new Error("SLICE_UNLOCKS[249] must be friend_083");
+  if (SLICE_UNLOCKS[252] !== "friend_084") throw new Error("SLICE_UNLOCKS[252] must be friend_084");
+  if (SLICE_UNLOCKS[255]) throw new Error("no friend_085 @255 this slice");
+  if (/pebble|Pebble/i.test(begonia48 + begonia72)) throw new Error("Begonia art must not use Pebble");
+  if (/anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|cluster|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise/i.test(begonia48 + begonia72)) {
+    throw new Error("Begonia art must not collide Anemone/Wisteria/Clematis/Cosmos and prior herb marks");
   }
-  const l244 = LEVELS.find((r) => r.id === "L244")!;
-  const l245 = LEVELS.find((r) => r.id === "L245")!;
-  const l246 = LEVELS.find((r) => r.id === "L246")!;
-  if (/\b(airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|pot|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|cluster|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|vase|dahlia|fizz|flare|planter|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|bowl|poppy)\b/i.test([l244.name, l245.name].join(","))) {
-    throw new Error("L244–L245 must not reuse Airy/Ray/Floret/Cosmos/ Meadow/Gloss/Petal/Buttercup/Pale/Dish/Ruff/Primrose/Moor/Sprig/Heath/Gold/Pot/Seed/Heather/Marigold and prior triad names");
+  const l247 = LEVELS.find((r) => r.id === "L253")!;
+  const l248 = LEVELS.find((r) => r.id === "L254")!;
+  const l249 = LEVELS.find((r) => r.id === "L255")!;
+  if (/\b(wind|bowl|whirl|anemone|cascade|arbor|droop|wisteria|vine|trellis|star|clematis|airy|ray|floret|cosmos|meadow|gloss|petal|buttercup|pale|dish|ruff|primrose|gold|pot|seed|marigold|heather|moor|sprig|heath|jaw|perch|dragon|snapdragon|cloche|ring|chime|bluebell|tower|throat|glove|foxglove|hyacinth|cluster|bell|raceme|crocus|saffron|tip|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|bloom|pad|ripple|pond|lotus|spur|veil|spike|orchid|blade|dew|iris|petal|drift|aster|quill|gleam|urn|zinnia|spire|ember|vase|dahlia|fizz|flare|azalea|wax|rose|tray|snow|velvet|latch|claim|roselle|punch|sip|hibiscus|cream|blush|magnolia|blossom|honey|citrus|earl|saucer|daisy|tea|cup|capsule|silk|calm|bundle|nip|dream|pouch|chill|frost|tin|needle|woody|pinch|twig|jar|softleaf|dusty|peel|stone|wild|pizza|spear|bitters|cruet|frondlet|ledge|garnish|bed|gardenia|camellia|peony|bud|satin|poppy)\b/i.test([l247.name, l248.name].join(","))) {
+    throw new Error("L253–L254 must not reuse Wind/Bowl/Whirl/Anemone/Cascade/Arbor/Droop and prior triad names");
   }
-  const clematisGatePair = (level: typeof l244) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
-  if (clematisGatePair(l244) !== "2,1/5,0") throw new Error(`L244 gates must be delta (3, 1) pair, got ${clematisGatePair(l244)}`);
-  if (clematisGatePair(l245) !== "3,0/4,2") throw new Error(`L245 gates must be delta (1, 2) pair, got ${clematisGatePair(l245)}`);
-  if (clematisGatePair(l246) !== "0,3/1,2") throw new Error(`L246 gates must be delta (1, 1) pair, got ${clematisGatePair(l246)}`);
-  const occ246 = [...l246.cats, ...l246.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
+  const begoniaGatePair = (level: typeof l247) => level.gates.map((g) => `${g.x},${g.y}`).sort().join("/");
+  if (begoniaGatePair(l247) !== "0,4/1,2") throw new Error(`L253 gates must be delta (1, 2) pair, got ${begoniaGatePair(l247)}`);
+  if (begoniaGatePair(l248) !== "2,2/4,0") throw new Error(`L254 gates must be delta (2, 2) pair, got ${begoniaGatePair(l248)}`);
+  if (begoniaGatePair(l249) !== "3,2/5,3") throw new Error(`L255 gates must be delta (2, 1) pair, got ${begoniaGatePair(l249)}`);
+  const occ249 = [...l249.cats, ...l249.gates].map((p) => `${p.x},${p.y}`).sort().join(";");
   const priorOcc = new Set([
     "1,2;2,0;2,5;5,3",
     "0,5;2,4;4,3;4,5",
@@ -453,126 +489,66 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
     "1,0;2,1;3,2;5,0",
     "2,0;2,1;2,5;4,2",
     "1,2;2,4;2,5;5,1",
+    "0,3;1,2;1,5;2,5",
+    "0,2;1,5;2,1;3,1",
+    "3,0;3,1;4,0;4,5",
   ]);
-  if (priorOcc.has(occ246)) throw new Error("L246 Star must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal occupancy");
-  if (occ246.split(";").includes("5,5")) throw new Error("L246 Star must be off Nori seat (5,5)");
-  if (l246.gates[0].y === l246.gates[1].y) throw new Error("L246 Star must not same-row Nest");
-  if (l246.gates[0].x === l246.gates[1].x) throw new Error("L246 Star must not column Porch");
-  if (l244.cats[0].x === l244.cats[1].x) throw new Error("L244 Vine must not stacked-column Vine");
+  if (priorOcc.has(occ249)) throw new Error("L255 Leaf must not twin Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl occupancy");
+  if (occ249.split(";").includes("5,5")) throw new Error("L255 Leaf must be off Nori seat (5,5)");
+  if (l249.gates[0].y === l249.gates[1].y) throw new Error("L255 Leaf must not same-row Nest");
+  if (l249.gates[0].x === l249.gates[1].x) throw new Error("L255 Leaf must not column Porch");
+  if (l247.cats[0].x === l247.cats[1].x) throw new Error("L253 Ruffle must not stacked-column Vine");
 
-  if (solves.L244[0][0] === "cat_gray" && solves.L244[0][1] === "e") {
-    throw new Error("L244 Vine Cut must not open gray-east (Pale Cut clone)");
+  if (solves.L253[0][0] === "cat_gray") {
+    throw new Error("L253 Ruffle Cut must not open gray-first (Wind Cut clone)");
   }
-  if (solves.L244[0][0] === "cat_orange" && solves.L244[0][1] === "n") {
-    throw new Error("L244 Vine Cut must not open orange-north (Moor Cut clone)");
+  if (solves.L253[0][0] === "cat_orange" && solves.L253[0][1] === "n") {
+    throw new Error("L253 Ruffle Cut must not open orange-north (Cascade Cut clone)");
   }
-  if (solves.L244[0][0] === "cat_black" && solves.L244[0][1] === "s") {
-    throw new Error("L244 Vine Cut must not open black-south (Gold Cut clone)");
+  if (solves.L254[0][0] === "cat_black") {
+    throw new Error("L254 Planter Gap must not open black-first (Bowl Gap clone)");
   }
-  if (solves.L245[0][0] === "cat_gray" && solves.L245[0][1] === "e") {
-    throw new Error("L245 Trellis Gap must not open gray-east (Sprig Gap clone)");
+  if (solves.L254[0][0] === "cat_gray" && solves.L254[0][1] === "s") {
+    throw new Error("L254 Planter Gap must not open gray-south (Arbor Gap clone)");
   }
-  if (solves.L246[0][0] === "cat_orange" && solves.L246[0][1] === "s") {
-    throw new Error("L246 Star Stop must not open orange-south (Ruff Stop clone)");
+  if (solves.L255[0][0] === "cat_orange") {
+    throw new Error("L255 Leaf Stop must not open orange-first (Whirl Stop clone)");
   }
-  if (solves.L246[0][0] === "cat_black" && solves.L246[0][1] === "s") {
-    throw new Error("L246 Star Stop must not open black-south (Heath Stop clone)");
+  if (solves.L255[0][0] === "cat_black" && solves.L255[0][1] === "e") {
+    throw new Error("L255 Leaf Stop must not open black-east (Droop Stop clone)");
   }
-  if (solves.L244[0][0] === "cat_black" && solves.L244[0][1] === "e") {
-    throw new Error("L244 Vine Cut must not open black-east (Jaw Cut clone)");
+  if (solves.L255[0][0] === "cat_black" && solves.L255[0][1] === "s") {
+    throw new Error("L255 Leaf Stop must not open black-south (Trellis Gap clone)");
   }
-  if (solves.L244[0][0] === "cat_orange" && solves.L244[0][1] === "s") {
-    throw new Error("L244 Vine Cut must not open orange-south (Tower Cut clone)");
+  if (solves.L253[0][0] !== "cat_orange") {
+    throw new Error("L253 Ruffle Cut must open orange-first");
   }
-  if (solves.L244[0][0] === "cat_black" && solves.L244[0][1] === "w") {
-    throw new Error("L244 Vine Cut must not open black-west (Pollen Cut clone)");
+  if (solves.L254[0][0] !== "cat_gray") {
+    throw new Error("L254 Planter Gap must open gray-first");
   }
-  if (solves.L244[0][0] === "cat_gray" && solves.L244[0][1] === "w") {
-    throw new Error("L244 Vine Cut must not open gray-west (Pad Cut clone)");
+  if (solves.L255[0][0] !== "cat_black") {
+    throw new Error("L255 Leaf Stop must open black-first");
   }
-  if (solves.L244[0][0] === "cat_black" && solves.L244[0][1] === "n") {
-    throw new Error("L244 Vine Cut must not open black-north (Cluster Cut clone)");
-  }
-  if (solves.L244[0][0] === "cat_orange" && solves.L244[0][1] === "w") {
-    throw new Error("L244 Vine Cut must not open orange-west (Saffron Cut clone)");
-  }
-  if (solves.L245[0][0] === "cat_gray" && solves.L245[0][1] === "n") {
-    throw new Error("L245 Trellis Gap must not open gray-north (Pot Gap clone)");
-  }
-  if (solves.L245[0][0] === "cat_black" && solves.L245[0][1] === "n") {
-    throw new Error("L245 Trellis Gap must not open black-north (Perch Gap clone)");
-  }
-  if (solves.L245[0][0] === "cat_orange" && solves.L245[0][1] === "w") {
-    throw new Error("L245 Trellis Gap must not open orange-west (Ring Gap clone)");
-  }
-  if (solves.L245[0][0] === "cat_gray" && solves.L245[0][1] === "s") {
-    throw new Error("L245 Trellis Gap must not open gray-south (Bell Gap clone)");
-  }
-  if (solves.L245[0][0] === "cat_black" && solves.L245[0][1] === "e") {
-    throw new Error("L245 Trellis Gap must not open black-east (Ripple Gap clone)");
-  }
-  if (solves.L245[0][0] === "cat_orange" && solves.L245[0][1] === "s") {
-    throw new Error("L245 Trellis Gap must not open orange-south (Veil Gap clone)");
-  }
-  if (solves.L245[0][0] === "cat_orange" && solves.L245[0][1] === "n") {
-    throw new Error("L245 Trellis Gap must not open orange-north (Dew Gap clone)");
-  }
-  if (solves.L245[0][0] === "cat_orange" && solves.L245[0][1] === "e") {
-    throw new Error("L245 Trellis Gap must not open orange-east (Tip Gap clone)");
-  }
-  if (solves.L246[0][0] === "cat_gray" && solves.L246[0][1] === "s") {
-    throw new Error("L246 Star Stop must not open gray-south (Seed Stop clone)");
-  }
-  if (solves.L246[0][0] === "cat_orange" && solves.L246[0][1] === "e") {
-    throw new Error("L246 Star Stop must not open orange-east (Dragon Stop clone)");
-  }
-  if (solves.L246[0][0] === "cat_orange" && solves.L246[0][1] === "n") {
-    throw new Error("L246 Star Stop must not open orange-north (Chime Stop clone)");
-  }
-  if (solves.L246[0][0] === "cat_black" && solves.L246[0][1] === "e") {
-    throw new Error("L246 Star Stop must not open black-east (Raceme Stop clone)");
-  }
-  if (solves.L246[0][0] === "cat_gray" && solves.L246[0][1] === "n") {
-    throw new Error("L246 Star Stop must not open gray-north (Dish Stop clone)");
-  }
-  if (solves.L246[0][0] === "cat_gray" && solves.L246[0][1] === "w") {
-    throw new Error("L246 Star Stop must not open gray-west (Urn Stop clone)");
-  }
-  if (solves.L246[0][0] === "cat_gray" && solves.L246[0][1] === "e") {
-    throw new Error("L246 Star Stop must not open gray-east (Petal Cut clone)");
-  }
-  if (solves.L244[0][0] === "cat_orange" && solves.L244[0][1] === "e") {
-    throw new Error("L244 Vine Cut must not open orange-east (Airy Cut clone)");
-  }
-  if (solves.L244[0][0] !== "cat_gray") {
-    throw new Error("L244 Vine Cut must open gray-first");
-  }
-  if (solves.L245[0][0] !== "cat_black") {
-    throw new Error("L245 Trellis Gap must open black-first");
-  }
-  if (solves.L246[0][0] !== "cat_orange") {
-    throw new Error("L246 Star Stop must open orange-first");
-  }
-  if (solves.L245[0][0] === "cat_gray" && solves.L245[0][1] === "w") {
-    throw new Error("L245 Trellis Gap must not open gray-west (Ray Gap clone)");
-  }
-  if (solves.L246[0][0] === "cat_black" && solves.L246[0][1] === "w") {
-    throw new Error("L246 Star Stop must not open black-west (Floret Stop clone)");
-  }
-  for (const level of [l244, l245, l246]) {
+  for (const level of [l247, l248, l249]) {
     if (level.gates.every((g) => g.y === 5) || level.gates.every((g) => g.x === 5)) {
       throw new Error(`${level.id} must not WRAP/edge-twin Nori/Medlar`);
     }
     if (level.width !== 6 || level.height !== 6) throw new Error(`${level.id} must be 6×6`);
     if (!level.templateId.startsWith("LT02_LT08_")) throw new Error(`${level.id} must be LT02+LT08`);
   }
-  const wallKeyO = (level: typeof l244) =>
+  const wallKeyO = (level: typeof l247) =>
     [...level.walls].map((w) => `${w.x},${w.y}`).sort().join(";");
-  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
-  for (const id of ["L244", "L245", "L246"] as const) {
+  const priorWallsO = ["L238", "L239", "L240", "L235", "L236", "L237", "L232", "L233", "L234", "L229", "L230", "L231", "L226", "L227", "L228", "L223", "L224", "L225", "L220", "L221", "L222", "L217", "L218", "L219", "L214", "L215", "L216", "L211", "L212", "L213", "L208", "L209", "L210", "L205", "L206", "L207", "L202", "L203", "L204", "L199", "L200", "L201", "L196", "L197", "L198", "L193", "L194", "L195", "L190", "L191", "L192", "L187", "L188", "L189", "L184", "L185", "L186", "L181", "L182", "L183", "L178", "L179", "L180", "L175", "L176", "L177", "L172", "L173", "L174", "L169", "L170", "L171", "L166", "L167", "L168", "L163", "L164", "L165", "L160", "L161", "L162", "L157", "L158", "L159", "L154", "L155", "L156", "L151", "L152", "L153", "L148", "L149", "L150", "L145", "L146", "L147", "L142", "L143", "L144", "L139", "L140", "L141", "L241", "L242", "L243", "L244", "L245", "L246", "L247", "L248", "L249", "L250", "L251", "L252"].map((id) => wallKeyO(LEVELS.find((r) => r.id === id)!));
+  for (const id of ["L253", "L254", "L255"] as const) {
     const key = wallKeyO(LEVELS.find((r) => r.id === id)!);
-    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L243`);
+    if (priorWallsO.includes(key)) throw new Error(`${id} wall twin of L139–L252`);
   }
+  if (ART_KIT_PATH.begonia.loaf48 !== "/assets/cats/begonia_loaf_48.svg") throw new Error("ART_KIT_PATH.begonia loaf48");
+  if (ART_KIT_PATH.begonia.loaf72 !== "/assets/cats/begonia_loaf_72.svg") throw new Error("ART_KIT_PATH.begonia loaf72");
+  if (ART_KIT_PATH.anemone.loaf48 !== "/assets/cats/anemone_loaf_48.svg") throw new Error("ART_KIT_PATH.anemone loaf48");
+  if (ART_KIT_PATH.anemone.loaf72 !== "/assets/cats/anemone_loaf_72.svg") throw new Error("ART_KIT_PATH.anemone loaf72");
+  if (ART_KIT_PATH.wisteria.loaf48 !== "/assets/cats/wisteria_loaf_48.svg") throw new Error("ART_KIT_PATH.wisteria loaf48");
+  if (ART_KIT_PATH.wisteria.loaf72 !== "/assets/cats/wisteria_loaf_72.svg") throw new Error("ART_KIT_PATH.wisteria loaf72");
   if (ART_KIT_PATH.clematis.loaf48 !== "/assets/cats/clematis_loaf_48.svg") throw new Error("ART_KIT_PATH.clematis loaf48");
   if (ART_KIT_PATH.clematis.loaf72 !== "/assets/cats/clematis_loaf_72.svg") throw new Error("ART_KIT_PATH.clematis loaf72");
   if (ART_KIT_PATH.cosmos.loaf48 !== "/assets/cats/cosmos_loaf_48.svg") throw new Error("Cosmos kit must stay");
@@ -605,6 +581,9 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
   if (ART_KIT_PATH.gardenia.loaf48 !== "/assets/cats/gardenia_loaf_48.svg") throw new Error("Gardenia kit must stay");
   if (ART_KIT_PATH.hibiscus.loaf48 !== "/assets/cats/hibiscus_loaf_48.svg") throw new Error("Hibiscus kit must stay");
   const saveF = readFileSync(resolve("src/components/providers/SaveProvider.tsx"), "utf8");
+  if (!saveF.includes("begonia planter")) throw new Error("SaveProvider must yard-bubble begonia planter for Begonia");
+  if (!saveF.includes("anemone bowl")) throw new Error("SaveProvider must yard-bubble anemone bowl for Anemone");
+  if (!saveF.includes("wisteria arbor")) throw new Error("SaveProvider must yard-bubble wisteria arbor for Wisteria");
   if (!saveF.includes("clematis trellis")) throw new Error("SaveProvider must yard-bubble clematis trellis for Clematis");
   if (!saveF.includes("cosmos stem")) throw new Error("SaveProvider must keep cosmos stem for Cosmos");
   if (!saveF.includes("buttercup cup")) throw new Error("SaveProvider must keep buttercup cup for Buttercup");
@@ -620,11 +599,14 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
   if (!saveF.includes("violet patch")) throw new Error("SaveProvider must keep violet patch for Violet");
   if (!saveF.includes("tulip vase")) throw new Error("SaveProvider must keep tulip vase for Tulip");
   if (!saveF.includes("poppy cup")) throw new Error("SaveProvider must keep poppy cup for Poppy");
-  if (!existsSync(resolve("data/collection/CH4_FRIEND_081.md"))) throw new Error("missing CH4_FRIEND_081.md");
-  if (!existsSync(resolve("data/collection/chapter4_clematis_bang.json"))) throw new Error("missing collection clematis bang");
-  if (!existsSync(resolve("data/chapter4_clematis_bang.json"))) throw new Error("missing chapter4_clematis_bang.json");
+  if (!existsSync(resolve("data/collection/CH4_FRIEND_084.md"))) throw new Error("missing CH4_FRIEND_084.md");
+  if (!existsSync(resolve("data/collection/chapter4_begonia_bang.json"))) throw new Error("missing collection begonia bang");
+  if (!existsSync(resolve("data/chapter4_begonia_bang.json"))) throw new Error("missing chapter4_begonia_bang.json");
   const nameModalF = readFileSync(resolve("src/components/puzzle/NameCatModal.tsx"), "utf8");
-  if (!nameModalF.includes("CLEMATIS_FRIEND_ID")) throw new Error("NameCatModal must lockChips Clematis");
+  if (!nameModalF.includes("BEGONIA_FRIEND_ID")) throw new Error("NameCatModal must lockChips Begonia");
+  if (!nameModalF.includes("ANEMONE_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Anemone");
+  if (!nameModalF.includes("WISTERIA_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Wisteria");
+  if (!nameModalF.includes("CLEMATIS_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Clematis");
   if (!nameModalF.includes("COSMOS_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Cosmos");
   if (!nameModalF.includes("BUTTERCUP_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Buttercup");
   if (!nameModalF.includes("PRIMROSE_FRIEND_ID")) throw new Error("NameCatModal must keep lockChips Primrose");
@@ -649,5 +631,5 @@ export function verifyChapter4Clematis(solves: Record<string, Array<[string, Dir
   if (/iphone-frame|device-bezel|phone-shell/i.test(shellC)) {
     throw new Error("GameShell must not add a phone frame");
   }
-  console.log("Ch4 Clematis@243 + L244–L246 ok · chips Clematis/Vine/Trellis · coat #7EC8E8 + deep freckles #1A3A58 · Vine Cut / Trellis Gap / Star Stop · Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
+  console.log("Ch4 Begonia@252 + L253–L255 ok · chips Begonia/Ruffle/Planter · coat #E87868 + leaf freckles #3A2818 · Ruffle Cut / Planter Gap / Leaf Stop · Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel/Sorrel/Nettle/Ivy/Briar/Thistle/Plum/Fig/Basil/Clay/Juniper/Linen/Cocoa/Steve/Maple/Blue/Coral/Velvet/Bean locked");
 }

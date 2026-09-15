@@ -81,6 +81,7 @@ import chapter4Cosmos from "../../data/chapter4_cosmos_bang.json";
 import chapter4Clematis from "../../data/chapter4_clematis_bang.json";
 import chapter4Wisteria from "../../data/chapter4_wisteria_bang.json";
 import chapter4Anemone from "../../data/chapter4_anemone_bang.json";
+import chapter4Begonia from "../../data/chapter4_begonia_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -191,7 +192,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "cosmos" ||
     raw === "clematis" ||
     raw === "wisteria" ||
-    raw === "anemone"
+    raw === "anemone" ||
+    raw === "begonia"
   ) {
     return raw;
   }
@@ -508,6 +510,7 @@ export const CHAPTER4_COSMOS = chapter4Cosmos;
 export const CHAPTER4_CLEMATIS = chapter4Clematis;
 export const CHAPTER4_WISTERIA = chapter4Wisteria;
 export const CHAPTER4_ANEMONE = chapter4Anemone;
+export const CHAPTER4_BEGONIA = chapter4Begonia;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -590,6 +593,7 @@ export const COSMOS_FRIEND_ID = chapter4Cosmos.friend_id;
 export const CLEMATIS_FRIEND_ID = chapter4Clematis.friend_id;
 export const WISTERIA_FRIEND_ID = chapter4Wisteria.friend_id;
 export const ANEMONE_FRIEND_ID = chapter4Anemone.friend_id;
+export const BEGONIA_FRIEND_ID = chapter4Begonia.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1855,6 +1859,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Begonia.friend_id,
+    defaultName: chapter4Begonia.default_name,
+    unlockClear: chapter4Begonia.unlock_clear,
+    displayLine: chapter4Begonia.display_line,
+    tier: chapter4Begonia.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_ruffle_planter_regular_regular_begonia",
+      breed: "Domestic Shorthair",
+      color: chapter4Begonia.color,
+      pattern: chapter4Begonia.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Begonia.personality,
+      artKit: "begonia",
+      boardColor: "orange",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1876,7 +1900,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 83);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 84);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1973,6 +1997,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   243: "friend_081",
   246: "friend_082",
   249: "friend_083",
+  252: "friend_084",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -2249,6 +2274,7 @@ export const COSMOS_NAMING_CHIPS: string[] = CHAPTER4_COSMOS.naming.suggestion_c
 export const CLEMATIS_NAMING_CHIPS: string[] = CHAPTER4_CLEMATIS.naming.suggestion_chips;
 export const WISTERIA_NAMING_CHIPS: string[] = CHAPTER4_WISTERIA.naming.suggestion_chips;
 export const ANEMONE_NAMING_CHIPS: string[] = CHAPTER4_ANEMONE.naming.suggestion_chips;
+export const BEGONIA_NAMING_CHIPS: string[] = CHAPTER4_BEGONIA.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -2496,6 +2522,9 @@ export function chipsForFriend(friendId: string): string[] {
   }
   if (friendId === ANEMONE_FRIEND_ID || friendId === "friend_083") {
     return [...ANEMONE_NAMING_CHIPS];
+  }
+  if (friendId === BEGONIA_FRIEND_ID || friendId === "friend_084") {
+    return [...BEGONIA_NAMING_CHIPS];
   }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
@@ -2832,6 +2861,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === ANEMONE_FRIEND_ID || friendId === "friend_083") {
     return shufflePool([...ANEMONE_NAMING_CHIPS], count);
   }
+  if (friendId === BEGONIA_FRIEND_ID || friendId === "friend_084") {
+    return shufflePool([...BEGONIA_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -2930,6 +2962,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_CLEMATIS.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_WISTERIA.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_ANEMONE.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_BEGONIA.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -3024,6 +3057,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Clematis-soft") return "clematis trellis";
   if (personality === "Wisteria-soft") return "wisteria arbor";
   if (personality === "Anemone-soft") return "anemone bowl";
+  if (personality === "Begonia-soft") return "begonia planter";
   return "sun patch";
 }
 
