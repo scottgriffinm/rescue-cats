@@ -79,7 +79,7 @@ const PRIOR_UNLOCKS: Array<[number, string, string]> = [
 ];
 
 const PRIOR_CHIPS: Array<[string, string, string]> = [
-  ["friend_076", "Heather,Moor,Sprig", "Marigold chips untouched"],
+  ["friend_076", "Marigold,Gold,Pot", "Marigold chips untouched"],
   ["friend_075", "Snapdragon,Jaw,Perch", "Snapdragon chips untouched"],
   ["friend_074", "Bluebell,Cloche,Ring", "Bluebell chips untouched"],
   ["friend_073", "Foxglove,Tower,Throat", "Foxglove chips untouched"],
