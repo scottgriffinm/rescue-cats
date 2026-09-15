@@ -151,7 +151,7 @@ export function YardScreen() {
           <ComfortMeter value={comfort} pulseKey={comfortPulse} />
           <span className="inline-flex items-center gap-1 tabular-nums">♥ {save.hearts}</span>
           <span className="inline-flex items-center gap-0.5 tabular-nums">
-            <UiIcon name="star_heather" className="h-3.5 w-3.5" />
+            <UiIcon name="star_primrose" className="h-3.5 w-3.5" />
             {save.stars}
           </span>
         </div>

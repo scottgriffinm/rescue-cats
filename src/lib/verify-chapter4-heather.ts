@@ -370,7 +370,7 @@ export function verifyChapter4Heather(solves: Record<string, Array<[string, Dir]
   if ((yardF.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardF.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardF.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 77) throw new Error("Met must include through Heather (77)");
+  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Primrose (78)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -378,7 +378,7 @@ export function verifyChapter4Heather(solves: Record<string, Array<[string, Dir]
     if (chipsForFriend(friendId).join(",") !== chips) throw new Error(message);
   }
   if (SLICE_UNLOCKS[231] !== "friend_077") throw new Error("SLICE_UNLOCKS[231] must be friend_077");
-  if (SLICE_UNLOCKS[234]) throw new Error("no friend_078 @234 this slice");
+  if (SLICE_UNLOCKS[234] !== "friend_078") throw new Error("SLICE_UNLOCKS[234] must be friend_078 after Primrose ship");
   if (/pebble|Pebble/i.test(heather48 + heather72)) throw new Error("Heather art must not use Pebble");
   if (/marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|cluster|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|flare|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|sprig|lovage|rib|chervil|frill|lace|fennel|anise/i.test(heather48 + heather72)) {
     throw new Error("Heather art must not collide Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Bergamot/Chamomile/Lavender/Catnip/Mint/Ivory/Rosemary/Thyme/Marjoram/Oregano/Tarragon/Dill/Parsley/Lovage/Chervil/Fennel marks");

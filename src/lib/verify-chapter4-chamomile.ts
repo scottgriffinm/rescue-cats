@@ -225,7 +225,7 @@ export function verifyChapter4Chamomile(solves: Record<string, Array<[string, Di
   const yardC = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardC.match(/const chamomile =/g) || []).length !== 1) throw new Error("YardScene must declare chamomile once");
   if ((yardC.match(/\{chamomile \?/g) || []).length !== 1) throw new Error("YardScene must render chamomile once");
-  if (TUTORIAL_RESCUES.length !== 77) throw new Error("Met must include through Chamomile (52)");
+  if (TUTORIAL_RESCUES.length !== 78) throw new Error("Met must include through Chamomile (52)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
