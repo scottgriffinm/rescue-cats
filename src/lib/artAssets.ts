@@ -114,6 +114,7 @@ export const UI_ASSETS = {
   input_name: "/assets/ui/input_name.svg",
   fail_mark: "/assets/ui/fail_mark.svg",
   fail_empty: "/assets/ui/fail_empty.svg",
+  star_heather: "/assets/ui/star_heather.svg",
   star_marigold: "/assets/ui/star_marigold.svg",
   hand_cursor: "/assets/ui/hand_cursor.svg",
   bubble_bang: "/assets/ui/bubble_bang.svg",

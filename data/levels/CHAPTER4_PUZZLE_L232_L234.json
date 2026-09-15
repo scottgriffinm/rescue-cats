@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Marigold Pass — L232–L234 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L232–L234",
+  "notes": "L232 Moor Cut / L233 Sprig Gap / L234 Heath Stop — off Gold Cut / Pot Gap / Seed Stop habits; not Jaw/Perch/Dragon tropes; not Heather Cut/Gap/Stop title clones; Heath Stop avoids Orchid Spike Stop; no WRAP/edge twin of Nori/Medlar; L234 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L232",
+      "name": "Moor Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_moor_cut_orange",
+      "walls": [
+        { "x": 4, "y": 2 },
+        { "x": 2, "y": 3 },
+        { "x": 5, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 1, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "moor_cut_orange"
+    },
+    {
+      "id": "L233",
+      "name": "Sprig Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_sprig_gap_gray",
+      "walls": [
+        { "x": 2, "y": 4 },
+        { "x": 0, "y": 4 },
+        { "x": 2, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 2, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 3, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "sprig_gap_gray"
+    },
+    {
+      "id": "L234",
+      "name": "Heath Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_heath_stop_black",
+      "walls": [
+        { "x": 5, "y": 0 },
+        { "x": 3, "y": 1 },
+        { "x": 0, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 0, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 4, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "heath_stop_black"
+    }
+  ],
+  "teaches": {
+    "L232": "Moor Cut — orange north first; gray cuts after; not Gold black-south, not Jaw black-east, not Cloche gray-south, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east",
+    "L233": "Sprig Gap — gray east then orange threads; not Pot gray-north, not Perch black-north, not Ring orange-west, not Throat gray-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Gleam black-west, not Ember black-south",
+    "L234": "Heath Stop — heather-sprig seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed twins; off Nori (5,5); not Hold*/Park*; title Heath Stop (not Heather Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L232": 10,
+      "L233": 10,
+      "L234": 11
+    }
+  },
+  "deltas": {
+    "L232": "(1, 0)",
+    "L233": "(2, 1)",
+    "L234": "(2, 3)"
+  }
+}

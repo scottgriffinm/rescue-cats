@@ -133,8 +133,8 @@ try {
   if (modal.hero.includes("/assets/cats/calico_belly_72.svg")) {
     throw new Error("calico belly leaked onto naming modal");
   }
-  if (!modal.hero.includes("/assets/ui/star_marigold.svg")) {
-    throw new Error("naming missing star_marigold");
+  if (!modal.hero.includes("/assets/ui/star_heather.svg") && !modal.hero.includes("/assets/ui/star_marigold.svg")) {
+    throw new Error("naming missing star");
   }
   await shot(page, "05_mango_naming");
 

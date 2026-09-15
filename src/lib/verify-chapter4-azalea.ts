@@ -262,7 +262,7 @@ export function verifyChapter4Azalea(solves: Record<string, Array<[string, Dir]>
   const yardA = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardA.match(/const azalea =/g) || []).length !== 1) throw new Error("YardScene must declare azalea once");
   if ((yardA.match(/\{azalea \?/g) || []).length !== 1) throw new Error("YardScene must render azalea once");
-  if (TUTORIAL_RESCUES.length !== 76) throw new Error("Met must include through Azalea (60)");
+  if (TUTORIAL_RESCUES.length !== 77) throw new Error("Met must include through Azalea (60)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
