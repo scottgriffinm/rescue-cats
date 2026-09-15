@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Ranunculus Pass — L259–L261 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L259–L261",
+  "notes": "L259 Trumpet Cut / L260 Vase Gap / L261 Tube Stop — habit-break vs Layer Cut gray-first / Nest Gap black-first / Fold Stop orange-first; not Trumpet/Vase/Tube title clones of Freesia Cut/Gap/Stop; Tube Stop avoids Fold/Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup/Spire Stop collisions; no WRAP/edge twin of Nori/Medlar; L261 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L259",
+      "name": "Trumpet Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_trumpet_cut_orange",
+      "walls": [
+        { "x": 4, "y": 3 },
+        { "x": 3, "y": 0 },
+        { "x": 2, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 5, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "trumpet_cut_orange"
+    },
+    {
+      "id": "L260",
+      "name": "Vase Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_vase_gap_gray",
+      "walls": [
+        { "x": 5, "y": 2 },
+        { "x": 0, "y": 5 },
+        { "x": 1, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 4, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "vase_gap_gray"
+    },
+    {
+      "id": "L261",
+      "name": "Tube Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_tube_stop_black",
+      "walls": [
+        { "x": 5, "y": 5 },
+        { "x": 1, "y": 1 },
+        { "x": 2, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 4, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "tube_stop_black"
+    }
+  ],
+  "teaches": {
+    "L259": "Trumpet Cut — orange west first; gray cuts after; not Layer gray-east, not Ruffle orange-south, not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Planter gray-west, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west",
+    "L260": "Vase Gap — gray west then orange threads; not Nest black-west, not Planter gray-west clone title, not Bowl black-east, not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Leaf black-north",
+    "L261": "Tube Stop — freesia-vase seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold twins; off Nori (5,5); not Hold*/Park*; title Tube Stop (not Freesia Stop, not Fold Stop, not Leaf Stop, not Whirl Stop, not Droop Stop, not Star Stop, not Floret Stop, not Petal Stop, not Stem Stop, not Cup Stop, not Spire Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L259": 10,
+      "L260": 10,
+      "L261": 11
+    }
+  },
+  "deltas": {
+    "L259": "(1, 0)",
+    "L260": "(3, 1)",
+    "L261": "(4, 3)"
+  }
+}

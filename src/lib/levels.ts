@@ -84,6 +84,7 @@ import chapter4bj from "../../data/levels/CHAPTER4_PUZZLE_L247_L249.json";
 import chapter4bk from "../../data/levels/CHAPTER4_PUZZLE_L250_L252.json";
 import chapter4bl from "../../data/levels/CHAPTER4_PUZZLE_L253_L255.json";
 import chapter4bm from "../../data/levels/CHAPTER4_PUZZLE_L256_L258.json";
+import chapter4bn from "../../data/levels/CHAPTER4_PUZZLE_L259_L261.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -347,6 +348,9 @@ const HEADLINES: Record<string, string> = {
   L256: "LAYER CUT",
   L257: "NEST GAP",
   L258: "FOLD STOP",
+  L259: "TRUMPET CUT",
+  L260: "VASE GAP",
+  L261: "TUBE STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -607,6 +611,9 @@ const HINTS: Record<string, string> = {
   L256: "Layer cut — gray east first; orange cuts after; not Ruffle orange-south, not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Planter gray-west, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west.",
   L257: "Nest gap — black west then orange threads; not Planter gray-west, not Bowl black-east, not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Leaf black-north.",
   L258: "Fold stop — ranunculus-nest seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf twins; off Nori (5,5); not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Hold*/Park*.",
+  L259: "Trumpet cut — orange west first; gray cuts after; not Layer gray-east, not Ruffle orange-south, not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east, not Planter gray-west, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west.",
+  L260: "Vase gap — gray west then orange threads; not Nest black-west, not Bowl black-east, not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Leaf black-north.",
+  L261: "Tube stop — freesia-vase seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf/Fold twins; off Nori (5,5); not Fold Stop; not Leaf Stop; not Whirl Stop; not Droop Stop; not Star Stop; not Floret Stop; not Petal Stop; not Stem Stop; not Cup Stop; not Spire Stop; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -746,6 +753,7 @@ const authored = [
   ...chapter4bk.levels,
   ...chapter4bl.levels,
   ...chapter4bm.levels,
+  ...chapter4bn.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

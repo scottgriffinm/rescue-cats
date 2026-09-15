@@ -1,7 +1,7 @@
 /**
- * Chapter 4 beat: L252 → Begonia@252 naming, then L253–L255.
+ * Chapter 4 beat: L258 → Freesia@258 naming, then L259–L261.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L252 queues Begonia pending. L255 queues Ranunculus when friend_085 is present.
+ * L258 queues Freesia pending. Do not invent friend_087.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-begonia";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-freesia";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -107,6 +107,8 @@ const PARADE = [
   ["friend_081", "Clematis", 243],
   ["friend_082", "Wisteria", 246],
   ["friend_083", "Anemone", 249],
+  ["friend_084", "Begonia", 252],
+  ["friend_085", "Ranunculus", 255],
 ];
 
 const completedIds = [
@@ -119,7 +121,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 241 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 247 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -145,7 +147,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Anemone claimed the anemone bowl."],
+  bubbles: ["Ranunculus claimed the ranunculus nest."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -195,23 +197,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L252`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("WHIRL STOP"));
-  await shot(page, "01_l252_before_begonia");
+  await page.goto(`${BASE}/level/L258`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("FOLD STOP"));
+  await shot(page, "01_l258_before_freesia");
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
+      ["black", "ArrowUp"],
       ["black", "ArrowRight"],
       ["black", "ArrowDown"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowDown"],
+      ["black", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
     ],
     "New friend!",
   );
@@ -229,15 +230,15 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("begonia naming", modal);
+  console.log("freesia naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Begonia prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Freesia prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Ruffle soft. Already claimed the begonia planter.") {
-    throw new Error(`Begonia display line drifted: ${modal.line}`);
+  if (modal.line !== "Trumpet soft. Already claimed the freesia vase.") {
+    throw new Error(`Freesia display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Begonia,Ruffle,Planter") {
-    throw new Error(`Begonia chips must be Begonia/Ruffle/Planter, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Freesia,Trumpet,Vase") {
+    throw new Error(`Freesia chips must be Freesia/Trumpet/Vase, got ${modal.chips.join("/")}`);
   }
   if (
     modal.chips.includes("Buttercup") ||
@@ -330,115 +331,127 @@ try {
     modal.chips.includes("Arbor") ||
     modal.chips.includes("Anemone") ||
     modal.chips.includes("Wind") ||
-    modal.chips.includes("Bowl")
+    modal.chips.includes("Bowl") ||
+    modal.chips.includes("Begonia") ||
+    modal.chips.includes("Ruffle") ||
+    modal.chips.includes("Planter") ||
+    modal.chips.includes("Ranunculus") ||
+    modal.chips.includes("Layer") ||
+    modal.chips.includes("Nest")
   ) {
-    throw new Error("Begonia chips collided with Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Freesia chips collided with Begonia/Anemone/Wisteria/Clematis/Cosmos/Buttercup/Primrose/Heather/Marigold/Snapdragon/Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/begonia_loaf_72.svg")) {
-    throw new Error(`Begonia hero missing ruffle loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/freesia_loaf_72.svg")) {
+    throw new Error(`Freesia hero missing trumpet loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/begonia_loaf_72.svg")) {
+    throw new Error("Freesia hero must not use the Begonia loaf");
+  }
+  if (modal.hero.includes("/assets/cats/ranunculus_loaf_72.svg")) {
+    throw new Error("Freesia hero must not use the Ranunculus loaf");
   }
   if (modal.hero.includes("/assets/cats/anemone_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Anemone loaf");
+    throw new Error("Freesia hero must not use the Anemone loaf");
   }
   if (modal.hero.includes("/assets/cats/wisteria_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Wisteria loaf");
+    throw new Error("Freesia hero must not use the Wisteria loaf");
   }
   if (modal.hero.includes("/assets/cats/clematis_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Clematis loaf");
+    throw new Error("Freesia hero must not use the Clematis loaf");
   }
   if (modal.hero.includes("/assets/cats/cosmos_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Cosmos loaf");
+    throw new Error("Freesia hero must not use the Cosmos loaf");
   }
   if (modal.hero.includes("/assets/cats/buttercup_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Buttercup loaf");
+    throw new Error("Freesia hero must not use the Buttercup loaf");
   }
   if (modal.hero.includes("/assets/cats/primrose_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Primrose loaf");
+    throw new Error("Freesia hero must not use the Primrose loaf");
   }
   if (modal.hero.includes("/assets/cats/heather_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Heather loaf");
+    throw new Error("Freesia hero must not use the Heather loaf");
   }
   if (modal.hero.includes("/assets/cats/marigold_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Marigold loaf");
+    throw new Error("Freesia hero must not use the Marigold loaf");
   }
   if (modal.hero.includes("/assets/cats/snapdragon_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Snapdragon loaf");
+    throw new Error("Freesia hero must not use the Snapdragon loaf");
   }
   if (modal.hero.includes("/assets/cats/bluebell_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Bluebell loaf");
+    throw new Error("Freesia hero must not use the Bluebell loaf");
   }
   if (modal.hero.includes("/assets/cats/foxglove_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Foxglove loaf");
+    throw new Error("Freesia hero must not use the Foxglove loaf");
   }
   if (modal.hero.includes("/assets/cats/hyacinth_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Hyacinth loaf");
+    throw new Error("Freesia hero must not use the Hyacinth loaf");
   }
   if (modal.hero.includes("/assets/cats/crocus_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Crocus loaf");
+    throw new Error("Freesia hero must not use the Crocus loaf");
   }
   if (modal.hero.includes("/assets/cats/lily_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Lily loaf");
+    throw new Error("Freesia hero must not use the Lily loaf");
   }
   if (modal.hero.includes("/assets/cats/violet_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Violet loaf");
+    throw new Error("Freesia hero must not use the Violet loaf");
   }
   if (modal.hero.includes("/assets/cats/tulip_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Tulip loaf");
+    throw new Error("Freesia hero must not use the Tulip loaf");
   }
   if (modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Poppy loaf");
+    throw new Error("Freesia hero must not use the Poppy loaf");
   }
   if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Lotus loaf");
+    throw new Error("Freesia hero must not use the Lotus loaf");
   }
   if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Orchid loaf");
+    throw new Error("Freesia hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Iris loaf");
+    throw new Error("Freesia hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Aster loaf");
+    throw new Error("Freesia hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Zinnia loaf");
+    throw new Error("Freesia hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Dahlia loaf");
+    throw new Error("Freesia hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Azalea loaf");
+    throw new Error("Freesia hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Peony loaf");
+    throw new Error("Freesia hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Camellia loaf");
+    throw new Error("Freesia hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Gardenia loaf");
+    throw new Error("Freesia hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Hibiscus loaf");
+    throw new Error("Freesia hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Jasmine loaf");
+    throw new Error("Freesia hero must not use the Jasmine loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Magnolia loaf");
+    throw new Error("Freesia hero must not use the Magnolia loaf");
   }
   if (modal.hero.includes("/assets/cats/lavender_loaf_72.svg")) {
-    throw new Error("Begonia hero must not use the Lavender loaf");
+    throw new Error("Freesia hero must not use the Lavender loaf");
   }
-  await shot(page, "02_begonia_naming");
+  await shot(page, "02_freesia_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Begonia") &&
-      ((document.body.innerText || "").includes("planter") ||
-        (document.body.innerText || "").includes("begonia") ||
+      (document.body.innerText || "").includes("Freesia") &&
+      ((document.body.innerText || "").includes("vase") ||
+        (document.body.innerText || "").includes("freesia") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -451,85 +464,86 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_084")) {
-    throw new Error("Begonia was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_086")) {
+    throw new Error("Freesia was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_084")?.name !== "Begonia") {
-    throw new Error("Begonia name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_086")?.name !== "Freesia") {
+    throw new Error("Freesia name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_085")) {
-    throw new Error("friend_085 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_087")) {
+    throw new Error("friend_087 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/begonia_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/begonia_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/freesia_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/freesia_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Begonia ruffle loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Freesia trumpet loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("planter") && !yard.text.includes("Begonia")) {
-    throw new Error("yard missing Begonia begonia planter line");
+  if (!yard.text.includes("vase") && !yard.text.includes("Freesia")) {
+    throw new Error("yard missing Freesia freesia vase line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_begonia_yard");
+  await shot(page, "03_freesia_yard");
 
-  await page.goto(`${BASE}/level/L253`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("RUFFLE CUT"));
+  await page.goto(`${BASE}/level/L259`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("TRUMPET CUT"));
   await play(
     page,
     [
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+    ],
+    "Home",
+  );
+
+  await page.goto(`${BASE}/level/L260`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("VASE GAP"));
+  await play(
+    page,
+    [
+      ["gray", "ArrowLeft"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowLeft"],
       ["gray", "ArrowDown"],
       ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowRight"],
       ["gray", "ArrowLeft"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
     ],
     "Home",
   );
+  await shot(page, "04_l260_win");
 
-  await page.goto(`${BASE}/level/L254`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("PLANTER GAP"));
+  await page.goto(`${BASE}/level/L261`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("TUBE STOP"));
   await play(
     page,
     [
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
-      ["gray", "ArrowLeft"],
+      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
+      ["black", "ArrowUp"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
     ],
     "Home",
   );
-  await shot(page, "04_l254_win");
-
-  await page.goto(`${BASE}/level/L255`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("LEAF STOP"));
-  await play(
-    page,
-    [
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowRight"],
-    ],
-    "Home",
-  );
-  await shot(page, "05_l255_win");
+  await shot(page, "05_l261_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -537,7 +551,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L252", "L253", "L254", "L255"]) {
+  for (const id of ["L258", "L259", "L260", "L261"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -545,23 +559,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_085")) {
-    throw new Error("friend_085 must stay pending, not named, on the Begonia slice");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_087")) {
+    throw new Error("friend_087 must not unlock this slice");
   }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_085")) {
-    throw new Error("L255 clear must queue Ranunculus when friend_085 is present");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_087")) {
+    throw new Error("L261 clear must not queue the next friend");
   }
-  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_086")) {
-    throw new Error("L255 clear must not queue friend_086");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L261 must not open a next-friend naming modal");
   }
-  if (!after.text.includes("New friend!")) {
-    throw new Error("L255 clear must show Ranunculus pending naming");
-  }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_084").length !== 1) {
-    throw new Error("L255 must not unlock a Begonia duplicate");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_086").length !== 1) {
+    throw new Error("L261 must not unlock a Freesia duplicate");
   }
   if (!after.hud.includes("261") && !after.text.includes("261")) {
-    throw new Error("Campaign HUD must show through 261 after L255 clear");
+    throw new Error("Campaign HUD must show through 261 after L261 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -581,9 +592,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L252 + BEGONIA + L253-255 OK");
+  console.log("CHAPTER 4 L258 + FREESIA + L259-261 OK");
 } catch (error) {
-  console.error("CHAPTER 4 BEGONIA FAIL", error);
+  console.error("CHAPTER 4 FREESIA FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {

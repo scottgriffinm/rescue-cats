@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_freesia_bang",
+  "status": "READY",
+  "friend_id": "friend_086",
+  "unlock_clear": 258,
+  "personality": "Freesia-soft",
+  "display_line": "Trumpet soft. Already claimed the freesia vase.",
+  "default_name": "Freesia",
+  "tier": "C",
+  "color": "Trumpet",
+  "pattern": "Vase",
+  "art": {
+    "loaf_48": "/assets/cats/freesia_loaf_48.svg",
+    "loaf_72": "/assets/cats/freesia_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "freesia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Freesia", "Trumpet", "Vase"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_086": [
+      "{Name}: Trumpet soft. Already claimed the freesia vase.",
+      "{Name}: Looks yard-soft. Owns the vase."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 258,
+    "sku_id": null,
+    "note": "Ch4. Freesia Pass. No gift. Ban Ranunculus/Layer/Nest and all prior pools. Bean parade stands. No Pebble. Freesia, Trumpet, and Vase chips are CEO-locked on Freesia. No friend_087."
+  }
+}
