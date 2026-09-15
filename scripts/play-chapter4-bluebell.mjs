@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L219 → Foxglove@219 naming, then L220–L222.
+ * Chapter 4 beat: L222 → Bluebell@222 naming, then L223–L225.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  * L222 queues Bluebell pending. Do not invent friend_075.
  */
@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-foxglove";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-bluebell";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -96,6 +96,7 @@ const PARADE = [
   ["friend_070", "Lily", 210],
   ["friend_071", "Crocus", 213],
   ["friend_072", "Hyacinth", 216],
+  ["friend_073", "Foxglove", 219],
 ];
 
 const completedIds = [
@@ -108,7 +109,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 208 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 211 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -134,7 +135,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Hyacinth claimed the hyacinth spike."],
+  bubbles: ["Foxglove claimed the foxglove tower."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -184,23 +185,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L219`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("RACEME STOP"));
-  await shot(page, "01_l219_before_foxglove");
+  await page.goto(`${BASE}/level/L222`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("GLOVE STOP"));
+  await shot(page, "01_l222_before_bluebell");
   await play(
     page,
     [
+      ["black", "ArrowLeft"],
+      ["black", "ArrowUp"],
       ["black", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowUp"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowRight"],
       ["orange", "ArrowRight"],
       ["black", "ArrowUp"],
-      ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
-      ["orange", "ArrowDown"],
+      ["black", "ArrowLeft"],
+      ["black", "ArrowDown"],
       ["orange", "ArrowRight"],
-      ["black", "ArrowUp"],
     ],
     "New friend!",
   );
@@ -218,17 +218,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("foxglove naming", modal);
+  console.log("bluebell naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Foxglove prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Bluebell prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Spotted soft. Already claimed the foxglove tower.") {
-    throw new Error(`Foxglove display line drifted: ${modal.line}`);
+  if (modal.line !== "Woodland blue. Already claimed the bluebell cloche.") {
+    throw new Error(`Bluebell display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Foxglove,Tower,Throat") {
-    throw new Error(`Foxglove chips must be Foxglove/Tower/Throat, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Bluebell,Cloche,Ring") {
+    throw new Error(`Bluebell chips must be Bluebell/Cloche/Ring, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Foxglove") ||
+    modal.chips.includes("Tower") ||
+    modal.chips.includes("Throat") ||
     modal.chips.includes("Hyacinth") ||
     modal.chips.includes("Cluster") ||
     modal.chips.includes("Bell") ||
@@ -288,77 +291,80 @@ try {
     modal.chips.includes("Honey") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Foxglove chips collided with Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Bluebell chips collided with Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/foxglove_loaf_72.svg")) {
-    throw new Error(`Foxglove hero missing spotted-foxglove loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/bluebell_loaf_72.svg")) {
+    throw new Error(`Bluebell hero missing woodland-bluebell loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/foxglove_loaf_72.svg")) {
+    throw new Error("Bluebell hero must not use the Foxglove loaf");
   }
   if (modal.hero.includes("/assets/cats/hyacinth_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Hyacinth loaf");
+    throw new Error("Bluebell hero must not use the Hyacinth loaf");
   }
   if (modal.hero.includes("/assets/cats/crocus_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Crocus loaf");
+    throw new Error("Bluebell hero must not use the Crocus loaf");
   }
   if (modal.hero.includes("/assets/cats/lily_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Lily loaf");
+    throw new Error("Bluebell hero must not use the Lily loaf");
   }
   if (modal.hero.includes("/assets/cats/violet_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Violet loaf");
+    throw new Error("Bluebell hero must not use the Violet loaf");
   }
   if (modal.hero.includes("/assets/cats/tulip_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Tulip loaf");
+    throw new Error("Bluebell hero must not use the Tulip loaf");
   }
   if (modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Poppy loaf");
+    throw new Error("Bluebell hero must not use the Poppy loaf");
   }
   if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Lotus loaf");
+    throw new Error("Bluebell hero must not use the Lotus loaf");
   }
   if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Orchid loaf");
+    throw new Error("Bluebell hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Iris loaf");
+    throw new Error("Bluebell hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Aster loaf");
+    throw new Error("Bluebell hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Zinnia loaf");
+    throw new Error("Bluebell hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Dahlia loaf");
+    throw new Error("Bluebell hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Azalea loaf");
+    throw new Error("Bluebell hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Peony loaf");
+    throw new Error("Bluebell hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Camellia loaf");
+    throw new Error("Bluebell hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Gardenia loaf");
+    throw new Error("Bluebell hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Hibiscus loaf");
+    throw new Error("Bluebell hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Jasmine loaf");
+    throw new Error("Bluebell hero must not use the Jasmine loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Foxglove hero must not use the Magnolia loaf");
+    throw new Error("Bluebell hero must not use the Magnolia loaf");
   }
-  await shot(page, "02_foxglove_naming");
+  await shot(page, "02_bluebell_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Foxglove") &&
-      ((document.body.innerText || "").includes("tower") ||
-        (document.body.innerText || "").includes("foxglove") ||
+      (document.body.innerText || "").includes("Bluebell") &&
+      ((document.body.innerText || "").includes("cloche") ||
+        (document.body.innerText || "").includes("bluebell") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -371,58 +377,58 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_073")) {
-    throw new Error("Foxglove was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_074")) {
+    throw new Error("Bluebell was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_073")?.name !== "Foxglove") {
-    throw new Error("Foxglove name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_074")?.name !== "Bluebell") {
+    throw new Error("Bluebell name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_074")) {
-    throw new Error("friend_074 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_075")) {
+    throw new Error("friend_075 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/foxglove_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/foxglove_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/bluebell_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/bluebell_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Foxglove spotted-foxglove loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Bluebell woodland-bluebell loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("tower") && !yard.text.includes("Foxglove")) {
-    throw new Error("yard missing Foxglove foxglove tower line");
+  if (!yard.text.includes("cloche") && !yard.text.includes("Bluebell")) {
+    throw new Error("yard missing Bluebell bluebell cloche line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_foxglove_yard");
+  await shot(page, "03_bluebell_yard");
 
-  await page.goto(`${BASE}/level/L220`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("TOWER CUT"));
+  await page.goto(`${BASE}/level/L223`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CLOCHE CUT"));
   await play(
     page,
     [
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowLeft"],
+      ["gray", "ArrowUp"],
+      ["gray", "ArrowRight"],
+      ["gray", "ArrowUp"],
       ["orange", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
+      ["gray", "ArrowDown"],
       ["orange", "ArrowDown"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L221`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("THROAT GAP"));
+  await page.goto(`${BASE}/level/L224`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("RING GAP"));
   await play(
     page,
     [
-      ["gray", "ArrowLeft"],
-      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["gray", "ArrowUp"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowUp"],
+      ["gray", "ArrowDown"],
       ["gray", "ArrowRight"],
       ["gray", "ArrowUp"],
-      ["orange", "ArrowDown"],
       ["gray", "ArrowRight"],
       ["gray", "ArrowUp"],
       ["gray", "ArrowLeft"],
@@ -430,27 +436,27 @@ try {
     ],
     "Home",
   );
-  await shot(page, "04_l221_win");
+  await shot(page, "04_l224_win");
 
-  await page.goto(`${BASE}/level/L222`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("GLOVE STOP"));
+  await page.goto(`${BASE}/level/L225`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CHIME STOP"));
   await play(
     page,
     [
+      ["orange", "ArrowUp"],
       ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowRight"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
     ],
     "Home",
   );
-  await shot(page, "05_l222_win");
+  await shot(page, "05_l225_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -458,7 +464,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L219", "L220", "L221", "L222"]) {
+  for (const id of ["L222", "L223", "L224", "L225"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -466,23 +472,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_074")) {
-    throw new Error("friend_074 must stay pending, not named, on the Foxglove slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_074")) {
-    throw new Error("L222 clear must queue Bluebell when friend_074 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_075")) {
+    throw new Error("friend_075 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_075")) {
-    throw new Error("L222 clear must not queue friend_075");
+    throw new Error("L225 clear must not queue the next friend");
   }
-  if (!after.text.includes("Woodland blue. Already claimed the bluebell cloche.")) {
-    throw new Error("L222 clear must show Bluebell pending naming");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L225 must not open a next-friend naming modal");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_073").length !== 1) {
-    throw new Error("L222 must not unlock a Foxglove duplicate");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_074").length !== 1) {
+    throw new Error("L225 must not unlock a Bluebell duplicate");
   }
-  if (!after.hud.includes("222") && !after.text.includes("222")) {
-    throw new Error("Campaign HUD must show through 222 after L222 clear");
+  if (!after.hud.includes("225") && !after.text.includes("225")) {
+    throw new Error("Campaign HUD must show through 225 after L225 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -502,9 +505,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L219 + FOXGLOVE + L220-222 OK");
+  console.log("CHAPTER 4 L222 + BLUEBELL + L223-225 OK");
 } catch (error) {
-  console.error("CHAPTER 4 FOXGLOVE FAIL", error);
+  console.error("CHAPTER 4 BLUEBELL FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {
