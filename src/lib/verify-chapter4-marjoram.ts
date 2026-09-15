@@ -207,7 +207,7 @@ export function verifyChapter4Marjoram(solves: Record<string, Array<[string, Dir
   const yardM = readFileSync(resolve("src/components/yard/YardScene.tsx"), "utf8");
   if ((yardM.match(/const marjoram =/g) || []).length !== 1) throw new Error("YardScene must declare marjoram once");
   if ((yardM.match(/\{marjoram \?/g) || []).length !== 1) throw new Error("YardScene must render marjoram once");
-  if (TUTORIAL_RESCUES.length !== 71) throw new Error("Met must include through Marjoram (46)");
+  if (TUTORIAL_RESCUES.length !== 72) throw new Error("Met must include through Marjoram (46)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
