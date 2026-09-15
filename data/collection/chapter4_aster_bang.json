@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_aster_bang",
+  "status": "READY",
+  "friend_id": "friend_063",
+  "unlock_clear": 189,
+  "personality": "Aster-soft",
+  "display_line": "Cool lilac. Already claimed the aster dish.",
+  "default_name": "Aster",
+  "tier": "C",
+  "color": "Gray",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/aster_loaf_48.svg",
+    "loaf_72": "/assets/cats/aster_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "aster"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Aster", "Petal", "Drift"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_063": [
+      "{Name}: Cool lilac. Already claimed the aster dish.",
+      "{Name}: Looks yard-cool. Owns the dish."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 189,
+    "sku_id": null,
+    "note": "Ch4. Zinnia Pass next. No gift. Ban Zinnia/Quill/Gleam and all prior pools. Bean parade stands. No Pebble. Aster chip is CEO-locked on Aster. No friend_064."
+  }
+}
