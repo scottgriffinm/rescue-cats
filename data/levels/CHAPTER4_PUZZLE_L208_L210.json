@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Tulip Pass — L208–L210 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L208–L210",
+  "notes": "L208 Patch Cut / L209 Moss Gap / L210 Thicket Stop — off Stem Cut / Glow Gap / Bloom Stop habits; not Capsule/Silk/Cup tropes; not Violet Cut/Gap/Stop title clones; Thicket Stop avoids Dahlia Vase Stop; no WRAP/edge twin of Nori/Medlar; L210 occupancy off Cup/Pad/Pond/Vase/Bloom twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L208",
+      "name": "Patch Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_patch_cut_black",
+      "walls": [
+        { "x": 0, "y": 1 },
+        { "x": 5, "y": 2 },
+        { "x": 3, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 3, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 0, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "patch_cut_black"
+    },
+    {
+      "id": "L209",
+      "name": "Moss Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_moss_gap_gray",
+      "walls": [
+        { "x": 4, "y": 3 },
+        { "x": 3, "y": 3 },
+        { "x": 5, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "moss_gap_gray"
+    },
+    {
+      "id": "L210",
+      "name": "Thicket Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_thicket_stop_black",
+      "walls": [
+        { "x": 5, "y": 4 },
+        { "x": 5, "y": 0 },
+        { "x": 1, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 2, "y": 1, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 0, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 1, "y": 4, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "thicket_stop_black"
+    }
+  ],
+  "teaches": {
+    "L208": "Patch Cut — black east first; orange cuts after; not Stem black-south, not Capsule black-north, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south",
+    "L209": "Moss Gap — gray north then orange threads; not Glow gray-east, not Silk gray-south, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west",
+    "L210": "Thicket Stop — violet-patch seats; occupancy off Cup/Pad/Pond/Vase/Bloom twins; off Nori (5,5); not Hold*/Park*; title Thicket Stop (not Dahlia Vase Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L208": 11,
+      "L209": 11,
+      "L210": 10
+    }
+  },
+  "deltas": {
+    "L208": "(1, 2)",
+    "L209": "(1, 1)",
+    "L210": "(1, -1)"
+  }
+}

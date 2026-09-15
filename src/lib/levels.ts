@@ -67,6 +67,7 @@ import chapter4as from "../../data/levels/CHAPTER4_PUZZLE_L196_L198.json";
 import chapter4at from "../../data/levels/CHAPTER4_PUZZLE_L199_L201.json";
 import chapter4au from "../../data/levels/CHAPTER4_PUZZLE_L202_L204.json";
 import chapter4av from "../../data/levels/CHAPTER4_PUZZLE_L205_L207.json";
+import chapter4aw from "../../data/levels/CHAPTER4_PUZZLE_L208_L210.json";
 import budgets from "../../data/levels/move_budget_L01-L30.json";
 import { normalizeBoardColor } from "./colors";
 import { TEMPLATE_ID } from "./constants";
@@ -279,6 +280,9 @@ const HEADLINES: Record<string, string> = {
   L205: "STEM CUT",
   L206: "GLOW GAP",
   L207: "BLOOM STOP",
+  L208: "PATCH CUT",
+  L209: "MOSS GAP",
+  L210: "THICKET STOP",
 };
 
 const HINTS: Record<string, string> = {
@@ -488,6 +492,9 @@ const HINTS: Record<string, string> = {
   L205: "Stem cut — black south first; orange cuts after; not Capsule black-north, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south.",
   L206: "Glow gap — gray east then orange threads; not Silk gray-south, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west.",
   L207: "Bloom stop — tulip-vase seats; occupancy off Cup/Pad/Pond/Vase/Bloom twins; off Nori (5,5); not Dahlia Vase Stop; not Hold*/Park*.",
+  L208: "Patch cut — black east first; orange cuts after; not Stem black-south, not Capsule black-north, not Pad gray-west, not Spur orange-east, not Blade gray-north, not Petal gray-east, not Quill orange-north, not Spire orange-west, not Fizz gray-south, not Vase orange-south.",
+  L209: "Moss gap — gray north then orange threads; not Glow gray-east, not Silk gray-south, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Drift orange-east, not Gleam black-west, not Ember black-south, not Flare orange-west.",
+  L210: "Thicket stop — violet-patch seats; occupancy off Cup/Pad/Pond/Vase/Bloom twins; off Nori (5,5); not Dahlia Vase Stop; not Hold*/Park*.",
 };
 
 type RawLevel = {
@@ -610,6 +617,7 @@ const authored = [
   ...chapter4at.levels,
   ...chapter4au.levels,
   ...chapter4av.levels,
+  ...chapter4aw.levels,
 ] as RawLevel[];
 
 export const LEVELS: Level[] = authored.map(hydrate);

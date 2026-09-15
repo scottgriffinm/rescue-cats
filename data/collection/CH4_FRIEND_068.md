@@ -32,7 +32,7 @@ Yard: `{Name} claimed the tulip vase.`
 None @204.
 
 ## Cadence
-Poppy@201 → L202–L204 → **Tulip@204** on L204 clear → L205–L207 triad. No friend_069 invent in this PR.
+Poppy@201 → L202–L204 → **Tulip@204** on L204 clear → L205–L207 triad. Violet@207 ships next. No friend_070 invent.
 
 ## Engineer (when unparked)
 1. `data/chapter4_tulip_bang.json` (+ collection copy)  

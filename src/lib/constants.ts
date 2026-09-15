@@ -74,7 +74,8 @@ export const ART_KIT_PATH: Record<
   | "orchid"
   | "lotus"
   | "poppy"
-  | "tulip",
+  | "tulip"
+  | "violet",
   { loaf48: string; loaf72: string }
 > = {
   ginger: {
@@ -352,6 +353,10 @@ export const ART_KIT_PATH: Record<
   tulip: {
     loaf48: "/assets/cats/tulip_loaf_48.svg",
     loaf72: "/assets/cats/tulip_loaf_72.svg",
+  },
+  violet: {
+    loaf48: "/assets/cats/violet_loaf_48.svg",
+    loaf72: "/assets/cats/violet_loaf_72.svg",
   },
 };
 
