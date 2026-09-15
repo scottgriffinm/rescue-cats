@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_phlox_bang",
+  "status": "READY",
+  "friend_id": "friend_096",
+  "unlock_clear": 288,
+  "personality": "Phlox-soft",
+  "display_line": "Floret soft. Already claimed the phlox bank.",
+  "default_name": "Phlox",
+  "tier": "C",
+  "color": "Floret",
+  "pattern": "Bank",
+  "art": {
+    "loaf_48": "/assets/cats/phlox_loaf_48.svg",
+    "loaf_72": "/assets/cats/phlox_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "phlox"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Phlox", "Floret", "Bank"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_096": [
+      "{Name}: Floret soft. Already claimed the phlox bank.",
+      "{Name}: Looks yard-soft. Owns the bank."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 288,
+    "sku_id": null,
+    "note": "Ch4. Phlox Pass. No gift. Ban Lantana/Umbel/Mound and all prior pools. Bean parade stands. No Pebble. Phlox, Floret, and Bank chips are CEO-locked on Phlox. No friend_097."
+  }
+}

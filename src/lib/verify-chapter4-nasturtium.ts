@@ -487,7 +487,7 @@ export function verifyChapter4Nasturtium(solves: Record<string, Array<[string, D
   if ((yardG.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardG.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardG.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 95) throw new Error("Met must include through Nasturtium (88) after Petunia (89)");
+  if (TUTORIAL_RESCUES.length !== 96) throw new Error("Met must include through Nasturtium (88) after Petunia (89)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
