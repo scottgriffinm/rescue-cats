@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_lantana_bang",
+  "status": "READY",
+  "friend_id": "friend_095",
+  "unlock_clear": 285,
+  "personality": "Lantana-soft",
+  "display_line": "Umbel soft. Already claimed the lantana mound.",
+  "default_name": "Lantana",
+  "tier": "C",
+  "color": "Umbel",
+  "pattern": "Mound",
+  "art": {
+    "loaf_48": "/assets/cats/lantana_loaf_48.svg",
+    "loaf_72": "/assets/cats/lantana_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "lantana"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Lantana", "Umbel", "Mound"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_095": [
+      "{Name}: Umbel soft. Already claimed the lantana mound.",
+      "{Name}: Looks yard-soft. Owns the mound."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 285,
+    "sku_id": null,
+    "note": "Ch4. Lantana Pass. No gift. Ban Calendula/Petal/Tin and all prior pools. Bean parade stands. No Pebble. Lantana, Umbel, and Mound chips are CEO-locked on Lantana. No friend_096."
+  }
+}

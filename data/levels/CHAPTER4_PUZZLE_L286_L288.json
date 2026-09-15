@@ -1,0 +1,201 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Calendula Pass — L286–L288 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L286–L288",
+  "notes": "L286 Umbel Cut / L287 Mound Gap / L288 Bunch Stop — habit-break vs Disk Cut orange-first / Tin Gap gray-first / Disc Stop black-first; not Sage/Torch/Bract/Disk/Tin/Disc; Umbel Cut gray-first (not Disk orange); Mound Gap black-first (not Tin gray); Bunch Stop orange-first (not Disc black); no WRAP/edge twin of Nori/Medlar; L288 occupancy off prior Stop twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L286",
+      "name": "Umbel Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_umbel_cut_gray",
+      "walls": [
+        {
+          "x": 0,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 0
+        },
+        {
+          "x": 5,
+          "y": 3
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_gray",
+          "x": 3,
+          "y": 0,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 4,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_gray",
+          "x": 0,
+          "y": 1,
+          "color": "gray",
+          "colorId": "color_gray"
+        }
+      ],
+      "teach": "umbel_cut_gray"
+    },
+    {
+      "id": "L287",
+      "name": "Mound Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_mound_gap_black",
+      "walls": [
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 3,
+          "y": 4,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 0,
+          "y": 3,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 3,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 3,
+          "y": 2,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "mound_gap_black"
+    },
+    {
+      "id": "L288",
+      "name": "Bunch Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_bunch_stop_orange",
+      "walls": [
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 5
+        },
+        {
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "blockers": [],
+      "cats": [
+        {
+          "id": "cat_orange",
+          "x": 2,
+          "y": 5,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "cat_black",
+          "x": 2,
+          "y": 4,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "gates": [
+        {
+          "id": "gate_orange",
+          "x": 1,
+          "y": 3,
+          "color": "orange",
+          "colorId": "color_orange"
+        },
+        {
+          "id": "gate_black",
+          "x": 3,
+          "y": 2,
+          "color": "black",
+          "colorId": "color_black"
+        }
+      ],
+      "teach": "bunch_stop_orange"
+    }
+  ],
+  "teaches": {
+    "umbel_cut_gray": "Gray first; orange cuts after the umbel slide.",
+    "mound_gap_black": "Black first then orange threads the mound gap.",
+    "bunch_stop_orange": "Orange first; black seats the bunch."
+  },
+  "solver": {
+    "min_slides": {
+      "L286": 10,
+      "L287": 11,
+      "L288": 11
+    }
+  },
+  "deltas": {
+    "L286": "(4, 2)",
+    "L287": "(0, 3)",
+    "L288": "(2, 1)"
+  }
+}
