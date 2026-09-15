@@ -1,7 +1,7 @@
 /**
  * Chapter 4 beat: L240 → Cosmos@240 naming, then L241–L243.
- * Next friend must not unlock. L10 stays off-path. localStorage only.
- * L240 queues Cosmos pending. Do not invent friend_081.
+ * L243 queues Clematis pending. L10 stays off-path. localStorage only.
+ * L240 queues Cosmos pending. Do not invent friend_082.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -429,7 +429,7 @@ try {
     throw new Error("Cosmos name was not kept");
   }
   if (yard.save.friends.some((friend) => friend.friendId === "friend_081")) {
-    throw new Error("friend_081 must not unlock");
+    throw new Error("friend_081 must stay pending until L243");
   }
   if (
     !yard.imgs.includes("/assets/cats/cosmos_loaf_72.svg") &&
@@ -499,7 +499,7 @@ try {
       ["black", "ArrowRight"],
       ["black", "ArrowUp"],
     ],
-    "Home",
+    "New friend!",
   );
   await shot(page, "05_l243_win");
 
@@ -518,19 +518,22 @@ try {
     throw new Error("L10 must stay off the campaign path");
   }
   if (after.save.friends.some((friend) => friend.friendId === "friend_081")) {
-    throw new Error("friend_081 must not unlock this slice");
+    throw new Error("friend_081 must stay pending, not named, on the Cosmos slice");
   }
-  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_081")) {
-    throw new Error("L243 clear must not queue the next friend");
+  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_081")) {
+    throw new Error("L243 clear must queue Clematis when friend_081 is present");
   }
-  if (after.text.includes("New friend!")) {
-    throw new Error("L243 must not open a next-friend naming modal");
+  if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_082")) {
+    throw new Error("L243 clear must not queue friend_082");
+  }
+  if (!after.text.includes("New friend!")) {
+    throw new Error("L243 clear must show Clematis pending naming");
   }
   if (after.save.friends.filter((friend) => friend.friendId === "friend_080").length !== 1) {
     throw new Error("L243 must not unlock a Cosmos duplicate");
   }
-  if (!after.hud.includes("243") && !after.text.includes("243")) {
-    throw new Error("Campaign HUD must show through 243 after L243 clear");
+  if (!after.hud.includes("246") && !after.text.includes("246")) {
+    throw new Error("Campaign HUD must show through 246 after L243 clear");
   }
   const paradeLocks = {
     friend_001: 3,
