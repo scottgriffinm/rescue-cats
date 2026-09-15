@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Anemone Pass — L253–L255 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L253–L255",
+  "notes": "L253 Ruffle Cut / L254 Planter Gap / L255 Leaf Stop — habit-break vs Wind Cut gray-first / Bowl Gap black-first / Whirl Stop orange-first; not Ruffle/Planter/Leaf title clones of Begonia Cut/Gap/Stop; Leaf Stop avoids Whirl/Droop/Star/Floret/Petal/Stem/Cup Stop collisions; no WRAP/edge twin of Nori/Medlar; L255 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L253",
+      "name": "Ruffle Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_ruffle_cut_orange",
+      "walls": [
+        { "x": 4, "y": 5 },
+        { "x": 5, "y": 1 },
+        { "x": 3, "y": 3 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 0, "y": 2, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 1, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 0, "y": 4, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "ruffle_cut_orange"
+    },
+    {
+      "id": "L254",
+      "name": "Planter Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_planter_gap_gray",
+      "walls": [
+        { "x": 3, "y": 3 },
+        { "x": 3, "y": 2 },
+        { "x": 5, "y": 5 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 3, "y": 5, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 4, "y": 0, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "planter_gap_gray"
+    },
+    {
+      "id": "L255",
+      "name": "Leaf Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_leaf_stop_black",
+      "walls": [
+        { "x": 1, "y": 1 },
+        { "x": 3, "y": 0 },
+        { "x": 2, "y": 4 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 5, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 0, "y": 5, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 3, "y": 2, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 5, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "leaf_stop_black"
+    }
+  ],
+  "teaches": {
+    "L253": "Ruffle Cut — orange south first; gray cuts after; not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north clone title, not Pale gray-east, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west",
+    "L254": "Planter Gap — gray west then orange threads; not Bowl black-east, not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north",
+    "L255": "Leaf Stop — begonia-planter seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl twins; off Nori (5,5); not Hold*/Park*; title Leaf Stop (not Begonia Stop, not Whirl Stop, not Droop Stop, not Star Stop, not Floret Stop, not Petal Stop, not Stem Stop, not Cup Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L253": 10,
+      "L254": 10,
+      "L255": 10
+    }
+  },
+  "deltas": {
+    "L253": "(1, 2)",
+    "L254": "(2, 2)",
+    "L255": "(2, 1)"
+  }
+}
