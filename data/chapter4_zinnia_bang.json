@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_zinnia_bang",
+  "status": "READY",
+  "friend_id": "friend_062",
+  "unlock_clear": 186,
+  "personality": "Urn-soft",
+  "display_line": "Sunlit coral. Already claimed the zinnia urn.",
+  "default_name": "Zinnia",
+  "tier": "C",
+  "color": "Orange",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/zinnia_loaf_48.svg",
+    "loaf_72": "/assets/cats/zinnia_loaf_72.svg",
+    "board_color": "orange",
+    "art_kit": "zinnia"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Zinnia", "Quill", "Gleam"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_062": [
+      "{Name}: Sunlit coral. Already claimed the zinnia urn.",
+      "{Name}: Looks yard-bright. Owns the urn."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 186,
+    "sku_id": null,
+    "note": "Ch4. Dahlia Pass next. No gift. Ban Dahlia/Spire/Ember and all prior pools. Bean parade stands. No Pebble. Zinnia chip is CEO-locked on Zinnia. No friend_063."
+  }
+}

@@ -59,6 +59,7 @@ import chapter4Camellia from "../../data/chapter4_camellia_bang.json";
 import chapter4Peony from "../../data/chapter4_peony_bang.json";
 import chapter4Azalea from "../../data/chapter4_azalea_bang.json";
 import chapter4Dahlia from "../../data/chapter4_dahlia_bang.json";
+import chapter4Zinnia from "../../data/chapter4_zinnia_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -147,7 +148,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "camellia" ||
     raw === "peony" ||
     raw === "azalea" ||
-    raw === "dahlia"
+    raw === "dahlia" ||
+    raw === "zinnia"
   ) {
     return raw;
   }
@@ -442,6 +444,7 @@ export const CHAPTER4_CAMELLIA = chapter4Camellia;
 export const CHAPTER4_PEONY = chapter4Peony;
 export const CHAPTER4_AZALEA = chapter4Azalea;
 export const CHAPTER4_DAHLIA = chapter4Dahlia;
+export const CHAPTER4_ZINNIA = chapter4Zinnia;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -502,6 +505,7 @@ export const CAMELLIA_FRIEND_ID = chapter4Camellia.friend_id;
 export const PEONY_FRIEND_ID = chapter4Peony.friend_id;
 export const AZALEA_FRIEND_ID = chapter4Azalea.friend_id;
 export const DAHLIA_FRIEND_ID = chapter4Dahlia.friend_id;
+export const ZINNIA_FRIEND_ID = chapter4Zinnia.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1327,6 +1331,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Zinnia.friend_id,
+    defaultName: chapter4Zinnia.default_name,
+    unlockClear: chapter4Zinnia.unlock_clear,
+    displayLine: chapter4Zinnia.display_line,
+    tier: chapter4Zinnia.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_orange_freckled_regular_regular_zinnia",
+      breed: "Domestic Shorthair",
+      color: chapter4Zinnia.color,
+      pattern: chapter4Zinnia.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Zinnia.personality,
+      artKit: "zinnia",
+      boardColor: "orange",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1348,7 +1372,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 61);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 62);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -1423,6 +1447,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   177: "friend_059",
   180: "friend_060",
   183: "friend_061",
+  186: "friend_062",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -1677,6 +1702,7 @@ export const CAMELLIA_NAMING_CHIPS: string[] = CHAPTER4_CAMELLIA.naming.suggesti
 export const PEONY_NAMING_CHIPS: string[] = CHAPTER4_PEONY.naming.suggestion_chips;
 export const AZALEA_NAMING_CHIPS: string[] = CHAPTER4_AZALEA.naming.suggestion_chips;
 export const DAHLIA_NAMING_CHIPS: string[] = CHAPTER4_DAHLIA.naming.suggestion_chips;
+export const ZINNIA_NAMING_CHIPS: string[] = CHAPTER4_ZINNIA.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -1859,6 +1885,9 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendId === DAHLIA_FRIEND_ID || friendId === "friend_061") {
     return [...DAHLIA_NAMING_CHIPS];
   }
+  if (friendId === ZINNIA_FRIEND_ID || friendId === "friend_062") {
+    return [...ZINNIA_NAMING_CHIPS];
+  }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
   const hungry = CHAPTER2.personality_pools.Hungry;
@@ -1921,6 +1950,7 @@ export function chipsForFriend(friendId: string): string[] {
   if (friendById(friendId)?.phenotype.personality === "Petal-soft") return [...PEONY_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Planter-soft") return [...AZALEA_NAMING_CHIPS];
   if (friendById(friendId)?.phenotype.personality === "Vase-soft") return [...DAHLIA_NAMING_CHIPS];
+  if (friendById(friendId)?.phenotype.personality === "Urn-soft") return [...ZINNIA_NAMING_CHIPS];
   return [...NAMING_CHIPS];
 }
 
@@ -2114,6 +2144,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === DAHLIA_FRIEND_ID || friendId === "friend_061") {
     return shufflePool([...DAHLIA_NAMING_CHIPS], count);
   }
+  if (friendId === ZINNIA_FRIEND_ID || friendId === "friend_062") {
+    return shufflePool([...ZINNIA_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -2190,6 +2223,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_PEONY.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_AZALEA.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_DAHLIA.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_ZINNIA.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -2262,6 +2296,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Petal-soft") return "peony bowl";
   if (personality === "Planter-soft") return "azalea planter";
   if (personality === "Vase-soft") return "dahlia vase";
+  if (personality === "Urn-soft") return "zinnia urn";
   return "sun patch";
 }
 
