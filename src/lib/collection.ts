@@ -92,6 +92,7 @@ import chapter4Verbena from "../../data/chapter4_verbena_bang.json";
 import chapter4Impatiens from "../../data/chapter4_impatiens_bang.json";
 import chapter4Salvia from "../../data/chapter4_salvia_bang.json";
 import chapter4Calendula from "../../data/chapter4_calendula_bang.json";
+import chapter4Lantana from "../../data/chapter4_lantana_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -213,7 +214,8 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "verbena" ||
     raw === "impatiens" ||
     raw === "salvia" ||
-    raw === "calendula"
+    raw === "calendula" ||
+    raw === "lantana"
   ) {
     return raw;
   }
@@ -541,6 +543,7 @@ export const CHAPTER4_VERBENA = chapter4Verbena;
 export const CHAPTER4_IMPATIENS = chapter4Impatiens;
 export const CHAPTER4_SALVIA = chapter4Salvia;
 export const CHAPTER4_CALENDULA = chapter4Calendula;
+export const CHAPTER4_LANTANA = chapter4Lantana;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -634,6 +637,7 @@ export const VERBENA_FRIEND_ID = chapter4Verbena.friend_id;
 export const IMPATIENS_FRIEND_ID = chapter4Impatiens.friend_id;
 export const SALVIA_FRIEND_ID = chapter4Salvia.friend_id;
 export const CALENDULA_FRIEND_ID = chapter4Calendula.friend_id;
+export const LANTANA_FRIEND_ID = chapter4Lantana.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -2119,6 +2123,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "orange",
     },
   },
+  {
+    friendId: chapter4Lantana.friend_id,
+    defaultName: chapter4Lantana.default_name,
+    unlockClear: chapter4Lantana.unlock_clear,
+    displayLine: chapter4Lantana.display_line,
+    tier: chapter4Lantana.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_umbel_mound_regular_regular_lantana",
+      breed: "Domestic Shorthair",
+      color: chapter4Lantana.color,
+      pattern: chapter4Lantana.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Lantana.personality,
+      artKit: "lantana",
+      boardColor: "gray",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -2140,7 +2164,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 94);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 95);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -2248,6 +2272,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   276: "friend_092",
   279: "friend_093",
   282: "friend_094",
+  285: "friend_095",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -2535,6 +2560,7 @@ export const VERBENA_NAMING_CHIPS: string[] = CHAPTER4_VERBENA.naming.suggestion
 export const IMPATIENS_NAMING_CHIPS: string[] = CHAPTER4_IMPATIENS.naming.suggestion_chips;
 export const SALVIA_NAMING_CHIPS: string[] = CHAPTER4_SALVIA.naming.suggestion_chips;
 export const CALENDULA_NAMING_CHIPS: string[] = CHAPTER4_CALENDULA.naming.suggestion_chips;
+export const LANTANA_NAMING_CHIPS: string[] = CHAPTER4_LANTANA.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -2815,6 +2841,9 @@ export function chipsForFriend(friendId: string): string[] {
   }
   if (friendId === CALENDULA_FRIEND_ID || friendId === "friend_094") {
     return [...CALENDULA_NAMING_CHIPS];
+  }
+  if (friendId === LANTANA_FRIEND_ID || friendId === "friend_095") {
+    return [...LANTANA_NAMING_CHIPS];
   }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
@@ -3184,6 +3213,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === CALENDULA_FRIEND_ID || friendId === "friend_094") {
     return shufflePool([...CALENDULA_NAMING_CHIPS], count);
   }
+  if (friendId === LANTANA_FRIEND_ID || friendId === "friend_095") {
+    return shufflePool([...LANTANA_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -3293,6 +3325,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_IMPATIENS.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_SALVIA.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_CALENDULA.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_LANTANA.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -3398,6 +3431,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Impatiens-soft") return "impatiens box";
   if (personality === "Salvia-soft") return "salvia torch";
   if (personality === "Calendula-soft") return "calendula tin";
+  if (personality === "Lantana-soft") return "lantana mound";
   return "sun patch";
 }
 

@@ -158,6 +158,7 @@ export function YardScene({
   const impatiens = friends.find((friend) => friend.friendId === "friend_092");
   const salvia = friends.find((friend) => friend.friendId === "friend_093");
   const calendula = friends.find((friend) => friend.friendId === "friend_094");
+  const lantana = friends.find((friend) => friend.friendId === "friend_095");
   const others = friends.filter(
     (friend) =>
       friend.friendId !== "friend_001" &&
@@ -252,7 +253,8 @@ export function YardScene({
       friend.friendId !== "friend_091" &&
       friend.friendId !== "friend_092" &&
       friend.friendId !== "friend_093" &&
-      friend.friendId !== "friend_094",
+      friend.friendId !== "friend_094" &&
+      friend.friendId !== "friend_095",
   );
 
   return (
@@ -2511,6 +2513,36 @@ export function YardScene({
             </button>
           ) : null}
           <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{calendula.name}</p>
+        </div>
+      ) : null}
+
+      {lantana ? (
+        <div
+          className="yard-drop absolute"
+          style={{ width: roostW, left: "78%", top: "324%" }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/furniture/lantanaMound.svg"
+            alt=""
+            className="pointer-events-none absolute left-1/2 top-[-8%] h-8 w-8 -translate-x-1/2 select-none"
+          />
+          <FriendSprite
+            kit={friendById(lantana.friendId)?.phenotype.artKit ?? "lantana"}
+            size={px}
+            className={loafClass}
+          />
+          {bangFriendId === lantana.instanceId ? (
+            <button
+              type="button"
+              onClick={() => onBang?.(lantana.instanceId)}
+              className="yard-bang absolute left-1/2 top-0 z-20 grid h-11 w-11 -translate-x-1/2 -translate-y-[72%] place-items-center"
+              aria-label={`${lantana.name} has something to say`}
+            >
+              <UiIcon name="bubble_bang" className="h-7 w-7" />
+            </button>
+          ) : null}
+          <p className="yard-roost-name text-center font-display text-[11px] leading-none text-ink/70">{lantana.name}</p>
         </div>
       ) : null}
 

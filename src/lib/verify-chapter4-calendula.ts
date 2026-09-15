@@ -571,7 +571,7 @@ export function verifyChapter4Calendula(solves: Record<string, Array<[string, Di
   if ((yardG.match(/const lotus =/g) || []).length !== 1) throw new Error("YardScene must keep lotus once");
   if ((yardG.match(/const orchid =/g) || []).length !== 1) throw new Error("YardScene must keep orchid once");
   if ((yardG.match(/const iris =/g) || []).length !== 1) throw new Error("YardScene must keep iris once");
-  if (TUTORIAL_RESCUES.length !== 94) throw new Error("Met must include through Calendula (94)");
+  if (TUTORIAL_RESCUES.length !== 95) throw new Error("Met must include through Calendula (94) after Lantana (95)");
   for (const [clear, friendId, message] of PRIOR_UNLOCKS) {
     if (shippedFriendForClear(clear)?.friendId !== friendId) throw new Error(message);
   }
@@ -592,7 +592,7 @@ export function verifyChapter4Calendula(solves: Record<string, Array<[string, Di
   if (SLICE_UNLOCKS[276] !== "friend_092") throw new Error("SLICE_UNLOCKS[276] must be friend_092");
   if (SLICE_UNLOCKS[279] !== "friend_093") throw new Error("SLICE_UNLOCKS[279] must be friend_093");
   if (SLICE_UNLOCKS[282] !== "friend_094") throw new Error("SLICE_UNLOCKS[282] must be friend_094");
-  if (SLICE_UNLOCKS[285]) throw new Error("no friend_095 @285 this slice");
+  if (SLICE_UNLOCKS[285] !== "friend_095") throw new Error("SLICE_UNLOCKS[285] must be friend_095 after Lantana ship");
   if (/pebble|Pebble/i.test(pansy48 + pansy72)) throw new Error("Calendula art must not use Pebble");
   if (/verbena|spike|pot|pansy|face|saucer|blotch|geranium|cluster|sill|freesia|trumpet|vase|ranunculus|layered|begonia|ruffle|planter|anemone|windflower|wisteria|cascade|arbor|clematis|vine|trellis|cosmos|airy|ray|floret|buttercup|meadow|gloss|petal|primrose|pale|dish|ruff|heather|moor|sprig|heath|marigold|gold|pot|snapdragon|jaw|perch|bluebell|cloche|ring|foxglove|tower|throat|hyacinth|raceme|crocus|saffron|stigma|lily|pollen|crest|anther|violet|patch|moss|thicket|tulip|stem|glow|poppy|capsule|silk|lotus|pad|ripple|orchid|spur|veil|iris|blade|dew|aster|petal|drift|zinnia|quill|gleam|dahlia|spire|ember|azalea|fizz|peony|camellia|wax|gardenia|hibiscus|roselle|punch|magnolia|cream|blush|jasmine|blossom|honey|bergamot|citrus|earl|chamomile|daisy|tea|lavender|bloom|calm|catnip|mint|chill|frost|ivory|sheer|rosemary|needle|woody|thyme|pinch|twig|marjoram|softleaf|peel|oregano|wild|bunch|tarragon|spear|bitters|dill|parsley|curl|lovage|rib|chervil|frill|lace|fennel|anise|nasturtium|pepper|tray|petunia|flare|basket|pansy|face|saucer|blotch/i.test(pansy48 + pansy72)) {
     throw new Error("Calendula art must not collide Salvia/Petunia/Nasturtium/Geranium/Freesia/Begonia/Anemone/Wisteria/Clematis/Cosmos and prior herb marks");

@@ -99,7 +99,8 @@ export type ArtKit =
   | "verbena"
   | "impatiens"
   | "salvia"
-  | "calendula";
+  | "calendula"
+  | "lantana";
 
 export type PieceCat = {
   id: string;
