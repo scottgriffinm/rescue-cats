@@ -85,6 +85,7 @@ import chapter4Begonia from "../../data/chapter4_begonia_bang.json";
 import chapter4Ranunculus from "../../data/chapter4_ranunculus_bang.json";
 import chapter4Freesia from "../../data/chapter4_freesia_bang.json";
 import chapter4Geranium from "../../data/chapter4_geranium_bang.json";
+import chapter4Nasturtium from "../../data/chapter4_nasturtium_bang.json";
 import { ART_KIT_PATH } from "./constants";
 import { PITY } from "./pity";
 import type { ArtKit, BoardColor, CatalogFriend, FurnitureSKU, Phenotype } from "./types";
@@ -197,7 +198,10 @@ function artKit(raw: string | undefined, color: string, pattern: string): ArtKit
     raw === "wisteria" ||
     raw === "anemone" ||
     raw === "begonia" ||
-    raw === "ranunculus"
+    raw === "ranunculus" ||
+    raw === "freesia" ||
+    raw === "geranium" ||
+    raw === "nasturtium"
   ) {
     return raw;
   }
@@ -518,6 +522,7 @@ export const CHAPTER4_BEGONIA = chapter4Begonia;
 export const CHAPTER4_RANUNCULUS = chapter4Ranunculus;
 export const CHAPTER4_FREESIA = chapter4Freesia;
 export const CHAPTER4_GERANIUM = chapter4Geranium;
+export const CHAPTER4_NASTURTIUM = chapter4Nasturtium;
 export const INK_FRIEND_ID = chapter2.friend_id;
 export const BISCUIT_FRIEND_ID = chapter3.friend_id;
 export const TUX_FRIEND_ID = chapter3Tux.friend_id;
@@ -604,6 +609,7 @@ export const BEGONIA_FRIEND_ID = chapter4Begonia.friend_id;
 export const RANUNCULUS_FRIEND_ID = chapter4Ranunculus.friend_id;
 export const FREESIA_FRIEND_ID = chapter4Freesia.friend_id;
 export const GERANIUM_FRIEND_ID = chapter4Geranium.friend_id;
+export const NASTURTIUM_FRIEND_ID = chapter4Nasturtium.friend_id;
 export const SHOP_STARTER = chapter2.shop_starter;
 export const BISCUIT_GIFT = chapter3.gift;
 
@@ -1949,6 +1955,26 @@ export const CATALOG: CatalogFriend[] = [
       boardColor: "gray",
     },
   },
+  {
+    friendId: chapter4Nasturtium.friend_id,
+    defaultName: chapter4Nasturtium.default_name,
+    unlockClear: chapter4Nasturtium.unlock_clear,
+    displayLine: chapter4Nasturtium.display_line,
+    tier: chapter4Nasturtium.tier,
+    phenotype: {
+      phenotypeId: "pheno_dsh_pepper_tray_regular_regular_nasturtium",
+      breed: "Domestic Shorthair",
+      color: chapter4Nasturtium.color,
+      pattern: chapter4Nasturtium.pattern,
+      body: "Regular",
+      tail: "Regular",
+      eyes: "Ink",
+      eyeAccent: "Ink",
+      personality: chapter4Nasturtium.personality,
+      artKit: "nasturtium",
+      boardColor: "orange",
+    },
+  },
 ];
 
 const SHOP_ITEMS = CHAPTER2.shop.items;
@@ -1970,7 +1996,7 @@ export const FURNITURE: FurnitureSKU[] = pack.starter_furniture.map((sku) => {
 
 export const STAR_COSMETICS = pack.star_cosmetics;
 
-export const TUTORIAL_RESCUES = CATALOG.slice(0, 87);
+export const TUTORIAL_RESCUES = CATALOG.slice(0, 88);
 
 export const ONBOARDING_FURNITURE = pack.starter_furniture
   .filter((sku) => "onboarding" in sku && sku.onboarding)
@@ -2071,6 +2097,7 @@ export const SLICE_UNLOCKS: Record<number, string> = {
   255: "friend_085",
   258: "friend_086",
   261: "friend_087",
+  264: "friend_088",
 };
 
 /** CURRENT: cat n at clear 3*n. Slice table covers 3/6/9/12/15/18/21/24/27/30/33/36/39/42/45/48/51/54; Nigel@57 and Bean@60 stay later. */
@@ -2351,6 +2378,7 @@ export const BEGONIA_NAMING_CHIPS: string[] = CHAPTER4_BEGONIA.naming.suggestion
 export const RANUNCULUS_NAMING_CHIPS: string[] = CHAPTER4_RANUNCULUS.naming.suggestion_chips;
 export const FREESIA_NAMING_CHIPS: string[] = CHAPTER4_FREESIA.naming.suggestion_chips;
 export const GERANIUM_NAMING_CHIPS: string[] = CHAPTER4_GERANIUM.naming.suggestion_chips;
+export const NASTURTIUM_NAMING_CHIPS: string[] = CHAPTER4_NASTURTIUM.naming.suggestion_chips;
 
 export function chipsForFriend(friendId: string): string[] {
   if (friendId === INK_FRIEND_ID || friendId === "friend_002") {
@@ -2610,6 +2638,9 @@ export function chipsForFriend(friendId: string): string[] {
   }
   if (friendId === GERANIUM_FRIEND_ID || friendId === "friend_087") {
     return [...GERANIUM_NAMING_CHIPS];
+  }
+  if (friendId === NASTURTIUM_FRIEND_ID || friendId === "friend_088") {
+    return [...NASTURTIUM_NAMING_CHIPS];
   }
   const soft = CHAPTER2.personality_pools.Soft;
   if (friendById(friendId)?.phenotype.personality === "Soft") return [...soft];
@@ -2958,6 +2989,9 @@ export function shuffleNameChips(count = 3, friendId?: string) {
   if (friendId === GERANIUM_FRIEND_ID || friendId === "friend_087") {
     return shufflePool([...GERANIUM_NAMING_CHIPS], count);
   }
+  if (friendId === NASTURTIUM_FRIEND_ID || friendId === "friend_088") {
+    return shufflePool([...NASTURTIUM_NAMING_CHIPS], count);
+  }
   return shufflePool([...new Set(allNameSuggestions())], count);
 }
 
@@ -3060,6 +3094,7 @@ export function bangLinesFor(friendId: string, name: string) {
     ...(CHAPTER4_RANUNCULUS.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_FREESIA.bang_copy as Record<string, string[]>),
     ...(CHAPTER4_GERANIUM.bang_copy as Record<string, string[]>),
+    ...(CHAPTER4_NASTURTIUM.bang_copy as Record<string, string[]>),
   };
   const variants = merged[friendId] ?? [NAMING.first_night_bubble];
   return variants.map((line) => withName(line, name));
@@ -3158,6 +3193,7 @@ export function favoriteToyFor(personality: string) {
   if (personality === "Ranunculus-soft") return "ranunculus nest";
   if (personality === "Freesia-soft") return "freesia vase";
   if (personality === "Geranium-soft") return "geranium sill";
+  if (personality === "Nasturtium-soft") return "nasturtium tray";
   return "sun patch";
 }
 
