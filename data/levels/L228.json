@@ -1,0 +1,25 @@
+{
+  "id": "L228",
+  "name": "Dragon Stop",
+  "width": 6,
+  "height": 6,
+  "moveBudget": 11,
+  "nudges": 3,
+  "colorLocks": true,
+  "templateId": "LT02_LT08_dragon_stop_orange",
+  "walls": [
+    { "x": 0, "y": 4 },
+    { "x": 1, "y": 1 },
+    { "x": 3, "y": 0 }
+  ],
+  "blockers": [],
+  "cats": [
+    { "id": "cat_orange", "x": 3, "y": 5, "color": "orange", "colorId": "color_orange" },
+    { "id": "cat_gray", "x": 3, "y": 4, "color": "gray", "colorId": "color_gray" }
+  ],
+  "gates": [
+    { "id": "gate_orange", "x": 2, "y": 0, "color": "orange", "colorId": "color_orange" },
+    { "id": "gate_gray", "x": 4, "y": 4, "color": "gray", "colorId": "color_gray" }
+  ],
+  "teach": "dragon_stop_orange"
+}

@@ -1,0 +1,35 @@
+{
+  "version": "chapter4_snapdragon_bang",
+  "status": "READY",
+  "friend_id": "friend_075",
+  "unlock_clear": 225,
+  "personality": "Snapdragon-soft",
+  "display_line": "Garden bright. Already claimed the snapdragon perch.",
+  "default_name": "Snapdragon",
+  "tier": "C",
+  "color": "Garden",
+  "pattern": "Freckled",
+  "art": {
+    "loaf_48": "/assets/cats/snapdragon_loaf_48.svg",
+    "loaf_72": "/assets/cats/snapdragon_loaf_72.svg",
+    "board_color": "gray",
+    "art_kit": "snapdragon"
+  },
+  "naming": {
+    "prefill": "",
+    "require_choice": true,
+    "suggestion_chips": ["Snapdragon", "Jaw", "Perch"],
+    "cta_primary": "Welcome home"
+  },
+  "bang_copy": {
+    "friend_075": [
+      "{Name}: Garden bright. Already claimed the snapdragon perch.",
+      "{Name}: Looks yard-cool. Owns the perch."
+    ]
+  },
+  "gift": {
+    "unlock_clear": 225,
+    "sku_id": null,
+    "note": "Ch4. Snapdragon Pass. No gift. Ban Bluebell/Cloche/Ring and all prior pools. Bean parade stands. No Pebble. Snapdragon, Jaw, and Perch chips are CEO-locked on Snapdragon. No friend_076."
+  }
+}

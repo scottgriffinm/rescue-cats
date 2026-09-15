@@ -1,5 +1,5 @@
 /**
- * Chapter 4 beat: L222 → Bluebell@222 naming, then L223–L225.
+ * Chapter 4 beat: L225 → Snapdragon@225 naming, then L226–L228.
  * Next friend must not unlock. L10 stays off-path. localStorage only.
  * L225 queues Snapdragon pending. Do not invent friend_076.
  */
@@ -11,7 +11,7 @@ const require = createRequire(import.meta.url);
 const { default: puppeteer } = require("puppeteer-core");
 
 const BASE = process.env.PLAY_URL ?? "http://127.0.0.1:43173";
-const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-bluebell";
+const OUT = process.env.PLAY_OUT ?? "/tmp/chapter4-snapdragon";
 const CHROME = process.env.CHROME_PATH ?? "/usr/bin/google-chrome";
 
 mkdirSync(OUT, { recursive: true });
@@ -97,6 +97,7 @@ const PARADE = [
   ["friend_071", "Crocus", 213],
   ["friend_072", "Hyacinth", 216],
   ["friend_073", "Foxglove", 219],
+  ["friend_074", "Bluebell", 222],
 ];
 
 const completedIds = [
@@ -109,7 +110,7 @@ const completedIds = [
   "L7",
   "L8",
   "L9",
-  ...Array.from({ length: 211 }, (_, i) => `L${i + 11}`),
+  ...Array.from({ length: 214 }, (_, i) => `L${i + 11}`),
 ];
 
 const SEED = {
@@ -135,7 +136,7 @@ const SEED = {
   cosmetics: [],
   levelStrikes: {},
   seenCoach: true,
-  bubbles: ["Foxglove claimed the foxglove tower."],
+  bubbles: ["Bluebell claimed the bluebell cloche."],
   unlockFlags: { mangoNamed: true, porchUnlocked: true },
   first_night_done: true,
   return_hook_available_at: null,
@@ -185,22 +186,22 @@ try {
   await page.reload({ waitUntil: "networkidle0" });
 
 
-  await page.goto(`${BASE}/level/L222`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("GLOVE STOP"));
-  await shot(page, "01_l222_before_bluebell");
+  await page.goto(`${BASE}/level/L225`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("CHIME STOP"));
+  await shot(page, "01_l225_before_snapdragon");
   await play(
     page,
     [
+      ["orange", "ArrowUp"],
       ["black", "ArrowLeft"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowRight"],
-      ["black", "ArrowDown"],
-      ["black", "ArrowRight"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
-      ["black", "ArrowUp"],
-      ["black", "ArrowLeft"],
-      ["black", "ArrowDown"],
+      ["orange", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["black", "ArrowRight"],
+      ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
+      ["orange", "ArrowUp"],
     ],
     "New friend!",
   );
@@ -218,17 +219,20 @@ try {
       ctaDisabled: Boolean(card.querySelector("button[type='submit']")?.disabled),
     };
   });
-  console.log("bluebell naming", modal);
+  console.log("snapdragon naming", modal);
   if (modal.title !== "New friend!") throw new Error(`title ${modal.title}`);
-  if (modal.input !== "") throw new Error(`Bluebell prefilled ${modal.input}`);
+  if (modal.input !== "") throw new Error(`Snapdragon prefilled ${modal.input}`);
   if (!modal.ctaDisabled) throw new Error("Welcome home should stay disabled");
-  if (modal.line !== "Woodland blue. Already claimed the bluebell cloche.") {
-    throw new Error(`Bluebell display line drifted: ${modal.line}`);
+  if (modal.line !== "Garden bright. Already claimed the snapdragon perch.") {
+    throw new Error(`Snapdragon display line drifted: ${modal.line}`);
   }
-  if (modal.chips.join(",") !== "Bluebell,Cloche,Ring") {
-    throw new Error(`Bluebell chips must be Bluebell/Cloche/Ring, got ${modal.chips.join("/")}`);
+  if (modal.chips.join(",") !== "Snapdragon,Jaw,Perch") {
+    throw new Error(`Snapdragon chips must be Snapdragon/Jaw/Perch, got ${modal.chips.join("/")}`);
   }
   if (
+    modal.chips.includes("Bluebell") ||
+    modal.chips.includes("Cloche") ||
+    modal.chips.includes("Ring") ||
     modal.chips.includes("Foxglove") ||
     modal.chips.includes("Tower") ||
     modal.chips.includes("Throat") ||
@@ -291,80 +295,83 @@ try {
     modal.chips.includes("Honey") ||
     modal.chips.includes("Pebble")
   ) {
-    throw new Error("Bluebell chips collided with Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
+    throw new Error("Snapdragon chips collided with Bluebell/Foxglove/Hyacinth/Crocus/Lily/Violet/Tulip/Poppy/Lotus/Orchid/Iris/Aster/Zinnia/Dahlia/Azalea/Peony/Camellia/Gardenia/Hibiscus/Magnolia/Jasmine/Pebble pools");
   }
-  if (!modal.hero.includes("/assets/cats/bluebell_loaf_72.svg")) {
-    throw new Error(`Bluebell hero missing woodland-bluebell loaf: ${modal.hero}`);
+  if (!modal.hero.includes("/assets/cats/snapdragon_loaf_72.svg")) {
+    throw new Error(`Snapdragon hero missing garden-snapdragon loaf: ${modal.hero}`);
+  }
+  if (modal.hero.includes("/assets/cats/bluebell_loaf_72.svg")) {
+    throw new Error("Snapdragon hero must not use the Bluebell loaf");
   }
   if (modal.hero.includes("/assets/cats/foxglove_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Foxglove loaf");
+    throw new Error("Snapdragon hero must not use the Foxglove loaf");
   }
   if (modal.hero.includes("/assets/cats/hyacinth_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Hyacinth loaf");
+    throw new Error("Snapdragon hero must not use the Hyacinth loaf");
   }
   if (modal.hero.includes("/assets/cats/crocus_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Crocus loaf");
+    throw new Error("Snapdragon hero must not use the Crocus loaf");
   }
   if (modal.hero.includes("/assets/cats/lily_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Lily loaf");
+    throw new Error("Snapdragon hero must not use the Lily loaf");
   }
   if (modal.hero.includes("/assets/cats/violet_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Violet loaf");
+    throw new Error("Snapdragon hero must not use the Violet loaf");
   }
   if (modal.hero.includes("/assets/cats/tulip_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Tulip loaf");
+    throw new Error("Snapdragon hero must not use the Tulip loaf");
   }
   if (modal.hero.includes("/assets/cats/poppy_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Poppy loaf");
+    throw new Error("Snapdragon hero must not use the Poppy loaf");
   }
   if (modal.hero.includes("/assets/cats/lotus_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Lotus loaf");
+    throw new Error("Snapdragon hero must not use the Lotus loaf");
   }
   if (modal.hero.includes("/assets/cats/orchid_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Orchid loaf");
+    throw new Error("Snapdragon hero must not use the Orchid loaf");
   }
   if (modal.hero.includes("/assets/cats/iris_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Iris loaf");
+    throw new Error("Snapdragon hero must not use the Iris loaf");
   }
   if (modal.hero.includes("/assets/cats/aster_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Aster loaf");
+    throw new Error("Snapdragon hero must not use the Aster loaf");
   }
   if (modal.hero.includes("/assets/cats/zinnia_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Zinnia loaf");
+    throw new Error("Snapdragon hero must not use the Zinnia loaf");
   }
   if (modal.hero.includes("/assets/cats/dahlia_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Dahlia loaf");
+    throw new Error("Snapdragon hero must not use the Dahlia loaf");
   }
   if (modal.hero.includes("/assets/cats/azalea_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Azalea loaf");
+    throw new Error("Snapdragon hero must not use the Azalea loaf");
   }
   if (modal.hero.includes("/assets/cats/peony_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Peony loaf");
+    throw new Error("Snapdragon hero must not use the Peony loaf");
   }
   if (modal.hero.includes("/assets/cats/camellia_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Camellia loaf");
+    throw new Error("Snapdragon hero must not use the Camellia loaf");
   }
   if (modal.hero.includes("/assets/cats/gardenia_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Gardenia loaf");
+    throw new Error("Snapdragon hero must not use the Gardenia loaf");
   }
   if (modal.hero.includes("/assets/cats/hibiscus_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Hibiscus loaf");
+    throw new Error("Snapdragon hero must not use the Hibiscus loaf");
   }
   if (modal.hero.includes("/assets/cats/jasmine_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Jasmine loaf");
+    throw new Error("Snapdragon hero must not use the Jasmine loaf");
   }
   if (modal.hero.includes("/assets/cats/magnolia_loaf_72.svg")) {
-    throw new Error("Bluebell hero must not use the Magnolia loaf");
+    throw new Error("Snapdragon hero must not use the Magnolia loaf");
   }
-  await shot(page, "02_bluebell_naming");
+  await shot(page, "02_snapdragon_naming");
 
   await page.click('[aria-label="Name suggestions"] button');
   await page.click('button[type="submit"]');
   await page.waitForFunction(
     () =>
-      (document.body.innerText || "").includes("Bluebell") &&
-      ((document.body.innerText || "").includes("cloche") ||
-        (document.body.innerText || "").includes("bluebell") ||
+      (document.body.innerText || "").includes("Snapdragon") &&
+      ((document.body.innerText || "").includes("perch") ||
+        (document.body.innerText || "").includes("snapdragon") ||
         (document.body.innerText || "").includes("moved in") ||
         (document.body.innerText || "").includes("are home") ||
         (document.body.innerText || "").includes("is home")),
@@ -377,86 +384,86 @@ try {
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
     phoneFrame: Boolean(document.querySelector("[data-phone-frame], .phone-frame, .device-bezel")),
   }));
-  if (!yard.save.friends.some((friend) => friend.friendId === "friend_074")) {
-    throw new Error("Bluebell was not named");
+  if (!yard.save.friends.some((friend) => friend.friendId === "friend_075")) {
+    throw new Error("Snapdragon was not named");
   }
-  if (yard.save.friends.find((friend) => friend.friendId === "friend_074")?.name !== "Bluebell") {
-    throw new Error("Bluebell name was not kept");
+  if (yard.save.friends.find((friend) => friend.friendId === "friend_075")?.name !== "Snapdragon") {
+    throw new Error("Snapdragon name was not kept");
   }
-  if (yard.save.friends.some((friend) => friend.friendId === "friend_075")) {
-    throw new Error("friend_075 must not unlock");
+  if (yard.save.friends.some((friend) => friend.friendId === "friend_076")) {
+    throw new Error("friend_076 must not unlock");
   }
   if (
-    !yard.imgs.includes("/assets/cats/bluebell_loaf_72.svg") &&
-    !yard.imgs.includes("/assets/cats/bluebell_loaf_48.svg")
+    !yard.imgs.includes("/assets/cats/snapdragon_loaf_72.svg") &&
+    !yard.imgs.includes("/assets/cats/snapdragon_loaf_48.svg")
   ) {
-    throw new Error(`yard missing Bluebell woodland-bluebell loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
+    throw new Error(`yard missing Snapdragon garden-snapdragon loaf: ${yard.imgs.filter((src) => src?.includes("loaf")).join(",")}`);
   }
-  if (!yard.text.includes("cloche") && !yard.text.includes("Bluebell")) {
-    throw new Error("yard missing Bluebell bluebell cloche line");
+  if (!yard.text.includes("perch") && !yard.text.includes("Snapdragon")) {
+    throw new Error("yard missing Snapdragon snapdragon perch line");
   }
   if (yard.phoneFrame) throw new Error("GameShell must stay full-viewport");
-  await shot(page, "03_bluebell_yard");
+  await shot(page, "03_snapdragon_yard");
 
-  await page.goto(`${BASE}/level/L223`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CLOCHE CUT"));
+  await page.goto(`${BASE}/level/L226`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("JAW CUT"));
   await play(
     page,
     [
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowUp"],
       ["orange", "ArrowUp"],
-      ["gray", "ArrowDown"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+      ["black", "ArrowLeft"],
+      ["orange", "ArrowLeft"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
-      ["orange", "ArrowLeft"],
     ],
     "Home",
   );
 
-  await page.goto(`${BASE}/level/L224`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("RING GAP"));
+  await page.goto(`${BASE}/level/L227`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("PERCH GAP"));
   await play(
     page,
     [
-      ["orange", "ArrowLeft"],
-      ["gray", "ArrowUp"],
-      ["orange", "ArrowRight"],
-      ["gray", "ArrowDown"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowRight"],
-      ["gray", "ArrowUp"],
-      ["gray", "ArrowLeft"],
-      ["gray", "ArrowDown"],
-    ],
-    "Home",
-  );
-  await shot(page, "04_l224_win");
-
-  await page.goto(`${BASE}/level/L225`, { waitUntil: "networkidle0" });
-  await page.waitForFunction(() => document.body.innerText.includes("CHIME STOP"));
-  await play(
-    page,
-    [
+      ["black", "ArrowUp"],
+      ["black", "ArrowRight"],
       ["orange", "ArrowUp"],
       ["black", "ArrowLeft"],
       ["orange", "ArrowDown"],
       ["orange", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowLeft"],
-      ["black", "ArrowRight"],
-      ["orange", "ArrowDown"],
-      ["orange", "ArrowRight"],
       ["orange", "ArrowUp"],
+      ["black", "ArrowRight"],
+      ["black", "ArrowDown"],
+      ["black", "ArrowLeft"],
     ],
     "Home",
   );
-  await shot(page, "05_l225_win");
+  await shot(page, "04_l227_win");
+
+  await page.goto(`${BASE}/level/L228`, { waitUntil: "networkidle0" });
+  await page.waitForFunction(() => document.body.innerText.includes("DRAGON STOP"));
+  await play(
+    page,
+    [
+      ["orange", "ArrowRight"],
+      ["gray", "ArrowDown"],
+      ["gray", "ArrowRight"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowDown"],
+      ["gray", "ArrowUp"],
+      ["orange", "ArrowLeft"],
+      ["orange", "ArrowUp"],
+      ["orange", "ArrowRight"],
+    ],
+    "Home",
+  );
+  await shot(page, "05_l228_win");
 
   const after = await page.evaluate(() => ({
     save: JSON.parse(localStorage.getItem("rescue-cats.save.v2")),
@@ -464,7 +471,7 @@ try {
     storageKeys: Object.keys(localStorage),
     hud: document.body.innerText,
   }));
-  for (const id of ["L222", "L223", "L224", "L225"]) {
+  for (const id of ["L225", "L226", "L227", "L228"]) {
     if (!after.save.completedIds.includes(id)) {
       throw new Error(`${id} not marked complete: ${after.save.completedIds.join(",")}`);
     }
@@ -472,23 +479,20 @@ try {
   if (after.save.completedIds.includes("L10")) {
     throw new Error("L10 must stay off the campaign path");
   }
-  if (after.save.friends.some((friend) => friend.friendId === "friend_075")) {
-    throw new Error("friend_075 must stay pending, not named, on the Bluebell slice");
-  }
-  if (!after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_075")) {
-    throw new Error("L225 clear must queue Snapdragon when friend_075 is present");
+  if (after.save.friends.some((friend) => friend.friendId === "friend_076")) {
+    throw new Error("friend_076 must not unlock this slice");
   }
   if (after.save.pendingUnlocks.some((pending) => pending.friendId === "friend_076")) {
-    throw new Error("L225 clear must not queue friend_076");
+    throw new Error("L228 clear must not queue the next friend");
   }
-  if (!after.text.includes("Garden bright. Already claimed the snapdragon perch.")) {
-    throw new Error("L225 clear must show Snapdragon pending naming");
+  if (after.text.includes("New friend!")) {
+    throw new Error("L228 must not open a next-friend naming modal");
   }
-  if (after.save.friends.filter((friend) => friend.friendId === "friend_074").length !== 1) {
-    throw new Error("L225 must not unlock a Bluebell duplicate");
+  if (after.save.friends.filter((friend) => friend.friendId === "friend_075").length !== 1) {
+    throw new Error("L228 must not unlock a Snapdragon duplicate");
   }
-  if (!after.hud.includes("225") && !after.text.includes("225")) {
-    throw new Error("Campaign HUD must show through 225 after L225 clear");
+  if (!after.hud.includes("228") && !after.text.includes("228")) {
+    throw new Error("Campaign HUD must show through 228 after L228 clear");
   }
   const paradeLocks = {
     friend_001: 3,
@@ -508,9 +512,9 @@ try {
     throw new Error("progress must stay on localStorage");
   }
   writeFileSync(join(OUT, "report.json"), JSON.stringify({ ok: true, modal }, null, 2));
-  console.log("CHAPTER 4 L222 + BLUEBELL + L223-225 OK");
+  console.log("CHAPTER 4 L225 + SNAPDRAGON + L226-228 OK");
 } catch (error) {
-  console.error("CHAPTER 4 BLUEBELL FAIL", error);
+  console.error("CHAPTER 4 SNAPDRAGON FAIL", error);
   try {
     const page = (await browser.pages()).at(-1);
     if (page) {
