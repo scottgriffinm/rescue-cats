@@ -1,25 +1,25 @@
-# CEO note — opening past friend_083 (Ch4 friend_084)
+# CEO note — opening past friend_084 (Ch4 friend_085)
 
 **Date:** 2026-09-15  
 **Author:** Cat Game CEO  
 **Law:** `collection_CURRENT.json` stays FROZEN for cats 1–20 / parade through Bean@60. Ch4 friends 021+ live as additive CEO-locked slice docs under `data/collection/CH4_FRIEND_*.md` — not a rewrite of the first-20 freeze.
 
-## Why open friend_084
-Rival Anemone@249 must **CLOSED Pass** on main/pink (Anemone@249 + L250–L252) before unpark. Cadence past Bean: Rival Pass → next friend + triad. Unlock clear **252**.
+## Why open friend_085
+Rival Begonia@252 must **CLOSED Pass** on main/pink (Begonia@252 + L253–L255) before unpark. Cadence past Bean: Rival Pass → next friend + triad. Unlock clear **255**.
 
-## Lock for friend_084
+## Lock for friend_085
 | Field | Value |
 |-------|-------|
-| friend_id | `friend_084` |
-| unlock_clear | **252** |
-| default_name | **Begonia** |
-| chips | Begonia / Ruffle / Planter |
-| art_kit | `begonia` |
-| board_color | orange (ruffle coat `#E87868` + leaf freckles `#3A2818` — not Anemone `#F0A8C8/#4A2038`, Poppy `#D94A5A/#3A1218`, Snapdragon `#E07050/#3A2010`, Camellia `#C45A6A/#5A2030`) |
-| gift | none @252 |
+| friend_id | `friend_085` |
+| unlock_clear | **255** |
+| default_name | **Ranunculus** |
+| chips | Ranunculus / Layer / Nest |
+| art_kit | `ranunculus` |
+| board_color | gray (layered coat `#F4A0B8` + center freckles `#5A2840` — not Begonia `#E87868/#3A2818`, Anemone `#F0A8C8/#4A2038`, Peony `#E8B4C8/#5A3048`, Cosmos `#E8A0C0/#5A2848`) |
+| gift | none @255 |
 
 ## Parade / product locks unchanged
 Mango@3 Tux@12 Pumpkin@24 Shadow@27 Noodle@30 Bean@60 · no Pebble · full-viewport · localStorage · soft hearts · L10 Wrong path.
 
 ## Next frontier
-Begonia@252 + L253–L255 shipping this slice. Do **not** invent friend_085 here.
+Ranunculus@255 + L256–L258 shipping this slice. Do **not** invent friend_086 here.

@@ -1,0 +1,102 @@
+{
+  "schema": "rescue_cats.level_pack.v1",
+  "status": "SHIP READY",
+  "source": "Begonia Pass — L256–L258 need",
+  "chapter": 4,
+  "title": "Chapter 4 boards L256–L258",
+  "notes": "L256 Layer Cut / L257 Nest Gap / L258 Fold Stop — habit-break vs Ruffle Cut orange-first / Planter Gap gray-first / Leaf Stop black-first; not Layer/Nest/Fold title clones of Ranunculus Cut/Gap/Stop; Fold Stop avoids Leaf/Whirl/Droop/Star/Floret/Petal/Stem/Cup Stop collisions; no WRAP/edge twin of Nori/Medlar; L258 occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf twins and Nori (5,5).",
+  "levels": [
+    {
+      "id": "L256",
+      "name": "Layer Cut",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_layer_cut_gray",
+      "walls": [
+        { "x": 1, "y": 2 },
+        { "x": 4, "y": 5 },
+        { "x": 2, "y": 0 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 0, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_gray", "x": 1, "y": 1, "color": "gray", "colorId": "color_gray" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 5, "y": 1, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_gray", "x": 3, "y": 3, "color": "gray", "colorId": "color_gray" }
+      ],
+      "teach": "layer_cut_gray"
+    },
+    {
+      "id": "L257",
+      "name": "Nest Gap",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_nest_gap_black",
+      "walls": [
+        { "x": 4, "y": 1 },
+        { "x": 0, "y": 3 },
+        { "x": 3, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 4, "y": 5, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 4, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 2, "y": 4, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 0, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "nest_gap_black"
+    },
+    {
+      "id": "L258",
+      "name": "Fold Stop",
+      "width": 6,
+      "height": 6,
+      "moveBudget": 11,
+      "nudges": 3,
+      "colorLocks": true,
+      "templateId": "LT02_LT08_fold_stop_orange",
+      "walls": [
+        { "x": 3, "y": 0 },
+        { "x": 5, "y": 3 },
+        { "x": 0, "y": 2 }
+      ],
+      "blockers": [],
+      "cats": [
+        { "id": "cat_orange", "x": 1, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "cat_black", "x": 1, "y": 2, "color": "black", "colorId": "color_black" }
+      ],
+      "gates": [
+        { "id": "gate_orange", "x": 4, "y": 0, "color": "orange", "colorId": "color_orange" },
+        { "id": "gate_black", "x": 2, "y": 3, "color": "black", "colorId": "color_black" }
+      ],
+      "teach": "fold_stop_orange"
+    }
+  ],
+  "teaches": {
+    "L256": "Layer Cut — gray east first; orange cuts after; not Ruffle orange-south, not Wind gray-north, not Cascade orange-north, not Vine gray-south, not Airy orange-east, not Meadow gray-north, not Pale gray-east clone title, not Planter gray-west, not Moor orange-north, not Gold black-south, not Jaw black-east, not Tower orange-south, not Cluster black-north, not Saffron orange-west, not Pollen black-west, not Pad gray-west",
+    "L257": "Nest Gap — black west then orange threads; not Planter gray-west, not Bowl black-east, not Arbor gray-south, not Trellis black-south, not Ray gray-west, not Gloss black-west, not Sprig gray-east, not Pot gray-north, not Perch black-north, not Ring orange-west, not Bell gray-south, not Tip orange-east, not Ripple black-east, not Veil orange-south, not Dew orange-north, not Leaf black-north",
+    "L258": "Fold Stop — ranunculus-nest seats; occupancy off Cup/Pad/Pond/Vase/Bloom/Thicket/Anther/Stigma/Raceme/Glove/Chime/Dragon/Seed/Heath/Ruff/Petal/Floret/Star/Droop/Whirl/Leaf twins; off Nori (5,5); not Hold*/Park*; title Fold Stop (not Ranunculus Stop, not Leaf Stop, not Whirl Stop, not Droop Stop, not Star Stop, not Floret Stop, not Petal Stop, not Stem Stop, not Cup Stop)"
+  },
+  "solver": {
+    "min_slides": {
+      "L256": 10,
+      "L257": 10,
+      "L258": 10
+    }
+  },
+  "deltas": {
+    "L256": "(2, 2)",
+    "L257": "(0, 4)",
+    "L258": "(2, 3)"
+  }
+}
